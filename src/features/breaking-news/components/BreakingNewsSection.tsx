@@ -7,7 +7,6 @@ import { ArticleImage } from "@/shared/components/common/ArticleImage";
 import { Container } from "@/shared/components/layout/Container";
 import { Section } from "@/shared/components/layout/Section";
 import { ErrorState } from "@/shared/components/common/ErrorState";
-import { EmptyState } from "@/shared/components/common/EmptyState";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
 import { useBreakingNews } from "@/features/homepage/hooks/useBreakingNews";
 import type { Article } from "@/shared/types/article.types";
@@ -39,6 +38,10 @@ export function BreakingNewsSection() {
   const { data, isLoading, isError, error, refetch } = useBreakingNews();
   const t = useTranslations("breaking");
 
+  if (!isLoading && !isError && !data?.items.length) {
+    return null;
+  }
+
   return (
     <Section ariaLabelledby="breaking-heading" className="border-y border-ink py-5">
       <Container>
@@ -67,10 +70,6 @@ export function BreakingNewsSection() {
 
             {isError ? (
               <ErrorState message={error?.message} onRetry={() => void refetch()} />
-            ) : null}
-
-            {!isLoading && !isError && !data?.items.length ? (
-              <EmptyState message={t("empty")} />
             ) : null}
 
             {!isLoading && !isError && data?.items.length ? (

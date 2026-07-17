@@ -17,7 +17,7 @@ function SeriesCard({ series }: { series: Series }) {
   const tCommon = useTranslations("common");
 
   return (
-    <article className="group w-72 shrink-0 border-t-2 border-ink pt-4">
+    <article className="group border-t-2 border-ink pt-4">
       <div className="flex h-32 items-center justify-center bg-neutral-100 font-serif text-5xl font-bold text-ink">
         {series.name.slice(0, 1)}
       </div>
@@ -52,9 +52,13 @@ export function FeaturedSeriesSection() {
         />
 
         {isLoading ? (
-          <div className="flex gap-4 overflow-hidden">
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {Array.from({ length: 3 }).map((_, index) => (
-              <Skeleton key={index} className="h-72 w-72 shrink-0 rounded-xl" />
+              <div key={index} className="space-y-3">
+                <Skeleton className="h-32 w-full" />
+                <Skeleton className="h-4 w-20" />
+                <Skeleton className="h-6 w-3/4" />
+              </div>
             ))}
           </div>
         ) : null}
@@ -68,8 +72,8 @@ export function FeaturedSeriesSection() {
         ) : null}
 
         {!isLoading && !isError && data?.items.length ? (
-          <div className="-mx-4 flex gap-4 overflow-x-auto px-4 pb-2 scrollbar-hide sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-            {data.items.map((series) => (
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {data.items.slice(0, 3).map((series) => (
               <SeriesCard key={series.id} series={series} />
             ))}
           </div>

@@ -49,6 +49,14 @@
     "title": "Berita Terbaru",
     "subtitle": "Liputan dan analisis terbaru dari tim redaksi kami."
   },
+  "categories": {
+    "title": "Berdasarkan Kategori",
+    "subtitle": "Liputan pilihan yang dikelompokkan menurut kategori redaksi."
+  },
+  "topics": {
+    "title": "Berdasarkan Topik",
+    "subtitle": "Artikel pilihan yang dikurasi menurut topik liputan."
+  },
   "newsletter": {
     "kicker": "Buletin Unggulan",
     "fallbackTitle": "Selangkah lebih depan bersama EGI Media",

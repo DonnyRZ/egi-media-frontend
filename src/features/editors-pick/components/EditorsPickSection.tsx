@@ -7,7 +7,6 @@ import { SectionHeading } from "@/shared/components/common/SectionHeading";
 import { Container } from "@/shared/components/layout/Container";
 import { Section } from "@/shared/components/layout/Section";
 import { ErrorState } from "@/shared/components/common/ErrorState";
-import { EmptyState } from "@/shared/components/common/EmptyState";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
 import { useEditorsPick } from "@/features/homepage/hooks/useEditorsPick";
 import type { Article } from "@/shared/types/article.types";
@@ -41,6 +40,10 @@ export function EditorsPickSection() {
   const { data, isLoading, isError, error, refetch } = useEditorsPick();
   const t = useTranslations("editors");
 
+  if (!isLoading && !isError && !data?.items.length) {
+    return null;
+  }
+
   return (
     <Section ariaLabelledby="editors-heading">
       <Container>
@@ -68,8 +71,6 @@ export function EditorsPickSection() {
         {isError ? (
           <ErrorState message={error?.message} onRetry={() => void refetch()} />
         ) : null}
-
-        {!isLoading && !isError && !data?.items.length ? <EmptyState /> : null}
 
         {!isLoading && !isError && data?.items.length ? (
           <div className="grid gap-x-10 md:grid-cols-2">

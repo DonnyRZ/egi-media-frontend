@@ -49,6 +49,14 @@
     "title": "Latest News",
     "subtitle": "Fresh reporting and analysis from our editorial team."
   },
+  "categories": {
+    "title": "By Category",
+    "subtitle": "Selected coverage organized by our newsroom categories."
+  },
+  "topics": {
+    "title": "By Topic",
+    "subtitle": "Selected articles curated by coverage topic."
+  },
   "newsletter": {
     "kicker": "The Flagship Newsletter",
     "fallbackTitle": "Stay ahead with EGI Media",

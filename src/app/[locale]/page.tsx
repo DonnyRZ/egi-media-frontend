@@ -20,6 +20,22 @@ const LatestNewsSection = dynamic(
   { loading: () => null },
 );
 
+const CategoryNewsSection = dynamic(
+  () =>
+    import("@/features/category-news/components/CategoryNewsSection").then(
+      (module) => module.CategoryNewsSection,
+    ),
+  { loading: () => null },
+);
+
+const TopicNewsSection = dynamic(
+  () =>
+    import("@/features/topic-news/components/TopicNewsSection").then(
+      (module) => module.TopicNewsSection,
+    ),
+  { loading: () => null },
+);
+
 const NewsletterSection = dynamic(
   () =>
     import("@/features/newsletter/components/NewsletterSection").then(
@@ -66,6 +82,8 @@ export default async function HomePage({ params }: HomePageProps) {
       <HeroSection />
       <BreakingNewsSection />
       <LatestNewsSection />
+      <TopicNewsSection />
+      <CategoryNewsSection />
       <NewsletterSection />
       <FeaturedSeriesSection />
       <FeaturedVideosSection />

@@ -49,6 +49,14 @@
     "title": "Soʻnggi yangiliklar",
     "subtitle": "Tahririyatimizdan yangi xabarlar va tahlillar."
   },
+  "categories": {
+    "title": "Kategoriya boʻyicha",
+    "subtitle": "Tahririyat kategoriyalari boʻyicha tanlangan xabarlar."
+  },
+  "topics": {
+    "title": "Mavzu boʻyicha",
+    "subtitle": "Mavzu boʻyicha tanlangan maqolalar."
+  },
   "newsletter": {
     "kicker": "Bosh axborotnoma",
     "fallbackTitle": "EGI Media bilan bir qadam oldinda",

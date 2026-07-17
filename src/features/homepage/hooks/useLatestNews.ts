@@ -1,23 +1,14 @@
 "use client";
 
-import { useLocale } from "next-intl";
-import { useQuery } from "@tanstack/react-query";
-
-import { QUERY_KEYS } from "@/shared/constants/query-keys.constants";
-import {
-  QUERY_GC_TIME,
-  QUERY_STALE_TIME,
-} from "@/shared/constants/homepage.constants";
-import { getLatestNews } from "@/shared/repositories/article.repository";
-import { toContentLocale } from "@/shared/utils/locale";
+import { useHomepageNews } from "@/features/homepage/hooks/useHomepageNews";
 
 export function useLatestNews() {
-  const lang = toContentLocale(useLocale());
+  const query = useHomepageNews();
 
-  return useQuery({
-    queryKey: QUERY_KEYS.articles.list({ section: "latest", lang }),
-    queryFn: () => getLatestNews(lang),
-    staleTime: QUERY_STALE_TIME.homepage,
-    gcTime: QUERY_GC_TIME.homepage,
-  });
+  return {
+    ...query,
+    data: query.data
+      ? { items: query.data.latest, total: query.data.latest.length }
+      : undefined,
+  };
 }

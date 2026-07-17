@@ -1,11 +1,18 @@
 export const HOMEPAGE_LIMITS = {
   heroFeatured: 1,
-  heroHeadlines: 4,
-  breakingNews: 8,
-  latestNews: 9,
+  heroHeadlines: 3,
+  breakingNews: 4,
+  latestNews: 6,
   editorsPicks: 6,
-  featuredSeries: 6,
+  featuredSeries: 3,
   featuredVideos: 6,
+  categoryGroups: 3,
+  categoryArticles: 2,
+  topicGroups: 3,
+  topicArticles: 2,
+  taxonomyCandidates: 16,
+  taxonomyFetchLimit: 12,
+  articlePool: 40,
 } as const;
 
 export const QUERY_STALE_TIME = {

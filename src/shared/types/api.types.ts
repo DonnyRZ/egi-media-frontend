@@ -40,6 +40,12 @@ export interface ArticleListParams {
   lang?: "id" | "en" | "uz";
 }
 
+export interface TaxonomyListParams {
+  page?: number;
+  limit?: number;
+  search?: string;
+}
+
 export interface SeriesListParams {
   page?: number;
   limit?: number;

@@ -7,11 +7,17 @@ interface YoutubeVideoDto {
   description: string | null;
   url: string;
   duration?: string | null;
+  created_at?: string | null;
 }
 
 interface YoutubeVideoListResponseDto {
   items: YoutubeVideoDto[];
-  meta: { total: number };
+  meta: {
+    total: number;
+    page?: number;
+    limit?: number;
+    total_pages?: number;
+  };
 }
 
 export function mapYoutubeVideoDto(dto: YoutubeVideoDto): YoutubeVideo {
@@ -22,14 +28,22 @@ export function mapYoutubeVideoDto(dto: YoutubeVideoDto): YoutubeVideo {
     url: dto.url,
     thumbnailUrl: getYoutubeThumbnail(dto.url),
     durationLabel: dto.duration ?? null,
+    publishedAt: dto.created_at ?? null,
   };
 }
 
 export function mapYoutubeVideoListDto(
   dto: YoutubeVideoListResponseDto,
 ): YoutubeVideoListResult {
+  const total = dto.meta?.total ?? 0;
+  const limit = dto.meta?.limit ?? dto.items?.length ?? 0;
+  const page = dto.meta?.page ?? 1;
+
   return {
     items: (dto.items ?? []).map(mapYoutubeVideoDto),
-    total: dto.meta?.total ?? 0,
+    total,
+    page,
+    limit,
+    totalPages: dto.meta?.total_pages ?? (limit > 0 ? Math.ceil(total / limit) : 0),
   };
 }

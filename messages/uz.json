@@ -9,7 +9,9 @@
     "termsDescription": "EGI Media foydalanish shartlari — veb-sayt, kontent va raqamli xizmatlarimizdan foydalanishni tartibga soladi.",
     "privacyTitle": "Maxfiylik siyosati",
     "privacyDescription": "EGI Media maxfiylik siyosati — shaxsiy maʼlumotlarni yigʻish, ishlatish va himoya qilish tartibi.",
-    "articleFallbackTitle": "Maqola"
+    "articleFallbackTitle": "Maqola",
+    "videosTitle": "Videolar",
+    "videosDescription": "EGI Media video reportajlari, suhbatlari va vizual tahlillarini tomosha qiling — nashr sanasi va toʻliq tavsif bilan."
   },
   "header": {
     "homeAria": "{siteName} bosh sahifasi",
@@ -78,6 +80,20 @@
     "empty": "Videolar mavjud boʻlgach shu yerda koʻrinadi.",
     "kicker": "Tomosha",
     "watchOnYoutube": "YouTubeʼda tomosha qiling →"
+  },
+  "videosPage": {
+    "kicker": "Videolar",
+    "headline": "Tahririyatdan vizual reportajlar",
+    "lede": "Suhbatlar, maydon reportajlari va video formatidagi tahlillar — aniqlik va kontekst kerak boʻlgan mutaxassislar uchun.",
+    "listingHeading": "Videolar roʻyxati",
+    "playlistLabel": "Pleylist",
+    "featuredKicker": "Tanlangan",
+    "watchKicker": "Tomosha",
+    "moreVideos": "Boshqa videolar",
+    "videoCount": "{count} ta video",
+    "publishedOn": "Nashr etilgan {date}",
+    "watchOnYoutube": "YouTubeʼda tomosha qiling →",
+    "empty": "Hali hech qanday video nashr etilmagan."
   },
   "editors": {
     "title": "Eng mashhur",

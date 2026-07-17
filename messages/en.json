@@ -1,0 +1,126 @@
+{
+  "metadata": {
+    "siteDescription": "Premium digital news platform delivering editorial insights with clarity, depth, and professionalism.",
+    "aboutTitle": "About Us",
+    "aboutDescription": "EGI Media bridges dynamic visual content with sharp literacy through podcasts, videos, and articles on Politics, Technology, Sport, Entertainment, and Travel."
+  },
+  "header": {
+    "homeAria": "{siteName} home",
+    "newsletters": "Newsletters",
+    "signIn": "Sign in",
+    "subscribe": "Subscribe",
+    "toggleMenu": "Toggle menu",
+    "toggleSearch": "Toggle search",
+    "searchLabel": "Search articles",
+    "searchPlaceholder": "Search stories...",
+    "language": "Language",
+    "navMain": "Main navigation",
+    "navMobile": "Mobile navigation",
+    "nav": {
+      "latest": "Latest",
+      "business": "Business",
+      "technology": "Technology",
+      "politics": "Politics",
+      "series": "Series",
+      "videos": "Videos"
+    }
+  },
+  "worldClock": {
+    "ariaLabel": "World clocks",
+    "local": "Local"
+  },
+  "hero": {
+    "srHeading": "Featured News",
+    "moreTopStories": "More Top Stories",
+    "noFeatured": "No featured story"
+  },
+  "breaking": {
+    "title": "Breaking",
+    "empty": "No breaking stories at the moment."
+  },
+  "latest": {
+    "title": "Latest News",
+    "subtitle": "Fresh reporting and analysis from our editorial team."
+  },
+  "newsletter": {
+    "kicker": "The Flagship Newsletter",
+    "fallbackTitle": "Stay ahead with EGI Media",
+    "description": "Get premium editorial insights delivered to your inbox. Curated reporting for professionals who need clarity.",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "Enter your email",
+    "subscribe": "Subscribe",
+    "tagline": "Trusted insights · Clean design"
+  },
+  "series": {
+    "title": "Featured Series",
+    "subtitle": "Deep-dive editorial collections curated by our newsroom.",
+    "empty": "Series will appear here once published.",
+    "kicker": "Series"
+  },
+  "videos": {
+    "title": "Featured Videos",
+    "subtitle": "Watch our latest video reporting and interviews.",
+    "empty": "Videos will appear here once available.",
+    "kicker": "Watch",
+    "watchOnYoutube": "Watch on YouTube →"
+  },
+  "editors": {
+    "title": "Most Popular",
+    "subtitle": "The stories our readers are following most closely."
+  },
+  "footer": {
+    "company": "Company",
+    "legal": "Legal",
+    "followUs": "Follow Us",
+    "about": "About",
+    "contact": "Contact",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "tagline": "Premium digital news with editorial clarity, professional design, and trusted reporting.",
+    "copyright": "© {year} {siteName}. All rights reserved."
+  },
+  "common": {
+    "viewAll": "View all",
+    "tryAgain": "Try again",
+    "readingTime": "{minutes} min read",
+    "articleCount": "{count} articles"
+  },
+  "states": {
+    "emptyTitle": "No content yet",
+    "emptyMessage": "Check back soon for new stories.",
+    "errorTitle": "Something went wrong",
+    "errorMessage": "We could not load this section. Please try again."
+  },
+  "about": {
+    "kicker": "About Us",
+    "headline": "An honest space for discussion, bridging dynamic visuals with sharp literacy.",
+    "lede": "EGI Media was born from a passion to create a collaborative space for exploring diverse perspectives without being patronizing.",
+    "storyTitle": "Our Story",
+    "pullQuote": "Objectivity and creativity in every piece — informative, yet enjoyable to follow.",
+    "paragraphs": [
+      "Born from a passion to create an honest space for discussion, this media became a collaborative platform for processing diverse perspectives without being patronizing. Its main focus is bridging dynamic visual content with sharp literacy.",
+      "The YouTube channel is the main engine through a Podcast program that explores a range of topics in depth. Not stopping at audio-visual content, every key point and interesting detail is further developed through articles on the website. Its coverage is broad and relevant to today's lifestyle — from the dynamics of Politics, developments in Technology, sportsmanship in Sport, Entertainment reviews, to Travel exploration.",
+      "EGI Media prioritizes objectivity and creativity in every piece of content it produces. The goal is simple: to be a reference that is informative yet enjoyable to follow. Amid the fast flow of information, integrity and accuracy remain the main foundation, while continuously adapting to current trends. Every idea broadcast and every word written is expected to bring new color and spark the birth of other fresh ideas."
+    ],
+    "coverageTitle": "What We Cover",
+    "coverageSubtitle": "A broad range of topics relevant to today's lifestyle.",
+    "coverage": [
+      { "label": "Politics", "description": "Unpacking the latest dynamics and policies." },
+      { "label": "Technology", "description": "Highlighting digital developments and innovation." },
+      { "label": "Sport", "description": "Celebrating sportsmanship on and off the field." },
+      { "label": "Entertainment", "description": "Reviews of pop culture trends and entertainment." },
+      { "label": "Travel", "description": "Exploring destinations and the modern lifestyle." }
+    ],
+    "teamTitle": "The EGI Media Team",
+    "teamSubtitle": "The people behind every idea broadcast and every word written.",
+    "roles": {
+      "iwel": "Chief Executive Officer & Editorial Board",
+      "budi": "Chief Operating Officer & Editorial Board",
+      "nemo": "Senior Multimedia & Digital Marketing Specialist",
+      "amelia": "Creative Research & Event Specialist",
+      "zidan": "Podcast & Multimedia Specialist",
+      "rio": "Production & Editor",
+      "ananda": "Production & Multimedia"
+    }
+  }
+}

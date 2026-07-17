@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 import { Button } from "@/shared/components/ui/Button";
 import { Container } from "@/shared/components/layout/Container";
@@ -13,6 +14,7 @@ export function NewsletterSection() {
   const { data, isLoading, isError, error, refetch } = useNewsletter();
   const [email, setEmail] = useState("");
   const newsletter = data?.items[0];
+  const t = useTranslations("newsletter");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -38,31 +40,31 @@ export function NewsletterSection() {
 
             {!isLoading && !isError ? (
               <>
-                <span className="kicker">The Flagship Newsletter</span>
+                <span className="kicker">{t("kicker")}</span>
                 <h2
                   id="newsletter-heading"
                   className="mt-2 font-serif text-3xl font-bold leading-tight sm:text-4xl"
                 >
-                  {newsletter?.title ?? "Stay ahead with EGI Media"}
+                  {newsletter?.title ?? t("fallbackTitle")}
                 </h2>
                 <p className="mt-3 max-w-xl text-base leading-7 text-neutral-300">
-                  {"Get premium editorial insights delivered to your inbox. Curated reporting for professionals who need clarity."}
+                  {t("description")}
                 </p>
                 <form className="mt-6 flex max-w-md flex-col gap-3 sm:flex-row" onSubmit={handleSubmit}>
                   <label className="sr-only" htmlFor="newsletter-email">
-                    Email address
+                    {t("emailLabel")}
                   </label>
                   <input
                     className="flex-1 border border-neutral-600 bg-transparent px-4 py-2.5 text-sm text-white placeholder:text-neutral-500 focus-visible:border-accent focus-visible:outline-none"
                     id="newsletter-email"
                     onChange={(event) => setEmail(event.target.value)}
-                    placeholder="Enter your email"
+                    placeholder={t("emailPlaceholder")}
                     required
                     type="email"
                     value={email}
                   />
                   <Button className="rounded-none bg-accent hover:bg-accent/90 focus-visible:ring-accent" type="submit">
-                    Subscribe
+                    {t("subscribe")}
                   </Button>
                 </form>
               </>
@@ -75,7 +77,7 @@ export function NewsletterSection() {
           >
             <p className="font-serif text-7xl font-bold leading-none">EGI</p>
             <p className="mt-3 text-sm uppercase tracking-[0.2em] text-neutral-400">
-              Trusted insights · Clean design
+              {t("tagline")}
             </p>
           </div>
         </div>

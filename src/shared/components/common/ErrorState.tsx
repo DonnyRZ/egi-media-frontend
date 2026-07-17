@@ -1,3 +1,5 @@
+import { useTranslations } from "next-intl";
+
 import { Button } from "@/shared/components/ui/Button";
 import { cn } from "@/shared/lib/cn";
 
@@ -8,12 +10,9 @@ interface ErrorStateProps {
   className?: string;
 }
 
-export function ErrorState({
-  title = "Something went wrong",
-  message = "We could not load this section. Please try again.",
-  onRetry,
-  className,
-}: ErrorStateProps) {
+export function ErrorState({ title, message, onRetry, className }: ErrorStateProps) {
+  const t = useTranslations();
+
   return (
     <div
       role="alert"
@@ -22,11 +21,15 @@ export function ErrorState({
         className,
       )}
     >
-      <h3 className="text-lg font-semibold text-neutral-900">{title}</h3>
-      <p className="mt-2 text-sm text-neutral-500">{message}</p>
+      <h3 className="text-lg font-semibold text-neutral-900">
+        {title ?? t("states.errorTitle")}
+      </h3>
+      <p className="mt-2 text-sm text-neutral-500">
+        {message ?? t("states.errorMessage")}
+      </p>
       {onRetry ? (
         <Button className="mt-4" onClick={onRetry} type="button">
-          Try again
+          {t("common.tryAgain")}
         </Button>
       ) : null}
     </div>

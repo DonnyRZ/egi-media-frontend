@@ -1,17 +1,23 @@
-import Link from "next/link";
+"use client";
 
+import { useFormatter, useTranslations } from "next-intl";
+
+import { Link } from "@/i18n/navigation";
+import { DATE_FORMAT } from "@/shared/constants/format.constants";
 import type { Article } from "@/shared/types/article.types";
-import { formatPublishedDate } from "@/shared/utils/format";
 
 interface HeroHeadlineListProps {
   articles: Article[];
 }
 
 export function HeroHeadlineList({ articles }: HeroHeadlineListProps) {
+  const t = useTranslations("hero");
+  const format = useFormatter();
+
   return (
     <div className="flex h-full flex-col lg:border-l lg:border-neutral-200 lg:pl-6">
       <h3 className="border-b-2 border-ink pb-2 text-sm font-bold uppercase tracking-wide text-ink">
-        More Top Stories
+        {t("moreTopStories")}
       </h3>
       <ul className="mt-4 flex flex-1 flex-col">
         {articles.map((article, index) => (
@@ -36,9 +42,11 @@ export function HeroHeadlineList({ articles }: HeroHeadlineListProps) {
                   {article.title}
                 </Link>
               </h4>
-              <p className="mt-1 text-xs text-neutral-500">
-                {formatPublishedDate(article.publishedAt)}
-              </p>
+              {article.publishedAt ? (
+                <p className="mt-1 text-xs text-neutral-500">
+                  {format.dateTime(new Date(article.publishedAt), DATE_FORMAT)}
+                </p>
+              ) : null}
             </div>
           </li>
         ))}

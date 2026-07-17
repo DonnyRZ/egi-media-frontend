@@ -1,0 +1,126 @@
+{
+  "metadata": {
+    "siteDescription": "Aniqlik, chuqurlik va professionallik bilan tahririy tahlillarni taqdim etuvchi premium raqamli yangiliklar platformasi.",
+    "aboutTitle": "Biz haqimizda",
+    "aboutDescription": "EGI Media podkastlar, videolar va Siyosat, Texnologiya, Sport, Koʻngilochar hamda Sayohat mavzusidagi maqolalar orqali dinamik vizual kontentni oʻtkir savodxonlik bilan bogʻlaydi."
+  },
+  "header": {
+    "homeAria": "{siteName} bosh sahifasi",
+    "newsletters": "Axborotnomalar",
+    "signIn": "Kirish",
+    "subscribe": "Obuna boʻlish",
+    "toggleMenu": "Menyuni ochish",
+    "toggleSearch": "Qidiruvni ochish",
+    "searchLabel": "Maqolalarni qidirish",
+    "searchPlaceholder": "Yangiliklarni qidiring...",
+    "language": "Til",
+    "navMain": "Asosiy navigatsiya",
+    "navMobile": "Mobil navigatsiya",
+    "nav": {
+      "latest": "Soʻnggi",
+      "business": "Biznes",
+      "technology": "Texnologiya",
+      "politics": "Siyosat",
+      "series": "Turkumlar",
+      "videos": "Videolar"
+    }
+  },
+  "worldClock": {
+    "ariaLabel": "Jahon soatlari",
+    "local": "Mahalliy"
+  },
+  "hero": {
+    "srHeading": "Asosiy yangiliklar",
+    "moreTopStories": "Boshqa asosiy yangiliklar",
+    "noFeatured": "Asosiy yangilik yoʻq"
+  },
+  "breaking": {
+    "title": "Dolzarb",
+    "empty": "Hozircha dolzarb yangiliklar yoʻq."
+  },
+  "latest": {
+    "title": "Soʻnggi yangiliklar",
+    "subtitle": "Tahririyatimizdan yangi xabarlar va tahlillar."
+  },
+  "newsletter": {
+    "kicker": "Bosh axborotnoma",
+    "fallbackTitle": "EGI Media bilan bir qadam oldinda",
+    "description": "Premium tahririy tahlillarni pochtangizga oling. Aniqlikni qadrlaydigan mutaxassislar uchun tanlangan xabarlar.",
+    "emailLabel": "Elektron pochta manzili",
+    "emailPlaceholder": "Elektron pochtangizni kiriting",
+    "subscribe": "Obuna boʻlish",
+    "tagline": "Ishonchli tahlil · Toza dizayn"
+  },
+  "series": {
+    "title": "Tanlangan turkumlar",
+    "subtitle": "Tahririyatimiz tanlagan chuqur tahririy toʻplamlar.",
+    "empty": "Turkumlar chop etilgach shu yerda koʻrinadi.",
+    "kicker": "Turkum"
+  },
+  "videos": {
+    "title": "Tanlangan videolar",
+    "subtitle": "Soʻnggi video reportaj va suhbatlarimizni tomosha qiling.",
+    "empty": "Videolar mavjud boʻlgach shu yerda koʻrinadi.",
+    "kicker": "Tomosha",
+    "watchOnYoutube": "YouTubeʼda tomosha qiling →"
+  },
+  "editors": {
+    "title": "Eng mashhur",
+    "subtitle": "Oʻquvchilarimiz eng koʻp kuzatayotgan xabarlar."
+  },
+  "footer": {
+    "company": "Kompaniya",
+    "legal": "Huquqiy",
+    "followUs": "Bizni kuzating",
+    "about": "Biz haqimizda",
+    "contact": "Aloqa",
+    "privacy": "Maxfiylik siyosati",
+    "terms": "Foydalanish shartlari",
+    "tagline": "Tahririy aniqlik, professional dizayn va ishonchli xabarlarga ega premium raqamli yangiliklar.",
+    "copyright": "© {year} {siteName}. Barcha huquqlar himoyalangan."
+  },
+  "common": {
+    "viewAll": "Barchasini koʻrish",
+    "tryAgain": "Qayta urinish",
+    "readingTime": "{minutes} daq oʻqish",
+    "articleCount": "{count} ta maqola"
+  },
+  "states": {
+    "emptyTitle": "Hozircha kontent yoʻq",
+    "emptyMessage": "Yangi xabarlar uchun tez orada qayting.",
+    "errorTitle": "Nimadir xato ketdi",
+    "errorMessage": "Ushbu boʻlimni yuklab boʻlmadi. Iltimos, qayta urinib koʻring."
+  },
+  "about": {
+    "kicker": "Biz haqimizda",
+    "headline": "Halol muhokama maydoni: dinamik vizual kontentni oʻtkir savodxonlik bilan bogʻlaydi.",
+    "lede": "EGI Media turli qarashlarni mensimay emas, balki hamkorlikda oʻrganish uchun maydon yaratish ishtiyoqidan tugʻilgan.",
+    "storyTitle": "Bizning hikoyamiz",
+    "pullQuote": "Har bir kontentda xolislik va ijodkorlik — maʼlumotli, ammo kuzatish uchun qiziqarli.",
+    "paragraphs": [
+      "Halol muhokama maydonini yaratish ishtiyoqidan boshlangan ushbu media turli qarashlarni mensimay emas, balki birgalikda ishlash uchun maydonga aylandi. Asosiy eʼtibor dinamik vizual kontentni oʻtkir savodxonlik bilan bogʻlashga qaratilgan.",
+      "YouTube kanali turli mavzularni chuqur yorituvchi Podkast dasturi orqali asosiy dvigatel hisoblanadi. Audio-vizual kontent bilan cheklanmay, har bir muhim nuqta va qiziqarli tafsilot veb-saytdagi maqolalar orqali yanada rivojlantiriladi. Uning qamrovi keng va bugungi turmush tarziga mos: Siyosat jarayonlaridan tortib, Texnologiya rivoji, Sportdagi sportmenlik, Koʻngilochar sharhlar va Sayohat kashfiyotlarigacha.",
+      "EGI Media ishlab chiqaradigan har bir kontentda xolislik va ijodkorlikni birinchi oʻringa qoʻyadi. Maqsad oddiy: maʼlumotli, ammo kuzatish uchun qiziqarli manba boʻlish. Tez axborot oqimi sharoitida halollik va aniqlik asosiy tayanch boʻlib qoladi, ayni paytda mavjud tendensiyalarga moslashib boradi. Efirga uzatilgan har bir gʻoya va yozilgan har bir soʻz yangi ranglar baxsh etib, boshqa yangi gʻoyalar tugʻilishiga turtki boʻlishi kutiladi."
+    ],
+    "coverageTitle": "Biz nimani yoritamiz",
+    "coverageSubtitle": "Bugungi turmush tarziga mos keng qamrovli mavzular.",
+    "coverage": [
+      { "label": "Siyosat", "description": "Soʻnggi jarayonlar va siyosatni tahlil qilamiz." },
+      { "label": "Texnologiya", "description": "Raqamli rivojlanish va innovatsiyalarni yoritamiz." },
+      { "label": "Sport", "description": "Maydonda va undan tashqarida sport ruhini nishonlaymiz." },
+      { "label": "Koʻngilochar", "description": "Ommaviy madaniyat tendensiyalari va koʻrgazmalar sharhi." },
+      { "label": "Sayohat", "description": "Manzillar va zamonaviy turmush tarzini kashf etamiz." }
+    ],
+    "teamTitle": "EGI Media jamoasi",
+    "teamSubtitle": "Efirga uzatilgan har bir gʻoya va yozilgan har bir soʻz ortidagi insonlar.",
+    "roles": {
+      "iwel": "Bosh ijrochi direktor va Tahririyat kengashi",
+      "budi": "Bosh operatsion direktor va Tahririyat kengashi",
+      "nemo": "Katta multimedia va raqamli marketing mutaxassisi",
+      "amelia": "Ijodiy tadqiqot va tadbirlar mutaxassisi",
+      "zidan": "Podkast va multimedia mutaxassisi",
+      "rio": "Ishlab chiqarish va muharrir",
+      "ananda": "Ishlab chiqarish va multimedia"
+    }
+  }
+}

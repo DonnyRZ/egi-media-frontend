@@ -1,12 +1,12 @@
+import { useTranslations } from "next-intl";
+
 import { Container } from "@/shared/components/layout/Container";
 import { Section } from "@/shared/components/layout/Section";
-import {
-  ABOUT_PARAGRAPHS,
-  ABOUT_PULL_QUOTE,
-} from "@/features/about/constants/about.constants";
 
 export function AboutStory() {
-  const [firstParagraph, ...restParagraphs] = ABOUT_PARAGRAPHS;
+  const t = useTranslations("about");
+  const paragraphs = t.raw("paragraphs") as string[];
+  const [firstParagraph, ...restParagraphs] = paragraphs;
 
   return (
     <Section ariaLabelledby="about-story-heading">
@@ -18,10 +18,10 @@ export function AboutStory() {
               className="flex items-center gap-2.5 text-lg font-bold uppercase tracking-wide text-ink sm:text-xl"
             >
               <span aria-hidden="true" className="h-5 w-1.5 bg-accent" />
-              Cerita Kami
+              {t("storyTitle")}
             </h2>
             <blockquote className="mt-6 border-l-2 border-accent pl-5 font-serif text-xl italic leading-relaxed text-ink lg:text-2xl">
-              “{ABOUT_PULL_QUOTE}”
+              “{t("pullQuote")}”
             </blockquote>
           </div>
 

@@ -1,5 +1,7 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 import { Container } from "@/shared/components/layout/Container";
 import { Section } from "@/shared/components/layout/Section";
 import { ErrorState } from "@/shared/components/common/ErrorState";
@@ -34,12 +36,13 @@ function HeroSkeleton() {
 
 export function HeroSection() {
   const { data, isLoading, isError, error, refetch } = useHeroNews();
+  const t = useTranslations("hero");
 
   return (
     <Section className="pt-8 lg:pt-12" ariaLabelledby="hero-heading">
       <Container>
         <h1 id="hero-heading" className="sr-only">
-          Featured News
+          {t("srHeading")}
         </h1>
         {isLoading ? <HeroSkeleton /> : null}
         {isError ? (
@@ -49,7 +52,7 @@ export function HeroSection() {
           />
         ) : null}
         {!isLoading && !isError && !data?.featured ? (
-          <EmptyState title="No featured story" />
+          <EmptyState title={t("noFeatured")} />
         ) : null}
         {!isLoading && !isError && data?.featured ? (
           <div className="grid gap-8 lg:grid-cols-[2fr_1fr]">

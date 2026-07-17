@@ -1,25 +1,27 @@
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 
+import { Link } from "@/i18n/navigation";
 import { Container } from "@/shared/components/layout/Container";
 import { SITE_NAME } from "@/shared/constants/site.constants";
 
-const FOOTER_LINKS = {
-  company: [
-    { label: "About", href: "/about" },
-    { label: "Contact", href: "/contact" },
-  ],
-  legal: [
-    { label: "Privacy Policy", href: "/privacy" },
-    { label: "Terms of Service", href: "/terms" },
-  ],
-  social: [
-    { label: "YouTube", href: "https://youtube.com" },
-    { label: "X", href: "https://x.com" },
-    { label: "Spotify", href: "https://spotify.com" },
-  ],
-};
+const COMPANY_LINKS = [
+  { key: "about", href: "/about" },
+  { key: "contact", href: "/contact" },
+] as const;
+
+const LEGAL_LINKS = [
+  { key: "privacy", href: "/privacy" },
+  { key: "terms", href: "/terms" },
+] as const;
+
+const SOCIAL_LINKS = [
+  { label: "YouTube", href: "https://youtube.com" },
+  { label: "X", href: "https://x.com" },
+  { label: "Spotify", href: "https://spotify.com" },
+];
 
 export function Footer() {
+  const t = useTranslations("footer");
   const currentYear = new Date().getFullYear();
 
   return (
@@ -28,21 +30,18 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <p className="font-serif text-2xl font-bold">{SITE_NAME}</p>
-            <p className="mt-3 text-sm leading-6 text-neutral-400">
-              Premium digital news with editorial clarity, professional design,
-              and trusted reporting.
-            </p>
+            <p className="mt-3 text-sm leading-6 text-neutral-400">{t("tagline")}</p>
           </div>
 
           <div>
             <h2 className="text-xs font-bold uppercase tracking-[0.14em] text-neutral-500">
-              Company
+              {t("company")}
             </h2>
             <ul className="mt-4 space-y-2">
-              {FOOTER_LINKS.company.map((link) => (
+              {COMPANY_LINKS.map((link) => (
                 <li key={link.href}>
                   <Link className="text-sm text-neutral-300 hover:text-accent" href={link.href}>
-                    {link.label}
+                    {t(link.key)}
                   </Link>
                 </li>
               ))}
@@ -51,13 +50,13 @@ export function Footer() {
 
           <div>
             <h2 className="text-xs font-bold uppercase tracking-[0.14em] text-neutral-500">
-              Legal
+              {t("legal")}
             </h2>
             <ul className="mt-4 space-y-2">
-              {FOOTER_LINKS.legal.map((link) => (
+              {LEGAL_LINKS.map((link) => (
                 <li key={link.href}>
                   <Link className="text-sm text-neutral-300 hover:text-accent" href={link.href}>
-                    {link.label}
+                    {t(link.key)}
                   </Link>
                 </li>
               ))}
@@ -66,19 +65,19 @@ export function Footer() {
 
           <div>
             <h2 className="text-xs font-bold uppercase tracking-[0.14em] text-neutral-500">
-              Follow Us
+              {t("followUs")}
             </h2>
             <ul className="mt-4 space-y-2">
-              {FOOTER_LINKS.social.map((link) => (
+              {SOCIAL_LINKS.map((link) => (
                 <li key={link.href}>
-                  <Link
+                  <a
                     className="text-sm text-neutral-300 hover:text-accent"
                     href={link.href}
                     rel="noopener noreferrer"
                     target="_blank"
                   >
                     {link.label}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -86,7 +85,7 @@ export function Footer() {
         </div>
 
         <div className="mt-10 border-t border-neutral-800 pt-6 text-sm text-neutral-500">
-          <p>© {currentYear} {SITE_NAME}. All rights reserved.</p>
+          <p>{t("copyright", { year: currentYear, siteName: SITE_NAME })}</p>
         </div>
       </Container>
     </footer>

@@ -1,5 +1,7 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 import { Container } from "@/shared/components/layout/Container";
 import { cn } from "@/shared/lib/cn";
 import { useClock } from "@/features/world-clock/hooks/useClock";
@@ -40,17 +42,18 @@ function ClockItem({ label, time, accent = false }: ClockItemProps) {
 
 export function WorldClock() {
   const now = useClock();
+  const t = useTranslations("worldClock");
 
   return (
     <section
-      aria-label="World clocks"
+      aria-label={t("ariaLabel")}
       className="border-b border-neutral-200 bg-neutral-50"
     >
       <Container>
         <div className="flex items-center gap-5 overflow-x-auto py-2.5 scrollbar-hide sm:gap-8">
           <ClockItem
             accent
-            label="Local"
+            label={t("local")}
             time={now ? formatClockTime(now) : PLACEHOLDER}
           />
           <span aria-hidden="true" className="h-3.5 w-px shrink-0 bg-neutral-300" />

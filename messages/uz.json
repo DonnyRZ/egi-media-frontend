@@ -6,7 +6,9 @@
     "contactTitle": "Aloqa",
     "contactDescription": "EGI Media bilan bogʻlaning — studio manzili, telefon, elektron pochta va Oscorp Building, Kebayoran Baru, Janubiy Jakartadagi xarita.",
     "termsTitle": "Foydalanish shartlari",
-    "termsDescription": "EGI Media foydalanish shartlari — veb-sayt, kontent va raqamli xizmatlarimizdan foydalanishni tartibga soladi."
+    "termsDescription": "EGI Media foydalanish shartlari — veb-sayt, kontent va raqamli xizmatlarimizdan foydalanishni tartibga soladi.",
+    "privacyTitle": "Maxfiylik siyosati",
+    "privacyDescription": "EGI Media maxfiylik siyosati — shaxsiy maʼlumotlarni yigʻish, ishlatish va himoya qilish tartibi."
   },
   "header": {
     "homeAria": "{siteName} bosh sahifasi",
@@ -231,6 +233,97 @@
         "title": "Biz bilan bogʻlaning",
         "paragraphs": [
           "Ushbu Foydalanish shartlari boʻyicha savollaringiz boʻlsa, official@egi-media.com manziliga yoki EGI Media veb-saytidagi Aloqa sahifasi orqali murojaat qiling."
+        ]
+      }
+    ]
+  },
+  "privacy": {
+    "kicker": "Huquqiy",
+    "headline": "Maxfiylik siyosati",
+    "lastUpdated": "Oxirgi yangilanish: 17-iyul, 2026",
+    "lede": "EGI Media sizning maxfiyligingizni hurmat qiladi. Ushbu siyosat xizmatlarimizdan foydalanganingizda shaxsiy maʼlumotlarni qanday yigʻishimiz, ishlatishimiz, saqlashimiz va himoya qilishimizni tushuntiradi.",
+    "sections": [
+      {
+        "title": "Qoʻllanish doirasi",
+        "paragraphs": [
+          "Ushbu Maxfiylik siyosati EGI Media veb-sayti, axborotnomalar va biz boshqaradigan tegishli raqamli xizmatlarga tatbiq etiladi.",
+          "Xizmatlarimizdan foydalanish orqali siz ushbu siyosatda bayon etilgan amaliyotni tushunganingizni bildiradi."
+        ]
+      },
+      {
+        "title": "Biz yigʻadigan maʼlumotlar",
+        "paragraphs": [
+          "Biz toʻgʻridan-toʻgʻri taqdim etgan maʼlumotlaringizni, masalan axborotnomaga obuna boʻlganda yoki biz bilan bogʻlanganda ism va elektron pochta manzilingizni yigʻishimiz mumkin.",
+          "Shuningdek, IP manzil, qurilma turi, brauzer, tashrif buyurilgan sahifalar va sayt ishlashini tushunishga yordam beradigan foydalanish maʼlumotlari kabi texnik maʼlumotlarni avtomatik yigʻishimiz mumkin."
+        ]
+      },
+      {
+        "title": "Maʼlumotlardan qanday foydalanamiz",
+        "paragraphs": [
+          "Maʼlumotlar xizmatlarni taqdim etish va yaxshilash, soʻragan axborotnoma yoki xabarlarni yuborish, soʻrovlarga javob berish hamda platforma xavfsizligi va ishonchliligini saqlash uchun ishlatiladi.",
+          "Biz shaxsingizni aniqlamasdan tahririy tahlil va mahsulot rivojlantirish uchun agregat yoki anonim maʼlumotlardan foydalanishimiz mumkin."
+        ]
+      },
+      {
+        "title": "Huquqiy asoslar va qonuniy maqsadlar",
+        "paragraphs": [
+          "Biz shaxsiy maʼlumotlarni Indoneziya Respublikasi amaldagi qonunlariga muvofiq, jumladan soʻragan xizmatlarni koʻrsatish, media platformasini yuritishdagi qonuniy manfaatlar va qonuniy majburiyatlarga rioya qilish uchun qayta ishlaymiz.",
+          "Agar qayta ishlash rozilik talab qilsa, oʻsha maqsad uchun maʼlumotni qayta ishlashdan oldin rozilik soʻraymiz."
+        ]
+      },
+      {
+        "title": "Cookie va oʻxshash texnologiyalar",
+        "paragraphs": [
+          "Veb-saytimiz koʻrish tajribasi, til afzalliklari va ishlashni oʻlchash uchun cookie yoki oʻxshash texnologiyalardan foydalanishi mumkin.",
+          "Brauzeringizni cookieʼlarni rad etishga sozlashingiz mumkin. Biroq baʼzi cookieʼlarsiz ayrim funksiyalar toʻliq ishlamasligi mumkin."
+        ]
+      },
+      {
+        "title": "Maʼlumotlarni ulashish",
+        "paragraphs": [
+          "Biz shaxsiy maʼlumotlaringizni sotmaymiz. Operatsiyaga yordam beruvchi ishonchli xizmat koʻrsatuvchilar (masalan, hosting, tahlil yoki elektron pochta yuborish) bilan maʼlumotni faqat shu xizmatlar uchun zarur darajada ulashishimiz mumkin.",
+          "Qonun talab qilganda yoki EGI Media va foydalanuvchilar huquqlari, xavfsizligi va yaxlitligini himoya qilish uchun ham maʼlumotni oshkor qilishimiz mumkin."
+        ]
+      },
+      {
+        "title": "Saqlash va xavfsizlik",
+        "paragraphs": [
+          "Biz shaxsiy maʼlumotlarni ushbu siyosatda bayon etilgan maqsadlar uchun zarur muddat davomida yoki qonun talab qilgan muddatda saqlaymiz.",
+          "Maʼlumotlarni ruxsatsiz kirish, oʻzgartirish yoki oshkor qilishdan himoya qilish uchun oqilona texnik va tashkiliy choralarni qoʻllaymiz. Biroq internet orqali uzatish mutlaqo xavfsiz emas."
+        ]
+      },
+      {
+        "title": "Sizning huquqlaringiz",
+        "paragraphs": [
+          "Amaldagi qonunga muvofiq, siz bizda saqlanayotgan ayrim shaxsiy maʼlumotlarga kirish, tuzatish yoki oʻchirishni soʻrash huquqiga ega boʻlishingiz mumkin.",
+          "Shuningdek, elektron pochtadagi obunani bekor qilish havolasi orqali yoki biz bilan bogʻlanib, istalgan vaqtda axborotnomadan voz kechishingiz mumkin."
+        ]
+      },
+      {
+        "title": "Uchinchi tomon xizmatlari",
+        "paragraphs": [
+          "Xizmatlarimiz YouTube yoki ijtimoiy tarmoqlar kabi uchinchi tomon platformalariga bogʻlangan boʻlishi mumkin. U yerda yigʻilgan maʼlumotlarga ularning maxfiylik siyosati tatbiq etiladi.",
+          "Maʼlumot berishdan oldin har bir uchinchi tomonning maxfiylik siyosatini oʻqib chiqishingizni tavsiya qilamiz."
+        ]
+      },
+      {
+        "title": "Bolalar",
+        "paragraphs": [
+          "Xizmatlarimiz mahalliy qonunda belgilangan yoshdan kichik bolalarga ota-ona yoki vasiy nazoratisiz moʻljallanmagan.",
+          "Agar tegishli ruxsatsiz boladan maʼlumot olganimizga ishonsangiz, koʻrib chiqish va zarur boʻlsa oʻchirish uchun biz bilan bogʻlaning."
+        ]
+      },
+      {
+        "title": "Siyosatning oʻzgarishi",
+        "paragraphs": [
+          "Biz ushbu Maxfiylik siyosatini vaqti-vaqti bilan yangilashimiz mumkin. Eng soʻnggi versiya yangilanish sanasi bilan ushbu sahifada eʼlon qilinadi.",
+          "Oʻzgarishlar kuchga kirganidan keyin xizmatlardan davomiy foydalanish yangilangan amaliyotni tushunganingizni bildiradi."
+        ]
+      },
+      {
+        "title": "Biz bilan bogʻlaning",
+        "paragraphs": [
+          "Ushbu Maxfiylik siyosati yoki shaxsiy maʼlumotlarga oid soʻrovlar boʻyicha savollaringiz uchun official@egi-media.com manziliga yoki EGI Media veb-saytidagi Aloqa sahifasi orqali murojaat qiling."
         ]
       }
     ]

@@ -6,7 +6,9 @@
     "contactTitle": "Kontak",
     "contactDescription": "Hubungi EGI Media — alamat studio, telepon, email, dan lokasi di Oscorp Building, Kebayoran Baru, Jakarta Selatan.",
     "termsTitle": "Ketentuan Layanan",
-    "termsDescription": "Ketentuan layanan EGI Media yang mengatur penggunaan website, konten, dan layanan digital kami."
+    "termsDescription": "Ketentuan layanan EGI Media yang mengatur penggunaan website, konten, dan layanan digital kami.",
+    "privacyTitle": "Kebijakan Privasi",
+    "privacyDescription": "Kebijakan privasi EGI Media tentang pengumpulan, penggunaan, dan perlindungan data pribadi pengguna."
   },
   "header": {
     "homeAria": "Beranda {siteName}",
@@ -231,6 +233,97 @@
         "title": "Hubungi kami",
         "paragraphs": [
           "Jika Anda memiliki pertanyaan terkait Ketentuan Layanan ini, silakan hubungi kami di official@egi-media.com atau melalui halaman Kontak di website EGI Media."
+        ]
+      }
+    ]
+  },
+  "privacy": {
+    "kicker": "Legal",
+    "headline": "Kebijakan Privasi",
+    "lastUpdated": "Terakhir diperbarui: 17 Juli 2026",
+    "lede": "EGI Media menghormati privasi Anda. Kebijakan ini menjelaskan bagaimana kami mengumpulkan, menggunakan, menyimpan, dan melindungi informasi pribadi saat Anda menggunakan layanan kami.",
+    "sections": [
+      {
+        "title": "Ruang lingkup",
+        "paragraphs": [
+          "Kebijakan Privasi ini berlaku untuk website EGI Media, buletin, serta layanan digital terkait yang kami kelola.",
+          "Dengan menggunakan layanan kami, Anda memahami praktik yang diuraikan dalam kebijakan ini."
+        ]
+      },
+      {
+        "title": "Informasi yang kami kumpulkan",
+        "paragraphs": [
+          "Kami dapat mengumpulkan informasi yang Anda berikan secara langsung, seperti nama dan alamat email saat berlangganan buletin atau menghubungi kami.",
+          "Kami juga dapat mengumpulkan data teknis secara otomatis, termasuk alamat IP, jenis perangkat, browser, halaman yang dikunjungi, serta data penggunaan yang membantu kami memahami performa situs."
+        ]
+      },
+      {
+        "title": "Cara kami menggunakan informasi",
+        "paragraphs": [
+          "Informasi digunakan untuk menyediakan dan meningkatkan layanan, mengirim buletin atau komunikasi yang Anda minta, menjawab pertanyaan, serta menjaga keamanan dan keandalan platform.",
+          "Kami dapat menggunakan data agregat atau anonim untuk analisis editorial dan pengembangan produk tanpa mengidentifikasi Anda secara pribadi."
+        ]
+      },
+      {
+        "title": "Dasar hukum dan tujuan yang sah",
+        "paragraphs": [
+          "Kami memproses data pribadi sesuai hukum yang berlaku di Republik Indonesia, termasuk untuk pelaksanaan layanan yang Anda minta, kepentingan yang sah dalam operasional media, serta kepatuhan terhadap kewajiban hukum.",
+          "Jika pemrosesan memerlukan persetujuan, kami akan memintanya sebelum memproses data untuk tujuan tersebut."
+        ]
+      },
+      {
+        "title": "Cookie dan teknologi serupa",
+        "paragraphs": [
+          "Website kami dapat menggunakan cookie atau teknologi serupa untuk pengalaman penjelajahan, preferensi bahasa, dan pengukuran kinerja.",
+          "Anda dapat mengatur browser untuk menolak cookie. Namun, beberapa fitur situs mungkin tidak berfungsi optimal tanpa cookie tertentu."
+        ]
+      },
+      {
+        "title": "Berbagi informasi",
+        "paragraphs": [
+          "Kami tidak menjual data pribadi Anda. Kami dapat membagikan informasi kepada penyedia layanan tepercaya yang membantu operasional (misalnya hosting, analitik, atau pengiriman email), sejauh diperlukan untuk layanan tersebut.",
+          "Kami juga dapat mengungkapkan informasi jika diwajibkan hukum, atau untuk melindungi hak, keamanan, dan integritas EGI Media serta pengguna."
+        ]
+      },
+      {
+        "title": "Penyimpanan dan keamanan",
+        "paragraphs": [
+          "Kami menyimpan data pribadi selama diperlukan untuk tujuan yang dijelaskan dalam kebijakan ini, atau selama diwajibkan oleh hukum.",
+          "Kami menerapkan langkah teknis dan organisasi yang wajar untuk melindungi data dari akses, perubahan, atau pengungkapan yang tidak sah. Namun, tidak ada transmisi internet yang sepenuhnya aman."
+        ]
+      },
+      {
+        "title": "Hak Anda",
+        "paragraphs": [
+          "Sesuai hukum yang berlaku, Anda dapat memiliki hak untuk mengakses, memperbaiki, atau meminta penghapusan data pribadi tertentu yang kami miliki tentang Anda.",
+          "Anda juga dapat berhenti berlangganan buletin kapan saja melalui tautan berhenti berlangganan pada email, atau dengan menghubungi kami."
+        ]
+      },
+      {
+        "title": "Layanan pihak ketiga",
+        "paragraphs": [
+          "Layanan kami dapat tertaut ke platform pihak ketiga seperti YouTube atau media sosial. Kebijakan privasi mereka berlaku untuk data yang dikumpulkan di platform tersebut.",
+          "Kami menganjurkan Anda membaca kebijakan privasi masing-masing pihak ketiga sebelum memberikan informasi."
+        ]
+      },
+      {
+        "title": "Anak-anak",
+        "paragraphs": [
+          "Layanan kami tidak ditujukan untuk anak di bawah usia yang ditentukan hukum setempat tanpa pengawasan orang tua atau wali.",
+          "Jika Anda meyakini kami telah menerima data dari anak tanpa izin yang tepat, hubungi kami agar kami dapat meninjau dan menghapusnya bila diperlukan."
+        ]
+      },
+      {
+        "title": "Perubahan kebijakan",
+        "paragraphs": [
+          "Kami dapat memperbarui Kebijakan Privasi ini dari waktu ke waktu. Versi terbaru akan dipublikasikan di halaman ini beserta tanggal pembaruan.",
+          "Penggunaan layanan secara berkelanjutan setelah perubahan berlaku berarti Anda memahami praktik yang diperbarui."
+        ]
+      },
+      {
+        "title": "Hubungi kami",
+        "paragraphs": [
+          "Untuk pertanyaan tentang Kebijakan Privasi ini atau permintaan terkait data pribadi, hubungi kami di official@egi-media.com atau melalui halaman Kontak di website EGI Media."
         ]
       }
     ]

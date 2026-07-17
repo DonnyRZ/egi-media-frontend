@@ -4,7 +4,9 @@
     "aboutTitle": "Biz haqimizda",
     "aboutDescription": "EGI Media podkastlar, videolar va Siyosat, Texnologiya, Sport, Koʻngilochar hamda Sayohat mavzusidagi maqolalar orqali dinamik vizual kontentni oʻtkir savodxonlik bilan bogʻlaydi.",
     "contactTitle": "Aloqa",
-    "contactDescription": "EGI Media bilan bogʻlaning — studio manzili, telefon, elektron pochta va Oscorp Building, Kebayoran Baru, Janubiy Jakartadagi xarita."
+    "contactDescription": "EGI Media bilan bogʻlaning — studio manzili, telefon, elektron pochta va Oscorp Building, Kebayoran Baru, Janubiy Jakartadagi xarita.",
+    "termsTitle": "Foydalanish shartlari",
+    "termsDescription": "EGI Media foydalanish shartlari — veb-sayt, kontent va raqamli xizmatlarimizdan foydalanishni tartibga soladi."
   },
   "header": {
     "homeAria": "{siteName} bosh sahifasi",
@@ -141,5 +143,96 @@
     "mapFullAddress": "Oscorp Building, Jl. Darmawangsa Raya No.16, RT.6/RW.1, Pulo, Kebayoran Baru, Janubiy Jakarta shahri, Jakarta 12160, Indoneziya",
     "openMaps": "Google Mapsda ochish",
     "imageAlt": "EGI Media jamoasi"
+  },
+  "terms": {
+    "kicker": "Huquqiy",
+    "headline": "Foydalanish shartlari",
+    "lastUpdated": "Oxirgi yangilanish: 17-iyul, 2026",
+    "lede": "EGI Media veb-sayti, kontenti va xizmatlariga kirish yoki ulardan foydalanish orqali siz quyidagi shartlarga rozilik bildirasiz. Iltimos, diqqat bilan oʻqing.",
+    "sections": [
+      {
+        "title": "Shartlarni qabul qilish",
+        "paragraphs": [
+          "Ushbu Foydalanish shartlari siz va EGI Media oʻrtasida raqamli platformamizga — veb-sayt, maqolalar, podkastlar, videolar, axborotnomalar va tegishli xizmatlarga — kirish va foydalanish boʻyicha kelishuv hisoblanadi.",
+          "Agar ushbu shartlarga rozi boʻlmasangiz, xizmatlarimizdan foydalanmang."
+        ]
+      },
+      {
+        "title": "Xizmatlar tavsifi",
+        "paragraphs": [
+          "EGI Media jamoatchilikka axborot va taʼlim maqsadida yangiliklar, tahlillar, podkastlar, videolar va boshqa tahririy materiallarni taqdim etadi.",
+          "Amaldagi qonunchilik ruxsat bergan darajada, biz xizmatlarning bir qismini yoki hammasiini istalgan vaqtda oldindan ogohlantirmasdan oʻzgartirish, toʻxtatib turish yoki tugatish huquqiga egamiz."
+        ]
+      },
+      {
+        "title": "Ruxsat etilgan foydalanish",
+        "paragraphs": [
+          "Siz xizmatlardan shaxsiy, tijorat boʻlmagan maqsadlarda va amaldagi qonunlarga muvofiq foydalanishingiz mumkin.",
+          "Siz xizmatlardan suiisteʼmol qilmaslikka rozilik bildirasiz, jumladan: sayt ishiga xalaqit berish, tizimga ruxsatsiz kirish, zararli dastur tarqatish yoki kontentni uchinchi shaxslar huquqlarini buzadigan tarzda ishlatish."
+        ]
+      },
+      {
+        "title": "Intellektual mulk",
+        "paragraphs": [
+          "EGI Media platformasidagi barcha kontent — matn, tasvir, audio, video, savdo belgilari, logotiplar va dizayn — agar boshqacha koʻrsatilmagan boʻlsa, mualliflik huquqi va amaldagi intellektual mulk qonunlari bilan himoyalangan.",
+          "EGI Mediadan oldindan yozma ruxsatsiz kontentni nusxalash, koʻpaytirish, tarqatish, oʻzgartirish yoki tijorat maqsadida ishlatish mumkin emas."
+        ]
+      },
+      {
+        "title": "Foydalanuvchi va hamjamiyat kontenti",
+        "paragraphs": [
+          "Agar bizga xabar, taklif yoki boshqa material yuborsangiz, ular qonun yoki uchinchi shaxslar huquqlarini buzmasligiga kafolat berasiz.",
+          "EGI Media siz taqdim etgan maxfiy boʻlmagan fikr-mulohazalarni xizmatlarni yaxshilash uchun, yozma kelishuv boʻlmasa, kompensatsiya majburiyatisiz ishlatishi mumkin."
+        ]
+      },
+      {
+        "title": "Tahririy aniqlik va javobgarlik",
+        "paragraphs": [
+          "Biz tahririy halollik va aniqlikka sodiqmiz. Shunga qaramay, kontent “boricha” taqdim etiladi va xatoliklar boʻlishi yoki eskirishi mumkin.",
+          "EGI Media ushbu platformadagi maʼlumotlarga asoslanib qabul qilgan qarorlaringiz uchun javobgar emas."
+        ]
+      },
+      {
+        "title": "Uchinchi tomon havolalari",
+        "paragraphs": [
+          "Xizmatlarimizda YouTube, ijtimoiy tarmoqlar yoki boshqa hamkorlar kabi uchinchi tomon saytlari yoki xizmatlariga havolalar boʻlishi mumkin.",
+          "EGI Media ushbu uchinchi tomon saytlarining kontenti, siyosati yoki amaliyotini nazorat qilmaydi va ular uchun javobgar emas."
+        ]
+      },
+      {
+        "title": "Kafolatlarning rad etilishi",
+        "paragraphs": [
+          "Qonun ruxsat bergan eng keng doirada, xizmatlar va kontent ochiq yoki yashirin kafolatlarsiz, jumladan sotishga yaroqlilik, maʼlum maqsadga moslik yoki uzluksiz ishlash kafolatlarsiz taqdim etiladi.",
+          "Xizmatlar har doim mavjud, xavfsiz yoki xatosiz boʻlishiga kafolat bermaymiz."
+        ]
+      },
+      {
+        "title": "Javobgarlikni cheklash",
+        "paragraphs": [
+          "Amaldagi qonun ruxsat bergan eng keng doirada, EGI Media va uning filiallari xizmatlardan foydalanish yoki foydalana olmaslik natijasida yuzaga kelgan bilvosita, tasodifiy, maxsus, oqibatli zararlar yoki maʼlumot, foyda yoki biznes imkoniyatlarini yoʻqotish uchun javobgar emas.",
+          "Bizning umumiy javobgarligimiz, agar boʻlsa, oqilona isbotlangan bevosita zararlar bilan cheklanadi va amaldagi qonun talab qilganidan oshmaydi."
+        ]
+      },
+      {
+        "title": "Shartlarning oʻzgarishi",
+        "paragraphs": [
+          "Biz ushbu Foydalanish shartlarini vaqti-vaqti bilan yangilashimiz mumkin. Eng soʻnggi versiya yangilanish sanasi bilan ushbu sahifada eʼlon qilinadi.",
+          "Oʻzgarishlar kuchga kirganidan keyin xizmatlardan davomiy foydalanish yangilangan shartlarni qabul qilganingiz hisoblanadi."
+        ]
+      },
+      {
+        "title": "Amal qiluvchi qonun",
+        "paragraphs": [
+          "Ushbu shartlar Indoneziya Respublikasi qonunlariga muvofiq tartibga solinadi va talqin qilinadi.",
+          "Ushbu shartlar bilan bogʻliq har qanday nizo avvalo yaxshi niyatli muzokaralar orqali hal qilinishiga harakat qilinadi."
+        ]
+      },
+      {
+        "title": "Biz bilan bogʻlaning",
+        "paragraphs": [
+          "Ushbu Foydalanish shartlari boʻyicha savollaringiz boʻlsa, official@egi-media.com manziliga yoki EGI Media veb-saytidagi Aloqa sahifasi orqali murojaat qiling."
+        ]
+      }
+    ]
   }
 }

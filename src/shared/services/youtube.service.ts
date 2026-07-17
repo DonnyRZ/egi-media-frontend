@@ -13,6 +13,7 @@ interface YoutubeVideoDto {
   description: string | null;
   url: string;
   duration?: string | null;
+  created_at?: string | null;
 }
 
 export async function fetchYoutubeVideos(
@@ -25,6 +26,11 @@ export async function fetchYoutubeVideos(
 
   return mapYoutubeVideoListDto({
     items: response.data.data,
-    meta: { total: response.data.meta?.total ?? 0 },
+    meta: {
+      total: response.data.meta?.total ?? 0,
+      page: response.data.meta?.page,
+      limit: response.data.meta?.limit,
+      total_pages: response.data.meta?.total_pages,
+    },
   });
 }

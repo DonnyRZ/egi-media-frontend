@@ -9,7 +9,9 @@
     "termsDescription": "EGI Media Terms of Service governing the use of our website, content, and digital services.",
     "privacyTitle": "Privacy Policy",
     "privacyDescription": "EGI Media Privacy Policy on how we collect, use, and protect personal data.",
-    "articleFallbackTitle": "Article"
+    "articleFallbackTitle": "Article",
+    "videosTitle": "Videos",
+    "videosDescription": "Watch EGI Media video reporting, interviews, and visual analysis — with publish dates and full descriptions."
   },
   "header": {
     "homeAria": "{siteName} home",
@@ -78,6 +80,20 @@
     "empty": "Videos will appear here once available.",
     "kicker": "Watch",
     "watchOnYoutube": "Watch on YouTube →"
+  },
+  "videosPage": {
+    "kicker": "Videos",
+    "headline": "Visual reporting from the newsroom",
+    "lede": "Interviews, field reports, and analysis in video — built for professionals who need clarity and context.",
+    "listingHeading": "Video library",
+    "playlistLabel": "Playlist",
+    "featuredKicker": "Featured",
+    "watchKicker": "Watch",
+    "moreVideos": "More videos",
+    "videoCount": "{count} videos",
+    "publishedOn": "Published {date}",
+    "watchOnYoutube": "Watch on YouTube →",
+    "empty": "No videos have been published yet."
   },
   "editors": {
     "title": "Most Popular",

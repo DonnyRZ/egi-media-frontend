@@ -9,7 +9,9 @@
     "termsDescription": "Ketentuan layanan EGI Media yang mengatur penggunaan website, konten, dan layanan digital kami.",
     "privacyTitle": "Kebijakan Privasi",
     "privacyDescription": "Kebijakan privasi EGI Media tentang pengumpulan, penggunaan, dan perlindungan data pribadi pengguna.",
-    "articleFallbackTitle": "Artikel"
+    "articleFallbackTitle": "Artikel",
+    "videosTitle": "Video",
+    "videosDescription": "Tonton liputan video, wawancara, dan analisis visual EGI Media — dengan tanggal terbit dan deskripsi lengkap."
   },
   "header": {
     "homeAria": "Beranda {siteName}",
@@ -78,6 +80,20 @@
     "empty": "Video akan muncul di sini setelah tersedia.",
     "kicker": "Tonton",
     "watchOnYoutube": "Tonton di YouTube →"
+  },
+  "videosPage": {
+    "kicker": "Video",
+    "headline": "Liputan visual dari ruang redaksi",
+    "lede": "Wawancara, reportase, dan analisis dalam format video — disusun untuk profesional yang membutuhkan kejelasan dan konteks.",
+    "listingHeading": "Daftar video",
+    "playlistLabel": "Daftar putar",
+    "featuredKicker": "Unggulan",
+    "watchKicker": "Tonton",
+    "moreVideos": "Video lainnya",
+    "videoCount": "{count} video",
+    "publishedOn": "Terbit {date}",
+    "watchOnYoutube": "Tonton di YouTube →",
+    "empty": "Belum ada video yang dipublikasikan."
   },
   "editors": {
     "title": "Terpopuler",

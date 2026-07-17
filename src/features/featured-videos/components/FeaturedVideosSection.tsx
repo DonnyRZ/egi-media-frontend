@@ -2,45 +2,15 @@
 
 import { useTranslations } from "next-intl";
 
+import { VideoEmbed } from "@/features/videos/components/VideoEmbed";
 import { SectionHeading } from "@/shared/components/common/SectionHeading";
 import { Container } from "@/shared/components/layout/Container";
 import { Section } from "@/shared/components/layout/Section";
 import { ErrorState } from "@/shared/components/common/ErrorState";
 import { EmptyState } from "@/shared/components/common/EmptyState";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
-import { getYoutubeEmbedUrl } from "@/shared/utils/format";
 import { useFeaturedVideos } from "@/features/homepage/hooks/useFeaturedVideos";
 import type { YoutubeVideo } from "@/shared/types/youtube.types";
-
-function VideoPlayer({ video }: { video: YoutubeVideo }) {
-  const t = useTranslations("videos");
-  const embedUrl = getYoutubeEmbedUrl(video.url);
-
-  if (!embedUrl) {
-    return (
-      <a
-        className="flex h-full w-full items-center justify-center bg-ink text-sm font-semibold text-white"
-        href={video.url}
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        {t("watchOnYoutube")}
-      </a>
-    );
-  }
-
-  return (
-    <iframe
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowFullScreen
-      className="h-full w-full border-0"
-      loading="lazy"
-      referrerPolicy="strict-origin-when-cross-origin"
-      src={embedUrl}
-      title={video.title}
-    />
-  );
-}
 
 function VideoCard({ video }: { video: YoutubeVideo }) {
   const t = useTranslations("videos");
@@ -48,7 +18,7 @@ function VideoCard({ video }: { video: YoutubeVideo }) {
   return (
     <article className="group">
       <div className="relative aspect-video overflow-hidden bg-ink">
-        <VideoPlayer video={video} />
+        <VideoEmbed video={video} />
       </div>
       <div className="pt-3">
         <div className="flex items-center gap-2">
@@ -104,7 +74,7 @@ export function FeaturedVideosSection() {
 
         {!isLoading && !isError && data?.items.length ? (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {data?.items?.map((video) => (
+            {data.items.map((video) => (
               <VideoCard key={video.id} video={video} />
             ))}
           </div>

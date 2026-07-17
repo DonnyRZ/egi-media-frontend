@@ -60,4 +60,6 @@ export interface NewsletterListParams {
 export interface YoutubeVideoListParams {
   page?: number;
   limit?: number;
+  search?: string;
+  lang?: "id" | "en" | "uz";
 }

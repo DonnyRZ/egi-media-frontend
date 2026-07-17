@@ -11,10 +11,15 @@ import { HeroHeadlineList } from "@/features/hero-section/components/HeroHeadlin
 
 function HeroSkeleton() {
   return (
-    <div className="grid gap-6 lg:grid-cols-[2fr_1fr]">
-      <Skeleton className="aspect-[16/10] w-full rounded-2xl" />
-      <div className="space-y-4 rounded-xl border border-neutral-300 bg-white p-5">
-        <Skeleton className="h-4 w-32" />
+    <div className="grid gap-8 lg:grid-cols-[2fr_1fr]">
+      <div className="space-y-4">
+        <Skeleton className="aspect-[16/9] w-full" />
+        <Skeleton className="h-4 w-24" />
+        <Skeleton className="h-10 w-full" />
+        <Skeleton className="h-4 w-40" />
+      </div>
+      <div className="space-y-4 lg:border-l lg:border-neutral-200 lg:pl-6">
+        <Skeleton className="h-5 w-40" />
         {Array.from({ length: 4 }).map((_, index) => (
           <div key={index} className="space-y-2 border-b border-neutral-200 pb-4">
             <Skeleton className="h-3 w-20" />
@@ -47,7 +52,7 @@ export function HeroSection() {
           <EmptyState title="No featured story" />
         ) : null}
         {!isLoading && !isError && data?.featured ? (
-          <div className="grid gap-6 lg:grid-cols-[2fr_1fr]">
+          <div className="grid gap-8 lg:grid-cols-[2fr_1fr]">
             <HeroFeaturedCard article={data.featured} />
             <HeroHeadlineList articles={data.headlines} />
           </div>

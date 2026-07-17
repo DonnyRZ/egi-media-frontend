@@ -33,3 +33,9 @@ export function getYoutubeThumbnail(url: string): string | null {
   if (!videoId) return null;
   return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
 }
+
+export function getYoutubeEmbedUrl(url: string): string | null {
+  const videoId = extractYoutubeId(url);
+  if (!videoId) return null;
+  return `https://www.youtube-nocookie.com/embed/${videoId}`;
+}

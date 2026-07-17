@@ -29,7 +29,7 @@ export function mapYoutubeVideoListDto(
   dto: YoutubeVideoListResponseDto,
 ): YoutubeVideoListResult {
   return {
-    items: dto.items.map(mapYoutubeVideoDto),
-    total: dto.meta.total,
+    items: (dto.items ?? []).map(mapYoutubeVideoDto),
+    total: dto.meta?.total ?? 0,
   };
 }

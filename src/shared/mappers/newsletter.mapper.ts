@@ -25,7 +25,7 @@ export function mapNewsletterListDto(
   dto: NewsletterListResponseDto,
 ): NewsletterListResult {
   return {
-    items: dto.items.map(mapNewsletterDto),
-    total: dto.meta.total,
+    items: (dto.items ?? []).map(mapNewsletterDto),
+    total: dto.meta?.total ?? 0,
   };
 }

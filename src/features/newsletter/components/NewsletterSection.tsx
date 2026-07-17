@@ -20,15 +20,15 @@ export function NewsletterSection() {
   };
 
   return (
-    <Section ariaLabelledby="newsletter-heading" className="bg-primary-100">
+    <Section ariaLabelledby="newsletter-heading" className="bg-ink text-white">
       <Container>
-        <div className="grid items-center gap-8 rounded-2xl border border-primary-500/20 bg-white p-8 shadow-sm lg:grid-cols-[1.4fr_1fr] lg:p-12">
-          <div>
+        <div className="grid items-center gap-8 lg:grid-cols-[1.4fr_1fr]">
+          <div className="border-l-4 border-accent pl-6">
             {isLoading ? (
               <div className="space-y-4">
-                <Skeleton className="h-8 w-64" />
-                <Skeleton className="h-4 w-full max-w-xl" />
-                <Skeleton className="h-12 w-full max-w-md" />
+                <Skeleton className="h-8 w-64 bg-neutral-700" />
+                <Skeleton className="h-4 w-full max-w-xl bg-neutral-700" />
+                <Skeleton className="h-12 w-full max-w-md bg-neutral-700" />
               </div>
             ) : null}
 
@@ -38,22 +38,22 @@ export function NewsletterSection() {
 
             {!isLoading && !isError ? (
               <>
+                <span className="kicker">The Flagship Newsletter</span>
                 <h2
                   id="newsletter-heading"
-                  className="text-2xl font-bold text-neutral-900 sm:text-3xl"
+                  className="mt-2 font-serif text-3xl font-bold leading-tight sm:text-4xl"
                 >
                   {newsletter?.title ?? "Stay ahead with EGI Media"}
                 </h2>
-                <p className="mt-3 max-w-xl text-base leading-7 text-neutral-700">
-                  {newsletter?.description ??
-                    "Get premium editorial insights delivered to your inbox. Curated reporting for professionals who need clarity."}
+                <p className="mt-3 max-w-xl text-base leading-7 text-neutral-300">
+                  {"Get premium editorial insights delivered to your inbox. Curated reporting for professionals who need clarity."}
                 </p>
                 <form className="mt-6 flex max-w-md flex-col gap-3 sm:flex-row" onSubmit={handleSubmit}>
                   <label className="sr-only" htmlFor="newsletter-email">
                     Email address
                   </label>
                   <input
-                    className="flex-1 rounded-lg border border-neutral-300 px-4 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+                    className="flex-1 border border-neutral-600 bg-transparent px-4 py-2.5 text-sm text-white placeholder:text-neutral-500 focus-visible:border-accent focus-visible:outline-none"
                     id="newsletter-email"
                     onChange={(event) => setEmail(event.target.value)}
                     placeholder="Enter your email"
@@ -61,7 +61,9 @@ export function NewsletterSection() {
                     type="email"
                     value={email}
                   />
-                  <Button type="submit">Subscribe</Button>
+                  <Button className="rounded-none bg-accent hover:bg-accent/90 focus-visible:ring-accent" type="submit">
+                    Subscribe
+                  </Button>
                 </form>
               </>
             ) : null}
@@ -69,15 +71,12 @@ export function NewsletterSection() {
 
           <div
             aria-hidden="true"
-            className="hidden items-center justify-center rounded-xl bg-primary-900 p-8 text-center text-white lg:flex"
+            className="hidden text-right text-white lg:block"
           >
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-widest text-primary-100">
-                Premium Editorial
-              </p>
-              <p className="mt-4 text-4xl font-bold">EGI</p>
-              <p className="mt-2 text-sm text-primary-100">Trusted insights. Clean design.</p>
-            </div>
+            <p className="font-serif text-7xl font-bold leading-none">EGI</p>
+            <p className="mt-3 text-sm uppercase tracking-[0.2em] text-neutral-400">
+              Trusted insights · Clean design
+            </p>
           </div>
         </div>
       </Container>

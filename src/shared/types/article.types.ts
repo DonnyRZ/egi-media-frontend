@@ -8,6 +8,15 @@ export interface ArticleCategory {
   name: string;
 }
 
+export type ContentLocale = "id" | "en" | "uz";
+
+export interface ArticleTranslation {
+  title: string;
+  slug: string | null;
+  summary: string | null;
+  content: string | null;
+}
+
 export interface Article {
   id: string;
   title: string;
@@ -18,7 +27,25 @@ export interface Article {
   author: ArticleAuthor;
   category: ArticleCategory | null;
   readingTimeMinutes: number;
+  locale: ContentLocale;
+  availableLocales: ContentLocale[];
 }
+
+export interface ArticleDetail extends Article {
+  content: string;
+  viewCount: number;
+  shareCount: number;
+  defaultLocale: ContentLocale;
+  requestedLocale: ContentLocale;
+  translations: Partial<Record<ContentLocale, ArticleTranslation>>;
+}
+
+export type SharePlatform =
+  | "twitter"
+  | "facebook"
+  | "whatsapp"
+  | "telegram"
+  | "copy_link";
 
 export interface ArticleListResult {
   items: Article[];

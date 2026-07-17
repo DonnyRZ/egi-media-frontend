@@ -8,7 +8,8 @@
     "termsTitle": "Foydalanish shartlari",
     "termsDescription": "EGI Media foydalanish shartlari — veb-sayt, kontent va raqamli xizmatlarimizdan foydalanishni tartibga soladi.",
     "privacyTitle": "Maxfiylik siyosati",
-    "privacyDescription": "EGI Media maxfiylik siyosati — shaxsiy maʼlumotlarni yigʻish, ishlatish va himoya qilish tartibi."
+    "privacyDescription": "EGI Media maxfiylik siyosati — shaxsiy maʼlumotlarni yigʻish, ishlatish va himoya qilish tartibi.",
+    "articleFallbackTitle": "Maqola"
   },
   "header": {
     "homeAria": "{siteName} bosh sahifasi",
@@ -327,5 +328,19 @@
         ]
       }
     ]
+  },
+  "article": {
+    "publishedOn": "Chop etilgan {date}",
+    "shareTitle": "Ulashish",
+    "shareCopy": "Havolani nusxalash",
+    "shareWhatsapp": "WhatsApp",
+    "shareFacebook": "Facebook",
+    "shareX": "X",
+    "shareTelegram": "Telegram",
+    "linkCopied": "Havola nusxalandi",
+    "viewsLabel": "koʻrishlar",
+    "sharesLabel": "ulashishlar",
+    "notFoundTitle": "Maqola topilmadi",
+    "notFoundMessage": "Qidirayotgan maqolangiz mavjud emas yoki oʻchirilgan."
   }
 }

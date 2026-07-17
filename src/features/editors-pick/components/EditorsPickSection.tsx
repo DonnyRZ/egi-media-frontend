@@ -11,6 +11,7 @@ import { EmptyState } from "@/shared/components/common/EmptyState";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
 import { useEditorsPick } from "@/features/homepage/hooks/useEditorsPick";
 import type { Article } from "@/shared/types/article.types";
+import { getArticleHref } from "@/shared/utils/article-path";
 
 function RankedItem({ article, rank }: { article: Article; rank: number }) {
   return (
@@ -28,7 +29,7 @@ function RankedItem({ article, rank }: { article: Article; rank: number }) {
           </span>
         ) : null}
         <h3 className="mt-0.5 font-serif text-lg font-semibold leading-snug text-ink group-hover:text-accent">
-          <Link href={`/articles/${article.slug}`}>{article.title}</Link>
+          <Link href={getArticleHref(article)}>{article.title}</Link>
         </h3>
         <p className="mt-1 text-xs text-neutral-500">{article.author.fullName}</p>
       </div>

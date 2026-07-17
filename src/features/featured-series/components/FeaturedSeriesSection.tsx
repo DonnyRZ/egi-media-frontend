@@ -13,17 +13,20 @@ import type { Series } from "@/shared/types/series.types";
 
 function SeriesCard({ series }: { series: Series }) {
   return (
-    <article className="w-72 shrink-0 rounded-xl border border-neutral-300 bg-white p-6 shadow-sm">
-      <div className="flex h-32 items-center justify-center rounded-lg bg-primary-100 text-3xl font-bold text-primary-700">
+    <article className="group w-72 shrink-0 border-t-2 border-ink pt-4">
+      <div className="flex h-32 items-center justify-center bg-neutral-100 font-serif text-5xl font-bold text-ink">
         {series.name.slice(0, 1)}
       </div>
-      <h3 className="mt-4 text-lg font-semibold text-neutral-900">
+      <span className="kicker mt-4 block">Series</span>
+      <h3 className="mt-1 font-serif text-xl font-bold leading-snug text-ink group-hover:text-accent">
         <Link href={`/series/${series.slug}`}>{series.name}</Link>
       </h3>
       {series.description ? (
-        <p className="mt-2 line-clamp-3 text-sm text-neutral-700">{series.description}</p>
+        <p className="mt-2 line-clamp-3 text-sm leading-6 text-neutral-600">
+          {series.description}
+        </p>
       ) : null}
-      <p className="mt-4 text-xs font-semibold uppercase tracking-wide text-neutral-500">
+      <p className="mt-3 text-xs font-semibold uppercase tracking-wide text-neutral-500">
         {series.articleCount} articles
       </p>
     </article>
@@ -37,6 +40,7 @@ export function FeaturedSeriesSection() {
     <Section ariaLabelledby="series-heading">
       <Container>
         <SectionHeading
+          actionHref="/series"
           id="series-heading"
           subtitle="Deep-dive editorial collections curated by our newsroom."
           title="Featured Series"

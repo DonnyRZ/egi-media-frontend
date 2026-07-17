@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Source_Serif_4 } from "next/font/google";
 
 import { Footer } from "@/features/footer/components/Footer";
 import { Header } from "@/features/header/components/Header";
@@ -13,6 +13,14 @@ const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
+});
+
+const sourceSerif = Source_Serif_4({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-serif",
 });
 
 export const metadata: Metadata = {
@@ -47,7 +55,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.variable}>
+      <body className={`${inter.variable} ${sourceSerif.variable}`}>
         <QueryProvider>
           <Header />
           <main>{children}</main>

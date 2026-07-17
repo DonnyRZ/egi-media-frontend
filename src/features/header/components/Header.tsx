@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 
 import { Button } from "@/shared/components/ui/Button";
@@ -10,74 +11,120 @@ import { cn } from "@/shared/lib/cn";
 
 const NAV_ITEMS = [
   { label: "Latest", href: "/" },
+  { label: "Business", href: "/topics/business" },
+  { label: "Technology", href: "/topics/technology" },
+  { label: "Politics", href: "/topics/politics" },
   { label: "Series", href: "/series" },
   { label: "Videos", href: "/videos" },
-  { label: "Topics", href: "/topics" },
 ];
+
+function formatToday(): string {
+  return new Intl.DateTimeFormat("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  }).format(new Date());
+}
+
+function UtilityBar() {
+  return (
+    <div className="hidden border-b border-neutral-200 bg-white lg:block">
+      <Container>
+        <div className="flex h-9 items-center justify-between text-xs text-neutral-500">
+          <span className="font-medium uppercase tracking-wide">
+            {formatToday()}
+          </span>
+          <div className="flex items-center gap-4">
+            <Link className="hover:text-accent" href="/newsletters">
+              Newsletters
+            </Link>
+            <span aria-hidden="true" className="text-neutral-300">
+              |
+            </span>
+            <Link className="hover:text-accent" href="/login">
+              Sign in
+            </Link>
+          </div>
+        </div>
+      </Container>
+    </div>
+  );
+}
+
+function Masthead() {
+  const { isSearchOpen, toggleMobileMenu, setSearchOpen } = useUiStore();
+
+  return (
+    <div className="flex h-16 items-center justify-between gap-4 lg:h-24">
+      <button
+        aria-label="Toggle menu"
+        className="rounded p-2 text-neutral-900 hover:bg-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 lg:hidden"
+        onClick={toggleMobileMenu}
+        type="button"
+      >
+        <MenuIcon />
+      </button>
+
+      <Link aria-label={`${SITE_NAME} home`} className="inline-flex" href="/">
+        <Image
+          alt={SITE_NAME}
+          className="h-10 w-auto sm:h-12 lg:h-16"
+          height={857}
+          priority
+          src="/images/Logo_EGI-Media.webp"
+          width={1536}
+        />
+      </Link>
+
+      <div className="flex items-center gap-2 sm:gap-3">
+        <button
+          aria-expanded={isSearchOpen}
+          aria-label="Toggle search"
+          className="rounded p-2 text-neutral-900 hover:bg-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+          onClick={() => setSearchOpen(!isSearchOpen)}
+          type="button"
+        >
+          <SearchIcon />
+        </button>
+        <Button className="hidden rounded-none sm:inline-flex">Subscribe</Button>
+      </div>
+    </div>
+  );
+}
 
 export function Header() {
   const {
     isMobileMenuOpen,
     isSearchOpen,
     searchQuery,
-    toggleMobileMenu,
     setMobileMenuOpen,
-    setSearchOpen,
     setSearchQuery,
   } = useUiStore();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-neutral-300 bg-white/95 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b-2 border-ink bg-white">
+      <UtilityBar />
       <Container>
-        <div className="flex h-16 items-center justify-between gap-4 lg:h-20">
-          <Link
-            aria-label={`${SITE_NAME} home`}
-            className="text-xl font-bold text-primary-900 lg:text-2xl"
-            href="/"
-          >
-            {SITE_NAME}
-          </Link>
+        <Masthead />
 
-          <nav aria-label="Main navigation" className="hidden lg:block">
-            <ul className="flex items-center gap-8">
-              {NAV_ITEMS.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    className="text-sm font-semibold text-neutral-700 transition-colors hover:text-primary-700"
-                    href={item.href}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          <div className="flex items-center gap-2 sm:gap-3">
-            <button
-              aria-expanded={isSearchOpen}
-              aria-label="Toggle search"
-              className="rounded-lg p-2 text-neutral-700 hover:bg-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
-              onClick={() => setSearchOpen(!isSearchOpen)}
-              type="button"
-            >
-              <SearchIcon />
-            </button>
-            <Button className="hidden sm:inline-flex" variant="secondary">
-              Subscribe
-            </Button>
-            <Button className="hidden md:inline-flex">Login</Button>
-            <button
-              aria-expanded={isMobileMenuOpen}
-              aria-label="Toggle menu"
-              className="rounded-lg p-2 text-neutral-700 hover:bg-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 lg:hidden"
-              onClick={toggleMobileMenu}
-              type="button"
-            >
-              <MenuIcon />
-            </button>
-          </div>
-        </div>
+        <nav
+          aria-label="Main navigation"
+          className="hidden border-t border-neutral-200 lg:block"
+        >
+          <ul className="-mb-px flex items-center justify-center gap-8">
+            {NAV_ITEMS.map((item) => (
+              <li key={item.href}>
+                <Link
+                  className="inline-block border-b-2 border-transparent py-3 text-sm font-semibold uppercase tracking-wide text-neutral-700 transition-colors hover:border-accent hover:text-accent"
+                  href={item.href}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
         {isSearchOpen ? (
           <div className="border-t border-neutral-200 py-4">
@@ -85,7 +132,7 @@ export function Header() {
               Search articles
             </label>
             <input
-              className="w-full rounded-lg border border-neutral-300 px-4 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+              className="w-full border-b-2 border-ink px-1 py-2 font-serif text-lg focus-visible:outline-none"
               id="site-search"
               onChange={(event) => setSearchQuery(event.target.value)}
               placeholder="Search stories..."
@@ -102,11 +149,11 @@ export function Header() {
             isMobileMenuOpen ? "block" : "hidden",
           )}
         >
-          <ul className="space-y-3">
+          <ul className="space-y-1">
             {NAV_ITEMS.map((item) => (
               <li key={item.href}>
                 <Link
-                  className="block text-sm font-semibold text-neutral-700"
+                  className="block py-2 text-sm font-semibold uppercase tracking-wide text-neutral-800"
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
                 >
@@ -114,11 +161,11 @@ export function Header() {
                 </Link>
               </li>
             ))}
-            <li className="flex gap-2 pt-2">
-              <Button className="flex-1" variant="secondary">
-                Subscribe
+            <li className="flex gap-2 pt-3">
+              <Button className="flex-1 rounded-none">Subscribe</Button>
+              <Button className="flex-1 rounded-none" variant="secondary">
+                Sign in
               </Button>
-              <Button className="flex-1">Login</Button>
             </li>
           </ul>
         </nav>

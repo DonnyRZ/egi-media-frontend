@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 
 import { HeroSection } from "@/features/hero-section/components/HeroSection";
+import { WorldClock } from "@/features/world-clock/components/WorldClock";
 
 const BreakingNewsSection = dynamic(
   () =>
@@ -53,6 +54,7 @@ const EditorsPickSection = dynamic(
 export default function HomePage() {
   return (
     <>
+      <WorldClock />
       <HeroSection />
       <BreakingNewsSection />
       <LatestNewsSection />

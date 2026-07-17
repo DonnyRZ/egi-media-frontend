@@ -17,6 +17,14 @@ export interface PaginatedResponse<T> {
   meta: PaginatedMeta;
 }
 
+export interface PaginatedApiResponse<T> {
+  success: boolean;
+  message: string;
+  code: number;
+  data: T[];
+  meta: PaginatedMeta;
+}
+
 export type ArticleSort = "latest" | "oldest" | "popular";
 
 export interface ArticleListParams {

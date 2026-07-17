@@ -27,7 +27,7 @@ export function mapSeriesDto(dto: SeriesDto): Series {
 
 export function mapSeriesListDto(dto: SeriesListResponseDto): SeriesListResult {
   return {
-    items: dto.items.map(mapSeriesDto),
-    total: dto.meta.total,
+    items: (dto.items ?? []).map(mapSeriesDto),
+    total: dto.meta?.total ?? 0,
   };
 }

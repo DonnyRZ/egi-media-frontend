@@ -4,7 +4,9 @@
     "aboutTitle": "About Us",
     "aboutDescription": "EGI Media bridges dynamic visual content with sharp literacy through podcasts, videos, and articles on Politics, Technology, Sport, Entertainment, and Travel.",
     "contactTitle": "Contact",
-    "contactDescription": "Get in touch with EGI Media — studio address, phone, email, and map at Oscorp Building, Kebayoran Baru, South Jakarta."
+    "contactDescription": "Get in touch with EGI Media — studio address, phone, email, and map at Oscorp Building, Kebayoran Baru, South Jakarta.",
+    "termsTitle": "Terms of Service",
+    "termsDescription": "EGI Media Terms of Service governing the use of our website, content, and digital services."
   },
   "header": {
     "homeAria": "{siteName} home",
@@ -141,5 +143,96 @@
     "mapFullAddress": "Oscorp Building, Jl. Darmawangsa Raya No.16, RT.6/RW.1, Pulo, Kebayoran Baru, South Jakarta City, Jakarta 12160, Indonesia",
     "openMaps": "Open in Google Maps",
     "imageAlt": "EGI Media team"
+  },
+  "terms": {
+    "kicker": "Legal",
+    "headline": "Terms of Service",
+    "lastUpdated": "Last updated: July 17, 2026",
+    "lede": "By accessing or using EGI Media’s website, content, and services, you agree to the following terms. Please read them carefully.",
+    "sections": [
+      {
+        "title": "Acceptance of terms",
+        "paragraphs": [
+          "These Terms of Service form an agreement between you and EGI Media regarding access to and use of our digital platform, including the website, articles, podcasts, videos, newsletters, and related services.",
+          "If you do not agree to these terms, please do not use our services."
+        ]
+      },
+      {
+        "title": "Description of services",
+        "paragraphs": [
+          "EGI Media provides news, analysis, podcasts, videos, and other editorial materials for public information and educational purposes.",
+          "We may modify, suspend, or discontinue any part or all of the services at any time without prior notice, to the extent permitted by applicable law."
+        ]
+      },
+      {
+        "title": "Permitted use",
+        "paragraphs": [
+          "You may access and use the services for personal, non-commercial purposes and in accordance with applicable law.",
+          "You agree not to misuse the services, including but not limited to: disrupting site operations, unauthorized system access, distributing malware, or using content in ways that infringe third-party rights."
+        ]
+      },
+      {
+        "title": "Intellectual property",
+        "paragraphs": [
+          "All content on the EGI Media platform — including text, images, audio, video, trademarks, logos, and design — is protected by copyright and applicable intellectual property laws, unless otherwise stated.",
+          "Without prior written permission from EGI Media, you may not copy, reproduce, distribute, modify, or commercially exploit the content."
+        ]
+      },
+      {
+        "title": "User and community content",
+        "paragraphs": [
+          "If you submit messages, suggestions, or other materials to us, you warrant that such materials do not violate the law or third-party rights.",
+          "EGI Media may use non-confidential feedback you provide to improve the services, without any obligation of compensation, unless otherwise agreed in writing."
+        ]
+      },
+      {
+        "title": "Editorial accuracy and responsibility",
+        "paragraphs": [
+          "We are committed to editorial integrity and accuracy. However, content is provided “as is” and may contain errors or become outdated.",
+          "EGI Media is not responsible for decisions you make solely based on information on this platform."
+        ]
+      },
+      {
+        "title": "Third-party links",
+        "paragraphs": [
+          "Our services may contain links to third-party sites or services, including YouTube, social media, or other partners.",
+          "EGI Media does not control and is not responsible for the content, policies, or practices of those third-party sites."
+        ]
+      },
+      {
+        "title": "Disclaimer of warranties",
+        "paragraphs": [
+          "To the fullest extent permitted by law, the services and content are provided without express or implied warranties, including warranties of merchantability, fitness for a particular purpose, or uninterrupted availability.",
+          "We do not warrant that the services will always be available, secure, or error-free."
+        ]
+      },
+      {
+        "title": "Limitation of liability",
+        "paragraphs": [
+          "To the fullest extent permitted by applicable law, EGI Media and its affiliates are not liable for indirect, incidental, special, consequential, or loss of data, profits, or business opportunities arising from the use of or inability to use the services.",
+          "Our total liability, if any, is limited to direct damages reasonably proven and shall not exceed what is required under applicable law."
+        ]
+      },
+      {
+        "title": "Changes to these terms",
+        "paragraphs": [
+          "We may update these Terms of Service from time to time. The latest version will be published on this page with the update date.",
+          "Continued use of the services after changes take effect constitutes your acceptance of the updated terms."
+        ]
+      },
+      {
+        "title": "Governing law",
+        "paragraphs": [
+          "These terms are governed by and construed in accordance with the laws of the Republic of Indonesia.",
+          "Any dispute arising in connection with these terms shall first be sought to be resolved amicably through good-faith discussion."
+        ]
+      },
+      {
+        "title": "Contact us",
+        "paragraphs": [
+          "If you have questions about these Terms of Service, please contact us at official@egi-media.com or through the Contact page on the EGI Media website."
+        ]
+      }
+    ]
   }
 }

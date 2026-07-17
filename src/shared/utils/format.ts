@@ -4,15 +4,6 @@ export function calculateReadingTime(text: string | null | undefined): number {
   return Math.max(1, Math.ceil(words / 200));
 }
 
-export function formatPublishedDate(date: string | null): string {
-  if (!date) return "";
-  return new Intl.DateTimeFormat("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  }).format(new Date(date));
-}
-
 export function extractYoutubeId(url: string): string | null {
   const patterns = [
     /youtu\.be\/([^?&]+)/,

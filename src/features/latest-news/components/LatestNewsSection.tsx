@@ -1,5 +1,7 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 import { ArticleCard } from "@/shared/components/common/ArticleCard";
 import { SectionHeading } from "@/shared/components/common/SectionHeading";
 import { Container } from "@/shared/components/layout/Container";
@@ -11,6 +13,7 @@ import { useLatestNews } from "@/features/homepage/hooks/useLatestNews";
 
 export function LatestNewsSection() {
   const { data, isLoading, isError, error, refetch } = useLatestNews();
+  const t = useTranslations("latest");
 
   return (
     <Section ariaLabelledby="latest-heading">
@@ -18,8 +21,8 @@ export function LatestNewsSection() {
         <SectionHeading
           actionHref="/"
           id="latest-heading"
-          subtitle="Fresh reporting and analysis from our editorial team."
-          title="Latest News"
+          subtitle={t("subtitle")}
+          title={t("title")}
         />
 
         {isLoading ? (

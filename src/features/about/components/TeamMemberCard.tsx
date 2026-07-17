@@ -4,15 +4,16 @@ import type { TeamMember } from "@/features/about/types/about.types";
 
 interface TeamMemberCardProps {
   member: TeamMember;
+  role: string;
   featured?: boolean;
 }
 
-export function TeamMemberCard({ member, featured = false }: TeamMemberCardProps) {
+export function TeamMemberCard({ member, role, featured = false }: TeamMemberCardProps) {
   return (
     <article className="group">
       <div className="relative aspect-[4/5] overflow-hidden bg-neutral-100">
         <ArticleImage
-          alt={`Foto ${member.name}`}
+          alt={member.name}
           className="grayscale transition duration-500 group-hover:scale-105 group-hover:grayscale-0"
           sizes={featured ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 50vw, 25vw"}
           src={member.image}
@@ -26,7 +27,7 @@ export function TeamMemberCard({ member, featured = false }: TeamMemberCardProps
       >
         {member.name}
       </h3>
-      <p className="mt-1 text-sm leading-6 text-neutral-500">{member.role}</p>
+      <p className="mt-1 text-sm leading-6 text-neutral-500">{role}</p>
     </article>
   );
 }

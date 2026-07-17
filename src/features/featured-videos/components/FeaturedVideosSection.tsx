@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 import { SectionHeading } from "@/shared/components/common/SectionHeading";
 import { Container } from "@/shared/components/layout/Container";
@@ -13,18 +13,19 @@ import { useFeaturedVideos } from "@/features/homepage/hooks/useFeaturedVideos";
 import type { YoutubeVideo } from "@/shared/types/youtube.types";
 
 function VideoPlayer({ video }: { video: YoutubeVideo }) {
+  const t = useTranslations("videos");
   const embedUrl = getYoutubeEmbedUrl(video.url);
 
   if (!embedUrl) {
     return (
-      <Link
+      <a
         className="flex h-full w-full items-center justify-center bg-ink text-sm font-semibold text-white"
         href={video.url}
         rel="noopener noreferrer"
         target="_blank"
       >
-        Watch on YouTube →
-      </Link>
+        {t("watchOnYoutube")}
+      </a>
     );
   }
 
@@ -42,6 +43,8 @@ function VideoPlayer({ video }: { video: YoutubeVideo }) {
 }
 
 function VideoCard({ video }: { video: YoutubeVideo }) {
+  const t = useTranslations("videos");
+
   return (
     <article className="group">
       <div className="relative aspect-video overflow-hidden bg-ink">
@@ -49,7 +52,7 @@ function VideoCard({ video }: { video: YoutubeVideo }) {
       </div>
       <div className="pt-3">
         <div className="flex items-center gap-2">
-          <span className="kicker">Watch</span>
+          <span className="kicker">{t("kicker")}</span>
           {video.durationLabel ? (
             <span className="text-xs font-medium text-neutral-500">
               {video.durationLabel}
@@ -57,9 +60,9 @@ function VideoCard({ video }: { video: YoutubeVideo }) {
           ) : null}
         </div>
         <h3 className="mt-1 font-serif text-lg font-bold leading-snug text-ink group-hover:text-accent">
-          <Link href={video.url} rel="noopener noreferrer" target="_blank">
+          <a href={video.url} rel="noopener noreferrer" target="_blank">
             {video.title}
-          </Link>
+          </a>
         </h3>
         {video.description ? (
           <p className="mt-2 line-clamp-2 text-sm text-neutral-600">{video.description}</p>
@@ -71,6 +74,7 @@ function VideoCard({ video }: { video: YoutubeVideo }) {
 
 export function FeaturedVideosSection() {
   const { data, isLoading, isError, error, refetch } = useFeaturedVideos();
+  const t = useTranslations("videos");
 
   return (
     <Section ariaLabelledby="videos-heading" className="bg-neutral-50">
@@ -78,8 +82,8 @@ export function FeaturedVideosSection() {
         <SectionHeading
           actionHref="/videos"
           id="videos-heading"
-          subtitle="Watch our latest video reporting and interviews."
-          title="Featured Videos"
+          subtitle={t("subtitle")}
+          title={t("title")}
         />
 
         {isLoading ? (
@@ -95,7 +99,7 @@ export function FeaturedVideosSection() {
         ) : null}
 
         {!isLoading && !isError && !data?.items.length ? (
-          <EmptyState message="Videos will appear here once available." />
+          <EmptyState message={t("empty")} />
         ) : null}
 
         {!isLoading && !isError && data?.items.length ? (

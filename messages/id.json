@@ -1,0 +1,126 @@
+{
+  "metadata": {
+    "siteDescription": "Platform berita digital premium yang menyajikan wawasan editorial dengan kejelasan, kedalaman, dan profesionalisme.",
+    "aboutTitle": "Tentang Kami",
+    "aboutDescription": "EGI Media menjembatani konten visual yang dinamis dengan literasi yang tajam melalui podcast, video, dan artikel seputar Politik, Teknologi, Sport, Hiburan, dan Wisata."
+  },
+  "header": {
+    "homeAria": "Beranda {siteName}",
+    "newsletters": "Buletin",
+    "signIn": "Masuk",
+    "subscribe": "Berlangganan",
+    "toggleMenu": "Buka menu",
+    "toggleSearch": "Buka pencarian",
+    "searchLabel": "Cari artikel",
+    "searchPlaceholder": "Cari berita...",
+    "language": "Bahasa",
+    "navMain": "Navigasi utama",
+    "navMobile": "Navigasi seluler",
+    "nav": {
+      "latest": "Terbaru",
+      "business": "Bisnis",
+      "technology": "Teknologi",
+      "politics": "Politik",
+      "series": "Seri",
+      "videos": "Video"
+    }
+  },
+  "worldClock": {
+    "ariaLabel": "Jam dunia",
+    "local": "Lokal"
+  },
+  "hero": {
+    "srHeading": "Berita Utama",
+    "moreTopStories": "Berita Utama Lainnya",
+    "noFeatured": "Belum ada berita utama"
+  },
+  "breaking": {
+    "title": "Terkini",
+    "empty": "Belum ada berita terkini saat ini."
+  },
+  "latest": {
+    "title": "Berita Terbaru",
+    "subtitle": "Liputan dan analisis terbaru dari tim redaksi kami."
+  },
+  "newsletter": {
+    "kicker": "Buletin Unggulan",
+    "fallbackTitle": "Selangkah lebih depan bersama EGI Media",
+    "description": "Dapatkan wawasan editorial premium langsung ke kotak masuk Anda. Liputan pilihan untuk profesional yang membutuhkan kejelasan.",
+    "emailLabel": "Alamat email",
+    "emailPlaceholder": "Masukkan email Anda",
+    "subscribe": "Berlangganan",
+    "tagline": "Wawasan tepercaya · Desain bersih"
+  },
+  "series": {
+    "title": "Seri Pilihan",
+    "subtitle": "Koleksi editorial mendalam yang dikurasi oleh ruang redaksi kami.",
+    "empty": "Seri akan muncul di sini setelah dipublikasikan.",
+    "kicker": "Seri"
+  },
+  "videos": {
+    "title": "Video Pilihan",
+    "subtitle": "Tonton liputan video dan wawancara terbaru kami.",
+    "empty": "Video akan muncul di sini setelah tersedia.",
+    "kicker": "Tonton",
+    "watchOnYoutube": "Tonton di YouTube →"
+  },
+  "editors": {
+    "title": "Terpopuler",
+    "subtitle": "Berita yang paling banyak diikuti pembaca kami."
+  },
+  "footer": {
+    "company": "Perusahaan",
+    "legal": "Legal",
+    "followUs": "Ikuti Kami",
+    "about": "Tentang",
+    "contact": "Kontak",
+    "privacy": "Kebijakan Privasi",
+    "terms": "Ketentuan Layanan",
+    "tagline": "Berita digital premium dengan kejelasan editorial, desain profesional, dan liputan tepercaya.",
+    "copyright": "© {year} {siteName}. Seluruh hak cipta dilindungi."
+  },
+  "common": {
+    "viewAll": "Lihat semua",
+    "tryAgain": "Coba lagi",
+    "readingTime": "{minutes} mnt baca",
+    "articleCount": "{count} artikel"
+  },
+  "states": {
+    "emptyTitle": "Belum ada konten",
+    "emptyMessage": "Nantikan berita baru segera.",
+    "errorTitle": "Terjadi kesalahan",
+    "errorMessage": "Kami tidak dapat memuat bagian ini. Silakan coba lagi."
+  },
+  "about": {
+    "kicker": "Tentang Kami",
+    "headline": "Ruang diskusi yang jujur, menjembatani konten visual dan literasi yang tajam.",
+    "lede": "EGI Media lahir dari semangat menciptakan wadah kolaborasi untuk mengolah beragam sudut pandang tanpa kesan menggurui.",
+    "storyTitle": "Cerita Kami",
+    "pullQuote": "Objektivitas dan kreativitas dalam setiap konten — informatif, namun tetap asik untuk diikuti.",
+    "paragraphs": [
+      "Berawal dari semangat untuk menciptakan ruang diskusi yang jujur, media ini menjadi wadah kolaborasi untuk mengolah berbagai sudut pandang tanpa kesan menggurui. Fokus utamanya adalah menjembatani antara konten visual yang dinamis dengan literasi yang tajam.",
+      "Kanal YouTube menjadi mesin utama melalui program Podcast yang mengupas beragam topik secara mendalam. Tak hanya berhenti pada tayangan audio visual, setiap poin penting dan detail menarik dikembangkan kembali melalui artikel di website. Cakupan bahasannya luas dan relevan dengan gaya hidup masa kini, mulai dari dinamika Politik, perkembangan Teknologi, sportivitas dalam Sport, ulasan Hiburan, hingga eksplorasi Wisata.",
+      "EGI Media mengedepankan objektivitas dan kreativitas dalam setiap konten yang dihasilkan. Tujuannya sederhana: menjadi referensi yang informatif namun tetap asik untuk diikuti. Di tengah arus informasi yang serba cepat, integritas dan akurasi tetap menjadi landasan utama, sembari terus beradaptasi dengan tren yang ada. Setiap gagasan yang tersiar dan setiap kata yang tertulis diharapkan mampu memberi warna baru serta menjadi pemantik bagi lahirnya ide segar lainnya."
+    ],
+    "coverageTitle": "Yang Kami Ulas",
+    "coverageSubtitle": "Cakupan bahasan yang luas dan relevan dengan gaya hidup masa kini.",
+    "coverage": [
+      { "label": "Politik", "description": "Mengurai dinamika dan kebijakan terkini." },
+      { "label": "Teknologi", "description": "Menyorot perkembangan dan inovasi digital." },
+      { "label": "Sport", "description": "Merayakan sportivitas di dalam dan luar lapangan." },
+      { "label": "Hiburan", "description": "Ulasan tren budaya populer dan tontonan." },
+      { "label": "Wisata", "description": "Eksplorasi destinasi dan gaya hidup masa kini." }
+    ],
+    "teamTitle": "Tim EGI Media",
+    "teamSubtitle": "Orang-orang di balik setiap gagasan yang tersiar dan kata yang tertulis.",
+    "roles": {
+      "iwel": "Chief Executive Officer & Dewan Redaksi",
+      "budi": "Chief Operating Officer & Dewan Redaksi",
+      "nemo": "Spesialis Senior Multimedia & Pemasaran Digital",
+      "amelia": "Spesialis Riset Kreatif & Acara",
+      "zidan": "Spesialis Podcast & Multimedia",
+      "rio": "Produksi & Editor",
+      "ananda": "Produksi & Multimedia"
+    }
+  }
+}

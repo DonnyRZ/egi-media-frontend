@@ -1,3 +1,5 @@
+import { useTranslations } from "next-intl";
+
 import { cn } from "@/shared/lib/cn";
 
 interface EmptyStateProps {
@@ -6,11 +8,9 @@ interface EmptyStateProps {
   className?: string;
 }
 
-export function EmptyState({
-  title = "No content yet",
-  message = "Check back soon for new stories.",
-  className,
-}: EmptyStateProps) {
+export function EmptyState({ title, message, className }: EmptyStateProps) {
+  const t = useTranslations("states");
+
   return (
     <div
       className={cn(
@@ -18,8 +18,12 @@ export function EmptyState({
         className,
       )}
     >
-      <h3 className="text-lg font-semibold text-neutral-900">{title}</h3>
-      <p className="mt-2 text-sm text-neutral-500">{message}</p>
+      <h3 className="text-lg font-semibold text-neutral-900">
+        {title ?? t("emptyTitle")}
+      </h3>
+      <p className="mt-2 text-sm text-neutral-500">
+        {message ?? t("emptyMessage")}
+      </p>
     </div>
   );
 }

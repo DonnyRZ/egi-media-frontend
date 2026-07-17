@@ -1,14 +1,20 @@
-import Link from "next/link";
+"use client";
 
+import { useFormatter, useTranslations } from "next-intl";
+
+import { Link } from "@/i18n/navigation";
 import { ArticleImage } from "@/shared/components/common/ArticleImage";
+import { DATE_FORMAT } from "@/shared/constants/format.constants";
 import type { Article } from "@/shared/types/article.types";
-import { formatPublishedDate } from "@/shared/utils/format";
 
 interface HeroFeaturedCardProps {
   article: Article;
 }
 
 export function HeroFeaturedCard({ article }: HeroFeaturedCardProps) {
+  const t = useTranslations("common");
+  const format = useFormatter();
+
   return (
     <article className="group">
       <Link href={`/articles/${article.slug}`}>
@@ -42,11 +48,13 @@ export function HeroFeaturedCard({ article }: HeroFeaturedCardProps) {
             {article.author.fullName}
           </span>
           <span aria-hidden="true">•</span>
-          <time dateTime={article.publishedAt ?? undefined}>
-            {formatPublishedDate(article.publishedAt)}
-          </time>
+          {article.publishedAt ? (
+            <time dateTime={article.publishedAt}>
+              {format.dateTime(new Date(article.publishedAt), DATE_FORMAT)}
+            </time>
+          ) : null}
           <span aria-hidden="true">•</span>
-          <span>{article.readingTimeMinutes} min read</span>
+          <span>{t("readingTime", { minutes: article.readingTimeMinutes })}</span>
         </div>
       </div>
     </article>

@@ -1,7 +1,8 @@
 "use client";
 
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 
+import { Link } from "@/i18n/navigation";
 import { SectionHeading } from "@/shared/components/common/SectionHeading";
 import { Container } from "@/shared/components/layout/Container";
 import { Section } from "@/shared/components/layout/Section";
@@ -37,14 +38,15 @@ function RankedItem({ article, rank }: { article: Article; rank: number }) {
 
 export function EditorsPickSection() {
   const { data, isLoading, isError, error, refetch } = useEditorsPick();
+  const t = useTranslations("editors");
 
   return (
     <Section ariaLabelledby="editors-heading">
       <Container>
         <SectionHeading
           id="editors-heading"
-          subtitle="The stories our readers are following most closely."
-          title="Most Popular"
+          subtitle={t("subtitle")}
+          title={t("title")}
         />
 
         {isLoading ? (

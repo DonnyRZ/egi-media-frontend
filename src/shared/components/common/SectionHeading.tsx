@@ -1,5 +1,6 @@
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 
+import { Link } from "@/i18n/navigation";
 import { cn } from "@/shared/lib/cn";
 
 interface SectionHeadingProps {
@@ -17,8 +18,10 @@ export function SectionHeading({
   id,
   className,
   actionHref,
-  actionLabel = "View all",
+  actionLabel,
 }: SectionHeadingProps) {
+  const t = useTranslations("common");
+
   return (
     <div className={cn("mb-6 border-b-2 border-ink pb-2 lg:mb-8", className)}>
       <div className="flex items-end justify-between gap-4">
@@ -36,7 +39,7 @@ export function SectionHeading({
             className="shrink-0 text-xs font-semibold uppercase tracking-wide text-neutral-500 transition-colors hover:text-accent"
             href={actionHref}
           >
-            {actionLabel} →
+            {actionLabel ?? t("viewAll")} →
           </Link>
         ) : null}
       </div>

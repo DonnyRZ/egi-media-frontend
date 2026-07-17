@@ -1,7 +1,8 @@
 "use client";
 
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 
+import { Link } from "@/i18n/navigation";
 import { ArticleImage } from "@/shared/components/common/ArticleImage";
 import { Container } from "@/shared/components/layout/Container";
 import { Section } from "@/shared/components/layout/Section";
@@ -35,6 +36,7 @@ function BreakingCard({ article }: { article: Article }) {
 
 export function BreakingNewsSection() {
   const { data, isLoading, isError, error, refetch } = useBreakingNews();
+  const t = useTranslations("breaking");
 
   return (
     <Section ariaLabelledby="breaking-heading" className="border-y border-ink py-5">
@@ -49,7 +51,7 @@ export function BreakingNewsSection() {
               id="breaking-heading"
               className="text-sm font-bold uppercase tracking-[0.14em] text-accent"
             >
-              Breaking
+              {t("title")}
             </h2>
           </div>
 
@@ -67,7 +69,7 @@ export function BreakingNewsSection() {
             ) : null}
 
             {!isLoading && !isError && !data?.items.length ? (
-              <EmptyState message="No breaking stories at the moment." />
+              <EmptyState message={t("empty")} />
             ) : null}
 
             {!isLoading && !isError && data?.items.length ? (

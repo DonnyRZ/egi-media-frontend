@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import { setRequestLocale } from "next-intl/server";
 
 import { HeroSection } from "@/features/hero-section/components/HeroSection";
 import { WorldClock } from "@/features/world-clock/components/WorldClock";
@@ -51,7 +52,14 @@ const EditorsPickSection = dynamic(
   { loading: () => null },
 );
 
-export default function HomePage() {
+interface HomePageProps {
+  params: Promise<{ locale: string }>;
+}
+
+export default async function HomePage({ params }: HomePageProps) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   return (
     <>
       <WorldClock />

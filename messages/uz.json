@@ -2,7 +2,9 @@
   "metadata": {
     "siteDescription": "Aniqlik, chuqurlik va professionallik bilan tahririy tahlillarni taqdim etuvchi premium raqamli yangiliklar platformasi.",
     "aboutTitle": "Biz haqimizda",
-    "aboutDescription": "EGI Media podkastlar, videolar va Siyosat, Texnologiya, Sport, Koʻngilochar hamda Sayohat mavzusidagi maqolalar orqali dinamik vizual kontentni oʻtkir savodxonlik bilan bogʻlaydi."
+    "aboutDescription": "EGI Media podkastlar, videolar va Siyosat, Texnologiya, Sport, Koʻngilochar hamda Sayohat mavzusidagi maqolalar orqali dinamik vizual kontentni oʻtkir savodxonlik bilan bogʻlaydi.",
+    "contactTitle": "Aloqa",
+    "contactDescription": "EGI Media bilan bogʻlaning — studio manzili, telefon, elektron pochta va Oscorp Building, Kebayoran Baru, Janubiy Jakartadagi xarita."
   },
   "header": {
     "homeAria": "{siteName} bosh sahifasi",
@@ -122,5 +124,22 @@
       "rio": "Ishlab chiqarish va muharrir",
       "ananda": "Ishlab chiqarish va multimedia"
     }
+  },
+  "contact": {
+    "kicker": "Aloqa",
+    "headline": "EGI Media bilan bogʻlanaylik.",
+    "lede": "Biz uchun aloqa hamma narsadan muhim. Dasturlarimiz haqida savolingiz boʻlsa yoki EGI Media hamjamiyatining bir qismi boʻlmoqchi boʻlsangiz, xabaringizni kutib qolamiz.",
+    "studioTitle": "Studio manzili",
+    "building": "Oscorp Building",
+    "addressLine": "Jl Dharmawangsa Raya No 16",
+    "addressCity": "Kebayoran Baru — Janubiy Jakarta 12160",
+    "callTitle": "Telefon",
+    "mailTitle": "Elektron pochta",
+    "mapTitle": "Bizning joylashuvimiz",
+    "mapSubtitle": "Studioni Oscorp Building, Kebayoran Baruda tashrif buyuring.",
+    "mapPlaceName": "Oscorp Building",
+    "mapFullAddress": "Oscorp Building, Jl. Darmawangsa Raya No.16, RT.6/RW.1, Pulo, Kebayoran Baru, Janubiy Jakarta shahri, Jakarta 12160, Indoneziya",
+    "openMaps": "Google Mapsda ochish",
+    "imageAlt": "EGI Media jamoasi"
   }
 }

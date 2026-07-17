@@ -2,7 +2,9 @@
   "metadata": {
     "siteDescription": "Premium digital news platform delivering editorial insights with clarity, depth, and professionalism.",
     "aboutTitle": "About Us",
-    "aboutDescription": "EGI Media bridges dynamic visual content with sharp literacy through podcasts, videos, and articles on Politics, Technology, Sport, Entertainment, and Travel."
+    "aboutDescription": "EGI Media bridges dynamic visual content with sharp literacy through podcasts, videos, and articles on Politics, Technology, Sport, Entertainment, and Travel.",
+    "contactTitle": "Contact",
+    "contactDescription": "Get in touch with EGI Media — studio address, phone, email, and map at Oscorp Building, Kebayoran Baru, South Jakarta."
   },
   "header": {
     "homeAria": "{siteName} home",
@@ -122,5 +124,22 @@
       "rio": "Production & Editor",
       "ananda": "Production & Multimedia"
     }
+  },
+  "contact": {
+    "kicker": "Contact",
+    "headline": "Let's connect with EGI Media.",
+    "lede": "Connection means everything to us. If you have questions about our programs or want to be part of the EGI Media community, we look forward to hearing from you.",
+    "studioTitle": "Studio Address",
+    "building": "Oscorp Building",
+    "addressLine": "Jl Dharmawangsa Raya No 16",
+    "addressCity": "Kebayoran Baru — South Jakarta 12160",
+    "callTitle": "Call Us",
+    "mailTitle": "Mail Us",
+    "mapTitle": "Our Location",
+    "mapSubtitle": "Visit our studio at Oscorp Building, Kebayoran Baru.",
+    "mapPlaceName": "Oscorp Building",
+    "mapFullAddress": "Oscorp Building, Jl. Darmawangsa Raya No.16, RT.6/RW.1, Pulo, Kebayoran Baru, South Jakarta City, Jakarta 12160, Indonesia",
+    "openMaps": "Open in Google Maps",
+    "imageAlt": "EGI Media team"
   }
 }

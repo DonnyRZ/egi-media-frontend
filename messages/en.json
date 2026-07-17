@@ -6,7 +6,9 @@
     "contactTitle": "Contact",
     "contactDescription": "Get in touch with EGI Media — studio address, phone, email, and map at Oscorp Building, Kebayoran Baru, South Jakarta.",
     "termsTitle": "Terms of Service",
-    "termsDescription": "EGI Media Terms of Service governing the use of our website, content, and digital services."
+    "termsDescription": "EGI Media Terms of Service governing the use of our website, content, and digital services.",
+    "privacyTitle": "Privacy Policy",
+    "privacyDescription": "EGI Media Privacy Policy on how we collect, use, and protect personal data."
   },
   "header": {
     "homeAria": "{siteName} home",
@@ -231,6 +233,97 @@
         "title": "Contact us",
         "paragraphs": [
           "If you have questions about these Terms of Service, please contact us at official@egi-media.com or through the Contact page on the EGI Media website."
+        ]
+      }
+    ]
+  },
+  "privacy": {
+    "kicker": "Legal",
+    "headline": "Privacy Policy",
+    "lastUpdated": "Last updated: July 17, 2026",
+    "lede": "EGI Media respects your privacy. This policy explains how we collect, use, store, and protect personal information when you use our services.",
+    "sections": [
+      {
+        "title": "Scope",
+        "paragraphs": [
+          "This Privacy Policy applies to the EGI Media website, newsletters, and related digital services we operate.",
+          "By using our services, you acknowledge the practices described in this policy."
+        ]
+      },
+      {
+        "title": "Information we collect",
+        "paragraphs": [
+          "We may collect information you provide directly, such as your name and email address when you subscribe to a newsletter or contact us.",
+          "We may also collect technical data automatically, including IP address, device type, browser, pages visited, and usage data that helps us understand site performance."
+        ]
+      },
+      {
+        "title": "How we use information",
+        "paragraphs": [
+          "We use information to provide and improve our services, send newsletters or communications you request, respond to inquiries, and maintain the security and reliability of the platform.",
+          "We may use aggregated or anonymized data for editorial analysis and product development without personally identifying you."
+        ]
+      },
+      {
+        "title": "Legal bases and legitimate purposes",
+        "paragraphs": [
+          "We process personal data in accordance with applicable laws of the Republic of Indonesia, including to deliver services you request, for legitimate interests in operating a media platform, and to comply with legal obligations.",
+          "Where processing requires consent, we will request it before processing data for that purpose."
+        ]
+      },
+      {
+        "title": "Cookies and similar technologies",
+        "paragraphs": [
+          "Our website may use cookies or similar technologies for browsing experience, language preferences, and performance measurement.",
+          "You can configure your browser to refuse cookies. However, some site features may not work optimally without certain cookies."
+        ]
+      },
+      {
+        "title": "Sharing of information",
+        "paragraphs": [
+          "We do not sell your personal data. We may share information with trusted service providers who help us operate (such as hosting, analytics, or email delivery), only as needed for those services.",
+          "We may also disclose information when required by law, or to protect the rights, safety, and integrity of EGI Media and our users."
+        ]
+      },
+      {
+        "title": "Retention and security",
+        "paragraphs": [
+          "We retain personal data for as long as needed for the purposes described in this policy, or as required by law.",
+          "We apply reasonable technical and organizational measures to protect data from unauthorized access, alteration, or disclosure. However, no internet transmission is completely secure."
+        ]
+      },
+      {
+        "title": "Your rights",
+        "paragraphs": [
+          "Subject to applicable law, you may have the right to access, correct, or request deletion of certain personal data we hold about you.",
+          "You may also unsubscribe from newsletters at any time via the unsubscribe link in emails, or by contacting us."
+        ]
+      },
+      {
+        "title": "Third-party services",
+        "paragraphs": [
+          "Our services may link to third-party platforms such as YouTube or social media. Their privacy policies apply to data collected on those platforms.",
+          "We encourage you to review each third party’s privacy policy before providing information."
+        ]
+      },
+      {
+        "title": "Children",
+        "paragraphs": [
+          "Our services are not directed to children under the age defined by local law without parental or guardian supervision.",
+          "If you believe we have received data from a child without appropriate permission, contact us so we can review and delete it if necessary."
+        ]
+      },
+      {
+        "title": "Changes to this policy",
+        "paragraphs": [
+          "We may update this Privacy Policy from time to time. The latest version will be published on this page with the update date.",
+          "Continued use of the services after changes take effect means you acknowledge the updated practices."
+        ]
+      },
+      {
+        "title": "Contact us",
+        "paragraphs": [
+          "For questions about this Privacy Policy or requests related to personal data, contact us at official@egi-media.com or through the Contact page on the EGI Media website."
         ]
       }
     ]

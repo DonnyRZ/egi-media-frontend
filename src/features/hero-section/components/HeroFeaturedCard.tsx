@@ -6,6 +6,7 @@ import { Link } from "@/i18n/navigation";
 import { ArticleImage } from "@/shared/components/common/ArticleImage";
 import { DATE_FORMAT } from "@/shared/constants/format.constants";
 import type { Article } from "@/shared/types/article.types";
+import { getArticleHref } from "@/shared/utils/article-path";
 
 interface HeroFeaturedCardProps {
   article: Article;
@@ -17,7 +18,7 @@ export function HeroFeaturedCard({ article }: HeroFeaturedCardProps) {
 
   return (
     <article className="group">
-      <Link href={`/articles/${article.slug}`}>
+      <Link href={getArticleHref(article)}>
         <div className="relative aspect-[16/9] overflow-hidden">
           <ArticleImage
             alt={article.title}
@@ -34,7 +35,7 @@ export function HeroFeaturedCard({ article }: HeroFeaturedCardProps) {
           <span className="kicker">{article.category.name}</span>
         ) : null}
         <h2 className="mt-2 font-serif text-3xl font-bold leading-[1.1] tracking-tight text-ink sm:text-4xl lg:text-5xl">
-          <Link className="headline-link" href={`/articles/${article.slug}`}>
+          <Link className="headline-link" href={getArticleHref(article)}>
             {article.title}
           </Link>
         </h2>

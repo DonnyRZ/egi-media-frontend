@@ -11,6 +11,7 @@ import { EmptyState } from "@/shared/components/common/EmptyState";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
 import { useBreakingNews } from "@/features/homepage/hooks/useBreakingNews";
 import type { Article } from "@/shared/types/article.types";
+import { getArticleHref } from "@/shared/utils/article-path";
 
 function BreakingCard({ article }: { article: Article }) {
   return (
@@ -28,7 +29,7 @@ function BreakingCard({ article }: { article: Article }) {
         </span>
       ) : null}
       <h3 className="mt-1 line-clamp-3 font-serif text-base font-semibold leading-snug text-ink group-hover:text-accent">
-        <Link href={`/articles/${article.slug}`}>{article.title}</Link>
+        <Link href={getArticleHref(article)}>{article.title}</Link>
       </h3>
     </article>
   );

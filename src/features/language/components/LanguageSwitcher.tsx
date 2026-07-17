@@ -6,10 +6,12 @@ import { useLocale, useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { useOutsideClick } from "@/shared/hooks/useOutsideClick";
 import { cn } from "@/shared/lib/cn";
+import { useArticleLocaleStore } from "@/shared/stores/article-locale.store";
 import {
   LANGUAGE_OPTIONS,
   type LanguageOption,
 } from "@/features/language/constants/language.constants";
+import { getArticleHref } from "@/shared/utils/article-path";
 
 function GlobeIcon() {
   return (
@@ -28,6 +30,7 @@ export function LanguageSwitcher() {
   const t = useTranslations("header");
   const locale = useLocale();
   const pathname = usePathname();
+  const articleId = useArticleLocaleStore((state) => state.articleId);
   const [isOpen, setIsOpen] = useState(false);
   const close = useCallback(() => setIsOpen(false), []);
   const ref = useOutsideClick<HTMLDivElement>(close);
@@ -35,6 +38,12 @@ export function LanguageSwitcher() {
   const active =
     LANGUAGE_OPTIONS.find((option) => option.locale === locale) ??
     LANGUAGE_OPTIONS[0];
+
+  // On article pages, keep the same article id across locales (avoids slug encoding bugs).
+  const href =
+    pathname.startsWith("/articles/") && articleId
+      ? getArticleHref({ id: articleId })
+      : pathname;
 
   return (
     <div ref={ref} className="relative">
@@ -66,7 +75,7 @@ export function LanguageSwitcher() {
                     ? "font-semibold text-accent"
                     : "text-neutral-700",
                 )}
-                href={pathname}
+                href={href}
                 locale={option.locale}
                 onClick={close}
                 role="menuitem"

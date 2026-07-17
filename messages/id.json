@@ -8,7 +8,8 @@
     "termsTitle": "Ketentuan Layanan",
     "termsDescription": "Ketentuan layanan EGI Media yang mengatur penggunaan website, konten, dan layanan digital kami.",
     "privacyTitle": "Kebijakan Privasi",
-    "privacyDescription": "Kebijakan privasi EGI Media tentang pengumpulan, penggunaan, dan perlindungan data pribadi pengguna."
+    "privacyDescription": "Kebijakan privasi EGI Media tentang pengumpulan, penggunaan, dan perlindungan data pribadi pengguna.",
+    "articleFallbackTitle": "Artikel"
   },
   "header": {
     "homeAria": "Beranda {siteName}",
@@ -327,5 +328,19 @@
         ]
       }
     ]
+  },
+  "article": {
+    "publishedOn": "Dipublikasikan {date}",
+    "shareTitle": "Bagikan",
+    "shareCopy": "Salin tautan",
+    "shareWhatsapp": "WhatsApp",
+    "shareFacebook": "Facebook",
+    "shareX": "X",
+    "shareTelegram": "Telegram",
+    "linkCopied": "Tautan disalin",
+    "viewsLabel": "dilihat",
+    "sharesLabel": "dibagikan",
+    "notFoundTitle": "Artikel tidak ditemukan",
+    "notFoundMessage": "Artikel yang Anda cari tidak tersedia atau telah dihapus."
   }
 }

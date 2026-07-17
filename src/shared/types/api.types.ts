@@ -37,6 +37,7 @@ export interface ArticleListParams {
   author_id?: string;
   series_id?: string;
   sort?: ArticleSort;
+  lang?: "id" | "en" | "uz";
 }
 
 export interface SeriesListParams {

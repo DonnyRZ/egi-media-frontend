@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { FALLBACK_ARTICLE_IMAGE } from "@/shared/constants/site.constants";
 import { cn } from "@/shared/lib/cn";
@@ -21,7 +21,12 @@ export function ArticleImage({
   priority = false,
   sizes = "(max-width: 768px) 100vw, 50vw",
 }: ArticleImageProps) {
-  const [imageSrc, setImageSrc] = useState(src || FALLBACK_ARTICLE_IMAGE);
+  const resolvedSrc = src || FALLBACK_ARTICLE_IMAGE;
+  const [imageSrc, setImageSrc] = useState(resolvedSrc);
+
+  useEffect(() => {
+    setImageSrc(resolvedSrc);
+  }, [resolvedSrc]);
 
   return (
     <Image

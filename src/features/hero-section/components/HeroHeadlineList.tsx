@@ -5,6 +5,7 @@ import { useFormatter, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { DATE_FORMAT } from "@/shared/constants/format.constants";
 import type { Article } from "@/shared/types/article.types";
+import { getArticleHref } from "@/shared/utils/article-path";
 
 interface HeroHeadlineListProps {
   articles: Article[];
@@ -38,7 +39,7 @@ export function HeroHeadlineList({ articles }: HeroHeadlineListProps) {
                 </span>
               ) : null}
               <h4 className="mt-0.5 font-serif text-base font-semibold leading-snug text-ink">
-                <Link className="headline-link" href={`/articles/${article.slug}`}>
+                <Link className="headline-link" href={getArticleHref(article)}>
                   {article.title}
                 </Link>
               </h4>

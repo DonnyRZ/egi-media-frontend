@@ -8,6 +8,7 @@ export const API_ENDPOINTS = {
   categories: "/api/v1/categories",
   topics: "/api/v1/topics",
   series: "/api/v1/series",
+  seriesById: (id: string) => `/api/v1/series/${id}`,
   newsletters: "/api/v1/newsletters",
   youtubeVideos: "/api/v1/youtube-videos",
 } as const;

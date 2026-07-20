@@ -3,12 +3,32 @@
 import { useFormatter, useTranslations } from "next-intl";
 
 import { Link } from "@/i18n/navigation";
+import { ArticleImage } from "@/shared/components/common/ArticleImage";
 import { DATE_FORMAT } from "@/shared/constants/format.constants";
 import type { Series } from "@/shared/types/series.types";
 
 interface SeriesCardProps {
   series: Series;
   variant?: "default" | "featured";
+}
+
+function SeriesCover({
+  series,
+  className,
+}: {
+  series: Series;
+  className?: string;
+}) {
+  return (
+    <div className={`relative overflow-hidden bg-neutral-100 ${className ?? ""}`}>
+      <ArticleImage
+        alt={series.name}
+        className="transition-transform duration-500 group-hover:scale-105"
+        sizes="(max-width: 768px) 100vw, 50vw"
+        src={series.coverImage}
+      />
+    </div>
+  );
 }
 
 export function SeriesCard({ series, variant = "default" }: SeriesCardProps) {
@@ -19,11 +39,8 @@ export function SeriesCard({ series, variant = "default" }: SeriesCardProps) {
   if (variant === "featured") {
     return (
       <article className="group grid gap-6 border-b-2 border-ink pb-8 lg:grid-cols-[1.2fr_1fr] lg:gap-10 lg:pb-10">
-        <Link
-          className="flex aspect-[16/10] items-center justify-center bg-neutral-100 font-serif text-7xl font-bold text-ink transition-colors group-hover:bg-primary-100 sm:text-8xl"
-          href={`/series/${series.slug}`}
-        >
-          {series.name.slice(0, 1)}
+        <Link className="block" href={`/series/${series.slug}`}>
+          <SeriesCover className="aspect-[16/10]" series={series} />
         </Link>
         <div className="flex flex-col justify-center">
           <div className="flex flex-wrap items-center gap-3">
@@ -61,11 +78,8 @@ export function SeriesCard({ series, variant = "default" }: SeriesCardProps) {
 
   return (
     <article className="group flex h-full flex-col border-t-2 border-ink pt-4">
-      <Link
-        className="flex aspect-[16/10] items-center justify-center bg-neutral-100 font-serif text-5xl font-bold text-ink transition-colors group-hover:bg-primary-100"
-        href={`/series/${series.slug}`}
-      >
-        {series.name.slice(0, 1)}
+      <Link className="block" href={`/series/${series.slug}`}>
+        <SeriesCover className="aspect-[16/10]" series={series} />
       </Link>
       <div className="flex flex-1 flex-col pt-4">
         <div className="flex flex-wrap items-center gap-3">

@@ -17,6 +17,7 @@ interface SeriesDto {
   name: string;
   slug: string;
   description: string | null;
+  image?: string | null;
   article_count?: number;
   cover_image?: string | null;
   created_at?: string | null;

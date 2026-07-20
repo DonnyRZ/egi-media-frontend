@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 
+import { AuthProvider } from "@/features/auth/components/AuthProvider";
 import { Footer } from "@/features/footer/components/Footer";
 import { Header } from "@/features/header/components/Header";
 import { QueryProvider } from "@/shared/providers/QueryProvider";
@@ -83,9 +84,11 @@ export default async function LocaleLayout({
       <body className={`${inter.variable} ${sourceSerif.variable}`}>
         <NextIntlClientProvider messages={messages}>
           <QueryProvider>
-            <Header />
-            <main>{children}</main>
-            <Footer />
+            <AuthProvider>
+              <Header />
+              <main>{children}</main>
+              <Footer />
+            </AuthProvider>
           </QueryProvider>
         </NextIntlClientProvider>
       </body>

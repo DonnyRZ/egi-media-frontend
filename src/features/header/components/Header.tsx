@@ -7,6 +7,7 @@ import { useFormatter, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/shared/components/ui/Button";
 import { Container } from "@/shared/components/layout/Container";
+import { AuthUserMenu, AuthMobileActions } from "@/features/auth/components/AuthUserMenu";
 import { LanguageSwitcher } from "@/features/language/components/LanguageSwitcher";
 import { HEADER_CATEGORY_SLUGS } from "@/shared/constants/header-categories.constants";
 import { SITE_NAME } from "@/shared/constants/site.constants";
@@ -54,9 +55,7 @@ function UtilityBar() {
             <span aria-hidden="true" className="text-neutral-300">
               |
             </span>
-            <Link className="hover:text-accent" href="/login">
-              {t("signIn")}
-            </Link>
+            <AuthUserMenu />
             <span aria-hidden="true" className="text-neutral-300">
               |
             </span>
@@ -158,11 +157,14 @@ function MobileNav() {
             </Link>
           </li>
         ))}
-        <li className="flex items-center justify-between pt-3">
-          <LanguageSwitcherSlot />
-          <Button className="rounded-none" type="button">
-            {t("subscribe")}
-          </Button>
+        <li className="space-y-3 pt-3">
+          <AuthMobileActions />
+          <div className="flex items-center justify-between gap-3">
+            <LanguageSwitcherSlot />
+            <Button className="rounded-none" type="button">
+              {t("subscribe")}
+            </Button>
+          </div>
         </li>
       </ul>
     </nav>

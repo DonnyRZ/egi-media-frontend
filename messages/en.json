@@ -13,7 +13,9 @@
     "videosTitle": "Videos",
     "videosDescription": "Watch EGI Media video reporting, interviews, and visual analysis — with publish dates and full descriptions.",
     "seriesTitle": "Series",
-    "seriesDescription": "EGI Media deep-dive editorial series — with descriptions, dates, and related articles."
+    "seriesDescription": "EGI Media deep-dive editorial series — with descriptions, dates, and related articles.",
+    "latestNewsTitle": "Latest News",
+    "latestNewsDescription": "All the latest reporting and analysis from the EGI Media newsroom — sorted by publish date."
   },
   "header": {
     "homeAria": "{siteName} home",
@@ -28,7 +30,7 @@
     "navMain": "Main navigation",
     "navMobile": "Mobile navigation",
     "nav": {
-      "latest": "Latest",
+      "home": "Home",
       "business": "Business",
       "technology": "Technology",
       "politics": "Politics",
@@ -112,6 +114,15 @@
     "watchOnYoutube": "Watch on YouTube →",
     "empty": "No videos have been published yet."
   },
+  "latestNewsPage": {
+    "kicker": "Latest News",
+    "headline": "Full coverage from the newsroom",
+    "lede": "The newest articles, analysis, and reporting — arranged chronologically for professionals who need timely information and deep context.",
+    "listingHeading": "Article library",
+    "featuredKicker": "Featured",
+    "allArticles": "All articles",
+    "empty": "No articles have been published yet."
+  },
   "editors": {
     "title": "Most Popular",
     "subtitle": "The stories our readers are following most closely."
@@ -131,7 +142,11 @@
     "viewAll": "View all",
     "tryAgain": "Try again",
     "readingTime": "{minutes} min read",
-    "articleCount": "{count} articles"
+    "articleCount": "{count} articles",
+    "previous": "Previous",
+    "next": "Next",
+    "pageOf": "Page {current} of {total}",
+    "paginationLabel": "Page navigation"
   },
   "states": {
     "emptyTitle": "No content yet",

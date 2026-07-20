@@ -14,6 +14,7 @@ import type {
   SharePlatform,
 } from "@/shared/types/article.types";
 import { HOMEPAGE_LIMITS } from "@/shared/constants/homepage.constants";
+import { LATEST_NEWS_PAGE_LIMIT } from "@/shared/constants/latest-news.constants";
 
 export async function getArticles(
   params: ArticleListParams,
@@ -79,6 +80,18 @@ export async function getLatestNews(
   return fetchArticles({
     page: 1,
     limit: HOMEPAGE_LIMITS.latestNews,
+    sort: "latest",
+    lang,
+  });
+}
+
+export async function getLatestNewsPage(
+  lang: ContentLocale = "id",
+  page = 1,
+): Promise<ArticleListResult> {
+  return fetchArticles({
+    page,
+    limit: LATEST_NEWS_PAGE_LIMIT,
     sort: "latest",
     lang,
   });

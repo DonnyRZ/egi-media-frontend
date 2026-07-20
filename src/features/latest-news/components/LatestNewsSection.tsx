@@ -22,7 +22,7 @@ export function LatestNewsSection() {
     <Section ariaLabelledby="latest-heading">
       <Container>
         <SectionHeading
-          actionHref="/"
+          actionHref="/latest"
           id="latest-heading"
           subtitle={t("subtitle")}
           title={t("title")}

@@ -1,13 +1,9 @@
 import axios, { type AxiosInstance, type InternalAxiosRequestConfig } from "axios";
 
+import { getAccessToken } from "@/features/auth/utils/token-storage";
 import { env } from "@/shared/config/env";
 import { API_TIMEOUT_MS } from "@/shared/constants/api.constants";
 import { mapAxiosError } from "@/shared/lib/errors";
-
-function getAccessToken(): string | null {
-  if (typeof window === "undefined") return null;
-  return localStorage.getItem("access_token");
-}
 
 function createAxiosClient(): AxiosInstance {
   const client = axios.create({

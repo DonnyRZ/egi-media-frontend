@@ -1,0 +1,2 @@
+export const TAXONOMY_PAGE_LIMIT = 50;
+export const TAXONOMY_ARTICLES_PAGE_LIMIT = 24;

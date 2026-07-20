@@ -15,6 +15,7 @@ import type {
 } from "@/shared/types/article.types";
 import { HOMEPAGE_LIMITS } from "@/shared/constants/homepage.constants";
 import { LATEST_NEWS_PAGE_LIMIT } from "@/shared/constants/latest-news.constants";
+import { TAXONOMY_ARTICLES_PAGE_LIMIT } from "@/shared/constants/taxonomy.constants";
 
 export async function getArticles(
   params: ArticleListParams,
@@ -104,6 +105,34 @@ export async function getEditorsPicks(
     page: 1,
     limit: HOMEPAGE_LIMITS.editorsPicks,
     sort: "popular",
+    lang,
+  });
+}
+
+export async function getArticlesByCategoryPage(
+  categoryId: string,
+  lang: ContentLocale = "id",
+  page = 1,
+): Promise<ArticleListResult> {
+  return fetchArticles({
+    page,
+    limit: TAXONOMY_ARTICLES_PAGE_LIMIT,
+    category_id: categoryId,
+    sort: "latest",
+    lang,
+  });
+}
+
+export async function getArticlesByTopicPage(
+  topicId: string,
+  lang: ContentLocale = "id",
+  page = 1,
+): Promise<ArticleListResult> {
+  return fetchArticles({
+    page,
+    limit: TAXONOMY_ARTICLES_PAGE_LIMIT,
+    topic_id: topicId,
+    sort: "latest",
     lang,
   });
 }

@@ -15,7 +15,11 @@
     "seriesTitle": "Seri",
     "seriesDescription": "Koleksi editorial mendalam EGI Media — seri liputan dengan deskripsi, tanggal, dan artikel terkait.",
     "latestNewsTitle": "Berita Terbaru",
-    "latestNewsDescription": "Seluruh liputan dan analisis terbaru dari tim redaksi EGI Media — diurutkan berdasarkan waktu terbit."
+    "latestNewsDescription": "Seluruh liputan dan analisis terbaru dari tim redaksi EGI Media — diurutkan berdasarkan waktu terbit.",
+    "categoriesTitle": "Kategori",
+    "categoriesDescription": "Jelajahi liputan EGI Media berdasarkan kategori redaksi — politik, teknologi, sport, hiburan, dan lainnya.",
+    "topicsTitle": "Topik",
+    "topicsDescription": "Jelajahi liputan EGI Media yang dikurasi menurut topik — dari bisnis dan teknologi hingga politik."
   },
   "header": {
     "homeAria": "Beranda {siteName}",
@@ -122,6 +126,36 @@
     "featuredKicker": "Unggulan",
     "allArticles": "Semua artikel",
     "empty": "Belum ada artikel yang dipublikasikan."
+  },
+  "categoriesPage": {
+    "kicker": "Kategori",
+    "headline": "Liputan menurut desk redaksi",
+    "lede": "Kategori editorial yang mengorganisasi liputan kami — untuk pembaca yang menavigasi berita menurut bidang dan spesialisasi.",
+    "listingHeading": "Daftar kategori",
+    "featuredKicker": "Unggulan",
+    "allCategories": "Semua kategori",
+    "categoryCount": "{count} kategori",
+    "browseCategory": "Jelajahi kategori",
+    "backToCategories": "Semua kategori",
+    "articlesHeading": "Artikel dalam kategori ini",
+    "noArticles": "Belum ada artikel dalam kategori ini.",
+    "notFound": "Kategori tidak ditemukan.",
+    "empty": "Belum ada kategori yang dipublikasikan."
+  },
+  "topicsPage": {
+    "kicker": "Topik",
+    "headline": "Liputan yang dikurasi menurut tema",
+    "lede": "Hub topik yang menghimpun liputan terkait lintas desk — untuk pembaca yang mengikuti cerita melalui benang merahnya.",
+    "listingHeading": "Daftar topik",
+    "featuredKicker": "Unggulan",
+    "allTopics": "Semua topik",
+    "topicCount": "{count} topik",
+    "browseTopic": "Jelajahi topik",
+    "backToTopics": "Semua topik",
+    "articlesHeading": "Artikel dalam topik ini",
+    "noArticles": "Belum ada artikel dalam topik ini.",
+    "notFound": "Topik tidak ditemukan.",
+    "empty": "Belum ada topik yang dipublikasikan."
   },
   "editors": {
     "title": "Terpopuler",

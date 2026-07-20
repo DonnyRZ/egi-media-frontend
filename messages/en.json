@@ -15,7 +15,11 @@
     "seriesTitle": "Series",
     "seriesDescription": "EGI Media deep-dive editorial series — with descriptions, dates, and related articles.",
     "latestNewsTitle": "Latest News",
-    "latestNewsDescription": "All the latest reporting and analysis from the EGI Media newsroom — sorted by publish date."
+    "latestNewsDescription": "All the latest reporting and analysis from the EGI Media newsroom — sorted by publish date.",
+    "categoriesTitle": "Categories",
+    "categoriesDescription": "Browse EGI Media coverage by newsroom category — politics, technology, sport, entertainment, and more.",
+    "topicsTitle": "Topics",
+    "topicsDescription": "Explore EGI Media reporting curated by coverage topic — from business and technology to politics."
   },
   "header": {
     "homeAria": "{siteName} home",
@@ -122,6 +126,36 @@
     "featuredKicker": "Featured",
     "allArticles": "All articles",
     "empty": "No articles have been published yet."
+  },
+  "categoriesPage": {
+    "kicker": "Categories",
+    "headline": "Coverage by newsroom desk",
+    "lede": "Editorial categories that organize our reporting — built for readers who navigate by beat and specialty.",
+    "listingHeading": "Category library",
+    "featuredKicker": "Featured",
+    "allCategories": "All categories",
+    "categoryCount": "{count} categories",
+    "browseCategory": "Browse category",
+    "backToCategories": "All categories",
+    "articlesHeading": "Articles in this category",
+    "noArticles": "No articles in this category yet.",
+    "notFound": "Category not found.",
+    "empty": "No categories have been published yet."
+  },
+  "topicsPage": {
+    "kicker": "Topics",
+    "headline": "Coverage curated by theme",
+    "lede": "Topic hubs that gather related reporting across desks — for readers who follow a story through its threads.",
+    "listingHeading": "Topic library",
+    "featuredKicker": "Featured",
+    "allTopics": "All topics",
+    "topicCount": "{count} topics",
+    "browseTopic": "Browse topic",
+    "backToTopics": "All topics",
+    "articlesHeading": "Articles in this topic",
+    "noArticles": "No articles in this topic yet.",
+    "notFound": "Topic not found.",
+    "empty": "No topics have been published yet."
   },
   "editors": {
     "title": "Most Popular",

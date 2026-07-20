@@ -13,6 +13,8 @@ import { Pagination } from "@/shared/components/common/Pagination";
 import { Container } from "@/shared/components/layout/Container";
 import { Section } from "@/shared/components/layout/Section";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
+import { TaxonomyLocaleShell } from "@/shared/components/common/TaxonomyLocaleShell";
+import { HEADER_CATEGORY_I18N_KEYS } from "@/shared/constants/header-categories.constants";
 
 interface CategoryDetailViewProps {
   slug: string;
@@ -44,7 +46,9 @@ export function CategoryDetailView({ slug }: CategoryDetailViewProps) {
   const page = Math.max(1, Number(searchParams.get("page")) || 1);
   const { categoryQuery, articlesQuery } = useCategoryDetail(slug, page);
   const t = useTranslations("categoriesPage");
+  const tHubs = useTranslations("categoryHubs");
   const tCommon = useTranslations("common");
+  const hubKey = HEADER_CATEGORY_I18N_KEYS[slug];
 
   const isLoading = categoryQuery.isLoading || articlesQuery.isLoading;
   const isError = categoryQuery.isError || articlesQuery.isError;
@@ -55,11 +59,15 @@ export function CategoryDetailView({ slug }: CategoryDetailViewProps) {
     void articlesQuery.refetch();
   }
 
-  return (
+  const categoryDescription =
+    categoryQuery.data?.description ||
+    (hubKey ? tHubs(`${hubKey}.lede`) : null);
+
+  const content = (
     <>
       <section
         aria-labelledby="category-detail-heading"
-        className="border-b border-neutral-200"
+        className="border-b border-neutral-200 bg-neutral-50"
       >
         <Container className="py-8 lg:py-10">
           <Link
@@ -78,16 +86,20 @@ export function CategoryDetailView({ slug }: CategoryDetailViewProps) {
 
           {categoryQuery.data ? (
             <>
-              <p className="mt-4 kicker">{t("kicker")}</p>
+              <p className="mt-4 kicker">
+                {hubKey ? tHubs(`${hubKey}.kicker`) : t("kicker")}
+              </p>
               <h1
                 id="category-detail-heading"
-                className="mt-2 max-w-3xl font-serif text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl"
+                className="mt-2 max-w-3xl font-serif text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl lg:text-5xl"
               >
-                {categoryQuery.data.name}
+                {hubKey
+                  ? tHubs(`${hubKey}.headline`)
+                  : categoryQuery.data.name}
               </h1>
-              {categoryQuery.data.description ? (
+              {categoryDescription ? (
                 <p className="mt-3 max-w-2xl text-sm leading-6 text-neutral-600 lg:text-base lg:leading-7">
-                  {categoryQuery.data.description}
+                  {categoryDescription}
                 </p>
               ) : null}
             </>
@@ -176,4 +188,14 @@ export function CategoryDetailView({ slug }: CategoryDetailViewProps) {
       </Section>
     </>
   );
+
+  if (categoryQuery.data) {
+    return (
+      <TaxonomyLocaleShell entity={categoryQuery.data} kind="categories">
+        {content}
+      </TaxonomyLocaleShell>
+    );
+  }
+
+  return content;
 }

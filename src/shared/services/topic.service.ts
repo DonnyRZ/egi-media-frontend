@@ -1,17 +1,30 @@
 import { axiosClient } from "@/shared/lib/axios-client";
 import { API_ENDPOINTS } from "@/shared/constants/api.constants";
-import { mapTopicListDto } from "@/shared/mappers/topic.mapper";
+import {
+  mapTopicDetailDto,
+  mapTopicListDto,
+} from "@/shared/mappers/topic.mapper";
 import type {
+  ApiSuccessResponse,
   PaginatedApiResponse,
   TaxonomyListParams,
 } from "@/shared/types/api.types";
-import type { TopicListResult } from "@/shared/types/topic.types";
+import type { ContentLocale } from "@/shared/types/article.types";
+import type { TopicDetail, TopicListResult } from "@/shared/types/topic.types";
 
 interface TopicDto {
   id: string;
   name: string;
   slug: string;
   description: string | null;
+  locale?: ContentLocale;
+  available_locales?: ContentLocale[];
+  translations?: Partial<
+    Record<
+      ContentLocale,
+      { name: string; slug: string | null; description: string | null }
+    >
+  >;
 }
 
 export async function fetchTopics(
@@ -26,4 +39,19 @@ export async function fetchTopics(
     items: response.data.data,
     meta: { total: response.data.meta?.total ?? 0 },
   });
+}
+
+export async function fetchTopicBySlug(
+  slug: string,
+  lang: ContentLocale = "id",
+): Promise<TopicDetail | null> {
+  try {
+    const response = await axiosClient.get<ApiSuccessResponse<TopicDto>>(
+      API_ENDPOINTS.topicById(slug),
+      { params: { lang } },
+    );
+    return mapTopicDetailDto(response.data.data);
+  } catch {
+    return null;
+  }
 }

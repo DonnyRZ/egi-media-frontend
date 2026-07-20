@@ -16,8 +16,8 @@ export function useTopicDetail(slug: string, page = 1) {
   const lang = toContentLocale(useLocale());
 
   const topicQuery = useQuery({
-    queryKey: QUERY_KEYS.topics.list({ section: "detail", slug }),
-    queryFn: () => getTopicBySlug(slug),
+    queryKey: QUERY_KEYS.topics.list({ section: "detail", slug, lang }),
+    queryFn: () => getTopicBySlug(slug, lang),
     staleTime: QUERY_STALE_TIME.homepage,
     gcTime: QUERY_GC_TIME.homepage,
     enabled: Boolean(slug),

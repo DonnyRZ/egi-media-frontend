@@ -16,8 +16,8 @@ export function useCategoryDetail(slug: string, page = 1) {
   const lang = toContentLocale(useLocale());
 
   const categoryQuery = useQuery({
-    queryKey: QUERY_KEYS.categories.list({ section: "detail", slug }),
-    queryFn: () => getCategoryBySlug(slug),
+    queryKey: QUERY_KEYS.categories.list({ section: "detail", slug, lang }),
+    queryFn: () => getCategoryBySlug(slug, lang),
     staleTime: QUERY_STALE_TIME.homepage,
     gcTime: QUERY_GC_TIME.homepage,
     enabled: Boolean(slug),

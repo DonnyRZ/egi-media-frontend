@@ -6,6 +6,8 @@ import { TopicDetailView } from "@/features/topics/components/TopicDetailView";
 import { Container } from "@/shared/components/layout/Container";
 import { Section } from "@/shared/components/layout/Section";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
+import { getTopicBySlug } from "@/shared/repositories/topic.repository";
+import { toContentLocale } from "@/shared/utils/locale";
 
 interface TopicDetailPageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -14,8 +16,17 @@ interface TopicDetailPageProps {
 export async function generateMetadata({
   params,
 }: TopicDetailPageProps): Promise<Metadata> {
-  const { locale } = await params;
+  const { locale, slug } = await params;
+  const lang = toContentLocale(locale);
+  const topic = await getTopicBySlug(slug, lang);
   const t = await getTranslations({ locale, namespace: "metadata" });
+
+  if (topic) {
+    return {
+      title: topic.name,
+      description: topic.description ?? t("topicsDescription"),
+    };
+  }
 
   return {
     title: t("topicsTitle"),

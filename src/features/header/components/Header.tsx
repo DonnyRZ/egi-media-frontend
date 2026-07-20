@@ -1,21 +1,32 @@
 "use client";
 
 import Image from "next/image";
+import { Suspense } from "react";
 import { useFormatter, useTranslations } from "next-intl";
 
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/shared/components/ui/Button";
 import { Container } from "@/shared/components/layout/Container";
 import { LanguageSwitcher } from "@/features/language/components/LanguageSwitcher";
+import { HEADER_CATEGORY_SLUGS } from "@/shared/constants/header-categories.constants";
 import { SITE_NAME } from "@/shared/constants/site.constants";
 import { useUiStore } from "@/shared/stores/ui.store";
 import { cn } from "@/shared/lib/cn";
 
+function LanguageSwitcherSlot() {
+  return (
+    <Suspense fallback={<span className="inline-block h-8 w-12" aria-hidden="true" />}>
+      <LanguageSwitcher />
+    </Suspense>
+  );
+}
+
 const NAV_ITEMS = [
   { key: "home", href: "/" },
-  { key: "business", href: "/topics/business" },
-  { key: "technology", href: "/topics/technology" },
-  { key: "politics", href: "/topics/politics" },
+  { key: "business", href: `/categories/${HEADER_CATEGORY_SLUGS.business}` },
+  { key: "technology", href: `/categories/${HEADER_CATEGORY_SLUGS.technology}` },
+  { key: "politics", href: `/categories/${HEADER_CATEGORY_SLUGS.politics}` },
+  { key: "egiNews", href: `/categories/${HEADER_CATEGORY_SLUGS.egiNews}` },
   { key: "series", href: "/series" },
   { key: "videos", href: "/videos" },
 ] as const;
@@ -49,7 +60,7 @@ function UtilityBar() {
             <span aria-hidden="true" className="text-neutral-300">
               |
             </span>
-            <LanguageSwitcher />
+            <LanguageSwitcherSlot />
           </div>
         </div>
       </Container>
@@ -148,7 +159,7 @@ function MobileNav() {
           </li>
         ))}
         <li className="flex items-center justify-between pt-3">
-          <LanguageSwitcher />
+          <LanguageSwitcherSlot />
           <Button className="rounded-none" type="button">
             {t("subscribe")}
           </Button>

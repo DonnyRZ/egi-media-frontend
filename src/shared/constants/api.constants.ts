@@ -6,6 +6,8 @@ export const API_ENDPOINTS = {
   articleView: (id: string) => `/api/v1/articles/${id}/view`,
   articleShare: (id: string) => `/api/v1/articles/${id}/share`,
   categories: "/api/v1/categories",
+  categoryById: (idOrSlug: string) =>
+    `/api/v1/categories/${encodeURIComponent(idOrSlug)}`,
   topics: "/api/v1/topics",
   topicById: (idOrSlug: string) =>
     `/api/v1/topics/${encodeURIComponent(idOrSlug)}`,

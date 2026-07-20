@@ -158,23 +158,23 @@
     "notFound": "Mavzu topilmadi.",
     "empty": "Hali hech qanday mavzu nashr etilmagan."
   },
-  "topicHubs": {
+  "categoryHubs": {
     "business": {
-      "kicker": "Mavzu",
+      "kicker": "Kategoriya",
       "headline": "Biznes",
       "lede": "Bozorlar, kompaniyalar va biznesni shakllantiruvchi iqtisodiy kuchlar — professional oʻquvchilar uchun aniqlik bilan yoritiladi.",
       "metaTitle": "Biznes",
       "metaDescription": "EGI Media biznes reportajlari — bozorlar, kompaniyalar va iqtisodiy tahlil eng soʻnggi nashr sanasi boʻyicha."
     },
     "technology": {
-      "kicker": "Mavzu",
+      "kicker": "Kategoriya",
       "headline": "Texnologiya",
       "lede": "Innovatsiya, raqamli platformalar va sanoatni oʻzgartirayotgan texnologiyalar — chuqurlik va aniqlik bilan.",
       "metaTitle": "Texnologiya",
       "metaDescription": "EGI Media texnologiya reportajlari — innovatsiya, raqamli platformalar va sanoat taʼsiri eng soʻnggi nashr sanasi boʻyicha."
     },
     "politics": {
-      "kicker": "Mavzu",
+      "kicker": "Kategoriya",
       "headline": "Siyosat",
       "lede": "Siyosat, hokimiyat va jamoat ishlari — shovqin emas, kontekst kerak boʻlgan oʻquvchilar uchun siyosiy reportaj.",
       "metaTitle": "Siyosat",

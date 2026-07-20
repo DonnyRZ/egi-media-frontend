@@ -158,23 +158,23 @@
     "notFound": "Topik tidak ditemukan.",
     "empty": "Belum ada topik yang dipublikasikan."
   },
-  "topicHubs": {
+  "categoryHubs": {
     "business": {
-      "kicker": "Topik",
+      "kicker": "Kategori",
       "headline": "Bisnis",
       "lede": "Pasar, perusahaan, dan dinamika ekonomi yang membentuk dunia bisnis — diliput dengan kejelasan untuk pembaca profesional.",
       "metaTitle": "Bisnis",
       "metaDescription": "Liputan bisnis EGI Media — pasar, perusahaan, dan analisis ekonomi diurutkan berdasarkan waktu terbit terbaru."
     },
     "technology": {
-      "kicker": "Topik",
+      "kicker": "Kategori",
       "headline": "Teknologi",
       "lede": "Inovasi, platform digital, dan teknologi yang mengubah industri — diliput dengan kedalaman dan ketepatan.",
       "metaTitle": "Teknologi",
       "metaDescription": "Liputan teknologi EGI Media — inovasi, platform digital, dan dampak industri diurutkan berdasarkan waktu terbit terbaru."
     },
     "politics": {
-      "kicker": "Topik",
+      "kicker": "Kategori",
       "headline": "Politik",
       "lede": "Kebijakan, kekuasaan, dan urusan publik — liputan politik untuk pembaca yang membutuhkan konteks, bukan kebisingan.",
       "metaTitle": "Politik",

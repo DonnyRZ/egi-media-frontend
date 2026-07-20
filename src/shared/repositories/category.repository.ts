@@ -1,6 +1,13 @@
-import { fetchCategories } from "@/shared/services/category.service";
+import {
+  fetchCategories,
+  fetchCategoryBySlug,
+} from "@/shared/services/category.service";
 import type { TaxonomyListParams } from "@/shared/types/api.types";
-import type { Category, CategoryListResult } from "@/shared/types/category.types";
+import type { ContentLocale } from "@/shared/types/article.types";
+import type {
+  Category,
+  CategoryListResult,
+} from "@/shared/types/category.types";
 import { TAXONOMY_PAGE_LIMIT } from "@/shared/constants/taxonomy.constants";
 
 export async function getCategories(
@@ -11,20 +18,18 @@ export async function getCategories(
 
 export async function getCategoriesPage(
   page = 1,
+  lang: ContentLocale = "id",
 ): Promise<CategoryListResult> {
   return fetchCategories({
     page,
     limit: TAXONOMY_PAGE_LIMIT,
+    lang,
   });
 }
 
 export async function getCategoryBySlug(
   slug: string,
+  lang: ContentLocale = "id",
 ): Promise<Category | null> {
-  const result = await fetchCategories({
-    page: 1,
-    limit: TAXONOMY_PAGE_LIMIT,
-  });
-
-  return result.items.find((category) => category.slug === slug) ?? null;
+  return fetchCategoryBySlug(slug, lang);
 }

@@ -158,23 +158,23 @@
     "notFound": "Topic not found.",
     "empty": "No topics have been published yet."
   },
-  "topicHubs": {
+  "categoryHubs": {
     "business": {
-      "kicker": "Topic",
+      "kicker": "Category",
       "headline": "Business",
       "lede": "Markets, companies, and the economic forces shaping business — reported with clarity for professional readers.",
       "metaTitle": "Business",
       "metaDescription": "EGI Media business coverage — markets, companies, and economic analysis sorted by latest publish date."
     },
     "technology": {
-      "kicker": "Topic",
+      "kicker": "Category",
       "headline": "Technology",
       "lede": "Innovation, digital platforms, and the technologies reshaping industry — covered with depth and precision.",
       "metaTitle": "Technology",
       "metaDescription": "EGI Media technology coverage — innovation, digital platforms, and industry impact sorted by latest publish date."
     },
     "politics": {
-      "kicker": "Topic",
+      "kicker": "Category",
       "headline": "Politics",
       "lede": "Policy, power, and public affairs — political reporting built for readers who need context, not noise.",
       "metaTitle": "Politics",

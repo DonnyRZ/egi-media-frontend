@@ -13,7 +13,9 @@
     "videosTitle": "Video",
     "videosDescription": "Tonton liputan video, wawancara, dan analisis visual EGI Media — dengan tanggal terbit dan deskripsi lengkap.",
     "seriesTitle": "Seri",
-    "seriesDescription": "Koleksi editorial mendalam EGI Media — seri liputan dengan deskripsi, tanggal, dan artikel terkait."
+    "seriesDescription": "Koleksi editorial mendalam EGI Media — seri liputan dengan deskripsi, tanggal, dan artikel terkait.",
+    "latestNewsTitle": "Berita Terbaru",
+    "latestNewsDescription": "Seluruh liputan dan analisis terbaru dari tim redaksi EGI Media — diurutkan berdasarkan waktu terbit."
   },
   "header": {
     "homeAria": "Beranda {siteName}",
@@ -28,7 +30,7 @@
     "navMain": "Navigasi utama",
     "navMobile": "Navigasi seluler",
     "nav": {
-      "latest": "Terbaru",
+      "home": "Beranda",
       "business": "Bisnis",
       "technology": "Teknologi",
       "politics": "Politik",
@@ -112,6 +114,15 @@
     "watchOnYoutube": "Tonton di YouTube →",
     "empty": "Belum ada video yang dipublikasikan."
   },
+  "latestNewsPage": {
+    "kicker": "Berita Terbaru",
+    "headline": "Seluruh liputan dari ruang redaksi",
+    "lede": "Artikel, analisis, dan reportase terbaru — disusun kronologis untuk profesional yang membutuhkan informasi aktual dan konteks mendalam.",
+    "listingHeading": "Daftar artikel",
+    "featuredKicker": "Unggulan",
+    "allArticles": "Semua artikel",
+    "empty": "Belum ada artikel yang dipublikasikan."
+  },
   "editors": {
     "title": "Terpopuler",
     "subtitle": "Berita yang paling banyak diikuti pembaca kami."
@@ -131,7 +142,11 @@
     "viewAll": "Lihat semua",
     "tryAgain": "Coba lagi",
     "readingTime": "{minutes} mnt baca",
-    "articleCount": "{count} artikel"
+    "articleCount": "{count} artikel",
+    "previous": "Sebelumnya",
+    "next": "Selanjutnya",
+    "pageOf": "Halaman {current} dari {total}",
+    "paginationLabel": "Navigasi halaman"
   },
   "states": {
     "emptyTitle": "Belum ada konten",

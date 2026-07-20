@@ -12,7 +12,7 @@ import { useUiStore } from "@/shared/stores/ui.store";
 import { cn } from "@/shared/lib/cn";
 
 const NAV_ITEMS = [
-  { key: "latest", href: "/" },
+  { key: "home", href: "/" },
   { key: "business", href: "/topics/business" },
   { key: "technology", href: "/topics/technology" },
   { key: "politics", href: "/topics/politics" },

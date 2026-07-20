@@ -13,7 +13,9 @@
     "videosTitle": "Videolar",
     "videosDescription": "EGI Media video reportajlari, suhbatlari va vizual tahlillarini tomosha qiling — nashr sanasi va toʻliq tavsif bilan.",
     "seriesTitle": "Turkumlar",
-    "seriesDescription": "EGI Media chuqur tahririy turkumlar — tavsif, sana va bogʻliq maqolalar bilan."
+    "seriesDescription": "EGI Media chuqur tahririy turkumlar — tavsif, sana va bogʻliq maqolalar bilan.",
+    "latestNewsTitle": "Soʻnggi yangiliklar",
+    "latestNewsDescription": "EGI Media tahririyatidan barcha soʻnggi reportaj va tahlillar — nashr vaqti boʻyicha tartiblangan."
   },
   "header": {
     "homeAria": "{siteName} bosh sahifasi",
@@ -28,7 +30,7 @@
     "navMain": "Asosiy navigatsiya",
     "navMobile": "Mobil navigatsiya",
     "nav": {
-      "latest": "Soʻnggi",
+      "home": "Bosh sahifa",
       "business": "Biznes",
       "technology": "Texnologiya",
       "politics": "Siyosat",
@@ -112,6 +114,15 @@
     "watchOnYoutube": "YouTubeʼda tomosha qiling →",
     "empty": "Hali hech qanday video nashr etilmagan."
   },
+  "latestNewsPage": {
+    "kicker": "Soʻnggi yangiliklar",
+    "headline": "Tahririyatdan toʻliq reportaj",
+    "lede": "Eng yangi maqolalar, tahlillar va reportajlar — dolzarb maʼlumot va chuqur kontekst kerak boʻlgan mutaxassislar uchun xronologik tartibda.",
+    "listingHeading": "Maqolalar roʻyxati",
+    "featuredKicker": "Tavsiya etilgan",
+    "allArticles": "Barcha maqolalar",
+    "empty": "Hali hech qanday maqola nashr etilmagan."
+  },
   "editors": {
     "title": "Eng mashhur",
     "subtitle": "Oʻquvchilarimiz eng koʻp kuzatayotgan xabarlar."
@@ -131,7 +142,11 @@
     "viewAll": "Barchasini koʻrish",
     "tryAgain": "Qayta urinish",
     "readingTime": "{minutes} daq oʻqish",
-    "articleCount": "{count} ta maqola"
+    "articleCount": "{count} ta maqola",
+    "previous": "Oldingi",
+    "next": "Keyingi",
+    "pageOf": "{total} dan {current}-sahifa",
+    "paginationLabel": "Sahifa navigatsiyasi"
   },
   "states": {
     "emptyTitle": "Hozircha kontent yoʻq",

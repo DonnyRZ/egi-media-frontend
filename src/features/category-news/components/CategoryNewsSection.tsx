@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 
 import { useCategoryNews } from "@/features/homepage/hooks/useCategoryNews";
+import { Link } from "@/i18n/navigation";
 import { ArticleCard } from "@/shared/components/common/ArticleCard";
 import { ErrorState } from "@/shared/components/common/ErrorState";
 import { SectionHeading } from "@/shared/components/common/SectionHeading";
@@ -15,7 +16,14 @@ function CategoryColumn({ group }: { group: CategoryNewsGroup }) {
   return (
     <div className="min-w-0">
       <div className="mb-4 border-b border-neutral-200 pb-2">
-        <p className="kicker">{group.category.name}</p>
+        <p className="kicker">
+          <Link
+            className="transition-colors hover:text-accent"
+            href={`/categories/${group.category.slug}`}
+          >
+            {group.category.name}
+          </Link>
+        </p>
         {group.category.description ? (
           <p className="mt-1 line-clamp-2 text-sm text-neutral-500">
             {group.category.description}
@@ -43,6 +51,7 @@ export function CategoryNewsSection() {
     <Section ariaLabelledby="categories-heading" className="bg-neutral-50">
       <Container>
         <SectionHeading
+          actionHref="/categories"
           id="categories-heading"
           subtitle={t("subtitle")}
           title={t("title")}

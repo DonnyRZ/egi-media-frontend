@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 
 import { useTopicNews } from "@/features/homepage/hooks/useTopicNews";
+import { Link } from "@/i18n/navigation";
 import { ArticleCard } from "@/shared/components/common/ArticleCard";
 import { ErrorState } from "@/shared/components/common/ErrorState";
 import { SectionHeading } from "@/shared/components/common/SectionHeading";
@@ -21,7 +22,14 @@ function TopicBlock({ group }: { group: TopicNewsGroup }) {
       <div className="mb-4">
         <div className="flex items-center gap-2">
           <span aria-hidden="true" className="h-3 w-3 rounded-sm bg-accent" />
-          <h3 className="font-serif text-xl font-bold text-ink">{group.topic.name}</h3>
+          <h3 className="font-serif text-xl font-bold text-ink">
+            <Link
+              className="transition-colors hover:text-accent"
+              href={`/topics/${group.topic.slug}`}
+            >
+              {group.topic.name}
+            </Link>
+          </h3>
         </div>
         {group.topic.description ? (
           <p className="mt-1 line-clamp-2 text-sm text-neutral-500">
@@ -52,6 +60,7 @@ export function TopicNewsSection() {
     <Section ariaLabelledby="topics-heading">
       <Container>
         <SectionHeading
+          actionHref="/topics"
           id="topics-heading"
           subtitle={t("subtitle")}
           title={t("title")}

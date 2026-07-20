@@ -38,6 +38,7 @@
       "business": "Bisnis",
       "technology": "Teknologi",
       "politics": "Politik",
+      "egiNews": "Berita EGI",
       "series": "Seri",
       "videos": "Video"
     }
@@ -156,6 +157,36 @@
     "noArticles": "Belum ada artikel dalam topik ini.",
     "notFound": "Topik tidak ditemukan.",
     "empty": "Belum ada topik yang dipublikasikan."
+  },
+  "topicHubs": {
+    "business": {
+      "kicker": "Topik",
+      "headline": "Bisnis",
+      "lede": "Pasar, perusahaan, dan dinamika ekonomi yang membentuk dunia bisnis — diliput dengan kejelasan untuk pembaca profesional.",
+      "metaTitle": "Bisnis",
+      "metaDescription": "Liputan bisnis EGI Media — pasar, perusahaan, dan analisis ekonomi diurutkan berdasarkan waktu terbit terbaru."
+    },
+    "technology": {
+      "kicker": "Topik",
+      "headline": "Teknologi",
+      "lede": "Inovasi, platform digital, dan teknologi yang mengubah industri — diliput dengan kedalaman dan ketepatan.",
+      "metaTitle": "Teknologi",
+      "metaDescription": "Liputan teknologi EGI Media — inovasi, platform digital, dan dampak industri diurutkan berdasarkan waktu terbit terbaru."
+    },
+    "politics": {
+      "kicker": "Topik",
+      "headline": "Politik",
+      "lede": "Kebijakan, kekuasaan, dan urusan publik — liputan politik untuk pembaca yang membutuhkan konteks, bukan kebisingan.",
+      "metaTitle": "Politik",
+      "metaDescription": "Liputan politik EGI Media — kebijakan, pemerintahan, dan urusan publik diurutkan berdasarkan waktu terbit terbaru."
+    },
+    "egiNews": {
+      "kicker": "EGI Media",
+      "headline": "Berita EGI",
+      "lede": "Berita internal, pengumuman, dan pembaruan dari ruang redaksi EGI Media.",
+      "metaTitle": "Berita EGI",
+      "metaDescription": "Berita internal dan pengumuman resmi EGI Media — diurutkan berdasarkan waktu terbit terbaru."
+    }
   },
   "editors": {
     "title": "Terpopuler",

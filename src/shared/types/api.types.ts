@@ -44,6 +44,7 @@ export interface TaxonomyListParams {
   page?: number;
   limit?: number;
   search?: string;
+  lang?: "id" | "en" | "uz";
 }
 
 export interface SeriesListParams {

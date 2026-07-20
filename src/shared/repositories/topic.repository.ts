@@ -1,5 +1,9 @@
-import { fetchTopics } from "@/shared/services/topic.service";
+import {
+  fetchTopicBySlug,
+  fetchTopics,
+} from "@/shared/services/topic.service";
 import type { TaxonomyListParams } from "@/shared/types/api.types";
+import type { ContentLocale } from "@/shared/types/article.types";
 import type { Topic, TopicListResult } from "@/shared/types/topic.types";
 import { TAXONOMY_PAGE_LIMIT } from "@/shared/constants/taxonomy.constants";
 
@@ -9,18 +13,20 @@ export async function getTopics(
   return fetchTopics(params);
 }
 
-export async function getTopicsPage(page = 1): Promise<TopicListResult> {
+export async function getTopicsPage(
+  page = 1,
+  lang: ContentLocale = "id",
+): Promise<TopicListResult> {
   return fetchTopics({
     page,
     limit: TAXONOMY_PAGE_LIMIT,
+    lang,
   });
 }
 
-export async function getTopicBySlug(slug: string): Promise<Topic | null> {
-  const result = await fetchTopics({
-    page: 1,
-    limit: TAXONOMY_PAGE_LIMIT,
-  });
-
-  return result.items.find((topic) => topic.slug === slug) ?? null;
+export async function getTopicBySlug(
+  slug: string,
+  lang: ContentLocale = "id",
+): Promise<Topic | null> {
+  return fetchTopicBySlug(slug, lang);
 }

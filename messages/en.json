@@ -38,6 +38,7 @@
       "business": "Business",
       "technology": "Technology",
       "politics": "Politics",
+      "egiNews": "EGI News",
       "series": "Series",
       "videos": "Videos"
     }
@@ -156,6 +157,36 @@
     "noArticles": "No articles in this topic yet.",
     "notFound": "Topic not found.",
     "empty": "No topics have been published yet."
+  },
+  "topicHubs": {
+    "business": {
+      "kicker": "Topic",
+      "headline": "Business",
+      "lede": "Markets, companies, and the economic forces shaping business — reported with clarity for professional readers.",
+      "metaTitle": "Business",
+      "metaDescription": "EGI Media business coverage — markets, companies, and economic analysis sorted by latest publish date."
+    },
+    "technology": {
+      "kicker": "Topic",
+      "headline": "Technology",
+      "lede": "Innovation, digital platforms, and the technologies reshaping industry — covered with depth and precision.",
+      "metaTitle": "Technology",
+      "metaDescription": "EGI Media technology coverage — innovation, digital platforms, and industry impact sorted by latest publish date."
+    },
+    "politics": {
+      "kicker": "Topic",
+      "headline": "Politics",
+      "lede": "Policy, power, and public affairs — political reporting built for readers who need context, not noise.",
+      "metaTitle": "Politics",
+      "metaDescription": "EGI Media politics coverage — policy, governance, and public affairs sorted by latest publish date."
+    },
+    "egiNews": {
+      "kicker": "EGI Media",
+      "headline": "EGI News",
+      "lede": "Internal news, announcements, and updates from the EGI Media newsroom.",
+      "metaTitle": "EGI News",
+      "metaDescription": "Official EGI Media internal news and announcements — sorted by latest publish date."
+    }
   },
   "editors": {
     "title": "Most Popular",

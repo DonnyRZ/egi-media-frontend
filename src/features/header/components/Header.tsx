@@ -7,15 +7,17 @@ import { Link } from "@/i18n/navigation";
 import { Button } from "@/shared/components/ui/Button";
 import { Container } from "@/shared/components/layout/Container";
 import { LanguageSwitcher } from "@/features/language/components/LanguageSwitcher";
+import { HEADER_TOPIC_SLUGS } from "@/shared/constants/header-topics.constants";
 import { SITE_NAME } from "@/shared/constants/site.constants";
 import { useUiStore } from "@/shared/stores/ui.store";
 import { cn } from "@/shared/lib/cn";
 
 const NAV_ITEMS = [
   { key: "home", href: "/" },
-  { key: "business", href: "/topics/business" },
-  { key: "technology", href: "/topics/technology" },
-  { key: "politics", href: "/topics/politics" },
+  { key: "business", href: `/topics/${HEADER_TOPIC_SLUGS.business}` },
+  { key: "technology", href: `/topics/${HEADER_TOPIC_SLUGS.technology}` },
+  { key: "politics", href: `/topics/${HEADER_TOPIC_SLUGS.politics}` },
+  { key: "egiNews", href: `/topics/${HEADER_TOPIC_SLUGS.egiNews}` },
   { key: "series", href: "/series" },
   { key: "videos", href: "/videos" },
 ] as const;

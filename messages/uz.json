@@ -38,6 +38,7 @@
       "business": "Biznes",
       "technology": "Texnologiya",
       "politics": "Siyosat",
+      "egiNews": "EGI Yangiliklari",
       "series": "Turkumlar",
       "videos": "Videolar"
     }
@@ -156,6 +157,36 @@
     "noArticles": "Bu mavzuda hali maqola yoʻq.",
     "notFound": "Mavzu topilmadi.",
     "empty": "Hali hech qanday mavzu nashr etilmagan."
+  },
+  "topicHubs": {
+    "business": {
+      "kicker": "Mavzu",
+      "headline": "Biznes",
+      "lede": "Bozorlar, kompaniyalar va biznesni shakllantiruvchi iqtisodiy kuchlar — professional oʻquvchilar uchun aniqlik bilan yoritiladi.",
+      "metaTitle": "Biznes",
+      "metaDescription": "EGI Media biznes reportajlari — bozorlar, kompaniyalar va iqtisodiy tahlil eng soʻnggi nashr sanasi boʻyicha."
+    },
+    "technology": {
+      "kicker": "Mavzu",
+      "headline": "Texnologiya",
+      "lede": "Innovatsiya, raqamli platformalar va sanoatni oʻzgartirayotgan texnologiyalar — chuqurlik va aniqlik bilan.",
+      "metaTitle": "Texnologiya",
+      "metaDescription": "EGI Media texnologiya reportajlari — innovatsiya, raqamli platformalar va sanoat taʼsiri eng soʻnggi nashr sanasi boʻyicha."
+    },
+    "politics": {
+      "kicker": "Mavzu",
+      "headline": "Siyosat",
+      "lede": "Siyosat, hokimiyat va jamoat ishlari — shovqin emas, kontekst kerak boʻlgan oʻquvchilar uchun siyosiy reportaj.",
+      "metaTitle": "Siyosat",
+      "metaDescription": "EGI Media siyosat reportajlari — siyosat, boshqaruv va jamoat ishlari eng soʻnggi nashr sanasi boʻyicha."
+    },
+    "egiNews": {
+      "kicker": "EGI Media",
+      "headline": "EGI Yangiliklari",
+      "lede": "EGI Media tahririyatidan ichki yangiliklar, eʼlonlar va yangilanishlar.",
+      "metaTitle": "EGI Yangiliklari",
+      "metaDescription": "EGI Mediadan rasmiy ichki yangiliklar va eʼlonlar — eng soʻnggi nashr sanasi boʻyicha."
+    }
   },
   "editors": {
     "title": "Eng mashhur",

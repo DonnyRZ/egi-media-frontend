@@ -7,6 +7,8 @@ export const API_ENDPOINTS = {
   articleShare: (id: string) => `/api/v1/articles/${id}/share`,
   categories: "/api/v1/categories",
   topics: "/api/v1/topics",
+  topicById: (idOrSlug: string) =>
+    `/api/v1/topics/${encodeURIComponent(idOrSlug)}`,
   series: "/api/v1/series",
   seriesById: (id: string) => `/api/v1/series/${id}`,
   newsletters: "/api/v1/newsletters",

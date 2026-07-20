@@ -13,6 +13,7 @@ import { Pagination } from "@/shared/components/common/Pagination";
 import { Container } from "@/shared/components/layout/Container";
 import { Section } from "@/shared/components/layout/Section";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
+import { HEADER_TOPIC_I18N_KEYS } from "@/shared/constants/header-topics.constants";
 
 interface TopicDetailViewProps {
   slug: string;
@@ -21,7 +22,7 @@ interface TopicDetailViewProps {
 function DetailSkeleton() {
   return (
     <div className="space-y-10">
-      <div className="space-y-3 border-b border-neutral-200 pb-8">
+      <div className="space-y-3">
         <Skeleton className="h-3 w-24" />
         <Skeleton className="h-10 w-1/2" />
         <Skeleton className="h-4 w-2/3" />
@@ -44,8 +45,10 @@ export function TopicDetailView({ slug }: TopicDetailViewProps) {
   const page = Math.max(1, Number(searchParams.get("page")) || 1);
   const { topicQuery, articlesQuery } = useTopicDetail(slug, page);
   const t = useTranslations("topicsPage");
+  const tHubs = useTranslations("topicHubs");
   const tCommon = useTranslations("common");
 
+  const hubKey = HEADER_TOPIC_I18N_KEYS[slug];
   const isLoading = topicQuery.isLoading || articlesQuery.isLoading;
   const isError = topicQuery.isError || articlesQuery.isError;
   const error = topicQuery.error ?? articlesQuery.error;
@@ -55,11 +58,16 @@ export function TopicDetailView({ slug }: TopicDetailViewProps) {
     void articlesQuery.refetch();
   }
 
+  const topicName = topicQuery.data?.name;
+  const topicDescription =
+    topicQuery.data?.description ||
+    (hubKey ? tHubs(`${hubKey}.lede`) : null);
+
   return (
     <>
       <section
         aria-labelledby="topic-detail-heading"
-        className="border-b border-neutral-200"
+        className="border-b border-neutral-200 bg-neutral-50"
       >
         <Container className="py-8 lg:py-10">
           <Link
@@ -83,17 +91,19 @@ export function TopicDetailView({ slug }: TopicDetailViewProps) {
                   aria-hidden="true"
                   className="h-3 w-3 rounded-sm bg-accent"
                 />
-                <p className="kicker">{t("kicker")}</p>
+                <p className="kicker">
+                  {hubKey ? tHubs(`${hubKey}.kicker`) : t("kicker")}
+                </p>
               </div>
               <h1
                 id="topic-detail-heading"
-                className="mt-2 max-w-3xl font-serif text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl"
+                className="mt-2 max-w-3xl font-serif text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl lg:text-5xl"
               >
-                {topicQuery.data.name}
+                {topicName}
               </h1>
-              {topicQuery.data.description ? (
+              {topicDescription ? (
                 <p className="mt-3 max-w-2xl text-sm leading-6 text-neutral-600 lg:text-base lg:leading-7">
-                  {topicQuery.data.description}
+                  {topicDescription}
                 </p>
               ) : null}
             </>

@@ -11,7 +11,9 @@
     "privacyDescription": "Kebijakan privasi EGI Media tentang pengumpulan, penggunaan, dan perlindungan data pribadi pengguna.",
     "articleFallbackTitle": "Artikel",
     "videosTitle": "Video",
-    "videosDescription": "Tonton liputan video, wawancara, dan analisis visual EGI Media — dengan tanggal terbit dan deskripsi lengkap."
+    "videosDescription": "Tonton liputan video, wawancara, dan analisis visual EGI Media — dengan tanggal terbit dan deskripsi lengkap.",
+    "seriesTitle": "Seri",
+    "seriesDescription": "Koleksi editorial mendalam EGI Media — seri liputan dengan deskripsi, tanggal, dan artikel terkait."
   },
   "header": {
     "homeAria": "Beranda {siteName}",
@@ -73,6 +75,21 @@
     "subtitle": "Koleksi editorial mendalam yang dikurasi oleh ruang redaksi kami.",
     "empty": "Seri akan muncul di sini setelah dipublikasikan.",
     "kicker": "Seri"
+  },
+  "seriesPage": {
+    "kicker": "Seri",
+    "headline": "Koleksi editorial mendalam",
+    "lede": "Seri liputan yang dikurasi ruang redaksi — disusun untuk pembaca yang membutuhkan konteks, kedalaman, dan kelanjutan cerita.",
+    "listingHeading": "Daftar seri",
+    "featuredKicker": "Unggulan",
+    "allSeries": "Semua seri",
+    "seriesCount": "{count} seri",
+    "readSeries": "Baca seri",
+    "backToSeries": "Semua seri",
+    "articlesInSeries": "Artikel dalam seri",
+    "noArticles": "Belum ada artikel dalam seri ini.",
+    "notFound": "Seri tidak ditemukan.",
+    "empty": "Belum ada seri yang dipublikasikan."
   },
   "videos": {
     "title": "Video Pilihan",

@@ -11,7 +11,9 @@
     "privacyDescription": "EGI Media Privacy Policy on how we collect, use, and protect personal data.",
     "articleFallbackTitle": "Article",
     "videosTitle": "Videos",
-    "videosDescription": "Watch EGI Media video reporting, interviews, and visual analysis — with publish dates and full descriptions."
+    "videosDescription": "Watch EGI Media video reporting, interviews, and visual analysis — with publish dates and full descriptions.",
+    "seriesTitle": "Series",
+    "seriesDescription": "EGI Media deep-dive editorial series — with descriptions, dates, and related articles."
   },
   "header": {
     "homeAria": "{siteName} home",
@@ -73,6 +75,21 @@
     "subtitle": "Deep-dive editorial collections curated by our newsroom.",
     "empty": "Series will appear here once published.",
     "kicker": "Series"
+  },
+  "seriesPage": {
+    "kicker": "Series",
+    "headline": "Deep-dive editorial collections",
+    "lede": "Newsroom-curated series — built for readers who need context, depth, and continuity across stories.",
+    "listingHeading": "Series library",
+    "featuredKicker": "Featured",
+    "allSeries": "All series",
+    "seriesCount": "{count} series",
+    "readSeries": "Read series",
+    "backToSeries": "All series",
+    "articlesInSeries": "Articles in this series",
+    "noArticles": "No articles in this series yet.",
+    "notFound": "Series not found.",
+    "empty": "No series have been published yet."
   },
   "videos": {
     "title": "Featured Videos",

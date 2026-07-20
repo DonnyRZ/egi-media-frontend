@@ -11,7 +11,9 @@
     "privacyDescription": "EGI Media maxfiylik siyosati — shaxsiy maʼlumotlarni yigʻish, ishlatish va himoya qilish tartibi.",
     "articleFallbackTitle": "Maqola",
     "videosTitle": "Videolar",
-    "videosDescription": "EGI Media video reportajlari, suhbatlari va vizual tahlillarini tomosha qiling — nashr sanasi va toʻliq tavsif bilan."
+    "videosDescription": "EGI Media video reportajlari, suhbatlari va vizual tahlillarini tomosha qiling — nashr sanasi va toʻliq tavsif bilan.",
+    "seriesTitle": "Turkumlar",
+    "seriesDescription": "EGI Media chuqur tahririy turkumlar — tavsif, sana va bogʻliq maqolalar bilan."
   },
   "header": {
     "homeAria": "{siteName} bosh sahifasi",
@@ -73,6 +75,21 @@
     "subtitle": "Tahririyatimiz tanlagan chuqur tahririy toʻplamlar.",
     "empty": "Turkumlar chop etilgach shu yerda koʻrinadi.",
     "kicker": "Turkum"
+  },
+  "seriesPage": {
+    "kicker": "Turkumlar",
+    "headline": "Chuqur tahririy toʻplamlar",
+    "lede": "Tahririyat tanlagan turkumlar — kontekst, chuqurlik va hikoya davomiyligini qadrlaydigan oʻquvchilar uchun.",
+    "listingHeading": "Turkumlar roʻyxati",
+    "featuredKicker": "Tanlangan",
+    "allSeries": "Barcha turkumlar",
+    "seriesCount": "{count} ta turkum",
+    "readSeries": "Turkumni oʻqish",
+    "backToSeries": "Barcha turkumlar",
+    "articlesInSeries": "Turkumdagi maqolalar",
+    "noArticles": "Bu turkumda hali maqola yoʻq.",
+    "notFound": "Turkum topilmadi.",
+    "empty": "Hali hech qanday turkum nashr etilmagan."
   },
   "videos": {
     "title": "Tanlangan videolar",

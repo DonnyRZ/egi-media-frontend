@@ -1,0 +1,96 @@
+"use client";
+
+import { useFormatter, useTranslations } from "next-intl";
+
+import { Link } from "@/i18n/navigation";
+import { DATE_FORMAT } from "@/shared/constants/format.constants";
+import type { Series } from "@/shared/types/series.types";
+
+interface SeriesCardProps {
+  series: Series;
+  variant?: "default" | "featured";
+}
+
+export function SeriesCard({ series, variant = "default" }: SeriesCardProps) {
+  const t = useTranslations("seriesPage");
+  const tCommon = useTranslations("common");
+  const format = useFormatter();
+
+  if (variant === "featured") {
+    return (
+      <article className="group grid gap-6 border-b-2 border-ink pb-8 lg:grid-cols-[1.2fr_1fr] lg:gap-10 lg:pb-10">
+        <Link
+          className="flex aspect-[16/10] items-center justify-center bg-neutral-100 font-serif text-7xl font-bold text-ink transition-colors group-hover:bg-primary-100 sm:text-8xl"
+          href={`/series/${series.slug}`}
+        >
+          {series.name.slice(0, 1)}
+        </Link>
+        <div className="flex flex-col justify-center">
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="kicker">{t("featuredKicker")}</span>
+            {series.publishedAt ? (
+              <time
+                className="text-xs font-semibold uppercase tracking-wide text-neutral-500"
+                dateTime={series.publishedAt}
+              >
+                {format.dateTime(new Date(series.publishedAt), DATE_FORMAT)}
+              </time>
+            ) : null}
+          </div>
+          <h2 className="mt-3 font-serif text-3xl font-bold leading-tight text-ink transition-colors group-hover:text-accent sm:text-4xl">
+            <Link href={`/series/${series.slug}`}>{series.name}</Link>
+          </h2>
+          {series.description ? (
+            <p className="mt-4 line-clamp-4 text-base leading-7 text-neutral-700">
+              {series.description}
+            </p>
+          ) : null}
+          <p className="mt-5 text-xs font-semibold uppercase tracking-wide text-neutral-500">
+            {tCommon("articleCount", { count: series.articleCount })}
+          </p>
+          <Link
+            className="mt-4 inline-flex text-sm font-semibold text-primary-700 transition-colors hover:text-accent"
+            href={`/series/${series.slug}`}
+          >
+            {t("readSeries")} →
+          </Link>
+        </div>
+      </article>
+    );
+  }
+
+  return (
+    <article className="group flex h-full flex-col border-t-2 border-ink pt-4">
+      <Link
+        className="flex aspect-[16/10] items-center justify-center bg-neutral-100 font-serif text-5xl font-bold text-ink transition-colors group-hover:bg-primary-100"
+        href={`/series/${series.slug}`}
+      >
+        {series.name.slice(0, 1)}
+      </Link>
+      <div className="flex flex-1 flex-col pt-4">
+        <div className="flex flex-wrap items-center gap-3">
+          <span className="kicker">{t("kicker")}</span>
+          {series.publishedAt ? (
+            <time
+              className="text-xs font-semibold uppercase tracking-wide text-neutral-500"
+              dateTime={series.publishedAt}
+            >
+              {format.dateTime(new Date(series.publishedAt), DATE_FORMAT)}
+            </time>
+          ) : null}
+        </div>
+        <h3 className="mt-2 font-serif text-xl font-bold leading-snug text-ink transition-colors group-hover:text-accent">
+          <Link href={`/series/${series.slug}`}>{series.name}</Link>
+        </h3>
+        {series.description ? (
+          <p className="mt-2 line-clamp-3 flex-1 text-sm leading-6 text-neutral-600">
+            {series.description}
+          </p>
+        ) : null}
+        <p className="mt-3 text-xs font-semibold uppercase tracking-wide text-neutral-500">
+          {tCommon("articleCount", { count: series.articleCount })}
+        </p>
+      </div>
+    </article>
+  );
+}

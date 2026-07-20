@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { Suspense } from "react";
 import { useFormatter, useTranslations } from "next-intl";
 
 import { Link } from "@/i18n/navigation";
@@ -11,6 +12,14 @@ import { HEADER_CATEGORY_SLUGS } from "@/shared/constants/header-categories.cons
 import { SITE_NAME } from "@/shared/constants/site.constants";
 import { useUiStore } from "@/shared/stores/ui.store";
 import { cn } from "@/shared/lib/cn";
+
+function LanguageSwitcherSlot() {
+  return (
+    <Suspense fallback={<span className="inline-block h-8 w-12" aria-hidden="true" />}>
+      <LanguageSwitcher />
+    </Suspense>
+  );
+}
 
 const NAV_ITEMS = [
   { key: "home", href: "/" },
@@ -51,7 +60,7 @@ function UtilityBar() {
             <span aria-hidden="true" className="text-neutral-300">
               |
             </span>
-            <LanguageSwitcher />
+            <LanguageSwitcherSlot />
           </div>
         </div>
       </Container>
@@ -150,7 +159,7 @@ function MobileNav() {
           </li>
         ))}
         <li className="flex items-center justify-between pt-3">
-          <LanguageSwitcher />
+          <LanguageSwitcherSlot />
           <Button className="rounded-none" type="button">
             {t("subscribe")}
           </Button>

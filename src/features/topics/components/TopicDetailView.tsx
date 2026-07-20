@@ -10,6 +10,7 @@ import { ArticleCard } from "@/shared/components/common/ArticleCard";
 import { EmptyState } from "@/shared/components/common/EmptyState";
 import { ErrorState } from "@/shared/components/common/ErrorState";
 import { Pagination } from "@/shared/components/common/Pagination";
+import { TaxonomyLocaleShell } from "@/shared/components/common/TaxonomyLocaleShell";
 import { Container } from "@/shared/components/layout/Container";
 import { Section } from "@/shared/components/layout/Section";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
@@ -55,7 +56,7 @@ export function TopicDetailView({ slug }: TopicDetailViewProps) {
     void articlesQuery.refetch();
   }
 
-  return (
+  const content = (
     <>
       <section
         aria-labelledby="topic-detail-heading"
@@ -182,4 +183,14 @@ export function TopicDetailView({ slug }: TopicDetailViewProps) {
       </Section>
     </>
   );
+
+  if (topicQuery.data) {
+    return (
+      <TaxonomyLocaleShell entity={topicQuery.data} kind="topics">
+        {content}
+      </TaxonomyLocaleShell>
+    );
+  }
+
+  return content;
 }

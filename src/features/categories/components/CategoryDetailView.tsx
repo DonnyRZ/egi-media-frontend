@@ -13,6 +13,7 @@ import { Pagination } from "@/shared/components/common/Pagination";
 import { Container } from "@/shared/components/layout/Container";
 import { Section } from "@/shared/components/layout/Section";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
+import { TaxonomyLocaleShell } from "@/shared/components/common/TaxonomyLocaleShell";
 import { HEADER_CATEGORY_I18N_KEYS } from "@/shared/constants/header-categories.constants";
 
 interface CategoryDetailViewProps {
@@ -62,7 +63,7 @@ export function CategoryDetailView({ slug }: CategoryDetailViewProps) {
     categoryQuery.data?.description ||
     (hubKey ? tHubs(`${hubKey}.lede`) : null);
 
-  return (
+  const content = (
     <>
       <section
         aria-labelledby="category-detail-heading"
@@ -92,7 +93,9 @@ export function CategoryDetailView({ slug }: CategoryDetailViewProps) {
                 id="category-detail-heading"
                 className="mt-2 max-w-3xl font-serif text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl lg:text-5xl"
               >
-                {categoryQuery.data.name}
+                {hubKey
+                  ? tHubs(`${hubKey}.headline`)
+                  : categoryQuery.data.name}
               </h1>
               {categoryDescription ? (
                 <p className="mt-3 max-w-2xl text-sm leading-6 text-neutral-600 lg:text-base lg:leading-7">
@@ -185,4 +188,14 @@ export function CategoryDetailView({ slug }: CategoryDetailViewProps) {
       </Section>
     </>
   );
+
+  if (categoryQuery.data) {
+    return (
+      <TaxonomyLocaleShell entity={categoryQuery.data} kind="categories">
+        {content}
+      </TaxonomyLocaleShell>
+    );
+  }
+
+  return content;
 }

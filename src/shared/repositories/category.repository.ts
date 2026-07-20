@@ -5,7 +5,7 @@ import {
 import type { TaxonomyListParams } from "@/shared/types/api.types";
 import type { ContentLocale } from "@/shared/types/article.types";
 import type {
-  Category,
+  CategoryDetail,
   CategoryListResult,
 } from "@/shared/types/category.types";
 import { TAXONOMY_PAGE_LIMIT } from "@/shared/constants/taxonomy.constants";
@@ -30,6 +30,6 @@ export async function getCategoriesPage(
 export async function getCategoryBySlug(
   slug: string,
   lang: ContentLocale = "id",
-): Promise<Category | null> {
+): Promise<CategoryDetail | null> {
   return fetchCategoryBySlug(slug, lang);
 }

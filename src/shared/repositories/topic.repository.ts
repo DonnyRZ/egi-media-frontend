@@ -4,7 +4,7 @@ import {
 } from "@/shared/services/topic.service";
 import type { TaxonomyListParams } from "@/shared/types/api.types";
 import type { ContentLocale } from "@/shared/types/article.types";
-import type { Topic, TopicListResult } from "@/shared/types/topic.types";
+import type { TopicDetail, TopicListResult } from "@/shared/types/topic.types";
 import { TAXONOMY_PAGE_LIMIT } from "@/shared/constants/taxonomy.constants";
 
 export async function getTopics(
@@ -27,6 +27,6 @@ export async function getTopicsPage(
 export async function getTopicBySlug(
   slug: string,
   lang: ContentLocale = "id",
-): Promise<Topic | null> {
+): Promise<TopicDetail | null> {
   return fetchTopicBySlug(slug, lang);
 }

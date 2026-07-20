@@ -1,7 +1,7 @@
 import { axiosClient } from "@/shared/lib/axios-client";
 import { API_ENDPOINTS } from "@/shared/constants/api.constants";
 import {
-  mapCategoryDto,
+  mapCategoryDetailDto,
   mapCategoryListDto,
 } from "@/shared/mappers/category.mapper";
 import type {
@@ -11,7 +11,7 @@ import type {
 } from "@/shared/types/api.types";
 import type { ContentLocale } from "@/shared/types/article.types";
 import type {
-  Category,
+  CategoryDetail,
   CategoryListResult,
 } from "@/shared/types/category.types";
 
@@ -20,6 +20,14 @@ interface CategoryDto {
   name: string;
   slug: string;
   description: string | null;
+  locale?: ContentLocale;
+  available_locales?: ContentLocale[];
+  translations?: Partial<
+    Record<
+      ContentLocale,
+      { name: string; slug: string | null; description: string | null }
+    >
+  >;
 }
 
 export async function fetchCategories(
@@ -39,13 +47,13 @@ export async function fetchCategories(
 export async function fetchCategoryBySlug(
   slug: string,
   lang: ContentLocale = "id",
-): Promise<Category | null> {
+): Promise<CategoryDetail | null> {
   try {
     const response = await axiosClient.get<ApiSuccessResponse<CategoryDto>>(
       API_ENDPOINTS.categoryById(slug),
       { params: { lang } },
     );
-    return mapCategoryDto(response.data.data);
+    return mapCategoryDetailDto(response.data.data);
   } catch {
     return null;
   }

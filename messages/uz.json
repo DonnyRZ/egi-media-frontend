@@ -38,6 +38,7 @@
   "header": {
     "homeAria": "{siteName} bosh sahifasi",
     "newsletters": "Axborotnomalar",
+    "saved": "Saqlangan",
     "signIn": "Kirish",
     "subscribe": "Obuna boʻlish",
     "toggleMenu": "Menyuni ochish",
@@ -70,8 +71,6 @@
     "loginSuccessTitle": "Muvaffaqiyatli kirdingiz",
     "loginSuccessBody": "Qaytib kelganingiz bilan. Bosh sahifaga oʻtish uchun quyidagi tugmani bosing.",
     "continueToHome": "OK, davom etish",
-    "savedArticles": "Saqlangan maqolalar",
-    "newsletters": "Byulletenlar",
     "signOut": "Chiqish",
     "createAccount": "Hisob yaratish",
     "creatingAccount": "Hisob yaratilmoqda...",

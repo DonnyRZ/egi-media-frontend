@@ -38,6 +38,7 @@
   "header": {
     "homeAria": "{siteName} home",
     "newsletters": "Newsletters",
+    "saved": "Saved",
     "signIn": "Sign in",
     "subscribe": "Subscribe",
     "toggleMenu": "Toggle menu",
@@ -70,8 +71,6 @@
     "loginSuccessTitle": "Signed in successfully",
     "loginSuccessBody": "Welcome back. Click the button below to continue to the homepage.",
     "continueToHome": "OK, continue",
-    "savedArticles": "Saved articles",
-    "newsletters": "Newsletters",
     "signOut": "Sign out",
     "createAccount": "Create account",
     "creatingAccount": "Creating account...",

@@ -1,4 +1,8 @@
-import { NOTIFICATION_ENDPOINTS } from "@/features/notifications/constants/notification.constants";
+import { getAccessToken } from "@/features/auth/utils/token-storage";
+import {
+  NOTIFICATION_ENDPOINTS,
+  NOTIFICATION_PROXY_ENDPOINTS,
+} from "@/features/notifications/constants/notification.constants";
 import {
   mapNotificationList,
   type NotificationListDto,
@@ -19,10 +23,25 @@ export async function fetchNotifications(
   return mapNotificationList(response.data.data);
 }
 
+// The backend read endpoints are PATCH, which its CORS policy blocks in the
+// browser. These calls go through same-origin Next.js route handlers that
+// forward the request to the backend server-to-server.
+async function patchViaProxy(path: string): Promise<void> {
+  const token = getAccessToken();
+  const response = await fetch(path, {
+    method: "PATCH",
+    headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+  });
+
+  if (!response.ok) {
+    throw new Error(`Notification update failed with status ${response.status}`);
+  }
+}
+
 export async function markNotificationAsRead(id: string): Promise<void> {
-  await axiosClient.patch(NOTIFICATION_ENDPOINTS.markRead(id));
+  await patchViaProxy(NOTIFICATION_PROXY_ENDPOINTS.markRead(id));
 }
 
 export async function markAllNotificationsAsRead(): Promise<void> {
-  await axiosClient.patch(NOTIFICATION_ENDPOINTS.markAllRead);
+  await patchViaProxy(NOTIFICATION_PROXY_ENDPOINTS.markAllRead);
 }

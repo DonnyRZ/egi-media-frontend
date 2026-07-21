@@ -177,6 +177,12 @@
     "signInMessage": "Anda harus masuk untuk melihat artikel yang tersimpan di akun Anda.",
     "signInCta": "Masuk"
   },
+  "unsaveDialog": {
+    "title": "Hapus dari tersimpan?",
+    "message": "Artikel ini akan dihapus dari daftar tersimpan Anda. Anda bisa menyimpannya lagi kapan saja.",
+    "confirm": "Ya, hapus",
+    "cancel": "Batal"
+  },
   "worldClock": {
     "ariaLabel": "Jam dunia",
     "local": "Lokal"

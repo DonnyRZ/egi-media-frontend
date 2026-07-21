@@ -177,6 +177,12 @@
     "signInMessage": "Hisobingizga saqlangan maqolalarni ko‘rish uchun tizimga kirishingiz kerak.",
     "signInCta": "Kirish"
   },
+  "unsaveDialog": {
+    "title": "Saqlanganlardan o‘chirilsinmi?",
+    "message": "Bu maqola saqlangan ro‘yxatingizdan o‘chiriladi. Uni istalgan vaqtda qayta saqlashingiz mumkin.",
+    "confirm": "Ha, o‘chirish",
+    "cancel": "Bekor qilish"
+  },
   "worldClock": {
     "ariaLabel": "Jahon soatlari",
     "local": "Mahalliy"

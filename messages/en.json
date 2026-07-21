@@ -177,6 +177,12 @@
     "signInMessage": "You need to be signed in to see the articles saved to your account.",
     "signInCta": "Sign in"
   },
+  "unsaveDialog": {
+    "title": "Remove from saved?",
+    "message": "This article will be removed from your saved list. You can save it again anytime.",
+    "confirm": "Yes, remove",
+    "cancel": "Cancel"
+  },
   "worldClock": {
     "ariaLabel": "World clocks",
     "local": "Local"

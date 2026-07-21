@@ -25,6 +25,7 @@ export const API_ENDPOINTS = {
   auditLogs: "/api/v1/audit-logs",
   newsletters: "/api/v1/newsletters",
   youtubeVideos: "/api/v1/youtube-videos",
+  uploads: "/api/v1/uploads",
 } as const;
 
 export const API_TIMEOUT_MS = 15_000;

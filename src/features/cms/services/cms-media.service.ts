@@ -1,20 +1,24 @@
-/**
- * Media upload service.
- *
- * TODO(backend): There is NO media/upload endpoint in the backend. The schema
- * stores `articles.featured_image` as a plain text URL, and `multer` + `aws-sdk`
- * (Cloudflare R2) dependencies are installed but unused, with static file
- * serving commented out in `src/app/server.js`.
- *
- * Required endpoint (proposed): `POST /api/v1/media` (multipart/form-data,
- * field `file`), auth: author/superadmin, returning `{ url: string }`. Wire it
- * here and the URL-based picker will transparently gain direct uploads.
- */
-export const MEDIA_UPLOAD_ENDPOINT = "/api/v1/media"; // not yet implemented
+import { API_ENDPOINTS } from "@/shared/constants/api.constants";
+import { axiosClient } from "@/shared/lib/axios-client";
+import type { ApiSuccessResponse } from "@/shared/types/api.types";
 
-export async function uploadImage(_file: File): Promise<string> {
-  void _file;
-  throw new Error(
-    "Direct upload isn't available yet. Paste an image URL instead. (Backend media upload endpoint pending.)",
+interface UploadResponseDto {
+  url: string;
+}
+
+/**
+ * Uploads an image to the backend (Cloudflare R2) and returns its public URL.
+ * The backend endpoint is `POST /api/v1/uploads` (multipart, field `file`).
+ */
+export async function uploadImage(file: File): Promise<string> {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const response = await axiosClient.post<ApiSuccessResponse<UploadResponseDto>>(
+    API_ENDPOINTS.uploads,
+    formData,
+    { headers: { "Content-Type": "multipart/form-data" } },
   );
+
+  return response.data.data.url;
 }

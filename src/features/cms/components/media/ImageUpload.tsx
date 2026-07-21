@@ -23,7 +23,6 @@ export function ImageUpload({ onUploaded }: ImageUploadProps) {
       onUploaded(url);
       toast.success("Image uploaded");
     } catch (error) {
-      // Expected until the backend upload endpoint exists.
       toast.error(
         error instanceof Error ? error.message : "Upload failed",
       );

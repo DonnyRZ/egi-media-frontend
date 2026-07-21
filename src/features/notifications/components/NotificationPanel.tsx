@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 
 import { NotificationItem } from "@/features/notifications/components/NotificationItem";
 import type { Notification } from "@/features/notifications/types/notification.types";
+import { Link } from "@/i18n/navigation";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
 
 interface NotificationPanelProps {
@@ -14,6 +15,7 @@ interface NotificationPanelProps {
   isMarkingAll: boolean;
   onMarkAsRead: (id: string) => void;
   onMarkAllAsRead: () => void;
+  onViewAll: () => void;
 }
 
 function PanelState({ message }: { message: string }) {
@@ -46,6 +48,7 @@ export function NotificationPanel({
   isMarkingAll,
   onMarkAsRead,
   onMarkAllAsRead,
+  onViewAll,
 }: NotificationPanelProps) {
   const t = useTranslations("notifications");
   const hasItems = notifications.length > 0;
@@ -91,6 +94,17 @@ export function NotificationPanel({
               />
             ))
           : null}
+      </div>
+
+      <div className="border-t border-neutral-200">
+        <Link
+          className="block px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide text-primary-700 transition-colors hover:bg-neutral-50 hover:text-primary-900"
+          href="/notifications"
+          onClick={onViewAll}
+          role="menuitem"
+        >
+          {t("viewAll")}
+        </Link>
       </div>
     </div>
   );

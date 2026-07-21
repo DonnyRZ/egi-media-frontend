@@ -57,6 +57,7 @@ export function NotificationBell({ className }: NotificationBellProps) {
             notifications={notifications}
             onMarkAllAsRead={markAllAsRead}
             onMarkAsRead={markAsRead}
+            onViewAll={() => setOpen(false)}
             unreadCount={unreadCount}
           />
         ) : null}

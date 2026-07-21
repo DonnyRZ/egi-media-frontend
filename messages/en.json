@@ -27,7 +27,9 @@
     "checkEmailTitle": "Check Your Email",
     "checkEmailDescription": "Verify your email address to activate your EGI Media account.",
     "verifyEmailTitle": "Verify Email",
-    "verifyEmailDescription": "Confirm your email address to finish creating your EGI Media account."
+    "verifyEmailDescription": "Confirm your email address to finish creating your EGI Media account.",
+    "notificationsTitle": "Notifications",
+    "notificationsDescription": "View all notifications sent to your EGI Media account — announcements, activity, and alerts."
   },
   "header": {
     "homeAria": "{siteName} home",
@@ -119,11 +121,22 @@
   "notifications": {
     "title": "Notifications",
     "markAllRead": "Mark all as read",
+    "markRead": "Mark as read",
     "empty": "You have no notifications yet.",
     "error": "Unable to load notifications.",
     "unread": "Unread",
+    "new": "New",
+    "viewAll": "View all notifications",
     "aria": "Notifications",
     "ariaWithCount": "Notifications, {count} unread"
+  },
+  "notificationsPage": {
+    "kicker": "Your Account",
+    "headline": "Notifications",
+    "lede": "Every update sent to your account — announcements, activity, and alerts, arranged from newest to oldest.",
+    "signInTitle": "Sign in to view notifications",
+    "signInMessage": "You need to be signed in to see notifications sent to your account.",
+    "signInCta": "Sign in"
   },
   "worldClock": {
     "ariaLabel": "World clocks",

@@ -84,8 +84,9 @@ async function buildTopicGroups(
  * Single homepage article feed with strict de-duplication:
  * each article ID appears in at most one section.
  *
- * Allocation order keeps taxonomy sections (category + topic)
- * from being starved by the general latest feed.
+ * The primary feeds (hero, breaking, latest) are allocated first so they
+ * are never starved when the catalog is small; taxonomy sections (topic +
+ * category) then draw from whatever unique articles remain.
  */
 export async function getHomepageNews(
   lang: ContentLocale = "id",
@@ -112,11 +113,6 @@ export async function getHomepageNews(
   const heroItems = takeUniqueArticles(latestPool.items, heroCount, usedIds);
   const [featured, ...headlines] = heroItems;
 
-  // Topic then category so taxonomy sections get dedicated unique articles
-  // (an article cannot appear in both).
-  const topics = await buildTopicGroups(lang, usedIds);
-  const categories = await buildCategoryGroups(lang, usedIds);
-
   const breaking = takeUniqueArticles(
     latestPool.items,
     HOMEPAGE_LIMITS.breakingNews,
@@ -128,6 +124,11 @@ export async function getHomepageNews(
     HOMEPAGE_LIMITS.latestNews,
     usedIds,
   );
+
+  // Taxonomy groups run after the main feeds so an article cannot appear in
+  // both, and so the latest/breaking sections always render.
+  const topics = await buildTopicGroups(lang, usedIds);
+  const categories = await buildCategoryGroups(lang, usedIds);
 
   // Popular keeps its own ranking (like before) and always shows a full list.
   const editors = popularPool.items.slice(0, HOMEPAGE_LIMITS.editorsPicks);

@@ -29,7 +29,9 @@
     "verifyEmailTitle": "Elektron pochtani tasdiqlash",
     "verifyEmailDescription": "EGI Media hisobini yaratishni yakunlash uchun elektron pochtangizni tasdiqlang.",
     "notificationsTitle": "Bildirishnomalar",
-    "notificationsDescription": "EGI Media hisobingizga yuborilgan barcha bildirishnomalarni ko‘ring — e'lonlar, faoliyat va ogohlantirishlar."
+    "notificationsDescription": "EGI Media hisobingizga yuborilgan barcha bildirishnomalarni ko‘ring — e'lonlar, faoliyat va ogohlantirishlar.",
+    "newslettersTitle": "Axborot byulletenlari",
+    "newslettersDescription": "Hisobingiz obuna bo‘lgan EGI Media byulletenlarini ko‘ring va boshqaring."
   },
   "header": {
     "homeAria": "{siteName} bosh sahifasi",
@@ -137,6 +139,26 @@
     "signInTitle": "Bildirishnomalarni ko‘rish uchun tizimga kiring",
     "signInMessage": "Hisobingizga yuborilgan bildirishnomalarni ko‘rish uchun tizimga kirishingiz kerak.",
     "signInCta": "Kirish"
+  },
+  "newslettersPage": {
+    "kicker": "Byulletenlar",
+    "headline": "Saralangan xulosalar to‘g‘ridan-to‘g‘ri pochtangizga",
+    "lede": "Siz uchun muhim EGI Media byulletenlarini tanlang. Obunalaringizni istalgan vaqtda boshqaring — hisobingizga bog‘langan.",
+    "listingHeading": "Barcha byulletenlar",
+    "count": "{count} ta byulleten",
+    "empty": "Hozircha byulletenlar mavjud emas.",
+    "noDescription": "Tavsif berilmagan.",
+    "subscribe": "Obuna bo‘lish",
+    "subscribed": "Obuna bo‘lingan",
+    "processing": "Saqlanmoqda...",
+    "signInTitle": "Byulletenlarni boshqarish uchun tizimga kiring",
+    "signInMessage": "Hisobingiz uchun byulletenlarga obuna bo‘lish uchun tizimga kirishingiz kerak.",
+    "signInCta": "Kirish",
+    "frequency": {
+      "daily": "Kunlik",
+      "weekly": "Haftalik",
+      "monthly": "Oylik"
+    }
   },
   "worldClock": {
     "ariaLabel": "Jahon soatlari",

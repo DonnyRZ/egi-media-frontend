@@ -29,7 +29,9 @@
     "verifyEmailTitle": "Verify Email",
     "verifyEmailDescription": "Confirm your email address to finish creating your EGI Media account.",
     "notificationsTitle": "Notifications",
-    "notificationsDescription": "View all notifications sent to your EGI Media account — announcements, activity, and alerts."
+    "notificationsDescription": "View all notifications sent to your EGI Media account — announcements, activity, and alerts.",
+    "newslettersTitle": "Newsletters",
+    "newslettersDescription": "Browse and manage the EGI Media newsletters your account is subscribed to."
   },
   "header": {
     "homeAria": "{siteName} home",
@@ -137,6 +139,26 @@
     "signInTitle": "Sign in to view notifications",
     "signInMessage": "You need to be signed in to see notifications sent to your account.",
     "signInCta": "Sign in"
+  },
+  "newslettersPage": {
+    "kicker": "Newsletters",
+    "headline": "Curated briefings, straight to your inbox",
+    "lede": "Choose the EGI Media newsletters that matter to you. Manage your subscriptions anytime — tied to your account.",
+    "listingHeading": "All newsletters",
+    "count": "{count} newsletters",
+    "empty": "No newsletters are available yet.",
+    "noDescription": "No description provided.",
+    "subscribe": "Subscribe",
+    "subscribed": "Subscribed",
+    "processing": "Saving...",
+    "signInTitle": "Sign in to manage newsletters",
+    "signInMessage": "You need to be signed in to subscribe to newsletters for your account.",
+    "signInCta": "Sign in",
+    "frequency": {
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly"
+    }
   },
   "worldClock": {
     "ariaLabel": "World clocks",

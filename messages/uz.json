@@ -27,7 +27,9 @@
     "checkEmailTitle": "Elektron pochtangizni tekshiring",
     "checkEmailDescription": "EGI Media hisobingizni faollashtirish uchun elektron pochtangizni tasdiqlang.",
     "verifyEmailTitle": "Elektron pochtani tasdiqlash",
-    "verifyEmailDescription": "EGI Media hisobini yaratishni yakunlash uchun elektron pochtangizni tasdiqlang."
+    "verifyEmailDescription": "EGI Media hisobini yaratishni yakunlash uchun elektron pochtangizni tasdiqlang.",
+    "notificationsTitle": "Bildirishnomalar",
+    "notificationsDescription": "EGI Media hisobingizga yuborilgan barcha bildirishnomalarni ko‘ring — e'lonlar, faoliyat va ogohlantirishlar."
   },
   "header": {
     "homeAria": "{siteName} bosh sahifasi",
@@ -115,6 +117,26 @@
       "missingToken": "Tasdiqlash tokeni topilmadi.",
       "googleFailed": "Google orqali kirish muvaffaqiyatsiz. Qayta urinib koʻring."
     }
+  },
+  "notifications": {
+    "title": "Bildirishnomalar",
+    "markAllRead": "Barchasini o‘qilgan deb belgilash",
+    "markRead": "O‘qilgan deb belgilash",
+    "empty": "Hozircha bildirishnomalar yo‘q.",
+    "error": "Bildirishnomalarni yuklab bo‘lmadi.",
+    "unread": "O‘qilmagan",
+    "new": "Yangi",
+    "viewAll": "Barcha bildirishnomalarni ko‘rish",
+    "aria": "Bildirishnomalar",
+    "ariaWithCount": "Bildirishnomalar, {count} ta o‘qilmagan"
+  },
+  "notificationsPage": {
+    "kicker": "Hisobingiz",
+    "headline": "Bildirishnomalar",
+    "lede": "Hisobingizga yuborilgan barcha yangiliklar — e'lonlar, faoliyat va ogohlantirishlar, eng yangisidan boshlab tartiblangan.",
+    "signInTitle": "Bildirishnomalarni ko‘rish uchun tizimga kiring",
+    "signInMessage": "Hisobingizga yuborilgan bildirishnomalarni ko‘rish uchun tizimga kirishingiz kerak.",
+    "signInCta": "Kirish"
   },
   "worldClock": {
     "ariaLabel": "Jahon soatlari",

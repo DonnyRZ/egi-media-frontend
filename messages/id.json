@@ -29,7 +29,9 @@
     "verifyEmailTitle": "Verifikasi Email",
     "verifyEmailDescription": "Konfirmasi alamat email Anda untuk menyelesaikan pembuatan akun EGI Media.",
     "notificationsTitle": "Notifikasi",
-    "notificationsDescription": "Lihat semua notifikasi yang dikirim ke akun EGI Media Anda — pengumuman, aktivitas, dan peringatan."
+    "notificationsDescription": "Lihat semua notifikasi yang dikirim ke akun EGI Media Anda — pengumuman, aktivitas, dan peringatan.",
+    "newslettersTitle": "Newsletter",
+    "newslettersDescription": "Jelajahi dan kelola newsletter EGI Media yang dilanggan oleh akun Anda."
   },
   "header": {
     "homeAria": "Beranda {siteName}",
@@ -137,6 +139,26 @@
     "signInTitle": "Masuk untuk melihat notifikasi",
     "signInMessage": "Anda harus masuk untuk melihat notifikasi yang dikirim ke akun Anda.",
     "signInCta": "Masuk"
+  },
+  "newslettersPage": {
+    "kicker": "Newsletter",
+    "headline": "Ringkasan pilihan, langsung ke email Anda",
+    "lede": "Pilih newsletter EGI Media yang paling relevan untuk Anda. Kelola langganan kapan saja — terhubung dengan akun Anda.",
+    "listingHeading": "Semua newsletter",
+    "count": "{count} newsletter",
+    "empty": "Belum ada newsletter yang tersedia.",
+    "noDescription": "Tidak ada deskripsi.",
+    "subscribe": "Langganan",
+    "subscribed": "Berlangganan",
+    "processing": "Menyimpan...",
+    "signInTitle": "Masuk untuk mengelola newsletter",
+    "signInMessage": "Anda harus masuk untuk berlangganan newsletter pada akun Anda.",
+    "signInCta": "Masuk",
+    "frequency": {
+      "daily": "Harian",
+      "weekly": "Mingguan",
+      "monthly": "Bulanan"
+    }
   },
   "worldClock": {
     "ariaLabel": "Jam dunia",

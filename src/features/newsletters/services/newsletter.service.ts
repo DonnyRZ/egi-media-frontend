@@ -14,15 +14,19 @@ import type {
 import { axiosClient } from "@/shared/lib/axios-client";
 import { ApiError } from "@/shared/lib/errors";
 import type { PaginatedApiResponse } from "@/shared/types/api.types";
+import type { ContentLocale } from "@/shared/types/article.types";
 
 export async function fetchNewsletters(
   params: NewsletterListParams = {},
+  lang: ContentLocale = "id",
 ): Promise<NewsletterListResult> {
+  // The API does not accept a language param; it returns every translation
+  // variant in one payload, so we resolve the active locale client-side.
   const response = await axiosClient.get<PaginatedApiResponse<NewsletterDto>>(
     NEWSLETTER_ENDPOINTS.list,
     { params },
   );
-  return mapNewsletterList(response.data.data, response.data.meta);
+  return mapNewsletterList(response.data.data, response.data.meta, lang);
 }
 
 export async function subscribeNewsletter(id: string): Promise<void> {

@@ -7,3 +7,11 @@ export function isNotificationUnread(notification: Notification): boolean {
 export function getNotificationInitial(title: string): string {
   return title.trim().charAt(0).toUpperCase() || "N";
 }
+
+export function filterOwnNotifications(
+  items: Notification[],
+  userId: string | undefined,
+): Notification[] {
+  if (!userId) return [];
+  return items.filter((item) => item.userId === userId);
+}

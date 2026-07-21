@@ -8,6 +8,7 @@ import { EmptyState, ErrorState, LoadingState } from "@/features/cms/components/
 import { Pagination } from "@/features/cms/components/ui/Pagination";
 import { PageHeader } from "@/features/cms/components/layout/PageHeader";
 import { ArticleFilters, type ArticleSortKey } from "@/features/cms/components/articles/ArticleFilters";
+import { ArticleStatusTabs } from "@/features/cms/components/articles/ArticleStatusTabs";
 import { ArticleTable } from "@/features/cms/components/articles/ArticleTable";
 import { BulkActionsBar } from "@/features/cms/components/articles/BulkActionsBar";
 import { ConfirmDialog } from "@/features/cms/components/ui/ConfirmDialog";
@@ -146,15 +147,19 @@ export function ArticleListView() {
       />
 
       <Card>
-        <ArticleFilters
-          search={searchInput}
-          status={status}
-          sort={sort}
-          onSearch={setSearchInput}
-          onStatus={(value) => {
+        <ArticleStatusTabs
+          value={status}
+          onChange={(value) => {
             setStatus(value);
             setPage(1);
+            setSelected(new Set());
           }}
+        />
+
+        <ArticleFilters
+          search={searchInput}
+          sort={sort}
+          onSearch={setSearchInput}
           onSort={setSort}
         />
 

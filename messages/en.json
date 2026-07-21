@@ -31,11 +31,14 @@
     "notificationsTitle": "Notifications",
     "notificationsDescription": "View all notifications sent to your EGI Media account — announcements, activity, and alerts.",
     "newslettersTitle": "Newsletters",
-    "newslettersDescription": "Browse and manage the EGI Media newsletters your account is subscribed to."
+    "newslettersDescription": "Browse and manage the EGI Media newsletters your account is subscribed to.",
+    "savedTitle": "Saved Articles",
+    "savedDescription": "Revisit the EGI Media articles you saved to your account — organized for quick access."
   },
   "header": {
     "homeAria": "{siteName} home",
     "newsletters": "Newsletters",
+    "saved": "Saved",
     "signIn": "Sign in",
     "subscribe": "Subscribe",
     "toggleMenu": "Toggle menu",
@@ -159,6 +162,26 @@
       "weekly": "Weekly",
       "monthly": "Monthly"
     }
+  },
+  "savedArticlesPage": {
+    "kicker": "Your Account",
+    "headline": "Your saved articles",
+    "lede": "Every story you saved, kept in one place. Pick up where you left off — tied to your account.",
+    "listingHeading": "Saved articles",
+    "count": "{count} saved",
+    "empty": "You haven't saved any articles yet. Tap Save on any story to keep it here.",
+    "savedOn": "Saved {date}",
+    "remove": "Remove",
+    "removing": "Removing...",
+    "signInTitle": "Sign in to view saved articles",
+    "signInMessage": "You need to be signed in to see the articles saved to your account.",
+    "signInCta": "Sign in"
+  },
+  "unsaveDialog": {
+    "title": "Remove from saved?",
+    "message": "This article will be removed from your saved list. You can save it again anytime.",
+    "confirm": "Yes, remove",
+    "cancel": "Cancel"
   },
   "worldClock": {
     "ariaLabel": "World clocks",
@@ -570,6 +593,10 @@
   "article": {
     "publishedOn": "Published {date}",
     "shareTitle": "Share",
+    "saveTitle": "Save",
+    "save": "Save",
+    "saved": "Saved",
+    "saving": "Saving...",
     "shareCopy": "Copy link",
     "shareWhatsapp": "WhatsApp",
     "shareFacebook": "Facebook",

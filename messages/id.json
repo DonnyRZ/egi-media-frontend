@@ -31,11 +31,14 @@
     "notificationsTitle": "Notifikasi",
     "notificationsDescription": "Lihat semua notifikasi yang dikirim ke akun EGI Media Anda — pengumuman, aktivitas, dan peringatan.",
     "newslettersTitle": "Newsletter",
-    "newslettersDescription": "Jelajahi dan kelola newsletter EGI Media yang dilanggan oleh akun Anda."
+    "newslettersDescription": "Jelajahi dan kelola newsletter EGI Media yang dilanggan oleh akun Anda.",
+    "savedTitle": "Artikel Tersimpan",
+    "savedDescription": "Baca kembali artikel EGI Media yang Anda simpan di akun Anda — tertata untuk akses cepat."
   },
   "header": {
     "homeAria": "Beranda {siteName}",
     "newsletters": "Buletin",
+    "saved": "Tersimpan",
     "signIn": "Masuk",
     "subscribe": "Berlangganan",
     "toggleMenu": "Buka menu",
@@ -159,6 +162,26 @@
       "weekly": "Mingguan",
       "monthly": "Bulanan"
     }
+  },
+  "savedArticlesPage": {
+    "kicker": "Akun Anda",
+    "headline": "Artikel tersimpan Anda",
+    "lede": "Semua artikel yang Anda simpan, terkumpul di satu tempat. Lanjutkan membaca kapan saja — terhubung dengan akun Anda.",
+    "listingHeading": "Artikel tersimpan",
+    "count": "{count} tersimpan",
+    "empty": "Anda belum menyimpan artikel apa pun. Ketuk Simpan pada artikel mana pun untuk menyimpannya di sini.",
+    "savedOn": "Disimpan {date}",
+    "remove": "Hapus",
+    "removing": "Menghapus...",
+    "signInTitle": "Masuk untuk melihat artikel tersimpan",
+    "signInMessage": "Anda harus masuk untuk melihat artikel yang tersimpan di akun Anda.",
+    "signInCta": "Masuk"
+  },
+  "unsaveDialog": {
+    "title": "Hapus dari tersimpan?",
+    "message": "Artikel ini akan dihapus dari daftar tersimpan Anda. Anda bisa menyimpannya lagi kapan saja.",
+    "confirm": "Ya, hapus",
+    "cancel": "Batal"
   },
   "worldClock": {
     "ariaLabel": "Jam dunia",
@@ -570,6 +593,10 @@
   "article": {
     "publishedOn": "Dipublikasikan {date}",
     "shareTitle": "Bagikan",
+    "saveTitle": "Simpan",
+    "save": "Simpan",
+    "saved": "Tersimpan",
+    "saving": "Menyimpan...",
     "shareCopy": "Salin tautan",
     "shareWhatsapp": "WhatsApp",
     "shareFacebook": "Facebook",

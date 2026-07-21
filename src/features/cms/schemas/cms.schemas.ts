@@ -55,6 +55,7 @@ export const addAuthorSchema = z.object({
   fullName: z.string().trim().min(1, "Full name is required").max(150),
   email: z.string().trim().min(1, "Email is required").email("Invalid email"),
   password: z.string().min(8, "Password must be at least 8 characters"),
+  role: z.enum(["author", "superadmin"]),
 });
 
 export type AddAuthorValues = z.infer<typeof addAuthorSchema>;

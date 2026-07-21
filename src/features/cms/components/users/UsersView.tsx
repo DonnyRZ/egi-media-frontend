@@ -23,6 +23,7 @@ import { useCmsUsers, useUserMutations } from "@/features/cms/hooks/useCmsUsers"
 import { useDebouncedValue } from "@/features/cms/hooks/useDebouncedValue";
 import { usePermissions } from "@/features/cms/hooks/usePermissions";
 import { useToast } from "@/features/cms/stores/cms-toast.store";
+import type { AddAuthorValues } from "@/features/cms/schemas/cms.schemas";
 import type { CmsUser } from "@/features/cms/types/cms.types";
 
 const ROLE_FILTER_OPTIONS = [
@@ -59,13 +60,15 @@ export function UsersView() {
 
   const users = data?.items ?? [];
 
-  async function createAuthor(values: { fullName: string; email: string; password: string }) {
+  async function createUser(values: AddAuthorValues) {
     try {
       await add.mutateAsync(values);
-      toast.success("Author created");
+      toast.success("User created");
       setAddOpen(false);
-    } catch {
-      toast.error("Could not create author");
+    } catch (error) {
+      toast.error(
+        error instanceof Error ? error.message : "Could not create user",
+      );
     }
   }
 
@@ -104,7 +107,7 @@ export function UsersView() {
         actions={
           canManageUsers ? (
             <Button onClick={() => setAddOpen(true)}>
-              <Icons.plus className="h-4 w-4" /> Add author
+              <Icons.plus className="h-4 w-4" /> Add user
             </Button>
           ) : undefined
         }
@@ -207,7 +210,7 @@ export function UsersView() {
         open={addOpen}
         saving={add.isPending}
         onClose={() => setAddOpen(false)}
-        onSubmit={createAuthor}
+        onSubmit={createUser}
       />
       <EditUserModal
         open={Boolean(editing)}

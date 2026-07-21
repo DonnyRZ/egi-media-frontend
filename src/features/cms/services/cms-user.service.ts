@@ -64,6 +64,7 @@ export interface AddAuthorPayload {
   email: string;
   password: string;
   fullName: string;
+  role: "author" | "superadmin";
 }
 
 export async function addAuthor(payload: AddAuthorPayload): Promise<void> {
@@ -71,5 +72,6 @@ export async function addAuthor(payload: AddAuthorPayload): Promise<void> {
     email: payload.email,
     password: payload.password,
     full_name: payload.fullName,
+    role: payload.role,
   });
 }

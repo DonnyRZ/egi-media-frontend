@@ -62,3 +62,61 @@
     @apply transition-colors hover:text-accent;
   }
 }
+
+/* Rich article content rendered from the Editorial CMS (HTML produced by the
+   Tiptap editor). Mirrors the public site's editorial typography. */
+.article-prose {
+  @apply text-base leading-8 text-neutral-700;
+}
+
+.article-prose > * + * {
+  @apply mt-6;
+}
+
+.article-prose p {
+  @apply leading-8;
+}
+
+.article-prose > p:first-child {
+  @apply font-serif text-lg leading-8 text-ink;
+}
+
+.article-prose > p:first-child::first-letter {
+  @apply float-left mr-2 font-serif text-6xl font-bold leading-[0.8] text-accent;
+}
+
+.article-prose h2 {
+  @apply mt-10 mb-3 font-serif text-2xl font-bold text-ink;
+}
+
+.article-prose h3 {
+  @apply mt-8 mb-2 font-serif text-xl font-semibold text-ink;
+}
+
+.article-prose ul {
+  @apply list-disc space-y-2 pl-6;
+}
+
+.article-prose ol {
+  @apply list-decimal space-y-2 pl-6;
+}
+
+.article-prose blockquote {
+  @apply border-l-4 border-accent pl-4 italic text-neutral-500;
+}
+
+.article-prose a {
+  @apply text-accent underline;
+}
+
+.article-prose strong {
+  @apply font-semibold text-ink;
+}
+
+.article-prose img {
+  @apply my-6 rounded-lg;
+}
+
+.article-prose hr {
+  @apply my-8 border-neutral-300;
+}

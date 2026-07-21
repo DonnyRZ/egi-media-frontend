@@ -23,6 +23,11 @@ export const QUERY_KEYS = {
     all: ["newsletters"] as const,
     list: (params: Record<string, unknown>) => ["newsletters", "list", params] as const,
   },
+  savedArticles: {
+    all: ["saved-articles"] as const,
+    list: (params: Record<string, unknown>) =>
+      ["saved-articles", "list", params] as const,
+  },
   homepage: {
     all: ["homepage"] as const,
     news: (lang: string) => ["homepage", "news", lang] as const,

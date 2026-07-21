@@ -73,8 +73,24 @@ export function AuthUserMenu() {
             <p className="truncate text-sm font-semibold text-ink">{user.fullName}</p>
             <p className="truncate text-xs text-neutral-500">{user.email}</p>
           </div>
+          <Link
+            className="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50"
+            href="/saved"
+            onClick={() => setOpen(false)}
+            role="menuitem"
+          >
+            {t("savedArticles")}
+          </Link>
+          <Link
+            className="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50"
+            href="/newsletters"
+            onClick={() => setOpen(false)}
+            role="menuitem"
+          >
+            {t("newsletters")}
+          </Link>
           <button
-            className="block w-full px-4 py-2 text-left text-sm text-neutral-700 hover:bg-neutral-50"
+            className="block w-full border-t border-neutral-100 px-4 py-2 text-left text-sm text-neutral-700 hover:bg-neutral-50"
             onClick={() => void handleLogout()}
             role="menuitem"
             type="button"
@@ -114,6 +130,13 @@ export function AuthMobileActions() {
     <div className="space-y-2 border-t border-neutral-200 pt-3">
       <p className="text-sm font-semibold text-ink">{user.fullName}</p>
       <p className="text-xs text-neutral-500">{user.email}</p>
+      <Link
+        className="block py-1 text-sm font-semibold uppercase tracking-wide text-neutral-800"
+        href="/saved"
+        onClick={() => setMobileMenuOpen(false)}
+      >
+        {t("savedArticles")}
+      </Link>
       <Button
         className="w-full rounded-none"
         onClick={() => {

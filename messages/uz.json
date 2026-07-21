@@ -31,7 +31,9 @@
     "notificationsTitle": "Bildirishnomalar",
     "notificationsDescription": "EGI Media hisobingizga yuborilgan barcha bildirishnomalarni ko‘ring — e'lonlar, faoliyat va ogohlantirishlar.",
     "newslettersTitle": "Axborot byulletenlari",
-    "newslettersDescription": "Hisobingiz obuna bo‘lgan EGI Media byulletenlarini ko‘ring va boshqaring."
+    "newslettersDescription": "Hisobingiz obuna bo‘lgan EGI Media byulletenlarini ko‘ring va boshqaring.",
+    "savedTitle": "Saqlangan maqolalar",
+    "savedDescription": "Hisobingizga saqlagan EGI Media maqolalarini qayta ko‘ring — tez kirish uchun tartiblangan."
   },
   "header": {
     "homeAria": "{siteName} bosh sahifasi",
@@ -68,6 +70,8 @@
     "loginSuccessTitle": "Muvaffaqiyatli kirdingiz",
     "loginSuccessBody": "Qaytib kelganingiz bilan. Bosh sahifaga oʻtish uchun quyidagi tugmani bosing.",
     "continueToHome": "OK, davom etish",
+    "savedArticles": "Saqlangan maqolalar",
+    "newsletters": "Byulletenlar",
     "signOut": "Chiqish",
     "createAccount": "Hisob yaratish",
     "creatingAccount": "Hisob yaratilmoqda...",
@@ -159,6 +163,20 @@
       "weekly": "Haftalik",
       "monthly": "Oylik"
     }
+  },
+  "savedArticlesPage": {
+    "kicker": "Hisobingiz",
+    "headline": "Saqlangan maqolalaringiz",
+    "lede": "Siz saqlagan barcha maqolalar bir joyda. Istalgan vaqtda o‘qishni davom ettiring — hisobingizga bog‘langan.",
+    "listingHeading": "Saqlangan maqolalar",
+    "count": "{count} ta saqlangan",
+    "empty": "Siz hali hech qanday maqola saqlamadingiz. Uni shu yerda saqlash uchun istalgan maqolada Saqlash tugmasini bosing.",
+    "savedOn": "Saqlangan {date}",
+    "remove": "O‘chirish",
+    "removing": "O‘chirilmoqda...",
+    "signInTitle": "Saqlangan maqolalarni ko‘rish uchun tizimga kiring",
+    "signInMessage": "Hisobingizga saqlangan maqolalarni ko‘rish uchun tizimga kirishingiz kerak.",
+    "signInCta": "Kirish"
   },
   "worldClock": {
     "ariaLabel": "Jahon soatlari",
@@ -570,6 +588,10 @@
   "article": {
     "publishedOn": "Chop etilgan {date}",
     "shareTitle": "Ulashish",
+    "saveTitle": "Saqlash",
+    "save": "Saqlash",
+    "saved": "Saqlangan",
+    "saving": "Saqlanmoqda...",
     "shareCopy": "Havolani nusxalash",
     "shareWhatsapp": "WhatsApp",
     "shareFacebook": "Facebook",

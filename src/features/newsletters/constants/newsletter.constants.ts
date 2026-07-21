@@ -11,3 +11,5 @@ export const NEWSLETTER_STALE_TIME_MS = 5 * 60 * 1000;
 export const NEWSLETTER_SUBSCRIPTIONS_STORAGE_PREFIX = "newsletter_subs";
 
 export const ALREADY_SUBSCRIBED_STATUS = 409;
+
+export const NOT_FOUND_STATUS = 404;

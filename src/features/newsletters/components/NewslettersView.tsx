@@ -37,7 +37,8 @@ export function NewslettersView() {
   const isHydrated = useAuthStore((state) => state.isHydrated);
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const { data, isLoading, isError, error, refetch } = useNewslettersPage(page);
-  const { isSubscribed, isPending, toggle } = useNewsletterSubscriptions();
+  const { isSubscribed, isPending, errorFor, toggle } =
+    useNewsletterSubscriptions();
 
   if (!isHydrated) {
     return (
@@ -90,6 +91,7 @@ export function NewslettersView() {
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {data.items.map((newsletter) => (
                 <NewsletterCard
+                  errorMessage={errorFor(newsletter.id)}
                   isPending={isPending(newsletter.id)}
                   isSubscribed={isSubscribed(newsletter.id)}
                   key={newsletter.id}

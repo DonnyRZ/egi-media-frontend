@@ -1,6 +1,7 @@
 import {
   ALREADY_SUBSCRIBED_STATUS,
   NEWSLETTER_ENDPOINTS,
+  NOT_FOUND_STATUS,
 } from "@/features/newsletters/constants/newsletter.constants";
 import {
   mapNewsletterList,
@@ -37,5 +38,13 @@ export async function subscribeNewsletter(id: string): Promise<void> {
 }
 
 export async function unsubscribeNewsletter(id: string): Promise<void> {
-  await axiosClient.delete(NEWSLETTER_ENDPOINTS.subscribe(id));
+  try {
+    await axiosClient.delete(NEWSLETTER_ENDPOINTS.subscribe(id));
+  } catch (error) {
+    // Treat "not subscribed" as success so the toggle is idempotent.
+    if (error instanceof ApiError && error.statusCode === NOT_FOUND_STATUS) {
+      return;
+    }
+    throw error;
+  }
 }

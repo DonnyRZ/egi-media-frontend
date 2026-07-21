@@ -9,6 +9,7 @@ interface NewsletterCardProps {
   newsletter: Newsletter;
   isSubscribed: boolean;
   isPending: boolean;
+  errorMessage: string | null;
   onToggle: (id: string) => void;
 }
 
@@ -16,6 +17,7 @@ export function NewsletterCard({
   newsletter,
   isSubscribed,
   isPending,
+  errorMessage,
   onToggle,
 }: NewsletterCardProps) {
   const t = useTranslations("newslettersPage");
@@ -47,6 +49,11 @@ export function NewsletterCard({
           isSubscribed={isSubscribed}
           onToggle={() => onToggle(newsletter.id)}
         />
+        {errorMessage ? (
+          <p className="mt-2 text-xs text-error" role="alert">
+            {errorMessage}
+          </p>
+        ) : null}
       </div>
     </article>
   );

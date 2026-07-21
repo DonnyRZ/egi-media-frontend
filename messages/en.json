@@ -116,6 +116,15 @@
       "googleFailed": "Google sign-in failed. Please try again."
     }
   },
+  "notifications": {
+    "title": "Notifications",
+    "markAllRead": "Mark all as read",
+    "empty": "You have no notifications yet.",
+    "error": "Unable to load notifications.",
+    "unread": "Unread",
+    "aria": "Notifications",
+    "ariaWithCount": "Notifications, {count} unread"
+  },
   "worldClock": {
     "ariaLabel": "World clocks",
     "local": "Local"

@@ -116,6 +116,15 @@
       "googleFailed": "Google orqali kirish muvaffaqiyatsiz. Qayta urinib koʻring."
     }
   },
+  "notifications": {
+    "title": "Bildirishnomalar",
+    "markAllRead": "Barchasini o‘qilgan deb belgilash",
+    "empty": "Hozircha bildirishnomalar yo‘q.",
+    "error": "Bildirishnomalarni yuklab bo‘lmadi.",
+    "unread": "O‘qilmagan",
+    "aria": "Bildirishnomalar",
+    "ariaWithCount": "Bildirishnomalar, {count} ta o‘qilmagan"
+  },
   "worldClock": {
     "ariaLabel": "Jahon soatlari",
     "local": "Mahalliy"

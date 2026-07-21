@@ -27,4 +27,9 @@ export const QUERY_KEYS = {
     all: ["homepage"] as const,
     news: (lang: string) => ["homepage", "news", lang] as const,
   },
+  notifications: {
+    all: ["notifications"] as const,
+    list: (params: Record<string, unknown>) =>
+      ["notifications", "list", params] as const,
+  },
 } as const;

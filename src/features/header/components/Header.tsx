@@ -8,6 +8,7 @@ import { Link } from "@/i18n/navigation";
 import { Button } from "@/shared/components/ui/Button";
 import { Container } from "@/shared/components/layout/Container";
 import { AuthUserMenu, AuthMobileActions } from "@/features/auth/components/AuthUserMenu";
+import { NotificationBell } from "@/features/notifications/components/NotificationBell";
 import { LanguageSwitcher } from "@/features/language/components/LanguageSwitcher";
 import { HEADER_CATEGORY_SLUGS } from "@/shared/constants/header-categories.constants";
 import { SITE_NAME } from "@/shared/constants/site.constants";
@@ -55,7 +56,10 @@ function UtilityBar() {
             <span aria-hidden="true" className="text-neutral-300">
               |
             </span>
-            <AuthUserMenu />
+            <div className="flex items-center gap-3">
+              <NotificationBell />
+              <AuthUserMenu />
+            </div>
             <span aria-hidden="true" className="text-neutral-300">
               |
             </span>
@@ -94,6 +98,7 @@ function Masthead() {
       </Link>
 
       <div className="flex items-center gap-2 sm:gap-3">
+        <NotificationBell className="lg:hidden" />
         <button
           aria-expanded={isSearchOpen}
           aria-label={t("toggleSearch")}

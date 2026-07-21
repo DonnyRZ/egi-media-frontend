@@ -116,6 +116,15 @@
       "googleFailed": "Masuk Google gagal. Silakan coba lagi."
     }
   },
+  "notifications": {
+    "title": "Notifikasi",
+    "markAllRead": "Tandai semua dibaca",
+    "empty": "Belum ada notifikasi.",
+    "error": "Gagal memuat notifikasi.",
+    "unread": "Belum dibaca",
+    "aria": "Notifikasi",
+    "ariaWithCount": "Notifikasi, {count} belum dibaca"
+  },
   "worldClock": {
     "ariaLabel": "Jam dunia",
     "local": "Lokal"

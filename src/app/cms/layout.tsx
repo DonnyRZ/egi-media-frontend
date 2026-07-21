@@ -36,9 +36,15 @@ export default function CmsRootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+        <script
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }}
+        />
       </head>
-      <body className={`cms-root ${inter.variable} ${sourceSerif.variable} font-sans`}>
+      <body
+        suppressHydrationWarning
+        className={`cms-root ${inter.variable} ${sourceSerif.variable} font-sans`}
+      >
         <QueryProvider>
           <AuthProvider>
             <CmsBootstrap />

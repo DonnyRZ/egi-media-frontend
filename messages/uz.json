@@ -59,6 +59,9 @@
       "business": "Biznes",
       "technology": "Texnologiya",
       "politics": "Siyosat",
+      "sports": "Sport",
+      "entertainment": "Koʻngilochar",
+      "column": "Rubrika",
       "egiNews": "EGI Yangiliklari",
       "series": "Turkumlar",
       "videos": "Videolar"
@@ -379,6 +382,27 @@
       "lede": "Siyosat, hokimiyat va jamoat ishlari — shovqin emas, kontekst kerak boʻlgan oʻquvchilar uchun siyosiy reportaj.",
       "metaTitle": "Siyosat",
       "metaDescription": "EGI Media siyosat reportajlari — siyosat, boshqaruv va jamoat ishlari eng soʻnggi nashr sanasi boʻyicha."
+    },
+    "sports": {
+      "kicker": "Kategoriya",
+      "headline": "Sport",
+      "lede": "Musobaqalar, sportchilar va natija ortidagi hikoyalar — aniqlik va surʼat bilan sport reportajlari.",
+      "metaTitle": "Sport",
+      "metaDescription": "EGI Media sport reportajlari — musobaqalar, sportchilar va asosiy sport voqealari eng soʻnggi nashr sanasi boʻyicha."
+    },
+    "entertainment": {
+      "kicker": "Kategoriya",
+      "headline": "Koʻngilochar",
+      "lede": "Kino, musiqa, madaniyat va mashhur koʻngilochar olamini shakllantiruvchi odamlar — tahririy ehtiyotkorlik bilan.",
+      "metaTitle": "Koʻngilochar",
+      "metaDescription": "EGI Media koʻngilochar reportajlari — kino, musiqa, madaniyat va mashhurlar yangiliklari eng soʻnggi nashr sanasi boʻyicha."
+    },
+    "column": {
+      "kicker": "Kategoriya",
+      "headline": "Rubrika",
+      "lede": "EGI Media yozuvchilaridan fikr va tahlil — muhim voqealarga oʻtkir nigoh.",
+      "metaTitle": "Rubrika",
+      "metaDescription": "EGI Media rubrikalari — yozuvchilarimizdan fikr va tahlil, eng soʻnggi nashr sanasi boʻyicha."
     },
     "egiNews": {
       "kicker": "EGI Media",

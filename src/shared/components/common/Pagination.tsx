@@ -1,5 +1,6 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 import { Link } from "@/i18n/navigation";
@@ -9,6 +10,7 @@ interface PaginationProps {
   currentPage: number;
   totalPages: number;
   basePath: string;
+  pageParam?: string;
   className?: string;
 }
 
@@ -16,9 +18,11 @@ export function Pagination({
   currentPage,
   totalPages,
   basePath,
+  pageParam = "page",
   className,
 }: PaginationProps) {
   const t = useTranslations("common");
+  const searchParams = useSearchParams();
 
   if (totalPages <= 1) return null;
 
@@ -26,13 +30,23 @@ export function Pagination({
   const nextPage = currentPage < totalPages ? currentPage + 1 : null;
 
   function pageHref(page: number) {
-    return page <= 1 ? basePath : `${basePath}?page=${page}`;
+    const params = new URLSearchParams(searchParams.toString());
+    if (page <= 1) {
+      params.delete(pageParam);
+    } else {
+      params.set(pageParam, String(page));
+    }
+    const query = params.toString();
+    return query ? `${basePath}?${query}` : basePath;
   }
 
   return (
     <nav
       aria-label={t("paginationLabel")}
-      className={cn("flex items-center justify-between gap-4 border-t border-neutral-200 pt-6", className)}
+      className={cn(
+        "flex items-center justify-between gap-4 border-t border-neutral-200 pt-6",
+        className,
+      )}
     >
       {previousPage ? (
         <Link

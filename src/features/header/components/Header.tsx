@@ -34,7 +34,7 @@ const NAV_ITEMS = [
   { key: "egiNews", href: `/categories/${HEADER_CATEGORY_SLUGS.egiNews}` },
   { key: "series", href: "/series" },
   { key: "videos", href: "/videos" },
-  { key: "column", href: `/categories/${HEADER_CATEGORY_SLUGS.column}` },
+  { key: "column", href: "/kolom" },
 ] as const;
 
 function UtilityBar() {

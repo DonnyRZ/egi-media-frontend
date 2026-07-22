@@ -7,6 +7,8 @@ export const AUTH_ENDPOINTS = {
   changePassword: "/api/v1/auth/change-password",
   verifyEmail: "/api/v1/auth/verify-email",
   resendVerification: "/api/v1/auth/resend-verification",
+  forgotPassword: "/api/v1/auth/forgot-password",
+  resetPassword: "/api/v1/auth/reset-password",
   google: "/api/v1/auth/google",
 } as const;
 

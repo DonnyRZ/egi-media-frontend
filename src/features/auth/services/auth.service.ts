@@ -85,3 +85,26 @@ export async function refreshAuthToken(
   );
   return mapAuthTokens(response.data.data);
 }
+
+export async function updateCurrentUserName(
+  fullName: string,
+): Promise<AuthUser> {
+  const response = await axiosClient.patch<ApiSuccessResponse<AuthUserDto>>(
+    AUTH_ENDPOINTS.me,
+    { full_name: fullName },
+  );
+  return mapAuthUser(response.data.data);
+}
+
+export async function changePassword(payload: {
+  oldPassword: string;
+  newPassword: string;
+}): Promise<string> {
+  const response = await axiosClient.patch<
+    ApiSuccessResponse<{ message: string }>
+  >(AUTH_ENDPOINTS.changePassword, {
+    old_password: payload.oldPassword,
+    new_password: payload.newPassword,
+  });
+  return response.data.data.message;
+}

@@ -33,7 +33,9 @@
     "newslettersTitle": "Newsletters",
     "newslettersDescription": "Browse and manage the EGI Media newsletters your account is subscribed to.",
     "savedTitle": "Saved Articles",
-    "savedDescription": "Revisit the EGI Media articles you saved to your account — organized for quick access."
+    "savedDescription": "Revisit the EGI Media articles you saved to your account — organized for quick access.",
+    "profileTitle": "Account Profile",
+    "profileDescription": "Update your EGI Media display name and password for a secure, personalized account."
   },
   "header": {
     "homeAria": "{siteName} home",
@@ -71,6 +73,7 @@
     "loginSuccessTitle": "Signed in successfully",
     "loginSuccessBody": "Welcome back. Click the button below to continue to the homepage.",
     "continueToHome": "OK, continue",
+    "profile": "Profile",
     "signOut": "Sign out",
     "createAccount": "Create account",
     "creatingAccount": "Creating account...",
@@ -182,6 +185,38 @@
     "message": "This article will be removed from your saved list. You can save it again anytime.",
     "confirm": "Yes, remove",
     "cancel": "Cancel"
+  },
+  "profilePage": {
+    "kicker": "Your Account",
+    "headline": "Profile settings",
+    "lede": "Keep your account details current. Update your display name and password in one place.",
+    "signInTitle": "Sign in to manage your profile",
+    "signInMessage": "You need to be signed in to update your name or password.",
+    "signInCta": "Sign in",
+    "nameHeading": "Display name",
+    "nameLede": "This name appears in your account menu and account activity.",
+    "emailLabel": "Email",
+    "fullNameLabel": "Full name",
+    "saveName": "Save name",
+    "nameSuccess": "Your display name has been updated.",
+    "passwordHeading": "Password",
+    "passwordLede": "Choose a strong password of at least 8 characters.",
+    "passwordSocialNote": "This account uses social login. Password changes are managed by your Google account.",
+    "oldPassword": "Current password",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm new password",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "savePassword": "Update password",
+    "passwordSuccess": "Your password has been updated.",
+    "saving": "Saving...",
+    "validation": {
+      "oldPasswordRequired": "Current password is required"
+    },
+    "errors": {
+      "nameFailed": "Unable to update your name. Please try again.",
+      "passwordFailed": "Unable to update your password. Please check your current password."
+    }
   },
   "worldClock": {
     "ariaLabel": "World clocks",

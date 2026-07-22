@@ -33,7 +33,9 @@
     "newslettersTitle": "Newsletter",
     "newslettersDescription": "Jelajahi dan kelola newsletter EGI Media yang dilanggan oleh akun Anda.",
     "savedTitle": "Artikel Tersimpan",
-    "savedDescription": "Baca kembali artikel EGI Media yang Anda simpan di akun Anda — tertata untuk akses cepat."
+    "savedDescription": "Baca kembali artikel EGI Media yang Anda simpan di akun Anda — tertata untuk akses cepat.",
+    "profileTitle": "Profil Akun",
+    "profileDescription": "Perbarui nama tampilan dan password akun EGI Media Anda secara aman."
   },
   "header": {
     "homeAria": "Beranda {siteName}",
@@ -71,6 +73,7 @@
     "loginSuccessTitle": "Berhasil masuk",
     "loginSuccessBody": "Selamat datang kembali. Klik tombol di bawah untuk lanjut ke beranda.",
     "continueToHome": "Oke, lanjutkan",
+    "profile": "Profil",
     "signOut": "Keluar",
     "createAccount": "Buat akun",
     "creatingAccount": "Sedang membuat akun...",
@@ -182,6 +185,38 @@
     "message": "Artikel ini akan dihapus dari daftar tersimpan Anda. Anda bisa menyimpannya lagi kapan saja.",
     "confirm": "Ya, hapus",
     "cancel": "Batal"
+  },
+  "profilePage": {
+    "kicker": "Akun Anda",
+    "headline": "Pengaturan profil",
+    "lede": "Jaga detail akun Anda tetap terkini. Perbarui nama tampilan dan password di satu tempat.",
+    "signInTitle": "Masuk untuk mengelola profil",
+    "signInMessage": "Anda harus masuk untuk memperbarui nama atau password.",
+    "signInCta": "Masuk",
+    "nameHeading": "Nama tampilan",
+    "nameLede": "Nama ini muncul di menu akun dan aktivitas akun Anda.",
+    "emailLabel": "Email",
+    "fullNameLabel": "Nama lengkap",
+    "saveName": "Simpan nama",
+    "nameSuccess": "Nama tampilan Anda telah diperbarui.",
+    "passwordHeading": "Password",
+    "passwordLede": "Pilih password yang kuat minimal 8 karakter.",
+    "passwordSocialNote": "Akun ini menggunakan login sosial. Perubahan password dikelola melalui akun Google Anda.",
+    "oldPassword": "Password saat ini",
+    "newPassword": "Password baru",
+    "confirmPassword": "Konfirmasi password baru",
+    "showPassword": "Tampilkan password",
+    "hidePassword": "Sembunyikan password",
+    "savePassword": "Perbarui password",
+    "passwordSuccess": "Password Anda telah diperbarui.",
+    "saving": "Menyimpan...",
+    "validation": {
+      "oldPasswordRequired": "Password saat ini wajib diisi"
+    },
+    "errors": {
+      "nameFailed": "Tidak dapat memperbarui nama. Silakan coba lagi.",
+      "passwordFailed": "Tidak dapat memperbarui password. Periksa password saat ini Anda."
+    }
   },
   "worldClock": {
     "ariaLabel": "Jam dunia",

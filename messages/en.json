@@ -28,12 +28,23 @@
     "checkEmailDescription": "Verify your email address to activate your EGI Media account.",
     "verifyEmailTitle": "Verify Email",
     "verifyEmailDescription": "Confirm your email address to finish creating your EGI Media account.",
+    "forgotPasswordTitle": "Forgot Password",
+    "forgotPasswordDescription": "Request a password reset link for your EGI Media account.",
+    "resetPasswordTitle": "Reset Password",
+    "resetPasswordDescription": "Choose a new password for your EGI Media account using the email verification link.",
     "notificationsTitle": "Notifications",
-    "notificationsDescription": "View all notifications sent to your EGI Media account — announcements, activity, and alerts."
+    "notificationsDescription": "View all notifications sent to your EGI Media account — announcements, activity, and alerts.",
+    "newslettersTitle": "Newsletters",
+    "newslettersDescription": "Browse and manage the EGI Media newsletters your account is subscribed to.",
+    "savedTitle": "Saved Articles",
+    "savedDescription": "Revisit the EGI Media articles you saved to your account — organized for quick access.",
+    "profileTitle": "Account Profile",
+    "profileDescription": "Update your EGI Media display name and password for a secure, personalized account."
   },
   "header": {
     "homeAria": "{siteName} home",
     "newsletters": "Newsletters",
+    "saved": "Saved",
     "signIn": "Sign in",
     "subscribe": "Subscribe",
     "toggleMenu": "Toggle menu",
@@ -48,6 +59,9 @@
       "business": "Business",
       "technology": "Technology",
       "politics": "Politics",
+      "sports": "Sports",
+      "entertainment": "Entertainment",
+      "column": "Column",
       "egiNews": "EGI News",
       "series": "Series",
       "videos": "Videos"
@@ -66,6 +80,7 @@
     "loginSuccessTitle": "Signed in successfully",
     "loginSuccessBody": "Welcome back. Click the button below to continue to the homepage.",
     "continueToHome": "OK, continue",
+    "profile": "Profile",
     "signOut": "Sign out",
     "createAccount": "Create account",
     "creatingAccount": "Creating account...",
@@ -76,6 +91,26 @@
     "loginSubtitle": "Sign in with your email or Google account.",
     "loginHeadline": "Sign in to EGI Media",
     "loginLede": "Access your account for a clearer, more personal reading experience across our coverage.",
+    "forgotPassword": "Forgot password?",
+    "forgotHeadline": "Reset your password",
+    "forgotLede": "Enter the email linked to your account. We will send a secure link to create a new password.",
+    "forgotTitle": "Forgot password",
+    "forgotSubtitle": "We will email you a reset link if this address is registered.",
+    "forgotSubmit": "Send reset link",
+    "forgotSending": "Sending...",
+    "forgotSentTitle": "Check your email",
+    "forgotSentBody": "If an account exists for {email}, we sent a password reset link. Open the email and follow the instructions within one hour.",
+    "resetHeadline": "Create a new password",
+    "resetLede": "Choose a strong new password for your EGI Media account.",
+    "resetTitle": "Set new password",
+    "resetSubtitle": "Enter and confirm your new password below.",
+    "newPassword": "New password",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "resetSubmit": "Update password",
+    "resetSaving": "Updating...",
+    "resetSuccessTitle": "Password updated",
+    "resetSuccessBody": "Your password has been changed. You can now sign in with the new password.",
     "registerTitle": "Join EGI Media",
     "registerSubtitle": "Create an account and verify your email to get started.",
     "registerHeadline": "Create your account",
@@ -115,6 +150,9 @@
       "resendFailed": "Unable to resend verification email.",
       "verifyFailed": "Unable to verify your email.",
       "missingToken": "Verification token is missing.",
+      "missingResetToken": "Reset token is missing or invalid. Request a new password reset link.",
+      "forgotPasswordFailed": "Unable to send the reset link. Please try again.",
+      "resetPasswordFailed": "Unable to reset your password. The link may have expired.",
       "googleFailed": "Google sign-in failed. Please try again."
     }
   },
@@ -137,6 +175,78 @@
     "signInTitle": "Sign in to view notifications",
     "signInMessage": "You need to be signed in to see notifications sent to your account.",
     "signInCta": "Sign in"
+  },
+  "newslettersPage": {
+    "kicker": "Newsletters",
+    "headline": "Curated briefings, straight to your inbox",
+    "lede": "Choose the EGI Media newsletters that matter to you. Manage your subscriptions anytime — tied to your account.",
+    "listingHeading": "All newsletters",
+    "count": "{count} newsletters",
+    "empty": "No newsletters are available yet.",
+    "noDescription": "No description provided.",
+    "subscribe": "Subscribe",
+    "subscribed": "Subscribed",
+    "processing": "Saving...",
+    "signInTitle": "Sign in to manage newsletters",
+    "signInMessage": "You need to be signed in to subscribe to newsletters for your account.",
+    "signInCta": "Sign in",
+    "frequency": {
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly"
+    }
+  },
+  "savedArticlesPage": {
+    "kicker": "Your Account",
+    "headline": "Your saved articles",
+    "lede": "Every story you saved, kept in one place. Pick up where you left off — tied to your account.",
+    "listingHeading": "Saved articles",
+    "count": "{count} saved",
+    "empty": "You haven't saved any articles yet. Tap Save on any story to keep it here.",
+    "savedOn": "Saved {date}",
+    "remove": "Remove",
+    "removing": "Removing...",
+    "signInTitle": "Sign in to view saved articles",
+    "signInMessage": "You need to be signed in to see the articles saved to your account.",
+    "signInCta": "Sign in"
+  },
+  "unsaveDialog": {
+    "title": "Remove from saved?",
+    "message": "This article will be removed from your saved list. You can save it again anytime.",
+    "confirm": "Yes, remove",
+    "cancel": "Cancel"
+  },
+  "profilePage": {
+    "kicker": "Your Account",
+    "headline": "Profile settings",
+    "lede": "Keep your account details current. Update your display name and password in one place.",
+    "signInTitle": "Sign in to manage your profile",
+    "signInMessage": "You need to be signed in to update your name or password.",
+    "signInCta": "Sign in",
+    "nameHeading": "Display name",
+    "nameLede": "This name appears in your account menu and account activity.",
+    "emailLabel": "Email",
+    "fullNameLabel": "Full name",
+    "saveName": "Save name",
+    "nameSuccess": "Your display name has been updated.",
+    "passwordHeading": "Password",
+    "passwordLede": "Choose a strong password of at least 8 characters.",
+    "passwordSocialNote": "This account uses social login. Password changes are managed by your Google account.",
+    "oldPassword": "Current password",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm new password",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "savePassword": "Update password",
+    "passwordSuccess": "Your password has been updated.",
+    "saving": "Saving...",
+    "validation": {
+      "oldPasswordRequired": "Current password is required"
+    },
+    "errors": {
+      "nameFailed": "Unable to update your name. Please try again.",
+      "passwordFailed": "Unable to update your password. Please check your current password."
+    }
   },
   "worldClock": {
     "ariaLabel": "World clocks",
@@ -167,8 +277,6 @@
     "kicker": "The Flagship Newsletter",
     "fallbackTitle": "Stay ahead with EGI Media",
     "description": "Get premium editorial insights delivered to your inbox. Curated reporting for professionals who need clarity.",
-    "emailLabel": "Email address",
-    "emailPlaceholder": "Enter your email",
     "subscribe": "Subscribe",
     "tagline": "Trusted insights · Clean design"
   },
@@ -274,6 +382,27 @@
       "lede": "Policy, power, and public affairs — political reporting built for readers who need context, not noise.",
       "metaTitle": "Politics",
       "metaDescription": "EGI Media politics coverage — policy, governance, and public affairs sorted by latest publish date."
+    },
+    "sports": {
+      "kicker": "Category",
+      "headline": "Sports",
+      "lede": "Competition, athletes, and the stories behind the score — sports coverage with clarity and pace.",
+      "metaTitle": "Sports",
+      "metaDescription": "EGI Media sports coverage — competition, athletes, and major sporting events sorted by latest publish date."
+    },
+    "entertainment": {
+      "kicker": "Category",
+      "headline": "Entertainment",
+      "lede": "Film, music, culture, and the people shaping popular entertainment — reported with editorial care.",
+      "metaTitle": "Entertainment",
+      "metaDescription": "EGI Media entertainment coverage — film, music, culture, and celebrity news sorted by latest publish date."
+    },
+    "column": {
+      "kicker": "Category",
+      "headline": "Column",
+      "lede": "Opinion and analysis from EGI Media writers — sharp perspectives on the stories that matter.",
+      "metaTitle": "Column",
+      "metaDescription": "EGI Media columns — opinion and analysis from our writers, sorted by latest publish date."
     },
     "egiNews": {
       "kicker": "EGI Media",
@@ -548,6 +677,10 @@
   "article": {
     "publishedOn": "Published {date}",
     "shareTitle": "Share",
+    "saveTitle": "Save",
+    "save": "Save",
+    "saved": "Saved",
+    "saving": "Saving...",
     "shareCopy": "Copy link",
     "shareWhatsapp": "WhatsApp",
     "shareFacebook": "Facebook",

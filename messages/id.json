@@ -28,12 +28,23 @@
     "checkEmailDescription": "Verifikasi alamat email Anda untuk mengaktifkan akun EGI Media.",
     "verifyEmailTitle": "Verifikasi Email",
     "verifyEmailDescription": "Konfirmasi alamat email Anda untuk menyelesaikan pembuatan akun EGI Media.",
+    "forgotPasswordTitle": "Lupa Password",
+    "forgotPasswordDescription": "Minta tautan reset password untuk akun EGI Media Anda.",
+    "resetPasswordTitle": "Atur Ulang Password",
+    "resetPasswordDescription": "Buat password baru untuk akun EGI Media Anda melalui tautan verifikasi email.",
     "notificationsTitle": "Notifikasi",
-    "notificationsDescription": "Lihat semua notifikasi yang dikirim ke akun EGI Media Anda — pengumuman, aktivitas, dan peringatan."
+    "notificationsDescription": "Lihat semua notifikasi yang dikirim ke akun EGI Media Anda — pengumuman, aktivitas, dan peringatan.",
+    "newslettersTitle": "Newsletter",
+    "newslettersDescription": "Jelajahi dan kelola newsletter EGI Media yang dilanggan oleh akun Anda.",
+    "savedTitle": "Artikel Tersimpan",
+    "savedDescription": "Baca kembali artikel EGI Media yang Anda simpan di akun Anda — tertata untuk akses cepat.",
+    "profileTitle": "Profil Akun",
+    "profileDescription": "Perbarui nama tampilan dan password akun EGI Media Anda secara aman."
   },
   "header": {
     "homeAria": "Beranda {siteName}",
     "newsletters": "Buletin",
+    "saved": "Tersimpan",
     "signIn": "Masuk",
     "subscribe": "Berlangganan",
     "toggleMenu": "Buka menu",
@@ -48,6 +59,9 @@
       "business": "Bisnis",
       "technology": "Teknologi",
       "politics": "Politik",
+      "sports": "Olahraga",
+      "entertainment": "Hiburan",
+      "column": "Kolom",
       "egiNews": "Berita EGI",
       "series": "Seri",
       "videos": "Video"
@@ -66,6 +80,7 @@
     "loginSuccessTitle": "Berhasil masuk",
     "loginSuccessBody": "Selamat datang kembali. Klik tombol di bawah untuk lanjut ke beranda.",
     "continueToHome": "Oke, lanjutkan",
+    "profile": "Profil",
     "signOut": "Keluar",
     "createAccount": "Buat akun",
     "creatingAccount": "Sedang membuat akun...",
@@ -76,6 +91,26 @@
     "loginSubtitle": "Masuk dengan email atau akun Google Anda.",
     "loginHeadline": "Masuk ke EGI Media",
     "loginLede": "Akses akun Anda untuk pengalaman membaca yang lebih jelas dan personal di seluruh liputan kami.",
+    "forgotPassword": "Lupa password?",
+    "forgotHeadline": "Atur ulang password Anda",
+    "forgotLede": "Masukkan email yang terhubung dengan akun Anda. Kami akan mengirim tautan aman untuk membuat password baru.",
+    "forgotTitle": "Lupa password",
+    "forgotSubtitle": "Kami akan mengirim tautan reset jika alamat ini terdaftar.",
+    "forgotSubmit": "Kirim tautan reset",
+    "forgotSending": "Mengirim...",
+    "forgotSentTitle": "Periksa email Anda",
+    "forgotSentBody": "Jika ada akun untuk {email}, kami telah mengirim tautan reset password. Buka email dan ikuti petunjuk dalam satu jam.",
+    "resetHeadline": "Buat password baru",
+    "resetLede": "Pilih password baru yang kuat untuk akun EGI Media Anda.",
+    "resetTitle": "Atur password baru",
+    "resetSubtitle": "Masukkan dan konfirmasi password baru Anda di bawah ini.",
+    "newPassword": "Password baru",
+    "showPassword": "Tampilkan password",
+    "hidePassword": "Sembunyikan password",
+    "resetSubmit": "Perbarui password",
+    "resetSaving": "Memperbarui...",
+    "resetSuccessTitle": "Password diperbarui",
+    "resetSuccessBody": "Password Anda telah diubah. Anda sekarang dapat masuk dengan password baru.",
     "registerTitle": "Bergabung dengan EGI Media",
     "registerSubtitle": "Buat akun dan verifikasi email Anda untuk memulai.",
     "registerHeadline": "Buat akun Anda",
@@ -115,6 +150,9 @@
       "resendFailed": "Tidak dapat mengirim ulang email verifikasi.",
       "verifyFailed": "Tidak dapat memverifikasi email Anda.",
       "missingToken": "Token verifikasi tidak ditemukan.",
+      "missingResetToken": "Token reset tidak valid atau hilang. Minta tautan reset password baru.",
+      "forgotPasswordFailed": "Tidak dapat mengirim tautan reset. Silakan coba lagi.",
+      "resetPasswordFailed": "Tidak dapat mengatur ulang password. Tautan mungkin sudah kedaluwarsa.",
       "googleFailed": "Masuk Google gagal. Silakan coba lagi."
     }
   },
@@ -137,6 +175,78 @@
     "signInTitle": "Masuk untuk melihat notifikasi",
     "signInMessage": "Anda harus masuk untuk melihat notifikasi yang dikirim ke akun Anda.",
     "signInCta": "Masuk"
+  },
+  "newslettersPage": {
+    "kicker": "Newsletter",
+    "headline": "Ringkasan pilihan, langsung ke email Anda",
+    "lede": "Pilih newsletter EGI Media yang paling relevan untuk Anda. Kelola langganan kapan saja — terhubung dengan akun Anda.",
+    "listingHeading": "Semua newsletter",
+    "count": "{count} newsletter",
+    "empty": "Belum ada newsletter yang tersedia.",
+    "noDescription": "Tidak ada deskripsi.",
+    "subscribe": "Langganan",
+    "subscribed": "Berlangganan",
+    "processing": "Menyimpan...",
+    "signInTitle": "Masuk untuk mengelola newsletter",
+    "signInMessage": "Anda harus masuk untuk berlangganan newsletter pada akun Anda.",
+    "signInCta": "Masuk",
+    "frequency": {
+      "daily": "Harian",
+      "weekly": "Mingguan",
+      "monthly": "Bulanan"
+    }
+  },
+  "savedArticlesPage": {
+    "kicker": "Akun Anda",
+    "headline": "Artikel tersimpan Anda",
+    "lede": "Semua artikel yang Anda simpan, terkumpul di satu tempat. Lanjutkan membaca kapan saja — terhubung dengan akun Anda.",
+    "listingHeading": "Artikel tersimpan",
+    "count": "{count} tersimpan",
+    "empty": "Anda belum menyimpan artikel apa pun. Ketuk Simpan pada artikel mana pun untuk menyimpannya di sini.",
+    "savedOn": "Disimpan {date}",
+    "remove": "Hapus",
+    "removing": "Menghapus...",
+    "signInTitle": "Masuk untuk melihat artikel tersimpan",
+    "signInMessage": "Anda harus masuk untuk melihat artikel yang tersimpan di akun Anda.",
+    "signInCta": "Masuk"
+  },
+  "unsaveDialog": {
+    "title": "Hapus dari tersimpan?",
+    "message": "Artikel ini akan dihapus dari daftar tersimpan Anda. Anda bisa menyimpannya lagi kapan saja.",
+    "confirm": "Ya, hapus",
+    "cancel": "Batal"
+  },
+  "profilePage": {
+    "kicker": "Akun Anda",
+    "headline": "Pengaturan profil",
+    "lede": "Jaga detail akun Anda tetap terkini. Perbarui nama tampilan dan password di satu tempat.",
+    "signInTitle": "Masuk untuk mengelola profil",
+    "signInMessage": "Anda harus masuk untuk memperbarui nama atau password.",
+    "signInCta": "Masuk",
+    "nameHeading": "Nama tampilan",
+    "nameLede": "Nama ini muncul di menu akun dan aktivitas akun Anda.",
+    "emailLabel": "Email",
+    "fullNameLabel": "Nama lengkap",
+    "saveName": "Simpan nama",
+    "nameSuccess": "Nama tampilan Anda telah diperbarui.",
+    "passwordHeading": "Password",
+    "passwordLede": "Pilih password yang kuat minimal 8 karakter.",
+    "passwordSocialNote": "Akun ini menggunakan login sosial. Perubahan password dikelola melalui akun Google Anda.",
+    "oldPassword": "Password saat ini",
+    "newPassword": "Password baru",
+    "confirmPassword": "Konfirmasi password baru",
+    "showPassword": "Tampilkan password",
+    "hidePassword": "Sembunyikan password",
+    "savePassword": "Perbarui password",
+    "passwordSuccess": "Password Anda telah diperbarui.",
+    "saving": "Menyimpan...",
+    "validation": {
+      "oldPasswordRequired": "Password saat ini wajib diisi"
+    },
+    "errors": {
+      "nameFailed": "Tidak dapat memperbarui nama. Silakan coba lagi.",
+      "passwordFailed": "Tidak dapat memperbarui password. Periksa password saat ini Anda."
+    }
   },
   "worldClock": {
     "ariaLabel": "Jam dunia",
@@ -167,8 +277,6 @@
     "kicker": "Buletin Unggulan",
     "fallbackTitle": "Selangkah lebih depan bersama EGI Media",
     "description": "Dapatkan wawasan editorial premium langsung ke kotak masuk Anda. Liputan pilihan untuk profesional yang membutuhkan kejelasan.",
-    "emailLabel": "Alamat email",
-    "emailPlaceholder": "Masukkan email Anda",
     "subscribe": "Berlangganan",
     "tagline": "Wawasan tepercaya · Desain bersih"
   },
@@ -274,6 +382,27 @@
       "lede": "Kebijakan, kekuasaan, dan urusan publik — liputan politik untuk pembaca yang membutuhkan konteks, bukan kebisingan.",
       "metaTitle": "Politik",
       "metaDescription": "Liputan politik EGI Media — kebijakan, pemerintahan, dan urusan publik diurutkan berdasarkan waktu terbit terbaru."
+    },
+    "sports": {
+      "kicker": "Kategori",
+      "headline": "Olahraga",
+      "lede": "Kompetisi, atlet, dan cerita di balik skor — liputan olahraga dengan kejelasan dan tempo yang tepat.",
+      "metaTitle": "Olahraga",
+      "metaDescription": "Liputan olahraga EGI Media — kompetisi, atlet, dan event olahraga utama diurutkan berdasarkan waktu terbit terbaru."
+    },
+    "entertainment": {
+      "kicker": "Kategori",
+      "headline": "Hiburan",
+      "lede": "Film, musik, budaya, dan tokoh yang membentuk dunia hiburan — diliput dengan ketelitian editorial.",
+      "metaTitle": "Hiburan",
+      "metaDescription": "Liputan hiburan EGI Media — film, musik, budaya, dan berita selebritas diurutkan berdasarkan waktu terbit terbaru."
+    },
+    "column": {
+      "kicker": "Kategori",
+      "headline": "Kolom",
+      "lede": "Opini dan analisis dari penulis EGI Media — sudut pandang tajam tentang isu yang penting.",
+      "metaTitle": "Kolom",
+      "metaDescription": "Kolom EGI Media — opini dan analisis dari penulis kami, diurutkan berdasarkan waktu terbit terbaru."
     },
     "egiNews": {
       "kicker": "EGI Media",
@@ -548,6 +677,10 @@
   "article": {
     "publishedOn": "Dipublikasikan {date}",
     "shareTitle": "Bagikan",
+    "saveTitle": "Simpan",
+    "save": "Simpan",
+    "saved": "Tersimpan",
+    "saving": "Menyimpan...",
     "shareCopy": "Salin tautan",
     "shareWhatsapp": "WhatsApp",
     "shareFacebook": "Facebook",

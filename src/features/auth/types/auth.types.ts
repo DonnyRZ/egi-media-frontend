@@ -25,3 +25,12 @@ export interface LoginPayload {
   email: string;
   password: string;
 }
+
+export interface UpdateNamePayload {
+  fullName: string;
+}
+
+export interface ChangePasswordPayload {
+  oldPassword: string;
+  newPassword: string;
+}

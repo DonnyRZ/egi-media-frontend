@@ -28,12 +28,23 @@
     "checkEmailDescription": "EGI Media hisobingizni faollashtirish uchun elektron pochtangizni tasdiqlang.",
     "verifyEmailTitle": "Elektron pochtani tasdiqlash",
     "verifyEmailDescription": "EGI Media hisobini yaratishni yakunlash uchun elektron pochtangizni tasdiqlang.",
+    "forgotPasswordTitle": "Parolni unutdingizmi",
+    "forgotPasswordDescription": "EGI Media hisobingiz uchun parolni tiklash havolasini so‘rang.",
+    "resetPasswordTitle": "Parolni tiklash",
+    "resetPasswordDescription": "Elektron pochta orqali tasdiqlangan havola bilan EGI Media hisobingiz uchun yangi parol yarating.",
     "notificationsTitle": "Bildirishnomalar",
-    "notificationsDescription": "EGI Media hisobingizga yuborilgan barcha bildirishnomalarni ko‘ring — e'lonlar, faoliyat va ogohlantirishlar."
+    "notificationsDescription": "EGI Media hisobingizga yuborilgan barcha bildirishnomalarni ko‘ring — e'lonlar, faoliyat va ogohlantirishlar.",
+    "newslettersTitle": "Axborot byulletenlari",
+    "newslettersDescription": "Hisobingiz obuna bo‘lgan EGI Media byulletenlarini ko‘ring va boshqaring.",
+    "savedTitle": "Saqlangan maqolalar",
+    "savedDescription": "Hisobingizga saqlagan EGI Media maqolalarini qayta ko‘ring — tez kirish uchun tartiblangan.",
+    "profileTitle": "Hisob profili",
+    "profileDescription": "EGI Media hisobingizning ko‘rsatiladigan ismi va parolini xavfsiz yangilang."
   },
   "header": {
     "homeAria": "{siteName} bosh sahifasi",
     "newsletters": "Axborotnomalar",
+    "saved": "Saqlangan",
     "signIn": "Kirish",
     "subscribe": "Obuna boʻlish",
     "toggleMenu": "Menyuni ochish",
@@ -48,6 +59,9 @@
       "business": "Biznes",
       "technology": "Texnologiya",
       "politics": "Siyosat",
+      "sports": "Sport",
+      "entertainment": "Koʻngilochar",
+      "column": "Rubrika",
       "egiNews": "EGI Yangiliklari",
       "series": "Turkumlar",
       "videos": "Videolar"
@@ -66,6 +80,7 @@
     "loginSuccessTitle": "Muvaffaqiyatli kirdingiz",
     "loginSuccessBody": "Qaytib kelganingiz bilan. Bosh sahifaga oʻtish uchun quyidagi tugmani bosing.",
     "continueToHome": "OK, davom etish",
+    "profile": "Profil",
     "signOut": "Chiqish",
     "createAccount": "Hisob yaratish",
     "creatingAccount": "Hisob yaratilmoqda...",
@@ -76,6 +91,26 @@
     "loginSubtitle": "Elektron pochta yoki Google hisobi orqali kiring.",
     "loginHeadline": "EGI Mediaga kirish",
     "loginLede": "Hisobingizga kiring va barcha reportajlarimizda aniqroq, shaxsiy oʻqish tajribasiga ega boʻling.",
+    "forgotPassword": "Parolni unutdingizmi?",
+    "forgotHeadline": "Parolingizni tiklang",
+    "forgotLede": "Hisobingizga bog‘langan elektron pochtani kiriting. Yangi parol yaratish uchun xavfsiz havola yuboramiz.",
+    "forgotTitle": "Parolni unutdingizmi",
+    "forgotSubtitle": "Agar bu manzil ro‘yxatdan o‘tgan bo‘lsa, tiklash havolasini yuboramiz.",
+    "forgotSubmit": "Tiklash havolasini yuborish",
+    "forgotSending": "Yuborilmoqda...",
+    "forgotSentTitle": "Elektron pochtangizni tekshiring",
+    "forgotSentBody": "Agar {email} uchun hisob mavjud bo‘lsa, parolni tiklash havolasini yubordik. Xatni oching va bir soat ichida ko‘rsatmalarga amal qiling.",
+    "resetHeadline": "Yangi parol yarating",
+    "resetLede": "EGI Media hisobingiz uchun kuchli yangi parol tanlang.",
+    "resetTitle": "Yangi parol o‘rnating",
+    "resetSubtitle": "Quyida yangi parolingizni kiriting va tasdiqlang.",
+    "newPassword": "Yangi parol",
+    "showPassword": "Parolni ko‘rsatish",
+    "hidePassword": "Parolni yashirish",
+    "resetSubmit": "Parolni yangilash",
+    "resetSaving": "Yangilanmoqda...",
+    "resetSuccessTitle": "Parol yangilandi",
+    "resetSuccessBody": "Parolingiz o‘zgartirildi. Endi yangi parol bilan tizimga kirishingiz mumkin.",
     "registerTitle": "EGI Mediaga qoʻshiling",
     "registerSubtitle": "Hisob yarating va boshlash uchun elektron pochtangizni tasdiqlang.",
     "registerHeadline": "Hisobingizni yarating",
@@ -115,6 +150,9 @@
       "resendFailed": "Tasdiqlash xatini qayta yuborib boʻlmadi.",
       "verifyFailed": "Elektron pochtangizni tasdiqlab boʻlmadi.",
       "missingToken": "Tasdiqlash tokeni topilmadi.",
+      "missingResetToken": "Tiklash tokeni yoʻq yoki yaroqsiz. Yangi parol tiklash havolasini so‘rang.",
+      "forgotPasswordFailed": "Tiklash havolasini yuborib boʻlmadi. Qayta urinib koʻring.",
+      "resetPasswordFailed": "Parolni tiklab boʻlmadi. Havola muddati oʻtgan boʻlishi mumkin.",
       "googleFailed": "Google orqali kirish muvaffaqiyatsiz. Qayta urinib koʻring."
     }
   },
@@ -137,6 +175,78 @@
     "signInTitle": "Bildirishnomalarni ko‘rish uchun tizimga kiring",
     "signInMessage": "Hisobingizga yuborilgan bildirishnomalarni ko‘rish uchun tizimga kirishingiz kerak.",
     "signInCta": "Kirish"
+  },
+  "newslettersPage": {
+    "kicker": "Byulletenlar",
+    "headline": "Saralangan xulosalar to‘g‘ridan-to‘g‘ri pochtangizga",
+    "lede": "Siz uchun muhim EGI Media byulletenlarini tanlang. Obunalaringizni istalgan vaqtda boshqaring — hisobingizga bog‘langan.",
+    "listingHeading": "Barcha byulletenlar",
+    "count": "{count} ta byulleten",
+    "empty": "Hozircha byulletenlar mavjud emas.",
+    "noDescription": "Tavsif berilmagan.",
+    "subscribe": "Obuna bo‘lish",
+    "subscribed": "Obuna bo‘lingan",
+    "processing": "Saqlanmoqda...",
+    "signInTitle": "Byulletenlarni boshqarish uchun tizimga kiring",
+    "signInMessage": "Hisobingiz uchun byulletenlarga obuna bo‘lish uchun tizimga kirishingiz kerak.",
+    "signInCta": "Kirish",
+    "frequency": {
+      "daily": "Kunlik",
+      "weekly": "Haftalik",
+      "monthly": "Oylik"
+    }
+  },
+  "savedArticlesPage": {
+    "kicker": "Hisobingiz",
+    "headline": "Saqlangan maqolalaringiz",
+    "lede": "Siz saqlagan barcha maqolalar bir joyda. Istalgan vaqtda o‘qishni davom ettiring — hisobingizga bog‘langan.",
+    "listingHeading": "Saqlangan maqolalar",
+    "count": "{count} ta saqlangan",
+    "empty": "Siz hali hech qanday maqola saqlamadingiz. Uni shu yerda saqlash uchun istalgan maqolada Saqlash tugmasini bosing.",
+    "savedOn": "Saqlangan {date}",
+    "remove": "O‘chirish",
+    "removing": "O‘chirilmoqda...",
+    "signInTitle": "Saqlangan maqolalarni ko‘rish uchun tizimga kiring",
+    "signInMessage": "Hisobingizga saqlangan maqolalarni ko‘rish uchun tizimga kirishingiz kerak.",
+    "signInCta": "Kirish"
+  },
+  "unsaveDialog": {
+    "title": "Saqlanganlardan o‘chirilsinmi?",
+    "message": "Bu maqola saqlangan ro‘yxatingizdan o‘chiriladi. Uni istalgan vaqtda qayta saqlashingiz mumkin.",
+    "confirm": "Ha, o‘chirish",
+    "cancel": "Bekor qilish"
+  },
+  "profilePage": {
+    "kicker": "Hisobingiz",
+    "headline": "Profil sozlamalari",
+    "lede": "Hisob ma’lumotlaringizni yangilab boring. Ko‘rsatiladigan ism va parolni bir joyda yangilang.",
+    "signInTitle": "Profilni boshqarish uchun tizimga kiring",
+    "signInMessage": "Ism yoki parolni yangilash uchun tizimga kirishingiz kerak.",
+    "signInCta": "Kirish",
+    "nameHeading": "Ko‘rsatiladigan ism",
+    "nameLede": "Bu ism hisob menyusi va hisob faoliyatingizda ko‘rinadi.",
+    "emailLabel": "Elektron pochta",
+    "fullNameLabel": "To‘liq ism",
+    "saveName": "Ismni saqlash",
+    "nameSuccess": "Ko‘rsatiladigan ismingiz yangilandi.",
+    "passwordHeading": "Parol",
+    "passwordLede": "Kamida 8 belgidan iborat kuchli parol tanlang.",
+    "passwordSocialNote": "Bu hisob ijtimoiy tarmoq orqali kirishdan foydalanadi. Parol o‘zgarishlari Google hisobingiz orqali boshqariladi.",
+    "oldPassword": "Joriy parol",
+    "newPassword": "Yangi parol",
+    "confirmPassword": "Yangi parolni tasdiqlang",
+    "showPassword": "Parolni ko‘rsatish",
+    "hidePassword": "Parolni yashirish",
+    "savePassword": "Parolni yangilash",
+    "passwordSuccess": "Parolingiz yangilandi.",
+    "saving": "Saqlanmoqda...",
+    "validation": {
+      "oldPasswordRequired": "Joriy parol majburiy"
+    },
+    "errors": {
+      "nameFailed": "Ismni yangilab bo‘lmadi. Qayta urinib ko‘ring.",
+      "passwordFailed": "Parolni yangilab bo‘lmadi. Joriy parolingizni tekshiring."
+    }
   },
   "worldClock": {
     "ariaLabel": "Jahon soatlari",
@@ -167,8 +277,6 @@
     "kicker": "Bosh axborotnoma",
     "fallbackTitle": "EGI Media bilan bir qadam oldinda",
     "description": "Premium tahririy tahlillarni pochtangizga oling. Aniqlikni qadrlaydigan mutaxassislar uchun tanlangan xabarlar.",
-    "emailLabel": "Elektron pochta manzili",
-    "emailPlaceholder": "Elektron pochtangizni kiriting",
     "subscribe": "Obuna boʻlish",
     "tagline": "Ishonchli tahlil · Toza dizayn"
   },
@@ -274,6 +382,27 @@
       "lede": "Siyosat, hokimiyat va jamoat ishlari — shovqin emas, kontekst kerak boʻlgan oʻquvchilar uchun siyosiy reportaj.",
       "metaTitle": "Siyosat",
       "metaDescription": "EGI Media siyosat reportajlari — siyosat, boshqaruv va jamoat ishlari eng soʻnggi nashr sanasi boʻyicha."
+    },
+    "sports": {
+      "kicker": "Kategoriya",
+      "headline": "Sport",
+      "lede": "Musobaqalar, sportchilar va natija ortidagi hikoyalar — aniqlik va surʼat bilan sport reportajlari.",
+      "metaTitle": "Sport",
+      "metaDescription": "EGI Media sport reportajlari — musobaqalar, sportchilar va asosiy sport voqealari eng soʻnggi nashr sanasi boʻyicha."
+    },
+    "entertainment": {
+      "kicker": "Kategoriya",
+      "headline": "Koʻngilochar",
+      "lede": "Kino, musiqa, madaniyat va mashhur koʻngilochar olamini shakllantiruvchi odamlar — tahririy ehtiyotkorlik bilan.",
+      "metaTitle": "Koʻngilochar",
+      "metaDescription": "EGI Media koʻngilochar reportajlari — kino, musiqa, madaniyat va mashhurlar yangiliklari eng soʻnggi nashr sanasi boʻyicha."
+    },
+    "column": {
+      "kicker": "Kategoriya",
+      "headline": "Rubrika",
+      "lede": "EGI Media yozuvchilaridan fikr va tahlil — muhim voqealarga oʻtkir nigoh.",
+      "metaTitle": "Rubrika",
+      "metaDescription": "EGI Media rubrikalari — yozuvchilarimizdan fikr va tahlil, eng soʻnggi nashr sanasi boʻyicha."
     },
     "egiNews": {
       "kicker": "EGI Media",
@@ -548,6 +677,10 @@
   "article": {
     "publishedOn": "Chop etilgan {date}",
     "shareTitle": "Ulashish",
+    "saveTitle": "Saqlash",
+    "save": "Saqlash",
+    "saved": "Saqlangan",
+    "saving": "Saqlanmoqda...",
     "shareCopy": "Havolani nusxalash",
     "shareWhatsapp": "WhatsApp",
     "shareFacebook": "Facebook",

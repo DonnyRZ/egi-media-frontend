@@ -8,6 +8,7 @@ import { Link } from "@/i18n/navigation";
 import { Button } from "@/shared/components/ui/Button";
 import { Container } from "@/shared/components/layout/Container";
 import { AuthUserMenu, AuthMobileActions } from "@/features/auth/components/AuthUserMenu";
+import { useAuthStore } from "@/features/auth/stores/auth.store";
 import { NotificationBell } from "@/features/notifications/components/NotificationBell";
 import { LanguageSwitcher } from "@/features/language/components/LanguageSwitcher";
 import { HEADER_CATEGORY_SLUGS } from "@/shared/constants/header-categories.constants";
@@ -28,14 +29,19 @@ const NAV_ITEMS = [
   { key: "business", href: `/categories/${HEADER_CATEGORY_SLUGS.business}` },
   { key: "technology", href: `/categories/${HEADER_CATEGORY_SLUGS.technology}` },
   { key: "politics", href: `/categories/${HEADER_CATEGORY_SLUGS.politics}` },
+  { key: "sports", href: `/categories/${HEADER_CATEGORY_SLUGS.sports}` },
+  { key: "entertainment", href: `/categories/${HEADER_CATEGORY_SLUGS.entertainment}` },
   { key: "egiNews", href: `/categories/${HEADER_CATEGORY_SLUGS.egiNews}` },
   { key: "series", href: "/series" },
   { key: "videos", href: "/videos" },
+  { key: "column", href: `/categories/${HEADER_CATEGORY_SLUGS.column}` },
 ] as const;
 
 function UtilityBar() {
   const t = useTranslations("header");
   const format = useFormatter();
+  const isHydrated = useAuthStore((state) => state.isHydrated);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   return (
     <div className="hidden border-b border-neutral-200 bg-white lg:block">
@@ -53,6 +59,11 @@ function UtilityBar() {
             <Link className="hover:text-accent" href="/newsletters">
               {t("newsletters")}
             </Link>
+            {isHydrated && isAuthenticated ? (
+              <Link className="hover:text-accent" href="/saved">
+                {t("saved")}
+              </Link>
+            ) : null}
             <span aria-hidden="true" className="text-neutral-300">
               |
             </span>

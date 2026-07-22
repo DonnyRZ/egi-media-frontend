@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { ArticleShareBar } from "@/features/article/components/ArticleShareBar";
 import { ArticleStats } from "@/features/article/components/ArticleStats";
+import { SaveArticleButton } from "@/features/saved-articles/components/SaveArticleButton";
 import { trackArticleView } from "@/shared/repositories/article.repository";
 
 interface ArticleEngagementProps {
@@ -49,12 +50,15 @@ export function ArticleEngagement({
   return (
     <div className="flex flex-col gap-6 border-y border-neutral-200 py-6 sm:flex-row sm:items-start sm:justify-between">
       <ArticleStats shareCount={shareCount} viewCount={viewCount} />
-      <ArticleShareBar
-        articleId={articleId}
-        onShareRecorded={setShareCount}
-        shareUrl={shareUrl}
-        title={title}
-      />
+      <div className="flex flex-col gap-5 sm:items-end">
+        <SaveArticleButton articleId={articleId} />
+        <ArticleShareBar
+          articleId={articleId}
+          onShareRecorded={setShareCount}
+          shareUrl={shareUrl}
+          title={title}
+        />
+      </div>
     </div>
   );
 }

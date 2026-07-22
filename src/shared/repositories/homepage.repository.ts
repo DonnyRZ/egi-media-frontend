@@ -27,12 +27,6 @@ async function fetchByPlacement(
   return result.items;
 }
 
-function collectIds(articles: Article[], into: Set<string>) {
-  for (const article of articles) {
-    into.add(article.id);
-  }
-}
-
 async function buildCategoryGroups(
   lang: ContentLocale,
   usedIds: Set<string>,
@@ -106,13 +100,18 @@ async function buildTopicGroups(
 }
 
 /**
- * Homepage feed driven by CMS placement tags.
- * Placement sections can intentionally share an article when it has multiple tags.
- * Taxonomy blocks still de-dupe against those IDs to reduce repetition.
+ * Homepage feed driven by CMS placement tags, with scoped taxonomy de-dup:
+ * - Primary sections (hero, headlines, trending, latest) come from placements
+ *   and may intentionally share an article when it has multiple tags.
+ * - Taxonomy sections (category + topic) share a separate used-id set so they
+ *   stay filled even on a small catalog.
+ * - Category is built before topic so By Category is not starved.
  */
 export async function getHomepageNews(
   lang: ContentLocale = "id",
 ): Promise<HomepageNewsData> {
+  const taxonomyUsedIds = new Set<string>();
+
   const [heroItems, headlines, trending, latest, popularPool] =
     await Promise.all([
       fetchByPlacement(
@@ -143,14 +142,10 @@ export async function getHomepageNews(
       }),
     ]);
 
-  const usedIds = new Set<string>();
-  collectIds(heroItems, usedIds);
-  collectIds(headlines, usedIds);
-  collectIds(trending, usedIds);
-  collectIds(latest, usedIds);
-
-  const topics = await buildTopicGroups(lang, usedIds);
-  const categories = await buildCategoryGroups(lang, usedIds);
+  // Category before topic so the By Category section is never empty when
+  // both compete for the same small taxonomy pool.
+  const categories = await buildCategoryGroups(lang, taxonomyUsedIds);
+  const topics = await buildTopicGroups(lang, taxonomyUsedIds);
 
   return {
     hero: {

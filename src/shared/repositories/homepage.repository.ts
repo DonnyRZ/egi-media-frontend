@@ -81,17 +81,18 @@ async function buildTopicGroups(
 }
 
 /**
- * Single homepage article feed with strict de-duplication:
- * each article ID appears in at most one section.
- *
- * The primary feeds (hero, breaking, latest) are allocated first so they
- * are never starved when the catalog is small; taxonomy sections (topic +
- * category) then draw from whatever unique articles remain.
+ * Homepage article feed with scoped de-duplication:
+ * - Primary feeds (hero, breaking, latest) never repeat the same article.
+ * - Taxonomy sections (topic + category) share a separate used-id set so they
+ *   stay filled even on a small catalog, without starving Latest News.
+ * - An article may appear in both a primary feed and a taxonomy column —
+ *   the same pattern used by Bloomberg / Semafor category rails.
  */
 export async function getHomepageNews(
   lang: ContentLocale = "id",
 ): Promise<HomepageNewsData> {
-  const usedIds = new Set<string>();
+  const primaryUsedIds = new Set<string>();
+  const taxonomyUsedIds = new Set<string>();
 
   const [latestPool, popularPool] = await Promise.all([
     fetchArticles({
@@ -110,25 +111,29 @@ export async function getHomepageNews(
 
   const heroCount =
     HOMEPAGE_LIMITS.heroFeatured + HOMEPAGE_LIMITS.heroHeadlines;
-  const heroItems = takeUniqueArticles(latestPool.items, heroCount, usedIds);
+  const heroItems = takeUniqueArticles(
+    latestPool.items,
+    heroCount,
+    primaryUsedIds,
+  );
   const [featured, ...headlines] = heroItems;
 
   const breaking = takeUniqueArticles(
     latestPool.items,
     HOMEPAGE_LIMITS.breakingNews,
-    usedIds,
+    primaryUsedIds,
   );
 
   const latest = takeUniqueArticles(
     latestPool.items,
     HOMEPAGE_LIMITS.latestNews,
-    usedIds,
+    primaryUsedIds,
   );
 
-  // Taxonomy groups run after the main feeds so an article cannot appear in
-  // both, and so the latest/breaking sections always render.
-  const topics = await buildTopicGroups(lang, usedIds);
-  const categories = await buildCategoryGroups(lang, usedIds);
+  // Category before topic so the By Category section is never empty when
+  // both compete for the same small taxonomy pool.
+  const categories = await buildCategoryGroups(lang, taxonomyUsedIds);
+  const topics = await buildTopicGroups(lang, taxonomyUsedIds);
 
   // Popular keeps its own ranking (like before) and always shows a full list.
   const editors = popularPool.items.slice(0, HOMEPAGE_LIMITS.editorsPicks);

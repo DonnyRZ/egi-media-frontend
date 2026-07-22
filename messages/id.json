@@ -59,6 +59,9 @@
       "business": "Bisnis",
       "technology": "Teknologi",
       "politics": "Politik",
+      "sports": "Olahraga",
+      "entertainment": "Hiburan",
+      "column": "Kolom",
       "egiNews": "Berita EGI",
       "series": "Seri",
       "videos": "Video"
@@ -379,6 +382,27 @@
       "lede": "Kebijakan, kekuasaan, dan urusan publik — liputan politik untuk pembaca yang membutuhkan konteks, bukan kebisingan.",
       "metaTitle": "Politik",
       "metaDescription": "Liputan politik EGI Media — kebijakan, pemerintahan, dan urusan publik diurutkan berdasarkan waktu terbit terbaru."
+    },
+    "sports": {
+      "kicker": "Kategori",
+      "headline": "Olahraga",
+      "lede": "Kompetisi, atlet, dan cerita di balik skor — liputan olahraga dengan kejelasan dan tempo yang tepat.",
+      "metaTitle": "Olahraga",
+      "metaDescription": "Liputan olahraga EGI Media — kompetisi, atlet, dan event olahraga utama diurutkan berdasarkan waktu terbit terbaru."
+    },
+    "entertainment": {
+      "kicker": "Kategori",
+      "headline": "Hiburan",
+      "lede": "Film, musik, budaya, dan tokoh yang membentuk dunia hiburan — diliput dengan ketelitian editorial.",
+      "metaTitle": "Hiburan",
+      "metaDescription": "Liputan hiburan EGI Media — film, musik, budaya, dan berita selebritas diurutkan berdasarkan waktu terbit terbaru."
+    },
+    "column": {
+      "kicker": "Kategori",
+      "headline": "Kolom",
+      "lede": "Opini dan analisis dari penulis EGI Media — sudut pandang tajam tentang isu yang penting.",
+      "metaTitle": "Kolom",
+      "metaDescription": "Kolom EGI Media — opini dan analisis dari penulis kami, diurutkan berdasarkan waktu terbit terbaru."
     },
     "egiNews": {
       "kicker": "EGI Media",

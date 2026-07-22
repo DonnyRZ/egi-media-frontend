@@ -59,6 +59,9 @@
       "business": "Business",
       "technology": "Technology",
       "politics": "Politics",
+      "sports": "Sports",
+      "entertainment": "Entertainment",
+      "column": "Column",
       "egiNews": "EGI News",
       "series": "Series",
       "videos": "Videos"
@@ -379,6 +382,27 @@
       "lede": "Policy, power, and public affairs — political reporting built for readers who need context, not noise.",
       "metaTitle": "Politics",
       "metaDescription": "EGI Media politics coverage — policy, governance, and public affairs sorted by latest publish date."
+    },
+    "sports": {
+      "kicker": "Category",
+      "headline": "Sports",
+      "lede": "Competition, athletes, and the stories behind the score — sports coverage with clarity and pace.",
+      "metaTitle": "Sports",
+      "metaDescription": "EGI Media sports coverage — competition, athletes, and major sporting events sorted by latest publish date."
+    },
+    "entertainment": {
+      "kicker": "Category",
+      "headline": "Entertainment",
+      "lede": "Film, music, culture, and the people shaping popular entertainment — reported with editorial care.",
+      "metaTitle": "Entertainment",
+      "metaDescription": "EGI Media entertainment coverage — film, music, culture, and celebrity news sorted by latest publish date."
+    },
+    "column": {
+      "kicker": "Category",
+      "headline": "Column",
+      "lede": "Opinion and analysis from EGI Media writers — sharp perspectives on the stories that matter.",
+      "metaTitle": "Column",
+      "metaDescription": "EGI Media columns — opinion and analysis from our writers, sorted by latest publish date."
     },
     "egiNews": {
       "kicker": "EGI Media",

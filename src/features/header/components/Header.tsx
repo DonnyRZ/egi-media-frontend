@@ -29,9 +29,12 @@ const NAV_ITEMS = [
   { key: "business", href: `/categories/${HEADER_CATEGORY_SLUGS.business}` },
   { key: "technology", href: `/categories/${HEADER_CATEGORY_SLUGS.technology}` },
   { key: "politics", href: `/categories/${HEADER_CATEGORY_SLUGS.politics}` },
+  { key: "sports", href: `/categories/${HEADER_CATEGORY_SLUGS.sports}` },
+  { key: "entertainment", href: `/categories/${HEADER_CATEGORY_SLUGS.entertainment}` },
   { key: "egiNews", href: `/categories/${HEADER_CATEGORY_SLUGS.egiNews}` },
   { key: "series", href: "/series" },
   { key: "videos", href: "/videos" },
+  { key: "column", href: `/categories/${HEADER_CATEGORY_SLUGS.column}` },
 ] as const;
 
 function UtilityBar() {

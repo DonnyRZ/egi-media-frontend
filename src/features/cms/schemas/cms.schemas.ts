@@ -28,6 +28,9 @@ export const articleFormSchema = z.object({
   seriesId: z.string().optional(),
   topicIds: z.array(z.string()),
   tagIds: z.array(z.string()),
+  placements: z.array(
+    z.enum(["latest_news", "homepage_hero", "headline", "trending"]),
+  ),
 });
 
 export type ArticleFormValues = z.infer<typeof articleFormSchema>;

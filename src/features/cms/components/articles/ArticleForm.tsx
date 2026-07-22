@@ -103,6 +103,7 @@ export function ArticleForm({
       seriesId: values.seriesId || null,
       topicIds: values.topicIds,
       tagIds: values.tagIds,
+      placements: values.placements,
       translations: buildTranslations(values),
     };
   }

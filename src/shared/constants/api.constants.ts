@@ -10,6 +10,7 @@ export const API_ENDPOINTS = {
   articleView: (id: string) => `/api/v1/articles/${id}/view`,
   articleShare: (id: string) => `/api/v1/articles/${id}/share`,
   articleStatus: (id: string) => `/api/v1/articles/${id}/status`,
+  articlePlacements: (id: string) => `/api/v1/articles/${id}/placements`,
   categories: "/api/v1/categories",
   categoryById: (idOrSlug: string) =>
     `/api/v1/categories/${encodeURIComponent(idOrSlug)}`,

@@ -13,6 +13,7 @@ import { ArticleTable } from "@/features/cms/components/articles/ArticleTable";
 import { BulkActionsBar } from "@/features/cms/components/articles/BulkActionsBar";
 import { ConfirmDialog } from "@/features/cms/components/ui/ConfirmDialog";
 import { ScheduleModal } from "@/features/cms/components/articles/ScheduleModal";
+import { PlacementModal } from "@/features/cms/components/articles/PlacementModal";
 import { Icons } from "@/features/cms/components/ui/Icons";
 import { CMS_DEFAULT_PAGE_SIZE } from "@/features/cms/constants/cms.constants";
 import { useCmsArticles } from "@/features/cms/hooks/useCmsArticles";
@@ -23,6 +24,7 @@ import { useAuthStore } from "@/features/auth/stores/auth.store";
 import { useToast } from "@/features/cms/stores/cms-toast.store";
 import { filterAndSortArticles } from "@/features/cms/utils/article-list.utils";
 import type {
+  ArticlePlacement,
   ArticleStatus,
   CmsArticleListItem,
 } from "@/features/cms/types/cms.types";
@@ -35,7 +37,7 @@ export function ArticleListView() {
   const toast = useToast();
   const { canPublish, isSuperadmin } = usePermissions();
   const currentUserId = useAuthStore((state) => state.user?.id ?? null);
-  const { changeStatus, remove } = useArticleMutations();
+  const { changeStatus, remove, updatePlacements } = useArticleMutations();
 
   const [page, setPage] = useState(1);
   const [status, setStatus] = useState<ArticleStatus | "">("");
@@ -45,6 +47,8 @@ export function ArticleListView() {
   const [pendingDelete, setPendingDelete] = useState<CmsArticleListItem | null>(null);
   const [bulkDeleteOpen, setBulkDeleteOpen] = useState(false);
   const [scheduleIds, setScheduleIds] = useState<string[] | null>(null);
+  const [placementArticle, setPlacementArticle] =
+    useState<CmsArticleListItem | null>(null);
 
   const search = useDebouncedValue(searchInput, 300);
   const { data, isLoading, isError } = useCmsArticles({
@@ -110,6 +114,20 @@ export function ArticleListView() {
       return;
     }
     void applyStatus([article.id], next);
+  }
+
+  async function confirmPlacements(placements: ArticlePlacement[]) {
+    if (!placementArticle) return;
+    try {
+      await updatePlacements.mutateAsync({
+        id: placementArticle.id,
+        placements,
+      });
+      toast.success("Placements updated");
+      setPlacementArticle(null);
+    } catch (error) {
+      toast.error(errorMessage(error, "Could not update placements"));
+    }
   }
 
   async function confirmDelete() {
@@ -191,6 +209,7 @@ export function ArticleListView() {
               onToggle={toggle}
               onToggleAll={toggleAll}
               onChangeStatus={handleRowStatus}
+              onManagePlacement={setPlacementArticle}
               onDelete={setPendingDelete}
             />
             <Pagination
@@ -233,6 +252,15 @@ export function ArticleListView() {
           if (scheduleIds) void applyStatus(scheduleIds, "scheduled", iso);
           setScheduleIds(null);
         }}
+      />
+
+      <PlacementModal
+        open={Boolean(placementArticle)}
+        title={placementArticle?.title ?? ""}
+        initialPlacements={placementArticle?.placements ?? ["latest_news"]}
+        loading={updatePlacements.isPending}
+        onClose={() => setPlacementArticle(null)}
+        onConfirm={confirmPlacements}
       />
     </>
   );

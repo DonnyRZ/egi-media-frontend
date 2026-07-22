@@ -109,6 +109,7 @@ function toArticleDto(payload: ArticleWritePayload) {
   if (payload.publishedAt !== undefined) dto.published_at = payload.publishedAt;
   if (payload.topicIds !== undefined) dto.topic_ids = payload.topicIds;
   if (payload.tagIds !== undefined) dto.tag_ids = payload.tagIds;
+  if (payload.placements !== undefined) dto.placements = payload.placements;
   if (payload.translations && Object.keys(payload.translations).length > 0) {
     dto.translations = payload.translations;
   }
@@ -144,5 +145,14 @@ export async function changeArticleStatus(
   await axiosClient.patch(API_ENDPOINTS.articleStatus(id), {
     status,
     published_at: publishedAt ?? undefined,
+  });
+}
+
+export async function updateArticlePlacements(
+  id: string,
+  placements: ArticleWritePayload["placements"],
+): Promise<void> {
+  await axiosClient.patch(API_ENDPOINTS.articlePlacements(id), {
+    placements: placements ?? [],
   });
 }

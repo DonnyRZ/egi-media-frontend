@@ -7,6 +7,12 @@ export type ArticleStatus =
   | "published"
   | "archived";
 
+export type ArticlePlacement =
+  | "latest_news"
+  | "homepage_hero"
+  | "headline"
+  | "trending";
+
 export interface CmsArticleListItem {
   id: string;
   title: string;
@@ -14,6 +20,7 @@ export interface CmsArticleListItem {
   summary: string | null;
   featuredImage: string | null;
   status: ArticleStatus;
+  placements: ArticlePlacement[];
   publishedAt: string | null;
   createdAt: string;
   updatedAt: string | null;
@@ -44,6 +51,7 @@ export interface CmsArticleDetail {
   content: string;
   featuredImage: string | null;
   status: ArticleStatus;
+  placements: ArticlePlacement[];
   publishedAt: string | null;
   categoryId: string | null;
   seriesId: string | null;
@@ -65,6 +73,7 @@ export interface ArticleWritePayload {
   publishedAt?: string | null;
   topicIds?: string[];
   tagIds?: string[];
+  placements?: ArticlePlacement[];
   /** en/uz translations; each locale is only sent when it has content. */
   translations?: Partial<Record<"en" | "uz", ArticleTranslation>>;
 }

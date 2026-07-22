@@ -19,6 +19,7 @@ interface ArticleRowActionsProps {
   canEdit: boolean;
   isSuperadmin: boolean;
   onChangeStatus: (status: ArticleStatus) => void;
+  onManagePlacement: () => void;
   onDelete: () => void;
 }
 
@@ -27,6 +28,7 @@ export function ArticleRowActions({
   canEdit,
   isSuperadmin,
   onChangeStatus,
+  onManagePlacement,
   onDelete,
 }: ArticleRowActionsProps) {
   const [open, setOpen] = useState(false);
@@ -85,6 +87,17 @@ export function ArticleRowActions({
           >
             <Icons.edit className="h-4 w-4" /> Edit
           </Link>
+
+          <button
+            className="flex w-full items-center gap-2 px-3 py-2 text-left text-sm text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800"
+            onClick={() => {
+              setOpen(false);
+              onManagePlacement();
+            }}
+            type="button"
+          >
+            <Icons.tag className="h-4 w-4" /> Manage Placement
+          </button>
 
           {transitions.map((status) => {
             const meta = STATUS_ACTION_META[status];

@@ -1,12 +1,37 @@
-import { HOMEPAGE_LIMITS } from "@/shared/constants/homepage.constants";
+import {
+  HOMEPAGE_LIMITS,
+  HOMEPAGE_PLACEMENTS,
+} from "@/shared/constants/homepage.constants";
 import { fetchArticles } from "@/shared/services/article.service";
 import { fetchCategories } from "@/shared/services/category.service";
 import { fetchTopics } from "@/shared/services/topic.service";
-import type { ContentLocale } from "@/shared/types/article.types";
+import type { ArticlePlacement } from "@/shared/types/api.types";
+import type { Article, ContentLocale } from "@/shared/types/article.types";
 import type { CategoryNewsGroup } from "@/shared/types/category.types";
 import type { HomepageNewsData } from "@/shared/types/homepage.types";
 import type { TopicNewsGroup } from "@/shared/types/topic.types";
 import { takeUniqueArticles } from "@/shared/utils/unique-articles";
+
+async function fetchByPlacement(
+  placement: ArticlePlacement,
+  limit: number,
+  lang: ContentLocale,
+): Promise<Article[]> {
+  const result = await fetchArticles({
+    page: 1,
+    limit,
+    placement,
+    sort: "latest",
+    lang,
+  });
+  return result.items;
+}
+
+function collectIds(articles: Article[], into: Set<string>) {
+  for (const article of articles) {
+    into.add(article.id);
+  }
+}
 
 async function buildCategoryGroups(
   lang: ContentLocale,
@@ -81,66 +106,61 @@ async function buildTopicGroups(
 }
 
 /**
- * Single homepage article feed with strict de-duplication:
- * each article ID appears in at most one section.
- *
- * Allocation order keeps taxonomy sections (category + topic)
- * from being starved by the general latest feed.
+ * Homepage feed driven by CMS placement tags.
+ * Placement sections can intentionally share an article when it has multiple tags.
+ * Taxonomy blocks still de-dupe against those IDs to reduce repetition.
  */
 export async function getHomepageNews(
   lang: ContentLocale = "id",
 ): Promise<HomepageNewsData> {
+  const [heroItems, headlines, trending, latest, popularPool] =
+    await Promise.all([
+      fetchByPlacement(
+        HOMEPAGE_PLACEMENTS.hero,
+        HOMEPAGE_LIMITS.heroFeatured,
+        lang,
+      ),
+      fetchByPlacement(
+        HOMEPAGE_PLACEMENTS.headline,
+        HOMEPAGE_LIMITS.heroHeadlines,
+        lang,
+      ),
+      fetchByPlacement(
+        HOMEPAGE_PLACEMENTS.trending,
+        HOMEPAGE_LIMITS.breakingNews,
+        lang,
+      ),
+      fetchByPlacement(
+        HOMEPAGE_PLACEMENTS.latestNews,
+        HOMEPAGE_LIMITS.latestNews,
+        lang,
+      ),
+      fetchArticles({
+        page: 1,
+        limit: HOMEPAGE_LIMITS.editorsPicks,
+        sort: "popular",
+        lang,
+      }),
+    ]);
+
   const usedIds = new Set<string>();
+  collectIds(heroItems, usedIds);
+  collectIds(headlines, usedIds);
+  collectIds(trending, usedIds);
+  collectIds(latest, usedIds);
 
-  const [latestPool, popularPool] = await Promise.all([
-    fetchArticles({
-      page: 1,
-      limit: HOMEPAGE_LIMITS.articlePool,
-      sort: "latest",
-      lang,
-    }),
-    fetchArticles({
-      page: 1,
-      limit: HOMEPAGE_LIMITS.articlePool,
-      sort: "popular",
-      lang,
-    }),
-  ]);
-
-  const heroCount =
-    HOMEPAGE_LIMITS.heroFeatured + HOMEPAGE_LIMITS.heroHeadlines;
-  const heroItems = takeUniqueArticles(latestPool.items, heroCount, usedIds);
-  const [featured, ...headlines] = heroItems;
-
-  // Topic then category so taxonomy sections get dedicated unique articles
-  // (an article cannot appear in both).
   const topics = await buildTopicGroups(lang, usedIds);
   const categories = await buildCategoryGroups(lang, usedIds);
 
-  const breaking = takeUniqueArticles(
-    latestPool.items,
-    HOMEPAGE_LIMITS.breakingNews,
-    usedIds,
-  );
-
-  const latest = takeUniqueArticles(
-    latestPool.items,
-    HOMEPAGE_LIMITS.latestNews,
-    usedIds,
-  );
-
-  // Popular keeps its own ranking (like before) and always shows a full list.
-  const editors = popularPool.items.slice(0, HOMEPAGE_LIMITS.editorsPicks);
-
   return {
     hero: {
-      featured: featured ?? null,
-      headlines: headlines.slice(0, HOMEPAGE_LIMITS.heroHeadlines),
+      featured: heroItems[0] ?? null,
+      headlines,
     },
-    breaking,
+    breaking: trending,
     latest,
     categories,
     topics,
-    editors,
+    editors: popularPool.items.slice(0, HOMEPAGE_LIMITS.editorsPicks),
   };
 }

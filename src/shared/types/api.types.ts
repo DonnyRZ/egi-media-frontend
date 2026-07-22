@@ -27,6 +27,12 @@ export interface PaginatedApiResponse<T> {
 
 export type ArticleSort = "latest" | "oldest" | "popular";
 
+export type ArticlePlacement =
+  | "latest_news"
+  | "homepage_hero"
+  | "headline"
+  | "trending";
+
 export interface ArticleListParams {
   page?: number;
   limit?: number;
@@ -36,6 +42,8 @@ export interface ArticleListParams {
   tag_id?: string;
   author_id?: string;
   series_id?: string;
+  /** Public homepage section filter (independent of article status). */
+  placement?: ArticlePlacement;
   sort?: ArticleSort;
   lang?: "id" | "en" | "uz";
 }

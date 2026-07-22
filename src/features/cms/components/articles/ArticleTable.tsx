@@ -1,7 +1,10 @@
 "use client";
 
 import { formatPublishedDate } from "@/shared/utils/format";
-import { StatusBadge } from "@/features/cms/components/ui/Badge";
+import {
+  PlacementBadges,
+  StatusBadge,
+} from "@/features/cms/components/ui/Badge";
 import { ArticleRowActions } from "@/features/cms/components/articles/ArticleRowActions";
 import type {
   ArticleStatus,
@@ -16,6 +19,7 @@ interface ArticleTableProps {
   onToggle: (id: string) => void;
   onToggleAll: () => void;
   onChangeStatus: (article: CmsArticleListItem, status: ArticleStatus) => void;
+  onManagePlacement: (article: CmsArticleListItem) => void;
   onDelete: (article: CmsArticleListItem) => void;
 }
 
@@ -30,6 +34,7 @@ export function ArticleTable({
   onToggle,
   onToggleAll,
   onChangeStatus,
+  onManagePlacement,
   onDelete,
 }: ArticleTableProps) {
   const canEditArticle = (article: CmsArticleListItem) =>
@@ -57,6 +62,7 @@ export function ArticleTable({
             <th className={`${HEAD_CELL} hidden lg:table-cell`}>Author</th>
             <th className={`${HEAD_CELL} hidden md:table-cell`}>Category</th>
             <th className={HEAD_CELL}>Status</th>
+            <th className={`${HEAD_CELL} hidden xl:table-cell`}>Placements</th>
             <th className={`${HEAD_CELL} hidden lg:table-cell`}>Last edited</th>
             <th className={`${HEAD_CELL} text-right`}>Actions</th>
           </tr>
@@ -98,6 +104,9 @@ export function ArticleTable({
                 <td className="px-4 py-3">
                   <StatusBadge status={article.status} />
                 </td>
+                <td className="hidden px-4 py-3 xl:table-cell">
+                  <PlacementBadges placements={article.placements} />
+                </td>
                 <td className="hidden px-4 py-3 text-sm text-neutral-500 lg:table-cell">
                   {formatPublishedDate(article.updatedAt) ||
                     formatPublishedDate(article.createdAt) ||
@@ -109,6 +118,7 @@ export function ArticleTable({
                     canEdit={canEdit}
                     isSuperadmin={isSuperadmin}
                     onChangeStatus={(status) => onChangeStatus(article, status)}
+                    onManagePlacement={() => onManagePlacement(article)}
                     onDelete={() => onDelete(article)}
                   />
                 </td>

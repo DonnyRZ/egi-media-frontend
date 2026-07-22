@@ -1,8 +1,14 @@
 import type { ReactNode } from "react";
 
 import { cn } from "@/shared/lib/cn";
-import { ARTICLE_STATUS_META } from "@/features/cms/constants/cms.constants";
-import type { ArticleStatus } from "@/features/cms/types/cms.types";
+import {
+  ARTICLE_PLACEMENT_META,
+  ARTICLE_STATUS_META,
+} from "@/features/cms/constants/cms.constants";
+import type {
+  ArticlePlacement,
+  ArticleStatus,
+} from "@/features/cms/types/cms.types";
 
 type Tone = "neutral" | "info" | "warning" | "success" | "muted" | "danger";
 
@@ -42,4 +48,27 @@ export function Badge({ tone = "neutral", children, className }: BadgeProps) {
 export function StatusBadge({ status }: { status: ArticleStatus }) {
   const meta = ARTICLE_STATUS_META[status];
   return <Badge tone={meta.tone}>{meta.label}</Badge>;
+}
+
+export function PlacementBadges({
+  placements,
+}: {
+  placements: ArticlePlacement[];
+}) {
+  if (!placements.length) {
+    return <span className="text-xs text-neutral-400">—</span>;
+  }
+
+  return (
+    <div className="flex flex-wrap gap-1">
+      {placements.map((placement) => {
+        const meta = ARTICLE_PLACEMENT_META[placement];
+        return (
+          <Badge key={placement} tone={meta.tone} className="rounded-md px-2">
+            {meta.shortLabel}
+          </Badge>
+        );
+      })}
+    </div>
+  );
 }

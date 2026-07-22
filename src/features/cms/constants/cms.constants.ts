@@ -1,4 +1,8 @@
-import type { ArticleStatus, CmsRole } from "@/features/cms/types/cms.types";
+import type {
+  ArticlePlacement,
+  ArticleStatus,
+  CmsRole,
+} from "@/features/cms/types/cms.types";
 
 export const CMS_BASE_PATH = "/cms";
 
@@ -19,6 +23,25 @@ export const ARTICLE_STATUSES: ArticleStatus[] = [
   "published",
   "archived",
 ];
+
+export const ARTICLE_PLACEMENTS: ArticlePlacement[] = [
+  "latest_news",
+  "homepage_hero",
+  "headline",
+  "trending",
+];
+
+export const DEFAULT_ARTICLE_PLACEMENTS: ArticlePlacement[] = ["latest_news"];
+
+export const ARTICLE_PLACEMENT_META: Record<
+  ArticlePlacement,
+  { label: string; shortLabel: string; tone: "neutral" | "info" | "warning" | "success" }
+> = {
+  latest_news: { label: "Latest News", shortLabel: "Latest", tone: "neutral" },
+  homepage_hero: { label: "Homepage Hero", shortLabel: "Hero", tone: "info" },
+  headline: { label: "Headline", shortLabel: "Headline", tone: "warning" },
+  trending: { label: "Trending", shortLabel: "Trending", tone: "success" },
+};
 
 /**
  * Status transitions allowed by the backend

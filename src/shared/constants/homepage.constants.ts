@@ -15,6 +15,14 @@ export const HOMEPAGE_LIMITS = {
   articlePool: 40,
 } as const;
 
+/** Placement tags used by the public homepage sections. */
+export const HOMEPAGE_PLACEMENTS = {
+  hero: "homepage_hero",
+  headline: "headline",
+  trending: "trending",
+  latestNews: "latest_news",
+} as const;
+
 export const QUERY_STALE_TIME = {
   homepage: 5 * 60 * 1000,
 } as const;

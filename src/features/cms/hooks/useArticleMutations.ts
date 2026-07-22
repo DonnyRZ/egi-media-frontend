@@ -8,8 +8,10 @@ import {
   createArticle,
   deleteArticle,
   updateArticle,
+  updateArticlePlacements,
 } from "@/features/cms/services/cms-article.service";
 import type {
+  ArticlePlacement,
   ArticleStatus,
   ArticleWritePayload,
 } from "@/features/cms/types/cms.types";
@@ -55,5 +57,16 @@ export function useArticleMutations() {
     onSuccess: invalidate,
   });
 
-  return { create, update, remove, changeStatus };
+  const updatePlacements = useMutation({
+    mutationFn: ({
+      id,
+      placements,
+    }: {
+      id: string;
+      placements: ArticlePlacement[];
+    }) => updateArticlePlacements(id, placements),
+    onSuccess: invalidate,
+  });
+
+  return { create, update, remove, changeStatus, updatePlacements };
 }

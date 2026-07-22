@@ -1,4 +1,5 @@
 import type {
+  ArticlePlacement,
   ArticleStatus,
   AuditLog,
   CmsArticleDetail,
@@ -7,6 +8,7 @@ import type {
   CmsUser,
   Tag,
 } from "@/features/cms/types/cms.types";
+import { DEFAULT_ARTICLE_PLACEMENTS } from "@/features/cms/constants/cms.constants";
 
 interface AuthorDto {
   id: string;
@@ -18,6 +20,13 @@ interface CategoryRefDto {
   name: string;
 }
 
+function mapPlacements(value: unknown): ArticlePlacement[] {
+  if (!Array.isArray(value) || value.length === 0) {
+    return [...DEFAULT_ARTICLE_PLACEMENTS];
+  }
+  return value as ArticlePlacement[];
+}
+
 export interface CmsArticleListItemDto {
   id: string;
   title: string;
@@ -25,6 +34,7 @@ export interface CmsArticleListItemDto {
   summary: string | null;
   featured_image: string | null;
   status: ArticleStatus;
+  placements?: ArticlePlacement[] | null;
   published_at: string | null;
   created_at: string;
   updated_at?: string | null;
@@ -45,6 +55,7 @@ export interface CmsArticleDetailDto {
   content: string;
   featured_image: string | null;
   status: ArticleStatus;
+  placements?: ArticlePlacement[] | null;
   published_at: string | null;
   category: { id: string } | null;
   series: { id: string } | null;
@@ -102,6 +113,7 @@ export function mapCmsArticleListItem(
     summary: dto.summary,
     featuredImage: dto.featured_image,
     status: dto.status,
+    placements: mapPlacements(dto.placements),
     publishedAt: dto.published_at,
     createdAt: dto.created_at,
     updatedAt: dto.updated_at ?? null,
@@ -133,6 +145,7 @@ export function mapCmsArticleDetail(dto: CmsArticleDetailDto): CmsArticleDetail 
     content: dto.content ?? "",
     featuredImage: dto.featured_image,
     status: dto.status,
+    placements: mapPlacements(dto.placements),
     publishedAt: dto.published_at,
     categoryId: dto.category?.id ?? null,
     seriesId: dto.series?.id ?? null,

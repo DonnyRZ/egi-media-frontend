@@ -3,6 +3,7 @@
 import { PageHeader } from "@/features/cms/components/layout/PageHeader";
 import { ArticleForm } from "@/features/cms/components/articles/ArticleForm";
 import { ErrorState, LoadingState } from "@/features/cms/components/ui/StateViews";
+import { DEFAULT_ARTICLE_PLACEMENTS } from "@/features/cms/constants/cms.constants";
 import { useCmsArticle } from "@/features/cms/hooks/useCmsArticles";
 import type { ArticleFormValues } from "@/features/cms/schemas/cms.schemas";
 
@@ -21,6 +22,7 @@ const EMPTY_VALUES: ArticleFormValues = {
   seriesId: "",
   topicIds: [],
   tagIds: [],
+  placements: [...DEFAULT_ARTICLE_PLACEMENTS],
 };
 
 export function ArticleEditorView({ articleId }: { articleId?: string }) {
@@ -49,6 +51,9 @@ export function ArticleEditorView({ articleId }: { articleId?: string }) {
           seriesId: data.seriesId ?? "",
           topicIds: data.topicIds,
           tagIds: data.tagIds,
+          placements: data.placements.length
+            ? data.placements
+            : [...DEFAULT_ARTICLE_PLACEMENTS],
         }
       : EMPTY_VALUES;
 

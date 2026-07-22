@@ -49,18 +49,26 @@ export async function trackArticleShare(
 }
 
 export async function getHeroNews(lang: ContentLocale = "id"): Promise<HeroNewsData> {
-  const result = await fetchArticles({
-    page: 1,
-    limit: HOMEPAGE_LIMITS.heroFeatured + HOMEPAGE_LIMITS.heroHeadlines,
-    sort: "latest",
-    lang,
-  });
-
-  const [featured, ...headlines] = result.items;
+  const [featuredResult, headlinesResult] = await Promise.all([
+    fetchArticles({
+      page: 1,
+      limit: HOMEPAGE_LIMITS.heroFeatured,
+      placement: "homepage_hero",
+      sort: "latest",
+      lang,
+    }),
+    fetchArticles({
+      page: 1,
+      limit: HOMEPAGE_LIMITS.heroHeadlines,
+      placement: "headline",
+      sort: "latest",
+      lang,
+    }),
+  ]);
 
   return {
-    featured: featured ?? null,
-    headlines: headlines.slice(0, HOMEPAGE_LIMITS.heroHeadlines),
+    featured: featuredResult.items[0] ?? null,
+    headlines: headlinesResult.items,
   };
 }
 
@@ -70,6 +78,7 @@ export async function getBreakingNews(
   return fetchArticles({
     page: 1,
     limit: HOMEPAGE_LIMITS.breakingNews,
+    placement: "trending",
     sort: "latest",
     lang,
   });
@@ -81,6 +90,7 @@ export async function getLatestNews(
   return fetchArticles({
     page: 1,
     limit: HOMEPAGE_LIMITS.latestNews,
+    placement: "latest_news",
     sort: "latest",
     lang,
   });

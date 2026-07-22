@@ -4,7 +4,21 @@ interface ArticleBodyProps {
   content: string;
 }
 
+/** Content authored in the CMS is HTML; legacy content may be plain text. */
+function isHtmlContent(content: string): boolean {
+  return /<\/?[a-z][\s\S]*>/i.test(content);
+}
+
 export function ArticleBody({ content }: ArticleBodyProps) {
+  if (isHtmlContent(content)) {
+    return (
+      <div
+        className="article-prose"
+        dangerouslySetInnerHTML={{ __html: content }}
+      />
+    );
+  }
+
   const paragraphs = splitArticleParagraphs(content);
 
   if (!paragraphs.length) {

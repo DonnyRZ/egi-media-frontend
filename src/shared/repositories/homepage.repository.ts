@@ -1,12 +1,31 @@
-import { HOMEPAGE_LIMITS } from "@/shared/constants/homepage.constants";
+import {
+  HOMEPAGE_LIMITS,
+  HOMEPAGE_PLACEMENTS,
+} from "@/shared/constants/homepage.constants";
 import { fetchArticles } from "@/shared/services/article.service";
 import { fetchCategories } from "@/shared/services/category.service";
 import { fetchTopics } from "@/shared/services/topic.service";
-import type { ContentLocale } from "@/shared/types/article.types";
+import type { ArticlePlacement } from "@/shared/types/api.types";
+import type { Article, ContentLocale } from "@/shared/types/article.types";
 import type { CategoryNewsGroup } from "@/shared/types/category.types";
 import type { HomepageNewsData } from "@/shared/types/homepage.types";
 import type { TopicNewsGroup } from "@/shared/types/topic.types";
 import { takeUniqueArticles } from "@/shared/utils/unique-articles";
+
+async function fetchByPlacement(
+  placement: ArticlePlacement,
+  limit: number,
+  lang: ContentLocale,
+): Promise<Article[]> {
+  const result = await fetchArticles({
+    page: 1,
+    limit,
+    placement,
+    sort: "latest",
+    lang,
+  });
+  return result.items;
+}
 
 async function buildCategoryGroups(
   lang: ContentLocale,
@@ -81,72 +100,62 @@ async function buildTopicGroups(
 }
 
 /**
- * Homepage article feed with scoped de-duplication:
- * - Primary feeds (hero, breaking, latest) never repeat the same article.
- * - Taxonomy sections (topic + category) share a separate used-id set so they
- *   stay filled even on a small catalog, without starving Latest News.
- * - An article may appear in both a primary feed and a taxonomy column —
- *   the same pattern used by Bloomberg / Semafor category rails.
+ * Homepage feed driven by CMS placement tags, with scoped taxonomy de-dup:
+ * - Primary sections (hero, headlines, trending, latest) come from placements
+ *   and may intentionally share an article when it has multiple tags.
+ * - Taxonomy sections (category + topic) share a separate used-id set so they
+ *   stay filled even on a small catalog.
+ * - Category is built before topic so By Category is not starved.
  */
 export async function getHomepageNews(
   lang: ContentLocale = "id",
 ): Promise<HomepageNewsData> {
-  const primaryUsedIds = new Set<string>();
   const taxonomyUsedIds = new Set<string>();
 
-  const [latestPool, popularPool] = await Promise.all([
-    fetchArticles({
-      page: 1,
-      limit: HOMEPAGE_LIMITS.articlePool,
-      sort: "latest",
-      lang,
-    }),
-    fetchArticles({
-      page: 1,
-      limit: HOMEPAGE_LIMITS.articlePool,
-      sort: "popular",
-      lang,
-    }),
-  ]);
-
-  const heroCount =
-    HOMEPAGE_LIMITS.heroFeatured + HOMEPAGE_LIMITS.heroHeadlines;
-  const heroItems = takeUniqueArticles(
-    latestPool.items,
-    heroCount,
-    primaryUsedIds,
-  );
-  const [featured, ...headlines] = heroItems;
-
-  const breaking = takeUniqueArticles(
-    latestPool.items,
-    HOMEPAGE_LIMITS.breakingNews,
-    primaryUsedIds,
-  );
-
-  const latest = takeUniqueArticles(
-    latestPool.items,
-    HOMEPAGE_LIMITS.latestNews,
-    primaryUsedIds,
-  );
+  const [heroItems, headlines, trending, latest, popularPool] =
+    await Promise.all([
+      fetchByPlacement(
+        HOMEPAGE_PLACEMENTS.hero,
+        HOMEPAGE_LIMITS.heroFeatured,
+        lang,
+      ),
+      fetchByPlacement(
+        HOMEPAGE_PLACEMENTS.headline,
+        HOMEPAGE_LIMITS.heroHeadlines,
+        lang,
+      ),
+      fetchByPlacement(
+        HOMEPAGE_PLACEMENTS.trending,
+        HOMEPAGE_LIMITS.breakingNews,
+        lang,
+      ),
+      fetchByPlacement(
+        HOMEPAGE_PLACEMENTS.latestNews,
+        HOMEPAGE_LIMITS.latestNews,
+        lang,
+      ),
+      fetchArticles({
+        page: 1,
+        limit: HOMEPAGE_LIMITS.editorsPicks,
+        sort: "popular",
+        lang,
+      }),
+    ]);
 
   // Category before topic so the By Category section is never empty when
   // both compete for the same small taxonomy pool.
   const categories = await buildCategoryGroups(lang, taxonomyUsedIds);
   const topics = await buildTopicGroups(lang, taxonomyUsedIds);
 
-  // Popular keeps its own ranking (like before) and always shows a full list.
-  const editors = popularPool.items.slice(0, HOMEPAGE_LIMITS.editorsPicks);
-
   return {
     hero: {
-      featured: featured ?? null,
-      headlines: headlines.slice(0, HOMEPAGE_LIMITS.heroHeadlines),
+      featured: heroItems[0] ?? null,
+      headlines,
     },
-    breaking,
+    breaking: trending,
     latest,
     categories,
     topics,
-    editors,
+    editors: popularPool.items.slice(0, HOMEPAGE_LIMITS.editorsPicks),
   };
 }

@@ -37,6 +37,10 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
+// ISR: keep the public site fresh so content published/edited in the Editorial CMS
+// appears within a minute without a redeploy. Applies to all nested public routes.
+export const revalidate = 60;
+
 export async function generateMetadata({
   params,
 }: Omit<LocaleLayoutProps, "children">): Promise<Metadata> {

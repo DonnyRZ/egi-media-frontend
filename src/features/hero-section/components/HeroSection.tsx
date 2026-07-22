@@ -38,6 +38,10 @@ export function HeroSection() {
   const { data, isLoading, isError, error, refetch } = useHeroNews();
   const t = useTranslations("hero");
 
+  const featured = data?.featured ?? null;
+  const headlines = data?.headlines ?? [];
+  const hasContent = Boolean(featured) || headlines.length > 0;
+
   return (
     <Section className="pt-8 lg:pt-12" ariaLabelledby="hero-heading">
       <Container>
@@ -51,13 +55,21 @@ export function HeroSection() {
             onRetry={() => void refetch()}
           />
         ) : null}
-        {!isLoading && !isError && !data?.featured ? (
+        {!isLoading && !isError && !hasContent ? (
           <EmptyState title={t("noFeatured")} />
         ) : null}
-        {!isLoading && !isError && data?.featured ? (
-          <div className="grid gap-8 lg:grid-cols-[2fr_1fr]">
-            <HeroFeaturedCard article={data.featured} />
-            <HeroHeadlineList articles={data.headlines} />
+        {!isLoading && !isError && hasContent ? (
+          <div
+            className={
+              featured && headlines.length > 0
+                ? "grid gap-8 lg:grid-cols-[2fr_1fr]"
+                : "grid gap-8"
+            }
+          >
+            {featured ? <HeroFeaturedCard article={featured} /> : null}
+            {headlines.length > 0 ? (
+              <HeroHeadlineList articles={headlines} />
+            ) : null}
           </div>
         ) : null}
       </Container>

@@ -28,6 +28,11 @@ export const QUERY_KEYS = {
     list: (params: Record<string, unknown>) =>
       ["saved-articles", "list", params] as const,
   },
+  savedColumns: {
+    all: ["saved-columns"] as const,
+    list: (params: Record<string, unknown>) =>
+      ["saved-columns", "list", params] as const,
+  },
   homepage: {
     all: ["homepage"] as const,
     news: (lang: string) => ["homepage", "news", lang] as const,
@@ -36,5 +41,18 @@ export const QUERY_KEYS = {
     all: ["notifications"] as const,
     list: (params: Record<string, unknown>) =>
       ["notifications", "list", params] as const,
+  },
+  columns: {
+    all: ["columns"] as const,
+    list: (params: Record<string, unknown>) =>
+      ["columns", "list", params] as const,
+    detail: (slug: string, lang: string) =>
+      ["columns", "detail", slug, lang] as const,
+    mine: (params: Record<string, unknown>) =>
+      ["columns", "me", params] as const,
+    mineDetail: (id: string, lang: string) =>
+      ["columns", "me", "detail", id, lang] as const,
+    comments: (columnId: string, params: Record<string, unknown>) =>
+      ["columns", "comments", columnId, params] as const,
   },
 } as const;

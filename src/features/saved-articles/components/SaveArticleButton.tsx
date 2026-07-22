@@ -66,7 +66,7 @@ export function SaveArticleButton({ articleId }: SaveArticleButtonProps) {
         cancelLabel={tDialog("cancel")}
         confirmLabel={tDialog("confirm")}
         isPending={isPending}
-        message={tDialog("message")}
+        message={tDialog("articleMessage")}
         onCancel={() => setConfirmOpen(false)}
         onConfirm={() => void handleConfirm()}
         open={confirmOpen}

@@ -18,7 +18,7 @@ interface ColumnStatusBadgeProps {
 }
 
 export function ColumnStatusBadge({ status }: ColumnStatusBadgeProps) {
-  const t = useTranslations("columnsPage.status");
+  const t = useTranslations("columnsPage");
 
   return (
     <span
@@ -27,7 +27,7 @@ export function ColumnStatusBadge({ status }: ColumnStatusBadgeProps) {
         STATUS_STYLES[status],
       )}
     >
-      {t(status)}
+      {t(`status.${status}`)}
     </span>
   );
 }

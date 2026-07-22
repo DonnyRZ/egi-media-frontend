@@ -10,6 +10,7 @@ import { useAuthStore } from "@/features/auth/stores/auth.store";
 import { useColumnCommentMutations } from "@/features/columns/hooks/useColumnCommentMutations";
 import { useColumnComments } from "@/features/columns/hooks/useColumnComments";
 import type { ColumnComment } from "@/features/columns/types/column-comment.types";
+import { canDeleteColumnComment } from "@/features/columns/utils/column-comment-permissions";
 import { Link } from "@/i18n/navigation";
 import { EmptyState } from "@/shared/components/common/EmptyState";
 import { ErrorState } from "@/shared/components/common/ErrorState";
@@ -47,7 +48,7 @@ export function ColumnCommentsSection({
   columnId,
   columnAuthorId,
 }: ColumnCommentsSectionProps) {
-  const t = useTranslations("columnsPage.comments");
+  const t = useTranslations("columnsPage");
   const format = useFormatter();
   const isHydrated = useAuthStore((state) => state.isHydrated);
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
@@ -58,12 +59,12 @@ export function ColumnCommentsSection({
   const [deleteTarget, setDeleteTarget] = useState<ColumnComment | null>(null);
 
   function canDeleteComment(comment: ColumnComment): boolean {
-    if (!user) return false;
-    return (
-      user.role === "superadmin" ||
-      user.id === columnAuthorId ||
-      user.id === comment.user.id
-    );
+    return canDeleteColumnComment({
+      viewerId: user?.id,
+      viewerRole: user?.role,
+      columnAuthorId,
+      commentAuthorId: comment.user.id,
+    });
   }
 
   const schema = useMemo(
@@ -72,8 +73,8 @@ export function ColumnCommentsSection({
         content: z
           .string()
           .trim()
-          .min(1, t("validationRequired"))
-          .max(2000, t("validationMax")),
+          .min(1, t("comments.validationRequired"))
+          .max(2000, t("comments.validationMax")),
       }),
     [t],
   );
@@ -100,11 +101,11 @@ export function ColumnCommentsSection({
           className="font-serif text-2xl font-bold text-ink"
           id="column-comments-heading"
         >
-          {t("heading")}
+          {t("comments.heading")}
         </h2>
         {data ? (
           <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
-            {t("count", { count: data.total })}
+            {t("comments.count", { count: data.total })}
           </p>
         ) : null}
       </div>
@@ -117,8 +118,8 @@ export function ColumnCommentsSection({
         >
           <TextArea
             error={errors.content?.message}
-            label={t("formLabel")}
-            placeholder={t("formPlaceholder")}
+            label={t("comments.formLabel")}
+            placeholder={t("comments.formPlaceholder")}
             rows={4}
             {...register("content")}
           />
@@ -126,7 +127,7 @@ export function ColumnCommentsSection({
             <p className="text-sm text-error" role="alert">
               {create.error instanceof ApiError
                 ? create.error.message
-                : t("errors.createFailed")}
+                : t("comments.errors.createFailed")}
             </p>
           ) : null}
           <Button
@@ -134,17 +135,17 @@ export function ColumnCommentsSection({
             disabled={create.isPending}
             type="submit"
           >
-            {create.isPending ? t("submitting") : t("submit")}
+            {create.isPending ? t("comments.submitting") : t("comments.submit")}
           </Button>
         </form>
       ) : isHydrated ? (
         <div className="mb-8 border border-neutral-200 bg-neutral-50 p-5 text-sm text-neutral-600">
-          <p>{t("signInPrompt")}</p>
+          <p>{t("comments.signInPrompt")}</p>
           <Link
             className="mt-3 inline-flex text-sm font-semibold text-primary-700 hover:text-accent"
             href="/login"
           >
-            {t("signInCta")} →
+            {t("comments.signInCta")} →
           </Link>
         </div>
       ) : null}
@@ -156,7 +157,7 @@ export function ColumnCommentsSection({
       ) : null}
 
       {!isLoading && !isError && !data?.items.length ? (
-        <EmptyState message={t("empty")} />
+        <EmptyState message={t("comments.empty")} />
       ) : null}
 
       {!isLoading && !isError && data?.items.length ? (
@@ -175,14 +176,14 @@ export function ColumnCommentsSection({
                     {format.dateTime(new Date(comment.createdAt), DATE_FORMAT)}
                   </time>
                 </div>
-                {canDeleteComment(comment) ? (
+                {isHydrated && canDeleteComment(comment) ? (
                   <button
                     className="text-xs font-semibold uppercase tracking-wide text-neutral-500 transition-colors hover:text-error focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
                     disabled={remove.isPending}
                     onClick={() => setDeleteTarget(comment)}
                     type="button"
                   >
-                    {t("delete")}
+                    {t("comments.delete")}
                   </button>
                 ) : null}
               </div>
@@ -198,24 +199,30 @@ export function ColumnCommentsSection({
         <p className="mt-3 text-sm text-error" role="alert">
           {remove.error instanceof ApiError
             ? remove.error.message
-            : t("errors.deleteFailed")}
+            : t("comments.errors.deleteFailed")}
         </p>
       ) : null}
 
       <ConfirmDialog
-        cancelLabel={t("cancel")}
-        confirmLabel={t("delete")}
+        cancelLabel={t("comments.cancel")}
+        confirmLabel={t("comments.delete")}
         isPending={remove.isPending}
-        message={t("deleteMessage")}
+        message={t("comments.deleteMessage")}
         onCancel={() => setDeleteTarget(null)}
         onConfirm={() => {
-          if (!deleteTarget) return;
-          void remove.mutateAsync(deleteTarget.id).then(() => {
+          if (!deleteTarget || !canDeleteComment(deleteTarget)) {
             setDeleteTarget(null);
-          });
+            return;
+          }
+          void remove
+            .mutateAsync(deleteTarget.id)
+            .then(() => {
+              setDeleteTarget(null);
+            })
+            .catch(() => undefined);
         }}
         open={Boolean(deleteTarget)}
-        title={t("deleteTitle")}
+        title={t("comments.deleteTitle")}
         tone="danger"
       />
     </section>

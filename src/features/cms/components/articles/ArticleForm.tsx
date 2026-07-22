@@ -12,6 +12,7 @@ import { ArticleSettingsSidebar } from "@/features/cms/components/articles/Artic
 import { ScheduleModal } from "@/features/cms/components/articles/ScheduleModal";
 import {
   articleFormSchema,
+  getMissingTranslationErrors,
   type ArticleFormValues,
 } from "@/features/cms/schemas/cms.schemas";
 import { useArticleMutations } from "@/features/cms/hooks/useArticleMutations";
@@ -59,6 +60,8 @@ export function ArticleForm({
     register,
     handleSubmit,
     watch,
+    setError,
+    getValues,
     formState: { errors },
   } = useForm<ArticleFormValues>({
     resolver: zodResolver(articleFormSchema),
@@ -128,7 +131,29 @@ export function ArticleForm({
     return articleId as string;
   }
 
+  function requireAllLocales(nextStatus?: ArticleStatus): boolean {
+    const needsAll =
+      nextStatus === "review" ||
+      nextStatus === "published" ||
+      nextStatus === "scheduled";
+    if (!needsAll) return true;
+
+    const missing = getMissingTranslationErrors(getValues());
+    const keys = Object.keys(missing) as (keyof ArticleFormValues)[];
+    if (keys.length === 0) return true;
+
+    for (const key of keys) {
+      const message = missing[key];
+      if (message) setError(key, { type: "manual", message });
+    }
+    toast.error(
+      "Fill Title and Content for Indonesia, English, and Oʻzbekcha before continuing.",
+    );
+    return false;
+  }
+
   function run(nextStatus: ArticleStatus | undefined, message: string, toList: boolean, publishedAt?: string) {
+    if (!requireAllLocales(nextStatus)) return;
     return handleSubmit(async (values) => {
       try {
         const id = await persist(values, nextStatus, publishedAt);

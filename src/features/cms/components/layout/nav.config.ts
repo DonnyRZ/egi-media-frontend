@@ -41,6 +41,13 @@ export const NAV_SECTIONS: NavSection[] = [
         matchPrefix: true,
       },
       {
+        label: "Videos",
+        href: "/cms/videos",
+        icon: "video",
+        permission: "always",
+        matchPrefix: true,
+      },
+      {
         label: "Users",
         href: "/cms/users",
         icon: "users",

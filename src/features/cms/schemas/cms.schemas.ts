@@ -32,6 +32,39 @@ export const articleFormSchema = z.object({
 
 export type ArticleFormValues = z.infer<typeof articleFormSchema>;
 
+function isFilledHtml(value: string | undefined): boolean {
+  return Boolean(value?.replace(/<[^>]*>/g, "").trim());
+}
+
+/**
+ * Strict multilanguage check for publish / review / schedule.
+ * Draft saves may remain partial; these actions require ID + EN + UZ title & content.
+ */
+export function getMissingTranslationErrors(
+  values: ArticleFormValues,
+): Partial<Record<keyof ArticleFormValues, string>> {
+  const errors: Partial<Record<keyof ArticleFormValues, string>> = {};
+  if (!values.title.trim()) {
+    errors.title = "Indonesian title is required";
+  }
+  if (!isFilledHtml(values.content)) {
+    errors.content = "Indonesian content is required";
+  }
+  if (!values.titleEn?.trim()) {
+    errors.titleEn = "English title is required";
+  }
+  if (!isFilledHtml(values.contentEn)) {
+    errors.contentEn = "English content is required";
+  }
+  if (!values.titleUz?.trim()) {
+    errors.titleUz = "Oʻzbekcha title is required";
+  }
+  if (!isFilledHtml(values.contentUz)) {
+    errors.contentUz = "Oʻzbekcha content is required";
+  }
+  return errors;
+}
+
 export const taxonomyFormSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(150),
   description: z.string().trim().max(1000).optional(),
@@ -91,3 +124,21 @@ export const changePasswordSchema = z
   });
 
 export type ChangePasswordValues = z.infer<typeof changePasswordSchema>;
+
+export const videoFormSchema = z.object({
+  title: z.string().trim().min(1, "Title is required").max(255),
+  description: z.string().trim().max(2000).optional(),
+  url: z
+    .string()
+    .trim()
+    .min(1, "YouTube URL is required")
+    .url("Enter a valid YouTube URL")
+    .refine(
+      (value) =>
+        /youtu\.be\//.test(value) || /youtube\.com\//.test(value),
+      "Enter a YouTube URL",
+    ),
+  isActive: z.boolean(),
+});
+
+export type VideoFormValues = z.infer<typeof videoFormSchema>;

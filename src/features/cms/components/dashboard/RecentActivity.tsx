@@ -1,6 +1,6 @@
 "use client";
 
-import { formatRelativeTime } from "@/shared/utils/format";
+import { formatAbsoluteDateTime } from "@/shared/utils/format";
 import { Badge } from "@/features/cms/components/ui/Badge";
 import { Card, CardHeader } from "@/features/cms/components/ui/Card";
 import { EmptyState, LoadingState } from "@/features/cms/components/ui/StateViews";
@@ -60,7 +60,7 @@ export function RecentActivity() {
                     ) : null}
                   </p>
                   <p className="mt-0.5 text-xs text-neutral-400">
-                    {formatRelativeTime(log.createdAt)}
+                    {formatAbsoluteDateTime(log.createdAt)}
                   </p>
                 </div>
                 <Badge tone={ACTION_TONE[log.action ?? ""] ?? "neutral"}>

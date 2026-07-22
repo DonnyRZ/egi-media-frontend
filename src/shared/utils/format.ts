@@ -38,6 +38,26 @@ export function formatRelativeTime(
   return "just now";
 }
 
+/** Absolute date/time for CMS lists, e.g. "22 Jul 2026, 09:15". */
+export function formatAbsoluteDateTime(
+  value: string | null | undefined,
+): string {
+  if (!value) return "";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "";
+  const datePart = new Intl.DateTimeFormat("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  }).format(date);
+  const timePart = new Intl.DateTimeFormat("en-GB", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).format(date);
+  return `${datePart}, ${timePart}`;
+}
+
 export function calculateReadingTime(text: string | null | undefined): number {
   if (!text) return 1;
   const words = text.trim().split(/\s+/).length;

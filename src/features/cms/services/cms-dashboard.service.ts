@@ -1,37 +1,32 @@
-import { fetchMyArticles } from "@/features/cms/services/cms-article.service";
-import { ARTICLE_STATUSES } from "@/features/cms/constants/cms.constants";
+import { API_ENDPOINTS } from "@/shared/constants/api.constants";
+import { axiosClient } from "@/shared/lib/axios-client";
+import type { ApiSuccessResponse } from "@/shared/types/api.types";
 import type { DashboardStats } from "@/features/cms/types/cms.types";
 
+interface ArticleStatsDto {
+  total: number;
+  draft: number;
+  review: number;
+  scheduled: number;
+  published: number;
+  archived: number;
+}
+
 /**
- * Aggregates status counts from the author's own articles.
- *
- * TODO(backend): There is no dashboard statistics endpoint. This derives counts
- * from `/api/v1/articles/me` (one lightweight request per status). A dedicated
- * `GET /api/v1/articles/stats` would remove the fan-out and enable org-wide
- * counts for superadmin.
+ * Dashboard status counts from `GET /api/v1/articles/stats`.
+ * Superadmin → newsroom-wide; author → own articles only (enforced by backend).
  */
 export async function fetchDashboardStats(): Promise<DashboardStats> {
-  const [total, ...byStatus] = await Promise.all([
-    fetchMyArticles({ page: 1, limit: 1 }),
-    ...ARTICLE_STATUSES.map((status) =>
-      fetchMyArticles({ page: 1, limit: 1, status }),
-    ),
-  ]);
-
-  const counts = ARTICLE_STATUSES.reduce<Record<string, number>>(
-    (acc, status, index) => {
-      acc[status] = byStatus[index].total;
-      return acc;
-    },
-    {},
+  const response = await axiosClient.get<ApiSuccessResponse<ArticleStatsDto>>(
+    API_ENDPOINTS.articlesStats,
   );
-
+  const data = response.data.data;
   return {
-    total: total.total,
-    draft: counts.draft ?? 0,
-    review: counts.review ?? 0,
-    scheduled: counts.scheduled ?? 0,
-    published: counts.published ?? 0,
-    archived: counts.archived ?? 0,
+    total: data.total ?? 0,
+    draft: data.draft ?? 0,
+    review: data.review ?? 0,
+    scheduled: data.scheduled ?? 0,
+    published: data.published ?? 0,
+    archived: data.archived ?? 0,
   };
 }

@@ -94,5 +94,9 @@ export const CMS_QUERY_KEYS = {
       ["cms", "audit-logs", params] as const,
   },
   dashboard: { all: ["cms", "dashboard"] as const },
+  videos: {
+    all: ["cms", "videos"] as const,
+    list: (params: object) => ["cms", "videos", "list", params] as const,
+  },
   account: { profile: ["cms", "account", "profile"] as const },
 } as const;

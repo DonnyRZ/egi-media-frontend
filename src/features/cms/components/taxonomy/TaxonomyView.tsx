@@ -24,6 +24,7 @@ import {
 } from "@/features/cms/hooks/useTaxonomyMutations";
 import { usePermissions } from "@/features/cms/hooks/usePermissions";
 import { useToast } from "@/features/cms/stores/cms-toast.store";
+import { cn } from "@/shared/lib/cn";
 import type { CmsTaxonomyItem } from "@/features/cms/services/cms-taxonomy.service";
 
 const SINGULAR: Record<TaxonomyKind, string> = {
@@ -33,6 +34,33 @@ const SINGULAR: Record<TaxonomyKind, string> = {
   tag: "Tag",
 };
 
+const TABS: {
+  kind: TaxonomyKind;
+  title: string;
+  description: string;
+}[] = [
+  {
+    kind: "category",
+    title: "Categories",
+    description: "Top-level sections, e.g. Sport, Business, Politics.",
+  },
+  {
+    kind: "topic",
+    title: "Topics",
+    description: "Themes within a category, e.g. Football, Elections.",
+  },
+  {
+    kind: "series",
+    title: "Series",
+    description: "Multi-part story collections, e.g. World Cup 2026.",
+  },
+  {
+    kind: "tag",
+    title: "Tags",
+    description: "Free-form keywords for granular discovery.",
+  },
+];
+
 interface FormState {
   kind: TaxonomyKind;
   editing: CmsTaxonomyItem | null;
@@ -41,6 +69,7 @@ interface FormState {
 export function TaxonomyView() {
   const toast = useToast();
   const { canManageTaxonomy } = usePermissions();
+  const [activeTab, setActiveTab] = useState<TaxonomyKind>("category");
 
   const categories = useCmsCategories();
   const topics = useCmsTopics();
@@ -57,6 +86,15 @@ export function TaxonomyView() {
     kind: TaxonomyKind;
     item: CmsTaxonomyItem;
   } | null>(null);
+
+  const dataFor = (kind: TaxonomyKind) =>
+    kind === "category"
+      ? categories
+      : kind === "topic"
+        ? topics
+        : kind === "series"
+          ? series
+          : tags;
 
   const mutationsFor = (kind: TaxonomyKind) =>
     kind === "category"
@@ -109,38 +147,8 @@ export function TaxonomyView() {
     }
   }
 
-  const sections: {
-    kind: TaxonomyKind;
-    title: string;
-    description: string;
-    data: ReturnType<typeof useCmsCategories>;
-  }[] = [
-    {
-      kind: "category",
-      title: "Categories",
-      description: "Top-level sections, e.g. Sport, Business, Politics.",
-      data: categories,
-    },
-    {
-      kind: "topic",
-      title: "Topics",
-      description: "Themes within a category, e.g. Football, Elections.",
-      data: topics,
-    },
-    {
-      kind: "series",
-      title: "Series",
-      description: "Multi-part story collections, e.g. World Cup 2026.",
-      data: series,
-    },
-    {
-      kind: "tag",
-      title: "Tags",
-      description: "Free-form keywords for granular discovery.",
-      data: tags,
-    },
-  ];
-
+  const active = TABS.find((tab) => tab.kind === activeTab) ?? TABS[0];
+  const activeData = dataFor(active.kind);
   const activeMutation = form ? mutationsFor(form.kind) : null;
 
   return (
@@ -150,26 +158,50 @@ export function TaxonomyView() {
         description="Organize content: Category → Topic → Series → Tag. Counts show how many articles use each."
       />
 
-      <div className="space-y-6">
-        {sections.map((section) => (
-          <TaxonomySection
-            key={section.kind}
-            kind={section.kind}
-            title={section.title}
-            description={section.description}
-            singular={SINGULAR[section.kind]}
-            items={section.data.data ?? []}
-            isLoading={section.data.isLoading}
-            isError={section.data.isError}
-            canManage={canManageTaxonomy}
-            onCreate={() => setForm({ kind: section.kind, editing: null })}
-            onEdit={(item) => setForm({ kind: section.kind, editing: item })}
-            onDelete={(item) =>
-              setPendingDelete({ kind: section.kind, item })
-            }
-          />
-        ))}
+      <div
+        role="tablist"
+        aria-label="Taxonomy types"
+        className="mb-6 flex flex-wrap gap-1 border-b border-neutral-200 dark:border-neutral-800"
+      >
+        {TABS.map((tab) => {
+          const count = dataFor(tab.kind).data?.length ?? 0;
+          const selected = tab.kind === activeTab;
+          return (
+            <button
+              key={tab.kind}
+              type="button"
+              role="tab"
+              aria-selected={selected}
+              onClick={() => setActiveTab(tab.kind)}
+              className={cn(
+                "-mb-px border-b-2 px-4 py-2.5 text-sm font-medium transition-colors",
+                selected
+                  ? "border-accent text-accent"
+                  : "border-transparent text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200",
+              )}
+            >
+              {tab.title}
+              <span className="ml-2 text-xs font-normal text-neutral-400">
+                {count}
+              </span>
+            </button>
+          );
+        })}
       </div>
+
+      <TaxonomySection
+        kind={active.kind}
+        title={active.title}
+        description={active.description}
+        singular={SINGULAR[active.kind]}
+        items={activeData.data ?? []}
+        isLoading={activeData.isLoading}
+        isError={activeData.isError}
+        canManage={canManageTaxonomy}
+        onCreate={() => setForm({ kind: active.kind, editing: null })}
+        onEdit={(item) => setForm({ kind: active.kind, editing: item })}
+        onDelete={(item) => setPendingDelete({ kind: active.kind, item })}
+      />
 
       <TaxonomyFormModal
         open={Boolean(form)}

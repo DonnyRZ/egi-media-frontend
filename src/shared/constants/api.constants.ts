@@ -2,6 +2,8 @@ export const API_ENDPOINTS = {
   articles: "/api/v1/articles",
   articlesMe: "/api/v1/articles/me",
   articlesManage: "/api/v1/articles/manage",
+  articlesStats: "/api/v1/articles/stats",
+  youtubeVideoById: (id: string) => `/api/v1/youtube-videos/${id}`,
   articleById: (id: string) => `/api/v1/articles/${id}`,
   articleBySlug: (slug: string) =>
     `/api/v1/articles/slug/${encodeURIComponent(slug)}`,

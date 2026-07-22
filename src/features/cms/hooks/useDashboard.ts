@@ -3,9 +3,13 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { CMS_QUERY_KEYS } from "@/features/cms/constants/cms.constants";
-import { fetchMyArticles } from "@/features/cms/services/cms-article.service";
+import {
+  fetchManageArticles,
+  fetchMyArticles,
+} from "@/features/cms/services/cms-article.service";
 import { fetchAuditLogs } from "@/features/cms/services/cms-audit-log.service";
 import { fetchDashboardStats } from "@/features/cms/services/cms-dashboard.service";
+import { usePermissions } from "@/features/cms/hooks/usePermissions";
 
 export function useDashboardStats() {
   return useQuery({
@@ -15,20 +19,24 @@ export function useDashboardStats() {
   });
 }
 
-export function useRecentDrafts() {
+function useRecentByStatus(status: "draft" | "published") {
+  const { isSuperadmin } = usePermissions();
   return useQuery({
-    queryKey: [...CMS_QUERY_KEYS.dashboard.all, "drafts"],
-    queryFn: () => fetchMyArticles({ page: 1, limit: 5, status: "draft" }),
+    queryKey: [...CMS_QUERY_KEYS.dashboard.all, status, { scope: isSuperadmin ? "all" : "mine" }],
+    queryFn: () =>
+      isSuperadmin
+        ? fetchManageArticles({ page: 1, limit: 5, status })
+        : fetchMyArticles({ page: 1, limit: 5, status }),
     staleTime: 30_000,
   });
 }
 
+export function useRecentDrafts() {
+  return useRecentByStatus("draft");
+}
+
 export function useRecentPublished() {
-  return useQuery({
-    queryKey: [...CMS_QUERY_KEYS.dashboard.all, "published"],
-    queryFn: () => fetchMyArticles({ page: 1, limit: 5, status: "published" }),
-    staleTime: 30_000,
-  });
+  return useRecentByStatus("published");
 }
 
 /** Superadmin-only recent activity feed. Pass `enabled` to gate by role. */

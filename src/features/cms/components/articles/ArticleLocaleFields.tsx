@@ -98,8 +98,8 @@ export function ArticleLocaleFields({
         </p>
       ) : (
         <p className="text-xs text-neutral-400">
-          Leave blank to skip this translation. Title and content must both be
-          filled to save a translation.
+          Optional for drafts. Title and content are required in all languages
+          before Submit for review, Publish, or Schedule.
         </p>
       )}
 

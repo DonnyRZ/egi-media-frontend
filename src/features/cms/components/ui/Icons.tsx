@@ -65,6 +65,12 @@ export const Icons = {
       <path d="m5 18 5-5 4 4 3-3 2 2" />
     </Base>
   ),
+  video: (p: IconProps) => (
+    <Base {...p}>
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="m10 9 5 3-5 3V9Z" />
+    </Base>
+  ),
   users: (p: IconProps) => (
     <Base {...p}>
       <circle cx="9" cy="8" r="3" />

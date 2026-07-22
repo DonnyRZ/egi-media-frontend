@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-import { formatRelativeTime } from "@/shared/utils/format";
+import { formatAbsoluteDateTime } from "@/shared/utils/format";
 import { Card, CardHeader } from "@/features/cms/components/ui/Card";
 import { StatusBadge } from "@/features/cms/components/ui/Badge";
 import { EmptyState, LoadingState } from "@/features/cms/components/ui/StateViews";
@@ -51,7 +51,7 @@ export function RecentArticles({
                     {article.title}
                   </p>
                   <p className="mt-0.5 text-xs text-neutral-400">
-                    {formatRelativeTime(
+                    {formatAbsoluteDateTime(
                       article.publishedAt ??
                         article.updatedAt ??
                         article.createdAt,

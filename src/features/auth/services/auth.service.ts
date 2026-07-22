@@ -85,3 +85,23 @@ export async function refreshAuthToken(
   );
   return mapAuthTokens(response.data.data);
 }
+
+export async function requestPasswordReset(email: string): Promise<string> {
+  const response = await axiosClient.post<
+    ApiSuccessResponse<{ message: string }>
+  >(AUTH_ENDPOINTS.forgotPassword, { email });
+  return response.data.data.message;
+}
+
+export async function resetPasswordWithToken(
+  token: string,
+  newPassword: string,
+): Promise<string> {
+  const response = await axiosClient.post<
+    ApiSuccessResponse<{ message: string }>
+  >(AUTH_ENDPOINTS.resetPassword, {
+    token,
+    new_password: newPassword,
+  });
+  return response.data.data.message;
+}

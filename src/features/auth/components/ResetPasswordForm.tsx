@@ -13,7 +13,7 @@ import {
 import { resetPasswordWithToken } from "@/features/auth/services/auth.service";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/shared/components/ui/Button";
-import { TextField } from "@/shared/components/ui/TextField";
+import { PasswordField } from "@/shared/components/ui/PasswordField";
 import { ApiError } from "@/shared/lib/errors";
 
 export function ResetPasswordForm() {
@@ -94,21 +94,22 @@ export function ResetPasswordForm() {
       </div>
 
       <form className="space-y-4" noValidate onSubmit={handleSubmit(onSubmit)}>
-        <TextField
+        <PasswordField
           autoComplete="new-password"
           error={errors.password?.message}
+          hideLabel={t("hidePassword")}
           label={t("newPassword")}
-          type="password"
+          showLabel={t("showPassword")}
           {...register("password")}
         />
-        <TextField
+        <PasswordField
           autoComplete="new-password"
           error={errors.confirmPassword?.message}
+          hideLabel={t("hidePassword")}
           label={t("confirmPassword")}
-          type="password"
+          showLabel={t("showPassword")}
           {...register("confirmPassword")}
         />
-
         {formError ? (
           <p className="border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
             {formError}

@@ -99,6 +99,8 @@
     "resetTitle": "Yangi parol o‘rnating",
     "resetSubtitle": "Quyida yangi parolingizni kiriting va tasdiqlang.",
     "newPassword": "Yangi parol",
+    "showPassword": "Parolni ko‘rsatish",
+    "hidePassword": "Parolni yashirish",
     "resetSubmit": "Parolni yangilash",
     "resetSaving": "Yangilanmoqda...",
     "resetSuccessTitle": "Parol yangilandi",

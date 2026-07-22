@@ -99,6 +99,8 @@
     "resetTitle": "Atur password baru",
     "resetSubtitle": "Masukkan dan konfirmasi password baru Anda di bawah ini.",
     "newPassword": "Password baru",
+    "showPassword": "Tampilkan password",
+    "hidePassword": "Sembunyikan password",
     "resetSubmit": "Perbarui password",
     "resetSaving": "Memperbarui...",
     "resetSuccessTitle": "Password diperbarui",

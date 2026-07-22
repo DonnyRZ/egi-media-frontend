@@ -99,6 +99,8 @@
     "resetTitle": "Set new password",
     "resetSubtitle": "Enter and confirm your new password below.",
     "newPassword": "New password",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
     "resetSubmit": "Update password",
     "resetSaving": "Updating...",
     "resetSuccessTitle": "Password updated",

@@ -118,6 +118,14 @@ export function LoginForm() {
             {...register("password")}
           />
 
+          <div className="-mt-1 flex justify-end">
+            <Link
+              className="text-xs font-semibold text-neutral-600 hover:text-accent"
+              href="/forgot-password"
+            >
+              {t("forgotPassword")}
+            </Link>
+          </div>
           {formError ? (
             <p className="border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
               {formError}

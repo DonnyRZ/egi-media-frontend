@@ -79,3 +79,37 @@ export function createResetPasswordSchema(messages: {
 export type ResetPasswordFormValues = z.infer<
   ReturnType<typeof createResetPasswordSchema>
 >;
+
+export function createUpdateNameSchema(messages: {
+  fullNameRequired: string;
+}) {
+  return z.object({
+    fullName: z.string().min(1, messages.fullNameRequired),
+  });
+}
+
+export type UpdateNameFormValues = z.infer<
+  ReturnType<typeof createUpdateNameSchema>
+>;
+
+export function createChangePasswordSchema(messages: {
+  oldPasswordRequired: string;
+  passwordMin: string;
+  confirmRequired: string;
+  passwordMismatch: string;
+}) {
+  return z
+    .object({
+      oldPassword: z.string().min(1, messages.oldPasswordRequired),
+      newPassword: z.string().min(8, messages.passwordMin),
+      confirmPassword: z.string().min(1, messages.confirmRequired),
+    })
+    .refine((data) => data.newPassword === data.confirmPassword, {
+      message: messages.passwordMismatch,
+      path: ["confirmPassword"],
+    });
+}
+
+export type ChangePasswordFormValues = z.infer<
+  ReturnType<typeof createChangePasswordSchema>
+>;

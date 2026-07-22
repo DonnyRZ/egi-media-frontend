@@ -4,7 +4,8 @@ import { forwardRef, useState, type InputHTMLAttributes } from "react";
 
 import { cn } from "@/shared/lib/cn";
 
-interface PasswordFieldProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
+interface PasswordFieldProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
   label: string;
   error?: string;
   showLabel: string;

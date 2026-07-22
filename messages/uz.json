@@ -37,7 +37,9 @@
     "newslettersTitle": "Axborot byulletenlari",
     "newslettersDescription": "Hisobingiz obuna bo‘lgan EGI Media byulletenlarini ko‘ring va boshqaring.",
     "savedTitle": "Saqlangan maqolalar",
-    "savedDescription": "Hisobingizga saqlagan EGI Media maqolalarini qayta ko‘ring — tez kirish uchun tartiblangan."
+    "savedDescription": "Hisobingizga saqlagan EGI Media maqolalarini qayta ko‘ring — tez kirish uchun tartiblangan.",
+    "profileTitle": "Hisob profili",
+    "profileDescription": "EGI Media hisobingizning ko‘rsatiladigan ismi va parolini xavfsiz yangilang."
   },
   "header": {
     "homeAria": "{siteName} bosh sahifasi",
@@ -75,6 +77,7 @@
     "loginSuccessTitle": "Muvaffaqiyatli kirdingiz",
     "loginSuccessBody": "Qaytib kelganingiz bilan. Bosh sahifaga oʻtish uchun quyidagi tugmani bosing.",
     "continueToHome": "OK, davom etish",
+    "profile": "Profil",
     "signOut": "Chiqish",
     "createAccount": "Hisob yaratish",
     "creatingAccount": "Hisob yaratilmoqda...",
@@ -209,6 +212,38 @@
     "message": "Bu maqola saqlangan ro‘yxatingizdan o‘chiriladi. Uni istalgan vaqtda qayta saqlashingiz mumkin.",
     "confirm": "Ha, o‘chirish",
     "cancel": "Bekor qilish"
+  },
+  "profilePage": {
+    "kicker": "Hisobingiz",
+    "headline": "Profil sozlamalari",
+    "lede": "Hisob ma’lumotlaringizni yangilab boring. Ko‘rsatiladigan ism va parolni bir joyda yangilang.",
+    "signInTitle": "Profilni boshqarish uchun tizimga kiring",
+    "signInMessage": "Ism yoki parolni yangilash uchun tizimga kirishingiz kerak.",
+    "signInCta": "Kirish",
+    "nameHeading": "Ko‘rsatiladigan ism",
+    "nameLede": "Bu ism hisob menyusi va hisob faoliyatingizda ko‘rinadi.",
+    "emailLabel": "Elektron pochta",
+    "fullNameLabel": "To‘liq ism",
+    "saveName": "Ismni saqlash",
+    "nameSuccess": "Ko‘rsatiladigan ismingiz yangilandi.",
+    "passwordHeading": "Parol",
+    "passwordLede": "Kamida 8 belgidan iborat kuchli parol tanlang.",
+    "passwordSocialNote": "Bu hisob ijtimoiy tarmoq orqali kirishdan foydalanadi. Parol o‘zgarishlari Google hisobingiz orqali boshqariladi.",
+    "oldPassword": "Joriy parol",
+    "newPassword": "Yangi parol",
+    "confirmPassword": "Yangi parolni tasdiqlang",
+    "showPassword": "Parolni ko‘rsatish",
+    "hidePassword": "Parolni yashirish",
+    "savePassword": "Parolni yangilash",
+    "passwordSuccess": "Parolingiz yangilandi.",
+    "saving": "Saqlanmoqda...",
+    "validation": {
+      "oldPasswordRequired": "Joriy parol majburiy"
+    },
+    "errors": {
+      "nameFailed": "Ismni yangilab bo‘lmadi. Qayta urinib ko‘ring.",
+      "passwordFailed": "Parolni yangilab bo‘lmadi. Joriy parolingizni tekshiring."
+    }
   },
   "worldClock": {
     "ariaLabel": "Jahon soatlari",

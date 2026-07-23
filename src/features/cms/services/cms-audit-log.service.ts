@@ -5,23 +5,41 @@ import {
   mapAuditLog,
   type AuditLogDto,
 } from "@/features/cms/mappers/cms.mapper";
-import type { AuditLog } from "@/features/cms/types/cms.types";
+import type { AuditLogListResult } from "@/features/cms/types/cms.types";
 
 export interface AuditLogParams {
   page?: number;
   limit?: number;
+  action?: string;
+  search?: string;
+  userId?: string;
 }
 
 /**
- * Recent editorial activity. Superadmin-only endpoint; callers should guard by
- * role before invoking (authors receive 403).
+ * Editorial audit trail. Superadmin-only endpoint; callers should gate by role.
  */
 export async function fetchAuditLogs(
   params: AuditLogParams,
-): Promise<AuditLog[]> {
+): Promise<AuditLogListResult> {
   const response = await axiosClient.get<PaginatedApiResponse<AuditLogDto>>(
     API_ENDPOINTS.auditLogs,
-    { params: { page: params.page ?? 1, limit: params.limit ?? 8 } },
+    {
+      params: {
+        page: params.page ?? 1,
+        limit: params.limit ?? 20,
+        action: params.action || undefined,
+        search: params.search || undefined,
+        user_id: params.userId || undefined,
+      },
+    },
   );
-  return (response.data.data ?? []).map(mapAuditLog);
+
+  const meta = response.data.meta;
+  return {
+    items: (response.data.data ?? []).map(mapAuditLog),
+    total: meta?.total ?? 0,
+    page: meta?.page ?? 1,
+    limit: meta?.limit ?? params.limit ?? 20,
+    totalPages: meta?.total_pages ?? 1,
+  };
 }

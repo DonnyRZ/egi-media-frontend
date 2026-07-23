@@ -42,8 +42,11 @@ export function useRecentPublished() {
 /** Superadmin-only recent activity feed. Pass `enabled` to gate by role. */
 export function useRecentActivity(enabled: boolean) {
   return useQuery({
-    queryKey: [...CMS_QUERY_KEYS.auditLogs.all, { limit: 8 }],
-    queryFn: () => fetchAuditLogs({ page: 1, limit: 8 }),
+    queryKey: [...CMS_QUERY_KEYS.auditLogs.all, "recent", { limit: 6 }],
+    queryFn: async () => {
+      const result = await fetchAuditLogs({ page: 1, limit: 6 });
+      return result.items;
+    },
     enabled,
     staleTime: 30_000,
   });

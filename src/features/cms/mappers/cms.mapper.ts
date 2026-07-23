@@ -85,6 +85,7 @@ export interface AuditLogDto {
   id: string;
   user_id: string | null;
   user_full_name?: string | null;
+  user_role?: string | null;
   table_name: string | null;
   record_id: string | null;
   action: string | null;
@@ -210,6 +211,7 @@ export function mapAuditLog(dto: AuditLogDto): AuditLog {
     id: dto.id,
     userId: dto.user_id,
     actorName: dto.user_full_name ?? null,
+    actorRole: dto.user_role ?? null,
     tableName: dto.table_name,
     recordId: dto.record_id,
     recordLabel:

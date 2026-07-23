@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 import { formatAbsoluteDateTime } from "@/shared/utils/format";
 import { Badge } from "@/features/cms/components/ui/Badge";
 import { Card, CardHeader } from "@/features/cms/components/ui/Card";
@@ -7,50 +9,30 @@ import {
   EmptyState,
   LoadingState,
 } from "@/features/cms/components/ui/StateViews";
+import { CMS_BASE_PATH } from "@/features/cms/constants/cms.constants";
 import { useRecentActivity } from "@/features/cms/hooks/useDashboard";
-
-type ActionTone = "success" | "info" | "warning" | "danger" | "neutral";
-
-const ACTION_TONE: Record<string, ActionTone> = {
-  create: "success",
-  insert: "success",
-  published: "success",
-  scheduled: "info",
-  submitted_for_review: "info",
-  update: "info",
-  restored: "info",
-  reverted_to_draft: "warning",
-  archived: "warning",
-  status_change: "warning",
-  delete: "danger",
-  trashed: "danger",
-};
-
-const ACTION_LABEL: Record<string, string> = {
-  create: "CREATED",
-  insert: "CREATED",
-  update: "UPDATED",
-  delete: "TRASHED",
-  trashed: "TRASHED",
-  archived: "ARCHIVED",
-  restored: "RESTORED",
-  published: "PUBLISHED",
-  scheduled: "SCHEDULED",
-  submitted_for_review: "SUBMITTED FOR REVIEW",
-  reverted_to_draft: "REVERTED TO DRAFT",
-  status_change: "CHANGED STATUS",
-};
-
-function normalizeAction(action: string | null | undefined): string {
-  return (action ?? "").trim().toLowerCase();
-}
+import {
+  getAuditActionLabel,
+  getAuditActionTone,
+} from "@/features/cms/utils/audit-action";
 
 export function RecentActivity() {
   const { data, isLoading, isError } = useRecentActivity(true);
 
   return (
     <Card>
-      <CardHeader title="Recent Activity" description="Newsroom audit trail" />
+      <CardHeader
+        title="Recent Activity"
+        description="Latest newsroom actions"
+        action={
+          <Link
+            href={`${CMS_BASE_PATH}/audit-logs`}
+            className="text-xs font-semibold text-accent hover:underline"
+          >
+            View all
+          </Link>
+        }
+      />
       {isLoading ? (
         <LoadingState />
       ) : isError || !data || data.length === 0 ? (
@@ -58,10 +40,7 @@ export function RecentActivity() {
       ) : (
         <ul className="divide-y divide-neutral-100 dark:divide-neutral-800">
           {data.map((log) => {
-            const normalized = normalizeAction(log.action);
-            const actionLabel =
-              ACTION_LABEL[normalized] ??
-              (log.action ? log.action.replace(/_/g, " ") : "CHANGED");
+            const actionLabel = getAuditActionLabel(log.action);
             const title = log.recordLabel?.trim();
 
             return (
@@ -90,7 +69,7 @@ export function RecentActivity() {
                     {formatAbsoluteDateTime(log.createdAt)}
                   </p>
                 </div>
-                <Badge tone={ACTION_TONE[normalized] ?? "neutral"}>
+                <Badge tone={getAuditActionTone(log.action)}>
                   {actionLabel}
                 </Badge>
               </li>

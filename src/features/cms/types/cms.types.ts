@@ -113,12 +113,21 @@ export interface AuditLog {
   id: string;
   userId: string | null;
   actorName: string | null;
+  actorRole: string | null;
   tableName: string | null;
   recordId: string | null;
   /** Human-friendly label of the affected record (e.g. article title). */
   recordLabel: string | null;
   action: string | null;
   createdAt: string | null;
+}
+
+export interface AuditLogListResult {
+  items: AuditLog[];
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
 }
 
 export interface CmsProfile {

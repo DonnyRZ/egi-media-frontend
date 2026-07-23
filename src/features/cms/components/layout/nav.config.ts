@@ -1,6 +1,6 @@
 import type { IconName } from "@/features/cms/components/ui/Icons";
 
-export type NavPermission = "always" | "canViewUsers";
+export type NavPermission = "always" | "canViewUsers" | "canViewActivity";
 
 export interface NavItem {
   label: string;
@@ -52,6 +52,13 @@ export const NAV_SECTIONS: NavSection[] = [
         href: "/cms/users",
         icon: "users",
         permission: "canViewUsers",
+      },
+      {
+        label: "Audit Logs",
+        href: "/cms/audit-logs",
+        icon: "activity",
+        permission: "canViewActivity",
+        matchPrefix: true,
       },
     ],
   },

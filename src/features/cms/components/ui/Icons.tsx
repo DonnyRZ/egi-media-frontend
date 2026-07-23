@@ -140,6 +140,13 @@ export const Icons = {
       <path d="M3 12h4l2 6 4-14 2 8h6" />
     </Base>
   ),
+  history: (p: IconProps) => (
+    <Base {...p}>
+      <path d="M3 12a9 9 0 1 0 3-6.7" />
+      <path d="M3 4v5h5" />
+      <path d="M12 7v5l3 2" />
+    </Base>
+  ),
   send: (p: IconProps) => (
     <Base {...p}>
       <path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7Z" />

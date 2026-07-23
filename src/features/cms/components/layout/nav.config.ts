@@ -56,7 +56,7 @@ export const NAV_SECTIONS: NavSection[] = [
       {
         label: "Audit Logs",
         href: "/cms/audit-logs",
-        icon: "activity",
+        icon: "history",
         permission: "canViewActivity",
         matchPrefix: true,
       },

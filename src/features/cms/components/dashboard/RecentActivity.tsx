@@ -3,31 +3,47 @@
 import { formatAbsoluteDateTime } from "@/shared/utils/format";
 import { Badge } from "@/features/cms/components/ui/Badge";
 import { Card, CardHeader } from "@/features/cms/components/ui/Card";
-import { EmptyState, LoadingState } from "@/features/cms/components/ui/StateViews";
+import {
+  EmptyState,
+  LoadingState,
+} from "@/features/cms/components/ui/StateViews";
 import { useRecentActivity } from "@/features/cms/hooks/useDashboard";
 
-const ACTION_TONE: Record<string, "success" | "info" | "warning" | "danger" | "neutral"> = {
+type ActionTone = "success" | "info" | "warning" | "danger" | "neutral";
+
+const ACTION_TONE: Record<string, ActionTone> = {
   create: "success",
   insert: "success",
+  published: "success",
+  scheduled: "info",
+  submitted_for_review: "info",
   update: "info",
+  restored: "info",
+  reverted_to_draft: "warning",
+  archived: "warning",
+  status_change: "warning",
   delete: "danger",
+  trashed: "danger",
 };
 
-const TABLE_LABEL: Record<string, string> = {
-  articles: "article",
-  categories: "category",
-  topics: "topic",
-  tags: "tag",
-  series: "series",
-  users: "user",
+const ACTION_LABEL: Record<string, string> = {
+  create: "CREATED",
+  insert: "CREATED",
+  update: "UPDATED",
+  delete: "TRASHED",
+  trashed: "TRASHED",
+  archived: "ARCHIVED",
+  restored: "RESTORED",
+  published: "PUBLISHED",
+  scheduled: "SCHEDULED",
+  submitted_for_review: "SUBMITTED FOR REVIEW",
+  reverted_to_draft: "REVERTED TO DRAFT",
+  status_change: "CHANGED STATUS",
 };
 
-const ACTION_VERB: Record<string, string> = {
-  create: "created",
-  insert: "created",
-  update: "updated",
-  delete: "deleted",
-};
+function normalizeAction(action: string | null | undefined): string {
+  return (action ?? "").trim().toLowerCase();
+}
 
 export function RecentActivity() {
   const { data, isLoading, isError } = useRecentActivity(true);
@@ -42,8 +58,12 @@ export function RecentActivity() {
       ) : (
         <ul className="divide-y divide-neutral-100 dark:divide-neutral-800">
           {data.map((log) => {
-            const verb = ACTION_VERB[log.action ?? ""] ?? log.action ?? "changed";
-            const entity = TABLE_LABEL[log.tableName ?? ""] ?? log.tableName ?? "record";
+            const normalized = normalizeAction(log.action);
+            const actionLabel =
+              ACTION_LABEL[normalized] ??
+              (log.action ? log.action.replace(/_/g, " ") : "CHANGED");
+            const title = log.recordLabel?.trim();
+
             return (
               <li
                 key={log.id}
@@ -54,17 +74,19 @@ export function RecentActivity() {
                     <span className="font-semibold">
                       {log.actorName ?? "Someone"}
                     </span>{" "}
-                    {verb} {entity}
-                    {log.recordLabel ? (
-                      <span className="text-neutral-500"> “{log.recordLabel}”</span>
+                    <span className="font-medium tracking-wide">
+                      {actionLabel}
+                    </span>
+                    {title ? (
+                      <span className="text-neutral-500"> &lsquo;{title}&rsquo;</span>
                     ) : null}
                   </p>
                   <p className="mt-0.5 text-xs text-neutral-400">
                     {formatAbsoluteDateTime(log.createdAt)}
                   </p>
                 </div>
-                <Badge tone={ACTION_TONE[log.action ?? ""] ?? "neutral"}>
-                  {log.action ?? "—"}
+                <Badge tone={ACTION_TONE[normalized] ?? "neutral"}>
+                  {actionLabel}
                 </Badge>
               </li>
             );

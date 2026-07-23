@@ -174,10 +174,28 @@ export function mapCmsUser(dto: CmsUserDto): CmsUser {
 }
 
 function pickRecordLabel(
-  data: Record<string, unknown> | null | undefined,
+  data: Record<string, unknown> | string | null | undefined,
 ): string | null {
   if (!data) return null;
-  const candidate = data.title ?? data.name ?? data.full_name ?? data.email;
+
+  let parsed: Record<string, unknown>;
+  if (typeof data === "string") {
+    try {
+      parsed = JSON.parse(data) as Record<string, unknown>;
+    } catch {
+      return null;
+    }
+  } else {
+    parsed = data;
+  }
+
+  if (!parsed || typeof parsed !== "object") return null;
+  const candidate =
+    parsed.article_title ??
+    parsed.title ??
+    parsed.name ??
+    parsed.full_name ??
+    parsed.email;
   return typeof candidate === "string" ? candidate : null;
 }
 

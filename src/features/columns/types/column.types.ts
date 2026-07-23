@@ -8,6 +8,7 @@ export type ColumnStatus =
 export interface ColumnAuthor {
   id: string;
   fullName: string;
+  email?: string | null;
   role: string | null;
 }
 

@@ -16,6 +16,7 @@ export const AUDIT_ACTION_TONE: Record<string, AuditActionTone> = {
   reverted_to_draft: "warning",
   archived: "warning",
   status_change: "warning",
+  rejected: "danger",
   delete: "danger",
   trashed: "danger",
 };
@@ -32,6 +33,7 @@ export const AUDIT_ACTION_LABEL: Record<string, string> = {
   scheduled: "SCHEDULED",
   submitted_for_review: "SUBMITTED FOR REVIEW",
   reverted_to_draft: "REVERTED TO DRAFT",
+  rejected: "REJECTED",
   status_change: "CHANGED STATUS",
 };
 
@@ -40,6 +42,7 @@ export const AUDIT_ACTION_FILTER_OPTIONS = [
   { value: "CREATE", label: "Created" },
   { value: "UPDATE", label: "Updated" },
   { value: "PUBLISHED", label: "Published" },
+  { value: "REJECTED", label: "Rejected" },
   { value: "ARCHIVED", label: "Archived" },
   { value: "RESTORED", label: "Restored" },
   { value: "SCHEDULED", label: "Scheduled" },

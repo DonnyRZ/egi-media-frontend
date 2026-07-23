@@ -54,7 +54,7 @@ export const ALLOWED_STATUS_TRANSITIONS: Record<ArticleStatus, ArticleStatus[]> 
     review: ["published", "draft"],
     scheduled: ["published", "draft"],
     published: ["archived"],
-    archived: [],
+    archived: ["draft", "published"],
   };
 
 export const ARTICLE_STATUS_META: Record<

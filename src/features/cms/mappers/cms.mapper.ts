@@ -88,9 +88,10 @@ export interface AuditLogDto {
   table_name: string | null;
   record_id: string | null;
   action: string | null;
+  article_title?: string | null;
   created_at: string | null;
-  new_data?: Record<string, unknown> | null;
-  old_data?: Record<string, unknown> | null;
+  new_data?: Record<string, unknown> | string | null;
+  old_data?: Record<string, unknown> | string | null;
 }
 
 export interface CmsProfileDto {
@@ -200,13 +201,21 @@ function pickRecordLabel(
 }
 
 export function mapAuditLog(dto: AuditLogDto): AuditLog {
+  const titleFromColumn =
+    typeof dto.article_title === "string" && dto.article_title.trim()
+      ? dto.article_title.trim()
+      : null;
+
   return {
     id: dto.id,
     userId: dto.user_id,
     actorName: dto.user_full_name ?? null,
     tableName: dto.table_name,
     recordId: dto.record_id,
-    recordLabel: pickRecordLabel(dto.new_data) ?? pickRecordLabel(dto.old_data),
+    recordLabel:
+      titleFromColumn ??
+      pickRecordLabel(dto.new_data) ??
+      pickRecordLabel(dto.old_data),
     action: dto.action,
     createdAt: dto.created_at,
   };

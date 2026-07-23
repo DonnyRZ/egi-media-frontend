@@ -78,7 +78,12 @@ export function RecentActivity() {
                       {actionLabel}
                     </span>
                     {title ? (
-                      <span className="text-neutral-500"> &lsquo;{title}&rsquo;</span>
+                      <>
+                        {" "}
+                        <span className="text-neutral-600 dark:text-neutral-300">
+                          &lsquo;{title}&rsquo;
+                        </span>
+                      </>
                     ) : null}
                   </p>
                   <p className="mt-0.5 text-xs text-neutral-400">

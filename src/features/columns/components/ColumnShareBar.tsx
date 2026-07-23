@@ -12,7 +12,7 @@ interface ColumnShareBarProps {
   columnId: string;
   title: string;
   shareUrl: string;
-  onShareRecorded: (shareCount: number) => void;
+  onShareRecorded: (shareCount: number | ((prev: number) => number)) => void;
 }
 
 const SHARE_ACTIONS: Array<{
@@ -57,6 +57,8 @@ export function ColumnShareBar({
       const nextCount = await trackColumnShare(columnId, platform);
       if (typeof nextCount === "number") {
         onShareRecorded(nextCount);
+      } else {
+        onShareRecorded((prev) => prev + 1);
       }
     } catch {
       // Keep UI usable even if tracking fails.

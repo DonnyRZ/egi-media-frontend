@@ -12,7 +12,7 @@ interface ArticleShareBarProps {
   articleId: string;
   title: string;
   shareUrl: string;
-  onShareRecorded: (shareCount: number) => void;
+  onShareRecorded: (shareCount: number | ((prev: number) => number)) => void;
 }
 
 const SHARE_ACTIONS: Array<{
@@ -52,6 +52,8 @@ export function ArticleShareBar({
       const nextCount = await trackArticleShare(articleId, platform);
       if (typeof nextCount === "number") {
         onShareRecorded(nextCount);
+      } else {
+        onShareRecorded((prev) => prev + 1);
       }
     } catch {
       // Keep UI usable even if tracking fails.

@@ -6,6 +6,10 @@ import { ArticleStats } from "@/features/article/components/ArticleStats";
 import { ColumnShareBar } from "@/features/columns/components/ColumnShareBar";
 import { SaveColumnButton } from "@/features/columns/components/SaveColumnButton";
 import { trackColumnView } from "@/features/columns/repositories/column.repository";
+import {
+  columnViewSessionKey,
+  recordViewOnce,
+} from "@/shared/lib/engagement-session";
 
 interface ColumnEngagementProps {
   columnId: string;
@@ -24,25 +28,26 @@ export function ColumnEngagement({
 }: ColumnEngagementProps) {
   const [viewCount, setViewCount] = useState(initialViewCount);
   const [shareCount, setShareCount] = useState(initialShareCount);
-  const hasTrackedView = useRef(false);
+  const activeColumnId = useRef(columnId);
 
   useEffect(() => {
-    if (hasTrackedView.current) return;
-    hasTrackedView.current = true;
-
-    const storageKey = `egi-column-viewed:${columnId}`;
-    if (typeof window !== "undefined" && sessionStorage.getItem(storageKey)) {
-      return;
+    if (activeColumnId.current !== columnId) {
+      activeColumnId.current = columnId;
+      setViewCount(initialViewCount);
+      setShareCount(initialShareCount);
     }
+  }, [columnId, initialViewCount, initialShareCount]);
 
-    void trackColumnView(columnId)
+  useEffect(() => {
+    void recordViewOnce(columnViewSessionKey(columnId), () =>
+      trackColumnView(columnId),
+    )
       .then((nextCount) => {
-        if (typeof window !== "undefined") {
-          sessionStorage.setItem(storageKey, "1");
-        }
         if (typeof nextCount === "number") {
-          setViewCount(nextCount);
+          setViewCount((current) => Math.max(current, nextCount));
+          return;
         }
+        setViewCount((current) => current + 1);
       })
       .catch(() => undefined);
   }, [columnId]);

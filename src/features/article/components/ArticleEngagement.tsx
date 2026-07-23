@@ -5,6 +5,10 @@ import { useEffect, useRef, useState } from "react";
 import { ArticleShareBar } from "@/features/article/components/ArticleShareBar";
 import { ArticleStats } from "@/features/article/components/ArticleStats";
 import { SaveArticleButton } from "@/features/saved-articles/components/SaveArticleButton";
+import {
+  articleViewSessionKey,
+  recordViewOnce,
+} from "@/shared/lib/engagement-session";
 import { trackArticleView } from "@/shared/repositories/article.repository";
 
 interface ArticleEngagementProps {
@@ -24,25 +28,26 @@ export function ArticleEngagement({
 }: ArticleEngagementProps) {
   const [viewCount, setViewCount] = useState(initialViewCount);
   const [shareCount, setShareCount] = useState(initialShareCount);
-  const hasTrackedView = useRef(false);
+  const activeArticleId = useRef(articleId);
 
   useEffect(() => {
-    if (hasTrackedView.current) return;
-    hasTrackedView.current = true;
-
-    const storageKey = `egi-article-viewed:${articleId}`;
-    if (typeof window !== "undefined" && sessionStorage.getItem(storageKey)) {
-      return;
+    if (activeArticleId.current !== articleId) {
+      activeArticleId.current = articleId;
+      setViewCount(initialViewCount);
+      setShareCount(initialShareCount);
     }
+  }, [articleId, initialViewCount, initialShareCount]);
 
-    void trackArticleView(articleId)
+  useEffect(() => {
+    void recordViewOnce(articleViewSessionKey(articleId), () =>
+      trackArticleView(articleId),
+    )
       .then((nextCount) => {
-        if (typeof window !== "undefined") {
-          sessionStorage.setItem(storageKey, "1");
-        }
         if (typeof nextCount === "number") {
-          setViewCount(nextCount);
+          setViewCount((current) => Math.max(current, nextCount));
+          return;
         }
+        setViewCount((current) => current + 1);
       })
       .catch(() => undefined);
   }, [articleId]);

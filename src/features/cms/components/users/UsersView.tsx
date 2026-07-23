@@ -8,9 +8,7 @@ import { Button } from "@/features/cms/components/ui/Button";
 import { Card } from "@/features/cms/components/ui/Card";
 import { ConfirmDialog } from "@/features/cms/components/ui/ConfirmDialog";
 import { Icons } from "@/features/cms/components/ui/Icons";
-import { Input } from "@/features/cms/components/ui/Input";
 import { Pagination } from "@/features/cms/components/ui/Pagination";
-import { Select } from "@/features/cms/components/ui/Select";
 import {
   EmptyState,
   ErrorState,
@@ -18,6 +16,14 @@ import {
 } from "@/features/cms/components/ui/StateViews";
 import { AddAuthorModal } from "@/features/cms/components/users/AddAuthorModal";
 import { EditUserModal } from "@/features/cms/components/users/EditUserModal";
+import {
+  UserFilters,
+  type UserSortKey,
+} from "@/features/cms/components/users/UserFilters";
+import {
+  UserRoleTabs,
+  type UserRoleFilter,
+} from "@/features/cms/components/users/UserRoleTabs";
 import { CMS_DEFAULT_PAGE_SIZE } from "@/features/cms/constants/cms.constants";
 import { useCmsUsers, useUserMutations } from "@/features/cms/hooks/useCmsUsers";
 import { useDebouncedValue } from "@/features/cms/hooks/useDebouncedValue";
@@ -25,13 +31,6 @@ import { usePermissions } from "@/features/cms/hooks/usePermissions";
 import { useToast } from "@/features/cms/stores/cms-toast.store";
 import type { AddAuthorValues } from "@/features/cms/schemas/cms.schemas";
 import type { CmsUser } from "@/features/cms/types/cms.types";
-
-const ROLE_FILTER_OPTIONS = [
-  { value: "superadmin", label: "Super Admin" },
-  { value: "author", label: "Author" },
-  { value: "member", label: "Member" },
-  { value: "visitor", label: "Visitor" },
-];
 
 const ROLE_TONE: Record<string, "info" | "success" | "neutral" | "muted"> = {
   superadmin: "success",
@@ -43,17 +42,24 @@ const ROLE_TONE: Record<string, "info" | "success" | "neutral" | "muted"> = {
 export function UsersView() {
   const toast = useToast();
   const { canManageUsers } = usePermissions();
-  const [search, setSearch] = useState("");
-  const [role, setRole] = useState("");
+  const [searchInput, setSearchInput] = useState("");
+  const [role, setRole] = useState<UserRoleFilter>("");
+  const [sort, setSort] = useState<UserSortKey>("newest");
   const [page, setPage] = useState(1);
   const [addOpen, setAddOpen] = useState(false);
   const [editing, setEditing] = useState<CmsUser | null>(null);
   const [pendingDelete, setPendingDelete] = useState<CmsUser | null>(null);
 
-  const debouncedSearch = useDebouncedValue(search);
+  const search = useDebouncedValue(searchInput, 300);
   const params = useMemo(
-    () => ({ page, limit: CMS_DEFAULT_PAGE_SIZE, search: debouncedSearch, role }),
-    [page, debouncedSearch, role],
+    () => ({
+      page,
+      limit: CMS_DEFAULT_PAGE_SIZE,
+      search,
+      role,
+      sort,
+    }),
+    [page, search, role, sort],
   );
   const { data, isLoading, isError } = useCmsUsers(params);
   const { add, update, remove } = useUserMutations();
@@ -113,32 +119,28 @@ export function UsersView() {
         }
       />
 
-      <div className="mb-4 flex flex-col gap-3 sm:flex-row">
-        <div className="relative flex-1">
-          <Icons.search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400" />
-          <Input
-            className="pl-9"
-            placeholder="Search users…"
-            value={search}
-            onChange={(event) => {
-              setSearch(event.target.value);
-              setPage(1);
-            }}
-          />
-        </div>
-        <Select
-          className="sm:w-48"
-          placeholder="All roles"
-          options={ROLE_FILTER_OPTIONS}
+      <Card>
+        <UserRoleTabs
           value={role}
-          onChange={(event) => {
-            setRole(event.target.value);
+          onChange={(value) => {
+            setRole(value);
             setPage(1);
           }}
         />
-      </div>
 
-      <Card>
+        <UserFilters
+          search={searchInput}
+          sort={sort}
+          onSearch={(value) => {
+            setSearchInput(value);
+            setPage(1);
+          }}
+          onSort={(value) => {
+            setSort(value);
+            setPage(1);
+          }}
+        />
+
         {isLoading ? (
           <LoadingState />
         ) : isError ? (

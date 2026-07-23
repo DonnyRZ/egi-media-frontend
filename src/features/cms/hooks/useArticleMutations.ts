@@ -26,6 +26,9 @@ export function useArticleMutations() {
     void queryClient.invalidateQueries({
       queryKey: CMS_QUERY_KEYS.dashboard.all,
     });
+    void queryClient.invalidateQueries({
+      queryKey: CMS_QUERY_KEYS.auditLogs.all,
+    });
   };
 
   const create = useMutation({

@@ -54,7 +54,7 @@ export const ALLOWED_STATUS_TRANSITIONS: Record<ArticleStatus, ArticleStatus[]> 
     review: ["published", "draft"],
     scheduled: ["published", "draft"],
     published: ["archived"],
-    archived: [],
+    archived: ["draft", "published"],
   };
 
 export const ARTICLE_STATUS_META: Record<
@@ -113,8 +113,9 @@ export const CMS_QUERY_KEYS = {
       ["cms", "users", "list", params] as const,
   },
   auditLogs: {
+    all: ["cms", "audit-logs"] as const,
     list: (params: object) =>
-      ["cms", "audit-logs", params] as const,
+      ["cms", "audit-logs", "list", params] as const,
   },
   dashboard: { all: ["cms", "dashboard"] as const },
   videos: {

@@ -85,12 +85,14 @@ export interface AuditLogDto {
   id: string;
   user_id: string | null;
   user_full_name?: string | null;
+  user_role?: string | null;
   table_name: string | null;
   record_id: string | null;
   action: string | null;
+  article_title?: string | null;
   created_at: string | null;
-  new_data?: Record<string, unknown> | null;
-  old_data?: Record<string, unknown> | null;
+  new_data?: Record<string, unknown> | string | null;
+  old_data?: Record<string, unknown> | string | null;
 }
 
 export interface CmsProfileDto {
@@ -174,21 +176,48 @@ export function mapCmsUser(dto: CmsUserDto): CmsUser {
 }
 
 function pickRecordLabel(
-  data: Record<string, unknown> | null | undefined,
+  data: Record<string, unknown> | string | null | undefined,
 ): string | null {
   if (!data) return null;
-  const candidate = data.title ?? data.name ?? data.full_name ?? data.email;
+
+  let parsed: Record<string, unknown>;
+  if (typeof data === "string") {
+    try {
+      parsed = JSON.parse(data) as Record<string, unknown>;
+    } catch {
+      return null;
+    }
+  } else {
+    parsed = data;
+  }
+
+  if (!parsed || typeof parsed !== "object") return null;
+  const candidate =
+    parsed.article_title ??
+    parsed.title ??
+    parsed.name ??
+    parsed.full_name ??
+    parsed.email;
   return typeof candidate === "string" ? candidate : null;
 }
 
 export function mapAuditLog(dto: AuditLogDto): AuditLog {
+  const titleFromColumn =
+    typeof dto.article_title === "string" && dto.article_title.trim()
+      ? dto.article_title.trim()
+      : null;
+
   return {
     id: dto.id,
     userId: dto.user_id,
     actorName: dto.user_full_name ?? null,
+    actorRole: dto.user_role ?? null,
     tableName: dto.table_name,
     recordId: dto.record_id,
-    recordLabel: pickRecordLabel(dto.new_data) ?? pickRecordLabel(dto.old_data),
+    recordLabel:
+      titleFromColumn ??
+      pickRecordLabel(dto.new_data) ??
+      pickRecordLabel(dto.old_data),
     action: dto.action,
     createdAt: dto.created_at,
   };

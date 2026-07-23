@@ -58,6 +58,7 @@ function mapAuthor(dto: ColumnAuthorDto): ColumnAuthor {
   return {
     id: dto.id,
     fullName: dto.full_name,
+    email: dto.email ?? null,
     role: dto.role ?? null,
   };
 }

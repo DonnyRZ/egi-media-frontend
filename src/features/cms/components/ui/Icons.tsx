@@ -36,6 +36,11 @@ export const Icons = {
       <path d="M14 4v5h5M8 13h8M8 17h5" />
     </Base>
   ),
+  columns: (p: IconProps) => (
+    <Base {...p}>
+      <path d="M4 4h6v16H4zM14 4h6v10h-6z" />
+    </Base>
+  ),
   category: (p: IconProps) => (
     <Base {...p}>
       <path d="M3 7h18M3 12h18M3 17h18" />

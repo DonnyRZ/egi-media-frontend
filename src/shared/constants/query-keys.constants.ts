@@ -46,6 +46,8 @@ export const QUERY_KEYS = {
     all: ["columns"] as const,
     list: (params: Record<string, unknown>) =>
       ["columns", "list", params] as const,
+    manage: (params: Record<string, unknown>) =>
+      ["columns", "manage", params] as const,
     detail: (slug: string, lang: string) =>
       ["columns", "detail", slug, lang] as const,
     mine: (params: Record<string, unknown>) =>

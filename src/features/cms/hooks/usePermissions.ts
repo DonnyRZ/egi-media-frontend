@@ -32,5 +32,6 @@ export function usePermissions() {
     canViewUsers: isSuperadmin || isAuthor,
     canManageUsers: isSuperadmin,
     canViewActivity: isSuperadmin,
+    canModerateColumns: isSuperadmin,
   };
 }

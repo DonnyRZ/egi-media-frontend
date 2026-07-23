@@ -9,6 +9,7 @@ export interface CmsUsersParams {
   limit?: number;
   search?: string;
   role?: string;
+  sort?: "newest" | "oldest" | "name";
 }
 
 interface CmsUserListResponseDto {
@@ -28,6 +29,7 @@ export async function fetchUsers(
       limit: params.limit,
       search: params.search || undefined,
       role: params.role || undefined,
+      sort: params.sort || undefined,
     },
   });
 

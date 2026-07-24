@@ -39,17 +39,19 @@
     "resetPasswordDescription": "Choose a new password for your EGI Media account using the email verification link.",
     "notificationsTitle": "Notifications",
     "notificationsDescription": "View all notifications sent to your EGI Media account — announcements, activity, and alerts.",
-    "newslettersTitle": "Newsletters",
-    "newslettersDescription": "Browse and manage the EGI Media newsletters your account is subscribed to.",
     "savedTitle": "Saved",
     "savedDescription": "Revisit the EGI Media articles and columns you saved to your account — organized for quick access.",
     "profileTitle": "Account Profile",
-    "profileDescription": "Update your EGI Media display name and password for a secure, personalized account."
+    "profileDescription": "Update your EGI Media display name and password for a secure, personalized account.",
+    "topicSubscriptionsTitle": "Topic Preferences",
+    "topicSubscriptionsDescription": "Subscribe to topics to personalize your EGI Media news feed.",
+    "forYouTitle": "For You",
+    "forYouDescription": "Your personalized EGI Media feed based on the topics you follow."
   },
   "header": {
     "homeAria": "{siteName} home",
-    "newsletters": "Newsletters",
     "saved": "Saved",
+    "forYou": "For You",
     "signIn": "Sign in",
     "subscribe": "Subscribe",
     "toggleMenu": "Toggle menu",
@@ -70,7 +72,8 @@
       "egiNews": "EGI News",
       "series": "Series",
       "videos": "Videos"
-    }
+    },
+    "topicPreferences": "Topic Preferences"
   },
   "auth": {
     "kicker": "Account",
@@ -86,6 +89,8 @@
     "loginSuccessBody": "Welcome back. Click the button below to continue to the homepage.",
     "continueToHome": "OK, continue",
     "profile": "Profile",
+    "topicPreferences": "Topic preferences",
+    "forYou": "For You",
     "signOut": "Sign out",
     "createAccount": "Create account",
     "creatingAccount": "Creating account...",
@@ -181,26 +186,6 @@
     "signInMessage": "You need to be signed in to see notifications sent to your account.",
     "signInCta": "Sign in"
   },
-  "newslettersPage": {
-    "kicker": "Newsletters",
-    "headline": "Curated briefings, straight to your inbox",
-    "lede": "Choose the EGI Media newsletters that matter to you. Manage your subscriptions anytime — tied to your account.",
-    "listingHeading": "All newsletters",
-    "count": "{count} newsletters",
-    "empty": "No newsletters are available yet.",
-    "noDescription": "No description provided.",
-    "subscribe": "Subscribe",
-    "subscribed": "Subscribed",
-    "processing": "Saving...",
-    "signInTitle": "Sign in to manage newsletters",
-    "signInMessage": "You need to be signed in to subscribe to newsletters for your account.",
-    "signInCta": "Sign in",
-    "frequency": {
-      "daily": "Daily",
-      "weekly": "Weekly",
-      "monthly": "Monthly"
-    }
-  },
   "savedArticlesPage": {
     "kicker": "Your Account",
     "headline": "Your saved reading",
@@ -278,6 +263,42 @@
     "title": "Latest News",
     "subtitle": "Fresh reporting and analysis from our editorial team."
   },
+  "forYou": {
+    "title": "For You",
+    "subtitle": "Stories matched to the topics you follow.",
+    "viewAll": "View all",
+    "guestTitle": "Sign up to personalize your news feed",
+    "guestMessage": "Create an account, pick the topics you care about, and get a feed tailored to your interests.",
+    "guestSignUpCta": "Sign up",
+    "guestSignInCta": "Sign in",
+    "emptyTitle": "Choose topics to build your feed",
+    "emptyMessage": "Subscribe to topics in your preferences to start seeing personalized stories here.",
+    "emptyCta": "Manage topics"
+  },
+  "forYouPage": {
+    "kicker": "My Feed",
+    "headline": "Stories selected for you",
+    "lede": "Published articles from the topics you subscribe to — updated as new reporting goes live.",
+    "listingHeading": "Your personalized feed",
+    "count": "{count} stories"
+  },
+  "topicSubscriptionsPage": {
+    "kicker": "Preferences",
+    "headline": "Subscribe to topics you care about",
+    "lede": "Topic subscriptions power your For You feed. Series and tags under each topic are included automatically.",
+    "listingHeading": "Available topics",
+    "subscribedCount": "{count} subscribed",
+    "topicCount": "{count} topics",
+    "uncategorized": "Other topics",
+    "empty": "No topics are available yet.",
+    "subscribe": "Subscribe",
+    "subscribed": "Subscribed",
+    "processing": "Saving...",
+    "signInTitle": "Sign in to manage topic preferences",
+    "signInMessage": "Topic subscriptions are available for members. Sign in or create an account to personalize your feed.",
+    "signInCta": "Sign in",
+    "signUpCta": "Sign up"
+  },
   "categories": {
     "title": "By Category",
     "subtitle": "Selected coverage organized by our newsroom categories."
@@ -285,13 +306,6 @@
   "topics": {
     "title": "By Topic",
     "subtitle": "Selected articles curated by coverage topic."
-  },
-  "newsletter": {
-    "kicker": "The Flagship Newsletter",
-    "fallbackTitle": "Stay ahead with EGI Media",
-    "description": "Get premium editorial insights delivered to your inbox. Curated reporting for professionals who need clarity.",
-    "subscribe": "Subscribe",
-    "tagline": "Trusted insights · Clean design"
   },
   "series": {
     "title": "Featured Series",
@@ -573,11 +587,26 @@
     "coverageTitle": "What We Cover",
     "coverageSubtitle": "A broad range of topics relevant to today's lifestyle.",
     "coverage": [
-      { "label": "Politics", "description": "Unpacking the latest dynamics and policies." },
-      { "label": "Technology", "description": "Highlighting digital developments and innovation." },
-      { "label": "Sport", "description": "Celebrating sportsmanship on and off the field." },
-      { "label": "Entertainment", "description": "Reviews of pop culture trends and entertainment." },
-      { "label": "Travel", "description": "Exploring destinations and the modern lifestyle." }
+      {
+        "label": "Politics",
+        "description": "Unpacking the latest dynamics and policies."
+      },
+      {
+        "label": "Technology",
+        "description": "Highlighting digital developments and innovation."
+      },
+      {
+        "label": "Sport",
+        "description": "Celebrating sportsmanship on and off the field."
+      },
+      {
+        "label": "Entertainment",
+        "description": "Reviews of pop culture trends and entertainment."
+      },
+      {
+        "label": "Travel",
+        "description": "Exploring destinations and the modern lifestyle."
+      }
     ],
     "teamTitle": "The EGI Media Team",
     "teamSubtitle": "The people behind every idea broadcast and every word written.",

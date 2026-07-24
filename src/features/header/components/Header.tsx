@@ -5,7 +5,6 @@ import { Suspense } from "react";
 import { useFormatter, useTranslations } from "next-intl";
 
 import { Link } from "@/i18n/navigation";
-import { Button } from "@/shared/components/ui/Button";
 import { Container } from "@/shared/components/layout/Container";
 import { AuthUserMenu, AuthMobileActions } from "@/features/auth/components/AuthUserMenu";
 import { useAuthStore } from "@/features/auth/stores/auth.store";
@@ -56,13 +55,18 @@ function UtilityBar() {
             })}
           </span>
           <div className="flex items-center gap-4">
-            <Link className="hover:text-accent" href="/newsletters">
-              {t("newsletters")}
+            <Link className="hover:text-accent" href="/settings/topics">
+              {t("topicPreferences")}
             </Link>
             {isHydrated && isAuthenticated ? (
-              <Link className="hover:text-accent" href="/saved">
-                {t("saved")}
-              </Link>
+              <>
+                <Link className="hover:text-accent" href="/for-you">
+                  {t("forYou")}
+                </Link>
+                <Link className="hover:text-accent" href="/saved">
+                  {t("saved")}
+                </Link>
+              </>
             ) : null}
             <span aria-hidden="true" className="text-neutral-300">
               |
@@ -119,7 +123,12 @@ function Masthead() {
         >
           <SearchIcon />
         </button>
-        <Button className="hidden rounded-none sm:inline-flex">{t("subscribe")}</Button>
+        <Link
+          className="hidden rounded-none bg-primary-700 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-primary-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 sm:inline-flex sm:items-center sm:justify-center"
+          href="/settings/topics"
+        >
+          {t("subscribe")}
+        </Link>
       </div>
     </div>
   );
@@ -177,9 +186,13 @@ function MobileNav() {
           <AuthMobileActions />
           <div className="flex items-center justify-between gap-3">
             <LanguageSwitcherSlot />
-            <Button className="rounded-none" type="button">
+            <Link
+              className="inline-flex items-center justify-center rounded-none bg-primary-700 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-primary-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+              href="/settings/topics"
+              onClick={() => setMobileMenuOpen(false)}
+            >
               {t("subscribe")}
-            </Button>
+            </Link>
           </div>
         </li>
       </ul>

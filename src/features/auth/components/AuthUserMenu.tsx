@@ -81,6 +81,22 @@ export function AuthUserMenu() {
           >
             {t("profile")}
           </Link>
+          <Link
+            className="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50"
+            href="/settings/topics"
+            onClick={() => setOpen(false)}
+            role="menuitem"
+          >
+            {t("topicPreferences")}
+          </Link>
+          <Link
+            className="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50"
+            href="/for-you"
+            onClick={() => setOpen(false)}
+            role="menuitem"
+          >
+            {t("forYou")}
+          </Link>
           <button
             className="block w-full border-t border-neutral-100 px-4 py-2 text-left text-sm text-neutral-700 hover:bg-neutral-50"
             onClick={() => void handleLogout()}
@@ -128,6 +144,20 @@ export function AuthMobileActions() {
         onClick={() => setMobileMenuOpen(false)}
       >
         {t("profile")}
+      </Link>
+      <Link
+        className="block py-1 text-sm font-semibold uppercase tracking-wide text-neutral-800"
+        href="/settings/topics"
+        onClick={() => setMobileMenuOpen(false)}
+      >
+        {t("topicPreferences")}
+      </Link>
+      <Link
+        className="block py-1 text-sm font-semibold uppercase tracking-wide text-neutral-800"
+        href="/for-you"
+        onClick={() => setMobileMenuOpen(false)}
+      >
+        {t("forYou")}
       </Link>
       <Button
         className="w-full rounded-none"

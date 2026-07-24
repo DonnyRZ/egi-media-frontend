@@ -75,8 +75,15 @@ export const taxonomyFormSchema = z.object({
 
 export type TaxonomyFormValues = z.infer<typeof taxonomyFormSchema>;
 
+export const topicFormSchema = taxonomyFormSchema.extend({
+  categoryId: z.string().uuid("Select a parent category"),
+});
+
+export type TopicFormValues = z.infer<typeof topicFormSchema>;
+
 export const seriesFormSchema = taxonomyFormSchema.extend({
   image: optionalUrl,
+  topicId: z.string().uuid("Select a parent topic"),
 });
 
 export type SeriesFormValues = z.infer<typeof seriesFormSchema>;

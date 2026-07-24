@@ -57,6 +57,16 @@ export function TaxonomyItemRow({
             <span className="block truncate text-sm font-medium text-neutral-900 dark:text-neutral-100">
               {item.name}
             </span>
+            {kind === "topic" && item.category ? (
+              <span className="mt-0.5 block truncate text-xs text-neutral-400">
+                Category: {item.category.name}
+              </span>
+            ) : null}
+            {kind === "series" && item.topic ? (
+              <span className="mt-0.5 block truncate text-xs text-neutral-400">
+                Topic: {item.topic.name}
+              </span>
+            ) : null}
             {item.description ? (
               <span className="block truncate text-xs text-neutral-400">
                 {item.description}

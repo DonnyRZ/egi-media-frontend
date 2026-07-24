@@ -39,17 +39,19 @@
     "resetPasswordDescription": "Elektron pochta orqali tasdiqlangan havola bilan EGI Media hisobingiz uchun yangi parol yarating.",
     "notificationsTitle": "Bildirishnomalar",
     "notificationsDescription": "EGI Media hisobingizga yuborilgan barcha bildirishnomalarni ko‘ring — e'lonlar, faoliyat va ogohlantirishlar.",
-    "newslettersTitle": "Axborot byulletenlari",
-    "newslettersDescription": "Hisobingiz obuna bo‘lgan EGI Media byulletenlarini ko‘ring va boshqaring.",
     "savedTitle": "Saqlanganlar",
     "savedDescription": "Hisobingizga saqlagan EGI Media maqola va rubrikalarini qayta ko‘ring — tez kirish uchun tartiblangan.",
     "profileTitle": "Hisob profili",
-    "profileDescription": "EGI Media hisobingizning ko‘rsatiladigan ismi va parolini xavfsiz yangilang."
+    "profileDescription": "EGI Media hisobingizning ko‘rsatiladigan ismi va parolini xavfsiz yangilang.",
+    "topicSubscriptionsTitle": "Mavzu sozlamalari",
+    "topicSubscriptionsDescription": "EGI Media yangiliklar lentangizni shaxsiylashtirish uchun mavzularga obuna bo‘ling.",
+    "forYouTitle": "Siz uchun",
+    "forYouDescription": "Kuzatayotgan mavzularingiz asosidagi shaxsiy EGI Media lentasi."
   },
   "header": {
     "homeAria": "{siteName} bosh sahifasi",
-    "newsletters": "Axborotnomalar",
     "saved": "Saqlangan",
+    "forYou": "Siz uchun",
     "signIn": "Kirish",
     "subscribe": "Obuna boʻlish",
     "toggleMenu": "Menyuni ochish",
@@ -70,7 +72,8 @@
       "egiNews": "EGI Yangiliklari",
       "series": "Turkumlar",
       "videos": "Videolar"
-    }
+    },
+    "topicPreferences": "Mavzu sozlamalari"
   },
   "auth": {
     "kicker": "Hisob",
@@ -86,6 +89,8 @@
     "loginSuccessBody": "Qaytib kelganingiz bilan. Bosh sahifaga oʻtish uchun quyidagi tugmani bosing.",
     "continueToHome": "OK, davom etish",
     "profile": "Profil",
+    "topicPreferences": "Mavzu sozlamalari",
+    "forYou": "Siz uchun",
     "signOut": "Chiqish",
     "createAccount": "Hisob yaratish",
     "creatingAccount": "Hisob yaratilmoqda...",
@@ -181,26 +186,6 @@
     "signInMessage": "Hisobingizga yuborilgan bildirishnomalarni ko‘rish uchun tizimga kirishingiz kerak.",
     "signInCta": "Kirish"
   },
-  "newslettersPage": {
-    "kicker": "Byulletenlar",
-    "headline": "Saralangan xulosalar to‘g‘ridan-to‘g‘ri pochtangizga",
-    "lede": "Siz uchun muhim EGI Media byulletenlarini tanlang. Obunalaringizni istalgan vaqtda boshqaring — hisobingizga bog‘langan.",
-    "listingHeading": "Barcha byulletenlar",
-    "count": "{count} ta byulleten",
-    "empty": "Hozircha byulletenlar mavjud emas.",
-    "noDescription": "Tavsif berilmagan.",
-    "subscribe": "Obuna bo‘lish",
-    "subscribed": "Obuna bo‘lingan",
-    "processing": "Saqlanmoqda...",
-    "signInTitle": "Byulletenlarni boshqarish uchun tizimga kiring",
-    "signInMessage": "Hisobingiz uchun byulletenlarga obuna bo‘lish uchun tizimga kirishingiz kerak.",
-    "signInCta": "Kirish",
-    "frequency": {
-      "daily": "Kunlik",
-      "weekly": "Haftalik",
-      "monthly": "Oylik"
-    }
-  },
   "savedArticlesPage": {
     "kicker": "Hisobingiz",
     "headline": "Saqlangan o‘qishlaringiz",
@@ -278,6 +263,42 @@
     "title": "Soʻnggi yangiliklar",
     "subtitle": "Tahririyatimizdan yangi xabarlar va tahlillar."
   },
+  "forYou": {
+    "title": "Siz uchun",
+    "subtitle": "Kuzatayotgan mavzularingizga mos xabarlar.",
+    "viewAll": "Hammasini koʻrish",
+    "guestTitle": "Yangiliklar lentangizni shaxsiylashtirish uchun roʻyxatdan oʻting",
+    "guestMessage": "Hisob yarating, qiziqarli mavzularni tanlang va shaxsiy lentani oling.",
+    "guestSignUpCta": "Roʻyxatdan oʻtish",
+    "guestSignInCta": "Kirish",
+    "emptyTitle": "Lentani yaratish uchun mavzularni tanlang",
+    "emptyMessage": "Shaxsiy xabarlarni koʻrish uchun sozlamalarda mavzularga obuna boʻling.",
+    "emptyCta": "Mavzularni boshqarish"
+  },
+  "forYouPage": {
+    "kicker": "Mening lentam",
+    "headline": "Siz uchun tanlangan xabarlar",
+    "lede": "Obuna boʻlgan mavzularingizdagi chop etilgan maqolalar — yangi xabarlar chiqqanda yangilanadi.",
+    "listingHeading": "Shaxsiy lentangiz",
+    "count": "{count} ta xabar"
+  },
+  "topicSubscriptionsPage": {
+    "kicker": "Sozlamalar",
+    "headline": "Sizni qiziqtirgan mavzularga obuna boʻling",
+    "lede": "Mavzu obunalari Siz uchun lentasini quvvatlaydi. Har bir mavzu ostidagi seriya va teglar avtomatik qoʻshiladi.",
+    "listingHeading": "Mavjud mavzular",
+    "subscribedCount": "{count} ta obuna",
+    "topicCount": "{count} ta mavzu",
+    "uncategorized": "Boshqa mavzular",
+    "empty": "Hali mavzular yoʻq.",
+    "subscribe": "Obuna boʻlish",
+    "subscribed": "Obuna",
+    "processing": "Saqlanmoqda...",
+    "signInTitle": "Mavzu sozlamalarini boshqarish uchun kiring",
+    "signInMessage": "Mavzu obunalari aʼzolar uchun. Lentani shaxsiylashtirish uchun kiring yoki hisob yarating.",
+    "signInCta": "Kirish",
+    "signUpCta": "Roʻyxatdan oʻtish"
+  },
   "categories": {
     "title": "Kategoriya boʻyicha",
     "subtitle": "Tahririyat kategoriyalari boʻyicha tanlangan xabarlar."
@@ -285,13 +306,6 @@
   "topics": {
     "title": "Mavzu boʻyicha",
     "subtitle": "Mavzu boʻyicha tanlangan maqolalar."
-  },
-  "newsletter": {
-    "kicker": "Bosh axborotnoma",
-    "fallbackTitle": "EGI Media bilan bir qadam oldinda",
-    "description": "Premium tahririy tahlillarni pochtangizga oling. Aniqlikni qadrlaydigan mutaxassislar uchun tanlangan xabarlar.",
-    "subscribe": "Obuna boʻlish",
-    "tagline": "Ishonchli tahlil · Toza dizayn"
   },
   "series": {
     "title": "Tanlangan turkumlar",
@@ -573,11 +587,26 @@
     "coverageTitle": "Biz nimani yoritamiz",
     "coverageSubtitle": "Bugungi turmush tarziga mos keng qamrovli mavzular.",
     "coverage": [
-      { "label": "Siyosat", "description": "Soʻnggi jarayonlar va siyosatni tahlil qilamiz." },
-      { "label": "Texnologiya", "description": "Raqamli rivojlanish va innovatsiyalarni yoritamiz." },
-      { "label": "Sport", "description": "Maydonda va undan tashqarida sport ruhini nishonlaymiz." },
-      { "label": "Koʻngilochar", "description": "Ommaviy madaniyat tendensiyalari va koʻrgazmalar sharhi." },
-      { "label": "Sayohat", "description": "Manzillar va zamonaviy turmush tarzini kashf etamiz." }
+      {
+        "label": "Siyosat",
+        "description": "Soʻnggi jarayonlar va siyosatni tahlil qilamiz."
+      },
+      {
+        "label": "Texnologiya",
+        "description": "Raqamli rivojlanish va innovatsiyalarni yoritamiz."
+      },
+      {
+        "label": "Sport",
+        "description": "Maydonda va undan tashqarida sport ruhini nishonlaymiz."
+      },
+      {
+        "label": "Koʻngilochar",
+        "description": "Ommaviy madaniyat tendensiyalari va koʻrgazmalar sharhi."
+      },
+      {
+        "label": "Sayohat",
+        "description": "Manzillar va zamonaviy turmush tarzini kashf etamiz."
+      }
     ],
     "teamTitle": "EGI Media jamoasi",
     "teamSubtitle": "Efirga uzatilgan har bir gʻoya va yozilgan har bir soʻz ortidagi insonlar.",

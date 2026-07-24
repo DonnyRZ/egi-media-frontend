@@ -12,10 +12,21 @@ export interface TaxonomyWritePayload {
   description?: string | null;
 }
 
+export interface TopicWritePayload extends TaxonomyWritePayload {
+  categoryId: string;
+}
+
 export interface SeriesWritePayload {
   name: string;
   description?: string | null;
   image?: string | null;
+  topicId: string;
+}
+
+export interface CmsTaxonomyParent {
+  id: string;
+  name: string;
+  slug: string | null;
 }
 
 export interface CmsTaxonomyItem {
@@ -25,6 +36,16 @@ export interface CmsTaxonomyItem {
   description: string | null;
   image: string | null;
   articleCount: number;
+  categoryId: string | null;
+  category: CmsTaxonomyParent | null;
+  topicId: string | null;
+  topic: CmsTaxonomyParent | null;
+}
+
+interface TaxonomyParentDto {
+  id: string;
+  name: string;
+  slug?: string | null;
 }
 
 interface TaxonomyItemDto {
@@ -34,6 +55,15 @@ interface TaxonomyItemDto {
   description?: string | null;
   image?: string | null;
   article_count?: number | null;
+  category_id?: string | null;
+  category?: TaxonomyParentDto | null;
+  topic_id?: string | null;
+  topic?: TaxonomyParentDto | null;
+}
+
+function mapParent(dto: TaxonomyParentDto | null | undefined): CmsTaxonomyParent | null {
+  if (!dto?.id) return null;
+  return { id: dto.id, name: dto.name, slug: dto.slug ?? null };
 }
 
 async function fetchTaxonomyList(
@@ -50,6 +80,10 @@ async function fetchTaxonomyList(
     description: dto.description ?? null,
     image: dto.image ?? null,
     articleCount: dto.article_count ?? 0,
+    categoryId: dto.category_id ?? dto.category?.id ?? null,
+    category: mapParent(dto.category),
+    topicId: dto.topic_id ?? dto.topic?.id ?? null,
+    topic: mapParent(dto.topic),
   }));
 }
 
@@ -59,7 +93,6 @@ export const fetchCmsTopics = () => fetchTaxonomyList(API_ENDPOINTS.topics);
 export const fetchCmsSeries = () => fetchTaxonomyList(API_ENDPOINTS.series);
 export const fetchCmsTags = () => fetchTaxonomyList(API_ENDPOINTS.tags);
 
-// ─── Categories ───────────────────────────────────────────────────────────────
 export async function createCategory(
   payload: TaxonomyWritePayload,
 ): Promise<void> {
@@ -83,21 +116,22 @@ export async function deleteCategory(id: string): Promise<void> {
   await axiosClient.delete(API_ENDPOINTS.categoryById(id));
 }
 
-// ─── Topics ───────────────────────────────────────────────────────────────────
-export async function createTopic(payload: TaxonomyWritePayload): Promise<void> {
+export async function createTopic(payload: TopicWritePayload): Promise<void> {
   await axiosClient.post(API_ENDPOINTS.topics, {
     name: payload.name,
     description: payload.description ?? "",
+    category_id: payload.categoryId,
   });
 }
 
 export async function updateTopic(
   id: string,
-  payload: TaxonomyWritePayload,
+  payload: TopicWritePayload,
 ): Promise<void> {
   await axiosClient.put(API_ENDPOINTS.topicById(id), {
     name: payload.name,
     description: payload.description ?? "",
+    category_id: payload.categoryId,
   });
 }
 
@@ -105,7 +139,6 @@ export async function deleteTopic(id: string): Promise<void> {
   await axiosClient.delete(API_ENDPOINTS.topicById(id));
 }
 
-// ─── Tags ─────────────────────────────────────────────────────────────────────
 export async function fetchTags(): Promise<Tag[]> {
   const response = await axiosClient.get<PaginatedApiResponse<TagDto>>(
     API_ENDPOINTS.tags,
@@ -134,12 +167,12 @@ export async function deleteTag(id: string): Promise<void> {
   await axiosClient.delete(API_ENDPOINTS.tagById(id));
 }
 
-// ─── Series ───────────────────────────────────────────────────────────────────
 export async function createSeries(payload: SeriesWritePayload): Promise<void> {
   await axiosClient.post(API_ENDPOINTS.series, {
     name: payload.name,
     description: payload.description ?? "",
     image: payload.image || undefined,
+    topic_id: payload.topicId,
   });
 }
 
@@ -151,6 +184,7 @@ export async function updateSeries(
     name: payload.name,
     description: payload.description ?? "",
     image: payload.image || undefined,
+    topic_id: payload.topicId,
   });
 }
 

@@ -39,17 +39,19 @@
     "resetPasswordDescription": "Buat password baru untuk akun EGI Media Anda melalui tautan verifikasi email.",
     "notificationsTitle": "Notifikasi",
     "notificationsDescription": "Lihat semua notifikasi yang dikirim ke akun EGI Media Anda — pengumuman, aktivitas, dan peringatan.",
-    "newslettersTitle": "Newsletter",
-    "newslettersDescription": "Jelajahi dan kelola newsletter EGI Media yang dilanggan oleh akun Anda.",
     "savedTitle": "Tersimpan",
     "savedDescription": "Baca kembali artikel dan kolom EGI Media yang Anda simpan di akun Anda — tertata untuk akses cepat.",
     "profileTitle": "Profil Akun",
-    "profileDescription": "Perbarui nama tampilan dan password akun EGI Media Anda secara aman."
+    "profileDescription": "Perbarui nama tampilan dan password akun EGI Media Anda secara aman.",
+    "topicSubscriptionsTitle": "Preferensi Topik",
+    "topicSubscriptionsDescription": "Berlangganan topik untuk mempersonalisasi feed berita EGI Media Anda.",
+    "forYouTitle": "Untuk Anda",
+    "forYouDescription": "Feed personal EGI Media berdasarkan topik yang Anda ikuti."
   },
   "header": {
     "homeAria": "Beranda {siteName}",
-    "newsletters": "Buletin",
     "saved": "Tersimpan",
+    "forYou": "Untuk Anda",
     "signIn": "Masuk",
     "subscribe": "Berlangganan",
     "toggleMenu": "Buka menu",
@@ -70,7 +72,8 @@
       "egiNews": "Berita EGI",
       "series": "Seri",
       "videos": "Video"
-    }
+    },
+    "topicPreferences": "Preferensi Topik"
   },
   "auth": {
     "kicker": "Akun",
@@ -86,6 +89,8 @@
     "loginSuccessBody": "Selamat datang kembali. Klik tombol di bawah untuk lanjut ke beranda.",
     "continueToHome": "Oke, lanjutkan",
     "profile": "Profil",
+    "topicPreferences": "Preferensi topik",
+    "forYou": "Untuk Anda",
     "signOut": "Keluar",
     "createAccount": "Buat akun",
     "creatingAccount": "Sedang membuat akun...",
@@ -181,26 +186,6 @@
     "signInMessage": "Anda harus masuk untuk melihat notifikasi yang dikirim ke akun Anda.",
     "signInCta": "Masuk"
   },
-  "newslettersPage": {
-    "kicker": "Newsletter",
-    "headline": "Ringkasan pilihan, langsung ke email Anda",
-    "lede": "Pilih newsletter EGI Media yang paling relevan untuk Anda. Kelola langganan kapan saja — terhubung dengan akun Anda.",
-    "listingHeading": "Semua newsletter",
-    "count": "{count} newsletter",
-    "empty": "Belum ada newsletter yang tersedia.",
-    "noDescription": "Tidak ada deskripsi.",
-    "subscribe": "Langganan",
-    "subscribed": "Berlangganan",
-    "processing": "Menyimpan...",
-    "signInTitle": "Masuk untuk mengelola newsletter",
-    "signInMessage": "Anda harus masuk untuk berlangganan newsletter pada akun Anda.",
-    "signInCta": "Masuk",
-    "frequency": {
-      "daily": "Harian",
-      "weekly": "Mingguan",
-      "monthly": "Bulanan"
-    }
-  },
   "savedArticlesPage": {
     "kicker": "Akun Anda",
     "headline": "Bacaan tersimpan Anda",
@@ -278,6 +263,42 @@
     "title": "Berita Terbaru",
     "subtitle": "Liputan dan analisis terbaru dari tim redaksi kami."
   },
+  "forYou": {
+    "title": "Untuk Anda",
+    "subtitle": "Berita yang cocok dengan topik yang Anda ikuti.",
+    "viewAll": "Lihat semua",
+    "guestTitle": "Daftar untuk mempersonalisasi feed berita Anda",
+    "guestMessage": "Buat akun, pilih topik yang Anda minati, dan dapatkan feed sesuai minat Anda.",
+    "guestSignUpCta": "Daftar",
+    "guestSignInCta": "Masuk",
+    "emptyTitle": "Pilih topik untuk membangun feed Anda",
+    "emptyMessage": "Berlangganan topik di preferensi agar cerita personal muncul di sini.",
+    "emptyCta": "Kelola topik"
+  },
+  "forYouPage": {
+    "kicker": "Feed Saya",
+    "headline": "Berita yang dipilih untuk Anda",
+    "lede": "Artikel terbit dari topik yang Anda langgan — diperbarui saat liputan baru tayang.",
+    "listingHeading": "Feed personal Anda",
+    "count": "{count} berita"
+  },
+  "topicSubscriptionsPage": {
+    "kicker": "Preferensi",
+    "headline": "Berlangganan topik yang Anda pedulikan",
+    "lede": "Langganan topik menggerakkan feed Untuk Anda. Series dan tag di bawah setiap topik ikut tercakup.",
+    "listingHeading": "Topik tersedia",
+    "subscribedCount": "{count} dilanggan",
+    "topicCount": "{count} topik",
+    "uncategorized": "Topik lainnya",
+    "empty": "Belum ada topik tersedia.",
+    "subscribe": "Langganan",
+    "subscribed": "Dilanggan",
+    "processing": "Menyimpan...",
+    "signInTitle": "Masuk untuk mengelola preferensi topik",
+    "signInMessage": "Langganan topik tersedia untuk member. Masuk atau buat akun untuk mempersonalisasi feed Anda.",
+    "signInCta": "Masuk",
+    "signUpCta": "Daftar"
+  },
   "categories": {
     "title": "Berdasarkan Kategori",
     "subtitle": "Liputan pilihan yang dikelompokkan menurut kategori redaksi."
@@ -285,13 +306,6 @@
   "topics": {
     "title": "Berdasarkan Topik",
     "subtitle": "Artikel pilihan yang dikurasi menurut topik liputan."
-  },
-  "newsletter": {
-    "kicker": "Buletin Unggulan",
-    "fallbackTitle": "Selangkah lebih depan bersama EGI Media",
-    "description": "Dapatkan wawasan editorial premium langsung ke kotak masuk Anda. Liputan pilihan untuk profesional yang membutuhkan kejelasan.",
-    "subscribe": "Berlangganan",
-    "tagline": "Wawasan tepercaya · Desain bersih"
   },
   "series": {
     "title": "Seri Pilihan",
@@ -573,11 +587,26 @@
     "coverageTitle": "Yang Kami Ulas",
     "coverageSubtitle": "Cakupan bahasan yang luas dan relevan dengan gaya hidup masa kini.",
     "coverage": [
-      { "label": "Politik", "description": "Mengurai dinamika dan kebijakan terkini." },
-      { "label": "Teknologi", "description": "Menyorot perkembangan dan inovasi digital." },
-      { "label": "Sport", "description": "Merayakan sportivitas di dalam dan luar lapangan." },
-      { "label": "Hiburan", "description": "Ulasan tren budaya populer dan tontonan." },
-      { "label": "Wisata", "description": "Eksplorasi destinasi dan gaya hidup masa kini." }
+      {
+        "label": "Politik",
+        "description": "Mengurai dinamika dan kebijakan terkini."
+      },
+      {
+        "label": "Teknologi",
+        "description": "Menyorot perkembangan dan inovasi digital."
+      },
+      {
+        "label": "Sport",
+        "description": "Merayakan sportivitas di dalam dan luar lapangan."
+      },
+      {
+        "label": "Hiburan",
+        "description": "Ulasan tren budaya populer dan tontonan."
+      },
+      {
+        "label": "Wisata",
+        "description": "Eksplorasi destinasi dan gaya hidup masa kini."
+      }
     ],
     "teamTitle": "Tim EGI Media",
     "teamSubtitle": "Orang-orang di balik setiap gagasan yang tersiar dan kata yang tertulis.",

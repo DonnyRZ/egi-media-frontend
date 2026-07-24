@@ -18,6 +18,7 @@ import {
   updateTopic,
   type SeriesWritePayload,
   type TaxonomyWritePayload,
+  type TopicWritePayload,
 } from "@/features/cms/services/cms-taxonomy.service";
 
 interface WriteArgs<T> {
@@ -63,7 +64,7 @@ export function useCategoryMutations() {
 }
 
 export function useTopicMutations() {
-  return useResourceMutations<TaxonomyWritePayload>(
+  return useResourceMutations<TopicWritePayload>(
     [CMS_QUERY_KEYS.topics.all, CMS_QUERY_KEYS.taxonomy.topics],
     { create: createTopic, update: updateTopic, remove: deleteTopic },
   );

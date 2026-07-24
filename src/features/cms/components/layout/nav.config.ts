@@ -65,6 +65,13 @@ export const NAV_SECTIONS: NavSection[] = [
         permission: "canViewUsers",
       },
       {
+        label: "Subscriptions",
+        href: "/cms/subscriptions",
+        icon: "topic",
+        permission: "canViewActivity",
+        matchPrefix: true,
+      },
+      {
         label: "Audit Logs",
         href: "/cms/audit-logs",
         icon: "history",

@@ -11,6 +11,16 @@ export const QUERY_KEYS = {
     all: ["topics"] as const,
     list: (params: Record<string, unknown>) => ["topics", "list", params] as const,
   },
+  topicSubscriptions: {
+    all: ["topic-subscriptions"] as const,
+    catalog: (lang: string) => ["topic-subscriptions", "catalog", lang] as const,
+    mine: (lang: string) => ["topic-subscriptions", "mine", lang] as const,
+  },
+  personalizedFeed: {
+    all: ["personalized-feed"] as const,
+    list: (params: Record<string, unknown>) =>
+      ["personalized-feed", "list", params] as const,
+  },
   series: {
     all: ["series"] as const,
     list: (params: Record<string, unknown>) => ["series", "list", params] as const,
@@ -18,10 +28,6 @@ export const QUERY_KEYS = {
   youtubeVideos: {
     all: ["youtube-videos"] as const,
     list: (params: Record<string, unknown>) => ["youtube-videos", "list", params] as const,
-  },
-  newsletters: {
-    all: ["newsletters"] as const,
-    list: (params: Record<string, unknown>) => ["newsletters", "list", params] as const,
   },
   savedArticles: {
     all: ["saved-articles"] as const,

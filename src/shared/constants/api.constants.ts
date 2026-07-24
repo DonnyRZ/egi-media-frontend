@@ -3,6 +3,10 @@ export const API_ENDPOINTS = {
   articlesMe: "/api/v1/articles/me",
   articlesManage: "/api/v1/articles/manage",
   articlesStats: "/api/v1/articles/stats",
+  articlesPersonalized: "/api/v1/articles/personalized",
+  subscriptionStats: "/api/v1/subscriptions/stats",
+  topicSubscribers: (topicId: string) =>
+    `/api/v1/subscriptions/stats/${topicId}/subscribers`,
   youtubeVideoById: (id: string) => `/api/v1/youtube-videos/${id}`,
   articleById: (id: string) => `/api/v1/articles/${id}`,
   articleBySlug: (slug: string) =>
@@ -15,8 +19,11 @@ export const API_ENDPOINTS = {
   categoryById: (idOrSlug: string) =>
     `/api/v1/categories/${encodeURIComponent(idOrSlug)}`,
   topics: "/api/v1/topics",
+  topicsCatalog: "/api/v1/topics/catalog",
   topicById: (idOrSlug: string) =>
     `/api/v1/topics/${encodeURIComponent(idOrSlug)}`,
+  myTopics: "/api/v1/users/me/topics",
+  myTopicById: (id: string) => `/api/v1/users/me/topics/${id}`,
   tags: "/api/v1/tags",
   tagById: (id: string) => `/api/v1/tags/${id}`,
   series: "/api/v1/series",
@@ -26,7 +33,6 @@ export const API_ENDPOINTS = {
   adminUsers: "/api/v1/admin/users",
   userProfile: "/api/v1/users/me/profile",
   auditLogs: "/api/v1/audit-logs",
-  newsletters: "/api/v1/newsletters",
   youtubeVideos: "/api/v1/youtube-videos",
   uploads: "/api/v1/uploads",
   columns: "/api/v1/columns",

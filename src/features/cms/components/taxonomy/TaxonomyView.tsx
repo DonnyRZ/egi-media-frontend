@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import { PageHeader } from "@/features/cms/components/layout/PageHeader";
 import { ConfirmDialog } from "@/features/cms/components/ui/ConfirmDialog";
@@ -26,40 +26,11 @@ import { usePermissions } from "@/features/cms/hooks/usePermissions";
 import { useToast } from "@/features/cms/stores/cms-toast.store";
 import { cn } from "@/shared/lib/cn";
 import type { CmsTaxonomyItem } from "@/features/cms/services/cms-taxonomy.service";
-
-const SINGULAR: Record<TaxonomyKind, string> = {
-  category: "Category",
-  topic: "Topic",
-  series: "Series",
-  tag: "Tag",
-};
-
-const TABS: {
-  kind: TaxonomyKind;
-  title: string;
-  description: string;
-}[] = [
-  {
-    kind: "category",
-    title: "Categories",
-    description: "Top-level sections, e.g. Sport, Business, Politics.",
-  },
-  {
-    kind: "topic",
-    title: "Topics",
-    description: "Themes within a category, e.g. Football, Elections.",
-  },
-  {
-    kind: "series",
-    title: "Series",
-    description: "Multi-part story collections, e.g. World Cup 2026.",
-  },
-  {
-    kind: "tag",
-    title: "Tags",
-    description: "Free-form keywords for granular discovery.",
-  },
-];
+import { getMutationErrorMessage } from "@/features/cms/components/taxonomy/getMutationErrorMessage";
+import {
+  TAXONOMY_SINGULAR,
+  TAXONOMY_TABS,
+} from "@/features/cms/components/taxonomy/taxonomy.constants";
 
 interface FormState {
   kind: TaxonomyKind;
@@ -87,23 +58,35 @@ export function TaxonomyView() {
     item: CmsTaxonomyItem;
   } | null>(null);
 
-  const dataFor = (kind: TaxonomyKind) =>
-    kind === "category"
-      ? categories
-      : kind === "topic"
-        ? topics
-        : kind === "series"
-          ? series
-          : tags;
+  const categoryOptions = useMemo(
+    () =>
+      (categories.data ?? []).map((item) => ({
+        value: item.id,
+        label: item.name,
+      })),
+    [categories.data],
+  );
 
-  const mutationsFor = (kind: TaxonomyKind) =>
-    kind === "category"
-      ? categoryMutations
-      : kind === "topic"
-        ? topicMutations
-        : kind === "series"
-          ? seriesMutations
-          : tagMutations;
+  const topicOptions = useMemo(
+    () =>
+      (topics.data ?? []).map((item) => ({
+        value: item.id,
+        label: item.category
+          ? `${item.name} (${item.category.name})`
+          : item.name,
+      })),
+    [topics.data],
+  );
+
+  const dataByKind = { category: categories, topic: topics, series, tag: tags };
+  const mutationsByKind = {
+    category: categoryMutations,
+    topic: topicMutations,
+    series: seriesMutations,
+    tag: tagMutations,
+  };
+  const dataFor = (kind: TaxonomyKind) => dataByKind[kind];
+  const mutationsFor = (kind: TaxonomyKind) => mutationsByKind[kind];
 
   async function submit(values: TaxonomyFormValues) {
     if (!form) return;
@@ -114,20 +97,34 @@ export function TaxonomyView() {
       if (kind === "tag") {
         await tagMutations.save.mutateAsync({ id, name: values.name });
       } else if (kind === "series") {
+        if (!values.topicId) {
+          toast.error("Parent topic is required");
+          return;
+        }
         await seriesMutations.save.mutateAsync({
           id,
-          payload: { ...base, image: values.image },
+          payload: { ...base, image: values.image, topicId: values.topicId },
         });
       } else if (kind === "category") {
         await categoryMutations.save.mutateAsync({ id, payload: base });
       } else {
-        await topicMutations.save.mutateAsync({ id, payload: base });
+        if (!values.categoryId) {
+          toast.error("Parent category is required");
+          return;
+        }
+        await topicMutations.save.mutateAsync({
+          id,
+          payload: { ...base, categoryId: values.categoryId },
+        });
       }
-      toast.success(`${SINGULAR[kind]} ${editing ? "updated" : "created"}`);
+      toast.success(`${TAXONOMY_SINGULAR[kind]} ${editing ? "updated" : "created"}`);
       setForm(null);
     } catch (error) {
       toast.error(
-        error instanceof Error ? error.message : `Could not save ${SINGULAR[kind].toLowerCase()}`,
+        getMutationErrorMessage(
+          error,
+          `Could not save ${TAXONOMY_SINGULAR[kind].toLowerCase()}`,
+        ),
       );
     }
   }
@@ -137,17 +134,20 @@ export function TaxonomyView() {
     const { kind, item } = pendingDelete;
     try {
       await mutationsFor(kind).remove.mutateAsync(item.id);
-      toast.success(`${SINGULAR[kind]} deleted`);
+      toast.success(`${TAXONOMY_SINGULAR[kind]} deleted`);
     } catch (error) {
       toast.error(
-        error instanceof Error ? error.message : `Could not delete ${SINGULAR[kind].toLowerCase()}`,
+        getMutationErrorMessage(
+          error,
+          `Could not delete ${TAXONOMY_SINGULAR[kind].toLowerCase()}`,
+        ),
       );
     } finally {
       setPendingDelete(null);
     }
   }
 
-  const active = TABS.find((tab) => tab.kind === activeTab) ?? TABS[0];
+  const active = TAXONOMY_TABS.find((tab) => tab.kind === activeTab) ?? TAXONOMY_TABS[0];
   const activeData = dataFor(active.kind);
   const activeMutation = form ? mutationsFor(form.kind) : null;
 
@@ -163,7 +163,7 @@ export function TaxonomyView() {
         aria-label="Taxonomy types"
         className="mb-6 flex flex-wrap gap-1 border-b border-neutral-200 dark:border-neutral-800"
       >
-        {TABS.map((tab) => {
+        {TAXONOMY_TABS.map((tab) => {
           const count = dataFor(tab.kind).data?.length ?? 0;
           const selected = tab.kind === activeTab;
           return (
@@ -193,7 +193,7 @@ export function TaxonomyView() {
         kind={active.kind}
         title={active.title}
         description={active.description}
-        singular={SINGULAR[active.kind]}
+        singular={TAXONOMY_SINGULAR[active.kind]}
         items={activeData.data ?? []}
         isLoading={activeData.isLoading}
         isError={activeData.isError}
@@ -205,9 +205,13 @@ export function TaxonomyView() {
 
       <TaxonomyFormModal
         open={Boolean(form)}
-        title={`${form?.editing ? "Edit" : "New"} ${form ? SINGULAR[form.kind].toLowerCase() : ""}`}
+        title={`${form?.editing ? "Edit" : "New"} ${form ? TAXONOMY_SINGULAR[form.kind].toLowerCase() : ""}`}
         withImage={form?.kind === "series"}
         nameOnly={form?.kind === "tag"}
+        requireCategory={form?.kind === "topic"}
+        requireTopic={form?.kind === "series"}
+        categoryOptions={categoryOptions}
+        topicOptions={topicOptions}
         saving={Boolean(activeMutation?.save.isPending)}
         initial={
           form?.editing
@@ -215,6 +219,8 @@ export function TaxonomyView() {
                 name: form.editing.name,
                 description: form.editing.description ?? "",
                 image: form.editing.image ?? "",
+                categoryId: form.editing.categoryId ?? "",
+                topicId: form.editing.topicId ?? "",
               }
             : undefined
         }
@@ -224,7 +230,7 @@ export function TaxonomyView() {
 
       <ConfirmDialog
         open={Boolean(pendingDelete)}
-        title={`Delete ${pendingDelete ? SINGULAR[pendingDelete.kind].toLowerCase() : ""}`}
+        title={`Delete ${pendingDelete ? TAXONOMY_SINGULAR[pendingDelete.kind].toLowerCase() : ""}`}
         message={
           pendingDelete && pendingDelete.item.articleCount > 0
             ? `"${pendingDelete.item.name}" is used by ${pendingDelete.item.articleCount} article(s). Reassign them first.`

@@ -11,6 +11,7 @@ export interface AuditLogParams {
   page?: number;
   limit?: number;
   action?: string;
+  resourceType?: string;
   search?: string;
   userId?: string;
 }
@@ -28,6 +29,7 @@ export async function fetchAuditLogs(
         page: params.page ?? 1,
         limit: params.limit ?? 20,
         action: params.action || undefined,
+        resource_type: params.resourceType || undefined,
         search: params.search || undefined,
         user_id: params.userId || undefined,
       },

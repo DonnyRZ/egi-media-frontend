@@ -65,9 +65,12 @@ export function RecentActivity() {
                       </>
                     ) : null}
                   </p>
-                  <p className="mt-0.5 text-xs text-neutral-400">
-                    {formatAbsoluteDateTime(log.createdAt)}
-                  </p>
+                  <div className="mt-1 flex flex-wrap items-center gap-2">
+                    <Badge tone="muted">{log.resourceType}</Badge>
+                    <span className="text-xs text-neutral-400">
+                      {formatAbsoluteDateTime(log.createdAt)}
+                    </span>
+                  </div>
                 </div>
                 <Badge tone={getAuditActionTone(log.action)}>
                   {actionLabel}

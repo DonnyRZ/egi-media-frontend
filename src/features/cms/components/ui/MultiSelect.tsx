@@ -19,6 +19,7 @@ interface MultiSelectProps {
   onCreate?: (label: string) => void;
   creating?: boolean;
   emptyLabel?: string;
+  disabled?: boolean;
 }
 
 export function MultiSelect({
@@ -29,6 +30,7 @@ export function MultiSelect({
   onCreate,
   creating,
   emptyLabel = "No options available",
+  disabled = false,
 }: MultiSelectProps) {
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
@@ -56,17 +58,19 @@ export function MultiSelect({
   }, [options, value, query]);
 
   const canCreate =
+    !disabled &&
     onCreate &&
     query.trim().length > 0 &&
     !options.some((o) => o.label.toLowerCase() === query.trim().toLowerCase());
 
   function add(id: string) {
+    if (disabled) return;
     onChange([...value, id]);
     setQuery("");
   }
 
   return (
-    <div className="space-y-2" ref={ref}>
+    <div className={cn("space-y-2", disabled && "opacity-60")} ref={ref}>
       {selectedOptions.length > 0 ? (
         <div className="flex flex-wrap gap-1.5">
           {selectedOptions.map((option) => (
@@ -78,6 +82,7 @@ export function MultiSelect({
               <button
                 type="button"
                 aria-label={`Remove ${option.label}`}
+                disabled={disabled}
                 onClick={() =>
                   onChange(value.filter((id) => id !== option.value))
                 }
@@ -92,16 +97,20 @@ export function MultiSelect({
       <div className="relative">
         <input
           className={cn(BASE_FIELD)}
+          disabled={disabled}
           placeholder={placeholder}
           value={query}
-          onFocus={() => setOpen(true)}
+          onFocus={() => {
+            if (!disabled) setOpen(true);
+          }}
           onChange={(event) => {
+            if (disabled) return;
             setQuery(event.target.value);
             setOpen(true);
           }}
         />
 
-        {open ? (
+        {open && !disabled ? (
           <div className="absolute z-20 mt-1 max-h-56 w-full overflow-y-auto rounded-lg border border-neutral-200 bg-white shadow-lg dark:border-neutral-800 dark:bg-neutral-900">
             {matches.length === 0 && !canCreate ? (
               <p className="px-3 py-2 text-sm text-neutral-400">

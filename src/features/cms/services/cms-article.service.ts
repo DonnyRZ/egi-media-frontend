@@ -107,7 +107,7 @@ function toArticleDto(payload: ArticleWritePayload) {
   if (payload.seriesId !== undefined) dto.series_id = payload.seriesId;
   if (payload.status !== undefined) dto.status = payload.status;
   if (payload.publishedAt !== undefined) dto.published_at = payload.publishedAt;
-  if (payload.topicIds !== undefined) dto.topic_ids = payload.topicIds;
+  if (payload.topicId !== undefined) dto.topic_id = payload.topicId || null;
   if (payload.tagIds !== undefined) dto.tag_ids = payload.tagIds;
   if (payload.placements !== undefined) dto.placements = payload.placements;
   if (payload.translations && Object.keys(payload.translations).length > 0) {

@@ -17,11 +17,17 @@ import {
 } from "@/features/cms/schemas/cms.schemas";
 import { useArticleMutations } from "@/features/cms/hooks/useArticleMutations";
 import {
-  useCategoryOptions,
-  useSeriesOptions,
-  useTagOptions,
-  useTopicOptions,
-} from "@/features/cms/hooks/useTaxonomyOptions";
+  toCategoryOptions,
+  toSeriesOptions,
+  toTagOptions,
+  toTopicOptions,
+} from "@/features/cms/hooks/useCascadingTaxonomyOptions";
+import {
+  useCmsCategories,
+  useCmsSeries,
+  useCmsTags,
+  useCmsTopics,
+} from "@/features/cms/hooks/useCmsTaxonomy";
 import { usePermissions } from "@/features/cms/hooks/usePermissions";
 import { useToast } from "@/features/cms/stores/cms-toast.store";
 import { ApiError } from "@/shared/lib/errors";
@@ -50,10 +56,10 @@ export function ArticleForm({
   const { create, update, changeStatus } = useArticleMutations();
   const [scheduleOpen, setScheduleOpen] = useState(false);
 
-  const categories = useCategoryOptions();
-  const topics = useTopicOptions();
-  const series = useSeriesOptions();
-  const tags = useTagOptions();
+  const categories = useCmsCategories();
+  const topics = useCmsTopics();
+  const series = useCmsSeries();
+  const tags = useCmsTags();
 
   const {
     control,
@@ -61,6 +67,7 @@ export function ArticleForm({
     handleSubmit,
     watch,
     setError,
+    setValue,
     getValues,
     formState: { errors },
   } = useForm<ArticleFormValues>({
@@ -101,7 +108,7 @@ export function ArticleForm({
       featuredImage: values.featuredImage || null,
       categoryId: values.categoryId || null,
       seriesId: values.seriesId || null,
-      topicIds: values.topicIds,
+      topicId: values.topicId || null,
       tagIds: values.tagIds,
       placements: values.placements,
       translations: buildTranslations(values),
@@ -203,10 +210,11 @@ export function ArticleForm({
 
         <ArticleSettingsSidebar
           control={control}
-          categories={(categories.data?.items ?? []).map((c) => ({ value: c.id, label: c.name }))}
-          series={(series.data?.items ?? []).map((s) => ({ value: s.id, label: s.name }))}
-          topics={(topics.data?.items ?? []).map((t) => ({ value: t.id, label: t.name }))}
-          tags={(tags.data ?? []).map((t) => ({ value: t.id, label: t.name }))}
+          setValue={setValue}
+          categories={toCategoryOptions(categories.data ?? [])}
+          series={toSeriesOptions(series.data ?? [])}
+          topics={toTopicOptions(topics.data ?? [])}
+          tags={toTagOptions(tags.data ?? [])}
         />
       </div>
 

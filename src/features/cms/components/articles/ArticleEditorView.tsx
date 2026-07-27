@@ -20,7 +20,7 @@ const EMPTY_VALUES: ArticleFormValues = {
   featuredImage: "",
   categoryId: "",
   seriesId: "",
-  topicIds: [],
+  topicId: "",
   tagIds: [],
   placements: [...DEFAULT_ARTICLE_PLACEMENTS],
 };
@@ -49,7 +49,7 @@ export function ArticleEditorView({ articleId }: { articleId?: string }) {
           featuredImage: data.featuredImage ?? "",
           categoryId: data.categoryId ?? "",
           seriesId: data.seriesId ?? "",
-          topicIds: data.topicIds,
+          topicId: data.topicId ?? "",
           tagIds: data.tagIds,
           placements: data.placements.length
             ? data.placements

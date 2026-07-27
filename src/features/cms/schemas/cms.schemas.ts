@@ -26,7 +26,7 @@ export const articleFormSchema = z.object({
   featuredImage: optionalUrl,
   categoryId: z.string().optional(),
   seriesId: z.string().optional(),
-  topicIds: z.array(z.string()),
+  topicId: z.string().optional(),
   tagIds: z.array(z.string()),
   placements: z.array(
     z.enum(["latest_news", "homepage_hero", "headline", "trending"]),

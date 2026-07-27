@@ -9,6 +9,7 @@ import type {
   Tag,
 } from "@/features/cms/types/cms.types";
 import { DEFAULT_ARTICLE_PLACEMENTS } from "@/features/cms/constants/cms.constants";
+import { resolveResourceTypeLabel } from "@/features/cms/utils/audit-resource";
 
 interface AuthorDto {
   id: string;
@@ -87,6 +88,7 @@ export interface AuditLogDto {
   user_full_name?: string | null;
   user_role?: string | null;
   table_name: string | null;
+  resource_type?: string | null;
   record_id: string | null;
   action: string | null;
   article_title?: string | null;
@@ -151,7 +153,7 @@ export function mapCmsArticleDetail(dto: CmsArticleDetailDto): CmsArticleDetail 
     publishedAt: dto.published_at,
     categoryId: dto.category?.id ?? null,
     seriesId: dto.series?.id ?? null,
-    topicIds: (dto.topics ?? []).map((topic) => topic.id),
+    topicId: dto.topics?.[0]?.id ?? null,
     tagIds: (dto.tags ?? []).map((tag) => tag.id),
     translationEn: mapTranslation(dto.translations?.en),
     translationUz: mapTranslation(dto.translations?.uz),
@@ -213,6 +215,7 @@ export function mapAuditLog(dto: AuditLogDto): AuditLog {
     actorName: dto.user_full_name ?? null,
     actorRole: dto.user_role ?? null,
     tableName: dto.table_name,
+    resourceType: resolveResourceTypeLabel(dto.resource_type, dto.table_name),
     recordId: dto.record_id,
     recordLabel:
       titleFromColumn ??

@@ -55,7 +55,7 @@ export interface CmsArticleDetail {
   publishedAt: string | null;
   categoryId: string | null;
   seriesId: string | null;
-  topicIds: string[];
+  topicId: string | null;
   tagIds: string[];
   /** Optional en/uz translations (id lives in the base fields above). */
   translationEn: ArticleTranslation | null;
@@ -71,7 +71,7 @@ export interface ArticleWritePayload {
   seriesId?: string | null;
   status?: ArticleStatus;
   publishedAt?: string | null;
-  topicIds?: string[];
+  topicId?: string | null;
   tagIds?: string[];
   placements?: ArticlePlacement[];
   /** en/uz translations; each locale is only sent when it has content. */
@@ -115,6 +115,7 @@ export interface AuditLog {
   actorName: string | null;
   actorRole: string | null;
   tableName: string | null;
+  resourceType: string;
   recordId: string | null;
   /** Human-friendly label of the affected record (e.g. article title). */
   recordLabel: string | null;

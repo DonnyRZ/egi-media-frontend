@@ -1,6 +1,6 @@
 "use client";
 
-import { Controller, type Control } from "react-hook-form";
+import { Controller, useWatch, type Control, type UseFormSetValue } from "react-hook-form";
 
 import { PlacementCheckboxes } from "@/features/cms/components/articles/PlacementCheckboxes";
 import { Card, CardBody, CardHeader } from "@/features/cms/components/ui/Card";
@@ -8,23 +8,44 @@ import { Field } from "@/features/cms/components/ui/Field";
 import { Select } from "@/features/cms/components/ui/Select";
 import { MultiSelect, type Option } from "@/features/cms/components/ui/MultiSelect";
 import { FeaturedImagePicker } from "@/features/cms/components/media/FeaturedImagePicker";
+import {
+  useCascadingTaxonomyOptions,
+  type SeriesOption,
+  type TopicOption,
+} from "@/features/cms/hooks/useCascadingTaxonomyOptions";
 import type { ArticleFormValues } from "@/features/cms/schemas/cms.schemas";
 
 interface ArticleSettingsSidebarProps {
   control: Control<ArticleFormValues>;
+  setValue: UseFormSetValue<ArticleFormValues>;
   categories: Option[];
-  series: Option[];
-  topics: Option[];
+  series: SeriesOption[];
+  topics: TopicOption[];
   tags: Option[];
 }
 
 export function ArticleSettingsSidebar({
   control,
+  setValue,
   categories,
   series,
   topics,
   tags,
 }: ArticleSettingsSidebarProps) {
+  const categoryId = useWatch({ control, name: "categoryId" });
+  const topicId = useWatch({ control, name: "topicId" });
+  const {
+    filteredTopics,
+    filteredSeries,
+    topicsDisabled,
+    seriesDisabled,
+  } = useCascadingTaxonomyOptions({
+    categoryId,
+    topicId,
+    topics,
+    series,
+  });
+
   return (
     <>
       <Card>
@@ -72,42 +93,71 @@ export function ArticleSettingsSidebar({
               render={({ field }) => (
                 <Select
                   id="category"
-                  placeholder="No category"
+                  placeholder="Select category"
                   options={categories}
                   value={field.value ?? ""}
-                  onChange={field.onChange}
+                  onChange={(event) => {
+                    field.onChange(event.target.value);
+                    setValue("topicId", "");
+                    setValue("seriesId", "");
+                  }}
                 />
               )}
             />
           </Field>
 
-          <Field label="Series" htmlFor="series">
+          <Field
+            label="Topic"
+            htmlFor="topic"
+            hint={
+              topicsDisabled
+                ? "Select a category first"
+                : "Only topics under the selected category"
+            }
+          >
+            <Controller
+              control={control}
+              name="topicId"
+              render={({ field }) => (
+                <Select
+                  id="topic"
+                  disabled={topicsDisabled}
+                  placeholder={
+                    topicsDisabled ? "Select a category first" : "Select topic"
+                  }
+                  options={filteredTopics}
+                  value={field.value ?? ""}
+                  onChange={(event) => {
+                    field.onChange(event.target.value);
+                    setValue("seriesId", "");
+                  }}
+                />
+              )}
+            />
+          </Field>
+
+          <Field
+            label="Series"
+            htmlFor="series"
+            hint={
+              seriesDisabled
+                ? "Select a topic first"
+                : "Only series under the selected topic"
+            }
+          >
             <Controller
               control={control}
               name="seriesId"
               render={({ field }) => (
                 <Select
                   id="series"
-                  placeholder="No series"
-                  options={series}
+                  disabled={seriesDisabled}
+                  placeholder={
+                    seriesDisabled ? "Select a topic first" : "No series"
+                  }
+                  options={filteredSeries}
                   value={field.value ?? ""}
                   onChange={field.onChange}
-                />
-              )}
-            />
-          </Field>
-
-          <Field label="Topics">
-            <Controller
-              control={control}
-              name="topicIds"
-              render={({ field }) => (
-                <MultiSelect
-                  options={topics}
-                  value={field.value ?? []}
-                  onChange={field.onChange}
-                  placeholder="Select topics…"
-                  emptyLabel="No topics yet — ask a superadmin to add some"
                 />
               )}
             />

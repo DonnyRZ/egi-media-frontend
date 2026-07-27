@@ -23,6 +23,7 @@ import {
   getAuditActionLabel,
   getAuditActionTone,
 } from "@/features/cms/utils/audit-action";
+import { AUDIT_RESOURCE_TYPE_FILTER_OPTIONS } from "@/features/cms/utils/audit-resource";
 import { formatAbsoluteDateTime } from "@/shared/utils/format";
 
 const ROLE_TONE: Record<string, "info" | "success" | "neutral" | "muted"> = {
@@ -35,6 +36,7 @@ const ROLE_TONE: Record<string, "info" | "success" | "neutral" | "muted"> = {
 export function AuditLogsView() {
   const [search, setSearch] = useState("");
   const [action, setAction] = useState("");
+  const [resourceType, setResourceType] = useState("");
   const [page, setPage] = useState(1);
 
   const debouncedSearch = useDebouncedValue(search);
@@ -44,8 +46,9 @@ export function AuditLogsView() {
       limit: CMS_DEFAULT_PAGE_SIZE,
       search: debouncedSearch,
       action,
+      resourceType,
     }),
-    [page, debouncedSearch, action],
+    [page, debouncedSearch, action, resourceType],
   );
 
   const { data, isLoading, isError } = useCmsAuditLogs(params);
@@ -58,8 +61,8 @@ export function AuditLogsView() {
         description="Full newsroom activity history for editorial accountability."
       />
 
-      <div className="mb-4 flex flex-col gap-3 sm:flex-row">
-        <div className="relative flex-1">
+      <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+        <div className="relative min-w-[12rem] flex-1">
           <Icons.search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400" />
           <Input
             className="pl-9"
@@ -72,12 +75,22 @@ export function AuditLogsView() {
           />
         </div>
         <Select
-          className="sm:w-56"
+          className="sm:w-52"
           placeholder="All actions"
           options={[...AUDIT_ACTION_FILTER_OPTIONS]}
           value={action}
           onChange={(event) => {
             setAction(event.target.value);
+            setPage(1);
+          }}
+        />
+        <Select
+          className="sm:w-52"
+          placeholder="All resource types"
+          options={[...AUDIT_RESOURCE_TYPE_FILTER_OPTIONS]}
+          value={resourceType}
+          onChange={(event) => {
+            setResourceType(event.target.value);
             setPage(1);
           }}
         />
@@ -125,11 +138,14 @@ export function AuditLogsView() {
                       </Badge>
                     </td>
                     <td className="px-5 py-3 text-neutral-700 dark:text-neutral-300">
-                      {log.recordLabel ? (
-                        <span>&lsquo;{log.recordLabel}&rsquo;</span>
-                      ) : (
-                        <span className="text-neutral-400">—</span>
-                      )}
+                      <div className="flex flex-wrap items-center gap-2">
+                        <Badge tone="muted">{log.resourceType}</Badge>
+                        {log.recordLabel ? (
+                          <span>&lsquo;{log.recordLabel}&rsquo;</span>
+                        ) : (
+                          <span className="text-neutral-400">—</span>
+                        )}
+                      </div>
                     </td>
                   </tr>
                 ))}

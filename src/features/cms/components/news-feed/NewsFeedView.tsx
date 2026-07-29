@@ -4,6 +4,8 @@ import { useMemo, useState } from "react";
 
 import { CrawledArticleCard } from "@/features/cms/components/news-feed/CrawledArticleCard";
 import { MediaSourceTabs } from "@/features/cms/components/news-feed/MediaSourceTabs";
+import { ViralIssueDrawer } from "@/features/cms/components/news-feed/ViralIssueDrawer";
+import { ViralIssuesList } from "@/features/cms/components/news-feed/ViralIssuesList";
 import { PageHeader } from "@/features/cms/components/layout/PageHeader";
 import { Card } from "@/features/cms/components/ui/Card";
 import { Icons } from "@/features/cms/components/ui/Icons";
@@ -20,12 +22,16 @@ import {
 } from "@/features/cms/constants/news-feed.constants";
 import { useCrawledArticles } from "@/features/cms/hooks/useCrawledArticles";
 import { useDebouncedValue } from "@/features/cms/hooks/useDebouncedValue";
+import { useViralIssues } from "@/features/cms/hooks/useViralIssues";
+import type { ViralIssue } from "@/features/cms/types/viral-issue.types";
 
 export function NewsFeedView() {
   const [source, setSource] = useState<NewsFeedSourceId>("");
   const [searchInput, setSearchInput] = useState("");
   const [page, setPage] = useState(1);
+  const [selectedIssue, setSelectedIssue] = useState<ViralIssue | null>(null);
   const search = useDebouncedValue(searchInput, 300);
+  const isViralTab = source === "";
 
   const params = useMemo(
     () => ({
@@ -37,14 +43,34 @@ export function NewsFeedView() {
     [page, source, search],
   );
 
-  const { data, isLoading, isError, error } = useCrawledArticles(params);
-  const items = data?.items ?? [];
+  const {
+    data: articleData,
+    isLoading: articlesLoading,
+    isError: articlesError,
+    error: articleError,
+  } = useCrawledArticles(params, { enabled: !isViralTab });
+  const {
+    data: viralData,
+    isLoading: viralLoading,
+    isError: viralError,
+    error: viralQueryError,
+  } = useViralIssues({ enabled: isViralTab });
+  const items = articleData?.items ?? [];
+
+  const viralIssues = useMemo(() => {
+    const query = search.trim().toLowerCase();
+    const issues = viralData?.items ?? [];
+    if (!query) return issues;
+    return issues.filter((issue) =>
+      issue.title.toLowerCase().includes(query),
+    );
+  }, [search, viralData?.items]);
 
   return (
     <>
       <PageHeader
         title="News Feed"
-        description="Scraped articles from egi-media-crawl. Viral shows all sources; EGI Media and outlet tabs filter by source."
+        description="Viral groups related coverage from the last 72 hours. Outlet tabs load scraped articles from egi-media-crawl."
       />
 
       <div className="mb-4">
@@ -52,7 +78,9 @@ export function NewsFeedView() {
           <Icons.search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400" />
           <Input
             className="pl-9"
-            placeholder="Search by title…"
+            placeholder={
+              isViralTab ? "Search trending issues…" : "Search by title…"
+            }
             value={searchInput}
             onChange={(event) => {
               setSearchInput(event.target.value);
@@ -68,17 +96,48 @@ export function NewsFeedView() {
           onChange={(next) => {
             setSource(next);
             setPage(1);
+            setSelectedIssue(null);
           }}
         />
 
-        {isLoading ? (
+        {isViralTab ? (
+          viralLoading ? (
+            <LoadingState label="Clustering recent articles…" />
+          ) : viralError ? (
+            <ErrorState
+              title="Viral clustering unavailable"
+              description={
+                viralQueryError instanceof Error
+                  ? viralQueryError.message
+                  : "Could not load clustered issues from the crawl API."
+              }
+            />
+          ) : viralIssues.length === 0 ? (
+            <EmptyState
+              title={search ? "No matching issues" : "No viral clusters yet"}
+              description={
+                search
+                  ? "Try another search."
+                  : "No related article groups were found in the current 72-hour window."
+              }
+            />
+          ) : (
+            <div className="max-h-[calc(100vh-300px)] overflow-y-auto overscroll-contain [scrollbar-color:theme(colors.neutral.300)_transparent] [scrollbar-width:thin] dark:[scrollbar-color:theme(colors.neutral.700)_transparent]">
+              <ViralIssuesList
+                issues={viralIssues}
+                selectedId={selectedIssue?.id ?? null}
+                onSelect={setSelectedIssue}
+              />
+            </div>
+          )
+        ) : articlesLoading ? (
           <LoadingState />
-        ) : isError ? (
+        ) : articlesError ? (
           <ErrorState
             title="Crawl API unavailable"
             description={
-              error instanceof Error
-                ? error.message
+              articleError instanceof Error
+                ? articleError.message
                 : "Could not reach the crawl API. Is npm run api running on port 5050?"
             }
           />
@@ -99,13 +158,21 @@ export function NewsFeedView() {
           </div>
         )}
 
-        <Pagination
-          page={data?.page ?? 1}
-          totalPages={Math.max(1, data?.totalPages ?? 1)}
-          total={data?.total ?? 0}
-          onPageChange={setPage}
-        />
+        {!isViralTab ? (
+          <Pagination
+            page={articleData?.page ?? 1}
+            totalPages={Math.max(1, articleData?.totalPages ?? 1)}
+            total={articleData?.total ?? 0}
+            onPageChange={setPage}
+          />
+        ) : null}
       </Card>
+
+      <ViralIssueDrawer
+        issue={selectedIssue}
+        open={Boolean(selectedIssue)}
+        onClose={() => setSelectedIssue(null)}
+      />
     </>
   );
 }

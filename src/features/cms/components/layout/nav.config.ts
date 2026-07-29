@@ -33,6 +33,13 @@ export const NAV_SECTIONS: NavSection[] = [
         matchPrefix: true,
       },
       {
+        label: "News Feed",
+        href: "/cms/news-feed",
+        icon: "articles",
+        permission: "always",
+        matchPrefix: true,
+      },
+      {
         label: "Contributor Columns",
         href: "/cms/columns",
         icon: "columns",

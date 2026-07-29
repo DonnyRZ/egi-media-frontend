@@ -44,7 +44,7 @@ export function NewsFeedView() {
     <>
       <PageHeader
         title="News Feed"
-        description="Raw scraped articles from external media sources (egi-media-crawl)."
+        description="Scraped articles from egi-media-crawl. Viral shows all sources; EGI Media and outlet tabs filter by source."
       />
 
       <div className="mb-4">
@@ -85,7 +85,11 @@ export function NewsFeedView() {
         ) : items.length === 0 ? (
           <EmptyState
             title="No crawled articles"
-            description="Run fixture crawls in egi-media-crawl (npm run crawl:once -- --source=detik) then refresh."
+            description={
+              source === "egi_media"
+                ? "No EGI Media articles in the crawl DB yet (source_id = egi_media)."
+                : "Run fixture crawls in egi-media-crawl (npm run crawl:once -- --source=detik) then refresh."
+            }
           />
         ) : (
           <div className="grid gap-6 p-5 sm:grid-cols-2 xl:grid-cols-3">

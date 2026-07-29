@@ -14,13 +14,17 @@ export function MediaSourceTabs({ value, onChange }: MediaSourceTabsProps) {
     <div
       role="tablist"
       aria-label="Filter news feed by media source"
-      className="flex gap-1 overflow-x-auto border-b border-neutral-200 px-2 dark:border-neutral-800"
+      className={cn(
+        "flex gap-1 overflow-x-auto border-b border-neutral-200 px-2 dark:border-neutral-800",
+        "[-ms-overflow-style:none] [scrollbar-width:none]",
+        "[&::-webkit-scrollbar]:hidden",
+      )}
     >
       {NEWS_FEED_TABS.map((tab) => {
         const active = value === tab.value;
         return (
           <button
-            key={tab.value || "egi-media"}
+            key={tab.value || "viral"}
             type="button"
             role="tab"
             aria-selected={active}

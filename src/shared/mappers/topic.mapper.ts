@@ -3,6 +3,7 @@ import type {
   Topic,
   TopicDetail,
   TopicListResult,
+  TopicParentCategory,
   TopicTranslation,
 } from "@/shared/types/topic.types";
 
@@ -10,6 +11,12 @@ interface TopicTranslationDto {
   name: string;
   slug: string | null;
   description: string | null;
+}
+
+interface TopicParentCategoryDto {
+  id: string;
+  name: string;
+  slug?: string | null;
 }
 
 interface TopicDto {
@@ -20,6 +27,8 @@ interface TopicDto {
   locale?: ContentLocale;
   available_locales?: ContentLocale[];
   translations?: Partial<Record<ContentLocale, TopicTranslationDto>>;
+  category_id?: string | null;
+  category?: TopicParentCategoryDto | null;
 }
 
 interface TopicListResponseDto {
@@ -44,12 +53,30 @@ function mapTranslations(
   return translations;
 }
 
+function mapParentCategory(
+  dto: TopicParentCategoryDto | null | undefined,
+  fallbackId?: string | null,
+): TopicParentCategory | null {
+  const id = dto?.id ?? fallbackId ?? null;
+  if (!id) return null;
+
+  return {
+    id,
+    name: dto?.name ?? "Category",
+    slug: dto?.slug ?? id,
+  };
+}
+
 export function mapTopicDto(dto: TopicDto): Topic {
+  const categoryId = dto.category_id ?? dto.category?.id ?? null;
+
   return {
     id: dto.id,
     name: dto.name,
     slug: dto.slug,
     description: dto.description,
+    categoryId,
+    category: mapParentCategory(dto.category, categoryId),
   };
 }
 

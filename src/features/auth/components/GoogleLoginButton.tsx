@@ -11,9 +11,12 @@ export function GoogleLoginButton() {
   const locale = useLocale();
 
   function handleGoogleLogin() {
-    const origin = `${env.siteUrl.replace(/\/$/, "")}/${locale}`;
-    const url = `${env.apiUrl.replace(/\/$/, "")}${AUTH_ENDPOINTS.google}?origin=${encodeURIComponent(origin)}`;
-    window.location.href = url;
+    const apiBase = env.apiUrl.replace(/\/$/, "");
+    const siteBase = env.siteUrl.replace(/\/$/, "");
+    const origin = `${siteBase}/${locale}`;
+    const url = new URL(`${apiBase}${AUTH_ENDPOINTS.google}`);
+    url.searchParams.set("origin", origin);
+    window.location.assign(url.toString());
   }
 
   return (

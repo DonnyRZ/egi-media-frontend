@@ -15,6 +15,7 @@ import { Section } from "@/shared/components/layout/Section";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
 import { TaxonomyLocaleShell } from "@/shared/components/common/TaxonomyLocaleShell";
 import { HEADER_CATEGORY_I18N_KEYS } from "@/shared/constants/header-categories.constants";
+import { TAXONOMY_ARTICLES_PAGE_LIMIT } from "@/shared/constants/taxonomy.constants";
 
 interface CategoryDetailViewProps {
   slug: string;
@@ -180,6 +181,11 @@ export function CategoryDetailView({ slug }: CategoryDetailViewProps) {
               <Pagination
                 basePath={`/categories/${slug}`}
                 currentPage={articlesQuery.data.page}
+                itemLabel="articles"
+                pageSize={
+                  articlesQuery.data.limit || TAXONOMY_ARTICLES_PAGE_LIMIT
+                }
+                totalItems={articlesQuery.data.total}
                 totalPages={articlesQuery.data.totalPages}
               />
             </div>

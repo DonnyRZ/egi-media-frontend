@@ -25,6 +25,8 @@ interface TopicDto {
       { name: string; slug: string | null; description: string | null }
     >
   >;
+  category_id?: string | null;
+  category?: { id: string; name: string; slug?: string | null } | null;
 }
 
 export async function fetchTopics(

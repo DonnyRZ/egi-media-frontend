@@ -1,6 +1,7 @@
 import type {
   ColumnComment,
   ColumnCommentListResult,
+  ColumnCommentNode,
 } from "@/features/columns/types/column-comment.types";
 
 interface ColumnCommentUserDto {
@@ -12,6 +13,7 @@ interface ColumnCommentUserDto {
 interface ColumnCommentDto {
   id: string;
   column_id: string;
+  parent_id?: string | null;
   content: string;
   created_at: string;
   updated_at?: string;
@@ -32,6 +34,7 @@ export function mapColumnCommentDto(dto: ColumnCommentDto): ColumnComment {
   return {
     id: dto.id,
     columnId: dto.column_id,
+    parentId: dto.parent_id ?? null,
     content: dto.content,
     createdAt: dto.created_at,
     user: {
@@ -58,4 +61,27 @@ export function mapColumnCommentListDto(
     totalPages:
       dto.meta?.total_pages ?? (limit > 0 ? Math.ceil(total / limit) : 0),
   };
+}
+
+export function buildCommentTree(comments: ColumnComment[]): ColumnCommentNode[] {
+  const nodes = new Map<string, ColumnCommentNode>();
+
+  for (const comment of comments) {
+    nodes.set(comment.id, { ...comment, replies: [] });
+  }
+
+  const roots: ColumnCommentNode[] = [];
+
+  for (const comment of comments) {
+    const node = nodes.get(comment.id);
+    if (!node) continue;
+
+    if (comment.parentId && nodes.has(comment.parentId)) {
+      nodes.get(comment.parentId)!.replies.push(node);
+    } else {
+      roots.push(node);
+    }
+  }
+
+  return roots;
 }

@@ -4,7 +4,10 @@ import {
   deleteColumnComment,
   fetchColumnComments,
 } from "@/features/columns/services/column-comment.service";
-import type { ColumnCommentListResult } from "@/features/columns/types/column-comment.types";
+import type {
+  ColumnCommentListResult,
+  CreateColumnCommentPayload,
+} from "@/features/columns/types/column-comment.types";
 
 export async function getColumnCommentsPage(
   columnId: string,
@@ -18,9 +21,9 @@ export async function getColumnCommentsPage(
 
 export async function postColumnComment(
   columnId: string,
-  content: string,
+  payload: CreateColumnCommentPayload,
 ): Promise<void> {
-  return createColumnComment(columnId, content);
+  return createColumnComment(columnId, payload);
 }
 
 export async function removeColumnComment(

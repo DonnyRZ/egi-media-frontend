@@ -21,6 +21,8 @@ interface SeriesDto {
   article_count?: number;
   cover_image?: string | null;
   created_at?: string | null;
+  topic_id?: string | null;
+  topic?: { id: string; name: string; slug?: string | null } | null;
 }
 
 interface SeriesDetailDto extends SeriesDto {

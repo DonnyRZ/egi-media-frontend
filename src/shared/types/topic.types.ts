@@ -7,11 +7,19 @@ export interface TopicTranslation {
   description: string | null;
 }
 
+export interface TopicParentCategory {
+  id: string;
+  name: string;
+  slug: string;
+}
+
 export interface Topic {
   id: string;
   name: string;
   slug: string;
   description: string | null;
+  categoryId: string | null;
+  category: TopicParentCategory | null;
 }
 
 export interface TopicDetail extends Topic {
@@ -28,4 +36,9 @@ export interface TopicListResult {
 export interface TopicNewsGroup {
   topic: Topic;
   articles: Article[];
+}
+
+export interface TopicCategoryGroup {
+  category: TopicParentCategory | null;
+  items: Topic[];
 }

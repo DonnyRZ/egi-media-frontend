@@ -1,3 +1,9 @@
+export interface SeriesParentTopic {
+  id: string;
+  name: string;
+  slug: string;
+}
+
 export interface Series {
   id: string;
   name: string;
@@ -6,6 +12,8 @@ export interface Series {
   articleCount: number;
   coverImage: string | null;
   publishedAt: string | null;
+  topicId: string | null;
+  topic: SeriesParentTopic | null;
 }
 
 export interface SeriesListResult {
@@ -18,4 +26,9 @@ export interface SeriesListResult {
 
 export interface SeriesDetail extends Series {
   articles: import("@/shared/types/article.types").Article[];
+}
+
+export interface SeriesTopicGroup {
+  topic: SeriesParentTopic | null;
+  items: Series[];
 }

@@ -14,6 +14,7 @@ import { TaxonomyLocaleShell } from "@/shared/components/common/TaxonomyLocaleSh
 import { Container } from "@/shared/components/layout/Container";
 import { Section } from "@/shared/components/layout/Section";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
+import { TAXONOMY_ARTICLES_PAGE_LIMIT } from "@/shared/constants/taxonomy.constants";
 
 interface TopicDetailViewProps {
   slug: string;
@@ -175,6 +176,11 @@ export function TopicDetailView({ slug }: TopicDetailViewProps) {
               <Pagination
                 basePath={`/topics/${slug}`}
                 currentPage={articlesQuery.data.page}
+                itemLabel="articles"
+                pageSize={
+                  articlesQuery.data.limit || TAXONOMY_ARTICLES_PAGE_LIMIT
+                }
+                totalItems={articlesQuery.data.total}
                 totalPages={articlesQuery.data.totalPages}
               />
             </div>

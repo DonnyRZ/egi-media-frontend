@@ -45,15 +45,15 @@ export function mapAuthTokens(dto: AuthTokensDto): AuthTokens {
 
 export function toRegisterDto(payload: RegisterPayload) {
   return {
-    email: payload.email,
+    email: payload.email.trim().toLowerCase(),
     password: payload.password,
-    full_name: payload.fullName,
+    full_name: payload.fullName.trim(),
   };
 }
 
 export function toLoginDto(payload: LoginPayload) {
   return {
-    email: payload.email,
+    email: payload.email.trim().toLowerCase(),
     password: payload.password,
   };
 }

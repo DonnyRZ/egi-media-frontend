@@ -15,6 +15,7 @@ import { Textarea } from "@/features/cms/components/ui/Textarea";
 import { ConfirmDialog } from "@/features/cms/components/ui/ConfirmDialog";
 import { ColumnRejectDialog } from "@/features/cms/components/columns/ColumnRejectDialog";
 import { ColumnEditorSidebar } from "@/features/cms/components/columns/ColumnEditorSidebar";
+import { CmsColumnCommentsPanel } from "@/features/cms/components/columns/CmsColumnCommentsPanel";
 import {
   EmptyState,
   ErrorState,
@@ -145,40 +146,47 @@ export function ColumnEditorView({ columnId }: ColumnEditorViewProps) {
       ) : null}
 
       {detail.data ? (
-        <form
-          className="grid gap-4 lg:grid-cols-[1fr_280px]"
-          onSubmit={handleSubmit((values) => void onSave(values))}
-        >
-          <Card>
-            <CardBody className="space-y-4">
-              <Field label="Title" htmlFor="title" required error={errors.title?.message}>
-                <Input id="title" invalid={Boolean(errors.title)} {...register("title")} />
-              </Field>
-              <Field label="Summary" htmlFor="summary" error={errors.summary?.message}>
-                <Textarea id="summary" rows={3} {...register("summary")} />
-              </Field>
-              <Field label="Content" htmlFor="content" required error={errors.content?.message}>
-                <Textarea id="content" rows={16} {...register("content")} />
-              </Field>
-              <Field
-                label="Featured image URL"
-                htmlFor="featuredImage"
-                error={errors.featuredImage?.message}
-              >
-                <Input id="featuredImage" {...register("featuredImage")} />
-              </Field>
-            </CardBody>
-          </Card>
+        <>
+          <form
+            className="grid gap-4 lg:grid-cols-[1fr_280px]"
+            onSubmit={handleSubmit((values) => void onSave(values))}
+          >
+            <Card>
+              <CardBody className="space-y-4">
+                <Field label="Title" htmlFor="title" required error={errors.title?.message}>
+                  <Input id="title" invalid={Boolean(errors.title)} {...register("title")} />
+                </Field>
+                <Field label="Summary" htmlFor="summary" error={errors.summary?.message}>
+                  <Textarea id="summary" rows={3} {...register("summary")} />
+                </Field>
+                <Field label="Content" htmlFor="content" required error={errors.content?.message}>
+                  <Textarea id="content" rows={16} {...register("content")} />
+                </Field>
+                <Field
+                  label="Featured image URL"
+                  htmlFor="featuredImage"
+                  error={errors.featuredImage?.message}
+                >
+                  <Input id="featuredImage" {...register("featuredImage")} />
+                </Field>
+              </CardBody>
+            </Card>
 
-          <ColumnEditorSidebar
-            column={detail.data}
-            canModerate={Boolean(canModerate)}
-            saving={update.isPending}
-            approving={approve.isPending}
-            onApprove={() => setApproveOpen(true)}
-            onReject={() => setRejectOpen(true)}
+            <ColumnEditorSidebar
+              column={detail.data}
+              canModerate={Boolean(canModerate)}
+              saving={update.isPending}
+              approving={approve.isPending}
+              onApprove={() => setApproveOpen(true)}
+              onReject={() => setRejectOpen(true)}
+            />
+          </form>
+
+          <CmsColumnCommentsPanel
+            columnId={columnId}
+            columnStatus={detail.data.status}
           />
-        </form>
+        </>
       ) : null}
 
       <ConfirmDialog

@@ -1,37 +1,37 @@
 "use client";
 
+import { useMemo } from "react";
 import { useTranslations } from "next-intl";
 
 import { SeriesCard } from "@/features/series/components/SeriesCard";
 import { useSeriesPage } from "@/features/series/hooks/useSeriesPage";
-import { Container } from "@/shared/components/layout/Container";
-import { Section } from "@/shared/components/layout/Section";
+import { Link } from "@/i18n/navigation";
 import { EmptyState } from "@/shared/components/common/EmptyState";
 import { ErrorState } from "@/shared/components/common/ErrorState";
+import { HorizontalScroller } from "@/shared/components/common/HorizontalScroller";
+import { Container } from "@/shared/components/layout/Container";
+import { Section } from "@/shared/components/layout/Section";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
+import { groupSeriesByTopic } from "@/shared/utils/taxonomy-groups";
 
 function SeriesSkeleton() {
   return (
-    <div className="space-y-10">
-      <div className="grid gap-6 lg:grid-cols-[1.2fr_1fr]">
-        <Skeleton className="aspect-[16/10] w-full" />
-        <div className="space-y-3">
-          <Skeleton className="h-3 w-28" />
-          <Skeleton className="h-8 w-3/4" />
-          <Skeleton className="h-4 w-full" />
-          <Skeleton className="h-4 w-5/6" />
-        </div>
-      </div>
-      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        {Array.from({ length: 6 }).map((_, index) => (
-          <div key={index} className="space-y-3">
-            <Skeleton className="aspect-[16/10] w-full" />
-            <Skeleton className="h-3 w-20" />
-            <Skeleton className="h-6 w-3/4" />
-            <Skeleton className="h-4 w-full" />
+    <div className="space-y-12">
+      {Array.from({ length: 2 }).map((_, sectionIndex) => (
+        <div key={sectionIndex} className="space-y-5">
+          <Skeleton className="h-7 w-48" />
+          <div className="flex gap-5 overflow-hidden">
+            {Array.from({ length: 3 }).map((_, cardIndex) => (
+              <div key={cardIndex} className="w-72 shrink-0 space-y-3">
+                <Skeleton className="aspect-[16/10] w-full" />
+                <Skeleton className="h-3 w-20" />
+                <Skeleton className="h-6 w-3/4" />
+                <Skeleton className="h-4 w-full" />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   );
 }
@@ -40,9 +40,14 @@ export function SeriesListing() {
   const { data, isLoading, isError, error, refetch } = useSeriesPage();
   const t = useTranslations("seriesPage");
 
+  const groups = useMemo(
+    () => (data?.items.length ? groupSeriesByTopic(data.items) : []),
+    [data?.items],
+  );
+
   return (
     <Section ariaLabelledby="series-listing-heading">
-      <Container>
+      <Container className="min-w-0">
         <h2 id="series-listing-heading" className="sr-only">
           {t("listingHeading")}
         </h2>
@@ -57,27 +62,68 @@ export function SeriesListing() {
           <EmptyState message={t("empty")} />
         ) : null}
 
-        {!isLoading && !isError && data?.items.length ? (
-          <div className="space-y-10">
-            <SeriesCard series={data.items[0]} variant="featured" />
+        {!isLoading && !isError && groups.length ? (
+          <div className="min-w-0 space-y-12">
+            <div className="flex items-end justify-between gap-4 border-b-2 border-ink pb-2">
+              <h3 className="text-lg font-bold uppercase tracking-wide text-ink">
+                {t("allSeries")}
+              </h3>
+              <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
+                {t("seriesCount", { count: data?.total ?? 0 })}
+              </p>
+            </div>
 
-            {data.items.length > 1 ? (
-              <div>
-                <div className="mb-6 flex items-end justify-between gap-4 border-b-2 border-ink pb-2">
-                  <h3 className="text-lg font-bold uppercase tracking-wide text-ink">
-                    {t("allSeries")}
-                  </h3>
-                  <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
-                    {t("seriesCount", { count: data.total })}
-                  </p>
-                </div>
-                <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-                  {data.items.slice(1).map((series) => (
-                    <SeriesCard key={series.id} series={series} />
-                  ))}
-                </div>
-              </div>
-            ) : null}
+            {groups.map((group) => {
+              const title = group.topic?.name ?? t("ungroupedTopic");
+              const headingId = `series-topic-${group.topic?.id ?? "other"}`;
+
+              return (
+                <section
+                  aria-labelledby={headingId}
+                  className="min-w-0"
+                  key={group.topic?.id ?? "ungrouped"}
+                >
+                  <HorizontalScroller
+                    ariaLabel={title}
+                    heading={
+                      <div>
+                        <p className="kicker">{t("kicker")}</p>
+                        <h3
+                          className="mt-1 font-serif text-2xl font-bold text-ink sm:text-3xl"
+                          id={headingId}
+                        >
+                          {group.topic ? (
+                            <Link
+                              className="transition-colors hover:text-accent"
+                              href={`/topics/${group.topic.slug}`}
+                            >
+                              {title}
+                            </Link>
+                          ) : (
+                            title
+                          )}
+                        </h3>
+                      </div>
+                    }
+                    trailing={
+                      <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
+                        {t("seriesInTopic", { count: group.items.length })}
+                      </p>
+                    }
+                  >
+                    {group.items.map((series) => (
+                      <div
+                        className="w-[17.5rem] shrink-0 snap-start sm:w-80"
+                        key={series.id}
+                        role="listitem"
+                      >
+                        <SeriesCard series={series} />
+                      </div>
+                    ))}
+                  </HorizontalScroller>
+                </section>
+              );
+            })}
           </div>
         ) : null}
       </Container>

@@ -1,5 +1,15 @@
-import type { Series, SeriesListResult } from "@/shared/types/series.types";
+import type {
+  Series,
+  SeriesListResult,
+  SeriesParentTopic,
+} from "@/shared/types/series.types";
 import { resolveImageUrl } from "@/shared/utils/image";
+
+interface SeriesParentTopicDto {
+  id: string;
+  name: string;
+  slug?: string | null;
+}
 
 interface SeriesDto {
   id: string;
@@ -11,6 +21,8 @@ interface SeriesDto {
   article_count?: number;
   cover_image?: string | null;
   created_at?: string | null;
+  topic_id?: string | null;
+  topic?: SeriesParentTopicDto | null;
 }
 
 interface SeriesListResponseDto {
@@ -23,10 +35,25 @@ interface SeriesListResponseDto {
   };
 }
 
+function mapParentTopic(
+  dto: SeriesParentTopicDto | null | undefined,
+  fallbackId?: string | null,
+): SeriesParentTopic | null {
+  const id = dto?.id ?? fallbackId ?? null;
+  if (!id) return null;
+
+  return {
+    id,
+    name: dto?.name ?? "Topic",
+    slug: dto?.slug ?? id,
+  };
+}
+
 export function mapSeriesDto(dto: SeriesDto): Series {
   // Prefer `image` (backend column); keep `cover_image` as legacy fallback.
   // Seed by series id so placeholder stays stable when locale/name changes.
   const rawImage = dto.image ?? dto.cover_image ?? null;
+  const topicId = dto.topic_id ?? dto.topic?.id ?? null;
 
   return {
     id: dto.id,
@@ -36,6 +63,8 @@ export function mapSeriesDto(dto: SeriesDto): Series {
     articleCount: dto.article_count ?? 0,
     coverImage: resolveImageUrl(rawImage, dto.id),
     publishedAt: dto.created_at ?? null,
+    topicId,
+    topic: mapParentTopic(dto.topic, topicId),
   };
 }
 

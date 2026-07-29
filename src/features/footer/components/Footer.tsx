@@ -16,8 +16,6 @@ const LEGAL_LINKS = [
 
 const SOCIAL_LINKS = [
   { label: "YouTube", href: "https://www.youtube.com/@egimediaofficial" },
-  { label: "X", href: "https://x.com" },
-  { label: "Spotify", href: "https://spotify.com" },
 ];
 
 export function Footer() {

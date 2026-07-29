@@ -12,6 +12,7 @@ import { Pagination } from "@/shared/components/common/Pagination";
 import { Container } from "@/shared/components/layout/Container";
 import { Section } from "@/shared/components/layout/Section";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
+import { LATEST_NEWS_PAGE_LIMIT } from "@/shared/constants/latest-news.constants";
 
 function LatestNewsSkeleton() {
   return (
@@ -84,7 +85,7 @@ export function LatestNewsListing() {
                     {tCommon("articleCount", { count: data.total })}
                   </p>
                 </div>
-                <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="grid min-h-[28rem] gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
                   {(page === 1 ? data.items.slice(1) : data.items).map((article) => (
                     <ArticleCard key={article.id} article={article} />
                   ))}
@@ -95,6 +96,9 @@ export function LatestNewsListing() {
             <Pagination
               basePath="/latest"
               currentPage={data.page}
+              itemLabel="articles"
+              pageSize={data.limit || LATEST_NEWS_PAGE_LIMIT}
+              totalItems={data.total}
               totalPages={data.totalPages}
             />
           </div>

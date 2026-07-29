@@ -1,5 +1,8 @@
 import { mapColumnCommentListDto } from "@/features/columns/mappers/column-comment.mapper";
-import type { ColumnCommentListResult } from "@/features/columns/types/column-comment.types";
+import type {
+  ColumnCommentListResult,
+  CreateColumnCommentPayload,
+} from "@/features/columns/types/column-comment.types";
 import { API_ENDPOINTS } from "@/shared/constants/api.constants";
 import { axiosClient } from "@/shared/lib/axios-client";
 import type { ApiSuccessResponse } from "@/shared/types/api.types";
@@ -7,6 +10,7 @@ import type { ApiSuccessResponse } from "@/shared/types/api.types";
 interface ColumnCommentDto {
   id: string;
   column_id: string;
+  parent_id?: string | null;
   content: string;
   created_at: string;
   user: {
@@ -37,9 +41,12 @@ export async function fetchColumnComments(
 
 export async function createColumnComment(
   columnId: string,
-  content: string,
+  payload: CreateColumnCommentPayload,
 ): Promise<void> {
-  await axiosClient.post(API_ENDPOINTS.columnComments(columnId), { content });
+  await axiosClient.post(API_ENDPOINTS.columnComments(columnId), {
+    content: payload.content,
+    parent_id: payload.parentId ?? null,
+  });
 }
 
 export async function deleteColumnComment(

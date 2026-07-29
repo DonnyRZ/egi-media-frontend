@@ -6,6 +6,7 @@ import {
   postColumnComment,
   removeColumnComment,
 } from "@/features/columns/repositories/column-comment.repository";
+import type { CreateColumnCommentPayload } from "@/features/columns/types/column-comment.types";
 
 export function useColumnCommentMutations(columnId: string) {
   const queryClient = useQueryClient();
@@ -17,7 +18,8 @@ export function useColumnCommentMutations(columnId: string) {
   }
 
   const create = useMutation({
-    mutationFn: (content: string) => postColumnComment(columnId, content),
+    mutationFn: (payload: CreateColumnCommentPayload) =>
+      postColumnComment(columnId, payload),
     onSuccess: invalidate,
   });
 

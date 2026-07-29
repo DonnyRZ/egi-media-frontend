@@ -1,10 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import { Suspense } from "react";
+import {
+  Suspense,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type FormEvent,
+} from "react";
 import { useFormatter, useTranslations } from "next-intl";
 
-import { Link } from "@/i18n/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
 import { Container } from "@/shared/components/layout/Container";
 import { AuthUserMenu, AuthMobileActions } from "@/features/auth/components/AuthUserMenu";
 import { useAuthStore } from "@/features/auth/stores/auth.store";
@@ -35,6 +43,8 @@ const NAV_ITEMS = [
   { key: "videos", href: "/videos" },
   { key: "column", href: "/kolom" },
 ] as const;
+
+type NavItem = (typeof NAV_ITEMS)[number];
 
 function UtilityBar() {
   const t = useTranslations("header");
@@ -136,15 +146,122 @@ function Masthead() {
 
 function DesktopNav() {
   const t = useTranslations("header");
+  const navRef = useRef<HTMLElement>(null);
+  const measureRef = useRef<HTMLUListElement>(null);
+  const moreMeasureRef = useRef<HTMLLIElement>(null);
+  const moreButtonRef = useRef<HTMLButtonElement>(null);
+  const moreMenuRef = useRef<HTMLDivElement>(null);
+  const [visibleCount, setVisibleCount] = useState<number>(NAV_ITEMS.length);
+  const [isMoreOpen, setIsMoreOpen] = useState(false);
+
+  const recalculate = useCallback(() => {
+    const nav = navRef.current;
+    const measureList = measureRef.current;
+    if (!nav || !measureList) return;
+
+    const availableWidth = nav.clientWidth;
+    // Last child is the hidden "More" width probe — exclude it from item count.
+    const itemNodes = Array.from(measureList.children).slice(0, -1) as HTMLElement[];
+    const moreWidth = moreMeasureRef.current?.offsetWidth ?? 88;
+    const gap = 32;
+
+    let usedWidth = 0;
+    let count = itemNodes.length;
+
+    for (let index = 0; index < itemNodes.length; index += 1) {
+      const itemWidth = itemNodes[index].offsetWidth;
+      const nextUsed = usedWidth + itemWidth + (index > 0 ? gap : 0);
+      const remaining = itemNodes.length - (index + 1);
+      const needsMore = remaining > 0;
+      const totalNeeded = nextUsed + (needsMore ? gap + moreWidth : 0);
+
+      if (totalNeeded > availableWidth) {
+        count = Math.max(1, index);
+        break;
+      }
+
+      usedWidth = nextUsed;
+      count = index + 1;
+    }
+
+    setVisibleCount((prev) => (prev === count ? prev : count));
+  }, []);
+
+  useLayoutEffect(() => {
+    recalculate();
+  }, [recalculate]);
+
+  useEffect(() => {
+    const nav = navRef.current;
+    if (!nav || typeof ResizeObserver === "undefined") return;
+
+    const observer = new ResizeObserver(() => recalculate());
+    observer.observe(nav);
+    window.addEventListener("resize", recalculate);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", recalculate);
+    };
+  }, [recalculate]);
+
+  useEffect(() => {
+    if (!isMoreOpen) return;
+
+    function handlePointerDown(event: MouseEvent) {
+      const target = event.target as Node;
+      if (
+        moreButtonRef.current?.contains(target) ||
+        moreMenuRef.current?.contains(target)
+      ) {
+        return;
+      }
+      setIsMoreOpen(false);
+    }
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") setIsMoreOpen(false);
+    }
+
+    document.addEventListener("mousedown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isMoreOpen]);
+
+  const visibleItems = NAV_ITEMS.slice(0, visibleCount) as NavItem[];
+  const overflowItems = NAV_ITEMS.slice(visibleCount) as NavItem[];
 
   return (
     <nav
       aria-label={t("navMain")}
-      className="hidden border-t border-neutral-200 lg:block"
+      className="relative hidden border-t border-neutral-200 lg:block"
+      ref={navRef}
     >
-      <ul className="-mb-px flex items-center justify-center gap-8">
+      <ul
+        aria-hidden="true"
+        className="pointer-events-none invisible absolute flex items-center gap-8 whitespace-nowrap"
+        ref={measureRef}
+      >
         {NAV_ITEMS.map((item) => (
-          <li key={item.href}>
+          <li key={item.href} className="shrink-0">
+            <span className="inline-block border-b-2 border-transparent py-3 text-sm font-semibold uppercase tracking-wide">
+              {t(`nav.${item.key}`)}
+            </span>
+          </li>
+        ))}
+        <li className="shrink-0" ref={moreMeasureRef}>
+          <span className="inline-flex items-center gap-1 border-b-2 border-transparent py-3 text-sm font-semibold uppercase tracking-wide">
+            {t("navMore")}
+            <ChevronIcon />
+          </span>
+        </li>
+      </ul>
+
+      <ul className="-mb-px flex items-center justify-center gap-8">
+        {visibleItems.map((item) => (
+          <li key={item.href} className="shrink-0">
             <Link
               className="inline-block border-b-2 border-transparent py-3 text-sm font-semibold uppercase tracking-wide text-neutral-700 transition-colors hover:border-accent hover:text-accent"
               href={item.href}
@@ -153,6 +270,47 @@ function DesktopNav() {
             </Link>
           </li>
         ))}
+
+        {overflowItems.length > 0 ? (
+          <li className="relative shrink-0">
+            <button
+              aria-expanded={isMoreOpen}
+              aria-haspopup="menu"
+              className={cn(
+                "inline-flex items-center gap-1 border-b-2 py-3 text-sm font-semibold uppercase tracking-wide transition-colors",
+                isMoreOpen
+                  ? "border-accent text-accent"
+                  : "border-transparent text-neutral-700 hover:border-accent hover:text-accent",
+              )}
+              onClick={() => setIsMoreOpen((open) => !open)}
+              ref={moreButtonRef}
+              type="button"
+            >
+              {t("navMore")}
+              <ChevronIcon className={cn("transition-transform", isMoreOpen && "rotate-180")} />
+            </button>
+
+            {isMoreOpen ? (
+              <div
+                className="absolute right-0 top-full z-50 mt-0 min-w-[12rem] border border-neutral-200 bg-white py-2 shadow-sm"
+                ref={moreMenuRef}
+                role="menu"
+              >
+                {overflowItems.map((item) => (
+                  <Link
+                    className="block px-4 py-2.5 text-sm font-semibold uppercase tracking-wide text-neutral-700 transition-colors hover:bg-neutral-50 hover:text-accent"
+                    href={item.href}
+                    key={item.href}
+                    onClick={() => setIsMoreOpen(false)}
+                    role="menuitem"
+                  >
+                    {t(`nav.${item.key}`)}
+                  </Link>
+                ))}
+              </div>
+            ) : null}
+          </li>
+        ) : null}
       </ul>
     </nav>
   );
@@ -202,23 +360,77 @@ function MobileNav() {
 
 function SearchBar() {
   const t = useTranslations("header");
-  const { isSearchOpen, searchQuery, setSearchQuery } = useUiStore();
+  const router = useRouter();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const { isSearchOpen, searchQuery, setSearchOpen, setSearchQuery } =
+    useUiStore();
+
+  useEffect(() => {
+    if (!isSearchOpen) return;
+    const frame = window.requestAnimationFrame(() => {
+      inputRef.current?.focus();
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [isSearchOpen]);
+
+  useEffect(() => {
+    if (!isSearchOpen) return;
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setSearchOpen(false);
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isSearchOpen, setSearchOpen]);
 
   if (!isSearchOpen) return null;
 
+  function submitSearch(event?: FormEvent) {
+    event?.preventDefault();
+    const query = searchQuery.trim();
+    if (!query) {
+      inputRef.current?.focus();
+      return;
+    }
+    setSearchOpen(false);
+    router.push(`/search?q=${encodeURIComponent(query)}`);
+  }
+
   return (
     <div className="border-t border-neutral-200 py-4">
-      <label className="sr-only" htmlFor="site-search">
-        {t("searchLabel")}
-      </label>
-      <input
-        className="w-full border-b-2 border-ink px-1 py-2 font-serif text-lg focus-visible:outline-none"
-        id="site-search"
-        onChange={(event) => setSearchQuery(event.target.value)}
-        placeholder={t("searchPlaceholder")}
-        type="search"
-        value={searchQuery}
-      />
+      <form className="flex items-end gap-3" onSubmit={submitSearch}>
+        <div className="min-w-0 flex-1">
+          <label className="sr-only" htmlFor="site-search">
+            {t("searchLabel")}
+          </label>
+          <input
+            className="w-full border-b-2 border-ink bg-transparent px-1 py-2 font-serif text-lg focus-visible:outline-none"
+            id="site-search"
+            onChange={(event) => setSearchQuery(event.target.value)}
+            placeholder={t("searchPlaceholder")}
+            ref={inputRef}
+            type="search"
+            value={searchQuery}
+          />
+        </div>
+        <button
+          className="shrink-0 border border-ink bg-ink px-4 py-2 text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-primary-900"
+          type="submit"
+        >
+          {t("searchSubmit")}
+        </button>
+        <button
+          aria-label={t("searchClose")}
+          className="shrink-0 rounded p-2 text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-ink"
+          onClick={() => setSearchOpen(false)}
+          type="button"
+        >
+          <CloseIcon />
+        </button>
+      </form>
     </div>
   );
 }
@@ -254,6 +466,38 @@ function MenuIcon() {
   return (
     <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
       <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeLinecap="round" strokeWidth="1.8" />
+    </svg>
+  );
+}
+
+function ChevronIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      aria-hidden="true"
+      className={cn("h-3.5 w-3.5", className)}
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M6 9l6 6 6-6"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.8"
+      />
+    </svg>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
+      <path
+        d="M6 6l12 12M18 6L6 18"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeWidth="1.8"
+      />
     </svg>
   );
 }

@@ -52,6 +52,8 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       const user = await fetchCurrentUser();
       set({ user, isAuthenticated: true, isHydrated: true, isLoading: false });
     } catch {
+      // Access token may be expired — axios interceptor refreshes once.
+      // If /me still fails after that, clear the local session.
       clearTokens();
       set({
         user: null,

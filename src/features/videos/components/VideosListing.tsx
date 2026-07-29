@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 import { VideoEmbed } from "@/features/videos/components/VideoEmbed";
@@ -10,11 +11,13 @@ import {
   VideoStageMeta,
 } from "@/features/videos/components/VideoPlaylist";
 import { useVideosPage } from "@/features/videos/hooks/useVideosPage";
-import { Container } from "@/shared/components/layout/Container";
-import { Section } from "@/shared/components/layout/Section";
 import { EmptyState } from "@/shared/components/common/EmptyState";
 import { ErrorState } from "@/shared/components/common/ErrorState";
+import { Pagination } from "@/shared/components/common/Pagination";
+import { Container } from "@/shared/components/layout/Container";
+import { Section } from "@/shared/components/layout/Section";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
+import { VIDEOS_PAGE_LIMIT } from "@/shared/constants/videos.constants";
 import type { YoutubeVideo } from "@/shared/types/youtube.types";
 
 function StageSkeleton() {
@@ -40,10 +43,27 @@ function StageSkeleton() {
   );
 }
 
-function VideoStage({ videos }: { videos: YoutubeVideo[] }) {
+function VideoStage({
+  videos,
+  page,
+  total,
+  totalPages,
+  limit,
+}: {
+  videos: YoutubeVideo[];
+  page: number;
+  total: number;
+  totalPages: number;
+  limit: number;
+}) {
   const [active, setActive] = useState(videos[0]);
   const [autoplay, setAutoplay] = useState(false);
   const t = useTranslations("videosPage");
+
+  useEffect(() => {
+    setActive(videos[0]);
+    setAutoplay(false);
+  }, [videos]);
 
   function handleSelect(video: YoutubeVideo) {
     setActive(video);
@@ -92,23 +112,35 @@ function VideoStage({ videos }: { videos: YoutubeVideo[] }) {
                 {t("moreVideos")}
               </h3>
               <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
-                {t("videoCount", { count: videos.length })}
+                {t("videoCount", { count: total })}
               </p>
             </div>
-            <div className="grid gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div className="grid min-h-[20rem] gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
               {moreVideos.map((video) => (
                 <VideoGridCard key={video.id} video={video} />
               ))}
             </div>
           </div>
         ) : null}
+
+        <Pagination
+          basePath="/videos"
+          className="mt-10"
+          currentPage={page}
+          itemLabel="videos"
+          pageSize={limit || VIDEOS_PAGE_LIMIT}
+          totalItems={total}
+          totalPages={totalPages}
+        />
       </Container>
     </Section>
   );
 }
 
 export function VideosListing() {
-  const { data, isLoading, isError, error, refetch } = useVideosPage();
+  const searchParams = useSearchParams();
+  const page = Math.max(1, Number(searchParams.get("page")) || 1);
+  const { data, isLoading, isError, error, refetch } = useVideosPage(page);
   const t = useTranslations("videosPage");
 
   if (isLoading) return <StageSkeleton />;
@@ -133,5 +165,13 @@ export function VideosListing() {
     );
   }
 
-  return <VideoStage videos={data.items} />;
+  return (
+    <VideoStage
+      limit={data.limit}
+      page={data.page}
+      total={data.total}
+      totalPages={data.totalPages}
+      videos={data.items}
+    />
+  );
 }

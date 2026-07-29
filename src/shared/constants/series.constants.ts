@@ -1,1 +1,1 @@
-export const SERIES_PAGE_LIMIT = 24;
+export const SERIES_PAGE_LIMIT = 100;

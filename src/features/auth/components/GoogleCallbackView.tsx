@@ -24,7 +24,10 @@ export function GoogleCallbackView() {
   useEffect(() => {
     const accessToken = searchParams.get("access_token");
     const refreshToken = searchParams.get("refresh_token");
-    const expiresIn = Number(searchParams.get("expires_in") || 300);
+    const expiresParam = searchParams.get("expires_in");
+    const expiresIn = Number(expiresParam);
+    const resolvedExpiresIn =
+      Number.isFinite(expiresIn) && expiresIn > 0 ? expiresIn : 7 * 24 * 60 * 60;
 
     if (!accessToken || !refreshToken) {
       setError(t("errors.googleFailed"));
@@ -37,7 +40,7 @@ export function GoogleCallbackView() {
           accessToken,
           refreshToken,
           tokenType: "Bearer",
-          expiresIn,
+          expiresIn: resolvedExpiresIn,
         });
         setShowSuccess(true);
       } catch {

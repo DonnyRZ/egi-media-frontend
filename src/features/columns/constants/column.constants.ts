@@ -20,4 +20,4 @@ export const SAVED_COLUMN_PAGE_LIMIT = 12;
 
 export const SAVED_COLUMN_STALE_TIME_MS = 60 * 1000;
 
-export const COLUMN_COMMENTS_PAGE_LIMIT = 20;
+export const COLUMN_COMMENTS_PAGE_LIMIT = 100;

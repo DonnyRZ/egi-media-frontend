@@ -4,6 +4,7 @@ export const API_ENDPOINTS = {
   articlesManage: "/api/v1/articles/manage",
   articlesStats: "/api/v1/articles/stats",
   newsFeedViral: "/api/v1/news-feed/viral",
+  newsFeedArticles: "/api/v1/news-feed/articles",
   articlesPersonalized: "/api/v1/articles/personalized",
   subscriptionStats: "/api/v1/subscriptions/stats",
   topicSubscribers: (topicId: string) =>

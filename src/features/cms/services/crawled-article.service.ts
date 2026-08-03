@@ -1,8 +1,6 @@
-import axios from "axios";
-
 import { mapCrawledArticle, type CrawledArticleDto } from "@/features/cms/mappers/news-feed.mapper";
-import { env } from "@/shared/config/env";
-import { API_TIMEOUT_MS } from "@/shared/constants/api.constants";
+import { axiosClient } from "@/shared/lib/axios-client";
+import { API_ENDPOINTS } from "@/shared/constants/api.constants";
 import type {
   CrawledArticlesParams,
   CrawledArticlesResult,
@@ -22,17 +20,11 @@ interface CrawledArticlesApiResponse {
   error?: { message?: string };
 }
 
-const crawlClient = axios.create({
-  baseURL: env.crawlApiUrl,
-  timeout: API_TIMEOUT_MS,
-  headers: { Accept: "application/json" },
-});
-
 export async function fetchCrawledArticles(
   params: CrawledArticlesParams,
 ): Promise<CrawledArticlesResult> {
-  const response = await crawlClient.get<CrawledArticlesApiResponse>(
-    "/api/crawled-articles",
+  const response = await axiosClient.get<CrawledArticlesApiResponse>(
+    API_ENDPOINTS.newsFeedArticles,
     {
       params: {
         page: params.page,

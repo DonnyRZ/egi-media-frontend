@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
@@ -23,5 +24,9 @@ export default async function MyColumnsPage({ params }: MyColumnsPageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  return <MyColumnsView />;
+  return (
+    <Suspense fallback={null}>
+      <MyColumnsView />
+    </Suspense>
+  );
 }

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { ColumnsHero } from "@/features/columns/components/ColumnsHero";
@@ -27,7 +28,9 @@ export default async function ColumnsPage({ params }: ColumnsPageProps) {
   return (
     <>
       <ColumnsHero />
-      <ColumnsListing />
+      <Suspense fallback={null}>
+        <ColumnsListing />
+      </Suspense>
     </>
   );
 }

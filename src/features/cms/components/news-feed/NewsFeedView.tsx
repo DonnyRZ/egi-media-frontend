@@ -27,6 +27,7 @@ import type { ViralIssue } from "@/features/cms/types/viral-issue.types";
 
 export function NewsFeedView() {
   const [source, setSource] = useState<NewsFeedSourceId>("");
+  const [windowHours, setWindowHours] = useState(72);
   const [searchInput, setSearchInput] = useState("");
   const [page, setPage] = useState(1);
   const [selectedIssue, setSelectedIssue] = useState<ViralIssue | null>(null);
@@ -54,7 +55,7 @@ export function NewsFeedView() {
     isLoading: viralLoading,
     isError: viralError,
     error: viralQueryError,
-  } = useViralIssues({ enabled: isViralTab });
+  } = useViralIssues({ enabled: isViralTab, windowHours });
   const items = articleData?.items ?? [];
 
   const viralIssues = useMemo(() => {
@@ -70,11 +71,26 @@ export function NewsFeedView() {
     <>
       <PageHeader
         title="News Feed"
-        description="Viral groups related coverage from the last 72 hours. Outlet tabs load scraped articles from egi-media-crawl."
+        description="Cross-media coverage groups for the selected period. Outlet tabs load scraped articles from egi-media-crawl."
       />
 
       <div className="mb-4">
-        <div className="relative max-w-md">
+        <div className="flex flex-wrap items-center gap-3">
+          {isViralTab ? (
+            <label className="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-300">
+              <span>Period</span>
+              <select
+                className="rounded-md border border-neutral-300 bg-white px-2 py-1.5 text-sm dark:border-neutral-700 dark:bg-neutral-900"
+                value={windowHours}
+                onChange={(event) => setWindowHours(Number(event.target.value))}
+              >
+                <option value={24}>24 jam</option>
+                <option value={72}>72 jam</option>
+                <option value={168}>7 hari</option>
+              </select>
+            </label>
+          ) : null}
+          <div className="relative max-w-md">
           <Icons.search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400" />
           <Input
             className="pl-9"
@@ -86,7 +102,8 @@ export function NewsFeedView() {
               setSearchInput(event.target.value);
               setPage(1);
             }}
-          />
+            />
+          </div>
         </div>
       </div>
 

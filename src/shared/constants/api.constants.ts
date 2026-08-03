@@ -3,6 +3,7 @@ export const API_ENDPOINTS = {
   articlesMe: "/api/v1/articles/me",
   articlesManage: "/api/v1/articles/manage",
   articlesStats: "/api/v1/articles/stats",
+  newsFeedViral: "/api/v1/news-feed/viral",
   articlesPersonalized: "/api/v1/articles/personalized",
   subscriptionStats: "/api/v1/subscriptions/stats",
   topicSubscribers: (topicId: string) =>

@@ -35,7 +35,7 @@ export function ViralIssuesList({
                 {issue.title}
               </p>
               <p className="mt-0.5 text-xs text-neutral-500">
-                {issue.articleCount} articles · clustered by AI
+                {issue.articleCount} articles · cross-media coverage
               </p>
             </div>
             <Badge tone="warning" className="shrink-0">

@@ -1,14 +1,13 @@
-import axios from "axios";
-
 import {
   mapViralIssue,
   type ViralIssueDto,
 } from "@/features/cms/mappers/viral-issue.mapper";
 import type { ViralIssue } from "@/features/cms/types/viral-issue.types";
-import { env } from "@/shared/config/env";
-import { API_TIMEOUT_MS } from "@/shared/constants/api.constants";
+import { axiosClient } from "@/shared/lib/axios-client";
+import { API_ENDPOINTS } from "@/shared/constants/api.constants";
 
-interface ViralPocMetaDto {
+interface ViralIssuesMetaDto {
+  windowHours?: number;
   lookbackHours?: number;
   similarityThreshold?: number;
   articlePoolSize?: number;
@@ -16,11 +15,11 @@ interface ViralPocMetaDto {
   engine?: string;
 }
 
-interface ViralPocApiResponse {
+interface ViralIssuesApiResponse {
   success: boolean;
   data: {
     items?: ViralIssueDto[];
-    meta?: ViralPocMetaDto;
+    meta?: ViralIssuesMetaDto;
     cached?: boolean;
     cache_expires_at?: string;
   };
@@ -30,17 +29,14 @@ interface ViralPocApiResponse {
 export interface ViralIssuesResult {
   items: ViralIssue[];
   cached: boolean;
+  windowHours: number;
 }
 
-const viralPocClient = axios.create({
-  baseURL: env.crawlApiUrl,
-  timeout: API_TIMEOUT_MS,
-  headers: { Accept: "application/json" },
-});
-
-export async function fetchViralIssues(): Promise<ViralIssuesResult> {
-  const response =
-    await viralPocClient.get<ViralPocApiResponse>("/api/viral-poc");
+export async function fetchViralIssues(windowHours = 72): Promise<ViralIssuesResult> {
+  const response = await axiosClient.get<ViralIssuesApiResponse>(
+    API_ENDPOINTS.newsFeedViral,
+    { params: { window_hours: windowHours, limit: 50 } },
+  );
 
   if (!response.data.success) {
     throw new Error(
@@ -50,6 +46,7 @@ export async function fetchViralIssues(): Promise<ViralIssuesResult> {
 
   return {
     items: (response.data.data.items ?? []).map(mapViralIssue),
-    cached: response.data.data.cached ?? false,
+    cached: false,
+    windowHours: response.data.data.meta?.windowHours ?? windowHours,
   };
 }

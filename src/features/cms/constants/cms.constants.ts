@@ -125,7 +125,7 @@ export const CMS_QUERY_KEYS = {
   newsFeed: {
     all: ["cms", "news-feed"] as const,
     list: (params: object) => ["cms", "news-feed", "list", params] as const,
-    viral: ["cms", "news-feed", "viral"] as const,
+    viral: (windowHours: number) => ["cms", "news-feed", "viral", windowHours] as const,
   },
   topicSubscriptions: {
     stats: ["cms", "topic-subscriptions", "stats"] as const,

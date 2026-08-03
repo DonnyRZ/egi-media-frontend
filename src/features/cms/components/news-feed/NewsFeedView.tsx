@@ -27,7 +27,7 @@ import type { ViralIssue } from "@/features/cms/types/viral-issue.types";
 
 export function NewsFeedView() {
   const [source, setSource] = useState<NewsFeedSourceId>("");
-  const [windowHours, setWindowHours] = useState(72);
+  const [windowHours, setWindowHours] = useState(24);
   const [searchInput, setSearchInput] = useState("");
   const [page, setPage] = useState(1);
   const [selectedIssue, setSelectedIssue] = useState<ViralIssue | null>(null);

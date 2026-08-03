@@ -17,7 +17,7 @@ export function ViralIssuesList({
 }: ViralIssuesListProps) {
   return (
     <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
-      {issues.map((issue) => {
+      {issues.map((issue, index) => {
         const active = selectedId === issue.id;
         return (
           <button
@@ -30,17 +30,23 @@ export function ViralIssuesList({
               active && "bg-accent/5 dark:bg-accent/10",
             )}
           >
-            <div className="min-w-0">
+            <div className="flex w-10 shrink-0 flex-col items-center justify-center border-r border-neutral-200 pr-3 dark:border-neutral-800">
+              <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-neutral-400">
+                Rank
+              </span>
+              <span className="mt-0.5 text-lg font-bold leading-none text-neutral-700 dark:text-neutral-200">
+                {index + 1}
+              </span>
+            </div>
+            <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-semibold text-neutral-900 dark:text-neutral-100">
                 {issue.title}
               </p>
-              <p className="mt-0.5 text-xs text-neutral-500">
-                {issue.articleCount} articles · cross-media coverage
-              </p>
             </div>
-            <Badge tone="warning" className="shrink-0">
-              {issue.mediaCount} channels
-            </Badge>
+            <div className="flex shrink-0 items-center gap-2">
+              <Badge tone="warning">{issue.mediaCount} channels</Badge>
+              <Badge tone="info">{issue.articleCount} articles</Badge>
+            </div>
           </button>
         );
       })}

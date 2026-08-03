@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 
-import { Badge } from "@/features/cms/components/ui/Badge";
 import { Card, CardHeader } from "@/features/cms/components/ui/Card";
 import {
   EmptyState,
@@ -57,9 +56,6 @@ export function TopTrendingIssues() {
                 >
                   {issue.title}
                 </p>
-                <Badge tone="warning" className="shrink-0">
-                  {issue.articleCount} articles
-                </Badge>
               </Link>
             </li>
           ))}

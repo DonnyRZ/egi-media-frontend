@@ -1,6 +1,5 @@
 export type NewsFeedSourceId =
   | ""
-  | "egi_media"
   | "detik"
   | "viva"
   | "cnn_indonesia"
@@ -27,11 +26,9 @@ export interface NewsFeedTab {
 /**
  * Media tabs for the CMS News Feed.
  * - Viral (`""`) = all crawled sources (cross-outlet feed)
- * - EGI Media (`egi_media`) = owned EGI outlet only
  */
 export const NEWS_FEED_TABS: NewsFeedTab[] = [
   { value: "", label: "Viral" },
-  { value: "egi_media", label: "EGI Media" },
   { value: "detik", label: "Detik" },
   { value: "viva", label: "VIVA" },
   { value: "cnn_indonesia", label: "CNN Indonesia" },
@@ -54,10 +51,5 @@ export const NEWS_FEED_TABS: NewsFeedTab[] = [
 export const NEWS_FEED_PAGE_SIZE = 12;
 
 export const NEWS_FEED_SOURCE_LABELS: Record<string, string> = {
-  egi_media: "EGI Media",
-  ...Object.fromEntries(
-    NEWS_FEED_TABS.filter((tab) => tab.value && tab.value !== "egi_media").map(
-      (tab) => [tab.value, tab.label],
-    ),
-  ),
+  ...Object.fromEntries(NEWS_FEED_TABS.filter((tab) => tab.value).map((tab) => [tab.value, tab.label])),
 };

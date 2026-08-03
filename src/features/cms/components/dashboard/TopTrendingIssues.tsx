@@ -13,14 +13,14 @@ import { useViralIssues } from "@/features/cms/hooks/useViralIssues";
 const TOP_ISSUES_LIMIT = 5;
 
 export function TopTrendingIssues() {
-  const { data, isLoading, isError } = useViralIssues();
+  const { data, isLoading, isError } = useViralIssues({ windowHours: 24 });
   const issues = data?.items.slice(0, TOP_ISSUES_LIMIT) ?? [];
 
   return (
     <Card>
       <CardHeader
         title="Top Trending Issues"
-        description="Cross-media coverage in the last 72 hours"
+        description="Cross-media coverage in the last 24 hours"
         action={
           <Link
             href="/cms/news-feed"
@@ -58,7 +58,7 @@ export function TopTrendingIssues() {
                   {issue.title}
                 </p>
                 <Badge tone="warning" className="shrink-0">
-                  {issue.mediaCount} channels
+                  {issue.articleCount} articles
                 </Badge>
               </Link>
             </li>

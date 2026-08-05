@@ -139,12 +139,13 @@ export function ArticleForm({
     return articleId as string;
   }
 
-  function requireAllLocales(nextStatus?: ArticleStatus): boolean {
-    const needsAll =
+  /** Review / publish / schedule only require Indonesian; EN/UZ stay optional in the editor. */
+  function requireIndonesianContent(nextStatus?: ArticleStatus): boolean {
+    const needsIndonesian =
       nextStatus === "review" ||
       nextStatus === "published" ||
       nextStatus === "scheduled";
-    if (!needsAll) return true;
+    if (!needsIndonesian) return true;
 
     const missing = getMissingTranslationErrors(getValues());
     const keys = Object.keys(missing) as (keyof ArticleFormValues)[];
@@ -154,14 +155,12 @@ export function ArticleForm({
       const message = missing[key];
       if (message) setError(key, { type: "manual", message });
     }
-    toast.error(
-      "Fill Title and Content for Indonesia, English, and Oʻzbekcha before continuing.",
-    );
+    toast.error("Fill Indonesian title and content before continuing.");
     return false;
   }
 
   function run(nextStatus: ArticleStatus | undefined, message: string, toList: boolean, publishedAt?: string) {
-    if (!requireAllLocales(nextStatus)) return;
+    if (!requireIndonesianContent(nextStatus)) return;
     return handleSubmit(async (values) => {
       try {
         const id = await persist(values, nextStatus, publishedAt);

@@ -40,8 +40,9 @@ function isFilledHtml(value: string | undefined): boolean {
 }
 
 /**
- * Strict multilanguage check for publish / review / schedule.
- * Draft saves may remain partial; these actions require ID + EN + UZ title & content.
+ * Editorial gate for review / publish / schedule.
+ * Only Indonesian (primary) title + content are required.
+ * EN/UZ are optional in the editor; backend may auto-translate when the article becomes final.
  */
 export function getMissingTranslationErrors(
   values: ArticleFormValues,
@@ -52,18 +53,6 @@ export function getMissingTranslationErrors(
   }
   if (!isFilledHtml(values.content)) {
     errors.content = "Indonesian content is required";
-  }
-  if (!values.titleEn?.trim()) {
-    errors.titleEn = "English title is required";
-  }
-  if (!isFilledHtml(values.contentEn)) {
-    errors.contentEn = "English content is required";
-  }
-  if (!values.titleUz?.trim()) {
-    errors.titleUz = "Oʻzbekcha title is required";
-  }
-  if (!isFilledHtml(values.contentUz)) {
-    errors.contentUz = "Oʻzbekcha content is required";
   }
   return errors;
 }

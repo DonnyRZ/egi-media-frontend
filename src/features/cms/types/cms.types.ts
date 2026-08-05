@@ -7,6 +7,19 @@ export type ArticleStatus =
   | "published"
   | "archived";
 
+export type TranslationStatus =
+  | "none"
+  | "pending"
+  | "processing"
+  | "ready"
+  | "failed";
+
+export type TranslationJobStatus =
+  | "queued"
+  | "processing"
+  | "succeeded"
+  | "failed";
+
 export type ArticlePlacement =
   | "latest_news"
   | "homepage_hero"
@@ -20,12 +33,28 @@ export interface CmsArticleListItem {
   summary: string | null;
   featuredImage: string | null;
   status: ArticleStatus;
+  translationStatus: TranslationStatus;
   placements: ArticlePlacement[];
   publishedAt: string | null;
   createdAt: string;
   updatedAt: string | null;
   author: { id: string; fullName: string };
   category: { id: string; name: string } | null;
+}
+
+export interface TranslationJob {
+  id: string;
+  articleId: string;
+  articleTitle: string;
+  requestedBy: string | null;
+  targetStatus: "published" | "scheduled";
+  jobStatus: TranslationJobStatus;
+  errorMessage: string | null;
+  translationStatus: TranslationStatus;
+  articleStatus: ArticleStatus;
+  createdAt: string;
+  startedAt: string | null;
+  finishedAt: string | null;
 }
 
 export type ContentLocale = "id" | "en" | "uz";

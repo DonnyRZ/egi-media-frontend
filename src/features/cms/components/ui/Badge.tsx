@@ -8,6 +8,7 @@ import {
 import type {
   ArticlePlacement,
   ArticleStatus,
+  TranslationStatus,
 } from "@/features/cms/types/cms.types";
 
 type Tone = "neutral" | "info" | "warning" | "success" | "muted" | "danger";
@@ -47,6 +48,27 @@ export function Badge({ tone = "neutral", children, className }: BadgeProps) {
 
 export function StatusBadge({ status }: { status: ArticleStatus }) {
   const meta = ARTICLE_STATUS_META[status];
+  return <Badge tone={meta.tone}>{meta.label}</Badge>;
+}
+
+const TRANSLATION_STATUS_META: Record<
+  TranslationStatus,
+  { label: string; tone: Tone }
+> = {
+  none: { label: "No EN/UZ", tone: "muted" },
+  pending: { label: "Translating", tone: "warning" },
+  processing: { label: "Translating", tone: "info" },
+  ready: { label: "EN+UZ ready", tone: "success" },
+  failed: { label: "Translate failed", tone: "danger" },
+};
+
+export function TranslationStatusBadge({
+  status,
+}: {
+  status: TranslationStatus;
+}) {
+  if (status === "none") return null;
+  const meta = TRANSLATION_STATUS_META[status];
   return <Badge tone={meta.tone}>{meta.label}</Badge>;
 }
 

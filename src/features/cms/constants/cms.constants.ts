@@ -133,4 +133,8 @@ export const CMS_QUERY_KEYS = {
       ["cms", "topic-subscriptions", "subscribers", topicId] as const,
   },
   account: { profile: ["cms", "account", "profile"] as const },
+  translationJobs: {
+    all: ["cms", "translation-jobs"] as const,
+    list: () => ["cms", "translation-jobs", "list"] as const,
+  },
 } as const;

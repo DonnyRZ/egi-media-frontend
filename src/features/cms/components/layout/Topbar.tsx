@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Breadcrumb } from "@/features/cms/components/layout/Breadcrumb";
 import { ThemeToggle } from "@/features/cms/components/layout/ThemeToggle";
 import { UserMenu } from "@/features/cms/components/layout/UserMenu";
+import { CmsTranslationBell } from "@/features/cms/components/translation-jobs/CmsTranslationBell";
 import { Icons } from "@/features/cms/components/ui/Icons";
 import { useCmsLayoutStore } from "@/features/cms/stores/cms-layout.store";
 
@@ -42,6 +43,7 @@ export function Topbar() {
         >
           <Icons.external className="h-[18px] w-[18px]" />
         </a>
+        <CmsTranslationBell />
         <ThemeToggle />
         <UserMenu />
       </div>

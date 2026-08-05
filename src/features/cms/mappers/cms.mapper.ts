@@ -7,6 +7,7 @@ import type {
   CmsProfile,
   CmsUser,
   Tag,
+  TranslationStatus,
 } from "@/features/cms/types/cms.types";
 import { DEFAULT_ARTICLE_PLACEMENTS } from "@/features/cms/constants/cms.constants";
 import { resolveResourceTypeLabel } from "@/features/cms/utils/audit-resource";
@@ -35,6 +36,7 @@ export interface CmsArticleListItemDto {
   summary: string | null;
   featured_image: string | null;
   status: ArticleStatus;
+  translation_status?: TranslationStatus | null;
   placements?: ArticlePlacement[] | null;
   published_at: string | null;
   created_at: string;
@@ -117,6 +119,7 @@ export function mapCmsArticleListItem(
     summary: dto.summary,
     featuredImage: dto.featured_image,
     status: dto.status,
+    translationStatus: dto.translation_status ?? "none",
     placements: mapPlacements(dto.placements),
     publishedAt: dto.published_at,
     createdAt: dto.created_at,

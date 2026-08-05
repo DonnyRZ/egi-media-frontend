@@ -198,7 +198,7 @@ export function ArticleForm({
           onPublish={() =>
             run(
               "published",
-              "Article published",
+              "Publish started — track EN/UZ translation in the bell.",
               true,
               mode === "new" ? new Date().toISOString() : undefined,
             )
@@ -223,7 +223,12 @@ export function ArticleForm({
         onClose={() => setScheduleOpen(false)}
         onConfirm={(iso) => {
           setScheduleOpen(false);
-          run("scheduled", "Article scheduled", true, iso);
+          run(
+            "scheduled",
+            "Schedule set — translation started; track progress in the bell.",
+            true,
+            iso,
+          );
         }}
       />
     </form>

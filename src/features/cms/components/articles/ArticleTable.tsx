@@ -4,6 +4,7 @@ import { formatPublishedDate } from "@/shared/utils/format";
 import {
   PlacementBadges,
   StatusBadge,
+  TranslationStatusBadge,
 } from "@/features/cms/components/ui/Badge";
 import { ArticleRowActions } from "@/features/cms/components/articles/ArticleRowActions";
 import type {
@@ -102,7 +103,10 @@ export function ArticleTable({
                   {article.category?.name ?? "—"}
                 </td>
                 <td className="px-4 py-3">
-                  <StatusBadge status={article.status} />
+                  <div className="flex flex-col items-start gap-1">
+                    <StatusBadge status={article.status} />
+                    <TranslationStatusBadge status={article.translationStatus} />
+                  </div>
                 </td>
                 <td className="hidden px-4 py-3 xl:table-cell">
                   <PlacementBadges placements={article.placements} />

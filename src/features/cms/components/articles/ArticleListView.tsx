@@ -99,7 +99,13 @@ export function ArticleListView() {
       | PromiseRejectedResult
       | undefined;
     const failed = results.length - ok;
-    if (ok) toast.success(`${ok} article(s) updated`);
+    if (ok) {
+      const translateNote =
+        next === "published" || next === "scheduled"
+          ? " Translation started — track progress in the bell."
+          : "";
+      toast.success(`${ok} article(s) updated.${translateNote}`);
+    }
     if (failed) {
       toast.error(
         errorMessage(rejected?.reason, `${failed} article(s) could not be updated`),

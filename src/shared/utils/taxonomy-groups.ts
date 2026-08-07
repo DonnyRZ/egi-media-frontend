@@ -1,6 +1,14 @@
 import type { Series, SeriesTopicGroup } from "@/shared/types/series.types";
 import type { Topic, TopicCategoryGroup } from "@/shared/types/topic.types";
 
+/** Most recent timestamp among a set of dates, used to rank groups by activity. */
+function latestTimestamp(dates: (string | null | undefined)[]): number {
+  return dates.reduce<number>(
+    (max, date) => Math.max(max, date ? new Date(date).getTime() : 0),
+    0,
+  );
+}
+
 export function groupSeriesByTopic(items: Series[]): SeriesTopicGroup[] {
   const groups = new Map<string, SeriesTopicGroup>();
   const ungrouped: Series[] = [];
@@ -20,9 +28,14 @@ export function groupSeriesByTopic(items: Series[]): SeriesTopicGroup[] {
     }
   }
 
-  const ordered = Array.from(groups.values()).sort((a, b) =>
-    (a.topic?.name ?? "").localeCompare(b.topic?.name ?? ""),
-  );
+  const ordered = Array.from(groups.values()).sort((a, b) => {
+    const recency =
+      latestTimestamp(b.items.map((s) => s.publishedAt)) -
+      latestTimestamp(a.items.map((s) => s.publishedAt));
+    return recency !== 0
+      ? recency
+      : (a.topic?.name ?? "").localeCompare(b.topic?.name ?? "");
+  });
 
   if (ungrouped.length) {
     ordered.push({ topic: null, items: ungrouped });
@@ -50,9 +63,14 @@ export function groupTopicsByCategory(items: Topic[]): TopicCategoryGroup[] {
     }
   }
 
-  const ordered = Array.from(groups.values()).sort((a, b) =>
-    (a.category?.name ?? "").localeCompare(b.category?.name ?? ""),
-  );
+  const ordered = Array.from(groups.values()).sort((a, b) => {
+    const recency =
+      latestTimestamp(b.items.map((t) => t.createdAt)) -
+      latestTimestamp(a.items.map((t) => t.createdAt));
+    return recency !== 0
+      ? recency
+      : (a.category?.name ?? "").localeCompare(b.category?.name ?? "");
+  });
 
   if (ungrouped.length) {
     ordered.push({ category: null, items: ungrouped });

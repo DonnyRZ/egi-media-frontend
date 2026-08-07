@@ -12,7 +12,10 @@ import { ErrorState } from "@/shared/components/common/ErrorState";
 import { HorizontalScroller } from "@/shared/components/common/HorizontalScroller";
 import { FrameHeading } from "@/shared/components/layout/FrameHeading";
 import { FrameModule } from "@/shared/components/layout/FrameModule";
+import { Button } from "@/shared/components/ui/Button";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
+import { SERIES_PAGE_LIMIT } from "@/shared/constants/series.constants";
+import { useVisibleGroups } from "@/shared/hooks/useVisibleGroups";
 import { groupSeriesByTopic } from "@/shared/utils/taxonomy-groups";
 
 function SeriesSkeleton() {
@@ -48,6 +51,7 @@ export function SeriesListing() {
     () => (data?.items.length ? groupSeriesByTopic(data.items) : []),
     [data?.items],
   );
+  const { visibleGroups, hiddenCount, revealAll } = useVisibleGroups(groups);
 
   if (isLoading) {
     return (
@@ -91,12 +95,16 @@ export function SeriesListing() {
       <FrameModule ariaLabelledby="series-listing-heading">
         <FrameHeading
           id="series-listing-heading"
-          subtitle={t("seriesCount", { count: data.total })}
+          subtitle={
+            data.total > SERIES_PAGE_LIMIT
+              ? t("truncatedCount", { shown: data.items.length, total: data.total })
+              : t("seriesCount", { count: data.total })
+          }
           title={t("allSeries")}
         />
       </FrameModule>
 
-      {groups.map((group) => {
+      {visibleGroups.map((group) => {
         const title = group.topic?.name ?? t("ungroupedTopic");
         const headingId = `series-topic-${group.topic?.id ?? "other"}`;
         const heading = (
@@ -157,6 +165,16 @@ export function SeriesListing() {
           </FrameModule>
         );
       })}
+
+      {hiddenCount > 0 && (
+        <FrameModule ariaLabelledby="series-listing-heading">
+          <div className="flex justify-center bg-white p-5">
+            <Button onClick={revealAll} variant="secondary">
+              {t("revealMoreGroups", { count: hiddenCount })}
+            </Button>
+          </div>
+        </FrameModule>
+      )}
     </>
   );
 }

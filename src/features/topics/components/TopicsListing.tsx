@@ -12,7 +12,10 @@ import { ErrorState } from "@/shared/components/common/ErrorState";
 import { HorizontalScroller } from "@/shared/components/common/HorizontalScroller";
 import { FrameHeading } from "@/shared/components/layout/FrameHeading";
 import { FrameModule } from "@/shared/components/layout/FrameModule";
+import { Button } from "@/shared/components/ui/Button";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
+import { TAXONOMY_PAGE_LIMIT } from "@/shared/constants/taxonomy.constants";
+import { useVisibleGroups } from "@/shared/hooks/useVisibleGroups";
 import { groupTopicsByCategory } from "@/shared/utils/taxonomy-groups";
 
 function TopicsSkeleton() {
@@ -48,6 +51,7 @@ export function TopicsListing() {
     () => (data?.items.length ? groupTopicsByCategory(data.items) : []),
     [data?.items],
   );
+  const { visibleGroups, hiddenCount, revealAll } = useVisibleGroups(groups);
 
   if (isLoading) {
     return (
@@ -91,12 +95,16 @@ export function TopicsListing() {
       <FrameModule ariaLabelledby="topics-listing-heading">
         <FrameHeading
           id="topics-listing-heading"
-          subtitle={t("topicCount", { count: data.total })}
+          subtitle={
+            data.total > TAXONOMY_PAGE_LIMIT
+              ? t("truncatedCount", { shown: data.items.length, total: data.total })
+              : t("topicCount", { count: data.total })
+          }
           title={t("allTopics")}
         />
       </FrameModule>
 
-      {groups.map((group) => {
+      {visibleGroups.map((group) => {
         const title = group.category?.name ?? t("ungroupedCategory");
         const headingId = `topics-category-${group.category?.id ?? "other"}`;
         const heading = (
@@ -161,6 +169,16 @@ export function TopicsListing() {
           </FrameModule>
         );
       })}
+
+      {hiddenCount > 0 && (
+        <FrameModule ariaLabelledby="topics-listing-heading">
+          <div className="flex justify-center bg-white p-5">
+            <Button onClick={revealAll} variant="secondary">
+              {t("revealMoreGroups", { count: hiddenCount })}
+            </Button>
+          </div>
+        </FrameModule>
+      )}
     </>
   );
 }

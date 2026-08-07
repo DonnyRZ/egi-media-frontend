@@ -8,11 +8,14 @@ import { Link } from "@/i18n/navigation";
 import { ArticleCard } from "@/shared/components/common/ArticleCard";
 import { EmptyState } from "@/shared/components/common/EmptyState";
 import { ErrorState } from "@/shared/components/common/ErrorState";
+import { GridFillers } from "@/shared/components/common/GridFillers";
 import { Pagination } from "@/shared/components/common/Pagination";
-import { Container } from "@/shared/components/layout/Container";
-import { Section } from "@/shared/components/layout/Section";
-import { Skeleton } from "@/shared/components/ui/Skeleton";
 import { TaxonomyLocaleShell } from "@/shared/components/common/TaxonomyLocaleShell";
+import { FrameHeading } from "@/shared/components/layout/FrameHeading";
+import { FrameModule } from "@/shared/components/layout/FrameModule";
+import { FramePageHero } from "@/shared/components/layout/FramePageHero";
+import { PageFrame } from "@/shared/components/layout/PageFrame";
+import { Skeleton } from "@/shared/components/ui/Skeleton";
 import { HEADER_CATEGORY_I18N_KEYS } from "@/shared/constants/header-categories.constants";
 import { TAXONOMY_ARTICLES_PAGE_LIMIT } from "@/shared/constants/taxonomy.constants";
 
@@ -20,23 +23,16 @@ interface CategoryDetailViewProps {
   slug: string;
 }
 
-function DetailSkeleton() {
+function ArticlesSkeleton() {
   return (
-    <div className="space-y-10">
-      <div className="space-y-3 border-b border-neutral-200 pb-8">
-        <Skeleton className="h-3 w-24" />
-        <Skeleton className="h-10 w-1/2" />
-        <Skeleton className="h-4 w-2/3" />
-      </div>
-      <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-        {Array.from({ length: 6 }).map((_, index) => (
-          <div key={index} className="space-y-3">
-            <Skeleton className="aspect-[16/10] w-full" />
-            <Skeleton className="h-3 w-20" />
-            <Skeleton className="h-6 w-3/4" />
-          </div>
-        ))}
-      </div>
+    <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
+      {Array.from({ length: 6 }).map((_, index) => (
+        <div key={index} className="space-y-3 bg-white p-5">
+          <Skeleton className="aspect-[16/10] w-full" />
+          <Skeleton className="h-3 w-20" />
+          <Skeleton className="h-6 w-3/4" />
+        </div>
+      ))}
     </div>
   );
 }
@@ -63,119 +59,108 @@ export function CategoryDetailView({ slug }: CategoryDetailViewProps) {
     categoryQuery.data?.description ||
     (hubKey ? tHubs(`${hubKey}.lede`) : null);
 
+  const heroTitle = categoryQuery.data
+    ? hubKey
+      ? tHubs(`${hubKey}.headline`)
+      : categoryQuery.data.name
+    : categoryQuery.isLoading
+      ? "…"
+      : t("notFound");
+
+  const gridItems =
+    !isLoading && !isError && articlesQuery.data?.items.length
+      ? page === 1
+        ? articlesQuery.data.items.slice(1)
+        : articlesQuery.data.items
+      : [];
+
   const content = (
-    <>
-      <section aria-labelledby="category-detail-heading">
-        <Container>
-          <div className="border-b border-neutral-200 py-8 lg:py-10">
-          <Link
-            className="text-xs font-semibold uppercase tracking-wide text-neutral-500 transition-colors hover:text-accent"
-            href="/categories"
-          >
-            ← {t("backToCategories")}
-          </Link>
-
-          {categoryQuery.isLoading ? (
-            <div className="mt-4 space-y-3">
-              <Skeleton className="h-3 w-24" />
-              <Skeleton className="h-10 w-1/2" />
-            </div>
-          ) : null}
-
-          {categoryQuery.data ? (
-            <>
-              <p className="mt-4 kicker">
-                {hubKey ? tHubs(`${hubKey}.kicker`) : t("kicker")}
-              </p>
-              <h1
-                id="category-detail-heading"
-                className="mt-2 max-w-3xl font-serif text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl"
-              >
-                {hubKey
-                  ? tHubs(`${hubKey}.headline`)
-                  : categoryQuery.data.name}
-              </h1>
-              {categoryDescription ? (
-                <p className="mt-3 max-w-2xl text-sm leading-6 text-neutral-600 lg:text-base lg:leading-7">
-                  {categoryDescription}
-                </p>
-              ) : null}
-            </>
-          ) : null}
-
-          {!categoryQuery.isLoading &&
-          !categoryQuery.isError &&
-          categoryQuery.data === null ? (
-            <h1
-              id="category-detail-heading"
-              className="mt-4 font-serif text-3xl font-bold text-ink"
+    <PageFrame>
+      <FrameModule ariaLabelledby="category-detail-heading">
+        <FramePageHero
+          kicker={
+            categoryQuery.data
+              ? hubKey
+                ? tHubs(`${hubKey}.kicker`)
+                : t("kicker")
+              : undefined
+          }
+          leading={
+            <Link
+              className="text-xs font-semibold uppercase tracking-wide text-neutral-500 transition-colors hover:text-accent"
+              href="/categories"
             >
-              {t("notFound")}
-            </h1>
-          ) : null}
-          </div>
-        </Container>
-      </section>
+              ← {t("backToCategories")}
+            </Link>
+          }
+          lede={categoryQuery.data ? categoryDescription || undefined : undefined}
+          title={heroTitle}
+          titleId="category-detail-heading"
+        />
+      </FrameModule>
 
-      <Section ariaLabelledby="category-articles-heading" className="pt-8 lg:pt-10">
-        <Container>
-          <h2 id="category-articles-heading" className="sr-only">
-            {t("articlesHeading")}
-          </h2>
+      <FrameModule ariaLabelledby="category-articles-heading">
+        <h2 className="sr-only" id="category-articles-heading">
+          {t("articlesHeading")}
+        </h2>
 
-          {isLoading ? <DetailSkeleton /> : null}
+        {isLoading ? <ArticlesSkeleton /> : null}
 
-          {isError ? (
+        {isError ? (
+          <div className="bg-white p-5">
             <ErrorState message={error?.message} onRetry={handleRetry} />
-          ) : null}
+          </div>
+        ) : null}
 
-          {!isLoading &&
-          !isError &&
-          categoryQuery.data &&
-          !articlesQuery.data?.items.length ? (
+        {!isLoading &&
+        !isError &&
+        categoryQuery.data &&
+        !articlesQuery.data?.items.length ? (
+          <div className="bg-white p-5">
             <EmptyState message={t("noArticles")} />
-          ) : null}
+          </div>
+        ) : null}
 
-          {!isLoading &&
-          !isError &&
-          categoryQuery.data &&
-          articlesQuery.data?.items.length ? (
-            <div className="space-y-10">
-              {page === 1 ? (
-                <div className="border-b border-neutral-200 pb-8">
-                  <p className="kicker">{t("featuredKicker")}</p>
-                  <div className="mt-3">
-                    <ArticleCard article={articlesQuery.data.items[0]} variant="featured" />
-                  </div>
+        {!isLoading &&
+        !isError &&
+        categoryQuery.data &&
+        articlesQuery.data?.items.length ? (
+          <>
+            {page === 1 ? (
+              <div className="border-b border-neutral-200 bg-white p-5">
+                <p className="kicker">{t("featuredKicker")}</p>
+                <div className="mt-3">
+                  <ArticleCard
+                    article={articlesQuery.data.items[0]}
+                    variant="featured"
+                  />
                 </div>
-              ) : null}
+              </div>
+            ) : null}
 
-              {(page === 1
-                ? articlesQuery.data.items.slice(1)
-                : articlesQuery.data.items
-              ).length > 0 ? (
-                <div>
-                  <div className="mb-6 flex items-end justify-between gap-4 border-b border-neutral-200 pb-2">
-                    <h3 className="text-lg font-bold uppercase tracking-wide text-ink">
-                      {t("articlesHeading")}
-                    </h3>
-                    <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
-                      {tCommon("articleCount", {
-                        count: articlesQuery.data.total,
-                      })}
-                    </p>
-                  </div>
-                  <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-                    {(page === 1
-                      ? articlesQuery.data.items.slice(1)
-                      : articlesQuery.data.items
-                    ).map((article) => (
-                      <ArticleCard key={article.id} article={article} />
-                    ))}
-                  </div>
+            {gridItems.length > 0 ? (
+              <>
+                <FrameHeading
+                  id="category-articles-grid-heading"
+                  subtitle={tCommon("articleCount", {
+                    count: articlesQuery.data.total,
+                  })}
+                  title={t("articlesHeading")}
+                />
+                <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
+                  {gridItems.map((article) => (
+                    <ArticleCard
+                      article={article}
+                      className="bg-white p-5"
+                      key={article.id}
+                    />
+                  ))}
+                  <GridFillers count={gridItems.length} />
                 </div>
-              ) : null}
+              </>
+            ) : null}
 
+            <div className="bg-white p-5">
               <Pagination
                 basePath={`/categories/${slug}`}
                 currentPage={articlesQuery.data.page}
@@ -187,10 +172,10 @@ export function CategoryDetailView({ slug }: CategoryDetailViewProps) {
                 totalPages={articlesQuery.data.totalPages}
               />
             </div>
-          ) : null}
-        </Container>
-      </Section>
-    </>
+          </>
+        ) : null}
+      </FrameModule>
+    </PageFrame>
   );
 
   if (categoryQuery.data) {

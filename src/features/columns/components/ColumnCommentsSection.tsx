@@ -180,7 +180,6 @@ function CommentItem({
   return (
     <li
       className={cn(
-        "border-b border-neutral-100 last:border-b-0",
         depth > 0 && "border-l-2 border-neutral-200",
       )}
       style={depth > 0 ? { marginLeft: Math.min(depth, 4) * 16 } : undefined}
@@ -235,7 +234,7 @@ function CommentItem({
       </div>
 
       {comment.replies.length > 0 ? (
-        <ul>
+        <ul className="divide-y divide-neutral-100">
           {comment.replies.map((reply) => (
             <CommentItem
               activeReplyId={activeReplyId}
@@ -322,129 +321,128 @@ export function ColumnCommentsSection({
   }
 
   return (
-    <section
-      aria-labelledby="column-comments-heading"
-      className="mt-12 border-t border-neutral-200 pt-10"
-    >
-      <div className="mb-6 flex items-end justify-between gap-4">
-        <h2
-          className="font-serif text-2xl font-bold text-ink"
-          id="column-comments-heading"
-        >
-          {t("heading")}
-        </h2>
-        {data ? (
-          <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
-            {t("count", { count: data.total })}
-          </p>
-        ) : null}
-      </div>
-
-      {isHydrated && isAuthenticated && !activeReplyId ? (
-        <form
-          className="mb-8 space-y-3 border border-neutral-200 bg-white p-5"
-          noValidate
-          onSubmit={handleSubmit((values) => void onSubmitStandalone(values))}
-        >
-          <TextArea
-            error={errors.content?.message}
-            label={t("formLabel")}
-            placeholder={t("formPlaceholder")}
-            rows={4}
-            {...register("content")}
-          />
-          {createErrorMessage ? (
-            <p className="text-sm text-error" role="alert">
-              {createErrorMessage}
+    <div className="bg-white p-5 lg:p-8">
+      <div className="mx-auto max-w-3xl">
+        <div className="mb-6 flex items-end justify-between gap-4">
+          <h2
+            className="font-serif text-2xl font-bold text-ink"
+            id="column-comments-heading"
+          >
+            {t("heading")}
+          </h2>
+          {data ? (
+            <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
+              {t("count", { count: data.total })}
             </p>
           ) : null}
-          <Button
-            className="rounded-none"
-            disabled={create.isPending}
-            type="submit"
-          >
-            {create.isPending ? t("submitting") : t("submit")}
-          </Button>
-        </form>
-      ) : null}
-
-      {isHydrated && isAuthenticated && activeReplyId ? (
-        <p className="mb-6 text-sm text-neutral-500">{t("replyingHint")}</p>
-      ) : null}
-
-      {isHydrated && !isAuthenticated ? (
-        <div className="mb-8 border border-neutral-200 bg-neutral-50 p-5 text-sm text-neutral-600">
-          <p>{t("signInPrompt")}</p>
-          <Link
-            className="mt-3 inline-flex text-sm font-semibold text-primary-700 hover:text-accent"
-            href="/login"
-          >
-            {t("signInCta")} →
-          </Link>
         </div>
-      ) : null}
 
-      {isLoading ? <CommentsSkeleton /> : null}
-
-      {isError ? (
-        <ErrorState message={error?.message} onRetry={() => void refetch()} />
-      ) : null}
-
-      {!isLoading && !isError && !tree.length ? (
-        <EmptyState message={t("empty")} />
-      ) : null}
-
-      {!isLoading && !isError && tree.length ? (
-        <ul className="border border-neutral-200 bg-white">
-          {tree.map((comment) => (
-            <CommentItem
-              activeReplyId={activeReplyId}
-              canDelete={canDeleteComment}
-              canReply={Boolean(isHydrated && isAuthenticated)}
-              comment={comment}
-              depth={0}
-              key={comment.id}
-              onCancelReply={cancelReply}
-              onDelete={setDeleteTarget}
-              onReply={(target) => setActiveReplyId(target.id)}
-              onSubmitReply={onSubmitReply}
-              replyError={activeReplyId ? createErrorMessage : null}
-              replyPending={create.isPending}
+        {isHydrated && isAuthenticated && !activeReplyId ? (
+          <form
+            className="mb-8 space-y-3 border border-neutral-200 bg-white p-5"
+            noValidate
+            onSubmit={handleSubmit((values) => void onSubmitStandalone(values))}
+          >
+            <TextArea
+              error={errors.content?.message}
+              label={t("formLabel")}
+              placeholder={t("formPlaceholder")}
+              rows={4}
+              {...register("content")}
             />
-          ))}
-        </ul>
-      ) : null}
+            {createErrorMessage ? (
+              <p className="text-sm text-error" role="alert">
+                {createErrorMessage}
+              </p>
+            ) : null}
+            <Button
+              className="rounded-none"
+              disabled={create.isPending}
+              type="submit"
+            >
+              {create.isPending ? t("submitting") : t("submit")}
+            </Button>
+          </form>
+        ) : null}
 
-      {remove.error ? (
-        <p className="mt-3 text-sm text-error" role="alert">
-          {remove.error instanceof ApiError
-            ? remove.error.message
-            : t("errors.deleteFailed")}
-        </p>
-      ) : null}
+        {isHydrated && isAuthenticated && activeReplyId ? (
+          <p className="mb-6 text-sm text-neutral-500">{t("replyingHint")}</p>
+        ) : null}
 
-      <ConfirmDialog
-        cancelLabel={t("cancel")}
-        confirmLabel={t("delete")}
-        isPending={remove.isPending}
-        message={t("deleteMessage")}
-        onCancel={() => setDeleteTarget(null)}
-        onConfirm={() => {
-          if (!deleteTarget || !canDeleteComment(deleteTarget)) {
-            setDeleteTarget(null);
-            return;
-          }
-          void remove
-            .mutateAsync(deleteTarget.id)
-            .then(() => {
+        {isHydrated && !isAuthenticated ? (
+          <div className="mb-8 border border-neutral-200 bg-neutral-50 p-5 text-sm text-neutral-600">
+            <p>{t("signInPrompt")}</p>
+            <Link
+              className="mt-3 inline-flex text-sm font-semibold text-primary-700 hover:text-accent"
+              href="/login"
+            >
+              {t("signInCta")} →
+            </Link>
+          </div>
+        ) : null}
+
+        {isLoading ? <CommentsSkeleton /> : null}
+
+        {isError ? (
+          <ErrorState message={error?.message} onRetry={() => void refetch()} />
+        ) : null}
+
+        {!isLoading && !isError && !tree.length ? (
+          <EmptyState message={t("empty")} />
+        ) : null}
+
+        {!isLoading && !isError && tree.length ? (
+          <ul className="divide-y divide-neutral-100 bg-white">
+            {tree.map((comment) => (
+              <CommentItem
+                activeReplyId={activeReplyId}
+                canDelete={canDeleteComment}
+                canReply={Boolean(isHydrated && isAuthenticated)}
+                comment={comment}
+                depth={0}
+                key={comment.id}
+                onCancelReply={cancelReply}
+                onDelete={setDeleteTarget}
+                onReply={(target) => setActiveReplyId(target.id)}
+                onSubmitReply={onSubmitReply}
+                replyError={activeReplyId ? createErrorMessage : null}
+                replyPending={create.isPending}
+              />
+            ))}
+          </ul>
+        ) : null}
+
+        {remove.error ? (
+          <p className="mt-3 text-sm text-error" role="alert">
+            {remove.error instanceof ApiError
+              ? remove.error.message
+              : t("errors.deleteFailed")}
+          </p>
+        ) : null}
+
+        <ConfirmDialog
+          cancelLabel={t("cancel")}
+          confirmLabel={t("delete")}
+          isPending={remove.isPending}
+          message={t("deleteMessage")}
+          onCancel={() => setDeleteTarget(null)}
+          onConfirm={() => {
+            if (!deleteTarget || !canDeleteComment(deleteTarget)) {
               setDeleteTarget(null);
-            })
-            .catch(() => undefined);
-        }}
-        open={Boolean(deleteTarget)}
-        title={t("deleteTitle")}
-        tone="danger"
-      />
-    </section>
+              return;
+            }
+            void remove
+              .mutateAsync(deleteTarget.id)
+              .then(() => {
+                setDeleteTarget(null);
+              })
+              .catch(() => undefined);
+          }}
+          open={Boolean(deleteTarget)}
+          title={t("deleteTitle")}
+          tone="danger"
+        />
+      </div>
+    </div>
   );
 }

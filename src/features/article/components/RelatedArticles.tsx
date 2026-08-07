@@ -1,6 +1,9 @@
 import { getTranslations } from "next-intl/server";
 
 import { ArticleCard } from "@/shared/components/common/ArticleCard";
+import { GridFillers } from "@/shared/components/common/GridFillers";
+import { FrameHeading } from "@/shared/components/layout/FrameHeading";
+import { FrameModule } from "@/shared/components/layout/FrameModule";
 import { getArticlesByCategoryPage } from "@/shared/repositories/article.repository";
 import type { ArticleDetail, ContentLocale } from "@/shared/types/article.types";
 
@@ -26,18 +29,19 @@ export async function RelatedArticles({ article, lang }: RelatedArticlesProps) {
   if (!related.length) return null;
 
   return (
-    <section aria-labelledby="related-articles-heading" className="mt-12">
-      <h2
-        className="mb-6 border-b border-neutral-200 pb-2 text-lg font-bold uppercase tracking-wide text-ink"
+    <FrameModule ariaLabelledby="related-articles-heading">
+      <FrameHeading
         id="related-articles-heading"
-      >
-        {t("relatedHeading")}
-      </h2>
-      <div className="grid gap-x-8 gap-y-6 sm:grid-cols-2">
+        title={t("relatedHeading")}
+      />
+      <div className="grid gap-px bg-neutral-200 sm:grid-cols-2">
         {related.map((item) => (
-          <ArticleCard article={item} key={item.id} variant="horizontal" />
+          <div className="bg-white p-5" key={item.id}>
+            <ArticleCard article={item} variant="horizontal" />
+          </div>
         ))}
+        <GridFillers count={related.length} lgCols={2} />
       </div>
-    </section>
+    </FrameModule>
   );
 }

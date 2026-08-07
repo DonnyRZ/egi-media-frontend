@@ -11,13 +11,12 @@ import { useNotificationsPage } from "@/features/notifications/hooks/useNotifica
 import { EmptyState } from "@/shared/components/common/EmptyState";
 import { ErrorState } from "@/shared/components/common/ErrorState";
 import { Pagination } from "@/shared/components/common/Pagination";
-import { Container } from "@/shared/components/layout/Container";
-import { Section } from "@/shared/components/layout/Section";
+import { FrameModule } from "@/shared/components/layout/FrameModule";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
 
 function ListSkeleton() {
   return (
-    <div className="divide-y divide-neutral-100 border border-neutral-200">
+    <div className="divide-y divide-neutral-100 bg-white">
       {Array.from({ length: 6 }).map((_, index) => (
         <div className="flex items-start gap-4 px-4 py-4 sm:px-5" key={index}>
           <Skeleton className="h-10 w-10 flex-none rounded-full" />
@@ -43,72 +42,77 @@ export function NotificationsView() {
 
   if (!isHydrated) {
     return (
-      <Section className="pt-8 lg:pt-10">
-        <Container>
-          <ListSkeleton />
-        </Container>
-      </Section>
+      <FrameModule>
+        <ListSkeleton />
+      </FrameModule>
     );
   }
 
   if (!isAuthenticated) {
     return (
-      <Section className="pt-8 lg:pt-10">
-        <Container>
+      <FrameModule>
+        <div className="bg-white p-5">
           <NotificationsSignInPrompt />
-        </Container>
-      </Section>
+        </div>
+      </FrameModule>
     );
   }
 
   const hasItems = Boolean(data?.items.length);
 
   return (
-    <Section className="pt-8 lg:pt-10">
-      <Container>
-        <div className="mb-4 flex items-end justify-between gap-4">
-          <h2 className="text-lg font-bold uppercase tracking-wide text-ink">
-            {t("title")}
-          </h2>
-          <button
-            className="text-xs font-semibold uppercase tracking-wide text-primary-700 transition-colors hover:text-primary-900 disabled:cursor-not-allowed disabled:text-neutral-400"
-            disabled={!data || data.unreadCount === 0 || isMarkingAll}
-            onClick={markAllAsRead}
-            type="button"
-          >
-            {t("markAllRead")}
-          </button>
-        </div>
+    <FrameModule ariaLabelledby="notifications-listing-heading">
+      <div className="flex items-end justify-between gap-4 border-b border-neutral-200 bg-white px-5 py-3">
+        <h2
+          className="text-lg font-bold uppercase tracking-wide text-ink sm:text-xl"
+          id="notifications-listing-heading"
+        >
+          {t("title")}
+        </h2>
+        <button
+          className="shrink-0 text-xs font-semibold uppercase tracking-wide text-primary-700 transition-colors hover:text-primary-900 disabled:cursor-not-allowed disabled:text-neutral-400"
+          disabled={!data || data.unreadCount === 0 || isMarkingAll}
+          onClick={markAllAsRead}
+          type="button"
+        >
+          {t("markAllRead")}
+        </button>
+      </div>
 
-        {isLoading ? <ListSkeleton /> : null}
+      {isLoading ? <ListSkeleton /> : null}
 
-        {isError ? (
+      {isError ? (
+        <div className="bg-white p-5">
           <ErrorState message={error?.message} onRetry={() => void refetch()} />
-        ) : null}
+        </div>
+      ) : null}
 
-        {!isLoading && !isError && !hasItems ? (
+      {!isLoading && !isError && !hasItems ? (
+        <div className="bg-white p-5">
           <EmptyState message={t("empty")} />
-        ) : null}
+        </div>
+      ) : null}
 
-        {!isLoading && !isError && hasItems && data ? (
-          <div className="space-y-8">
-            <div className="divide-y divide-neutral-100 border border-neutral-200">
-              {data.items.map((notification) => (
-                <NotificationCard
-                  key={notification.id}
-                  notification={notification}
-                  onMarkAsRead={markAsRead}
-                />
-              ))}
-            </div>
+      {!isLoading && !isError && hasItems && data ? (
+        <>
+          <div className="divide-y divide-neutral-100 bg-white">
+            {data.items.map((notification) => (
+              <NotificationCard
+                key={notification.id}
+                notification={notification}
+                onMarkAsRead={markAsRead}
+              />
+            ))}
+          </div>
+          <div className="bg-white p-5">
             <Pagination
               basePath="/notifications"
               currentPage={data.page}
               totalPages={data.totalPages}
             />
           </div>
-        ) : null}
-      </Container>
-    </Section>
+        </>
+      ) : null}
+    </FrameModule>
   );
 }

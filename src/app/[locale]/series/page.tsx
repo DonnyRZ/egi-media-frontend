@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { SeriesHero } from "@/features/series/components/SeriesHero";
 import { SeriesListing } from "@/features/series/components/SeriesListing";
+import { PageFrame } from "@/shared/components/layout/PageFrame";
 
 interface SeriesPageProps {
   params: Promise<{ locale: string }>;
@@ -25,9 +26,9 @@ export default async function SeriesPage({ params }: SeriesPageProps) {
   setRequestLocale(locale);
 
   return (
-    <>
+    <PageFrame>
       <SeriesHero />
       <SeriesListing />
-    </>
+    </PageFrame>
   );
 }

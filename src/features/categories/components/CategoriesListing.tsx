@@ -5,21 +5,21 @@ import { useTranslations } from "next-intl";
 import { CategoryCard } from "@/features/categories/components/CategoryCard";
 import { useCategoriesPage } from "@/features/categories/hooks/useCategoriesPage";
 import { EmptyState } from "@/shared/components/common/EmptyState";
-import { GridFillers } from "@/shared/components/common/GridFillers";
 import { ErrorState } from "@/shared/components/common/ErrorState";
-import { Container } from "@/shared/components/layout/Container";
-import { Section } from "@/shared/components/layout/Section";
+import { GridFillers } from "@/shared/components/common/GridFillers";
+import { FrameHeading } from "@/shared/components/layout/FrameHeading";
+import { FrameModule } from "@/shared/components/layout/FrameModule";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
 
 function CategoriesSkeleton() {
   return (
-    <div className="space-y-10">
-      <div className="space-y-3 border border-neutral-200 p-6 lg:p-8">
+    <>
+      <div className="bg-white p-5">
         <Skeleton className="h-3 w-28" />
-        <Skeleton className="h-10 w-2/3" />
-        <Skeleton className="h-4 w-full max-w-2xl" />
+        <Skeleton className="mt-3 h-10 w-2/3" />
+        <Skeleton className="mt-3 h-4 w-full max-w-2xl" />
       </div>
-      <div className="grid gap-px border border-neutral-200 bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
         {Array.from({ length: 6 }).map((_, index) => (
           <div key={index} className="space-y-3 bg-white p-5">
             <Skeleton className="h-3 w-20" />
@@ -29,7 +29,7 @@ function CategoriesSkeleton() {
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 }
 
@@ -38,47 +38,48 @@ export function CategoriesListing() {
   const t = useTranslations("categoriesPage");
 
   return (
-    <Section ariaLabelledby="categories-listing-heading" dense>
-      <Container>
-        <h2 id="categories-listing-heading" className="sr-only">
-          {t("listingHeading")}
-        </h2>
+    <FrameModule ariaLabelledby="categories-listing-heading">
+      <h2 className="sr-only" id="categories-listing-heading">
+        {t("listingHeading")}
+      </h2>
 
-        {isLoading ? <CategoriesSkeleton /> : null}
+      {isLoading ? <CategoriesSkeleton /> : null}
 
-        {isError ? (
+      {isError ? (
+        <div className="bg-white p-5">
           <ErrorState message={error?.message} onRetry={() => void refetch()} />
-        ) : null}
+        </div>
+      ) : null}
 
-        {!isLoading && !isError && !data?.items.length ? (
+      {!isLoading && !isError && !data?.items.length ? (
+        <div className="bg-white p-5">
           <EmptyState message={t("empty")} />
-        ) : null}
+        </div>
+      ) : null}
 
-        {!isLoading && !isError && data?.items.length ? (
-          <div className="space-y-10">
+      {!isLoading && !isError && data?.items.length ? (
+        <>
+          <div className="border-b border-neutral-200 bg-white">
             <CategoryCard category={data.items[0]} variant="featured" />
-
-            {data.items.length > 1 ? (
-              <div>
-                <div className="mb-4 flex items-end justify-between gap-4">
-                  <h3 className="text-lg font-bold uppercase tracking-wide text-ink">
-                    {t("allCategories")}
-                  </h3>
-                  <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
-                    {t("categoryCount", { count: data.total })}
-                  </p>
-                </div>
-                <div className="grid gap-px border border-neutral-200 bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
-                  {data.items.slice(1).map((category) => (
-                    <CategoryCard key={category.id} category={category} />
-                  ))}
-                  <GridFillers count={data.items.length - 1} />
-                </div>
-              </div>
-            ) : null}
           </div>
-        ) : null}
-      </Container>
-    </Section>
+
+          {data.items.length > 1 ? (
+            <>
+              <FrameHeading
+                id="categories-grid-heading"
+                subtitle={t("categoryCount", { count: data.total })}
+                title={t("allCategories")}
+              />
+              <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
+                {data.items.slice(1).map((category) => (
+                  <CategoryCard category={category} key={category.id} />
+                ))}
+                <GridFillers count={data.items.length - 1} />
+              </div>
+            </>
+          ) : null}
+        </>
+      ) : null}
+    </FrameModule>
   );
 }

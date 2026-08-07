@@ -9,14 +9,14 @@ import { Link } from "@/i18n/navigation";
 import { EmptyState } from "@/shared/components/common/EmptyState";
 import { ErrorState } from "@/shared/components/common/ErrorState";
 import { HorizontalScroller } from "@/shared/components/common/HorizontalScroller";
-import { Container } from "@/shared/components/layout/Container";
-import { Section } from "@/shared/components/layout/Section";
+import { FrameHeading } from "@/shared/components/layout/FrameHeading";
+import { FrameModule } from "@/shared/components/layout/FrameModule";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
 import { groupSeriesByTopic } from "@/shared/utils/taxonomy-groups";
 
 function SeriesSkeleton() {
   return (
-    <div className="space-y-12">
+    <div className="space-y-5 bg-white p-5">
       {Array.from({ length: 2 }).map((_, sectionIndex) => (
         <div key={sectionIndex} className="space-y-5">
           <Skeleton className="h-7 w-48" />
@@ -48,88 +48,102 @@ export function SeriesListing() {
     [data?.items],
   );
 
-  return (
-    <Section ariaLabelledby="series-listing-heading" className="pt-8 lg:pt-10">
-      <Container className="min-w-0">
-        <h2 id="series-listing-heading" className="sr-only">
+  if (isLoading) {
+    return (
+      <FrameModule ariaLabelledby="series-listing-heading">
+        <h2 className="sr-only" id="series-listing-heading">
           {t("listingHeading")}
         </h2>
+        <SeriesSkeleton />
+      </FrameModule>
+    );
+  }
 
-        {isLoading ? <SeriesSkeleton /> : null}
-
-        {isError ? (
+  if (isError) {
+    return (
+      <FrameModule ariaLabelledby="series-listing-heading">
+        <h2 className="sr-only" id="series-listing-heading">
+          {t("listingHeading")}
+        </h2>
+        <div className="bg-white p-5">
           <ErrorState message={error?.message} onRetry={() => void refetch()} />
-        ) : null}
+        </div>
+      </FrameModule>
+    );
+  }
 
-        {!isLoading && !isError && !data?.items.length ? (
+  if (!data?.items.length) {
+    return (
+      <FrameModule ariaLabelledby="series-listing-heading">
+        <h2 className="sr-only" id="series-listing-heading">
+          {t("listingHeading")}
+        </h2>
+        <div className="bg-white p-5">
           <EmptyState message={t("empty")} />
-        ) : null}
+        </div>
+      </FrameModule>
+    );
+  }
 
-        {!isLoading && !isError && groups.length ? (
-          <div className="min-w-0 space-y-12">
-            <div className="flex items-end justify-between gap-4 border-b border-neutral-200 pb-2">
-              <h3 className="text-lg font-bold uppercase tracking-wide text-ink">
-                {t("allSeries")}
-              </h3>
-              <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
-                {t("seriesCount", { count: data?.total ?? 0 })}
-              </p>
-            </div>
+  return (
+    <>
+      <FrameModule ariaLabelledby="series-listing-heading">
+        <FrameHeading
+          id="series-listing-heading"
+          subtitle={t("seriesCount", { count: data.total })}
+          title={t("allSeries")}
+        />
+      </FrameModule>
 
-            {groups.map((group) => {
-              const title = group.topic?.name ?? t("ungroupedTopic");
-              const headingId = `series-topic-${group.topic?.id ?? "other"}`;
+      {groups.map((group) => {
+        const title = group.topic?.name ?? t("ungroupedTopic");
+        const headingId = `series-topic-${group.topic?.id ?? "other"}`;
 
-              return (
-                <section
-                  aria-labelledby={headingId}
-                  className="min-w-0"
-                  key={group.topic?.id ?? "ungrouped"}
-                >
-                  <HorizontalScroller
-                    ariaLabel={title}
-                    heading={
-                      <div>
-                        <p className="kicker">{t("kicker")}</p>
-                        <h3
-                          className="mt-1 font-serif text-xl font-bold text-ink sm:text-2xl"
-                          id={headingId}
+        return (
+          <FrameModule ariaLabelledby={headingId} key={group.topic?.id ?? "ungrouped"}>
+            <div className="min-w-0 bg-white p-5">
+              <HorizontalScroller
+                ariaLabel={title}
+                heading={
+                  <div>
+                    <p className="kicker">{t("kicker")}</p>
+                    <h3
+                      className="mt-1 font-serif text-xl font-bold text-ink sm:text-2xl"
+                      id={headingId}
+                    >
+                      {group.topic ? (
+                        <Link
+                          className="transition-colors hover:text-accent"
+                          href={`/topics/${group.topic.slug}`}
                         >
-                          {group.topic ? (
-                            <Link
-                              className="transition-colors hover:text-accent"
-                              href={`/topics/${group.topic.slug}`}
-                            >
-                              {title}
-                            </Link>
-                          ) : (
-                            title
-                          )}
-                        </h3>
-                      </div>
-                    }
-                    trailing={
-                      <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
-                        {t("seriesInTopic", { count: group.items.length })}
-                      </p>
-                    }
+                          {title}
+                        </Link>
+                      ) : (
+                        title
+                      )}
+                    </h3>
+                  </div>
+                }
+                trailing={
+                  <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
+                    {t("seriesInTopic", { count: group.items.length })}
+                  </p>
+                }
+              >
+                {group.items.map((series) => (
+                  <div
+                    className="w-60 shrink-0 snap-start border border-neutral-200 sm:w-72"
+                    key={series.id}
+                    role="listitem"
                   >
-                    {group.items.map((series) => (
-                      <div
-                        className="w-60 shrink-0 snap-start border border-neutral-200 sm:w-72"
-                        key={series.id}
-                        role="listitem"
-                      >
-                        <SeriesCard series={series} />
-                      </div>
-                    ))}
-                  </HorizontalScroller>
-                </section>
-              );
-            })}
-          </div>
-        ) : null}
-      </Container>
-    </Section>
+                    <SeriesCard series={series} />
+                  </div>
+                ))}
+              </HorizontalScroller>
+            </div>
+          </FrameModule>
+        );
+      })}
+    </>
   );
 }

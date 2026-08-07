@@ -4,28 +4,31 @@ import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 import { ColumnCard } from "@/features/columns/components/ColumnCard";
+import { COLUMNS_PAGE_LIMIT } from "@/features/columns/constants/column.constants";
 import { useColumnsPage } from "@/features/columns/hooks/useColumnsPage";
 import { EmptyState } from "@/shared/components/common/EmptyState";
-import { GridFillers } from "@/shared/components/common/GridFillers";
 import { ErrorState } from "@/shared/components/common/ErrorState";
+import { GridFillers } from "@/shared/components/common/GridFillers";
 import { Pagination } from "@/shared/components/common/Pagination";
-import { Container } from "@/shared/components/layout/Container";
-import { Section } from "@/shared/components/layout/Section";
+import { FrameHeading } from "@/shared/components/layout/FrameHeading";
+import { FrameModule } from "@/shared/components/layout/FrameModule";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
 
 function ColumnsSkeleton() {
   return (
-    <div className="space-y-10">
-      <div className="grid gap-6 border border-neutral-200 p-6 lg:grid-cols-[1.2fr_1fr] lg:p-8">
-        <Skeleton className="aspect-[16/10] w-full" />
-        <div className="space-y-3">
+    <>
+      <div className="grid gap-px bg-neutral-200 lg:grid-cols-[1.2fr_1fr]">
+        <div className="bg-white p-5">
+          <Skeleton className="aspect-[16/10] w-full" />
+        </div>
+        <div className="space-y-3 bg-white p-5">
           <Skeleton className="h-3 w-28" />
           <Skeleton className="h-8 w-3/4" />
           <Skeleton className="h-4 w-full" />
           <Skeleton className="h-4 w-5/6" />
         </div>
       </div>
-      <div className="grid gap-px border border-neutral-200 bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
         {Array.from({ length: 6 }).map((_, index) => (
           <div className="space-y-3 bg-white p-5" key={index}>
             <Skeleton className="aspect-[16/10] w-full" />
@@ -35,7 +38,7 @@ function ColumnsSkeleton() {
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 }
 
@@ -45,54 +48,69 @@ export function ColumnsListing() {
   const page = Math.max(1, Number(searchParams.get("page")) || 1);
   const { data, isLoading, isError, error, refetch } = useColumnsPage(page);
 
+  const gridItems =
+    !isLoading && !isError && data?.items.length
+      ? page === 1
+        ? data.items.slice(1)
+        : data.items
+      : [];
+
   return (
-    <Section ariaLabelledby="columns-listing-heading" dense>
-      <Container>
-        <h2 className="sr-only" id="columns-listing-heading">
-          {t("listingHeading")}
-        </h2>
+    <FrameModule ariaLabelledby="columns-listing-heading">
+      <h2 className="sr-only" id="columns-listing-heading">
+        {t("listingHeading")}
+      </h2>
 
-        {isLoading ? <ColumnsSkeleton /> : null}
+      {isLoading ? <ColumnsSkeleton /> : null}
 
-        {isError ? (
+      {isError ? (
+        <div className="bg-white p-5">
           <ErrorState message={error?.message} onRetry={() => void refetch()} />
-        ) : null}
+        </div>
+      ) : null}
 
-        {!isLoading && !isError && !data?.items.length ? (
+      {!isLoading && !isError && !data?.items.length ? (
+        <div className="bg-white p-5">
           <EmptyState message={t("empty")} />
-        ) : null}
+        </div>
+      ) : null}
 
-        {!isLoading && !isError && data?.items.length ? (
-          <div className="space-y-10">
-            <ColumnCard column={data.items[0]} variant="featured" />
+      {!isLoading && !isError && data?.items.length ? (
+        <>
+          {page === 1 ? (
+            <div className="border-b border-neutral-200 bg-white">
+              <ColumnCard column={data.items[0]} variant="featured" />
+            </div>
+          ) : null}
 
-            {data.items.length > 1 ? (
-              <div>
-                <div className="mb-4 flex items-end justify-between gap-4">
-                  <h3 className="text-lg font-bold uppercase tracking-wide text-ink">
-                    {t("allColumns")}
-                  </h3>
-                  <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
-                    {t("columnCount", { count: data.total })}
-                  </p>
-                </div>
-                <div className="grid gap-px border border-neutral-200 bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
-                  {data.items.slice(1).map((column) => (
-                    <ColumnCard column={column} key={column.id} />
-                  ))}
-                  <GridFillers count={data.items.length - 1} />
-                </div>
+          {gridItems.length > 0 ? (
+            <>
+              <FrameHeading
+                id="columns-grid-heading"
+                subtitle={t("columnCount", { count: data.total })}
+                title={page === 1 ? t("allColumns") : t("listingHeading")}
+              />
+              <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
+                {gridItems.map((column) => (
+                  <ColumnCard column={column} key={column.id} />
+                ))}
+                <GridFillers count={gridItems.length} />
               </div>
-            ) : null}
+            </>
+          ) : null}
 
+          <div className="bg-white p-5">
             <Pagination
               basePath="/kolom"
               currentPage={data.page}
+              itemLabel="items"
+              pageSize={data.limit || COLUMNS_PAGE_LIMIT}
+              totalItems={data.total}
               totalPages={data.totalPages}
             />
           </div>
-        ) : null}
-      </Container>
-    </Section>
+        </>
+      ) : null}
+    </FrameModule>
   );
 }

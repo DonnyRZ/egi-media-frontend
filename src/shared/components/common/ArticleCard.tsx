@@ -36,6 +36,7 @@ export function ArticleMeta({ article, className }: ArticleMetaProps) {
 interface ArticleCardProps {
   article: Article;
   variant?: "default" | "compact" | "horizontal" | "featured";
+  className?: string;
 }
 
 function CategoryKicker({ article }: { article: Article }) {
@@ -43,10 +44,10 @@ function CategoryKicker({ article }: { article: Article }) {
   return <span className="kicker">{article.category.name}</span>;
 }
 
-export function ArticleCard({ article, variant = "default" }: ArticleCardProps) {
+export function ArticleCard({ article, variant = "default", className }: ArticleCardProps) {
   if (variant === "featured") {
     return (
-      <article className="group grid gap-6 lg:grid-cols-[1.2fr_1fr] lg:gap-10">
+      <article className={cn("group grid gap-6 lg:grid-cols-[1.2fr_1fr] lg:gap-10", className)}>
         <Link href={getArticleHref(article)}>
           <div className="relative aspect-[16/10] overflow-hidden">
             <ArticleImage
@@ -76,7 +77,7 @@ export function ArticleCard({ article, variant = "default" }: ArticleCardProps) 
 
   if (variant === "horizontal") {
     return (
-      <article className="group flex gap-4">
+      <article className={cn("group flex gap-4", className)}>
         <div className="relative h-20 w-28 shrink-0 overflow-hidden">
           <ArticleImage alt={article.title} src={article.featuredImage} />
         </div>
@@ -93,7 +94,7 @@ export function ArticleCard({ article, variant = "default" }: ArticleCardProps) 
 
   if (variant === "compact") {
     return (
-      <article className="group border-b border-neutral-200 pb-4 last:border-b-0 last:pb-0">
+      <article className={cn("group border-b border-neutral-200 pb-4 last:border-b-0 last:pb-0", className)}>
         <CategoryKicker article={article} />
         <h3 className="mt-1 font-serif text-lg font-semibold leading-snug text-ink group-hover:text-accent">
           <Link href={getArticleHref(article)}>{article.title}</Link>
@@ -104,7 +105,7 @@ export function ArticleCard({ article, variant = "default" }: ArticleCardProps) 
   }
 
   return (
-    <article className="group flex h-full flex-col">
+    <article className={cn("group flex h-full flex-col", className)}>
       <Link href={getArticleHref(article)}>
         <div className="relative aspect-[16/10] overflow-hidden">
           <ArticleImage

@@ -15,7 +15,7 @@ import { Skeleton } from "@/shared/components/ui/Skeleton";
 function ColumnsSkeleton() {
   return (
     <div className="space-y-10">
-      <div className="grid gap-6 lg:grid-cols-[1.2fr_1fr]">
+      <div className="grid gap-6 border border-neutral-200 p-6 lg:grid-cols-[1.2fr_1fr] lg:p-8">
         <Skeleton className="aspect-[16/10] w-full" />
         <div className="space-y-3">
           <Skeleton className="h-3 w-28" />
@@ -24,9 +24,9 @@ function ColumnsSkeleton() {
           <Skeleton className="h-4 w-5/6" />
         </div>
       </div>
-      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid border border-neutral-200 divide-y divide-neutral-200 sm:grid-cols-2 sm:divide-x lg:grid-cols-3">
         {Array.from({ length: 6 }).map((_, index) => (
-          <div className="space-y-3" key={index}>
+          <div className="space-y-3 p-5" key={index}>
             <Skeleton className="aspect-[16/10] w-full" />
             <Skeleton className="h-3 w-20" />
             <Skeleton className="h-6 w-3/4" />
@@ -45,7 +45,7 @@ export function ColumnsListing() {
   const { data, isLoading, isError, error, refetch } = useColumnsPage(page);
 
   return (
-    <Section ariaLabelledby="columns-listing-heading" className="pt-8 lg:pt-10">
+    <Section ariaLabelledby="columns-listing-heading" dense>
       <Container>
         <h2 className="sr-only" id="columns-listing-heading">
           {t("listingHeading")}
@@ -75,7 +75,7 @@ export function ColumnsListing() {
                     {t("columnCount", { count: data.total })}
                   </p>
                 </div>
-                <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="grid border border-neutral-200 divide-y divide-neutral-200 sm:grid-cols-2 sm:divide-x lg:grid-cols-3">
                   {data.items.slice(1).map((column) => (
                     <ColumnCard column={column} key={column.id} />
                   ))}

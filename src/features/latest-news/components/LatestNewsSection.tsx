@@ -19,7 +19,7 @@ export function LatestNewsSection() {
   }
 
   return (
-    <Section ariaLabelledby="latest-heading">
+    <Section ariaLabelledby="latest-heading" dense>
       <Container>
         <SectionHeading
           actionHref="/latest"
@@ -29,9 +29,9 @@ export function LatestNewsSection() {
         />
 
         {isLoading ? (
-          <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid border border-neutral-200 divide-y divide-neutral-200 sm:grid-cols-2 sm:divide-x lg:grid-cols-3">
             {Array.from({ length: 6 }).map((_, index) => (
-              <div key={index} className="space-y-3">
+              <div key={index} className="space-y-3 p-5">
                 <Skeleton className="aspect-[16/10] w-full" />
                 <Skeleton className="h-4 w-24" />
                 <Skeleton className="h-6 w-full" />
@@ -46,9 +46,9 @@ export function LatestNewsSection() {
         ) : null}
 
         {!isLoading && !isError && data?.items.length ? (
-          <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid border border-neutral-200 divide-y divide-neutral-200 sm:grid-cols-2 sm:divide-x lg:grid-cols-3">
             {data.items.map((article) => (
-              <ArticleCard key={article.id} article={article} />
+              <ArticleCard article={article} className="p-5" key={article.id} />
             ))}
           </div>
         ) : null}

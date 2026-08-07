@@ -97,6 +97,14 @@ export function AuthUserMenu() {
           >
             {t("forYou")}
           </Link>
+          <Link
+            className="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50"
+            href="/saved"
+            onClick={() => setOpen(false)}
+            role="menuitem"
+          >
+            {t("saved")}
+          </Link>
           <button
             className="block w-full border-t border-neutral-100 px-4 py-2 text-left text-sm text-neutral-700 hover:bg-neutral-50"
             onClick={() => void handleLogout()}
@@ -158,6 +166,13 @@ export function AuthMobileActions() {
         onClick={() => setMobileMenuOpen(false)}
       >
         {t("forYou")}
+      </Link>
+      <Link
+        className="block py-1 text-sm font-semibold uppercase tracking-wide text-neutral-800"
+        href="/saved"
+        onClick={() => setMobileMenuOpen(false)}
+      >
+        {t("saved")}
       </Link>
       <Button
         className="w-full rounded-none"

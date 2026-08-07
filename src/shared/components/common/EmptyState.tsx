@@ -14,7 +14,7 @@ export function EmptyState({ title, message, className }: EmptyStateProps) {
   return (
     <div
       className={cn(
-        "rounded-xl border border-neutral-300 bg-white p-8 text-center",
+        "border border-neutral-300 bg-white p-8 text-center",
         className,
       )}
     >

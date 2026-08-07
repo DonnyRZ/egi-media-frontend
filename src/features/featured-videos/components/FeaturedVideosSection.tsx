@@ -20,7 +20,7 @@ function VideoCard({ video }: { video: YoutubeVideo }) {
       <div className="relative aspect-video overflow-hidden bg-ink">
         <VideoEmbed video={video} />
       </div>
-      <div className="pt-3">
+      <div className="p-4">
         <div className="flex items-center gap-2">
           <span className="kicker">{t("kicker")}</span>
           {video.durationLabel ? (
@@ -47,7 +47,7 @@ export function FeaturedVideosSection() {
   const t = useTranslations("videos");
 
   return (
-    <Section ariaLabelledby="videos-heading" className="bg-neutral-50">
+    <Section ariaLabelledby="videos-heading" dense>
       <Container>
         <SectionHeading
           actionHref="/videos"
@@ -57,9 +57,9 @@ export function FeaturedVideosSection() {
         />
 
         {isLoading ? (
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid border border-neutral-200 divide-y divide-neutral-200 sm:grid-cols-2 sm:divide-x lg:grid-cols-3">
             {Array.from({ length: 3 }).map((_, index) => (
-              <Skeleton key={index} className="aspect-video w-full rounded-xl" />
+              <Skeleton className="aspect-video w-full" key={index} />
             ))}
           </div>
         ) : null}
@@ -73,7 +73,7 @@ export function FeaturedVideosSection() {
         ) : null}
 
         {!isLoading && !isError && data?.items.length ? (
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid border border-neutral-200 divide-y divide-neutral-200 sm:grid-cols-2 sm:divide-x lg:grid-cols-3">
             {data.items.map((video) => (
               <VideoCard key={video.id} video={video} />
             ))}

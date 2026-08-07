@@ -13,14 +13,14 @@ import { Skeleton } from "@/shared/components/ui/Skeleton";
 function CategoriesSkeleton() {
   return (
     <div className="space-y-10">
-      <div className="space-y-3 border-b border-neutral-200 pb-8">
+      <div className="space-y-3 border border-neutral-200 p-6 lg:p-8">
         <Skeleton className="h-3 w-28" />
         <Skeleton className="h-10 w-2/3" />
         <Skeleton className="h-4 w-full max-w-2xl" />
       </div>
-      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid border border-neutral-200 divide-y divide-neutral-200 sm:grid-cols-2 sm:divide-x lg:grid-cols-3">
         {Array.from({ length: 6 }).map((_, index) => (
-          <div key={index} className="space-y-3 pt-4">
+          <div key={index} className="space-y-3 p-5">
             <Skeleton className="h-3 w-20" />
             <Skeleton className="h-7 w-3/4" />
             <Skeleton className="h-4 w-full" />
@@ -37,7 +37,7 @@ export function CategoriesListing() {
   const t = useTranslations("categoriesPage");
 
   return (
-    <Section ariaLabelledby="categories-listing-heading">
+    <Section ariaLabelledby="categories-listing-heading" dense>
       <Container>
         <h2 id="categories-listing-heading" className="sr-only">
           {t("listingHeading")}
@@ -67,7 +67,7 @@ export function CategoriesListing() {
                     {t("categoryCount", { count: data.total })}
                   </p>
                 </div>
-                <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="grid border border-neutral-200 divide-y divide-neutral-200 sm:grid-cols-2 sm:divide-x lg:grid-cols-3">
                   {data.items.slice(1).map((category) => (
                     <CategoryCard key={category.id} category={category} />
                   ))}

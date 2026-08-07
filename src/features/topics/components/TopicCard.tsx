@@ -36,7 +36,7 @@ export function TopicCard({ topic, variant = "default" }: TopicCardProps) {
   }
 
   return (
-    <article className="group flex h-full flex-col pt-4">
+    <article className="group flex h-full flex-col p-5">
       <p className="kicker">{t("kicker")}</p>
       <h3 className="mt-2 font-serif text-xl font-bold leading-snug text-ink transition-colors group-hover:text-accent">
         <Link href={`/topics/${topic.slug}`}>{topic.name}</Link>

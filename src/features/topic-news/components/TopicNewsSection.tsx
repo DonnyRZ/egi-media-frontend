@@ -54,7 +54,7 @@ export function TopicNewsSection() {
   }
 
   return (
-    <Section ariaLabelledby="topics-heading">
+    <Section ariaLabelledby="topics-heading" dense>
       <Container>
         <SectionHeading
           actionHref="/topics"

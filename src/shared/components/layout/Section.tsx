@@ -6,13 +6,19 @@ interface SectionProps {
   children: ReactNode;
   className?: string;
   ariaLabelledby?: string;
+  dense?: boolean;
 }
 
-export function Section({ children, className, ariaLabelledby }: SectionProps) {
+export function Section({ children, className, ariaLabelledby, dense }: SectionProps) {
   return (
     <section
       aria-labelledby={ariaLabelledby}
-      className={cn("py-12 lg:py-16", className)}
+      className={cn(
+        dense
+          ? "border-t border-neutral-200 py-8 lg:py-10 first:border-t-0 first:pt-0"
+          : "py-12 lg:py-16",
+        className,
+      )}
     >
       {children}
     </section>

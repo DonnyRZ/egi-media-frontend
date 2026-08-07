@@ -169,7 +169,7 @@ export function VideoGridCard({ video }: { video: YoutubeVideo }) {
           </span>
         </span>
       </a>
-      <div className="flex flex-1 flex-col pt-3">
+      <div className="flex flex-1 flex-col p-4">
         {video.publishedAt ? (
           <time
             className="text-xs font-semibold uppercase tracking-wide text-neutral-500"

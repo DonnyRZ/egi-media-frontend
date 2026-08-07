@@ -18,7 +18,7 @@ export function CategoryCard({
 
   if (variant === "featured") {
     return (
-      <article className="group border-b border-neutral-200 pb-8 lg:pb-10">
+      <article className="group border border-neutral-200 p-6 lg:p-8">
         <p className="kicker">{t("featuredKicker")}</p>
         <h2 className="mt-3 font-serif text-3xl font-bold leading-tight text-ink transition-colors group-hover:text-accent sm:text-4xl">
           <Link href={`/categories/${category.slug}`}>{category.name}</Link>
@@ -39,7 +39,7 @@ export function CategoryCard({
   }
 
   return (
-    <article className="group flex h-full flex-col pt-4">
+    <article className="group flex h-full flex-col p-5">
       <p className="kicker">{t("kicker")}</p>
       <h3 className="mt-2 font-serif text-xl font-bold leading-snug text-ink transition-colors group-hover:text-accent">
         <Link href={`/categories/${category.slug}`}>{category.name}</Link>

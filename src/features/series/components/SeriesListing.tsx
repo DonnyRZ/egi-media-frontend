@@ -20,9 +20,12 @@ function SeriesSkeleton() {
       {Array.from({ length: 2 }).map((_, sectionIndex) => (
         <div key={sectionIndex} className="space-y-5">
           <Skeleton className="h-7 w-48" />
-          <div className="flex gap-5 overflow-hidden">
+          <div className="flex gap-3 overflow-hidden">
             {Array.from({ length: 3 }).map((_, cardIndex) => (
-              <div key={cardIndex} className="w-60 shrink-0 space-y-3">
+              <div
+                key={cardIndex}
+                className="w-60 shrink-0 space-y-3 border border-neutral-200 p-5"
+              >
                 <Skeleton className="aspect-[16/10] w-full" />
                 <Skeleton className="h-3 w-20" />
                 <Skeleton className="h-6 w-3/4" />
@@ -113,7 +116,7 @@ export function SeriesListing() {
                   >
                     {group.items.map((series) => (
                       <div
-                        className="w-60 shrink-0 snap-start sm:w-72"
+                        className="w-60 shrink-0 snap-start border border-neutral-200 sm:w-72"
                         key={series.id}
                         role="listitem"
                       >

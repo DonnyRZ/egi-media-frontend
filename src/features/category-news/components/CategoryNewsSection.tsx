@@ -14,7 +14,7 @@ import type { CategoryNewsGroup } from "@/shared/types/category.types";
 
 function CategoryColumn({ group }: { group: CategoryNewsGroup }) {
   return (
-    <div className="min-w-0">
+    <div className="min-w-0 border-t border-neutral-200 pt-6 first:border-t-0 first:pt-0 lg:border-t-0 lg:border-l lg:border-neutral-200 lg:pt-0 lg:pl-8 lg:first:border-l-0 lg:first:pl-0">
       <div className="mb-4 border-b border-neutral-200 pb-2">
         <p className="kicker">
           <Link
@@ -48,7 +48,7 @@ export function CategoryNewsSection() {
   }
 
   return (
-    <Section ariaLabelledby="categories-heading" className="bg-neutral-50">
+    <Section ariaLabelledby="categories-heading" dense>
       <Container>
         <SectionHeading
           actionHref="/categories"
@@ -75,7 +75,7 @@ export function CategoryNewsSection() {
         ) : null}
 
         {!isLoading && !isError && data?.length ? (
-          <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-12">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-0">
             {data.map((group) => (
               <CategoryColumn key={group.category.id} group={group} />
             ))}

@@ -118,7 +118,7 @@ export function HorizontalScroller({
       <div
         aria-label={ariaLabel}
         className={cn(
-          "flex w-full min-w-0 flex-nowrap gap-5 overflow-x-auto overscroll-x-contain",
+          "flex w-full min-w-0 flex-nowrap gap-3 overflow-x-auto overscroll-x-contain",
           "scroll-smooth snap-x snap-mandatory pb-3 scrollbar-hide",
         )}
         ref={scrollerRef}

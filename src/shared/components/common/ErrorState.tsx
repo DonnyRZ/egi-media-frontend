@@ -17,7 +17,7 @@ export function ErrorState({ title, message, onRetry, className }: ErrorStatePro
     <div
       role="alert"
       className={cn(
-        "rounded-xl border border-error/20 bg-white p-6 text-center shadow-sm",
+        "border border-error/20 bg-white p-6 text-center shadow-sm",
         className,
       )}
     >

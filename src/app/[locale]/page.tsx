@@ -2,7 +2,6 @@ import dynamic from "next/dynamic";
 import { setRequestLocale } from "next-intl/server";
 
 import { HeroSection } from "@/features/hero-section/components/HeroSection";
-import { WorldClock } from "@/features/world-clock/components/WorldClock";
 
 const BreakingNewsSection = dynamic(
   () =>
@@ -78,7 +77,6 @@ export default async function HomePage({ params }: HomePageProps) {
 
   return (
     <>
-      <WorldClock />
       <HeroSection />
       <EditorsPickSection />
       <BreakingNewsSection />

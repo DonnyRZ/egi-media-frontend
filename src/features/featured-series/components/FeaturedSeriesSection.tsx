@@ -16,7 +16,7 @@ export function FeaturedSeriesSection() {
   const t = useTranslations("series");
 
   return (
-    <Section ariaLabelledby="series-heading">
+    <Section ariaLabelledby="series-heading" dense>
       <Container>
         <SectionHeading
           actionHref="/series"
@@ -26,9 +26,9 @@ export function FeaturedSeriesSection() {
         />
 
         {isLoading ? (
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid border border-neutral-200 divide-y divide-neutral-200 sm:grid-cols-2 sm:divide-x lg:grid-cols-3">
             {Array.from({ length: 3 }).map((_, index) => (
-              <div key={index} className="space-y-3">
+              <div key={index} className="space-y-3 p-5">
                 <Skeleton className="aspect-[16/10] w-full" />
                 <Skeleton className="h-4 w-20" />
                 <Skeleton className="h-6 w-3/4" />
@@ -46,7 +46,7 @@ export function FeaturedSeriesSection() {
         ) : null}
 
         {!isLoading && !isError && data?.items.length ? (
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid border border-neutral-200 divide-y divide-neutral-200 sm:grid-cols-2 sm:divide-x lg:grid-cols-3">
             {data.items.slice(0, 3).map((series) => (
               <SeriesCard key={series.id} series={series} />
             ))}

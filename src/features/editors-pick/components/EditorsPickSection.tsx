@@ -14,7 +14,7 @@ import { getArticleHref } from "@/shared/utils/article-path";
 
 function RankedItem({ article, rank }: { article: Article; rank: number }) {
   return (
-    <article className="group flex gap-4 border-b border-neutral-200 py-4 first:pt-0">
+    <article className="group flex gap-4 p-5">
       <span
         aria-hidden="true"
         className="font-serif text-3xl font-bold leading-none text-neutral-300"
@@ -45,7 +45,7 @@ export function EditorsPickSection() {
   }
 
   return (
-    <Section ariaLabelledby="editors-heading">
+    <Section ariaLabelledby="editors-heading" dense>
       <Container>
         <SectionHeading
           id="editors-heading"
@@ -54,9 +54,9 @@ export function EditorsPickSection() {
         />
 
         {isLoading ? (
-          <div className="grid gap-x-10 gap-y-2 md:grid-cols-2">
+          <div className="grid border border-neutral-200 divide-y divide-neutral-200 md:grid-cols-2 md:divide-x">
             {Array.from({ length: 6 }).map((_, index) => (
-              <div key={index} className="flex gap-4 py-4">
+              <div key={index} className="flex gap-4 p-5">
                 <Skeleton className="h-8 w-6" />
                 <div className="flex-1 space-y-2">
                   <Skeleton className="h-3 w-20" />
@@ -73,7 +73,7 @@ export function EditorsPickSection() {
         ) : null}
 
         {!isLoading && !isError && data?.items.length ? (
-          <div className="grid gap-x-10 md:grid-cols-2">
+          <div className="grid border border-neutral-200 divide-y divide-neutral-200 md:grid-cols-2 md:divide-x">
             {data.items.map((article, index) => (
               <RankedItem key={article.id} article={article} rank={index + 1} />
             ))}

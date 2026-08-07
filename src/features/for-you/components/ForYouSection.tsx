@@ -29,7 +29,7 @@ export function ForYouSection() {
     (isAuthenticated && (feed.isLoading || subscriptions.isLoading));
 
   return (
-    <Section ariaLabelledby="for-you-heading">
+    <Section ariaLabelledby="for-you-heading" dense>
       <Container>
         <SectionHeading
           actionHref={isAuthenticated ? "/for-you" : "/register"}
@@ -40,9 +40,9 @@ export function ForYouSection() {
         />
 
         {isLoading ? (
-          <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid border border-neutral-200 divide-y divide-neutral-200 sm:grid-cols-2 sm:divide-x lg:grid-cols-3">
             {Array.from({ length: 6 }).map((_, index) => (
-              <div className="space-y-3" key={index}>
+              <div className="space-y-3 p-5" key={index}>
                 <Skeleton className="aspect-[16/10] w-full" />
                 <Skeleton className="h-4 w-24" />
                 <Skeleton className="h-6 w-full" />
@@ -74,9 +74,9 @@ export function ForYouSection() {
         ) : null}
 
         {!isLoading && isAuthenticated && !feed.isError && hasItems && feed.data ? (
-          <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid border border-neutral-200 divide-y divide-neutral-200 sm:grid-cols-2 sm:divide-x lg:grid-cols-3">
             {feed.data.items.map((article) => (
-              <ArticleCard article={article} key={article.id} />
+              <ArticleCard article={article} className="p-5" key={article.id} />
             ))}
           </div>
         ) : null}

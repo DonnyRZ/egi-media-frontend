@@ -115,7 +115,7 @@ function VideoStage({
                 {t("videoCount", { count: total })}
               </p>
             </div>
-            <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid border border-neutral-200 divide-y divide-neutral-200 sm:grid-cols-2 sm:divide-x lg:grid-cols-3">
               {moreVideos.map((video) => (
                 <VideoGridCard key={video.id} video={video} />
               ))}

@@ -107,7 +107,7 @@ function Masthead() {
   const { isSearchOpen, toggleMobileMenu, setSearchOpen } = useUiStore();
 
   return (
-    <div className="flex h-14 items-center justify-between gap-3 lg:h-16 lg:gap-4">
+    <div className="flex h-16 items-center justify-between gap-3 lg:h-20 lg:gap-4">
       <div className="flex shrink-0 items-center gap-2">
         <button
           aria-label={t("toggleMenu")}
@@ -121,7 +121,7 @@ function Masthead() {
         <Link aria-label={t("homeAria", { siteName: SITE_NAME })} className="inline-flex" href="/">
           <Image
             alt={SITE_NAME}
-            className="h-8 w-auto sm:h-9 lg:h-10"
+            className="h-9 w-auto sm:h-10 lg:h-12"
             height={857}
             priority
             src="/images/Logo_EGI-Media-2.png"
@@ -257,13 +257,13 @@ function DesktopNav() {
       >
         {NAV_ITEMS.map((item) => (
           <li key={item.href} className="shrink-0">
-            <span className="inline-block border-b-2 border-transparent py-2.5 text-xs font-semibold uppercase tracking-wide">
+            <span className="inline-block border-b-2 border-transparent py-3 text-xs font-semibold uppercase tracking-wide">
               {t(`nav.${item.key}`)}
             </span>
           </li>
         ))}
         <li className="shrink-0" ref={moreMeasureRef}>
-          <span className="inline-flex items-center gap-1 border-b-2 border-transparent py-2.5 text-xs font-semibold uppercase tracking-wide">
+          <span className="inline-flex items-center gap-1 border-b-2 border-transparent py-3 text-xs font-semibold uppercase tracking-wide">
             {t("navMore")}
             <ChevronIcon />
           </span>
@@ -274,7 +274,7 @@ function DesktopNav() {
         {visibleItems.map((item) => (
           <li key={item.href} className="shrink-0">
             <Link
-              className="inline-block border-b-2 border-transparent py-2.5 text-xs font-semibold uppercase tracking-wide text-neutral-300 transition-colors hover:border-accent hover:text-white"
+              className="inline-block border-b-2 border-transparent py-3 text-xs font-semibold uppercase tracking-wide text-neutral-300 transition-colors hover:border-accent hover:text-white"
               href={item.href}
             >
               {t(`nav.${item.key}`)}
@@ -288,7 +288,7 @@ function DesktopNav() {
               aria-expanded={isMoreOpen}
               aria-haspopup="menu"
               className={cn(
-                "inline-flex items-center gap-1 border-b-2 py-2.5 text-xs font-semibold uppercase tracking-wide transition-colors",
+                "inline-flex items-center gap-1 border-b-2 py-3 text-xs font-semibold uppercase tracking-wide transition-colors",
                 isMoreOpen
                   ? "border-accent text-accent"
                   : "border-transparent text-neutral-300 hover:border-accent hover:text-white",
@@ -334,7 +334,7 @@ function NavRow() {
     <div className="hidden border-t border-neutral-800 lg:flex lg:items-center lg:justify-between">
       <DesktopNav />
       <Link
-        className="ml-6 shrink-0 border-b-2 border-transparent py-2.5 text-[11px] font-semibold uppercase tracking-wide text-neutral-400 transition-colors hover:border-accent hover:text-white"
+        className="ml-6 shrink-0 border-b-2 border-transparent py-3 text-[11px] font-semibold uppercase tracking-wide text-neutral-400 transition-colors hover:border-accent hover:text-white"
         href="/settings/topics"
       >
         {t("topicPreferences")}

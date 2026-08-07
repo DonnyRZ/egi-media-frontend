@@ -21,13 +21,13 @@ export function AuthUserMenu() {
 
   if (!isHydrated) {
     return (
-      <span aria-hidden="true" className="inline-block h-4 w-16 bg-neutral-100" />
+      <span aria-hidden="true" className="inline-block h-4 w-16 bg-white/20" />
     );
   }
 
   if (!user) {
     return (
-      <Link className="hover:text-accent" href="/login">
+      <Link className="text-sm font-semibold text-neutral-300 hover:text-white" href="/login">
         {tHeader("signIn")}
       </Link>
     );
@@ -52,11 +52,11 @@ export function AuthUserMenu() {
       <button
         aria-expanded={open}
         aria-haspopup="menu"
-        className="flex items-center gap-2 text-left hover:text-accent"
+        className="flex items-center gap-2 text-left text-neutral-300 hover:text-white"
         onClick={() => setOpen((value) => !value)}
         type="button"
       >
-        <span className="flex h-7 w-7 items-center justify-center bg-ink text-[10px] font-bold text-white">
+        <span className="flex h-7 w-7 items-center justify-center bg-white text-[10px] font-bold text-ink">
           {initials || "U"}
         </span>
         <span className="hidden max-w-[9rem] truncate text-xs font-semibold uppercase tracking-wide sm:inline">
@@ -133,7 +133,7 @@ export function AuthMobileActions() {
   if (!user) {
     return (
       <Link
-        className="block py-2 text-sm font-semibold uppercase tracking-wide text-neutral-800"
+        className="block py-2 text-sm font-semibold uppercase tracking-wide text-neutral-200"
         href="/login"
         onClick={() => setMobileMenuOpen(false)}
       >
@@ -143,32 +143,32 @@ export function AuthMobileActions() {
   }
 
   return (
-    <div className="space-y-2 border-t border-neutral-200 pt-3">
-      <p className="text-sm font-semibold text-ink">{user.fullName}</p>
-      <p className="text-xs text-neutral-500">{user.email}</p>
+    <div className="space-y-2 border-t border-neutral-800 pt-3">
+      <p className="text-sm font-semibold text-white">{user.fullName}</p>
+      <p className="text-xs text-neutral-400">{user.email}</p>
       <Link
-        className="block py-1 text-sm font-semibold uppercase tracking-wide text-neutral-800"
+        className="block py-1 text-sm font-semibold uppercase tracking-wide text-neutral-200"
         href="/profile"
         onClick={() => setMobileMenuOpen(false)}
       >
         {t("profile")}
       </Link>
       <Link
-        className="block py-1 text-sm font-semibold uppercase tracking-wide text-neutral-800"
+        className="block py-1 text-sm font-semibold uppercase tracking-wide text-neutral-200"
         href="/settings/topics"
         onClick={() => setMobileMenuOpen(false)}
       >
         {t("topicPreferences")}
       </Link>
       <Link
-        className="block py-1 text-sm font-semibold uppercase tracking-wide text-neutral-800"
+        className="block py-1 text-sm font-semibold uppercase tracking-wide text-neutral-200"
         href="/for-you"
         onClick={() => setMobileMenuOpen(false)}
       >
         {t("forYou")}
       </Link>
       <Link
-        className="block py-1 text-sm font-semibold uppercase tracking-wide text-neutral-800"
+        className="block py-1 text-sm font-semibold uppercase tracking-wide text-neutral-200"
         href="/saved"
         onClick={() => setMobileMenuOpen(false)}
       >

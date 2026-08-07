@@ -80,7 +80,7 @@ export function LanguageSwitcher() {
         aria-expanded={isOpen}
         aria-haspopup="menu"
         aria-label={t("language")}
-        className="flex items-center gap-1.5 rounded p-2 text-neutral-700 hover:bg-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+        className="flex items-center gap-1.5 rounded p-2 text-neutral-300 hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
         onClick={() => setIsOpen((previous) => !previous)}
         type="button"
       >

@@ -37,7 +37,7 @@ export function NotificationBell({ className }: NotificationBellProps) {
           aria-expanded={open}
           aria-haspopup="menu"
           aria-label={ariaLabel}
-          className="relative flex items-center justify-center rounded p-1.5 text-neutral-700 transition-colors hover:bg-neutral-100 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+          className="relative flex items-center justify-center rounded p-1.5 text-neutral-300 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
           onClick={() => setOpen((value) => !value)}
           type="button"
         >

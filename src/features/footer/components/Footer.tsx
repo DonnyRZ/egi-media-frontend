@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 import { Link } from "@/i18n/navigation";
@@ -23,12 +24,24 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t-4 border-accent bg-ink text-white">
+    <footer className="border-t border-neutral-800 bg-ink text-white">
       <Container className="py-12 lg:py-16">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
-            <p className="font-serif text-2xl font-bold">{SITE_NAME}</p>
-            <p className="mt-3 text-sm leading-6 text-neutral-400">{t("tagline")}</p>
+            <Link
+              aria-label={SITE_NAME}
+              className="inline-flex"
+              href="/"
+            >
+              <Image
+                alt={SITE_NAME}
+                className="h-12 w-auto"
+                height={857}
+                src="/images/Logo_EGI-Media-2.png"
+                width={1536}
+              />
+            </Link>
+            <p className="mt-4 text-sm leading-6 text-neutral-400">{t("tagline")}</p>
           </div>
 
           <div>
@@ -38,7 +51,7 @@ export function Footer() {
             <ul className="mt-4 space-y-2">
               {COMPANY_LINKS.map((link) => (
                 <li key={link.href}>
-                  <Link className="text-sm text-neutral-300 hover:text-accent" href={link.href}>
+                  <Link className="text-sm text-neutral-300 hover:text-white" href={link.href}>
                     {t(link.key)}
                   </Link>
                 </li>
@@ -53,7 +66,7 @@ export function Footer() {
             <ul className="mt-4 space-y-2">
               {LEGAL_LINKS.map((link) => (
                 <li key={link.href}>
-                  <Link className="text-sm text-neutral-300 hover:text-accent" href={link.href}>
+                  <Link className="text-sm text-neutral-300 hover:text-white" href={link.href}>
                     {t(link.key)}
                   </Link>
                 </li>
@@ -69,7 +82,7 @@ export function Footer() {
               {SOCIAL_LINKS.map((link) => (
                 <li key={link.href}>
                   <a
-                    className="text-sm text-neutral-300 hover:text-accent"
+                    className="text-sm text-neutral-300 hover:text-white"
                     href={link.href}
                     rel="noopener noreferrer"
                     target="_blank"

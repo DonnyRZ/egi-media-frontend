@@ -18,6 +18,7 @@ import { AuthUserMenu, AuthMobileActions } from "@/features/auth/components/Auth
 import { useAuthStore } from "@/features/auth/stores/auth.store";
 import { NotificationBell } from "@/features/notifications/components/NotificationBell";
 import { LanguageSwitcher } from "@/features/language/components/LanguageSwitcher";
+import { useScrollHeaderVisibility } from "@/features/header/hooks/useScrollHeaderVisibility";
 import { useClock } from "@/features/world-clock/hooks/useClock";
 import { WORLD_CLOCK_CITIES } from "@/features/world-clock/constants/world-clock.constants";
 import { formatClockTime } from "@/features/world-clock/utils/formatClockTime";
@@ -57,35 +58,42 @@ function HeaderClockStrip() {
   return (
     <div
       aria-label={t("ariaLabel")}
-      className="hidden min-w-0 flex-1 items-center gap-4 overflow-x-auto scrollbar-hide lg:flex"
+      className="hidden min-w-0 flex-1 items-center gap-2.5 overflow-hidden lg:flex xl:gap-3"
     >
-      <span className="shrink-0 text-xs font-medium uppercase tracking-wide text-neutral-500">
+      <span className="shrink-0 text-[10px] font-medium uppercase tracking-wide text-neutral-400">
         {now
           ? format.dateTime(now, { weekday: "short", day: "numeric", month: "short" })
           : "--"}
       </span>
-      <span aria-hidden="true" className="h-3.5 w-px shrink-0 bg-neutral-200" />
-      <div className="flex shrink-0 items-baseline gap-1.5">
+      <span aria-hidden="true" className="h-3 w-px shrink-0 bg-neutral-700" />
+      <div className="flex shrink-0 items-baseline gap-1">
         <span
           aria-hidden="true"
           className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-accent"
         />
-        <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-accent">
+        <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-accent">
           {t("local")}
         </span>
-        <span className="font-serif text-sm font-semibold tabular-nums text-ink">
+        <span className="font-serif text-xs font-semibold tabular-nums text-white">
           {now ? formatClockTime(now) : "--:--"}
         </span>
       </div>
       {WORLD_CLOCK_CITIES.map((city, index) => (
         <div
-          className={cn("flex shrink-0 items-baseline gap-1.5", index >= 3 && "hidden xl:flex")}
+          className={cn(
+            "flex shrink-0 items-baseline gap-1",
+            index >= 4
+              ? "hidden 2xl:flex"
+              : index >= 2
+                ? "hidden xl:flex"
+                : undefined,
+          )}
           key={city.timeZone}
         >
-          <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-neutral-500">
+          <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-neutral-400">
             {city.label}
           </span>
-          <span className="font-serif text-sm font-semibold tabular-nums text-ink">
+          <span className="font-serif text-xs font-semibold tabular-nums text-white">
             {now ? formatClockTime(now, city.timeZone) : "--:--"}
           </span>
         </div>
@@ -99,11 +107,11 @@ function Masthead() {
   const { isSearchOpen, toggleMobileMenu, setSearchOpen } = useUiStore();
 
   return (
-    <div className="flex h-16 items-center justify-between gap-3 lg:h-20 lg:gap-6">
-      <div className="flex shrink-0 items-center gap-3">
+    <div className="flex h-14 items-center justify-between gap-3 lg:h-16 lg:gap-4">
+      <div className="flex shrink-0 items-center gap-2">
         <button
           aria-label={t("toggleMenu")}
-          className="rounded p-2 text-neutral-900 hover:bg-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 lg:hidden"
+          className="rounded p-1.5 text-white hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 lg:hidden"
           onClick={toggleMobileMenu}
           type="button"
         >
@@ -113,10 +121,10 @@ function Masthead() {
         <Link aria-label={t("homeAria", { siteName: SITE_NAME })} className="inline-flex" href="/">
           <Image
             alt={SITE_NAME}
-            className="h-10 w-auto sm:h-12 lg:h-14"
+            className="h-8 w-auto sm:h-9 lg:h-10"
             height={857}
             priority
-            src="/images/Logo_EGI-Media.webp"
+            src="/images/Logo_EGI-Media-2.png"
             width={1536}
           />
         </Link>
@@ -124,11 +132,11 @@ function Masthead() {
 
       <HeaderClockStrip />
 
-      <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
+      <div className="flex shrink-0 items-center gap-1 sm:gap-1.5">
         <button
           aria-expanded={isSearchOpen}
           aria-label={t("toggleSearch")}
-          className="rounded p-2 text-neutral-900 hover:bg-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+          className="rounded p-1.5 text-white hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
           onClick={() => setSearchOpen(!isSearchOpen)}
           type="button"
         >
@@ -136,12 +144,12 @@ function Masthead() {
         </button>
         <NotificationBell />
         <LanguageSwitcherSlot />
-        <span aria-hidden="true" className="hidden h-5 w-px shrink-0 bg-neutral-200 lg:block" />
+        <span aria-hidden="true" className="hidden h-4 w-px shrink-0 bg-neutral-700 lg:block" />
         <div className="hidden lg:block">
           <AuthUserMenu />
         </div>
         <Link
-          className="hidden rounded-none bg-primary-700 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-primary-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 sm:inline-flex sm:items-center sm:justify-center"
+          className="hidden rounded-none border border-white/40 bg-transparent px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:border-white hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-ink sm:inline-flex sm:items-center sm:justify-center"
           href="/settings/topics"
         >
           {t("subscribe")}
@@ -170,7 +178,7 @@ function DesktopNav() {
     // Last child is the hidden "More" width probe — exclude it from item count.
     const itemNodes = Array.from(measureList.children).slice(0, -1) as HTMLElement[];
     const moreWidth = moreMeasureRef.current?.offsetWidth ?? 88;
-    const gap = 32;
+    const gap = 24;
 
     let usedWidth = 0;
     let count = itemNodes.length;
@@ -249,24 +257,24 @@ function DesktopNav() {
       >
         {NAV_ITEMS.map((item) => (
           <li key={item.href} className="shrink-0">
-            <span className="inline-block border-b-2 border-transparent py-3 text-sm font-semibold uppercase tracking-wide">
+            <span className="inline-block border-b-2 border-transparent py-2.5 text-xs font-semibold uppercase tracking-wide">
               {t(`nav.${item.key}`)}
             </span>
           </li>
         ))}
         <li className="shrink-0" ref={moreMeasureRef}>
-          <span className="inline-flex items-center gap-1 border-b-2 border-transparent py-3 text-sm font-semibold uppercase tracking-wide">
+          <span className="inline-flex items-center gap-1 border-b-2 border-transparent py-2.5 text-xs font-semibold uppercase tracking-wide">
             {t("navMore")}
             <ChevronIcon />
           </span>
         </li>
       </ul>
 
-      <ul className="-mb-px flex items-center justify-center gap-8">
+      <ul className="-mb-px flex items-center justify-start gap-6">
         {visibleItems.map((item) => (
           <li key={item.href} className="shrink-0">
             <Link
-              className="inline-block border-b-2 border-transparent py-3 text-sm font-semibold uppercase tracking-wide text-neutral-700 transition-colors hover:border-accent hover:text-accent"
+              className="inline-block border-b-2 border-transparent py-2.5 text-xs font-semibold uppercase tracking-wide text-neutral-300 transition-colors hover:border-accent hover:text-white"
               href={item.href}
             >
               {t(`nav.${item.key}`)}
@@ -280,10 +288,10 @@ function DesktopNav() {
               aria-expanded={isMoreOpen}
               aria-haspopup="menu"
               className={cn(
-                "inline-flex items-center gap-1 border-b-2 py-3 text-sm font-semibold uppercase tracking-wide transition-colors",
+                "inline-flex items-center gap-1 border-b-2 py-2.5 text-xs font-semibold uppercase tracking-wide transition-colors",
                 isMoreOpen
                   ? "border-accent text-accent"
-                  : "border-transparent text-neutral-700 hover:border-accent hover:text-accent",
+                  : "border-transparent text-neutral-300 hover:border-accent hover:text-white",
               )}
               onClick={() => setIsMoreOpen((open) => !open)}
               ref={moreButtonRef}
@@ -295,13 +303,13 @@ function DesktopNav() {
 
             {isMoreOpen ? (
               <div
-                className="absolute right-0 top-full z-50 mt-0 min-w-[12rem] border border-neutral-200 bg-white py-2 shadow-sm"
+                className="absolute right-0 top-full z-50 mt-0 min-w-[12rem] border border-neutral-700 bg-ink py-2 shadow-sm"
                 ref={moreMenuRef}
                 role="menu"
               >
                 {overflowItems.map((item) => (
                   <Link
-                    className="block px-4 py-2.5 text-sm font-semibold uppercase tracking-wide text-neutral-700 transition-colors hover:bg-neutral-50 hover:text-accent"
+                    className="block px-4 py-2 text-xs font-semibold uppercase tracking-wide text-neutral-300 transition-colors hover:bg-white/10 hover:text-white"
                     href={item.href}
                     key={item.href}
                     onClick={() => setIsMoreOpen(false)}
@@ -323,10 +331,10 @@ function NavRow() {
   const t = useTranslations("header");
 
   return (
-    <div className="hidden border-t border-neutral-200 lg:flex lg:items-center lg:justify-between">
+    <div className="hidden border-t border-neutral-800 lg:flex lg:items-center lg:justify-between">
       <DesktopNav />
       <Link
-        className="ml-6 shrink-0 border-b-2 border-transparent py-3 text-xs font-semibold uppercase tracking-wide text-neutral-500 transition-colors hover:border-accent hover:text-accent"
+        className="ml-6 shrink-0 border-b-2 border-transparent py-2.5 text-[11px] font-semibold uppercase tracking-wide text-neutral-400 transition-colors hover:border-accent hover:text-white"
         href="/settings/topics"
       >
         {t("topicPreferences")}
@@ -346,7 +354,7 @@ function MobileNav() {
     <nav
       aria-label={t("navMobile")}
       className={cn(
-        "border-t border-neutral-200 py-4 lg:hidden",
+        "border-t border-neutral-800 py-4 lg:hidden",
         isMobileMenuOpen ? "block" : "hidden",
       )}
     >
@@ -354,7 +362,7 @@ function MobileNav() {
         {NAV_ITEMS.map((item) => (
           <li key={item.href}>
             <Link
-              className="block py-2 text-sm font-semibold uppercase tracking-wide text-neutral-800"
+              className="block py-2 text-sm font-semibold uppercase tracking-wide text-neutral-200"
               href={item.href}
               onClick={() => setMobileMenuOpen(false)}
             >
@@ -365,7 +373,7 @@ function MobileNav() {
         {showTopicPreferences ? (
           <li>
             <Link
-              className="block py-2 text-sm font-semibold uppercase tracking-wide text-neutral-800"
+              className="block py-2 text-sm font-semibold uppercase tracking-wide text-neutral-200"
               href="/settings/topics"
               onClick={() => setMobileMenuOpen(false)}
             >
@@ -376,7 +384,7 @@ function MobileNav() {
         <li className="space-y-3 pt-3">
           <AuthMobileActions />
           <Link
-            className="flex items-center justify-center rounded-none bg-primary-700 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+            className="flex items-center justify-center rounded-none border border-white/40 bg-transparent px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:border-white hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
             href="/settings/topics"
             onClick={() => setMobileMenuOpen(false)}
           >
@@ -430,14 +438,14 @@ function SearchBar() {
   }
 
   return (
-    <div className="border-t border-neutral-200 py-4">
+    <div className="border-t border-neutral-800 py-4">
       <form className="flex items-end gap-3" onSubmit={submitSearch}>
         <div className="min-w-0 flex-1">
           <label className="sr-only" htmlFor="site-search">
             {t("searchLabel")}
           </label>
           <input
-            className="w-full border-b-2 border-ink bg-transparent px-1 py-2 font-serif text-lg focus-visible:outline-none"
+            className="w-full border-b-2 border-white/40 bg-transparent px-1 py-2 font-serif text-lg text-white placeholder:text-neutral-500 focus-visible:border-white focus-visible:outline-none"
             id="site-search"
             onChange={(event) => setSearchQuery(event.target.value)}
             placeholder={t("searchPlaceholder")}
@@ -447,14 +455,14 @@ function SearchBar() {
           />
         </div>
         <button
-          className="shrink-0 border border-ink bg-ink px-4 py-2 text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-primary-900"
+          className="shrink-0 border border-white bg-white px-4 py-2 text-sm font-semibold uppercase tracking-wide text-ink transition-colors hover:bg-neutral-200"
           type="submit"
         >
           {t("searchSubmit")}
         </button>
         <button
           aria-label={t("searchClose")}
-          className="shrink-0 rounded p-2 text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-ink"
+          className="shrink-0 rounded p-2 text-neutral-400 transition-colors hover:bg-white/10 hover:text-white"
           onClick={() => setSearchOpen(false)}
           type="button"
         >
@@ -466,8 +474,18 @@ function SearchBar() {
 }
 
 export function Header() {
+  const isScrollVisible = useScrollHeaderVisibility();
+  const isMobileMenuOpen = useUiStore((state) => state.isMobileMenuOpen);
+  const isSearchOpen = useUiStore((state) => state.isSearchOpen);
+  const isVisible = isScrollVisible || isMobileMenuOpen || isSearchOpen;
+
   return (
-    <header className="sticky top-0 z-50 border-b-2 border-ink bg-white">
+    <header
+      className={cn(
+        "sticky top-0 z-50 border-b border-neutral-800 bg-ink text-white transition-transform duration-300 ease-out will-change-transform",
+        isVisible ? "translate-y-0" : "pointer-events-none -translate-y-full",
+      )}
+    >
       <Container>
         <Masthead />
         <NavRow />

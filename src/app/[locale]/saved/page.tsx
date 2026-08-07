@@ -26,7 +26,7 @@ export async function generateMetadata({
 
 function ViewFallback() {
   return (
-    <Section>
+    <Section className="pt-8 lg:pt-10">
       <Container>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 6 }).map((_, index) => (

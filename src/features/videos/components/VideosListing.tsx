@@ -22,7 +22,7 @@ import type { YoutubeVideo } from "@/shared/types/youtube.types";
 
 function StageSkeleton() {
   return (
-    <Section>
+    <Section className="pt-8 lg:pt-10">
       <Container>
         <div className="grid overflow-hidden border border-neutral-200 lg:grid-cols-[minmax(0,1fr)_22rem]">
           <Skeleton className="aspect-video w-full rounded-none" />
@@ -73,7 +73,7 @@ function VideoStage({
   const moreVideos = videos.filter((video) => video.id !== active.id);
 
   return (
-    <Section ariaLabelledby="videos-listing-heading">
+    <Section ariaLabelledby="videos-listing-heading" className="pt-8 lg:pt-10">
       <Container>
         <h2 id="videos-listing-heading" className="sr-only">
           {t("listingHeading")}
@@ -106,7 +106,7 @@ function VideoStage({
         <VideoStageMeta video={active} />
 
         {moreVideos.length > 0 ? (
-          <div className="mt-4 border-t-2 border-ink pt-8">
+          <div className="mt-4 border-t border-neutral-200 pt-8">
             <div className="mb-6 flex items-end justify-between gap-4">
               <h3 className="text-lg font-bold uppercase tracking-wide text-ink">
                 {t("moreVideos")}
@@ -115,7 +115,7 @@ function VideoStage({
                 {t("videoCount", { count: total })}
               </p>
             </div>
-            <div className="grid min-h-[20rem] gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
               {moreVideos.map((video) => (
                 <VideoGridCard key={video.id} video={video} />
               ))}

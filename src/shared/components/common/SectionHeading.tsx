@@ -23,17 +23,14 @@ export function SectionHeading({
   const t = useTranslations("common");
 
   return (
-    <div className={cn("mb-6 border-b-2 border-ink pb-2 lg:mb-8", className)}>
+    <div className={cn("mb-6 border-b border-neutral-200 pb-2 lg:mb-8", className)}>
       <div className="flex items-end justify-between gap-4">
-        <div className="flex items-center gap-2.5">
-          <span aria-hidden="true" className="h-5 w-1.5 bg-accent" />
-          <h2
-            id={id}
-            className="text-lg font-bold uppercase tracking-wide text-ink sm:text-xl"
-          >
-            {title}
-          </h2>
-        </div>
+        <h2
+          id={id}
+          className="text-lg font-bold uppercase tracking-wide text-ink sm:text-xl"
+        >
+          {title}
+        </h2>
         {actionHref ? (
           <Link
             className="shrink-0 text-xs font-semibold uppercase tracking-wide text-neutral-500 transition-colors hover:text-accent"

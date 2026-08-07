@@ -20,9 +20,9 @@ import { Skeleton } from "@/shared/components/ui/Skeleton";
 
 function GridSkeleton() {
   return (
-    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
       {Array.from({ length: 3 }).map((_, index) => (
-        <div className="space-y-3 border border-neutral-200 p-5" key={index}>
+        <div className="space-y-3 border border-neutral-200 p-4" key={index}>
           <Skeleton className="aspect-[16/10] w-full" />
           <Skeleton className="h-4 w-16" />
           <Skeleton className="h-6 w-3/4" />
@@ -80,10 +80,10 @@ export function SavedArticlesView() {
     !hasColumns;
 
   return (
-    <Section>
+    <Section className="pt-8 lg:pt-10">
       <Container className="space-y-14">
         <section aria-labelledby="saved-articles-heading">
-          <div className="mb-6 flex items-end justify-between gap-4 border-b-2 border-ink pb-2">
+          <div className="mb-6 flex items-end justify-between gap-4 border-b border-neutral-200 pb-2">
             <h2
               className="text-lg font-bold uppercase tracking-wide text-ink"
               id="saved-articles-heading"
@@ -112,7 +112,7 @@ export function SavedArticlesView() {
 
           {!articlesLoading && !articles.isError && hasArticles && articles.data ? (
             <div className="space-y-8">
-              <div className="grid min-h-[28rem] gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
                 {articles.data.items.map((article) => (
                   <SavedArticleCard article={article} key={article.id} />
                 ))}
@@ -131,7 +131,7 @@ export function SavedArticlesView() {
         </section>
 
         <section aria-labelledby="saved-columns-heading">
-          <div className="mb-6 flex items-end justify-between gap-4 border-b-2 border-ink pb-2">
+          <div className="mb-6 flex items-end justify-between gap-4 border-b border-neutral-200 pb-2">
             <h2
               className="text-lg font-bold uppercase tracking-wide text-ink"
               id="saved-columns-heading"
@@ -160,7 +160,7 @@ export function SavedArticlesView() {
 
           {!columnsLoading && !columns.isError && hasColumns && columns.data ? (
             <div className="space-y-8">
-              <div className="grid min-h-[28rem] gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
                 {columns.data.items.map((column) => (
                   <SavedColumnCard column={column} key={column.id} />
                 ))}

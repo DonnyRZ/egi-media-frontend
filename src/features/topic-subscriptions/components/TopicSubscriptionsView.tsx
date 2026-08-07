@@ -39,7 +39,7 @@ export function TopicSubscriptionsView() {
 
   if (!isHydrated) {
     return (
-      <Section>
+      <Section className="pt-8 lg:pt-10">
         <Container>
           <ListSkeleton />
         </Container>
@@ -49,7 +49,7 @@ export function TopicSubscriptionsView() {
 
   if (!isAuthenticated) {
     return (
-      <Section>
+      <Section className="pt-8 lg:pt-10">
         <Container>
           <TopicSubscriptionsSignInPrompt />
         </Container>
@@ -64,9 +64,9 @@ export function TopicSubscriptionsView() {
   const hasGroups = groups.length > 0;
 
   return (
-    <Section>
+    <Section className="pt-8 lg:pt-10">
       <Container>
-        <div className="mb-6 flex items-end justify-between gap-4 border-b-2 border-ink pb-2">
+        <div className="mb-6 flex items-end justify-between gap-4 border-b border-neutral-200 pb-2">
           <h2 className="text-lg font-bold uppercase tracking-wide text-ink">
             {t("listingHeading")}
           </h2>

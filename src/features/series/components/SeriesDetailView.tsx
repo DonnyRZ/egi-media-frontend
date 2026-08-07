@@ -27,7 +27,7 @@ export function SeriesDetailView({ slug }: SeriesDetailViewProps) {
     return (
       <>
         <section className="border-b border-neutral-200">
-          <Container className="py-10 lg:py-14">
+          <Container className="py-8 lg:py-10">
             <Skeleton className="h-3 w-24" />
             <Skeleton className="mt-4 h-10 w-2/3" />
             <Skeleton className="mt-4 h-4 w-full max-w-2xl" />
@@ -72,8 +72,8 @@ export function SeriesDetailView({ slug }: SeriesDetailViewProps) {
 
   return (
     <>
-      <section aria-labelledby="series-detail-heading" className="border-b-2 border-ink">
-        <Container className="py-10 lg:py-14">
+      <section aria-labelledby="series-detail-heading" className="border-b border-neutral-200">
+        <Container className="py-8 lg:py-10">
           <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-end lg:gap-10">
             <div className="relative aspect-[16/10] overflow-hidden bg-neutral-100">
               <ArticleImage
@@ -120,9 +120,9 @@ export function SeriesDetailView({ slug }: SeriesDetailViewProps) {
         </Container>
       </section>
 
-      <Section ariaLabelledby="series-articles-heading">
+      <Section ariaLabelledby="series-articles-heading" className="pt-8 lg:pt-10">
         <Container>
-          <div className="mb-6 border-b-2 border-ink pb-2">
+          <div className="mb-6 border-b border-neutral-200 pb-2">
             <h2
               id="series-articles-heading"
               className="text-lg font-bold uppercase tracking-wide text-ink"

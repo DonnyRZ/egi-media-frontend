@@ -66,19 +66,19 @@
 /* Rich article content rendered from the Editorial CMS (HTML produced by the
    Tiptap editor). Mirrors the public site's editorial typography. */
 .article-prose {
-  @apply text-base leading-8 text-neutral-700;
+  @apply text-base leading-7 text-neutral-700;
 }
 
 .article-prose > * + * {
-  @apply mt-6;
+  @apply mt-5;
 }
 
 .article-prose p {
-  @apply leading-8;
+  @apply leading-7;
 }
 
 .article-prose > p:first-child {
-  @apply font-serif text-lg leading-8 text-ink;
+  @apply font-serif text-lg leading-7 text-ink;
 }
 
 .article-prose > p:first-child::first-letter {
@@ -86,11 +86,11 @@
 }
 
 .article-prose h2 {
-  @apply mt-10 mb-3 font-serif text-2xl font-bold text-ink;
+  @apply mt-8 mb-3 font-serif text-2xl font-bold text-ink;
 }
 
 .article-prose h3 {
-  @apply mt-8 mb-2 font-serif text-xl font-semibold text-ink;
+  @apply mt-6 mb-2 font-serif text-xl font-semibold text-ink;
 }
 
 .article-prose ul {

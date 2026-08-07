@@ -26,7 +26,7 @@ export async function generateMetadata({
 
 function ViewFallback() {
   return (
-    <Section>
+    <Section className="pt-8 lg:pt-10">
       <Container>
         <div className="space-y-4">
           <Skeleton className="h-6 w-40" />

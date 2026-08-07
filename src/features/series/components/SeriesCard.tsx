@@ -38,7 +38,7 @@ export function SeriesCard({ series, variant = "default" }: SeriesCardProps) {
 
   if (variant === "featured") {
     return (
-      <article className="group grid gap-6 border-b-2 border-ink pb-8 lg:grid-cols-[1.2fr_1fr] lg:gap-10 lg:pb-10">
+      <article className="group grid gap-6 border-b border-neutral-200 pb-8 lg:grid-cols-[1.2fr_1fr] lg:gap-10 lg:pb-10">
         <Link className="block" href={`/series/${series.slug}`}>
           <SeriesCover className="aspect-[16/10]" series={series} />
         </Link>
@@ -77,7 +77,7 @@ export function SeriesCard({ series, variant = "default" }: SeriesCardProps) {
   }
 
   return (
-    <article className="group flex h-full flex-col border-t-2 border-ink pt-4">
+    <article className="group flex h-full flex-col pt-4">
       <Link className="block" href={`/series/${series.slug}`}>
         <SeriesCover className="aspect-[16/10]" series={series} />
       </Link>

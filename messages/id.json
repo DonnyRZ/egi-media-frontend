@@ -868,6 +868,7 @@
     "viewsLabel": "dilihat",
     "sharesLabel": "dibagikan",
     "notFoundTitle": "Artikel tidak ditemukan",
-    "notFoundMessage": "Artikel yang Anda cari tidak tersedia atau telah dihapus."
+    "notFoundMessage": "Artikel yang Anda cari tidak tersedia atau telah dihapus.",
+    "relatedHeading": "Baca Juga"
   }
 }

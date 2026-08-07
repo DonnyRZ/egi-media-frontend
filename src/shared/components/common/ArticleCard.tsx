@@ -35,7 +35,7 @@ export function ArticleMeta({ article, className }: ArticleMetaProps) {
 
 interface ArticleCardProps {
   article: Article;
-  variant?: "default" | "compact" | "horizontal";
+  variant?: "default" | "compact" | "horizontal" | "featured";
 }
 
 function CategoryKicker({ article }: { article: Article }) {
@@ -44,6 +44,36 @@ function CategoryKicker({ article }: { article: Article }) {
 }
 
 export function ArticleCard({ article, variant = "default" }: ArticleCardProps) {
+  if (variant === "featured") {
+    return (
+      <article className="group grid gap-6 lg:grid-cols-[1.2fr_1fr] lg:gap-10">
+        <Link href={getArticleHref(article)}>
+          <div className="relative aspect-[16/10] overflow-hidden">
+            <ArticleImage
+              alt={article.title}
+              className="transition-transform duration-500 group-hover:scale-105"
+              priority
+              sizes="(max-width: 1024px) 100vw, 58vw"
+              src={article.featuredImage}
+            />
+          </div>
+        </Link>
+        <div className="flex flex-col justify-center">
+          <CategoryKicker article={article} />
+          <h2 className="mt-2 font-serif text-2xl font-bold leading-tight text-ink transition-colors group-hover:text-accent sm:text-3xl">
+            <Link href={getArticleHref(article)}>{article.title}</Link>
+          </h2>
+          {article.summary ? (
+            <p className="mt-3 line-clamp-3 text-base leading-7 text-neutral-700">
+              {article.summary}
+            </p>
+          ) : null}
+          <ArticleMeta article={article} className="mt-4" />
+        </div>
+      </article>
+    );
+  }
+
   if (variant === "horizontal") {
     return (
       <article className="group flex gap-4">

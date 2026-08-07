@@ -17,7 +17,7 @@ export function HeroHeadlineList({ articles }: HeroHeadlineListProps) {
 
   return (
     <div className="flex h-full flex-col lg:border-l lg:border-neutral-200 lg:pl-6">
-      <h3 className="border-b-2 border-ink pb-2 text-sm font-bold uppercase tracking-wide text-ink">
+      <h3 className="border-b border-neutral-200 pb-2 text-sm font-bold uppercase tracking-wide text-ink">
         {t("moreTopStories")}
       </h3>
       <ul className="mt-4 flex flex-1 flex-col">

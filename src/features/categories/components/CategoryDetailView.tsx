@@ -4,7 +4,6 @@ import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 import { useCategoryDetail } from "@/features/categories/hooks/useCategoryDetail";
-import { HeroFeaturedCard } from "@/features/hero-section/components/HeroFeaturedCard";
 import { Link } from "@/i18n/navigation";
 import { ArticleCard } from "@/shared/components/common/ArticleCard";
 import { EmptyState } from "@/shared/components/common/EmptyState";
@@ -92,7 +91,7 @@ export function CategoryDetailView({ slug }: CategoryDetailViewProps) {
               </p>
               <h1
                 id="category-detail-heading"
-                className="mt-2 max-w-3xl font-serif text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl lg:text-5xl"
+                className="mt-2 max-w-3xl font-serif text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl"
               >
                 {hubKey
                   ? tHubs(`${hubKey}.headline`)
@@ -119,7 +118,7 @@ export function CategoryDetailView({ slug }: CategoryDetailViewProps) {
         </Container>
       </section>
 
-      <Section ariaLabelledby="category-articles-heading">
+      <Section ariaLabelledby="category-articles-heading" className="pt-8 lg:pt-10">
         <Container>
           <h2 id="category-articles-heading" className="sr-only">
             {t("articlesHeading")}
@@ -144,10 +143,10 @@ export function CategoryDetailView({ slug }: CategoryDetailViewProps) {
           articlesQuery.data?.items.length ? (
             <div className="space-y-10">
               {page === 1 ? (
-                <div>
+                <div className="border-b border-neutral-200 pb-8">
                   <p className="kicker">{t("featuredKicker")}</p>
                   <div className="mt-3">
-                    <HeroFeaturedCard article={articlesQuery.data.items[0]} />
+                    <ArticleCard article={articlesQuery.data.items[0]} variant="featured" />
                   </div>
                 </div>
               ) : null}
@@ -157,7 +156,7 @@ export function CategoryDetailView({ slug }: CategoryDetailViewProps) {
                 : articlesQuery.data.items
               ).length > 0 ? (
                 <div>
-                  <div className="mb-6 flex items-end justify-between gap-4 border-b-2 border-ink pb-2">
+                  <div className="mb-6 flex items-end justify-between gap-4 border-b border-neutral-200 pb-2">
                     <h3 className="text-lg font-bold uppercase tracking-wide text-ink">
                       {t("articlesHeading")}
                     </h3>

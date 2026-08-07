@@ -868,6 +868,7 @@
     "viewsLabel": "koʻrishlar",
     "sharesLabel": "ulashishlar",
     "notFoundTitle": "Maqola topilmadi",
-    "notFoundMessage": "Qidirayotgan maqolangiz mavjud emas yoki oʻchirilgan."
+    "notFoundMessage": "Qidirayotgan maqolangiz mavjud emas yoki oʻchirilgan.",
+    "relatedHeading": "Shuningdek oʻqing"
   }
 }

@@ -45,7 +45,7 @@ export function ColumnsListing() {
   const { data, isLoading, isError, error, refetch } = useColumnsPage(page);
 
   return (
-    <Section ariaLabelledby="columns-listing-heading">
+    <Section ariaLabelledby="columns-listing-heading" className="pt-8 lg:pt-10">
       <Container>
         <h2 className="sr-only" id="columns-listing-heading">
           {t("listingHeading")}
@@ -67,7 +67,7 @@ export function ColumnsListing() {
 
             {data.items.length > 1 ? (
               <div>
-                <div className="mb-6 flex items-end justify-between gap-4 border-b-2 border-ink pb-2">
+                <div className="mb-6 flex items-end justify-between gap-4 border-b border-neutral-200 pb-2">
                   <h3 className="text-lg font-bold uppercase tracking-wide text-ink">
                     {t("allColumns")}
                   </h3>

@@ -7,6 +7,7 @@ import { ArticleEngagement } from "@/features/article/components/ArticleEngageme
 import { ArticleHeader } from "@/features/article/components/ArticleHeader";
 import { ArticleHero } from "@/features/article/components/ArticleHero";
 import { ArticleLocaleShell } from "@/features/article/components/ArticleLocaleShell";
+import { RelatedArticles } from "@/features/article/components/RelatedArticles";
 import { Container } from "@/shared/components/layout/Container";
 import { Section } from "@/shared/components/layout/Section";
 import { env } from "@/shared/config/env";
@@ -97,6 +98,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             <div className="mt-10">
               <ArticleBody content={article.content} />
             </div>
+            <RelatedArticles article={article} lang={lang} />
           </article>
         </Container>
       </Section>

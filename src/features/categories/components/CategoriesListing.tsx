@@ -13,14 +13,14 @@ import { Skeleton } from "@/shared/components/ui/Skeleton";
 function CategoriesSkeleton() {
   return (
     <div className="space-y-10">
-      <div className="space-y-3 border-b-2 border-ink pb-8">
+      <div className="space-y-3 border-b border-neutral-200 pb-8">
         <Skeleton className="h-3 w-28" />
         <Skeleton className="h-10 w-2/3" />
         <Skeleton className="h-4 w-full max-w-2xl" />
       </div>
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {Array.from({ length: 6 }).map((_, index) => (
-          <div key={index} className="space-y-3 border-t-2 border-ink pt-4">
+          <div key={index} className="space-y-3 pt-4">
             <Skeleton className="h-3 w-20" />
             <Skeleton className="h-7 w-3/4" />
             <Skeleton className="h-4 w-full" />
@@ -59,7 +59,7 @@ export function CategoriesListing() {
 
             {data.items.length > 1 ? (
               <div>
-                <div className="mb-6 flex items-end justify-between gap-4 border-b-2 border-ink pb-2">
+                <div className="mb-6 flex items-end justify-between gap-4 border-b border-neutral-200 pb-2">
                   <h3 className="text-lg font-bold uppercase tracking-wide text-ink">
                     {t("allCategories")}
                   </h3>

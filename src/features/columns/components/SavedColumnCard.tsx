@@ -31,7 +31,7 @@ export function SavedColumnCard({ column }: SavedColumnCardProps) {
   const dateValue = column.savedAt ?? column.publishedAt ?? column.createdAt;
 
   return (
-    <div className="flex h-full flex-col border border-neutral-200 bg-white p-5 transition-shadow hover:shadow-md">
+    <div className="flex h-full flex-col border border-neutral-200 bg-white p-4 transition-shadow hover:shadow-md">
       <article className="group flex flex-1 flex-col">
         <Link className="block" href={href}>
           <div className="relative aspect-[16/10] overflow-hidden bg-neutral-100">
@@ -59,7 +59,7 @@ export function SavedColumnCard({ column }: SavedColumnCardProps) {
         </div>
       </article>
 
-      <div className="mt-4 flex items-center justify-between gap-3 border-t border-neutral-100 pt-4">
+      <div className="mt-3 flex items-center justify-between gap-3 border-t border-neutral-100 pt-3">
         {dateValue ? (
           <span className="text-xs text-neutral-500">
             {t("savedOn", {

@@ -65,9 +65,9 @@ export function ForYouListing() {
   const isLoading = feed.isLoading || subscriptions.isLoading;
 
   return (
-    <Section ariaLabelledby="for-you-listing-heading">
+    <Section ariaLabelledby="for-you-listing-heading" className="pt-8 lg:pt-10">
       <Container>
-        <div className="mb-6 flex items-end justify-between gap-4 border-b-2 border-ink pb-2">
+        <div className="mb-6 flex items-end justify-between gap-4 border-b border-neutral-200 pb-2">
           <h2
             className="text-lg font-bold uppercase tracking-wide text-ink"
             id="for-you-listing-heading"

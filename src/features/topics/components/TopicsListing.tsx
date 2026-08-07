@@ -24,7 +24,7 @@ function TopicsSkeleton() {
             {Array.from({ length: 3 }).map((_, cardIndex) => (
               <div
                 key={cardIndex}
-                className="w-72 shrink-0 space-y-3 border-t-2 border-ink pt-4"
+                className="w-60 shrink-0 space-y-3 pt-4"
               >
                 <Skeleton className="h-3 w-20" />
                 <Skeleton className="h-7 w-3/4" />
@@ -49,7 +49,7 @@ export function TopicsListing() {
   );
 
   return (
-    <Section ariaLabelledby="topics-listing-heading">
+    <Section ariaLabelledby="topics-listing-heading" className="pt-8 lg:pt-10">
       <Container className="min-w-0">
         <h2 id="topics-listing-heading" className="sr-only">
           {t("listingHeading")}
@@ -67,7 +67,7 @@ export function TopicsListing() {
 
         {!isLoading && !isError && groups.length ? (
           <div className="min-w-0 space-y-12">
-            <div className="flex items-end justify-between gap-4 border-b-2 border-ink pb-2">
+            <div className="flex items-end justify-between gap-4 border-b border-neutral-200 pb-2">
               <h3 className="text-lg font-bold uppercase tracking-wide text-ink">
                 {t("allTopics")}
               </h3>
@@ -92,7 +92,7 @@ export function TopicsListing() {
                       <div>
                         <p className="kicker">{t("kicker")}</p>
                         <h3
-                          className="mt-1 font-serif text-2xl font-bold text-ink sm:text-3xl"
+                          className="mt-1 font-serif text-xl font-bold text-ink sm:text-2xl"
                           id={headingId}
                         >
                           {group.category ? (
@@ -116,7 +116,7 @@ export function TopicsListing() {
                   >
                     {group.items.map((topic) => (
                       <div
-                        className="w-[17.5rem] shrink-0 snap-start sm:w-80"
+                        className="w-60 shrink-0 snap-start sm:w-72"
                         key={topic.id}
                         role="listitem"
                       >

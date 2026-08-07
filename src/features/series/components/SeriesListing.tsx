@@ -22,7 +22,7 @@ function SeriesSkeleton() {
           <Skeleton className="h-7 w-48" />
           <div className="flex gap-5 overflow-hidden">
             {Array.from({ length: 3 }).map((_, cardIndex) => (
-              <div key={cardIndex} className="w-72 shrink-0 space-y-3">
+              <div key={cardIndex} className="w-60 shrink-0 space-y-3">
                 <Skeleton className="aspect-[16/10] w-full" />
                 <Skeleton className="h-3 w-20" />
                 <Skeleton className="h-6 w-3/4" />
@@ -46,7 +46,7 @@ export function SeriesListing() {
   );
 
   return (
-    <Section ariaLabelledby="series-listing-heading">
+    <Section ariaLabelledby="series-listing-heading" className="pt-8 lg:pt-10">
       <Container className="min-w-0">
         <h2 id="series-listing-heading" className="sr-only">
           {t("listingHeading")}
@@ -64,7 +64,7 @@ export function SeriesListing() {
 
         {!isLoading && !isError && groups.length ? (
           <div className="min-w-0 space-y-12">
-            <div className="flex items-end justify-between gap-4 border-b-2 border-ink pb-2">
+            <div className="flex items-end justify-between gap-4 border-b border-neutral-200 pb-2">
               <h3 className="text-lg font-bold uppercase tracking-wide text-ink">
                 {t("allSeries")}
               </h3>
@@ -89,7 +89,7 @@ export function SeriesListing() {
                       <div>
                         <p className="kicker">{t("kicker")}</p>
                         <h3
-                          className="mt-1 font-serif text-2xl font-bold text-ink sm:text-3xl"
+                          className="mt-1 font-serif text-xl font-bold text-ink sm:text-2xl"
                           id={headingId}
                         >
                           {group.topic ? (
@@ -113,7 +113,7 @@ export function SeriesListing() {
                   >
                     {group.items.map((series) => (
                       <div
-                        className="w-[17.5rem] shrink-0 snap-start sm:w-80"
+                        className="w-60 shrink-0 snap-start sm:w-72"
                         key={series.id}
                         role="listitem"
                       >

@@ -3,7 +3,6 @@
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 
-import { HeroFeaturedCard } from "@/features/hero-section/components/HeroFeaturedCard";
 import { useTopicDetail } from "@/features/topics/hooks/useTopicDetail";
 import { Link } from "@/i18n/navigation";
 import { ArticleCard } from "@/shared/components/common/ArticleCard";
@@ -80,13 +79,7 @@ export function TopicDetailView({ slug }: TopicDetailViewProps) {
 
           {topicQuery.data ? (
             <>
-              <div className="mt-4 flex items-center gap-2">
-                <span
-                  aria-hidden="true"
-                  className="h-3 w-3 rounded-sm bg-accent"
-                />
-                <p className="kicker">{t("kicker")}</p>
-              </div>
+              <p className="mt-4 kicker">{t("kicker")}</p>
               <h1
                 id="topic-detail-heading"
                 className="mt-2 max-w-3xl font-serif text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl"
@@ -114,7 +107,7 @@ export function TopicDetailView({ slug }: TopicDetailViewProps) {
         </Container>
       </section>
 
-      <Section ariaLabelledby="topic-articles-heading">
+      <Section ariaLabelledby="topic-articles-heading" className="pt-8 lg:pt-10">
         <Container>
           <h2 id="topic-articles-heading" className="sr-only">
             {t("articlesHeading")}
@@ -139,10 +132,10 @@ export function TopicDetailView({ slug }: TopicDetailViewProps) {
           articlesQuery.data?.items.length ? (
             <div className="space-y-10">
               {page === 1 ? (
-                <div>
+                <div className="border-b border-neutral-200 pb-8">
                   <p className="kicker">{t("featuredKicker")}</p>
                   <div className="mt-3">
-                    <HeroFeaturedCard article={articlesQuery.data.items[0]} />
+                    <ArticleCard article={articlesQuery.data.items[0]} variant="featured" />
                   </div>
                 </div>
               ) : null}
@@ -152,7 +145,7 @@ export function TopicDetailView({ slug }: TopicDetailViewProps) {
                 : articlesQuery.data.items
               ).length > 0 ? (
                 <div>
-                  <div className="mb-6 flex items-end justify-between gap-4 border-b-2 border-ink pb-2">
+                  <div className="mb-6 flex items-end justify-between gap-4 border-b border-neutral-200 pb-2">
                     <h3 className="text-lg font-bold uppercase tracking-wide text-ink">
                       {t("articlesHeading")}
                     </h3>

@@ -26,7 +26,7 @@ export async function generateMetadata({
 
 function ListingFallback() {
   return (
-    <Section>
+    <Section className="pt-8 lg:pt-10">
       <Container>
         <div className="grid overflow-hidden border border-neutral-200 lg:grid-cols-[minmax(0,1fr)_22rem]">
           <Skeleton className="aspect-video w-full rounded-none" />

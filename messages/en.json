@@ -868,6 +868,7 @@
     "viewsLabel": "views",
     "sharesLabel": "shares",
     "notFoundTitle": "Article not found",
-    "notFoundMessage": "The article you are looking for is unavailable or has been removed."
+    "notFoundMessage": "The article you are looking for is unavailable or has been removed.",
+    "relatedHeading": "Related Articles"
   }
 }

@@ -15,9 +15,8 @@ export function AboutStory() {
           <div className="lg:col-span-4">
             <h2
               id="about-story-heading"
-              className="flex items-center gap-2.5 text-lg font-bold uppercase tracking-wide text-ink sm:text-xl"
+              className="text-lg font-bold uppercase tracking-wide text-ink sm:text-xl"
             >
-              <span aria-hidden="true" className="h-5 w-1.5 bg-accent" />
               {t("storyTitle")}
             </h2>
             <blockquote className="mt-6 border-l-2 border-accent pl-5 font-serif text-xl italic leading-relaxed text-ink lg:text-2xl">

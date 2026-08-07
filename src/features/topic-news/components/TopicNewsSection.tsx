@@ -20,17 +20,14 @@ function TopicBlock({ group }: { group: TopicNewsGroup }) {
   return (
     <div className="min-w-0 border-t border-neutral-200 pt-6 first:border-t-0 first:pt-0 lg:border-t-0 lg:border-l lg:border-neutral-200 lg:pt-0 lg:pl-8 lg:first:border-l-0 lg:first:pl-0">
       <div className="mb-4">
-        <div className="flex items-center gap-2">
-          <span aria-hidden="true" className="h-3 w-3 rounded-sm bg-accent" />
-          <h3 className="font-serif text-xl font-bold text-ink">
-            <Link
-              className="transition-colors hover:text-accent"
-              href={`/topics/${group.topic.slug}`}
-            >
-              {group.topic.name}
-            </Link>
-          </h3>
-        </div>
+        <h3 className="font-serif text-xl font-bold text-ink">
+          <Link
+            className="transition-colors hover:text-accent"
+            href={`/topics/${group.topic.slug}`}
+          >
+            {group.topic.name}
+          </Link>
+        </h3>
         {group.topic.description ? (
           <p className="mt-1 line-clamp-2 text-sm text-neutral-500">
             {group.topic.description}

@@ -80,14 +80,14 @@ export default async function HomePage({ params }: HomePageProps) {
     <>
       <WorldClock />
       <HeroSection />
+      <EditorsPickSection />
       <BreakingNewsSection />
       <LatestNewsSection />
-      <ForYouSection />
-      <TopicNewsSection />
       <CategoryNewsSection />
+      <TopicNewsSection />
       <FeaturedSeriesSection />
       <FeaturedVideosSection />
-      <EditorsPickSection />
+      <ForYouSection />
     </>
   );
 }

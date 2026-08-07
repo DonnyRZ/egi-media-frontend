@@ -43,7 +43,7 @@ export function BreakingNewsSection() {
   }
 
   return (
-    <Section ariaLabelledby="breaking-heading" className="border-y border-ink py-5">
+    <Section ariaLabelledby="breaking-heading" className="border-y border-neutral-200 py-5">
       <Container>
         <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:gap-6">
           <div className="flex shrink-0 items-center gap-2">

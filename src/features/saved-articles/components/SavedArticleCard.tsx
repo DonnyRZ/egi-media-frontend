@@ -27,9 +27,9 @@ export function SavedArticleCard({ article }: SavedArticleCardProps) {
   }
 
   return (
-    <div className="flex h-full flex-col border border-neutral-200 bg-white p-5 transition-shadow hover:shadow-md">
+    <div className="flex h-full flex-col border border-neutral-200 bg-white p-4 transition-shadow hover:shadow-md">
       <ArticleCard article={article} />
-      <div className="mt-4 flex items-center justify-between gap-3 border-t border-neutral-100 pt-4">
+      <div className="mt-3 flex items-center justify-between gap-3 border-t border-neutral-100 pt-3">
         {article.savedAt ? (
           <span className="text-xs text-neutral-500">
             {t("savedOn", {

@@ -21,7 +21,7 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
         {article.title}
       </h1>
       {article.summary ? (
-        <p className="mt-4 max-w-3xl text-lg leading-8 text-neutral-700">{article.summary}</p>
+        <p className="mt-4 max-w-3xl text-base leading-7 text-neutral-700 lg:text-lg lg:leading-8">{article.summary}</p>
       ) : null}
       <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-neutral-500">
         <span className="font-semibold text-neutral-800">{article.author.fullName}</span>

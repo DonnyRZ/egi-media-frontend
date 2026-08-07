@@ -24,8 +24,7 @@ export function ContactDetails() {
         <div className="grid items-start gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="space-y-10 lg:col-span-5">
             <div>
-              <h3 className="flex items-center gap-2.5 text-xs font-bold uppercase tracking-[0.14em] text-accent">
-                <span aria-hidden="true" className="h-4 w-1 bg-accent" />
+              <h3 className="text-xs font-bold uppercase tracking-[0.14em] text-accent">
                 {t("studioTitle")}
               </h3>
               <p className="mt-3 font-serif text-2xl font-bold text-ink">{t("building")}</p>

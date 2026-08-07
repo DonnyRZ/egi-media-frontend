@@ -4,8 +4,7 @@ import { useTranslations } from "next-intl";
 
 import { Link } from "@/i18n/navigation";
 import { ArticleImage } from "@/shared/components/common/ArticleImage";
-import { Container } from "@/shared/components/layout/Container";
-import { Section } from "@/shared/components/layout/Section";
+import { FrameModule } from "@/shared/components/layout/FrameModule";
 import { ErrorState } from "@/shared/components/common/ErrorState";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
 import { useBreakingNews } from "@/features/homepage/hooks/useBreakingNews";
@@ -43,45 +42,43 @@ export function BreakingNewsSection() {
   }
 
   return (
-    <Section ariaLabelledby="breaking-heading" dense>
-      <Container>
-        <div className="flex flex-col gap-4 border border-neutral-200 bg-white p-4 lg:flex-row lg:items-start lg:gap-6 lg:p-5">
-          <div className="flex shrink-0 items-center gap-2">
-            <span
-              aria-hidden="true"
-              className="inline-flex h-2.5 w-2.5 animate-pulse rounded-full bg-accent"
-            />
-            <h2
-              id="breaking-heading"
-              className="text-sm font-bold uppercase tracking-[0.14em] text-accent"
-            >
-              {t("title")}
-            </h2>
-          </div>
-
-          <div className="min-w-0 flex-1">
-            {isLoading ? (
-              <div className="flex gap-4 overflow-hidden">
-                {Array.from({ length: 4 }).map((_, index) => (
-                  <Skeleton key={index} className="h-44 w-60 shrink-0" />
-                ))}
-              </div>
-            ) : null}
-
-            {isError ? (
-              <ErrorState message={error?.message} onRetry={() => void refetch()} />
-            ) : null}
-
-            {!isLoading && !isError && data?.items.length ? (
-              <div className="flex gap-5 overflow-x-auto pb-2 scrollbar-hide">
-                {data.items.map((article) => (
-                  <BreakingCard key={article.id} article={article} />
-                ))}
-              </div>
-            ) : null}
-          </div>
+    <FrameModule ariaLabelledby="breaking-heading">
+      <div className="flex flex-col gap-4 bg-white p-4 lg:flex-row lg:items-start lg:gap-6 lg:p-5">
+        <div className="flex shrink-0 items-center gap-2">
+          <span
+            aria-hidden="true"
+            className="inline-flex h-2.5 w-2.5 animate-pulse rounded-full bg-accent"
+          />
+          <h2
+            id="breaking-heading"
+            className="text-sm font-bold uppercase tracking-[0.14em] text-accent"
+          >
+            {t("title")}
+          </h2>
         </div>
-      </Container>
-    </Section>
+
+        <div className="min-w-0 flex-1">
+          {isLoading ? (
+            <div className="flex gap-4 overflow-hidden">
+              {Array.from({ length: 4 }).map((_, index) => (
+                <Skeleton key={index} className="h-44 w-60 shrink-0" />
+              ))}
+            </div>
+          ) : null}
+
+          {isError ? (
+            <ErrorState message={error?.message} onRetry={() => void refetch()} />
+          ) : null}
+
+          {!isLoading && !isError && data?.items.length ? (
+            <div className="flex gap-5 overflow-x-auto pb-2 scrollbar-hide">
+              {data.items.map((article) => (
+                <BreakingCard key={article.id} article={article} />
+              ))}
+            </div>
+          ) : null}
+        </div>
+      </div>
+    </FrameModule>
   );
 }

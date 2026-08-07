@@ -54,7 +54,9 @@ export function ForYouListing() {
     return (
       <Section>
         <Container>
-          <ForYouGuestCta />
+          <div className="border border-neutral-200">
+            <ForYouGuestCta />
+          </div>
         </Container>
       </Section>
     );
@@ -91,7 +93,9 @@ export function ForYouListing() {
         ) : null}
 
         {!isLoading && !feed.isError && (!hasSubscriptions || !hasItems) ? (
-          <ForYouEmptyState />
+          <div className="border border-neutral-200">
+            <ForYouEmptyState />
+          </div>
         ) : null}
 
         {!isLoading && !feed.isError && hasItems && feed.data ? (

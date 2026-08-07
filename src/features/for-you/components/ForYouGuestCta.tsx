@@ -9,7 +9,7 @@ export function ForYouGuestCta() {
   const t = useTranslations("forYou");
 
   return (
-    <div className="border border-neutral-200 bg-neutral-50 px-6 py-10 text-center">
+    <div className="bg-white px-6 py-10 text-center">
       <h3 className="font-serif text-2xl font-bold text-ink">{t("guestTitle")}</h3>
       <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-neutral-600">
         {t("guestMessage")}

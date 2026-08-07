@@ -4,11 +4,9 @@ import { useTranslations } from "next-intl";
 
 import { VideoEmbed } from "@/features/videos/components/VideoEmbed";
 import { GridFillers } from "@/shared/components/common/GridFillers";
-import { SectionHeading } from "@/shared/components/common/SectionHeading";
-import { Container } from "@/shared/components/layout/Container";
-import { Section } from "@/shared/components/layout/Section";
+import { FrameHeading } from "@/shared/components/layout/FrameHeading";
+import { FrameModule } from "@/shared/components/layout/FrameModule";
 import { ErrorState } from "@/shared/components/common/ErrorState";
-import { EmptyState } from "@/shared/components/common/EmptyState";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
 import { useFeaturedVideos } from "@/features/homepage/hooks/useFeaturedVideos";
 import type { YoutubeVideo } from "@/shared/types/youtube.types";
@@ -47,44 +45,44 @@ export function FeaturedVideosSection() {
   const { data, isLoading, isError, error, refetch } = useFeaturedVideos();
   const t = useTranslations("videos");
 
+  if (!isLoading && !isError && !data?.items.length) {
+    return null;
+  }
+
   return (
-    <Section ariaLabelledby="videos-heading" dense>
-      <Container>
-        <SectionHeading
-          actionHref="/videos"
-          id="videos-heading"
-          subtitle={t("subtitle")}
-          title={t("title")}
-        />
+    <FrameModule ariaLabelledby="videos-heading">
+      <FrameHeading
+        actionHref="/videos"
+        id="videos-heading"
+        subtitle={t("subtitle")}
+        title={t("title")}
+      />
 
-        {isLoading ? (
-          <div className="grid gap-px border border-neutral-200 bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
-            {Array.from({ length: 3 }).map((_, index) => (
-              <div className="bg-white" key={index}>
-                <Skeleton className="aspect-video w-full" />
-              </div>
-            ))}
-            <GridFillers count={3} />
-          </div>
-        ) : null}
+      {isLoading ? (
+        <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
+          {Array.from({ length: 3 }).map((_, index) => (
+            <div className="bg-white" key={index}>
+              <Skeleton className="aspect-video w-full" />
+            </div>
+          ))}
+          <GridFillers count={3} />
+        </div>
+      ) : null}
 
-        {isError ? (
+      {isError ? (
+        <div className="bg-white p-5">
           <ErrorState message={error?.message} onRetry={() => void refetch()} />
-        ) : null}
+        </div>
+      ) : null}
 
-        {!isLoading && !isError && !data?.items.length ? (
-          <EmptyState message={t("empty")} />
-        ) : null}
-
-        {!isLoading && !isError && data?.items.length ? (
-          <div className="grid gap-px border border-neutral-200 bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
-            {data.items.map((video) => (
-              <VideoCard key={video.id} video={video} />
-            ))}
-            <GridFillers count={data.items.length} />
-          </div>
-        ) : null}
-      </Container>
-    </Section>
+      {!isLoading && !isError && data?.items.length ? (
+        <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
+          {data.items.map((video) => (
+            <VideoCard key={video.id} video={video} />
+          ))}
+          <GridFillers count={data.items.length} />
+        </div>
+      ) : null}
+    </FrameModule>
   );
 }

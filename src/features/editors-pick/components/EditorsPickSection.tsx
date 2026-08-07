@@ -4,9 +4,8 @@ import { useTranslations } from "next-intl";
 
 import { Link } from "@/i18n/navigation";
 import { GridFillers } from "@/shared/components/common/GridFillers";
-import { SectionHeading } from "@/shared/components/common/SectionHeading";
-import { Container } from "@/shared/components/layout/Container";
-import { Section } from "@/shared/components/layout/Section";
+import { FrameHeading } from "@/shared/components/layout/FrameHeading";
+import { FrameModule } from "@/shared/components/layout/FrameModule";
 import { ErrorState } from "@/shared/components/common/ErrorState";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
 import { useEditorsPick } from "@/features/homepage/hooks/useEditorsPick";
@@ -46,42 +45,42 @@ export function EditorsPickSection() {
   }
 
   return (
-    <Section ariaLabelledby="editors-heading" dense>
-      <Container>
-        <SectionHeading
-          id="editors-heading"
-          subtitle={t("subtitle")}
-          title={t("title")}
-        />
+    <FrameModule ariaLabelledby="editors-heading">
+      <FrameHeading
+        id="editors-heading"
+        subtitle={t("subtitle")}
+        title={t("title")}
+      />
 
-        {isLoading ? (
-          <div className="grid gap-px border border-neutral-200 bg-neutral-200 sm:grid-cols-2">
-            {Array.from({ length: 6 }).map((_, index) => (
-              <div key={index} className="flex gap-4 bg-white p-5">
-                <Skeleton className="h-8 w-6" />
-                <div className="flex-1 space-y-2">
-                  <Skeleton className="h-3 w-20" />
-                  <Skeleton className="h-5 w-full" />
-                  <Skeleton className="h-3 w-24" />
-                </div>
+      {isLoading ? (
+        <div className="grid gap-px bg-neutral-200 sm:grid-cols-2">
+          {Array.from({ length: 6 }).map((_, index) => (
+            <div key={index} className="flex gap-4 bg-white p-5">
+              <Skeleton className="h-8 w-6" />
+              <div className="flex-1 space-y-2">
+                <Skeleton className="h-3 w-20" />
+                <Skeleton className="h-5 w-full" />
+                <Skeleton className="h-3 w-24" />
               </div>
-            ))}
-          </div>
-        ) : null}
+            </div>
+          ))}
+        </div>
+      ) : null}
 
-        {isError ? (
+      {isError ? (
+        <div className="bg-white p-5">
           <ErrorState message={error?.message} onRetry={() => void refetch()} />
-        ) : null}
+        </div>
+      ) : null}
 
-        {!isLoading && !isError && data?.items.length ? (
-          <div className="grid gap-px border border-neutral-200 bg-neutral-200 sm:grid-cols-2">
-            {data.items.map((article, index) => (
-              <RankedItem key={article.id} article={article} rank={index + 1} />
-            ))}
-            <GridFillers count={data.items.length} lgCols={2} />
-          </div>
-        ) : null}
-      </Container>
-    </Section>
+      {!isLoading && !isError && data?.items.length ? (
+        <div className="grid gap-px bg-neutral-200 sm:grid-cols-2">
+          {data.items.map((article, index) => (
+            <RankedItem key={article.id} article={article} rank={index + 1} />
+          ))}
+          <GridFillers count={data.items.length} lgCols={2} />
+        </div>
+      ) : null}
+    </FrameModule>
   );
 }

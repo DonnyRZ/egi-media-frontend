@@ -9,7 +9,7 @@ export function ForYouEmptyState() {
   const t = useTranslations("forYou");
 
   return (
-    <div className="border border-neutral-200 bg-white px-6 py-10 text-center">
+    <div className="bg-white px-6 py-10 text-center">
       <h3 className="font-serif text-xl font-bold text-ink">{t("emptyTitle")}</h3>
       <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-neutral-600">
         {t("emptyMessage")}

@@ -2,8 +2,7 @@
 
 import { useTranslations } from "next-intl";
 
-import { Container } from "@/shared/components/layout/Container";
-import { Section } from "@/shared/components/layout/Section";
+import { FrameModule } from "@/shared/components/layout/FrameModule";
 import { ErrorState } from "@/shared/components/common/ErrorState";
 import { EmptyState } from "@/shared/components/common/EmptyState";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
@@ -13,7 +12,7 @@ import { HeroHeadlineList } from "@/features/hero-section/components/HeroHeadlin
 
 function HeroSkeleton() {
   return (
-    <div className="grid gap-px border border-neutral-200 bg-neutral-200 lg:grid-cols-[2fr_1fr]">
+    <div className="grid gap-px bg-neutral-200 lg:grid-cols-[2fr_1fr]">
       <div className="space-y-4 bg-white p-6">
         <Skeleton className="aspect-[16/9] w-full" />
         <Skeleton className="h-4 w-24" />
@@ -42,37 +41,40 @@ export function HeroSection() {
   const headlines = data?.headlines ?? [];
   const hasContent = Boolean(featured) || headlines.length > 0;
 
+  // Always render so the content frame has a top module (loading / empty / error).
   return (
-    <Section ariaLabelledby="hero-heading" dense>
-      <Container>
-        <h1 id="hero-heading" className="sr-only">
-          {t("srHeading")}
-        </h1>
-        {isLoading ? <HeroSkeleton /> : null}
-        {isError ? (
+    <FrameModule ariaLabelledby="hero-heading">
+      <h1 id="hero-heading" className="sr-only">
+        {t("srHeading")}
+      </h1>
+      {isLoading ? <HeroSkeleton /> : null}
+      {isError ? (
+        <div className="bg-white p-6">
           <ErrorState
             message={error?.message}
             onRetry={() => void refetch()}
           />
-        ) : null}
-        {!isLoading && !isError && !hasContent ? (
+        </div>
+      ) : null}
+      {!isLoading && !isError && !hasContent ? (
+        <div className="bg-white p-6">
           <EmptyState title={t("noFeatured")} />
-        ) : null}
-        {!isLoading && !isError && hasContent ? (
-          <div
-            className={
-              featured && headlines.length > 0
-                ? "grid gap-px border border-neutral-200 bg-neutral-200 lg:grid-cols-[2fr_1fr]"
-                : "grid gap-px border border-neutral-200 bg-neutral-200"
-            }
-          >
-            {featured ? <HeroFeaturedCard article={featured} /> : null}
-            {headlines.length > 0 ? (
-              <HeroHeadlineList articles={headlines} />
-            ) : null}
-          </div>
-        ) : null}
-      </Container>
-    </Section>
+        </div>
+      ) : null}
+      {!isLoading && !isError && hasContent ? (
+        <div
+          className={
+            featured && headlines.length > 0
+              ? "grid gap-px bg-neutral-200 lg:grid-cols-[2fr_1fr]"
+              : "grid gap-px bg-neutral-200"
+          }
+        >
+          {featured ? <HeroFeaturedCard article={featured} /> : null}
+          {headlines.length > 0 ? (
+            <HeroHeadlineList articles={headlines} />
+          ) : null}
+        </div>
+      ) : null}
+    </FrameModule>
   );
 }

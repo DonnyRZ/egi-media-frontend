@@ -10,9 +10,8 @@ import { useMyTopicSubscriptions } from "@/features/topic-subscriptions/hooks/us
 import { ArticleCard } from "@/shared/components/common/ArticleCard";
 import { ErrorState } from "@/shared/components/common/ErrorState";
 import { GridFillers } from "@/shared/components/common/GridFillers";
-import { SectionHeading } from "@/shared/components/common/SectionHeading";
-import { Container } from "@/shared/components/layout/Container";
-import { Section } from "@/shared/components/layout/Section";
+import { FrameHeading } from "@/shared/components/layout/FrameHeading";
+import { FrameModule } from "@/shared/components/layout/FrameModule";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
 
 export function ForYouSection() {
@@ -30,63 +29,63 @@ export function ForYouSection() {
     (isAuthenticated && (feed.isLoading || subscriptions.isLoading));
 
   return (
-    <Section ariaLabelledby="for-you-heading" dense>
-      <Container>
-        <SectionHeading
-          actionHref={isAuthenticated ? "/for-you" : "/register"}
-          actionLabel={isAuthenticated ? t("viewAll") : t("guestSignUpCta")}
-          id="for-you-heading"
-          subtitle={t("subtitle")}
-          title={t("title")}
-        />
+    <FrameModule ariaLabelledby="for-you-heading">
+      <FrameHeading
+        actionHref={isAuthenticated ? "/for-you" : "/register"}
+        actionLabel={isAuthenticated ? t("viewAll") : t("guestSignUpCta")}
+        id="for-you-heading"
+        subtitle={t("subtitle")}
+        title={t("title")}
+      />
 
-        {isLoading ? (
-          <div className="grid gap-px border border-neutral-200 bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
-            {Array.from({ length: 6 }).map((_, index) => (
-              <div className="space-y-3 bg-white p-5" key={index}>
-                <Skeleton className="aspect-[16/10] w-full" />
-                <Skeleton className="h-4 w-24" />
-                <Skeleton className="h-6 w-full" />
-                <Skeleton className="h-4 w-3/4" />
-              </div>
-            ))}
-          </div>
-        ) : null}
+      {isLoading ? (
+        <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
+          {Array.from({ length: 6 }).map((_, index) => (
+            <div className="space-y-3 bg-white p-5" key={index}>
+              <Skeleton className="aspect-[16/10] w-full" />
+              <Skeleton className="h-4 w-24" />
+              <Skeleton className="h-6 w-full" />
+              <Skeleton className="h-4 w-3/4" />
+            </div>
+          ))}
+        </div>
+      ) : null}
 
-        {!isLoading && showGuest ? <ForYouGuestCta /> : null}
+      {!isLoading && showGuest ? <ForYouGuestCta /> : null}
 
-        {!isLoading && isAuthenticated && feed.isError ? (
+      {!isLoading && isAuthenticated && feed.isError ? (
+        <div className="bg-white p-5">
           <ErrorState
             message={feed.error?.message}
             onRetry={() => void feed.refetch()}
           />
-        ) : null}
+        </div>
+      ) : null}
 
-        {!isLoading && isAuthenticated && !feed.isError && !hasSubscriptions ? (
-          <ForYouEmptyState />
-        ) : null}
+      {!isLoading && isAuthenticated && !feed.isError && !hasSubscriptions ? (
+        <ForYouEmptyState />
+      ) : null}
 
-        {!isLoading &&
-        isAuthenticated &&
-        !feed.isError &&
-        hasSubscriptions &&
-        !hasItems ? (
-          <ForYouEmptyState />
-        ) : null}
+      {!isLoading &&
+      isAuthenticated &&
+      !feed.isError &&
+      hasSubscriptions &&
+      !hasItems ? (
+        <ForYouEmptyState />
+      ) : null}
 
-        {!isLoading && isAuthenticated && !feed.isError && hasItems && feed.data ? (
-          <div className="grid gap-px border border-neutral-200 bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
-            {feed.data.items.map((article) => (
-              <ArticleCard
-                article={article}
-                className="bg-white p-5"
-                key={article.id}
-              />
-            ))}
-            <GridFillers count={feed.data.items.length} />
-          </div>
-        ) : null}
-      </Container>
-    </Section>
+      {!isLoading && isAuthenticated && !feed.isError && hasItems && feed.data ? (
+        <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
+          {feed.data.items.map((article) => (
+            <ArticleCard
+              article={article}
+              className="bg-white p-5"
+              key={article.id}
+            />
+          ))}
+          <GridFillers count={feed.data.items.length} />
+        </div>
+      ) : null}
+    </FrameModule>
   );
 }

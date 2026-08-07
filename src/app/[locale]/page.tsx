@@ -2,6 +2,8 @@ import dynamic from "next/dynamic";
 import { setRequestLocale } from "next-intl/server";
 
 import { HeroSection } from "@/features/hero-section/components/HeroSection";
+import { Container } from "@/shared/components/layout/Container";
+import { ContentFrame } from "@/shared/components/layout/ContentFrame";
 
 const BreakingNewsSection = dynamic(
   () =>
@@ -76,16 +78,18 @@ export default async function HomePage({ params }: HomePageProps) {
   setRequestLocale(locale);
 
   return (
-    <>
-      <HeroSection />
-      <EditorsPickSection />
-      <BreakingNewsSection />
-      <LatestNewsSection />
-      <CategoryNewsSection />
-      <TopicNewsSection />
-      <FeaturedSeriesSection />
-      <FeaturedVideosSection />
-      <ForYouSection />
-    </>
+    <Container className="py-0">
+      <ContentFrame>
+        <HeroSection />
+        <EditorsPickSection />
+        <BreakingNewsSection />
+        <LatestNewsSection />
+        <CategoryNewsSection />
+        <TopicNewsSection />
+        <FeaturedSeriesSection />
+        <FeaturedVideosSection />
+        <ForYouSection />
+      </ContentFrame>
+    </Container>
   );
 }

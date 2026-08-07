@@ -7,9 +7,8 @@ import { Link } from "@/i18n/navigation";
 import { ArticleCard } from "@/shared/components/common/ArticleCard";
 import { ErrorState } from "@/shared/components/common/ErrorState";
 import { GridFillers } from "@/shared/components/common/GridFillers";
-import { SectionHeading } from "@/shared/components/common/SectionHeading";
-import { Container } from "@/shared/components/layout/Container";
-import { Section } from "@/shared/components/layout/Section";
+import { FrameHeading } from "@/shared/components/layout/FrameHeading";
+import { FrameModule } from "@/shared/components/layout/FrameModule";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
 import type { TopicNewsGroup } from "@/shared/types/topic.types";
 
@@ -55,42 +54,42 @@ export function TopicNewsSection() {
   }
 
   return (
-    <Section ariaLabelledby="topics-heading" dense>
-      <Container>
-        <SectionHeading
-          actionHref="/topics"
-          id="topics-heading"
-          subtitle={t("subtitle")}
-          title={t("title")}
-        />
+    <FrameModule ariaLabelledby="topics-heading">
+      <FrameHeading
+        actionHref="/topics"
+        id="topics-heading"
+        subtitle={t("subtitle")}
+        title={t("title")}
+      />
 
-        {isLoading ? (
-          <div className="grid gap-px border border-neutral-200 bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
-            {Array.from({ length: 3 }).map((_, index) => (
-              <div key={index} className="space-y-4 bg-white p-5">
-                <Skeleton className="h-6 w-32" />
-                <Skeleton className="h-20 w-full" />
-                <Skeleton className="h-14 w-full" />
-                <Skeleton className="h-14 w-full" />
-              </div>
-            ))}
-            <GridFillers count={3} />
-          </div>
-        ) : null}
+      {isLoading ? (
+        <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
+          {Array.from({ length: 3 }).map((_, index) => (
+            <div key={index} className="space-y-4 bg-white p-5">
+              <Skeleton className="h-6 w-32" />
+              <Skeleton className="h-20 w-full" />
+              <Skeleton className="h-14 w-full" />
+              <Skeleton className="h-14 w-full" />
+            </div>
+          ))}
+          <GridFillers count={3} />
+        </div>
+      ) : null}
 
-        {isError ? (
+      {isError ? (
+        <div className="bg-white p-5">
           <ErrorState message={error?.message} onRetry={() => void refetch()} />
-        ) : null}
+        </div>
+      ) : null}
 
-        {!isLoading && !isError && data?.length ? (
-          <div className="grid gap-px border border-neutral-200 bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
-            {data.map((group) => (
-              <TopicBlock key={group.topic.id} group={group} />
-            ))}
-            <GridFillers count={data.length} />
-          </div>
-        ) : null}
-      </Container>
-    </Section>
+      {!isLoading && !isError && data?.length ? (
+        <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
+          {data.map((group) => (
+            <TopicBlock key={group.topic.id} group={group} />
+          ))}
+          <GridFillers count={data.length} />
+        </div>
+      ) : null}
+    </FrameModule>
   );
 }

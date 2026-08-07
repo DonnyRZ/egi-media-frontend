@@ -7,9 +7,8 @@ import { Link } from "@/i18n/navigation";
 import { ArticleCard } from "@/shared/components/common/ArticleCard";
 import { ErrorState } from "@/shared/components/common/ErrorState";
 import { GridFillers } from "@/shared/components/common/GridFillers";
-import { SectionHeading } from "@/shared/components/common/SectionHeading";
-import { Container } from "@/shared/components/layout/Container";
-import { Section } from "@/shared/components/layout/Section";
+import { FrameHeading } from "@/shared/components/layout/FrameHeading";
+import { FrameModule } from "@/shared/components/layout/FrameModule";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
 import type { CategoryNewsGroup } from "@/shared/types/category.types";
 
@@ -49,42 +48,42 @@ export function CategoryNewsSection() {
   }
 
   return (
-    <Section ariaLabelledby="categories-heading" dense>
-      <Container>
-        <SectionHeading
-          actionHref="/categories"
-          id="categories-heading"
-          subtitle={t("subtitle")}
-          title={t("title")}
-        />
+    <FrameModule ariaLabelledby="categories-heading">
+      <FrameHeading
+        actionHref="/categories"
+        id="categories-heading"
+        subtitle={t("subtitle")}
+        title={t("title")}
+      />
 
-        {isLoading ? (
-          <div className="grid gap-px border border-neutral-200 bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
-            {Array.from({ length: 3 }).map((_, index) => (
-              <div key={index} className="space-y-4 bg-white p-5">
-                <Skeleton className="h-4 w-28" />
-                <Skeleton className="h-16 w-full" />
-                <Skeleton className="h-16 w-full" />
-                <Skeleton className="h-16 w-full" />
-              </div>
-            ))}
-            <GridFillers count={3} />
-          </div>
-        ) : null}
+      {isLoading ? (
+        <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
+          {Array.from({ length: 3 }).map((_, index) => (
+            <div key={index} className="space-y-4 bg-white p-5">
+              <Skeleton className="h-4 w-28" />
+              <Skeleton className="h-16 w-full" />
+              <Skeleton className="h-16 w-full" />
+              <Skeleton className="h-16 w-full" />
+            </div>
+          ))}
+          <GridFillers count={3} />
+        </div>
+      ) : null}
 
-        {isError ? (
+      {isError ? (
+        <div className="bg-white p-5">
           <ErrorState message={error?.message} onRetry={() => void refetch()} />
-        ) : null}
+        </div>
+      ) : null}
 
-        {!isLoading && !isError && data?.length ? (
-          <div className="grid gap-px border border-neutral-200 bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
-            {data.map((group) => (
-              <CategoryColumn key={group.category.id} group={group} />
-            ))}
-            <GridFillers count={data.length} />
-          </div>
-        ) : null}
-      </Container>
-    </Section>
+      {!isLoading && !isError && data?.length ? (
+        <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
+          {data.map((group) => (
+            <CategoryColumn key={group.category.id} group={group} />
+          ))}
+          <GridFillers count={data.length} />
+        </div>
+      ) : null}
+    </FrameModule>
   );
 }

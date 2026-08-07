@@ -5,57 +5,55 @@ import { useTranslations } from "next-intl";
 import { SeriesCard } from "@/features/series/components/SeriesCard";
 import { useFeaturedSeries } from "@/features/homepage/hooks/useFeaturedSeries";
 import { GridFillers } from "@/shared/components/common/GridFillers";
-import { SectionHeading } from "@/shared/components/common/SectionHeading";
-import { Container } from "@/shared/components/layout/Container";
-import { Section } from "@/shared/components/layout/Section";
+import { FrameHeading } from "@/shared/components/layout/FrameHeading";
+import { FrameModule } from "@/shared/components/layout/FrameModule";
 import { ErrorState } from "@/shared/components/common/ErrorState";
-import { EmptyState } from "@/shared/components/common/EmptyState";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
 
 export function FeaturedSeriesSection() {
   const { data, isLoading, isError, error, refetch } = useFeaturedSeries();
   const t = useTranslations("series");
 
+  if (!isLoading && !isError && !data?.items.length) {
+    return null;
+  }
+
   return (
-    <Section ariaLabelledby="series-heading" dense>
-      <Container>
-        <SectionHeading
-          actionHref="/series"
-          id="series-heading"
-          subtitle={t("subtitle")}
-          title={t("title")}
-        />
+    <FrameModule ariaLabelledby="series-heading">
+      <FrameHeading
+        actionHref="/series"
+        id="series-heading"
+        subtitle={t("subtitle")}
+        title={t("title")}
+      />
 
-        {isLoading ? (
-          <div className="grid gap-px border border-neutral-200 bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
-            {Array.from({ length: 3 }).map((_, index) => (
-              <div key={index} className="space-y-3 bg-white p-5">
-                <Skeleton className="aspect-[16/10] w-full" />
-                <Skeleton className="h-4 w-20" />
-                <Skeleton className="h-6 w-3/4" />
-              </div>
-            ))}
-            <GridFillers count={3} />
-          </div>
-        ) : null}
+      {isLoading ? (
+        <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
+          {Array.from({ length: 3 }).map((_, index) => (
+            <div key={index} className="space-y-3 bg-white p-5">
+              <Skeleton className="aspect-[16/10] w-full" />
+              <Skeleton className="h-4 w-20" />
+              <Skeleton className="h-6 w-3/4" />
+            </div>
+          ))}
+          <GridFillers count={3} />
+        </div>
+      ) : null}
 
-        {isError ? (
+      {isError ? (
+        <div className="bg-white p-5">
           <ErrorState message={error?.message} onRetry={() => void refetch()} />
-        ) : null}
+        </div>
+      ) : null}
 
-        {!isLoading && !isError && !data?.items.length ? (
-          <EmptyState message={t("empty")} />
-        ) : null}
-
-        {!isLoading && !isError && data?.items.length ? (
-          <div className="grid gap-px border border-neutral-200 bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
-            {data.items.slice(0, 3).map((series) => (
-              <SeriesCard key={series.id} series={series} />
-            ))}
-            <GridFillers count={Math.min(data.items.length, 3)} />
-          </div>
-        ) : null}
-      </Container>
-    </Section>
+      {!isLoading && !isError && data?.items.length ? (
+        <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
+          {data.items.slice(0, 3).map((series) => (
+            <SeriesCard key={series.id} series={series} />
+          ))}
+          <GridFillers count={Math.min(data.items.length, 3)} />
+        </div>
+      ) : null}
+    </FrameModule>
   );
 }

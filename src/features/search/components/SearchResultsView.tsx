@@ -6,10 +6,10 @@ import { useQuery } from "@tanstack/react-query";
 
 import { ColumnCard } from "@/features/columns/components/ColumnCard";
 import { fetchColumns } from "@/features/columns/services/column.service";
+import { AdaptiveCardGrid } from "@/shared/components/common/AdaptiveCardGrid";
 import { ArticleCard } from "@/shared/components/common/ArticleCard";
 import { EmptyState } from "@/shared/components/common/EmptyState";
 import { ErrorState } from "@/shared/components/common/ErrorState";
-import { GridFillers } from "@/shared/components/common/GridFillers";
 import { FrameHeading } from "@/shared/components/layout/FrameHeading";
 import { FrameModule } from "@/shared/components/layout/FrameModule";
 import { FramePageHero } from "@/shared/components/layout/FramePageHero";
@@ -139,16 +139,13 @@ export function SearchResultsView() {
             })}
             title={t("articlesHeading")}
           />
-          <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
-            {articles.map((article) => (
-              <ArticleCard
-                article={article}
-                className="bg-white p-5"
-                key={article.id}
-              />
-            ))}
-            <GridFillers count={articles.length} />
-          </div>
+          <AdaptiveCardGrid
+            items={articles}
+            keyForItem={(article) => article.id}
+            renderItem={(article) => (
+              <ArticleCard article={article} className="bg-white p-5" />
+            )}
+          />
         </FrameModule>
       ) : null}
 
@@ -161,12 +158,11 @@ export function SearchResultsView() {
             })}
             title={t("columnsHeading")}
           />
-          <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
-            {columns.map((column) => (
-              <ColumnCard column={column} key={column.id} />
-            ))}
-            <GridFillers count={columns.length} />
-          </div>
+          <AdaptiveCardGrid
+            items={columns}
+            keyForItem={(column) => column.id}
+            renderItem={(column) => <ColumnCard column={column} />}
+          />
         </FrameModule>
       ) : null}
     </PageFrame>

@@ -4,10 +4,10 @@ import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 import { useLatestNewsPage } from "@/features/latest-news/hooks/useLatestNewsPage";
+import { AdaptiveCardGrid } from "@/shared/components/common/AdaptiveCardGrid";
 import { ArticleCard } from "@/shared/components/common/ArticleCard";
 import { EmptyState } from "@/shared/components/common/EmptyState";
 import { ErrorState } from "@/shared/components/common/ErrorState";
-import { GridFillers } from "@/shared/components/common/GridFillers";
 import { Pagination } from "@/shared/components/common/Pagination";
 import { FrameHeading } from "@/shared/components/layout/FrameHeading";
 import { FrameModule } from "@/shared/components/layout/FrameModule";
@@ -49,12 +49,9 @@ export function LatestNewsListing() {
   const t = useTranslations("latestNewsPage");
   const tCommon = useTranslations("common");
 
-  const gridItems =
-    !isLoading && !isError && data?.items.length
-      ? page === 1
-        ? data.items.slice(1)
-        : data.items
-      : [];
+  const items = !isLoading && !isError ? data?.items ?? [] : [];
+  const showFeatured = page === 1 && items.length >= 3;
+  const gridItems = showFeatured ? items.slice(1) : items;
 
   return (
     <FrameModule ariaLabelledby="latest-news-listing-heading">
@@ -78,11 +75,11 @@ export function LatestNewsListing() {
 
       {!isLoading && !isError && data?.items.length ? (
         <>
-          {page === 1 ? (
+          {showFeatured ? (
             <div className="border-b border-neutral-200 bg-white p-5">
               <p className="kicker">{t("featuredKicker")}</p>
               <div className="mt-3">
-                <ArticleCard article={data.items[0]} variant="featured" />
+                <ArticleCard article={items[0]} variant="featured" />
               </div>
             </div>
           ) : null}
@@ -92,31 +89,30 @@ export function LatestNewsListing() {
               <FrameHeading
                 id="latest-news-grid-heading"
                 subtitle={tCommon("articleCount", { count: data.total })}
-                title={page === 1 ? t("allArticles") : t("listingHeading")}
+                title={showFeatured ? t("allArticles") : t("listingHeading")}
               />
-              <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
-                {gridItems.map((article) => (
-                  <ArticleCard
-                    article={article}
-                    className="bg-white p-5"
-                    key={article.id}
-                  />
-                ))}
-                <GridFillers count={gridItems.length} />
-              </div>
+              <AdaptiveCardGrid
+                items={gridItems}
+                keyForItem={(article) => article.id}
+                renderItem={(article) => (
+                  <ArticleCard article={article} className="bg-white p-5" />
+                )}
+              />
             </>
           ) : null}
 
-          <div className="bg-white p-5">
-            <Pagination
-              basePath="/latest"
-              currentPage={data.page}
-              itemLabel="articles"
-              pageSize={data.limit || LATEST_NEWS_PAGE_LIMIT}
-              totalItems={data.total}
-              totalPages={data.totalPages}
-            />
-          </div>
+          {data.totalPages > 1 ? (
+            <div className="bg-white p-5">
+              <Pagination
+                basePath="/latest"
+                currentPage={data.page}
+                itemLabel="articles"
+                pageSize={data.limit || LATEST_NEWS_PAGE_LIMIT}
+                totalItems={data.total}
+                totalPages={data.totalPages}
+              />
+            </div>
+          ) : null}
         </>
       ) : null}
     </FrameModule>

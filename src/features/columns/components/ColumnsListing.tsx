@@ -6,9 +6,9 @@ import { useTranslations } from "next-intl";
 import { ColumnCard } from "@/features/columns/components/ColumnCard";
 import { COLUMNS_PAGE_LIMIT } from "@/features/columns/constants/column.constants";
 import { useColumnsPage } from "@/features/columns/hooks/useColumnsPage";
+import { AdaptiveCardGrid } from "@/shared/components/common/AdaptiveCardGrid";
 import { EmptyState } from "@/shared/components/common/EmptyState";
 import { ErrorState } from "@/shared/components/common/ErrorState";
-import { GridFillers } from "@/shared/components/common/GridFillers";
 import { Pagination } from "@/shared/components/common/Pagination";
 import { FrameHeading } from "@/shared/components/layout/FrameHeading";
 import { FrameModule } from "@/shared/components/layout/FrameModule";
@@ -48,12 +48,9 @@ export function ColumnsListing() {
   const page = Math.max(1, Number(searchParams.get("page")) || 1);
   const { data, isLoading, isError, error, refetch } = useColumnsPage(page);
 
-  const gridItems =
-    !isLoading && !isError && data?.items.length
-      ? page === 1
-        ? data.items.slice(1)
-        : data.items
-      : [];
+  const items = !isLoading && !isError ? data?.items ?? [] : [];
+  const showFeatured = page === 1 && items.length >= 3;
+  const gridItems = showFeatured ? items.slice(1) : items;
 
   return (
     <FrameModule ariaLabelledby="columns-listing-heading">
@@ -77,9 +74,9 @@ export function ColumnsListing() {
 
       {!isLoading && !isError && data?.items.length ? (
         <>
-          {page === 1 ? (
+          {showFeatured ? (
             <div className="border-b border-neutral-200 bg-white">
-              <ColumnCard column={data.items[0]} variant="featured" />
+              <ColumnCard column={items[0]} variant="featured" />
             </div>
           ) : null}
 
@@ -88,27 +85,28 @@ export function ColumnsListing() {
               <FrameHeading
                 id="columns-grid-heading"
                 subtitle={t("columnCount", { count: data.total })}
-                title={page === 1 ? t("allColumns") : t("listingHeading")}
+                title={showFeatured ? t("allColumns") : t("listingHeading")}
               />
-              <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
-                {gridItems.map((column) => (
-                  <ColumnCard column={column} key={column.id} />
-                ))}
-                <GridFillers count={gridItems.length} />
-              </div>
+              <AdaptiveCardGrid
+                items={gridItems}
+                keyForItem={(column) => column.id}
+                renderItem={(column) => <ColumnCard column={column} />}
+              />
             </>
           ) : null}
 
-          <div className="bg-white p-5">
-            <Pagination
-              basePath="/kolom"
-              currentPage={data.page}
-              itemLabel="items"
-              pageSize={data.limit || COLUMNS_PAGE_LIMIT}
-              totalItems={data.total}
-              totalPages={data.totalPages}
-            />
-          </div>
+          {data.totalPages > 1 ? (
+            <div className="bg-white p-5">
+              <Pagination
+                basePath="/kolom"
+                currentPage={data.page}
+                itemLabel="items"
+                pageSize={data.limit || COLUMNS_PAGE_LIMIT}
+                totalItems={data.total}
+                totalPages={data.totalPages}
+              />
+            </div>
+          ) : null}
         </>
       ) : null}
     </FrameModule>

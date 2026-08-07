@@ -4,11 +4,11 @@ import { useFormatter, useTranslations } from "next-intl";
 
 import { useSeriesDetail } from "@/features/series/hooks/useSeriesDetail";
 import { Link } from "@/i18n/navigation";
+import { AdaptiveCardGrid } from "@/shared/components/common/AdaptiveCardGrid";
 import { ArticleCard } from "@/shared/components/common/ArticleCard";
 import { ArticleImage } from "@/shared/components/common/ArticleImage";
 import { EmptyState } from "@/shared/components/common/EmptyState";
 import { ErrorState } from "@/shared/components/common/ErrorState";
-import { GridFillers } from "@/shared/components/common/GridFillers";
 import { FrameHeading } from "@/shared/components/layout/FrameHeading";
 import { FrameModule } from "@/shared/components/layout/FrameModule";
 import { PageFrame } from "@/shared/components/layout/PageFrame";
@@ -135,16 +135,13 @@ export function SeriesDetailView({ slug }: SeriesDetailViewProps) {
             <EmptyState message={t("noArticles")} />
           </div>
         ) : (
-          <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
-            {data.articles.map((article) => (
-              <ArticleCard
-                article={article}
-                className="bg-white p-5"
-                key={article.id}
-              />
-            ))}
-            <GridFillers count={data.articles.length} />
-          </div>
+          <AdaptiveCardGrid
+            items={data.articles}
+            keyForItem={(article) => article.id}
+            renderItem={(article) => (
+              <ArticleCard article={article} className="bg-white p-5" />
+            )}
+          />
         )}
       </FrameModule>
     </PageFrame>

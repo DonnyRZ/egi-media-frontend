@@ -9,9 +9,9 @@ import { ForYouGuestCta } from "@/features/for-you/components/ForYouGuestCta";
 import { PERSONALIZED_FEED_PAGE_LIMIT } from "@/features/for-you/constants/for-you.constants";
 import { usePersonalizedFeed } from "@/features/for-you/hooks/usePersonalizedFeed";
 import { useMyTopicSubscriptions } from "@/features/topic-subscriptions/hooks/useMyTopicSubscriptions";
+import { AdaptiveCardGrid } from "@/shared/components/common/AdaptiveCardGrid";
 import { ArticleCard } from "@/shared/components/common/ArticleCard";
 import { ErrorState } from "@/shared/components/common/ErrorState";
-import { GridFillers } from "@/shared/components/common/GridFillers";
 import { Pagination } from "@/shared/components/common/Pagination";
 import { FrameHeading } from "@/shared/components/layout/FrameHeading";
 import { FrameModule } from "@/shared/components/layout/FrameModule";
@@ -90,23 +90,22 @@ export function ForYouListing() {
 
       {!isLoading && !feed.isError && hasItems && feed.data ? (
         <>
-          <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
-            {feed.data.items.map((article) => (
-              <ArticleCard
-                article={article}
-                className="bg-white p-5"
-                key={article.id}
+          <AdaptiveCardGrid
+            items={feed.data.items}
+            keyForItem={(article) => article.id}
+            renderItem={(article) => (
+              <ArticleCard article={article} className="bg-white p-5" />
+            )}
+          />
+          {feed.data.totalPages > 1 ? (
+            <div className="bg-white p-5">
+              <Pagination
+                basePath="/for-you"
+                currentPage={feed.data.page}
+                totalPages={feed.data.totalPages}
               />
-            ))}
-            <GridFillers count={feed.data.items.length} />
-          </div>
-          <div className="bg-white p-5">
-            <Pagination
-              basePath="/for-you"
-              currentPage={feed.data.page}
-              totalPages={feed.data.totalPages}
-            />
-          </div>
+            </div>
+          ) : null}
         </>
       ) : null}
     </FrameModule>

@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { SeriesCard } from "@/features/series/components/SeriesCard";
 import { useSeriesPage } from "@/features/series/hooks/useSeriesPage";
 import { Link } from "@/i18n/navigation";
+import { AdaptiveCardGrid } from "@/shared/components/common/AdaptiveCardGrid";
 import { EmptyState } from "@/shared/components/common/EmptyState";
 import { ErrorState } from "@/shared/components/common/ErrorState";
 import { HorizontalScroller } from "@/shared/components/common/HorizontalScroller";
@@ -98,49 +99,61 @@ export function SeriesListing() {
       {groups.map((group) => {
         const title = group.topic?.name ?? t("ungroupedTopic");
         const headingId = `series-topic-${group.topic?.id ?? "other"}`;
+        const heading = (
+          <div>
+            <p className="kicker">{t("kicker")}</p>
+            <h3
+              className="mt-1 font-serif text-xl font-bold text-ink sm:text-2xl"
+              id={headingId}
+            >
+              {group.topic ? (
+                <Link
+                  className="transition-colors hover:text-accent"
+                  href={`/topics/${group.topic.slug}`}
+                >
+                  {title}
+                </Link>
+              ) : (
+                title
+              )}
+            </h3>
+          </div>
+        );
 
         return (
           <FrameModule ariaLabelledby={headingId} key={group.topic?.id ?? "ungrouped"}>
-            <div className="min-w-0 bg-white p-5">
-              <HorizontalScroller
-                ariaLabel={title}
-                heading={
-                  <div>
-                    <p className="kicker">{t("kicker")}</p>
-                    <h3
-                      className="mt-1 font-serif text-xl font-bold text-ink sm:text-2xl"
-                      id={headingId}
+            {group.items.length < 4 ? (
+              <div className="min-w-0 space-y-5 bg-white p-5">
+                {heading}
+                <AdaptiveCardGrid
+                  items={group.items}
+                  keyForItem={(series) => series.id}
+                  renderItem={(series) => <SeriesCard series={series} />}
+                />
+              </div>
+            ) : (
+              <div className="min-w-0 bg-white p-5">
+                <HorizontalScroller
+                  ariaLabel={title}
+                  heading={heading}
+                  trailing={
+                    <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
+                      {t("seriesInTopic", { count: group.items.length })}
+                    </p>
+                  }
+                >
+                  {group.items.map((series) => (
+                    <div
+                      className="w-60 shrink-0 snap-start border border-neutral-200 sm:w-72"
+                      key={series.id}
+                      role="listitem"
                     >
-                      {group.topic ? (
-                        <Link
-                          className="transition-colors hover:text-accent"
-                          href={`/topics/${group.topic.slug}`}
-                        >
-                          {title}
-                        </Link>
-                      ) : (
-                        title
-                      )}
-                    </h3>
-                  </div>
-                }
-                trailing={
-                  <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
-                    {t("seriesInTopic", { count: group.items.length })}
-                  </p>
-                }
-              >
-                {group.items.map((series) => (
-                  <div
-                    className="w-60 shrink-0 snap-start border border-neutral-200 sm:w-72"
-                    key={series.id}
-                    role="listitem"
-                  >
-                    <SeriesCard series={series} />
-                  </div>
-                ))}
-              </HorizontalScroller>
-            </div>
+                      <SeriesCard series={series} />
+                    </div>
+                  ))}
+                </HorizontalScroller>
+              </div>
+            )}
           </FrameModule>
         );
       })}

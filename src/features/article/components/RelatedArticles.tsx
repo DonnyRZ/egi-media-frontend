@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
 
+import { AdaptiveCardGrid } from "@/shared/components/common/AdaptiveCardGrid";
 import { ArticleCard } from "@/shared/components/common/ArticleCard";
-import { GridFillers } from "@/shared/components/common/GridFillers";
 import { FrameHeading } from "@/shared/components/layout/FrameHeading";
 import { FrameModule } from "@/shared/components/layout/FrameModule";
 import { getArticlesByCategoryPage } from "@/shared/repositories/article.repository";
@@ -34,14 +34,18 @@ export async function RelatedArticles({ article, lang }: RelatedArticlesProps) {
         id="related-articles-heading"
         title={t("relatedHeading")}
       />
-      <div className="grid gap-px bg-neutral-200 sm:grid-cols-2">
-        {related.map((item) => (
-          <div className="bg-white p-5" key={item.id}>
-            <ArticleCard article={item} variant="horizontal" />
-          </div>
-        ))}
-        <GridFillers count={related.length} lgCols={2} />
-      </div>
+      <AdaptiveCardGrid
+        items={related}
+        keyForItem={(item) => item.id}
+        maxCols={2}
+        renderItem={(item) => (
+          <ArticleCard
+            article={item}
+            className="bg-white p-5"
+            variant="horizontal"
+          />
+        )}
+      />
     </FrameModule>
   );
 }

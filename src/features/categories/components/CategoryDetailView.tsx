@@ -5,10 +5,10 @@ import { useTranslations } from "next-intl";
 
 import { useCategoryDetail } from "@/features/categories/hooks/useCategoryDetail";
 import { Link } from "@/i18n/navigation";
+import { AdaptiveCardGrid } from "@/shared/components/common/AdaptiveCardGrid";
 import { ArticleCard } from "@/shared/components/common/ArticleCard";
 import { EmptyState } from "@/shared/components/common/EmptyState";
 import { ErrorState } from "@/shared/components/common/ErrorState";
-import { GridFillers } from "@/shared/components/common/GridFillers";
 import { Pagination } from "@/shared/components/common/Pagination";
 import { TaxonomyLocaleShell } from "@/shared/components/common/TaxonomyLocaleShell";
 import { FrameHeading } from "@/shared/components/layout/FrameHeading";
@@ -67,12 +67,10 @@ export function CategoryDetailView({ slug }: CategoryDetailViewProps) {
       ? "…"
       : t("notFound");
 
-  const gridItems =
-    !isLoading && !isError && articlesQuery.data?.items.length
-      ? page === 1
-        ? articlesQuery.data.items.slice(1)
-        : articlesQuery.data.items
-      : [];
+  const articleItems =
+    !isLoading && !isError ? articlesQuery.data?.items ?? [] : [];
+  const showFeatured = page === 1 && articleItems.length >= 3;
+  const gridItems = showFeatured ? articleItems.slice(1) : articleItems;
 
   const content = (
     <PageFrame>
@@ -126,14 +124,11 @@ export function CategoryDetailView({ slug }: CategoryDetailViewProps) {
         categoryQuery.data &&
         articlesQuery.data?.items.length ? (
           <>
-            {page === 1 ? (
+            {showFeatured ? (
               <div className="border-b border-neutral-200 bg-white p-5">
                 <p className="kicker">{t("featuredKicker")}</p>
                 <div className="mt-3">
-                  <ArticleCard
-                    article={articlesQuery.data.items[0]}
-                    variant="featured"
-                  />
+                  <ArticleCard article={articleItems[0]} variant="featured" />
                 </div>
               </div>
             ) : null}
@@ -147,31 +142,30 @@ export function CategoryDetailView({ slug }: CategoryDetailViewProps) {
                   })}
                   title={t("articlesHeading")}
                 />
-                <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
-                  {gridItems.map((article) => (
-                    <ArticleCard
-                      article={article}
-                      className="bg-white p-5"
-                      key={article.id}
-                    />
-                  ))}
-                  <GridFillers count={gridItems.length} />
-                </div>
+                <AdaptiveCardGrid
+                  items={gridItems}
+                  keyForItem={(article) => article.id}
+                  renderItem={(article) => (
+                    <ArticleCard article={article} className="bg-white p-5" />
+                  )}
+                />
               </>
             ) : null}
 
-            <div className="bg-white p-5">
-              <Pagination
-                basePath={`/categories/${slug}`}
-                currentPage={articlesQuery.data.page}
-                itemLabel="articles"
-                pageSize={
-                  articlesQuery.data.limit || TAXONOMY_ARTICLES_PAGE_LIMIT
-                }
-                totalItems={articlesQuery.data.total}
-                totalPages={articlesQuery.data.totalPages}
-              />
-            </div>
+            {articlesQuery.data.totalPages > 1 ? (
+              <div className="bg-white p-5">
+                <Pagination
+                  basePath={`/categories/${slug}`}
+                  currentPage={articlesQuery.data.page}
+                  itemLabel="articles"
+                  pageSize={
+                    articlesQuery.data.limit || TAXONOMY_ARTICLES_PAGE_LIMIT
+                  }
+                  totalItems={articlesQuery.data.total}
+                  totalPages={articlesQuery.data.totalPages}
+                />
+              </div>
+            ) : null}
           </>
         ) : null}
       </FrameModule>

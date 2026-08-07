@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { TopicCard } from "@/features/topics/components/TopicCard";
 import { useTopicsPage } from "@/features/topics/hooks/useTopicsPage";
 import { Link } from "@/i18n/navigation";
+import { AdaptiveCardGrid } from "@/shared/components/common/AdaptiveCardGrid";
 import { EmptyState } from "@/shared/components/common/EmptyState";
 import { ErrorState } from "@/shared/components/common/ErrorState";
 import { HorizontalScroller } from "@/shared/components/common/HorizontalScroller";
@@ -98,49 +99,65 @@ export function TopicsListing() {
       {groups.map((group) => {
         const title = group.category?.name ?? t("ungroupedCategory");
         const headingId = `topics-category-${group.category?.id ?? "other"}`;
+        const heading = (
+          <div>
+            <p className="kicker">{t("kicker")}</p>
+            <h3
+              className="mt-1 font-serif text-xl font-bold text-ink sm:text-2xl"
+              id={headingId}
+            >
+              {group.category ? (
+                <Link
+                  className="transition-colors hover:text-accent"
+                  href={`/categories/${group.category.slug}`}
+                >
+                  {title}
+                </Link>
+              ) : (
+                title
+              )}
+            </h3>
+          </div>
+        );
 
         return (
           <FrameModule ariaLabelledby={headingId} key={group.category?.id ?? "ungrouped"}>
-            <div className="min-w-0 bg-white p-5">
-              <HorizontalScroller
-                ariaLabel={title}
-                heading={
-                  <div>
-                    <p className="kicker">{t("kicker")}</p>
-                    <h3
-                      className="mt-1 font-serif text-xl font-bold text-ink sm:text-2xl"
-                      id={headingId}
+            {group.items.length < 4 ? (
+              <div className="min-w-0 space-y-5 bg-white p-5">
+                {heading}
+                <AdaptiveCardGrid
+                  items={group.items}
+                  keyForItem={(topic) => topic.id}
+                  renderItem={(topic) => (
+                    <div className="bg-white">
+                      <TopicCard topic={topic} />
+                    </div>
+                  )}
+                />
+              </div>
+            ) : (
+              <div className="min-w-0 bg-white p-5">
+                <HorizontalScroller
+                  ariaLabel={title}
+                  heading={heading}
+                  trailing={
+                    <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
+                      {t("topicsInCategory", { count: group.items.length })}
+                    </p>
+                  }
+                >
+                  {group.items.map((topic) => (
+                    <div
+                      className="w-60 shrink-0 snap-start border border-neutral-200 sm:w-72"
+                      key={topic.id}
+                      role="listitem"
                     >
-                      {group.category ? (
-                        <Link
-                          className="transition-colors hover:text-accent"
-                          href={`/categories/${group.category.slug}`}
-                        >
-                          {title}
-                        </Link>
-                      ) : (
-                        title
-                      )}
-                    </h3>
-                  </div>
-                }
-                trailing={
-                  <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
-                    {t("topicsInCategory", { count: group.items.length })}
-                  </p>
-                }
-              >
-                {group.items.map((topic) => (
-                  <div
-                    className="w-60 shrink-0 snap-start border border-neutral-200 sm:w-72"
-                    key={topic.id}
-                    role="listitem"
-                  >
-                    <TopicCard topic={topic} />
-                  </div>
-                ))}
-              </HorizontalScroller>
-            </div>
+                      <TopicCard topic={topic} />
+                    </div>
+                  ))}
+                </HorizontalScroller>
+              </div>
+            )}
           </FrameModule>
         );
       })}

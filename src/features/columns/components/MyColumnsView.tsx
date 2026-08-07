@@ -209,13 +209,15 @@ export function MyColumnsView() {
                 </li>
               ))}
             </ul>
-            <div className="bg-white p-5">
-              <Pagination
-                basePath="/kolom/saya"
-                currentPage={data.page}
-                totalPages={data.totalPages}
-              />
-            </div>
+            {data.totalPages > 1 ? (
+              <div className="bg-white p-5">
+                <Pagination
+                  basePath="/kolom/saya"
+                  currentPage={data.page}
+                  totalPages={data.totalPages}
+                />
+              </div>
+            ) : null}
           </>
         ) : null}
 

@@ -4,9 +4,9 @@ import { useTranslations } from "next-intl";
 
 import { CategoryCard } from "@/features/categories/components/CategoryCard";
 import { useCategoriesPage } from "@/features/categories/hooks/useCategoriesPage";
+import { AdaptiveCardGrid } from "@/shared/components/common/AdaptiveCardGrid";
 import { EmptyState } from "@/shared/components/common/EmptyState";
 import { ErrorState } from "@/shared/components/common/ErrorState";
-import { GridFillers } from "@/shared/components/common/GridFillers";
 import { FrameHeading } from "@/shared/components/layout/FrameHeading";
 import { FrameModule } from "@/shared/components/layout/FrameModule";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
@@ -37,6 +37,10 @@ export function CategoriesListing() {
   const { data, isLoading, isError, error, refetch } = useCategoriesPage();
   const t = useTranslations("categoriesPage");
 
+  const items = !isLoading && !isError ? data?.items ?? [] : [];
+  const showFeatured = items.length >= 3;
+  const gridItems = showFeatured ? items.slice(1) : items;
+
   return (
     <FrameModule ariaLabelledby="categories-listing-heading">
       <h2 className="sr-only" id="categories-listing-heading">
@@ -59,25 +63,22 @@ export function CategoriesListing() {
 
       {!isLoading && !isError && data?.items.length ? (
         <>
-          <div className="border-b border-neutral-200 bg-white">
-            <CategoryCard category={data.items[0]} variant="featured" />
-          </div>
-
-          {data.items.length > 1 ? (
-            <>
-              <FrameHeading
-                id="categories-grid-heading"
-                subtitle={t("categoryCount", { count: data.total })}
-                title={t("allCategories")}
-              />
-              <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
-                {data.items.slice(1).map((category) => (
-                  <CategoryCard category={category} key={category.id} />
-                ))}
-                <GridFillers count={data.items.length - 1} />
-              </div>
-            </>
+          {showFeatured ? (
+            <div className="border-b border-neutral-200 bg-white">
+              <CategoryCard category={items[0]} variant="featured" />
+            </div>
           ) : null}
+
+          <FrameHeading
+            id="categories-grid-heading"
+            subtitle={t("categoryCount", { count: data.total })}
+            title={t("allCategories")}
+          />
+          <AdaptiveCardGrid
+            items={gridItems}
+            keyForItem={(category) => category.id}
+            renderItem={(category) => <CategoryCard category={category} />}
+          />
         </>
       ) : null}
     </FrameModule>

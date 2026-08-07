@@ -9,9 +9,9 @@ import { useSavedColumnsPage } from "@/features/columns/hooks/useSavedColumnsPag
 import { SavedArticleCard } from "@/features/saved-articles/components/SavedArticleCard";
 import { SavedArticlesSignInPrompt } from "@/features/saved-articles/components/SavedArticlesSignInPrompt";
 import { useSavedArticlesPage } from "@/features/saved-articles/hooks/useSavedArticlesPage";
+import { AdaptiveCardGrid } from "@/shared/components/common/AdaptiveCardGrid";
 import { EmptyState } from "@/shared/components/common/EmptyState";
 import { ErrorState } from "@/shared/components/common/ErrorState";
-import { GridFillers } from "@/shared/components/common/GridFillers";
 import { SAVED_COLUMN_PAGE_LIMIT } from "@/features/columns/constants/column.constants";
 import { SAVED_ARTICLE_PAGE_LIMIT } from "@/features/saved-articles/constants/saved-article.constants";
 import { Pagination } from "@/shared/components/common/Pagination";
@@ -118,23 +118,24 @@ export function SavedArticlesView() {
         hasArticles &&
         articles.data ? (
           <>
-            <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
-              {articles.data.items.map((article) => (
-                <SavedArticleCard article={article} key={article.id} />
-              ))}
-              <GridFillers count={articles.data.items.length} />
-            </div>
-            <div className="bg-white p-5">
-              <Pagination
-                basePath="/saved"
-                currentPage={articles.data.page}
-                itemLabel="articles"
-                pageParam="page"
-                pageSize={articles.data.limit || SAVED_ARTICLE_PAGE_LIMIT}
-                totalItems={articles.data.total}
-                totalPages={articles.data.totalPages}
-              />
-            </div>
+            <AdaptiveCardGrid
+              items={articles.data.items}
+              keyForItem={(article) => article.id}
+              renderItem={(article) => <SavedArticleCard article={article} />}
+            />
+            {articles.data.totalPages > 1 ? (
+              <div className="bg-white p-5">
+                <Pagination
+                  basePath="/saved"
+                  currentPage={articles.data.page}
+                  itemLabel="articles"
+                  pageParam="page"
+                  pageSize={articles.data.limit || SAVED_ARTICLE_PAGE_LIMIT}
+                  totalItems={articles.data.total}
+                  totalPages={articles.data.totalPages}
+                />
+              </div>
+            ) : null}
           </>
         ) : null}
       </FrameModule>
@@ -169,23 +170,24 @@ export function SavedArticlesView() {
 
         {!columnsLoading && !columns.isError && hasColumns && columns.data ? (
           <>
-            <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
-              {columns.data.items.map((column) => (
-                <SavedColumnCard column={column} key={column.id} />
-              ))}
-              <GridFillers count={columns.data.items.length} />
-            </div>
-            <div className="bg-white p-5">
-              <Pagination
-                basePath="/saved"
-                currentPage={columns.data.page}
-                itemLabel="items"
-                pageParam="columnsPage"
-                pageSize={columns.data.limit || SAVED_COLUMN_PAGE_LIMIT}
-                totalItems={columns.data.total}
-                totalPages={columns.data.totalPages}
-              />
-            </div>
+            <AdaptiveCardGrid
+              items={columns.data.items}
+              keyForItem={(column) => column.id}
+              renderItem={(column) => <SavedColumnCard column={column} />}
+            />
+            {columns.data.totalPages > 1 ? (
+              <div className="bg-white p-5">
+                <Pagination
+                  basePath="/saved"
+                  currentPage={columns.data.page}
+                  itemLabel="items"
+                  pageParam="columnsPage"
+                  pageSize={columns.data.limit || SAVED_COLUMN_PAGE_LIMIT}
+                  totalItems={columns.data.total}
+                  totalPages={columns.data.totalPages}
+                />
+              </div>
+            ) : null}
           </>
         ) : null}
 

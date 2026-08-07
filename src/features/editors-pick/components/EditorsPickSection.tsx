@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 
 import { Link } from "@/i18n/navigation";
+import { GridFillers } from "@/shared/components/common/GridFillers";
 import { SectionHeading } from "@/shared/components/common/SectionHeading";
 import { Container } from "@/shared/components/layout/Container";
 import { Section } from "@/shared/components/layout/Section";
@@ -14,7 +15,7 @@ import { getArticleHref } from "@/shared/utils/article-path";
 
 function RankedItem({ article, rank }: { article: Article; rank: number }) {
   return (
-    <article className="group flex gap-4 p-5">
+    <article className="group flex gap-4 bg-white p-5">
       <span
         aria-hidden="true"
         className="font-serif text-3xl font-bold leading-none text-neutral-300"
@@ -54,9 +55,9 @@ export function EditorsPickSection() {
         />
 
         {isLoading ? (
-          <div className="grid border border-neutral-200 divide-y divide-neutral-200 md:grid-cols-2 md:divide-x">
+          <div className="grid gap-px border border-neutral-200 bg-neutral-200 sm:grid-cols-2">
             {Array.from({ length: 6 }).map((_, index) => (
-              <div key={index} className="flex gap-4 p-5">
+              <div key={index} className="flex gap-4 bg-white p-5">
                 <Skeleton className="h-8 w-6" />
                 <div className="flex-1 space-y-2">
                   <Skeleton className="h-3 w-20" />
@@ -73,10 +74,11 @@ export function EditorsPickSection() {
         ) : null}
 
         {!isLoading && !isError && data?.items.length ? (
-          <div className="grid border border-neutral-200 divide-y divide-neutral-200 md:grid-cols-2 md:divide-x">
+          <div className="grid gap-px border border-neutral-200 bg-neutral-200 sm:grid-cols-2">
             {data.items.map((article, index) => (
               <RankedItem key={article.id} article={article} rank={index + 1} />
             ))}
+            <GridFillers count={data.items.length} lgCols={2} />
           </div>
         ) : null}
       </Container>

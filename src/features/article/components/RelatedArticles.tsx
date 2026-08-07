@@ -26,10 +26,7 @@ export async function RelatedArticles({ article, lang }: RelatedArticlesProps) {
   if (!related.length) return null;
 
   return (
-    <section
-      aria-labelledby="related-articles-heading"
-      className="mt-12 border-t border-neutral-200 pt-8"
-    >
+    <section aria-labelledby="related-articles-heading" className="mt-12">
       <h2
         className="mb-6 border-b border-neutral-200 pb-2 text-lg font-bold uppercase tracking-wide text-ink"
         id="related-articles-heading"

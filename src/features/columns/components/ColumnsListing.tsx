@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { ColumnCard } from "@/features/columns/components/ColumnCard";
 import { useColumnsPage } from "@/features/columns/hooks/useColumnsPage";
 import { EmptyState } from "@/shared/components/common/EmptyState";
+import { GridFillers } from "@/shared/components/common/GridFillers";
 import { ErrorState } from "@/shared/components/common/ErrorState";
 import { Pagination } from "@/shared/components/common/Pagination";
 import { Container } from "@/shared/components/layout/Container";
@@ -24,9 +25,9 @@ function ColumnsSkeleton() {
           <Skeleton className="h-4 w-5/6" />
         </div>
       </div>
-      <div className="grid border border-neutral-200 divide-y divide-neutral-200 sm:grid-cols-2 sm:divide-x lg:grid-cols-3">
+      <div className="grid gap-px border border-neutral-200 bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
         {Array.from({ length: 6 }).map((_, index) => (
-          <div className="space-y-3 p-5" key={index}>
+          <div className="space-y-3 bg-white p-5" key={index}>
             <Skeleton className="aspect-[16/10] w-full" />
             <Skeleton className="h-3 w-20" />
             <Skeleton className="h-6 w-3/4" />
@@ -67,7 +68,7 @@ export function ColumnsListing() {
 
             {data.items.length > 1 ? (
               <div>
-                <div className="mb-6 flex items-end justify-between gap-4 border-b border-neutral-200 pb-2">
+                <div className="mb-4 flex items-end justify-between gap-4">
                   <h3 className="text-lg font-bold uppercase tracking-wide text-ink">
                     {t("allColumns")}
                   </h3>
@@ -75,10 +76,11 @@ export function ColumnsListing() {
                     {t("columnCount", { count: data.total })}
                   </p>
                 </div>
-                <div className="grid border border-neutral-200 divide-y divide-neutral-200 sm:grid-cols-2 sm:divide-x lg:grid-cols-3">
+                <div className="grid gap-px border border-neutral-200 bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
                   {data.items.slice(1).map((column) => (
                     <ColumnCard column={column} key={column.id} />
                   ))}
+                  <GridFillers count={data.items.length - 1} />
                 </div>
               </div>
             ) : null}

@@ -14,9 +14,7 @@ export function Section({ children, className, ariaLabelledby, dense }: SectionP
     <section
       aria-labelledby={ariaLabelledby}
       className={cn(
-        dense
-          ? "border-t border-neutral-200 py-8 lg:py-10 first:border-t-0 first:pt-0"
-          : "py-12 lg:py-16",
+        dense ? "py-6 first:pt-0 lg:py-8" : "py-12 lg:py-16",
         className,
       )}
     >

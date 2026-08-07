@@ -6,8 +6,9 @@ export function ContactHero() {
   const t = useTranslations("contact");
 
   return (
-    <section aria-labelledby="contact-hero-heading" className="border-b border-neutral-200">
-      <Container className="py-12 lg:py-20">
+    <section aria-labelledby="contact-hero-heading">
+      <Container>
+        <div className="border-b border-neutral-200 py-12 lg:py-20">
         <p className="kicker">{t("kicker")}</p>
         <h1
           id="contact-hero-heading"
@@ -18,6 +19,7 @@ export function ContactHero() {
         <p className="mt-6 max-w-2xl text-base leading-7 text-neutral-700 lg:text-lg">
           {t("lede")}
         </p>
+        </div>
       </Container>
     </section>
   );

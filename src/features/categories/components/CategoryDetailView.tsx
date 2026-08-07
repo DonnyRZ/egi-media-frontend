@@ -65,11 +65,9 @@ export function CategoryDetailView({ slug }: CategoryDetailViewProps) {
 
   const content = (
     <>
-      <section
-        aria-labelledby="category-detail-heading"
-        className="border-b border-neutral-200 bg-neutral-50"
-      >
-        <Container className="py-8 lg:py-10">
+      <section aria-labelledby="category-detail-heading">
+        <Container>
+          <div className="border-b border-neutral-200 py-8 lg:py-10">
           <Link
             className="text-xs font-semibold uppercase tracking-wide text-neutral-500 transition-colors hover:text-accent"
             href="/categories"
@@ -115,6 +113,7 @@ export function CategoryDetailView({ slug }: CategoryDetailViewProps) {
               {t("notFound")}
             </h1>
           ) : null}
+          </div>
         </Container>
       </section>
 

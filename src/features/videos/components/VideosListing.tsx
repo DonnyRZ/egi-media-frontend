@@ -12,6 +12,7 @@ import {
 } from "@/features/videos/components/VideoPlaylist";
 import { useVideosPage } from "@/features/videos/hooks/useVideosPage";
 import { EmptyState } from "@/shared/components/common/EmptyState";
+import { GridFillers } from "@/shared/components/common/GridFillers";
 import { ErrorState } from "@/shared/components/common/ErrorState";
 import { Pagination } from "@/shared/components/common/Pagination";
 import { Container } from "@/shared/components/layout/Container";
@@ -115,10 +116,11 @@ function VideoStage({
                 {t("videoCount", { count: total })}
               </p>
             </div>
-            <div className="grid border border-neutral-200 divide-y divide-neutral-200 sm:grid-cols-2 sm:divide-x lg:grid-cols-3">
+            <div className="grid gap-px border border-neutral-200 bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
               {moreVideos.map((video) => (
                 <VideoGridCard key={video.id} video={video} />
               ))}
+              <GridFillers count={moreVideos.length} />
             </div>
           </div>
         ) : null}

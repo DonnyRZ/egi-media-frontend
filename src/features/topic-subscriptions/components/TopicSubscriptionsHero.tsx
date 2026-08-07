@@ -8,11 +8,9 @@ export function TopicSubscriptionsHero() {
   const t = useTranslations("topicSubscriptionsPage");
 
   return (
-    <section
-      aria-labelledby="topic-subscriptions-hero-heading"
-      className="border-b border-neutral-200"
-    >
-      <Container className="py-8 lg:py-10">
+    <section aria-labelledby="topic-subscriptions-hero-heading">
+      <Container>
+        <div className="border-b border-neutral-200 py-8 lg:py-10">
         <p className="kicker">{t("kicker")}</p>
         <h1
           className="mt-2 max-w-3xl font-serif text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl"
@@ -23,6 +21,7 @@ export function TopicSubscriptionsHero() {
         <p className="mt-3 max-w-2xl text-sm leading-6 text-neutral-600 lg:text-base lg:leading-7">
           {t("lede")}
         </p>
+        </div>
       </Container>
     </section>
   );

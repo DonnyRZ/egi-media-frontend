@@ -77,7 +77,7 @@ export function SeriesCard({ series, variant = "default" }: SeriesCardProps) {
   }
 
   return (
-    <article className="group flex h-full flex-col p-5">
+    <article className="group flex h-full flex-col bg-white p-5">
       <Link className="block" href={`/series/${series.slug}`}>
         <SeriesCover className="aspect-[16/10]" series={series} />
       </Link>

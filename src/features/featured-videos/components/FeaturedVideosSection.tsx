@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 
 import { VideoEmbed } from "@/features/videos/components/VideoEmbed";
+import { GridFillers } from "@/shared/components/common/GridFillers";
 import { SectionHeading } from "@/shared/components/common/SectionHeading";
 import { Container } from "@/shared/components/layout/Container";
 import { Section } from "@/shared/components/layout/Section";
@@ -16,7 +17,7 @@ function VideoCard({ video }: { video: YoutubeVideo }) {
   const t = useTranslations("videos");
 
   return (
-    <article className="group">
+    <article className="group flex h-full flex-col bg-white">
       <div className="relative aspect-video overflow-hidden bg-ink">
         <VideoEmbed video={video} />
       </div>
@@ -57,10 +58,13 @@ export function FeaturedVideosSection() {
         />
 
         {isLoading ? (
-          <div className="grid border border-neutral-200 divide-y divide-neutral-200 sm:grid-cols-2 sm:divide-x lg:grid-cols-3">
+          <div className="grid gap-px border border-neutral-200 bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
             {Array.from({ length: 3 }).map((_, index) => (
-              <Skeleton className="aspect-video w-full" key={index} />
+              <div className="bg-white" key={index}>
+                <Skeleton className="aspect-video w-full" />
+              </div>
             ))}
+            <GridFillers count={3} />
           </div>
         ) : null}
 
@@ -73,10 +77,11 @@ export function FeaturedVideosSection() {
         ) : null}
 
         {!isLoading && !isError && data?.items.length ? (
-          <div className="grid border border-neutral-200 divide-y divide-neutral-200 sm:grid-cols-2 sm:divide-x lg:grid-cols-3">
+          <div className="grid gap-px border border-neutral-200 bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
             {data.items.map((video) => (
               <VideoCard key={video.id} video={video} />
             ))}
+            <GridFillers count={data.items.length} />
           </div>
         ) : null}
       </Container>

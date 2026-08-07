@@ -66,7 +66,7 @@ export function NotificationsView() {
   return (
     <Section className="pt-8 lg:pt-10">
       <Container>
-        <div className="mb-6 flex items-end justify-between gap-4 border-b border-neutral-200 pb-2">
+        <div className="mb-4 flex items-end justify-between gap-4">
           <h2 className="text-lg font-bold uppercase tracking-wide text-ink">
             {t("title")}
           </h2>

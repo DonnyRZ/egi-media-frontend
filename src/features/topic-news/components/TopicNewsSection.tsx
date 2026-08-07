@@ -6,6 +6,7 @@ import { useTopicNews } from "@/features/homepage/hooks/useTopicNews";
 import { Link } from "@/i18n/navigation";
 import { ArticleCard } from "@/shared/components/common/ArticleCard";
 import { ErrorState } from "@/shared/components/common/ErrorState";
+import { GridFillers } from "@/shared/components/common/GridFillers";
 import { SectionHeading } from "@/shared/components/common/SectionHeading";
 import { Container } from "@/shared/components/layout/Container";
 import { Section } from "@/shared/components/layout/Section";
@@ -18,7 +19,7 @@ function TopicBlock({ group }: { group: TopicNewsGroup }) {
   if (!featured) return null;
 
   return (
-    <div className="min-w-0 border-t border-neutral-200 pt-6 first:border-t-0 first:pt-0 lg:border-t-0 lg:border-l lg:border-neutral-200 lg:pt-0 lg:pl-8 lg:first:border-l-0 lg:first:pl-0">
+    <div className="min-w-0 bg-white p-5">
       <div className="mb-4">
         <h3 className="font-serif text-xl font-bold text-ink">
           <Link
@@ -64,15 +65,16 @@ export function TopicNewsSection() {
         />
 
         {isLoading ? (
-          <div className="grid gap-10 md:grid-cols-3">
+          <div className="grid gap-px border border-neutral-200 bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
             {Array.from({ length: 3 }).map((_, index) => (
-              <div key={index} className="space-y-4">
+              <div key={index} className="space-y-4 bg-white p-5">
                 <Skeleton className="h-6 w-32" />
                 <Skeleton className="h-20 w-full" />
                 <Skeleton className="h-14 w-full" />
                 <Skeleton className="h-14 w-full" />
               </div>
             ))}
+            <GridFillers count={3} />
           </div>
         ) : null}
 
@@ -81,10 +83,11 @@ export function TopicNewsSection() {
         ) : null}
 
         {!isLoading && !isError && data?.length ? (
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-0">
+          <div className="grid gap-px border border-neutral-200 bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
             {data.map((group) => (
               <TopicBlock key={group.topic.id} group={group} />
             ))}
+            <GridFillers count={data.length} />
           </div>
         ) : null}
       </Container>

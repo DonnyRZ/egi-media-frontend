@@ -104,7 +104,7 @@ export function VideoStageMeta({ video }: { video: YoutubeVideo }) {
   const t = useTranslations("videosPage");
 
   return (
-    <div className="border-t border-neutral-200 py-6 sm:py-8">
+    <div className="py-6 sm:py-8">
       {video.publishedAt ? (
         <time
           className="text-xs font-semibold uppercase tracking-wide text-neutral-500"
@@ -138,7 +138,7 @@ export function VideoGridCard({ video }: { video: YoutubeVideo }) {
   const t = useTranslations("videosPage");
 
   return (
-    <article className="group flex h-full flex-col">
+    <article className="group flex h-full flex-col bg-white">
       <a
         className="relative block aspect-video overflow-hidden bg-neutral-100"
         href={video.url}

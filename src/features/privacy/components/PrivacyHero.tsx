@@ -6,8 +6,9 @@ export function PrivacyHero() {
   const t = useTranslations("privacy");
 
   return (
-    <section aria-labelledby="privacy-hero-heading" className="border-b border-neutral-200">
-      <Container className="py-12 lg:py-20">
+    <section aria-labelledby="privacy-hero-heading">
+      <Container>
+        <div className="border-b border-neutral-200 py-12 lg:py-20">
         <p className="kicker">{t("kicker")}</p>
         <h1
           id="privacy-hero-heading"
@@ -19,6 +20,7 @@ export function PrivacyHero() {
         <p className="mt-6 max-w-2xl text-base leading-7 text-neutral-700 lg:text-lg">
           {t("lede")}
         </p>
+        </div>
       </Container>
     </section>
   );

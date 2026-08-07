@@ -26,11 +26,13 @@ export function SeriesDetailView({ slug }: SeriesDetailViewProps) {
   if (isLoading) {
     return (
       <>
-        <section className="border-b border-neutral-200">
-          <Container className="py-8 lg:py-10">
-            <Skeleton className="h-3 w-24" />
-            <Skeleton className="mt-4 h-10 w-2/3" />
-            <Skeleton className="mt-4 h-4 w-full max-w-2xl" />
+        <section>
+          <Container>
+            <div className="border-b border-neutral-200 py-8 lg:py-10">
+              <Skeleton className="h-3 w-24" />
+              <Skeleton className="mt-4 h-10 w-2/3" />
+              <Skeleton className="mt-4 h-4 w-full max-w-2xl" />
+            </div>
           </Container>
         </section>
         <Section>
@@ -72,9 +74,9 @@ export function SeriesDetailView({ slug }: SeriesDetailViewProps) {
 
   return (
     <>
-      <section aria-labelledby="series-detail-heading" className="border-b border-neutral-200">
-        <Container className="py-8 lg:py-10">
-          <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-end lg:gap-10">
+      <section aria-labelledby="series-detail-heading">
+        <Container>
+          <div className="grid gap-8 border-b border-neutral-200 py-8 lg:grid-cols-[1.2fr_1fr] lg:items-end lg:gap-10 lg:py-10">
             <div className="relative aspect-[16/10] overflow-hidden bg-neutral-100">
               <ArticleImage
                 alt={data.name}

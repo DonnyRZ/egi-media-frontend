@@ -10,7 +10,7 @@ export function AboutCoverage() {
   const topics = t.raw("coverage") as CoverageTopic[];
 
   return (
-    <Section ariaLabelledby="about-coverage-heading" className="bg-neutral-50">
+    <Section ariaLabelledby="about-coverage-heading">
       <Container>
         <SectionHeading
           id="about-coverage-heading"
@@ -27,6 +27,9 @@ export function AboutCoverage() {
               <p className="mt-2 text-sm leading-6 text-neutral-500">{topic.description}</p>
             </li>
           ))}
+          {topics.length % 2 === 1 ? (
+            <li aria-hidden="true" className="hidden bg-white sm:block lg:hidden" />
+          ) : null}
         </ul>
       </Container>
     </Section>

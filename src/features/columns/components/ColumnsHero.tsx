@@ -13,12 +13,9 @@ export function ColumnsHero() {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   return (
-    <section
-      aria-labelledby="columns-hero-heading"
-      className="border-b border-neutral-200 bg-neutral-50"
-    >
-      <Container className="py-8 lg:py-10">
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+    <section aria-labelledby="columns-hero-heading">
+      <Container>
+        <div className="flex flex-col gap-6 border-b border-neutral-200 py-8 lg:flex-row lg:items-end lg:justify-between lg:py-10">
           <div className="max-w-3xl">
             <p className="kicker">{t("kicker")}</p>
             <h1

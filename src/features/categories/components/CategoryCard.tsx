@@ -39,7 +39,7 @@ export function CategoryCard({
   }
 
   return (
-    <article className="group flex h-full flex-col p-5">
+    <article className="group flex h-full flex-col bg-white p-5">
       <p className="kicker">{t("kicker")}</p>
       <h3 className="mt-2 font-serif text-xl font-bold leading-snug text-ink transition-colors group-hover:text-accent">
         <Link href={`/categories/${category.slug}`}>{category.name}</Link>

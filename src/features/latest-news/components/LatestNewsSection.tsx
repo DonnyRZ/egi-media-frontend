@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 
 import { ArticleCard } from "@/shared/components/common/ArticleCard";
+import { GridFillers } from "@/shared/components/common/GridFillers";
 import { SectionHeading } from "@/shared/components/common/SectionHeading";
 import { Container } from "@/shared/components/layout/Container";
 import { Section } from "@/shared/components/layout/Section";
@@ -29,9 +30,9 @@ export function LatestNewsSection() {
         />
 
         {isLoading ? (
-          <div className="grid border border-neutral-200 divide-y divide-neutral-200 sm:grid-cols-2 sm:divide-x lg:grid-cols-3">
+          <div className="grid gap-px border border-neutral-200 bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
             {Array.from({ length: 6 }).map((_, index) => (
-              <div key={index} className="space-y-3 p-5">
+              <div key={index} className="space-y-3 bg-white p-5">
                 <Skeleton className="aspect-[16/10] w-full" />
                 <Skeleton className="h-4 w-24" />
                 <Skeleton className="h-6 w-full" />
@@ -46,10 +47,15 @@ export function LatestNewsSection() {
         ) : null}
 
         {!isLoading && !isError && data?.items.length ? (
-          <div className="grid border border-neutral-200 divide-y divide-neutral-200 sm:grid-cols-2 sm:divide-x lg:grid-cols-3">
+          <div className="grid gap-px border border-neutral-200 bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
             {data.items.map((article) => (
-              <ArticleCard article={article} className="p-5" key={article.id} />
+              <ArticleCard
+                article={article}
+                className="bg-white p-5"
+                key={article.id}
+              />
             ))}
+            <GridFillers count={data.items.length} />
           </div>
         ) : null}
       </Container>

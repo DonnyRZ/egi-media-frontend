@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { CategoryCard } from "@/features/categories/components/CategoryCard";
 import { useCategoriesPage } from "@/features/categories/hooks/useCategoriesPage";
 import { EmptyState } from "@/shared/components/common/EmptyState";
+import { GridFillers } from "@/shared/components/common/GridFillers";
 import { ErrorState } from "@/shared/components/common/ErrorState";
 import { Container } from "@/shared/components/layout/Container";
 import { Section } from "@/shared/components/layout/Section";
@@ -18,9 +19,9 @@ function CategoriesSkeleton() {
         <Skeleton className="h-10 w-2/3" />
         <Skeleton className="h-4 w-full max-w-2xl" />
       </div>
-      <div className="grid border border-neutral-200 divide-y divide-neutral-200 sm:grid-cols-2 sm:divide-x lg:grid-cols-3">
+      <div className="grid gap-px border border-neutral-200 bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
         {Array.from({ length: 6 }).map((_, index) => (
-          <div key={index} className="space-y-3 p-5">
+          <div key={index} className="space-y-3 bg-white p-5">
             <Skeleton className="h-3 w-20" />
             <Skeleton className="h-7 w-3/4" />
             <Skeleton className="h-4 w-full" />
@@ -59,7 +60,7 @@ export function CategoriesListing() {
 
             {data.items.length > 1 ? (
               <div>
-                <div className="mb-6 flex items-end justify-between gap-4 border-b border-neutral-200 pb-2">
+                <div className="mb-4 flex items-end justify-between gap-4">
                   <h3 className="text-lg font-bold uppercase tracking-wide text-ink">
                     {t("allCategories")}
                   </h3>
@@ -67,10 +68,11 @@ export function CategoriesListing() {
                     {t("categoryCount", { count: data.total })}
                   </p>
                 </div>
-                <div className="grid border border-neutral-200 divide-y divide-neutral-200 sm:grid-cols-2 sm:divide-x lg:grid-cols-3">
+                <div className="grid gap-px border border-neutral-200 bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
                   {data.items.slice(1).map((category) => (
                     <CategoryCard key={category.id} category={category} />
                   ))}
+                  <GridFillers count={data.items.length - 1} />
                 </div>
               </div>
             ) : null}

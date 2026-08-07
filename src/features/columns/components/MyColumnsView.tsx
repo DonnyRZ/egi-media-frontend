@@ -69,7 +69,7 @@ export function MyColumnsView() {
   return (
     <Section>
       <Container>
-        <div className="mb-6 flex flex-wrap items-end justify-between gap-4 border-b border-neutral-200 pb-2">
+        <div className="mb-4 flex flex-wrap items-end justify-between gap-4">
           <div>
             <Link
               className="text-sm font-semibold text-primary-700 hover:text-accent"

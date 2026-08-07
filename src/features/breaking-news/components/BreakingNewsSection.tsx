@@ -14,7 +14,7 @@ import { getArticleHref } from "@/shared/utils/article-path";
 
 function BreakingCard({ article }: { article: Article }) {
   return (
-    <article className="group w-60 shrink-0 border-l border-neutral-200 pl-4 sm:w-64">
+    <article className="group w-60 shrink-0 border-l border-neutral-200 pl-4 first:border-l-0 first:pl-0 sm:w-64">
       <div className="relative aspect-[16/9] overflow-hidden">
         <ArticleImage
           alt={article.title}
@@ -43,9 +43,9 @@ export function BreakingNewsSection() {
   }
 
   return (
-    <Section ariaLabelledby="breaking-heading" className="py-5" dense>
+    <Section ariaLabelledby="breaking-heading" dense>
       <Container>
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:gap-6">
+        <div className="flex flex-col gap-4 border border-neutral-200 bg-white p-4 lg:flex-row lg:items-start lg:gap-6 lg:p-5">
           <div className="flex shrink-0 items-center gap-2">
             <span
               aria-hidden="true"

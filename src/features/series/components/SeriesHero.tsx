@@ -8,8 +8,9 @@ export function SeriesHero() {
   const t = useTranslations("seriesPage");
 
   return (
-    <section aria-labelledby="series-hero-heading" className="border-b border-neutral-200">
-      <Container className="py-8 lg:py-10">
+    <section aria-labelledby="series-hero-heading">
+      <Container>
+        <div className="border-b border-neutral-200 py-8 lg:py-10">
         <p className="kicker">{t("kicker")}</p>
         <h1
           id="series-hero-heading"
@@ -20,6 +21,7 @@ export function SeriesHero() {
         <p className="mt-3 max-w-2xl text-sm leading-6 text-neutral-600 lg:text-base lg:leading-7">
           {t("lede")}
         </p>
+        </div>
       </Container>
     </section>
   );

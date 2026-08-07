@@ -16,7 +16,7 @@ export function HeroHeadlineList({ articles }: HeroHeadlineListProps) {
   const format = useFormatter();
 
   return (
-    <div className="flex h-full flex-col p-6">
+    <div className="flex h-full flex-col bg-white p-6">
       <h3 className="border-b border-neutral-200 pb-2 text-sm font-bold uppercase tracking-wide text-ink">
         {t("moreTopStories")}
       </h3>

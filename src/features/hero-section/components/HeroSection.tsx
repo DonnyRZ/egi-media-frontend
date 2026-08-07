@@ -13,14 +13,14 @@ import { HeroHeadlineList } from "@/features/hero-section/components/HeroHeadlin
 
 function HeroSkeleton() {
   return (
-    <div className="grid border border-neutral-200 lg:grid-cols-[2fr_1fr] lg:divide-x lg:divide-neutral-200">
-      <div className="space-y-4 p-6">
+    <div className="grid gap-px border border-neutral-200 bg-neutral-200 lg:grid-cols-[2fr_1fr]">
+      <div className="space-y-4 bg-white p-6">
         <Skeleton className="aspect-[16/9] w-full" />
         <Skeleton className="h-4 w-24" />
         <Skeleton className="h-10 w-full" />
         <Skeleton className="h-4 w-40" />
       </div>
-      <div className="space-y-4 p-6">
+      <div className="space-y-4 bg-white p-6">
         <Skeleton className="h-5 w-40" />
         {Array.from({ length: 4 }).map((_, index) => (
           <div key={index} className="space-y-2 border-b border-neutral-200 pb-4">
@@ -62,8 +62,8 @@ export function HeroSection() {
           <div
             className={
               featured && headlines.length > 0
-                ? "grid border border-neutral-200 lg:grid-cols-[2fr_1fr] lg:divide-x lg:divide-neutral-200"
-                : "grid border border-neutral-200"
+                ? "grid gap-px border border-neutral-200 bg-neutral-200 lg:grid-cols-[2fr_1fr]"
+                : "grid gap-px border border-neutral-200 bg-neutral-200"
             }
           >
             {featured ? <HeroFeaturedCard article={featured} /> : null}

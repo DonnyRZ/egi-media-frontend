@@ -6,8 +6,9 @@ export function AboutHero() {
   const t = useTranslations("about");
 
   return (
-    <section aria-labelledby="about-hero-heading" className="border-b border-neutral-200">
-      <Container className="py-12 lg:py-20">
+    <section aria-labelledby="about-hero-heading">
+      <Container>
+        <div className="border-b border-neutral-200 py-12 lg:py-20">
         <p className="kicker">{t("kicker")}</p>
         <h1
           id="about-hero-heading"
@@ -18,6 +19,7 @@ export function AboutHero() {
         <p className="mt-6 max-w-2xl text-base leading-7 text-neutral-700 lg:text-lg">
           {t("lede")}
         </p>
+        </div>
       </Container>
     </section>
   );

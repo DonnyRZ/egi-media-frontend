@@ -80,17 +80,19 @@ export function SearchResultsView() {
 
   return (
     <>
-      <Section className="border-b border-neutral-200 !py-10 lg:!py-12">
+      <section>
         <Container>
-          <p className="kicker">{t("kicker")}</p>
-          <h1 className="mt-2 font-serif text-3xl font-bold text-ink sm:text-4xl">
-            {query ? t("headlineWithQuery", { query }) : t("headline")}
-          </h1>
-          <p className="mt-3 max-w-2xl text-base leading-7 text-neutral-600">
-            {query ? t("ledeWithQuery", { query }) : t("lede")}
-          </p>
+          <div className="border-b border-neutral-200 py-10 lg:py-12">
+            <p className="kicker">{t("kicker")}</p>
+            <h1 className="mt-2 font-serif text-3xl font-bold text-ink sm:text-4xl">
+              {query ? t("headlineWithQuery", { query }) : t("headline")}
+            </h1>
+            <p className="mt-3 max-w-2xl text-base leading-7 text-neutral-600">
+              {query ? t("ledeWithQuery", { query }) : t("lede")}
+            </p>
+          </div>
         </Container>
-      </Section>
+      </section>
 
       <Section>
         <Container className="space-y-12">

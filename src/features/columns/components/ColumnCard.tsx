@@ -64,7 +64,7 @@ export function ColumnCard({ column, variant = "default" }: ColumnCardProps) {
   }
 
   return (
-    <article className="group flex h-full flex-col p-5">
+    <article className="group flex h-full flex-col bg-white p-5">
       <Link className="block" href={href}>
         <div className="relative aspect-[16/10] overflow-hidden bg-neutral-100">
           <ArticleImage

@@ -23,7 +23,7 @@ export function SectionHeading({
   const t = useTranslations("common");
 
   return (
-    <div className={cn("mb-6 border-b border-neutral-200 pb-2 lg:mb-8", className)}>
+    <div className={cn("mb-4 lg:mb-5", className)}>
       <div className="flex items-end justify-between gap-4">
         <h2
           id={id}

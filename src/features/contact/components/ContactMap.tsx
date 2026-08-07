@@ -26,7 +26,7 @@ export function ContactMap() {
   const t = useTranslations("contact");
 
   return (
-    <Section ariaLabelledby="contact-map-heading" className="bg-neutral-50">
+    <Section ariaLabelledby="contact-map-heading">
       <Container>
         <SectionHeading
           id="contact-map-heading"

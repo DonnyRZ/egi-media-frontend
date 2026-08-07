@@ -58,11 +58,9 @@ export function TopicDetailView({ slug }: TopicDetailViewProps) {
 
   const content = (
     <>
-      <section
-        aria-labelledby="topic-detail-heading"
-        className="border-b border-neutral-200"
-      >
-        <Container className="py-8 lg:py-10">
+      <section aria-labelledby="topic-detail-heading">
+        <Container>
+          <div className="border-b border-neutral-200 py-8 lg:py-10">
           <Link
             className="text-xs font-semibold uppercase tracking-wide text-neutral-500 transition-colors hover:text-accent"
             href="/topics"
@@ -104,6 +102,7 @@ export function TopicDetailView({ slug }: TopicDetailViewProps) {
               {t("notFound")}
             </h1>
           ) : null}
+          </div>
         </Container>
       </section>
 

@@ -17,7 +17,9 @@ interface AdaptiveCardGridProps<T> {
  * Card grid that adapts its column count to the item count so a `gap-px`
  * grid never needs filler cells to look intentional:
  * - 0 items: renders nothing (caller owns its own empty state).
- * - 1 item: single full-width cell, no gap/divider chrome.
+ * - 1 item: sized to a single column of the target grid (same breakpoints
+ *   as the 3+ case) so the card keeps a normal card width with empty space
+ *   beside it, instead of stretching edge-to-edge like a banner.
  * - 2 items: two columns from `sm`, no `lg` bump — fills exactly, no fillers.
  * - 3+ items: full grid (`sm:grid-cols-2 lg:grid-cols-3`, or `sm:grid-cols-2`
  *   when `maxCols` is 2) with `GridFillers` completing the last row.
@@ -33,7 +35,13 @@ export function AdaptiveCardGrid<T>({
 
   if (items.length === 1) {
     return (
-      <div className={cn("grid grid-cols-1", className)}>
+      <div
+        className={cn(
+          "grid grid-cols-1 sm:grid-cols-2",
+          maxCols === 3 && "lg:grid-cols-3",
+          className,
+        )}
+      >
         {renderItem(items[0])}
       </div>
     );

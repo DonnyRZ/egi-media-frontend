@@ -5,6 +5,12 @@ import type { ReactNode } from "react";
 import { isProfesionalPath } from "@/features/profesional/constants/profesional.constants";
 import { usePathname } from "@/i18n/navigation";
 
+const GOOGLE_CALLBACK_PATH = "/auth/google/callback";
+
+function hidePublicChrome(pathname: string) {
+  return isProfesionalPath(pathname) || pathname === GOOGLE_CALLBACK_PATH;
+}
+
 interface PublicChromeProps {
   ad: ReactNode;
   header: ReactNode;
@@ -20,7 +26,7 @@ export function PublicChrome({
 }: PublicChromeProps) {
   const pathname = usePathname();
 
-  if (isProfesionalPath(pathname)) {
+  if (hidePublicChrome(pathname)) {
     return <>{children}</>;
   }
 

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
-import { AuthShell } from "@/features/auth/components/AuthShell";
 import { GoogleCallbackView } from "@/features/auth/components/GoogleCallbackView";
 
 interface GoogleCallbackPageProps {
@@ -29,10 +28,8 @@ export default async function GoogleCallbackPage({
   const t = await getTranslations({ locale, namespace: "auth" });
 
   return (
-    <AuthShell subtitle={t("googleLoadingBody")} title={t("googleLoadingTitle")}>
-      <Suspense fallback={<p>{t("loading")}</p>}>
-        <GoogleCallbackView />
-      </Suspense>
-    </AuthShell>
+    <Suspense fallback={<p>{t("loading")}</p>}>
+      <GoogleCallbackView />
+    </Suspense>
   );
 }

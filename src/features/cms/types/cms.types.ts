@@ -35,9 +35,11 @@ export interface CmsArticleListItem {
   status: ArticleStatus;
   translationStatus: TranslationStatus;
   placements: ArticlePlacement[];
+  headlinePosition: number | null;
   publishedAt: string | null;
   createdAt: string;
   updatedAt: string | null;
+  viewCount: number;
   author: { id: string; fullName: string };
   category: { id: string; name: string } | null;
 }
@@ -81,6 +83,7 @@ export interface CmsArticleDetail {
   featuredImage: string | null;
   status: ArticleStatus;
   placements: ArticlePlacement[];
+  headlinePosition: number | null;
   publishedAt: string | null;
   categoryId: string | null;
   seriesId: string | null;
@@ -103,6 +106,7 @@ export interface ArticleWritePayload {
   topicId?: string | null;
   tagIds?: string[];
   placements?: ArticlePlacement[];
+  headlinePosition?: number | null;
   /** en/uz translations; each locale is only sent when it has content. */
   translations?: Partial<Record<"en" | "uz", ArticleTranslation>>;
 }

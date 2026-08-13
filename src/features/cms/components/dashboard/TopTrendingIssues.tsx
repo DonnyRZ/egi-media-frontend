@@ -3,6 +3,7 @@
 import Link from "next/link";
 
 import { Card, CardHeader } from "@/features/cms/components/ui/Card";
+import { Icons } from "@/features/cms/components/ui/Icons";
 import {
   EmptyState,
   LoadingState,
@@ -31,14 +32,21 @@ export function TopTrendingIssues() {
       />
 
       {isLoading ? (
-        <LoadingState label="Loading trends…" />
+        <LoadingState compact label="Loading…" />
       ) : isError ? (
         <EmptyState
-          title="Trending unavailable"
+          compact
+          icon={<Icons.topic className="h-5 w-5" />}
+          title="Unavailable"
           description="Could not load clustering data."
         />
       ) : issues.length === 0 ? (
-        <EmptyState title="No trending issues yet" />
+        <EmptyState
+          compact
+          icon={<Icons.topic className="h-5 w-5" />}
+          title="Unavailable"
+          description="No trending issues yet."
+        />
       ) : (
         <ol className="divide-y divide-neutral-100 dark:divide-neutral-800">
           {issues.map((issue, index) => (

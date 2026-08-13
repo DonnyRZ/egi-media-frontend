@@ -36,6 +36,7 @@ export interface ArticleListItemDto {
   category: ArticleCategoryDto | null;
   locale?: ContentLocale;
   available_locales?: ContentLocale[];
+  headline_position?: number | null;
 }
 
 export interface ArticleDetailDto extends ArticleListItemDto {
@@ -85,6 +86,8 @@ export function mapArticleDto(dto: ArticleListItemDto): Article {
     readingTimeMinutes: calculateReadingTime(dto.summary),
     locale: dto.locale ?? "id",
     availableLocales: dto.available_locales ?? ["id"],
+    headlinePosition:
+      typeof dto.headline_position === "number" ? dto.headline_position : null,
   };
 }
 
@@ -109,12 +112,17 @@ export function mapArticleDetailDto(dto: ArticleDetailDto): ArticleDetail {
   };
 }
 
-export function mapArticleListDto(dto: ArticleListResponseDto): ArticleListResult {
+export function mapArticleListDto(
+  dto: ArticleListResponseDto | null | undefined,
+): ArticleListResult {
+  const items = dto?.items ?? [];
+  const meta = dto?.meta;
+
   return {
-    items: dto.items.map(mapArticleDto),
-    total: dto.meta.total,
-    page: dto.meta.page,
-    limit: dto.meta.limit,
-    totalPages: dto.meta.total_pages,
+    items: items.map(mapArticleDto),
+    total: meta?.total ?? items.length,
+    page: meta?.page ?? 1,
+    limit: meta?.limit ?? items.length,
+    totalPages: meta?.total_pages ?? 1,
   };
 }

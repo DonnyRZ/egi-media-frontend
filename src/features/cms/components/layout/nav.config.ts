@@ -66,6 +66,13 @@ export const NAV_SECTIONS: NavSection[] = [
         matchPrefix: true,
       },
       {
+        label: "Advertisements",
+        href: "/cms/ads",
+        icon: "media",
+        permission: "canViewActivity",
+        matchPrefix: true,
+      },
+      {
         label: "Users",
         href: "/cms/users",
         icon: "users",
@@ -94,5 +101,17 @@ export const SETTINGS_NAV: NavItem = {
   href: "/cms/settings",
   icon: "settings",
   permission: "always",
+};
+
+export const COMPANY_PROFILE_NAV: NavItem = {
+  label: "Company Profile",
+  href: "/cms/settings/company",
+  icon: "media",
+  permission: "canViewActivity",
   matchPrefix: true,
 };
+
+/** @deprecated Use COMPANY_PROFILE_NAV */
+export const SOCIAL_MEDIA_NAV = COMPANY_PROFILE_NAV;
+
+export const SETTINGS_NAV_ITEMS: NavItem[] = [SETTINGS_NAV, COMPANY_PROFILE_NAV];

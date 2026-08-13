@@ -29,6 +29,8 @@ export interface Article {
   readingTimeMinutes: number;
   locale: ContentLocale;
   availableLocales: ContentLocale[];
+  /** Curated Top Stories slot (1-5) when present. */
+  headlinePosition?: number | null;
 }
 
 export interface ArticleDetail extends Article {

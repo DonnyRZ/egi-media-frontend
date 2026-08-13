@@ -12,12 +12,37 @@ import type { HomepageNewsData } from "@/shared/types/homepage.types";
 import type { TopicNewsGroup } from "@/shared/types/topic.types";
 import { takeUniqueArticles } from "@/shared/utils/unique-articles";
 
+const EMPTY_ARTICLE_LIST = {
+  items: [] as Article[],
+  total: 0,
+  page: 1,
+  limit: 0,
+  totalPages: 0,
+};
+
+async function safeFetchArticles(
+  params: Parameters<typeof fetchArticles>[0],
+): Promise<typeof EMPTY_ARTICLE_LIST> {
+  try {
+    const result = await fetchArticles(params);
+    return {
+      items: result?.items ?? [],
+      total: result?.total ?? 0,
+      page: result?.page ?? 1,
+      limit: result?.limit ?? 0,
+      totalPages: result?.totalPages ?? 0,
+    };
+  } catch {
+    return EMPTY_ARTICLE_LIST;
+  }
+}
+
 async function fetchByPlacement(
   placement: ArticlePlacement,
   limit: number,
   lang: ContentLocale,
 ): Promise<Article[]> {
-  const result = await fetchArticles({
+  const result = await safeFetchArticles({
     page: 1,
     limit,
     placement,
@@ -31,17 +56,22 @@ async function buildCategoryGroups(
   lang: ContentLocale,
   usedIds: Set<string>,
 ): Promise<CategoryNewsGroup[]> {
-  const categories = await fetchCategories({
-    page: 1,
-    limit: HOMEPAGE_LIMITS.taxonomyCandidates,
-  });
+  let categories;
+  try {
+    categories = await fetchCategories({
+      page: 1,
+      limit: HOMEPAGE_LIMITS.taxonomyCandidates,
+    });
+  } catch {
+    return [];
+  }
 
   const groups: CategoryNewsGroup[] = [];
 
-  for (const category of categories.items) {
+  for (const category of categories?.items ?? []) {
     if (groups.length >= HOMEPAGE_LIMITS.categoryGroups) break;
 
-    const result = await fetchArticles({
+    const result = await safeFetchArticles({
       page: 1,
       limit: HOMEPAGE_LIMITS.taxonomyFetchLimit,
       category_id: category.id,
@@ -67,17 +97,22 @@ async function buildTopicGroups(
   lang: ContentLocale,
   usedIds: Set<string>,
 ): Promise<TopicNewsGroup[]> {
-  const topics = await fetchTopics({
-    page: 1,
-    limit: HOMEPAGE_LIMITS.taxonomyCandidates,
-  });
+  let topics;
+  try {
+    topics = await fetchTopics({
+      page: 1,
+      limit: HOMEPAGE_LIMITS.taxonomyCandidates,
+    });
+  } catch {
+    return [];
+  }
 
   const groups: TopicNewsGroup[] = [];
 
-  for (const topic of topics.items) {
+  for (const topic of topics?.items ?? []) {
     if (groups.length >= HOMEPAGE_LIMITS.topicGroups) break;
 
-    const result = await fetchArticles({
+    const result = await safeFetchArticles({
       page: 1,
       limit: HOMEPAGE_LIMITS.taxonomyFetchLimit,
       topic_id: topic.id,
@@ -106,6 +141,8 @@ async function buildTopicGroups(
  * - Taxonomy sections (category + topic) share a separate used-id set so they
  *   stay filled even on a small catalog.
  * - Category is built before topic so By Category is not starved.
+ * - Section fetch failures degrade to empty arrays so one bad API cannot
+ *   crash the whole homepage Error Boundary.
  */
 export async function getHomepageNews(
   lang: ContentLocale = "id",
@@ -134,7 +171,7 @@ export async function getHomepageNews(
         HOMEPAGE_LIMITS.latestNews,
         lang,
       ),
-      fetchArticles({
+      safeFetchArticles({
         page: 1,
         limit: HOMEPAGE_LIMITS.editorsPicks,
         sort: "popular",
@@ -142,20 +179,18 @@ export async function getHomepageNews(
       }),
     ]);
 
-  // Category before topic so the By Category section is never empty when
-  // both compete for the same small taxonomy pool.
   const categories = await buildCategoryGroups(lang, taxonomyUsedIds);
   const topics = await buildTopicGroups(lang, taxonomyUsedIds);
 
   return {
     hero: {
       featured: heroItems[0] ?? null,
-      headlines,
+      headlines: headlines ?? [],
     },
-    breaking: trending,
-    latest,
-    categories,
-    topics,
-    editors: popularPool.items.slice(0, HOMEPAGE_LIMITS.editorsPicks),
+    breaking: trending ?? [],
+    latest: latest ?? [],
+    categories: categories ?? [],
+    topics: topics ?? [],
+    editors: (popularPool.items ?? []).slice(0, HOMEPAGE_LIMITS.editorsPicks),
   };
 }

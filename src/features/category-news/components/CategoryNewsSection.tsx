@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 
+import { NativeAdSlot } from "@/features/ads/components/NativeAdSlot";
 import { useCategoryNews } from "@/features/homepage/hooks/useCategoryNews";
 import { Link } from "@/i18n/navigation";
 import { ArticleCard } from "@/shared/components/common/ArticleCard";
@@ -81,7 +82,8 @@ export function CategoryNewsSection() {
           {data.map((group) => (
             <CategoryColumn key={group.category.id} group={group} />
           ))}
-          <GridFillers count={data.length} />
+          <NativeAdSlot className="border-0" placement="IN_FEED" />
+          <GridFillers count={data.length + 1} />
         </div>
       ) : null}
     </FrameModule>

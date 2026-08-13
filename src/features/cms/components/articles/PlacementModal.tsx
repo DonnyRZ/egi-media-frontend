@@ -11,24 +11,35 @@ interface PlacementModalProps {
   open: boolean;
   title: string;
   initialPlacements: ArticlePlacement[];
+  initialHeadlinePosition?: number | null;
   loading?: boolean;
   onClose: () => void;
-  onConfirm: (placements: ArticlePlacement[]) => void;
+  onConfirm: (
+    placements: ArticlePlacement[],
+    headlinePosition: number | null,
+  ) => void;
 }
 
 export function PlacementModal({
   open,
   title,
   initialPlacements,
+  initialHeadlinePosition = null,
   loading,
   onClose,
   onConfirm,
 }: PlacementModalProps) {
-  const [placements, setPlacements] = useState<ArticlePlacement[]>(initialPlacements);
+  const [placements, setPlacements] =
+    useState<ArticlePlacement[]>(initialPlacements);
+  const [headlinePosition, setHeadlinePosition] = useState<number | null>(
+    initialHeadlinePosition,
+  );
 
   useEffect(() => {
-    if (open) setPlacements(initialPlacements);
-  }, [open, initialPlacements]);
+    if (!open) return;
+    setPlacements(initialPlacements);
+    setHeadlinePosition(initialHeadlinePosition);
+  }, [open, initialPlacements, initialHeadlinePosition]);
 
   return (
     <Modal
@@ -41,19 +52,28 @@ export function PlacementModal({
           <Button variant="secondary" onClick={onClose} disabled={loading}>
             Cancel
           </Button>
-          <Button onClick={() => onConfirm(placements)} loading={loading}>
+          <Button
+            onClick={() => onConfirm(placements, headlinePosition)}
+            loading={loading}
+          >
             Save placements
           </Button>
         </>
       }
     >
       <p className="mb-4 text-sm text-neutral-500">
-        Choose where <span className="font-medium text-neutral-800 dark:text-neutral-200">{title}</span> appears on the site. Independent of publish status.
+        Choose where{" "}
+        <span className="font-medium text-neutral-800 dark:text-neutral-200">
+          {title}
+        </span>{" "}
+        appears on the site. Independent of publish status.
       </p>
       <PlacementCheckboxes
         idPrefix="modal-placement"
         value={placements}
+        headlinePosition={headlinePosition}
         onChange={setPlacements}
+        onHeadlinePositionChange={setHeadlinePosition}
       />
     </Modal>
   );

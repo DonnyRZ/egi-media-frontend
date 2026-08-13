@@ -151,8 +151,10 @@ export async function changeArticleStatus(
 export async function updateArticlePlacements(
   id: string,
   placements: ArticleWritePayload["placements"],
+  headlinePosition?: number | null,
 ): Promise<void> {
   await axiosClient.patch(API_ENDPOINTS.articlePlacements(id), {
     placements: placements ?? [],
+    headline_position: headlinePosition ?? null,
   });
 }

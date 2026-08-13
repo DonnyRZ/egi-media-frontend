@@ -63,6 +63,7 @@ export function ArticleTable({
             <th className={`${HEAD_CELL} hidden lg:table-cell`}>Author</th>
             <th className={`${HEAD_CELL} hidden md:table-cell`}>Category</th>
             <th className={HEAD_CELL}>Status</th>
+            <th className={`${HEAD_CELL} hidden md:table-cell`}>Views</th>
             <th className={`${HEAD_CELL} hidden xl:table-cell`}>Placements</th>
             <th className={`${HEAD_CELL} hidden lg:table-cell`}>Last edited</th>
             <th className={`${HEAD_CELL} text-right`}>Actions</th>
@@ -108,8 +109,14 @@ export function ArticleTable({
                     <TranslationStatusBadge status={article.translationStatus} />
                   </div>
                 </td>
+                <td className="hidden px-4 py-3 text-sm tabular-nums text-neutral-600 md:table-cell dark:text-neutral-300">
+                  {article.viewCount.toLocaleString()}
+                </td>
                 <td className="hidden px-4 py-3 xl:table-cell">
-                  <PlacementBadges placements={article.placements} />
+                  <PlacementBadges
+                    placements={article.placements}
+                    headlinePosition={article.headlinePosition}
+                  />
                 </td>
                 <td className="hidden px-4 py-3 text-sm text-neutral-500 lg:table-cell">
                   {formatPublishedDate(article.updatedAt) ||

@@ -31,6 +31,15 @@ export const articleFormSchema = z.object({
   placements: z.array(
     z.enum(["latest_news", "homepage_hero", "headline", "trending"]),
   ),
+  headlinePosition: z.number().int().min(1).max(5).nullable(),
+}).superRefine((values, ctx) => {
+  if (values.placements.includes("headline") && values.headlinePosition == null) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: "Select a Headline Position (1–5)",
+      path: ["headlinePosition"],
+    });
+  }
 });
 
 export type ArticleFormValues = z.infer<typeof articleFormSchema>;
@@ -141,3 +150,54 @@ export const videoFormSchema = z.object({
 });
 
 export type VideoFormValues = z.infer<typeof videoFormSchema>;
+
+export const socialMediaLinkFormSchema = z.object({
+  platformName: z.string().trim().min(1, "Platform name is required").max(100),
+  url: z.string().trim().url("Enter a valid URL"),
+  iconName: z.enum(["youtube", "instagram", "tiktok", "spotify", "twitter"]),
+  isActive: z.boolean(),
+  sortOrder: z.coerce.number().int().min(0).max(9999),
+});
+
+export type SocialMediaLinkFormValues = z.infer<typeof socialMediaLinkFormSchema>;
+
+export const teamMemberFormSchema = z.object({
+  name: z.string().trim().min(1, "Name is required").max(150),
+  role: z.string().trim().min(1, "Role is required").max(200),
+  bio: z.string().trim().max(2000).optional().or(z.literal("")),
+  photoUrl: z
+    .string()
+    .trim()
+    .min(1, "Photo is required")
+    .refine(
+      (value) => /^https?:\/\//i.test(value) || value.startsWith("/"),
+      "Use an http(s) URL or a site-relative path",
+    ),
+  isActive: z.boolean(),
+  sortOrder: z.coerce.number().int().min(0).max(9999),
+});
+
+export type TeamMemberFormValues = z.infer<typeof teamMemberFormSchema>;
+
+export const AD_PLACEMENTS = [
+  "LEADERBOARD",
+  "IN_FEED",
+  "SIDEBAR_RECTANGLE",
+] as const;
+
+export const adFormSchema = z.object({
+  title: z.string().trim().min(1, "Title is required").max(200),
+  imageUrl: z
+    .string()
+    .trim()
+    .min(1, "Image is required")
+    .refine(
+      (value) => /^https?:\/\//i.test(value) || value.startsWith("/"),
+      "Use an http(s) URL or a site-relative path",
+    ),
+  targetUrl: z.string().trim().url("Enter a valid target URL"),
+  placement: z.enum(AD_PLACEMENTS),
+  isActive: z.boolean(),
+});
+
+export type AdFormValues = z.infer<typeof adFormSchema>;

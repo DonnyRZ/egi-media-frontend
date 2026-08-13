@@ -14,11 +14,22 @@ export function Spinner({ className }: { className?: string }) {
   );
 }
 
-export function LoadingState({ label = "Loading…" }: { label?: string }) {
+export function LoadingState({
+  label = "Loading…",
+  compact = false,
+}: {
+  label?: string;
+  compact?: boolean;
+}) {
   return (
-    <div className="flex flex-col items-center justify-center gap-3 py-16 text-sm text-neutral-500 dark:text-neutral-400">
-      <Spinner />
-      <span>{label}</span>
+    <div
+      className={cn(
+        "flex flex-col items-center justify-center text-sm text-neutral-500 dark:text-neutral-400",
+        compact ? "gap-2 py-5" : "gap-3 py-16",
+      )}
+    >
+      <Spinner className={compact ? "h-4 w-4" : undefined} />
+      <span className={compact ? "text-xs" : undefined}>{label}</span>
     </div>
   );
 }
@@ -28,17 +39,48 @@ interface MessageStateProps {
   description?: string;
   icon?: ReactNode;
   action?: ReactNode;
+  compact?: boolean;
 }
 
-export function EmptyState({ title, description, icon, action }: MessageStateProps) {
+export function EmptyState({
+  title,
+  description,
+  icon,
+  action,
+  compact = false,
+}: MessageStateProps) {
   return (
-    <div className="flex flex-col items-center justify-center gap-2 px-6 py-16 text-center">
-      {icon ? <div className="text-neutral-300 dark:text-neutral-600">{icon}</div> : null}
-      <h3 className="text-sm font-semibold text-neutral-800 dark:text-neutral-200">
+    <div
+      className={cn(
+        "flex flex-col items-center justify-center text-center",
+        compact ? "gap-1 px-4 py-5" : "gap-2 px-6 py-16",
+      )}
+    >
+      {icon ? (
+        <div
+          className={cn(
+            "text-neutral-300 dark:text-neutral-600",
+            compact && "opacity-80",
+          )}
+        >
+          {icon}
+        </div>
+      ) : null}
+      <h3
+        className={cn(
+          "font-semibold text-neutral-800 dark:text-neutral-200",
+          compact ? "text-xs" : "text-sm",
+        )}
+      >
         {title}
       </h3>
       {description ? (
-        <p className="max-w-sm text-sm text-neutral-500 dark:text-neutral-400">
+        <p
+          className={cn(
+            "max-w-sm text-neutral-500 dark:text-neutral-400",
+            compact ? "text-[11px] leading-snug" : "text-sm",
+          )}
+        >
           {description}
         </p>
       ) : null}

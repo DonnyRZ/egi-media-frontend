@@ -122,6 +122,20 @@ export const CMS_QUERY_KEYS = {
     all: ["cms", "videos"] as const,
     list: (params: object) => ["cms", "videos", "list", params] as const,
   },
+  socialMediaLinks: {
+    all: ["cms", "social-media-links"] as const,
+    list: (params: object) =>
+      ["cms", "social-media-links", "list", params] as const,
+  },
+  teamMembers: {
+    all: ["cms", "team-members"] as const,
+    list: (params: object) =>
+      ["cms", "team-members", "list", params] as const,
+  },
+  ads: {
+    all: ["cms", "ads"] as const,
+    list: (params: object) => ["cms", "ads", "list", params] as const,
+  },
   newsFeed: {
     all: ["cms", "news-feed"] as const,
     list: (params: object) => ["cms", "news-feed", "list", params] as const,

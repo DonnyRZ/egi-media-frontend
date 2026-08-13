@@ -7,7 +7,7 @@ import { cn } from "@/shared/lib/cn";
 import { Icons } from "@/features/cms/components/ui/Icons";
 import {
   NAV_SECTIONS,
-  SETTINGS_NAV,
+  SETTINGS_NAV_ITEMS,
   type NavItem,
 } from "@/features/cms/components/layout/nav.config";
 import { usePermissions } from "@/features/cms/hooks/usePermissions";
@@ -98,8 +98,10 @@ export function Sidebar() {
           })}
         </nav>
 
-        <div className="border-t border-neutral-200 px-3 py-3 dark:border-neutral-800">
-          <NavLink item={SETTINGS_NAV} pathname={pathname} />
+        <div className="space-y-1 border-t border-neutral-200 px-3 py-3 dark:border-neutral-800">
+          {SETTINGS_NAV_ITEMS.filter(canShow).map((item) => (
+            <NavLink key={item.href} item={item} pathname={pathname} />
+          ))}
         </div>
       </aside>
     </>

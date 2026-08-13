@@ -9,12 +9,16 @@ import {
 } from "@/features/cms/services/cms-article.service";
 import type { CmsMyArticlesParams } from "@/features/cms/types/cms.types";
 
-export function useCmsArticles(params: CmsMyArticlesParams & { search?: string }) {
+export function useCmsArticles(
+  params: CmsMyArticlesParams & { search?: string },
+  options?: { enabled?: boolean },
+) {
   return useQuery({
     queryKey: CMS_QUERY_KEYS.articles.list(params),
     queryFn: () => fetchManageArticles(params),
     placeholderData: keepPreviousData,
     staleTime: 30_000,
+    enabled: options?.enabled ?? true,
   });
 }
 

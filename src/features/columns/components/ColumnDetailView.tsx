@@ -137,7 +137,6 @@ export function ColumnDetailView({ slug }: ColumnDetailViewProps) {
               <ColumnEngagement
                 columnId={data.id}
                 initialShareCount={data.shareCount}
-                initialViewCount={data.viewCount}
                 shareUrl={shareUrl}
                 title={data.title}
               />

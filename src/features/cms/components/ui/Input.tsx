@@ -15,9 +15,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
 ) {
   return (
     <input
-      ref={ref}
-      className={cn(BASE_FIELD, invalid && "border-error focus:border-error", className)}
       {...props}
+      ref={ref}
+      className={cn(
+        BASE_FIELD,
+        "h-10 min-h-10",
+        invalid && "border-error focus:border-error",
+        className,
+      )}
     />
   );
 });

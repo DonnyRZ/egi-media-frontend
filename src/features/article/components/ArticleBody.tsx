@@ -23,7 +23,9 @@ export function ArticleBody({ content }: ArticleBodyProps) {
 
   if (!paragraphs.length) {
     return (
-      <p className="whitespace-pre-wrap text-base leading-8 text-neutral-700">{content}</p>
+      <p className="whitespace-pre-wrap text-base leading-8 text-neutral-700">
+        {content}
+      </p>
     );
   }
 

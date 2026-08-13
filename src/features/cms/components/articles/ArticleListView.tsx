@@ -122,12 +122,16 @@ export function ArticleListView() {
     void applyStatus([article.id], next);
   }
 
-  async function confirmPlacements(placements: ArticlePlacement[]) {
+  async function confirmPlacements(
+    placements: ArticlePlacement[],
+    headlinePosition: number | null,
+  ) {
     if (!placementArticle) return;
     try {
       await updatePlacements.mutateAsync({
         id: placementArticle.id,
         placements,
+        headlinePosition,
       });
       toast.success("Placements updated");
       setPlacementArticle(null);
@@ -264,6 +268,7 @@ export function ArticleListView() {
         open={Boolean(placementArticle)}
         title={placementArticle?.title ?? ""}
         initialPlacements={placementArticle?.placements ?? ["latest_news"]}
+        initialHeadlinePosition={placementArticle?.headlinePosition ?? null}
         loading={updatePlacements.isPending}
         onClose={() => setPlacementArticle(null)}
         onConfirm={confirmPlacements}

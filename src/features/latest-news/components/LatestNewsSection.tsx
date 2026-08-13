@@ -18,6 +18,8 @@ export function LatestNewsSection() {
     return null;
   }
 
+  const items = data?.items ?? [];
+
   return (
     <FrameModule ariaLabelledby="latest-heading">
       <FrameHeading
@@ -46,16 +48,16 @@ export function LatestNewsSection() {
         </div>
       ) : null}
 
-      {!isLoading && !isError && data?.items.length ? (
+      {!isLoading && !isError && items.length ? (
         <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
-          {data.items.map((article) => (
+          {items.map((article) => (
             <ArticleCard
+              key={article.id}
               article={article}
               className="bg-white p-5"
-              key={article.id}
             />
           ))}
-          <GridFillers count={data.items.length} />
+          <GridFillers count={items.length} />
         </div>
       ) : null}
     </FrameModule>

@@ -39,7 +39,7 @@ export function RecentActivity() {
         <EmptyState title="No recent activity" />
       ) : (
         <ul className="divide-y divide-neutral-100 dark:divide-neutral-800">
-          {data.map((log) => {
+          {data.slice(0, 5).map((log) => {
             const actionLabel = getAuditActionLabel(log.action);
             const title = log.recordLabel?.trim();
 

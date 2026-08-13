@@ -1,7 +1,14 @@
 import { API_ENDPOINTS } from "@/shared/constants/api.constants";
 import { axiosClient } from "@/shared/lib/axios-client";
 import type { ApiSuccessResponse } from "@/shared/types/api.types";
-import type { DashboardStats } from "@/features/cms/types/cms.types";
+import {
+  mapCmsArticleListItem,
+  type CmsArticleListItemDto,
+} from "@/features/cms/mappers/cms.mapper";
+import type {
+  CmsArticleListItem,
+  DashboardStats,
+} from "@/features/cms/types/cms.types";
 
 interface ArticleStatsDto {
   total: number;
@@ -10,6 +17,10 @@ interface ArticleStatsDto {
   scheduled: number;
   published: number;
   archived: number;
+}
+
+interface TopArticlesDto {
+  items: CmsArticleListItemDto[];
 }
 
 /**
@@ -29,4 +40,18 @@ export async function fetchDashboardStats(): Promise<DashboardStats> {
     published: data.published ?? 0,
     archived: data.archived ?? 0,
   };
+}
+
+/**
+ * Top published articles by view count from `GET /api/v1/articles/top-viewed`.
+ * Superadmin → newsroom-wide; author → own articles only (enforced by backend).
+ */
+export async function fetchTopArticlesByViews(
+  limit = 5,
+): Promise<CmsArticleListItem[]> {
+  const response = await axiosClient.get<ApiSuccessResponse<TopArticlesDto>>(
+    API_ENDPOINTS.articlesTopViewed,
+    { params: { limit } },
+  );
+  return (response.data.data.items ?? []).map(mapCmsArticleListItem);
 }

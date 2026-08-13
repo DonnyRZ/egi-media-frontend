@@ -74,8 +74,10 @@ export function TranslationStatusBadge({
 
 export function PlacementBadges({
   placements,
+  headlinePosition = null,
 }: {
   placements: ArticlePlacement[];
+  headlinePosition?: number | null;
 }) {
   if (!placements.length) {
     return <span className="text-xs text-neutral-400">—</span>;
@@ -85,9 +87,13 @@ export function PlacementBadges({
     <div className="flex flex-wrap gap-1">
       {placements.map((placement) => {
         const meta = ARTICLE_PLACEMENT_META[placement];
+        const label =
+          placement === "headline" && headlinePosition != null
+            ? `Headline #${String(headlinePosition).padStart(2, "0")}`
+            : meta.shortLabel;
         return (
           <Badge key={placement} tone={meta.tone} className="rounded-md px-2">
-            {meta.shortLabel}
+            {label}
           </Badge>
         );
       })}

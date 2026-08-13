@@ -9,6 +9,7 @@ import { SITE_NAME } from "@/shared/constants/site.constants";
 const COMPANY_LINKS = [
   { key: "about", href: "/about" },
   { key: "contact", href: "/contact" },
+  { key: "profesional", href: "/profesional" },
 ] as const;
 
 const LEGAL_LINKS = [

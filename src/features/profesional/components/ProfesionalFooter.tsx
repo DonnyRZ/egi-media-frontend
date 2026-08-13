@@ -43,7 +43,7 @@ export function ProfesionalFooter() {
           <h2>{t("footerAccess")}</h2>
           <div className="profesional-footer-links">
             <a href={env.aiAppUrl} rel="noreferrer">{t("signIn")}</a>
-            <Link href="/">{t("footerNews")}</Link>
+            <Link href="/" locale="id">{t("footerNews")}</Link>
             {PROFESIONAL_NAV.map((item) => (
               <Link href={item.href} key={item.key}>{t(item.key)}</Link>
             ))}

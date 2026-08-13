@@ -11,7 +11,7 @@ export function ProfesionalUtilityBar() {
 
   return (
     <div className="profesional-utility">
-      <Link href="/">{t("utilityNews")}</Link>
+      <Link href="/" locale="id">{t("utilityNews")}</Link>
       <Link href={PROFESIONAL_ROUTES.support}>{t("utilityDemo")}</Link>
       <a href={env.aiAppUrl} rel="noreferrer">{t("utilitySignIn")}</a>
       <Link href={PROFESIONAL_ROUTES.support}>{t("utilitySupport")}</Link>

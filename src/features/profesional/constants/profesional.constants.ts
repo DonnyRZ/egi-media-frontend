@@ -1,4 +1,5 @@
 export const PROFESIONAL_PATH = "/profesional";
+export const PROFESIONAL_LOCALE = "en" as const;
 
 export const PROFESIONAL_ROUTES = {
   home: "/profesional",
@@ -73,4 +74,17 @@ export const PAGE_BANNERS = {
 
 export function isProfesionalPath(pathname: string) {
   return pathname === PROFESIONAL_PATH || pathname.startsWith(`${PROFESIONAL_PATH}/`);
+}
+
+export function profesionalEnglishPath(pathname: string) {
+  if (pathname === PROFESIONAL_PATH || pathname.startsWith(`${PROFESIONAL_PATH}/`)) {
+    return `/${PROFESIONAL_LOCALE}${pathname}`;
+  }
+
+  const prefixed = pathname.match(/^\/(id|uz)(\/profesional(?:\/.*)?)$/);
+  if (prefixed) {
+    return `/${PROFESIONAL_LOCALE}${prefixed[2]}`;
+  }
+
+  return null;
 }

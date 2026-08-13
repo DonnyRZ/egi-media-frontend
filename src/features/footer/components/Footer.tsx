@@ -9,7 +9,7 @@ import { SITE_NAME } from "@/shared/constants/site.constants";
 const COMPANY_LINKS = [
   { key: "about", href: "/about" },
   { key: "contact", href: "/contact" },
-  { key: "profesional", href: "/profesional" },
+  { key: "profesional", href: "/profesional", locale: "en" as const },
 ] as const;
 
 const LEGAL_LINKS = [
@@ -50,7 +50,11 @@ export function Footer() {
             <ul className="mt-4 space-y-2">
               {COMPANY_LINKS.map((link) => (
                 <li key={link.href}>
-                  <Link className="text-sm text-neutral-300 hover:text-white" href={link.href}>
+                  <Link
+                    className="text-sm text-neutral-300 hover:text-white"
+                    href={link.href}
+                    locale={"locale" in link ? link.locale : undefined}
+                  >
                     {t(link.key)}
                   </Link>
                 </li>

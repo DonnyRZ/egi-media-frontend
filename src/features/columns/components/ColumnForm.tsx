@@ -1,10 +1,11 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 
+import { ColumnFeaturedImageField } from "@/features/columns/components/ColumnFeaturedImageField";
 import { useColumnMutations } from "@/features/columns/hooks/useColumnMutations";
 import {
   createColumnFormSchema,
@@ -87,6 +88,7 @@ export function ColumnForm({
 
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors },
   } = useForm<ColumnFormValues>({
@@ -173,12 +175,16 @@ export function ColumnForm({
           rows={12}
           {...register("content")}
         />
-        <TextField
-          error={errors.featuredImage?.message}
-          label={t("form.featuredImage")}
-          placeholder="https://"
-          type="url"
-          {...register("featuredImage")}
+        <Controller
+          control={control}
+          name="featuredImage"
+          render={({ field }) => (
+            <ColumnFeaturedImageField
+              error={errors.featuredImage?.message}
+              value={field.value}
+              onChange={field.onChange}
+            />
+          )}
         />
 
         <div className="border-t border-neutral-200 pt-4">

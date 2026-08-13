@@ -3,15 +3,15 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { RouteGuard } from "@/features/cms/components/auth/RouteGuard";
 import { PageHeader } from "@/features/cms/components/layout/PageHeader";
 import { Card, CardBody } from "@/features/cms/components/ui/Card";
 import { Field } from "@/features/cms/components/ui/Field";
-import { Input } from "@/features/cms/components/ui/Input";
 import { ConfirmDialog } from "@/features/cms/components/ui/ConfirmDialog";
+import { FeaturedImagePicker } from "@/features/cms/components/media/FeaturedImagePicker";
 import { ColumnRejectDialog } from "@/features/cms/components/columns/ColumnRejectDialog";
 import { ColumnEditorSidebar } from "@/features/cms/components/columns/ColumnEditorSidebar";
 import { ColumnLocaleFields } from "@/features/cms/components/columns/ColumnLocaleFields";
@@ -194,12 +194,17 @@ export function ColumnEditorView({ columnId }: ColumnEditorViewProps) {
                   register={register}
                   errors={errors}
                 />
-                <Field
-                  label="Featured image URL"
-                  htmlFor="featuredImage"
-                  error={errors.featuredImage?.message}
-                >
-                  <Input id="featuredImage" {...register("featuredImage")} />
+                <Field label="Featured image" error={errors.featuredImage?.message}>
+                  <Controller
+                    control={control}
+                    name="featuredImage"
+                    render={({ field }) => (
+                      <FeaturedImagePicker
+                        value={field.value}
+                        onChange={(url) => field.onChange(url ?? "")}
+                      />
+                    )}
+                  />
                 </Field>
               </CardBody>
             </Card>

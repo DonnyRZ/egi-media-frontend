@@ -51,7 +51,9 @@ export function ColumnListView() {
     if (!pendingApprove) return;
     try {
       await approve.mutateAsync(pendingApprove.id);
-      toast.success("Column approved and published");
+      toast.success(
+        "Column approved. Translation started — track progress in the bell. It appears on /kolom when EN+UZ are ready.",
+      );
     } catch (error) {
       toast.error(errorMessage(error, "Could not approve column"));
     } finally {
@@ -134,7 +136,7 @@ export function ColumnListView() {
       <ConfirmDialog
         open={Boolean(pendingApprove)}
         title="Approve & publish"
-        message={`Publish “${pendingApprove?.title ?? ""}”? It will go live on the main site immediately.`}
+        message={`Approve “${pendingApprove?.title ?? ""}”? English and Oʻzbekcha will be translated in the background. It appears on the public site when ready.`}
         confirmLabel="Approve & Publish"
         loading={approve.isPending}
         onConfirm={() => void confirmApprove()}

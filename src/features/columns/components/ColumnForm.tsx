@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
@@ -105,6 +105,9 @@ export function ColumnForm({
     },
   });
 
+  const [showOverrides, setShowOverrides] = useState(false);
+  const [overrideLocale, setOverrideLocale] = useState<"en" | "uz">("en");
+
   const isPending =
     create.isPending || update.isPending || submit.isPending;
 
@@ -150,6 +153,9 @@ export function ColumnForm({
           </h2>
           <p className="mt-1 text-sm text-neutral-600">{t("form.mainLede")}</p>
         </div>
+        <p className="border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-600">
+          {t("form.aiBanner")}
+        </p>
         <TextField
           error={errors.title?.message}
           label={t("form.title")}
@@ -174,50 +180,66 @@ export function ColumnForm({
           type="url"
           {...register("featuredImage")}
         />
-      </section>
 
-      <section className="space-y-4 border border-neutral-200 bg-white p-6 sm:p-8">
-        <div>
-          <h2 className="font-serif text-lg font-bold text-ink">
-            {t("form.translationsHeading")}
-          </h2>
-          <p className="mt-1 text-sm text-neutral-600">
-            {t("form.translationsLede")}
-          </p>
-        </div>
-        <div className="grid gap-6 lg:grid-cols-2">
-          <div className="space-y-3">
-            <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
-              English
-            </p>
-            <TextField label={t("form.titleEn")} {...register("titleEn")} />
-            <TextArea
-              label={t("form.summaryEn")}
-              rows={2}
-              {...register("summaryEn")}
-            />
-            <TextArea
-              label={t("form.contentEn")}
-              rows={6}
-              {...register("contentEn")}
-            />
-          </div>
-          <div className="space-y-3">
-            <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
-              Oʻzbekcha
-            </p>
-            <TextField label={t("form.titleUz")} {...register("titleUz")} />
-            <TextArea
-              label={t("form.summaryUz")}
-              rows={2}
-              {...register("summaryUz")}
-            />
-            <TextArea
-              label={t("form.contentUz")}
-              rows={6}
-              {...register("contentUz")}
-            />
-          </div>
+        <div className="border-t border-neutral-200 pt-4">
+          <button
+            type="button"
+            onClick={() => setShowOverrides((open) => !open)}
+            className="text-sm font-medium text-neutral-600 underline-offset-2 hover:text-ink hover:underline"
+          >
+            {showOverrides ? t("form.overrideHide") : t("form.overrideShow")}
+          </button>
+
+          {showOverrides ? (
+            <div className="mt-4 space-y-4 border border-dashed border-neutral-300 p-4">
+              <p className="text-sm text-neutral-600">{t("form.overrideHint")}</p>
+              <div className="flex gap-2">
+                {(["en", "uz"] as const).map((locale) => (
+                  <button
+                    key={locale}
+                    type="button"
+                    onClick={() => setOverrideLocale(locale)}
+                    className={
+                      overrideLocale === locale
+                        ? "bg-ink px-3 py-1.5 text-sm font-medium text-white"
+                        : "bg-neutral-100 px-3 py-1.5 text-sm font-medium text-neutral-600"
+                    }
+                  >
+                    {locale === "en" ? "English" : "Oʻzbekcha"}
+                  </button>
+                ))}
+              </div>
+              {overrideLocale === "en" ? (
+                <div className="space-y-3">
+                  <TextField label={t("form.titleEn")} {...register("titleEn")} />
+                  <TextArea
+                    label={t("form.summaryEn")}
+                    rows={2}
+                    {...register("summaryEn")}
+                  />
+                  <TextArea
+                    label={t("form.contentEn")}
+                    rows={6}
+                    {...register("contentEn")}
+                  />
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  <TextField label={t("form.titleUz")} {...register("titleUz")} />
+                  <TextArea
+                    label={t("form.summaryUz")}
+                    rows={2}
+                    {...register("summaryUz")}
+                  />
+                  <TextArea
+                    label={t("form.contentUz")}
+                    rows={6}
+                    {...register("contentUz")}
+                  />
+                </div>
+              )}
+            </div>
+          ) : null}
         </div>
       </section>
 

@@ -21,6 +21,8 @@ export const API_ENDPOINTS = {
   articleTranslationJobs: "/api/v1/article-translation-jobs",
   articleTranslateRetry: (id: string) =>
     `/api/v1/articles/${id}/translate/retry`,
+  columnTranslateRetry: (id: string) =>
+    `/api/v1/columns/${id}/translate/retry`,
   categories: "/api/v1/categories",
   categoryById: (idOrSlug: string) =>
     `/api/v1/categories/${encodeURIComponent(idOrSlug)}`,

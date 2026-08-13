@@ -18,6 +18,7 @@ export function useCmsColumnMutations() {
     await Promise.all([
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.columns.all }),
       queryClient.invalidateQueries({ queryKey: CMS_QUERY_KEYS.auditLogs.all }),
+      queryClient.invalidateQueries({ queryKey: CMS_QUERY_KEYS.translationJobs.all }),
     ]);
   }
 

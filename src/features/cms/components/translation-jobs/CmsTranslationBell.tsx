@@ -42,22 +42,29 @@ function JobRow({
   retrying,
 }: {
   job: TranslationJob;
-  onRetry: (articleId: string) => void;
+  onRetry: (job: TranslationJob) => void;
   retrying: boolean;
 }) {
   const isActive = job.jobStatus === "queued" || job.jobStatus === "processing";
+  const href =
+    job.entityType === "column"
+      ? `/cms/columns/${job.entityId}`
+      : `/cms/articles/${job.entityId}`;
+  const kindLabel = job.entityType === "column" ? "Column" : "Article";
 
   return (
     <li className="border-b border-neutral-100 px-3 py-3 last:border-0 dark:border-neutral-800">
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0 flex-1">
           <Link
-            href={`/cms/articles/${job.articleId}`}
+            href={href}
             className="block truncate text-sm font-medium text-neutral-900 hover:text-accent dark:text-neutral-100"
           >
-            {job.articleTitle || "Untitled article"}
+            {job.entityTitle || job.articleTitle || "Untitled"}
           </Link>
           <p className="mt-0.5 text-[11px] text-neutral-400">
+            {kindLabel}
+            {" · "}
             {job.targetStatus === "scheduled" ? "Schedule" : "Publish"}
             {" · "}
             {formatRelativeTime(job.createdAt)}
@@ -88,7 +95,7 @@ function JobRow({
           <button
             type="button"
             disabled={retrying}
-            onClick={() => onRetry(job.articleId)}
+            onClick={() => onRetry(job)}
             className="shrink-0 rounded-md bg-accent px-2 py-1 text-[11px] font-semibold text-white hover:bg-accent/90 disabled:opacity-50"
           >
             Retry
@@ -117,9 +124,12 @@ export function CmsTranslationBell() {
   const badgeCount = activeCount > 0 ? activeCount : failedCount;
   const badgeLabel = badgeCount > 99 ? "99+" : String(badgeCount);
 
-  async function handleRetry(articleId: string) {
+  async function handleRetry(job: TranslationJob) {
     try {
-      await retry.mutateAsync(articleId);
+      await retry.mutateAsync({
+        entityType: job.entityType,
+        entityId: job.entityId,
+      });
       toast.success("Translation restarted — tracking in the bell.");
     } catch (error) {
       toast.error(

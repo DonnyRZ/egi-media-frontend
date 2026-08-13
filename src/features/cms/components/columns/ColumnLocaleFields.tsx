@@ -1,0 +1,153 @@
+"use client";
+
+import { useState } from "react";
+import {
+  Controller,
+  type Control,
+  type FieldErrors,
+  type UseFormRegister,
+} from "react-hook-form";
+
+import { Field } from "@/features/cms/components/ui/Field";
+import { Input } from "@/features/cms/components/ui/Input";
+import { Textarea } from "@/features/cms/components/ui/Textarea";
+import { RichTextEditor } from "@/features/cms/components/editor/RichTextEditor";
+import type { CmsColumnEditorValues } from "@/features/cms/schemas/cms-column.schema";
+
+type OverrideLocale = "en" | "uz";
+
+const OVERRIDE_LOCALES: { id: OverrideLocale; label: string }[] = [
+  { id: "en", label: "English" },
+  { id: "uz", label: "Oʻzbekcha" },
+];
+
+const OVERRIDE_FIELDS: Record<
+  OverrideLocale,
+  {
+    title: keyof CmsColumnEditorValues;
+    summary: keyof CmsColumnEditorValues;
+    content: keyof CmsColumnEditorValues;
+  }
+> = {
+  en: { title: "titleEn", summary: "summaryEn", content: "contentEn" },
+  uz: { title: "titleUz", summary: "summaryUz", content: "contentUz" },
+};
+
+interface ColumnLocaleFieldsProps {
+  control: Control<CmsColumnEditorValues>;
+  register: UseFormRegister<CmsColumnEditorValues>;
+  errors: FieldErrors<CmsColumnEditorValues>;
+}
+
+export function ColumnLocaleFields({
+  control,
+  register,
+  errors,
+}: ColumnLocaleFieldsProps) {
+  const [showOverrides, setShowOverrides] = useState(false);
+  const [overrideLocale, setOverrideLocale] = useState<OverrideLocale>("en");
+  const overrideNames = OVERRIDE_FIELDS[overrideLocale];
+  const titleError = errors.title?.message as string | undefined;
+  const contentError = errors.content?.message as string | undefined;
+
+  return (
+    <div className="space-y-4">
+      <div className="rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-600 dark:border-neutral-700 dark:bg-neutral-900/60 dark:text-neutral-300">
+        Write in <strong className="font-medium text-neutral-800 dark:text-neutral-100">Indonesian</strong>.
+        English and Oʻzbekcha are filled by AI when the column is approved.
+      </div>
+
+      <Field label="Title" htmlFor="title-id" error={titleError} required>
+        <Input
+          id="title-id"
+          placeholder="A compelling headline"
+          invalid={Boolean(titleError)}
+          {...register("title")}
+        />
+      </Field>
+
+      <Field label="Summary" htmlFor="summary-id">
+        <Textarea
+          id="summary-id"
+          placeholder="A short standfirst shown in listings"
+          rows={3}
+          {...register("summary")}
+        />
+      </Field>
+
+      <Field label="Content" htmlFor="content-id" error={contentError} required>
+        <Textarea
+          id="content-id"
+          rows={16}
+          invalid={Boolean(contentError)}
+          {...register("content")}
+        />
+      </Field>
+
+      <div className="border-t border-neutral-200 pt-3 dark:border-neutral-800">
+        <button
+          type="button"
+          onClick={() => setShowOverrides((open) => !open)}
+          className="text-sm font-medium text-neutral-500 underline-offset-2 hover:text-neutral-800 hover:underline dark:hover:text-neutral-200"
+        >
+          {showOverrides ? "Hide translation override" : "Optional: override AI translation"}
+        </button>
+
+        {showOverrides ? (
+          <div className="mt-3 space-y-4 rounded-lg border border-dashed border-neutral-300 p-3 dark:border-neutral-700">
+            <p className="text-xs text-neutral-500">
+              Leave empty to let AI generate translations on approve. Fill only
+              if you need a manual override.
+            </p>
+
+            <div className="flex gap-2">
+              {OVERRIDE_LOCALES.map((item) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => setOverrideLocale(item.id)}
+                  className={
+                    overrideLocale === item.id
+                      ? "rounded-md bg-neutral-900 px-3 py-1.5 text-sm font-medium text-white dark:bg-neutral-100 dark:text-neutral-900"
+                      : "rounded-md bg-neutral-100 px-3 py-1.5 text-sm font-medium text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300"
+                  }
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+
+            <Field label="Title" htmlFor={`title-${overrideLocale}`}>
+              <Input
+                id={`title-${overrideLocale}`}
+                placeholder="Optional override headline"
+                {...register(overrideNames.title)}
+              />
+            </Field>
+
+            <Field label="Summary" htmlFor={`summary-${overrideLocale}`}>
+              <Textarea
+                id={`summary-${overrideLocale}`}
+                placeholder="Optional override summary"
+                {...register(overrideNames.summary)}
+              />
+            </Field>
+
+            <Field label="Content">
+              <Controller
+                control={control}
+                name={overrideNames.content}
+                render={({ field }) => (
+                  <RichTextEditor
+                    value={(field.value as string) ?? ""}
+                    onChange={field.onChange}
+                  />
+                )}
+              />
+            </Field>
+          </div>
+        ) : null}
+      </div>
+    </div>
+  );
+}

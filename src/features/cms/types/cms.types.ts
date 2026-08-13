@@ -44,8 +44,13 @@ export interface CmsArticleListItem {
   category: { id: string; name: string } | null;
 }
 
+export type TranslationEntityType = "article" | "column";
+
 export interface TranslationJob {
   id: string;
+  entityType: TranslationEntityType;
+  entityId: string;
+  entityTitle: string;
   articleId: string;
   articleTitle: string;
   requestedBy: string | null;
@@ -53,7 +58,7 @@ export interface TranslationJob {
   jobStatus: TranslationJobStatus;
   errorMessage: string | null;
   translationStatus: TranslationStatus;
-  articleStatus: ArticleStatus;
+  articleStatus: string;
   createdAt: string;
   startedAt: string | null;
   finishedAt: string | null;

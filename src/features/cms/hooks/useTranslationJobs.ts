@@ -5,9 +5,13 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { CMS_QUERY_KEYS } from "@/features/cms/constants/cms.constants";
 import {
   fetchTranslationJobs,
-  retryArticleTranslation,
+  retryTranslationJob,
 } from "@/features/cms/services/cms-translation-jobs.service";
-import type { TranslationJob } from "@/features/cms/types/cms.types";
+import type {
+  TranslationEntityType,
+  TranslationJob,
+} from "@/features/cms/types/cms.types";
+import { QUERY_KEYS } from "@/shared/constants/query-keys.constants";
 
 const ACTIVE_STATUSES = new Set(["queued", "processing"]);
 
@@ -42,13 +46,22 @@ export function useRetryTranslation() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (articleId: string) => retryArticleTranslation(articleId),
+    mutationFn: ({
+      entityType,
+      entityId,
+    }: {
+      entityType: TranslationEntityType;
+      entityId: string;
+    }) => retryTranslationJob(entityType, entityId),
     onSuccess: () => {
       void queryClient.invalidateQueries({
         queryKey: CMS_QUERY_KEYS.translationJobs.all,
       });
       void queryClient.invalidateQueries({
         queryKey: CMS_QUERY_KEYS.articles.all,
+      });
+      void queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.columns.all,
       });
     },
   });

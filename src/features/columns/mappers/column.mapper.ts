@@ -5,6 +5,7 @@ import type {
   ColumnListResult,
   ColumnStatus,
   ColumnTranslation,
+  ColumnTranslationStatus,
 } from "@/features/columns/types/column.types";
 import { resolveImageUrl } from "@/shared/utils/image";
 
@@ -22,6 +23,7 @@ interface ColumnListItemDto {
   summary: string | null;
   featured_image?: string | null;
   status: ColumnStatus;
+  translation_status?: ColumnTranslationStatus | null;
   rejection_reason?: string | null;
   published_at?: string | null;
   created_at: string;
@@ -83,6 +85,7 @@ export function mapColumnListItemDto(dto: ColumnListItemDto): ColumnListItem {
     summary: dto.summary,
     featuredImage: resolveImageUrl(dto.featured_image ?? null, dto.id),
     status: dto.status,
+    translationStatus: dto.translation_status ?? "none",
     rejectionReason: dto.rejection_reason ?? null,
     publishedAt: dto.published_at ?? null,
     createdAt: dto.created_at,

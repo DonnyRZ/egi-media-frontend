@@ -11,10 +11,10 @@ import { PageHeader } from "@/features/cms/components/layout/PageHeader";
 import { Card, CardBody } from "@/features/cms/components/ui/Card";
 import { Field } from "@/features/cms/components/ui/Field";
 import { Input } from "@/features/cms/components/ui/Input";
-import { Textarea } from "@/features/cms/components/ui/Textarea";
 import { ConfirmDialog } from "@/features/cms/components/ui/ConfirmDialog";
 import { ColumnRejectDialog } from "@/features/cms/components/columns/ColumnRejectDialog";
 import { ColumnEditorSidebar } from "@/features/cms/components/columns/ColumnEditorSidebar";
+import { ColumnLocaleFields } from "@/features/cms/components/columns/ColumnLocaleFields";
 import { CmsColumnCommentsPanel } from "@/features/cms/components/columns/CmsColumnCommentsPanel";
 import {
   EmptyState,
@@ -29,7 +29,10 @@ import {
 } from "@/features/cms/schemas/cms-column.schema";
 import { useToast } from "@/features/cms/stores/cms-toast.store";
 import { PLACEHOLDER_IMAGE_BASE } from "@/shared/constants/site.constants";
-import type { ColumnWritePayload } from "@/features/columns/types/column.types";
+import type {
+  ColumnTranslation,
+  ColumnWritePayload,
+} from "@/features/columns/types/column.types";
 
 interface ColumnEditorViewProps {
   columnId: string;
@@ -37,6 +40,29 @@ interface ColumnEditorViewProps {
 
 function errorMessage(error: unknown, fallback: string): string {
   return error instanceof Error && error.message ? error.message : fallback;
+}
+
+function buildTranslations(
+  values: CmsColumnEditorValues,
+): ColumnWritePayload["translations"] {
+  const translations: Partial<Record<"en" | "uz", ColumnTranslation>> = {};
+
+  if (values.titleEn?.trim() && values.contentEn?.trim()) {
+    translations.en = {
+      title: values.titleEn.trim(),
+      summary: values.summaryEn?.trim() || null,
+      content: values.contentEn.trim(),
+    };
+  }
+  if (values.titleUz?.trim() && values.contentUz?.trim()) {
+    translations.uz = {
+      title: values.titleUz.trim(),
+      summary: values.summaryUz?.trim() || null,
+      content: values.contentUz.trim(),
+    };
+  }
+
+  return Object.keys(translations).length > 0 ? translations : undefined;
 }
 
 export function ColumnEditorView({ columnId }: ColumnEditorViewProps) {
@@ -57,11 +83,18 @@ export function ColumnEditorView({ columnId }: ColumnEditorViewProps) {
       summary: detail.data.summary ?? "",
       content: detail.data.content,
       featuredImage: usableImage,
+      titleEn: detail.data.translations.en?.title ?? "",
+      summaryEn: detail.data.translations.en?.summary ?? "",
+      contentEn: detail.data.translations.en?.content ?? "",
+      titleUz: detail.data.translations.uz?.title ?? "",
+      summaryUz: detail.data.translations.uz?.summary ?? "",
+      contentUz: detail.data.translations.uz?.content ?? "",
     };
   }, [detail.data]);
 
   const {
     register,
+    control,
     handleSubmit,
     reset,
     getValues,
@@ -83,6 +116,7 @@ export function ColumnEditorView({ columnId }: ColumnEditorViewProps) {
       content: values.content.trim(),
       summary: values.summary?.trim() || null,
       featured_image: values.featuredImage?.trim() || null,
+      translations: buildTranslations(values),
     };
     await update.mutateAsync({ id: columnId, payload });
   }
@@ -100,7 +134,9 @@ export function ColumnEditorView({ columnId }: ColumnEditorViewProps) {
     try {
       if (isDirty) await saveValues(getValues());
       await approve.mutateAsync(columnId);
-      toast.success("Column approved and published");
+      toast.success(
+        "Column approved. Translation started — track progress in the bell. It appears on /kolom when EN+UZ are ready.",
+      );
       setApproveOpen(false);
       router.push("/cms/columns");
     } catch (error) {
@@ -153,15 +189,11 @@ export function ColumnEditorView({ columnId }: ColumnEditorViewProps) {
           >
             <Card>
               <CardBody className="space-y-4">
-                <Field label="Title" htmlFor="title" required error={errors.title?.message}>
-                  <Input id="title" invalid={Boolean(errors.title)} {...register("title")} />
-                </Field>
-                <Field label="Summary" htmlFor="summary" error={errors.summary?.message}>
-                  <Textarea id="summary" rows={3} {...register("summary")} />
-                </Field>
-                <Field label="Content" htmlFor="content" required error={errors.content?.message}>
-                  <Textarea id="content" rows={16} {...register("content")} />
-                </Field>
+                <ColumnLocaleFields
+                  control={control}
+                  register={register}
+                  errors={errors}
+                />
                 <Field
                   label="Featured image URL"
                   htmlFor="featuredImage"
@@ -192,7 +224,7 @@ export function ColumnEditorView({ columnId }: ColumnEditorViewProps) {
       <ConfirmDialog
         open={approveOpen}
         title="Approve & publish"
-        message="Publish this column to the main site now?"
+        message="Approve this column? English and Oʻzbekcha will be translated in the background. It appears on the public site when ready."
         confirmLabel="Approve & Publish"
         loading={approve.isPending || update.isPending}
         onConfirm={() => void confirmApprove()}

@@ -1,6 +1,6 @@
 "use client";
 
-import { Badge } from "@/features/cms/components/ui/Badge";
+import { Badge, TranslationStatusBadge } from "@/features/cms/components/ui/Badge";
 import { ColumnRowActions } from "@/features/cms/components/columns/ColumnRowActions";
 import { COLUMN_STATUS_META } from "@/features/cms/constants/column.constants";
 import { formatPublishedDate } from "@/shared/utils/format";
@@ -64,7 +64,10 @@ export function ColumnTable({ columns, onApprove, onReject }: ColumnTableProps) 
                   {formatPublishedDate(column.createdAt) || "—"}
                 </td>
                 <td className="px-4 py-3">
-                  <Badge tone={statusMeta.tone}>{statusMeta.label}</Badge>
+                  <div className="flex flex-col items-start gap-1">
+                    <Badge tone={statusMeta.tone}>{statusMeta.label}</Badge>
+                    <TranslationStatusBadge status={column.translationStatus} />
+                  </div>
                 </td>
                 <td className="px-4 py-3">
                   <ColumnRowActions

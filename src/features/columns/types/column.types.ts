@@ -5,6 +5,13 @@ export type ColumnStatus =
   | "published"
   | "archived";
 
+export type ColumnTranslationStatus =
+  | "none"
+  | "pending"
+  | "processing"
+  | "ready"
+  | "failed";
+
 export interface ColumnAuthor {
   id: string;
   fullName: string;
@@ -25,6 +32,7 @@ export interface ColumnListItem {
   summary: string | null;
   featuredImage: string | null;
   status: ColumnStatus;
+  translationStatus: ColumnTranslationStatus;
   rejectionReason: string | null;
   publishedAt: string | null;
   createdAt: string;

@@ -2,7 +2,7 @@ import { axiosClient } from "@/shared/lib/axios-client";
 import { API_ENDPOINTS } from "@/shared/constants/api.constants";
 import type { ApiSuccessResponse } from "@/shared/types/api.types";
 import type {
-  ArticleStatus,
+  TranslationEntityType,
   TranslationJob,
   TranslationJobStatus,
   TranslationStatus,
@@ -10,6 +10,9 @@ import type {
 
 interface TranslationJobDto {
   id: string;
+  entity_type?: TranslationEntityType;
+  entity_id?: string;
+  entity_title?: string;
   article_id: string;
   article_title: string;
   requested_by: string | null;
@@ -17,15 +20,21 @@ interface TranslationJobDto {
   job_status: TranslationJobStatus;
   error_message: string | null;
   translation_status: TranslationStatus;
-  article_status: ArticleStatus;
+  article_status: string;
   created_at: string;
   started_at: string | null;
   finished_at: string | null;
 }
 
 function mapJob(dto: TranslationJobDto): TranslationJob {
+  const entityType = dto.entity_type ?? "article";
+  const entityId = dto.entity_id || dto.article_id;
+  const entityTitle = dto.entity_title || dto.article_title;
   return {
     id: dto.id,
+    entityType,
+    entityId,
+    entityTitle,
     articleId: dto.article_id,
     articleTitle: dto.article_title,
     requestedBy: dto.requested_by,
@@ -53,4 +62,21 @@ export async function retryArticleTranslation(
   articleId: string,
 ): Promise<void> {
   await axiosClient.post(API_ENDPOINTS.articleTranslateRetry(articleId));
+}
+
+export async function retryColumnTranslation(
+  columnId: string,
+): Promise<void> {
+  await axiosClient.post(API_ENDPOINTS.columnTranslateRetry(columnId));
+}
+
+export async function retryTranslationJob(
+  entityType: TranslationEntityType,
+  entityId: string,
+): Promise<void> {
+  if (entityType === "column") {
+    await retryColumnTranslation(entityId);
+    return;
+  }
+  await retryArticleTranslation(entityId);
 }

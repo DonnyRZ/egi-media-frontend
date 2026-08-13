@@ -9,10 +9,9 @@ const handleI18n = createMiddleware(routing);
 export default function middleware(request: NextRequest) {
   const englishPath = profesionalEnglishPath(request.nextUrl.pathname);
   if (englishPath) {
-    return new NextResponse(null, {
-      status: 307,
-      headers: { location: `${englishPath}${request.nextUrl.search}` },
-    });
+    const url = request.nextUrl.clone();
+    url.pathname = englishPath;
+    return NextResponse.rewrite(url);
   }
 
   return handleI18n(request);

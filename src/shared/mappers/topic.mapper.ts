@@ -29,6 +29,7 @@ interface TopicDto {
   translations?: Partial<Record<ContentLocale, TopicTranslationDto>>;
   category_id?: string | null;
   category?: TopicParentCategoryDto | null;
+  created_at?: string | null;
 }
 
 interface TopicListResponseDto {
@@ -77,6 +78,7 @@ export function mapTopicDto(dto: TopicDto): Topic {
     description: dto.description,
     categoryId,
     category: mapParentCategory(dto.category, categoryId),
+    createdAt: dto.created_at ?? null,
   };
 }
 

@@ -4,6 +4,9 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { ColumnsHero } from "@/features/columns/components/ColumnsHero";
 import { ColumnsListing } from "@/features/columns/components/ColumnsListing";
+import { FrameModule } from "@/shared/components/layout/FrameModule";
+import { PageFrame } from "@/shared/components/layout/PageFrame";
+import { Skeleton } from "@/shared/components/ui/Skeleton";
 
 interface ColumnsPageProps {
   params: Promise<{ locale: string }>;
@@ -21,16 +24,33 @@ export async function generateMetadata({
   };
 }
 
+function ListingFallback() {
+  return (
+    <FrameModule>
+      <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
+        {Array.from({ length: 6 }).map((_, index) => (
+          <div className="space-y-3 bg-white p-5" key={index}>
+            <Skeleton className="aspect-[16/10] w-full" />
+            <Skeleton className="h-3 w-20" />
+            <Skeleton className="h-6 w-3/4" />
+            <Skeleton className="h-4 w-full" />
+          </div>
+        ))}
+      </div>
+    </FrameModule>
+  );
+}
+
 export default async function ColumnsPage({ params }: ColumnsPageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
 
   return (
-    <>
+    <PageFrame>
       <ColumnsHero />
-      <Suspense fallback={null}>
+      <Suspense fallback={<ListingFallback />}>
         <ColumnsListing />
       </Suspense>
-    </>
+    </PageFrame>
   );
 }

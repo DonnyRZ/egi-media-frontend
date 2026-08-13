@@ -37,10 +37,10 @@ export function TopicSubscriptionGroupBlock({
         </p>
       </div>
 
-      <ul className="divide-y divide-neutral-200 border border-neutral-200">
+      <ul className="divide-y divide-neutral-200">
         {group.topics.map((topic) => (
           <li
-            className="flex flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between"
+            className="flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:justify-between"
             key={topic.id}
           >
             <div className="min-w-0">

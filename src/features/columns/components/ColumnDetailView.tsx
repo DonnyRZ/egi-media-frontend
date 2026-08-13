@@ -8,10 +8,10 @@ import { ColumnEngagement } from "@/features/columns/components/ColumnEngagement
 import { useColumnDetail } from "@/features/columns/hooks/useColumnDetail";
 import { Link } from "@/i18n/navigation";
 import { ArticleImage } from "@/shared/components/common/ArticleImage";
-import { EmptyState } from "@/shared/components/common/EmptyState";
 import { ErrorState } from "@/shared/components/common/ErrorState";
-import { Container } from "@/shared/components/layout/Container";
-import { Section } from "@/shared/components/layout/Section";
+import { FrameModule } from "@/shared/components/layout/FrameModule";
+import { FramePageHero } from "@/shared/components/layout/FramePageHero";
+import { PageFrame } from "@/shared/components/layout/PageFrame";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
 import { env } from "@/shared/config/env";
 import { DATE_FORMAT } from "@/shared/constants/format.constants";
@@ -44,32 +44,69 @@ export function ColumnDetailView({ slug }: ColumnDetailViewProps) {
     ? `${env.siteUrl}/${locale}/kolom/${data.slug}`
     : "";
 
+  const backLink = (
+    <Link
+      className="text-xs font-semibold uppercase tracking-wide text-neutral-500 transition-colors hover:text-accent"
+      href="/kolom"
+    >
+      ← {t("backToColumns")}
+    </Link>
+  );
+
+  if (isLoading) {
+    return (
+      <PageFrame>
+        <FrameModule>
+          <div className="bg-white p-5 lg:p-8">
+            <div className="mb-4">{backLink}</div>
+            <DetailSkeleton />
+          </div>
+        </FrameModule>
+      </PageFrame>
+    );
+  }
+
+  if (isError) {
+    return (
+      <PageFrame>
+        <FrameModule>
+          <div className="bg-white p-5 lg:p-8">
+            <div className="mb-4">{backLink}</div>
+            <ErrorState
+              message={error?.message}
+              onRetry={() => void refetch()}
+            />
+          </div>
+        </FrameModule>
+      </PageFrame>
+    );
+  }
+
+  if (!data || data.status !== "published") {
+    return (
+      <PageFrame>
+        <FrameModule ariaLabelledby="column-detail-heading">
+          <FramePageHero
+            leading={backLink}
+            title={t("notFound")}
+            titleId="column-detail-heading"
+          />
+        </FrameModule>
+      </PageFrame>
+    );
+  }
+
   return (
-    <Section className="pt-8 lg:pt-12">
-      <Container>
-        <div className="mb-6">
-          <Link
-            className="text-sm font-semibold text-primary-700 transition-colors hover:text-accent"
-            href="/kolom"
-          >
-            ← {t("backToColumns")}
-          </Link>
-        </div>
-
-        {isLoading ? <DetailSkeleton /> : null}
-
-        {isError ? (
-          <ErrorState message={error?.message} onRetry={() => void refetch()} />
-        ) : null}
-
-        {!isLoading && !isError && (!data || data.status !== "published") ? (
-          <EmptyState message={t("notFound")} />
-        ) : null}
-
-        {!isLoading && !isError && data?.status === "published" ? (
-          <article className="mx-auto max-w-3xl">
+    <PageFrame>
+      <FrameModule ariaLabelledby="column-detail-heading">
+        <div className="bg-white p-5 lg:p-8">
+          <div className="mx-auto max-w-3xl">
+            <div className="mb-4">{backLink}</div>
             <p className="kicker">{t("kicker")}</p>
-            <h1 className="mt-2 font-serif text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl lg:text-5xl">
+            <h1
+              className="mt-2 font-serif text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl lg:text-5xl"
+              id="column-detail-heading"
+            >
               {data.title}
             </h1>
             <div className="mt-4 flex flex-wrap items-center gap-3 text-sm text-neutral-600">
@@ -104,16 +141,24 @@ export function ColumnDetailView({ slug }: ColumnDetailViewProps) {
                 title={data.title}
               />
             </div>
-            <div className="mt-10">
-              <ArticleBody content={data.content} />
-            </div>
-            <ColumnCommentsSection
-              columnAuthorId={data.author.id}
-              columnId={data.id}
-            />
-          </article>
-        ) : null}
-      </Container>
-    </Section>
+          </div>
+        </div>
+      </FrameModule>
+
+      <FrameModule>
+        <div className="bg-white p-5 lg:p-8">
+          <div className="mx-auto max-w-3xl">
+            <ArticleBody content={data.content} />
+          </div>
+        </div>
+      </FrameModule>
+
+      <FrameModule ariaLabelledby="column-comments-heading">
+        <ColumnCommentsSection
+          columnAuthorId={data.author.id}
+          columnId={data.id}
+        />
+      </FrameModule>
+    </PageFrame>
   );
 }

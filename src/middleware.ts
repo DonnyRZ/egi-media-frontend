@@ -1,20 +1,13 @@
 import createMiddleware from "next-intl/middleware";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
-import { profesionalEnglishPath } from "@/features/profesional/constants/profesional.constants";
+import { profesionalLocaleResponse } from "@/features/profesional/lib/profesional-locale";
 import { routing } from "@/i18n/routing";
 
 const handleI18n = createMiddleware(routing);
 
 export default function middleware(request: NextRequest) {
-  const englishPath = profesionalEnglishPath(request.nextUrl.pathname);
-  if (englishPath) {
-    const url = request.nextUrl.clone();
-    url.pathname = englishPath;
-    return NextResponse.rewrite(url);
-  }
-
-  return handleI18n(request);
+  return profesionalLocaleResponse(request) ?? handleI18n(request);
 }
 
 export const config = {

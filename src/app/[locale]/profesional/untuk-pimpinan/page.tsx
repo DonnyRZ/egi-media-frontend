@@ -7,7 +7,7 @@ import {
   ProfesionalPageBanner,
   ProfesionalRichCopy,
 } from "@/features/profesional/components/ProfesionalPageBanner";
-import { PAGE_BANNERS } from "@/features/profesional/constants/profesional.constants";
+import { PAGE_BANNERS, PROFESIONAL_LOCALE } from "@/features/profesional/constants/profesional.constants";
 import { profesionalPageMeta } from "@/features/profesional/lib/profesional-metadata";
 
 const LEADERSHIP_POINTS = [
@@ -31,8 +31,8 @@ export async function generateMetadata({
 }
 
 export default async function LeadershipPage({ params }: LeadershipPageProps) {
-  const { locale } = await params;
-  setRequestLocale(locale);
+  await params;
+  setRequestLocale(PROFESIONAL_LOCALE);
 
   return (
     <>

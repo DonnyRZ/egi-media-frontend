@@ -8,7 +8,7 @@ import {
   ProfesionalRichCopy,
 } from "@/features/profesional/components/ProfesionalPageBanner";
 import { ProfesionalSolutionsSplit } from "@/features/profesional/components/ProfesionalSolutionsSplit";
-import { PAGE_BANNERS } from "@/features/profesional/constants/profesional.constants";
+import { PAGE_BANNERS, PROFESIONAL_LOCALE } from "@/features/profesional/constants/profesional.constants";
 import { profesionalPageMeta } from "@/features/profesional/lib/profesional-metadata";
 
 const SOLUTION_POINTS = [
@@ -30,8 +30,8 @@ export async function generateMetadata({
 }
 
 export default async function SolutionsPage({ params }: SolutionsPageProps) {
-  const { locale } = await params;
-  setRequestLocale(locale);
+  await params;
+  setRequestLocale(PROFESIONAL_LOCALE);
 
   return (
     <>

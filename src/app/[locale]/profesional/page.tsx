@@ -6,6 +6,7 @@ import { ProfesionalHero } from "@/features/profesional/components/ProfesionalHe
 import { ProfesionalInsights } from "@/features/profesional/components/ProfesionalInsights";
 import { ProfesionalProductsGrid } from "@/features/profesional/components/ProfesionalProductsGrid";
 import { ProfesionalSolutionsSplit } from "@/features/profesional/components/ProfesionalSolutionsSplit";
+import { PROFESIONAL_LOCALE } from "@/features/profesional/constants/profesional.constants";
 import { profesionalPageMeta } from "@/features/profesional/lib/profesional-metadata";
 
 interface ProfesionalPageProps {
@@ -20,8 +21,8 @@ export async function generateMetadata({
 }
 
 export default async function ProfesionalPage({ params }: ProfesionalPageProps) {
-  const { locale } = await params;
-  setRequestLocale(locale);
+  await params;
+  setRequestLocale(PROFESIONAL_LOCALE);
 
   return (
     <>

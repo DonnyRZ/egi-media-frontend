@@ -12,7 +12,7 @@ export const AD_PLACEMENT_GUIDELINES: Record<
 > = {
   LEADERBOARD: {
     label: "Leaderboard (homepage header)",
-    dimensions: "728×90",
+    dimensions: "873×149",
     tip: "Wide banner. Prefer JPG/PNG/WebP, max ~200 KB.",
   },
   IN_FEED: {

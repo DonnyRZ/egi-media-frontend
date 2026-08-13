@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { TopicSubscriptionsHero } from "@/features/topic-subscriptions/components/TopicSubscriptionsHero";
 import { TopicSubscriptionsView } from "@/features/topic-subscriptions/components/TopicSubscriptionsView";
+import { PageFrame } from "@/shared/components/layout/PageFrame";
 
 interface TopicSubscriptionsPageProps {
   params: Promise<{ locale: string }>;
@@ -27,9 +28,9 @@ export default async function TopicSubscriptionsPage({
   setRequestLocale(locale);
 
   return (
-    <>
+    <PageFrame>
       <TopicSubscriptionsHero />
       <TopicSubscriptionsView />
-    </>
+    </PageFrame>
   );
 }

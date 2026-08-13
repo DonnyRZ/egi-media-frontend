@@ -9,20 +9,21 @@ import { useSavedColumnsPage } from "@/features/columns/hooks/useSavedColumnsPag
 import { SavedArticleCard } from "@/features/saved-articles/components/SavedArticleCard";
 import { SavedArticlesSignInPrompt } from "@/features/saved-articles/components/SavedArticlesSignInPrompt";
 import { useSavedArticlesPage } from "@/features/saved-articles/hooks/useSavedArticlesPage";
+import { AdaptiveCardGrid } from "@/shared/components/common/AdaptiveCardGrid";
 import { EmptyState } from "@/shared/components/common/EmptyState";
 import { ErrorState } from "@/shared/components/common/ErrorState";
 import { SAVED_COLUMN_PAGE_LIMIT } from "@/features/columns/constants/column.constants";
 import { SAVED_ARTICLE_PAGE_LIMIT } from "@/features/saved-articles/constants/saved-article.constants";
 import { Pagination } from "@/shared/components/common/Pagination";
-import { Container } from "@/shared/components/layout/Container";
-import { Section } from "@/shared/components/layout/Section";
+import { FrameHeading } from "@/shared/components/layout/FrameHeading";
+import { FrameModule } from "@/shared/components/layout/FrameModule";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
 
 function GridSkeleton() {
   return (
-    <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
       {Array.from({ length: 3 }).map((_, index) => (
-        <div className="space-y-3 border border-neutral-200 p-4" key={index}>
+        <div className="space-y-3 bg-white p-5" key={index}>
           <Skeleton className="aspect-[16/10] w-full" />
           <Skeleton className="h-4 w-16" />
           <Skeleton className="h-6 w-3/4" />
@@ -49,21 +50,24 @@ export function SavedArticlesView() {
 
   if (!isHydrated) {
     return (
-      <Section>
-        <Container>
+      <>
+        <FrameModule>
           <GridSkeleton />
-        </Container>
-      </Section>
+        </FrameModule>
+        <FrameModule>
+          <GridSkeleton />
+        </FrameModule>
+      </>
     );
   }
 
   if (!isAuthenticated) {
     return (
-      <Section>
-        <Container>
+      <FrameModule>
+        <div className="bg-white p-5">
           <SavedArticlesSignInPrompt />
-        </Container>
-      </Section>
+        </div>
+      </FrameModule>
     );
   }
 
@@ -80,108 +84,115 @@ export function SavedArticlesView() {
     !hasColumns;
 
   return (
-    <Section className="pt-8 lg:pt-10">
-      <Container className="space-y-14">
-        <section aria-labelledby="saved-articles-heading">
-          <div className="mb-6 flex items-end justify-between gap-4 border-b border-neutral-200 pb-2">
-            <h2
-              className="text-lg font-bold uppercase tracking-wide text-ink"
-              id="saved-articles-heading"
-            >
-              {t("listingHeading")}
-            </h2>
-            {articles.data ? (
-              <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
-                {t("count", { count: articles.data.total })}
-              </p>
-            ) : null}
-          </div>
+    <>
+      <FrameModule ariaLabelledby="saved-articles-heading">
+        <FrameHeading
+          id="saved-articles-heading"
+          subtitle={
+            articles.data
+              ? t("count", { count: articles.data.total })
+              : undefined
+          }
+          title={t("listingHeading")}
+        />
 
-          {articlesLoading ? <GridSkeleton /> : null}
+        {articlesLoading ? <GridSkeleton /> : null}
 
-          {articles.isError ? (
+        {articles.isError ? (
+          <div className="bg-white p-5">
             <ErrorState
               message={articles.error?.message}
               onRetry={() => void articles.refetch()}
             />
-          ) : null}
-
-          {!articlesLoading && !articles.isError && !hasArticles ? (
-            <EmptyState message={t("emptyArticles")} />
-          ) : null}
-
-          {!articlesLoading && !articles.isError && hasArticles && articles.data ? (
-            <div className="space-y-8">
-              <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-                {articles.data.items.map((article) => (
-                  <SavedArticleCard article={article} key={article.id} />
-                ))}
-              </div>
-              <Pagination
-                basePath="/saved"
-                currentPage={articles.data.page}
-                itemLabel="articles"
-                pageParam="page"
-                pageSize={articles.data.limit || SAVED_ARTICLE_PAGE_LIMIT}
-                totalItems={articles.data.total}
-                totalPages={articles.data.totalPages}
-              />
-            </div>
-          ) : null}
-        </section>
-
-        <section aria-labelledby="saved-columns-heading">
-          <div className="mb-6 flex items-end justify-between gap-4 border-b border-neutral-200 pb-2">
-            <h2
-              className="text-lg font-bold uppercase tracking-wide text-ink"
-              id="saved-columns-heading"
-            >
-              {t("columnsHeading")}
-            </h2>
-            {columns.data ? (
-              <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
-                {t("columnsCount", { count: columns.data.total })}
-              </p>
-            ) : null}
           </div>
+        ) : null}
 
-          {columnsLoading ? <GridSkeleton /> : null}
+        {!articlesLoading && !articles.isError && !hasArticles ? (
+          <div className="bg-white p-5">
+            <EmptyState message={t("emptyArticles")} />
+          </div>
+        ) : null}
 
-          {columns.isError ? (
+        {!articlesLoading &&
+        !articles.isError &&
+        hasArticles &&
+        articles.data ? (
+          <>
+            <AdaptiveCardGrid
+              items={articles.data.items}
+              keyForItem={(article) => article.id}
+              renderItem={(article) => <SavedArticleCard article={article} />}
+            />
+            {articles.data.totalPages > 1 ? (
+              <div className="bg-white p-5">
+                <Pagination
+                  basePath="/saved"
+                  currentPage={articles.data.page}
+                  itemLabel="articles"
+                  pageParam="page"
+                  pageSize={articles.data.limit || SAVED_ARTICLE_PAGE_LIMIT}
+                  totalItems={articles.data.total}
+                  totalPages={articles.data.totalPages}
+                />
+              </div>
+            ) : null}
+          </>
+        ) : null}
+      </FrameModule>
+
+      <FrameModule ariaLabelledby="saved-columns-heading">
+        <FrameHeading
+          id="saved-columns-heading"
+          subtitle={
+            columns.data
+              ? t("columnsCount", { count: columns.data.total })
+              : undefined
+          }
+          title={t("columnsHeading")}
+        />
+
+        {columnsLoading ? <GridSkeleton /> : null}
+
+        {columns.isError ? (
+          <div className="bg-white p-5">
             <ErrorState
               message={columns.error?.message}
               onRetry={() => void columns.refetch()}
             />
-          ) : null}
-
-          {!columnsLoading && !columns.isError && !hasColumns ? (
-            <EmptyState message={t("emptyColumns")} />
-          ) : null}
-
-          {!columnsLoading && !columns.isError && hasColumns && columns.data ? (
-            <div className="space-y-8">
-              <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-                {columns.data.items.map((column) => (
-                  <SavedColumnCard column={column} key={column.id} />
-                ))}
-              </div>
-              <Pagination
-                basePath="/saved"
-                currentPage={columns.data.page}
-                itemLabel="items"
-                pageParam="columnsPage"
-                pageSize={columns.data.limit || SAVED_COLUMN_PAGE_LIMIT}
-                totalItems={columns.data.total}
-                totalPages={columns.data.totalPages}
-              />
-            </div>
-          ) : null}
-        </section>
-
-        {bothEmpty ? (
-          <p className="sr-only">{t("empty")}</p>
+          </div>
         ) : null}
-      </Container>
-    </Section>
+
+        {!columnsLoading && !columns.isError && !hasColumns ? (
+          <div className="bg-white p-5">
+            <EmptyState message={t("emptyColumns")} />
+          </div>
+        ) : null}
+
+        {!columnsLoading && !columns.isError && hasColumns && columns.data ? (
+          <>
+            <AdaptiveCardGrid
+              items={columns.data.items}
+              keyForItem={(column) => column.id}
+              renderItem={(column) => <SavedColumnCard column={column} />}
+            />
+            {columns.data.totalPages > 1 ? (
+              <div className="bg-white p-5">
+                <Pagination
+                  basePath="/saved"
+                  currentPage={columns.data.page}
+                  itemLabel="items"
+                  pageParam="columnsPage"
+                  pageSize={columns.data.limit || SAVED_COLUMN_PAGE_LIMIT}
+                  totalItems={columns.data.total}
+                  totalPages={columns.data.totalPages}
+                />
+              </div>
+            ) : null}
+          </>
+        ) : null}
+
+        {bothEmpty ? <p className="sr-only">{t("empty")}</p> : null}
+      </FrameModule>
+    </>
   );
 }

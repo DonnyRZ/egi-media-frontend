@@ -8,8 +8,8 @@ import { ArticleHeader } from "@/features/article/components/ArticleHeader";
 import { ArticleHero } from "@/features/article/components/ArticleHero";
 import { ArticleLocaleShell } from "@/features/article/components/ArticleLocaleShell";
 import { RelatedArticles } from "@/features/article/components/RelatedArticles";
-import { Container } from "@/shared/components/layout/Container";
-import { Section } from "@/shared/components/layout/Section";
+import { FrameModule } from "@/shared/components/layout/FrameModule";
+import { PageFrame } from "@/shared/components/layout/PageFrame";
 import { env } from "@/shared/config/env";
 import { ApiError } from "@/shared/lib/errors";
 import {
@@ -79,28 +79,37 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
   return (
     <ArticleLocaleShell article={article}>
-      <Section className="pt-8 lg:pt-12">
-        <Container>
-          <article className="mx-auto max-w-3xl">
-            <ArticleHero article={article} />
-            <div className="mt-8">
-              <ArticleHeader article={article} />
+      <PageFrame>
+        <FrameModule>
+          <div className="bg-white p-5 lg:p-8">
+            <div className="mx-auto max-w-3xl">
+              <ArticleHero article={article} />
+              <div className="mt-8">
+                <ArticleHeader article={article} />
+              </div>
+              <div className="mt-8">
+                <ArticleEngagement
+                  articleId={article.id}
+                  initialShareCount={article.shareCount}
+                  initialViewCount={article.viewCount}
+                  shareUrl={shareUrl}
+                  title={article.title}
+                />
+              </div>
             </div>
-            <div className="mt-8">
-              <ArticleEngagement
-                articleId={article.id}
-                initialShareCount={article.shareCount}
-                shareUrl={shareUrl}
-                title={article.title}
-              />
-            </div>
-            <div className="mt-10">
+          </div>
+        </FrameModule>
+
+        <FrameModule>
+          <div className="bg-white p-5 lg:p-8">
+            <div className="mx-auto max-w-3xl">
               <ArticleBody content={article.content} />
             </div>
-            <RelatedArticles article={article} lang={lang} />
-          </article>
-        </Container>
-      </Section>
+          </div>
+        </FrameModule>
+
+        <RelatedArticles article={article} lang={lang} />
+      </PageFrame>
     </ArticleLocaleShell>
   );
 }

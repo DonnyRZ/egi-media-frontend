@@ -54,50 +54,104 @@ function HeaderClockStrip() {
   const now = useClock();
   const format = useFormatter();
   const t = useTranslations("worldClock");
+  const stripRef = useRef<HTMLDivElement>(null);
+  const measureRef = useRef<HTMLDivElement>(null);
+  const [visibleCityCount, setVisibleCityCount] = useState(WORLD_CLOCK_CITIES.length);
+
+  const dateLabel = now
+    ? format.dateTime(now, { weekday: "short", day: "numeric", month: "short" })
+    : "--";
+  const localTime = now ? formatClockTime(now) : "--:--";
+
+  const recalc = useCallback(() => {
+    const strip = stripRef.current;
+    const measure = measureRef.current;
+    if (!strip || !measure) return;
+
+    const available = strip.clientWidth;
+    const gap = 10; // gap-2.5
+    const items = Array.from(measure.children) as HTMLElement[];
+    let used = 0;
+    let cities = 0;
+
+    for (let index = 0; index < items.length; index += 1) {
+      const width = items[index].getBoundingClientRect().width;
+      const next = used + (index > 0 ? gap : 0) + width;
+      if (next > available + 0.5) break;
+      used = next;
+      if (index >= 3) cities += 1;
+    }
+
+    setVisibleCityCount(cities);
+  }, []);
+
+  useLayoutEffect(() => {
+    recalc();
+    const strip = stripRef.current;
+    if (!strip || typeof ResizeObserver === "undefined") return;
+    const observer = new ResizeObserver(() => recalc());
+    observer.observe(strip);
+    return () => observer.disconnect();
+  }, [recalc, dateLabel, localTime]);
 
   return (
     <div
       aria-label={t("ariaLabel")}
-      className="hidden min-w-0 flex-1 items-center gap-2.5 overflow-hidden lg:flex xl:gap-3"
+      className="relative hidden min-w-0 flex-1 lg:block"
+      ref={stripRef}
     >
-      <span className="shrink-0 text-[10px] font-medium uppercase tracking-wide text-neutral-400">
-        {now
-          ? format.dateTime(now, { weekday: "short", day: "numeric", month: "short" })
-          : "--"}
-      </span>
-      <span aria-hidden="true" className="h-3 w-px shrink-0 bg-neutral-700" />
-      <div className="flex shrink-0 items-baseline gap-1">
-        <span
-          aria-hidden="true"
-          className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-accent"
-        />
-        <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-accent">
-          {t("local")}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none invisible absolute flex items-center gap-2.5 whitespace-nowrap"
+        ref={measureRef}
+      >
+        <span className="shrink-0 text-[10px] font-medium uppercase tracking-wide">
+          {dateLabel}
         </span>
-        <span className="font-serif text-xs font-semibold tabular-nums text-white">
-          {now ? formatClockTime(now) : "--:--"}
-        </span>
+        <span className="h-3 w-px shrink-0" />
+        <div className="flex shrink-0 items-baseline gap-1">
+          <span className="inline-block h-1.5 w-1.5 rounded-full" />
+          <span className="text-[10px] font-bold uppercase tracking-[0.1em]">{t("local")}</span>
+          <span className="font-serif text-xs font-semibold tabular-nums">{localTime}</span>
+        </div>
+        {WORLD_CLOCK_CITIES.map((city) => (
+          <div className="flex shrink-0 items-baseline gap-1" key={city.timeZone}>
+            <span className="text-[10px] font-bold uppercase tracking-[0.1em]">{city.label}</span>
+            <span className="font-serif text-xs font-semibold tabular-nums">
+              {now ? formatClockTime(now, city.timeZone) : "--:--"}
+            </span>
+          </div>
+        ))}
       </div>
-      {WORLD_CLOCK_CITIES.map((city, index) => (
-        <div
-          className={cn(
-            "flex shrink-0 items-baseline gap-1",
-            index >= 4
-              ? "hidden 2xl:flex"
-              : index >= 2
-                ? "hidden xl:flex"
-                : undefined,
-          )}
-          key={city.timeZone}
-        >
-          <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-neutral-400">
-            {city.label}
+
+      <div className="flex h-full min-w-0 items-center gap-2.5 overflow-hidden">
+        <span className="shrink-0 text-[10px] font-medium uppercase tracking-wide text-neutral-400">
+          {dateLabel}
+        </span>
+        <span aria-hidden="true" className="h-3 w-px shrink-0 bg-neutral-700" />
+        <div className="flex shrink-0 items-baseline gap-1">
+          <span
+            aria-hidden="true"
+            className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-accent"
+          />
+          <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-accent">
+            {t("local")}
           </span>
           <span className="font-serif text-xs font-semibold tabular-nums text-white">
-            {now ? formatClockTime(now, city.timeZone) : "--:--"}
+            {localTime}
           </span>
         </div>
-      ))}
+        {WORLD_CLOCK_CITIES.slice(0, visibleCityCount).map((city) => (
+          <div className="flex shrink-0 items-baseline gap-1" key={city.timeZone}>
+            <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-neutral-400">
+              {city.label}
+            </span>
+            <span className="font-serif text-xs font-semibold tabular-nums text-white">
+              {now ? formatClockTime(now, city.timeZone) : "--:--"}
+            </span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -107,7 +161,7 @@ function Masthead() {
   const { isSearchOpen, toggleMobileMenu, setSearchOpen } = useUiStore();
 
   return (
-    <div className="flex h-14 items-center justify-between gap-3 lg:h-16 lg:gap-4">
+    <div className="flex h-16 items-center justify-between gap-3 lg:h-20 lg:gap-4">
       <div className="flex shrink-0 items-center gap-2">
         <button
           aria-label={t("toggleMenu")}
@@ -121,7 +175,7 @@ function Masthead() {
         <Link aria-label={t("homeAria", { siteName: SITE_NAME })} className="inline-flex" href="/">
           <Image
             alt={SITE_NAME}
-            className="h-8 w-auto sm:h-9 lg:h-10"
+            className="h-9 w-auto sm:h-10 lg:h-12"
             height={857}
             priority
             src="/images/Logo_EGI-Media-2.png"
@@ -257,13 +311,13 @@ function DesktopNav() {
       >
         {NAV_ITEMS.map((item) => (
           <li key={item.href} className="shrink-0">
-            <span className="inline-block border-b-2 border-transparent py-2.5 text-xs font-semibold uppercase tracking-wide">
+            <span className="inline-block border-b-2 border-transparent py-3 text-xs font-semibold uppercase tracking-wide">
               {t(`nav.${item.key}`)}
             </span>
           </li>
         ))}
         <li className="shrink-0" ref={moreMeasureRef}>
-          <span className="inline-flex items-center gap-1 border-b-2 border-transparent py-2.5 text-xs font-semibold uppercase tracking-wide">
+          <span className="inline-flex items-center gap-1 border-b-2 border-transparent py-3 text-xs font-semibold uppercase tracking-wide">
             {t("navMore")}
             <ChevronIcon />
           </span>
@@ -274,7 +328,7 @@ function DesktopNav() {
         {visibleItems.map((item) => (
           <li key={item.href} className="shrink-0">
             <Link
-              className="inline-block border-b-2 border-transparent py-2.5 text-xs font-semibold uppercase tracking-wide text-neutral-300 transition-colors hover:border-accent hover:text-white"
+              className="inline-block border-b-2 border-transparent py-3 text-xs font-semibold uppercase tracking-wide text-neutral-300 transition-colors hover:border-accent hover:text-white"
               href={item.href}
             >
               {t(`nav.${item.key}`)}
@@ -288,7 +342,7 @@ function DesktopNav() {
               aria-expanded={isMoreOpen}
               aria-haspopup="menu"
               className={cn(
-                "inline-flex items-center gap-1 border-b-2 py-2.5 text-xs font-semibold uppercase tracking-wide transition-colors",
+                "inline-flex items-center gap-1 border-b-2 py-3 text-xs font-semibold uppercase tracking-wide transition-colors",
                 isMoreOpen
                   ? "border-accent text-accent"
                   : "border-transparent text-neutral-300 hover:border-accent hover:text-white",
@@ -334,7 +388,7 @@ function NavRow() {
     <div className="hidden border-t border-neutral-800 lg:flex lg:items-center lg:justify-between">
       <DesktopNav />
       <Link
-        className="ml-6 shrink-0 border-b-2 border-transparent py-2.5 text-[11px] font-semibold uppercase tracking-wide text-neutral-400 transition-colors hover:border-accent hover:text-white"
+        className="ml-6 shrink-0 border-b-2 border-transparent py-3 text-[11px] font-semibold uppercase tracking-wide text-neutral-400 transition-colors hover:border-accent hover:text-white"
         href="/settings/topics"
       >
         {t("topicPreferences")}

@@ -63,7 +63,9 @@ export async function fetchSeriesById(
 
   return {
     ...series,
-    articleCount: articles.length || series.articleCount,
+    // `articles` is already the published+ready set embedded by the detail
+    // endpoint, so it's always the source of truth (including when empty).
+    articleCount: articles.length,
     articles,
   };
 }

@@ -18,7 +18,7 @@ export function CategoryCard({
 
   if (variant === "featured") {
     return (
-      <article className="group border border-neutral-200 p-6 lg:p-8">
+      <article className="group p-5 lg:p-6">
         <p className="kicker">{t("featuredKicker")}</p>
         <h2 className="mt-3 font-serif text-3xl font-bold leading-tight text-ink transition-colors group-hover:text-accent sm:text-4xl">
           <Link href={`/categories/${category.slug}`}>{category.name}</Link>

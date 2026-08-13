@@ -20,6 +20,7 @@ export interface Topic {
   description: string | null;
   categoryId: string | null;
   category: TopicParentCategory | null;
+  createdAt: string | null;
 }
 
 export interface TopicDetail extends Topic {

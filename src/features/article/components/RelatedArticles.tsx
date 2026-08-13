@@ -1,6 +1,9 @@
 import { getTranslations } from "next-intl/server";
 
+import { AdaptiveCardGrid } from "@/shared/components/common/AdaptiveCardGrid";
 import { ArticleCard } from "@/shared/components/common/ArticleCard";
+import { FrameHeading } from "@/shared/components/layout/FrameHeading";
+import { FrameModule } from "@/shared/components/layout/FrameModule";
 import { getArticlesByCategoryPage } from "@/shared/repositories/article.repository";
 import type { ArticleDetail, ContentLocale } from "@/shared/types/article.types";
 
@@ -26,18 +29,23 @@ export async function RelatedArticles({ article, lang }: RelatedArticlesProps) {
   if (!related.length) return null;
 
   return (
-    <section aria-labelledby="related-articles-heading" className="mt-12">
-      <h2
-        className="mb-6 border-b border-neutral-200 pb-2 text-lg font-bold uppercase tracking-wide text-ink"
+    <FrameModule ariaLabelledby="related-articles-heading">
+      <FrameHeading
         id="related-articles-heading"
-      >
-        {t("relatedHeading")}
-      </h2>
-      <div className="grid gap-x-8 gap-y-6 sm:grid-cols-2">
-        {related.map((item) => (
-          <ArticleCard article={item} key={item.id} variant="horizontal" />
-        ))}
-      </div>
-    </section>
+        title={t("relatedHeading")}
+      />
+      <AdaptiveCardGrid
+        items={related}
+        keyForItem={(item) => item.id}
+        maxCols={2}
+        renderItem={(item) => (
+          <ArticleCard
+            article={item}
+            className="bg-white p-5"
+            variant="horizontal"
+          />
+        )}
+      />
+    </FrameModule>
   );
 }

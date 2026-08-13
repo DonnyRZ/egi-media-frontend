@@ -6,17 +6,21 @@ import { useTranslations } from "next-intl";
 import { TopicCard } from "@/features/topics/components/TopicCard";
 import { useTopicsPage } from "@/features/topics/hooks/useTopicsPage";
 import { Link } from "@/i18n/navigation";
+import { AdaptiveCardGrid } from "@/shared/components/common/AdaptiveCardGrid";
 import { EmptyState } from "@/shared/components/common/EmptyState";
 import { ErrorState } from "@/shared/components/common/ErrorState";
 import { HorizontalScroller } from "@/shared/components/common/HorizontalScroller";
-import { Container } from "@/shared/components/layout/Container";
-import { Section } from "@/shared/components/layout/Section";
+import { FrameHeading } from "@/shared/components/layout/FrameHeading";
+import { FrameModule } from "@/shared/components/layout/FrameModule";
+import { Button } from "@/shared/components/ui/Button";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
+import { TAXONOMY_PAGE_LIMIT } from "@/shared/constants/taxonomy.constants";
+import { useVisibleGroups } from "@/shared/hooks/useVisibleGroups";
 import { groupTopicsByCategory } from "@/shared/utils/taxonomy-groups";
 
 function TopicsSkeleton() {
   return (
-    <div className="space-y-12">
+    <div className="space-y-5 bg-white p-5">
       {Array.from({ length: 2 }).map((_, sectionIndex) => (
         <div key={sectionIndex} className="space-y-5">
           <Skeleton className="h-7 w-48" />
@@ -47,89 +51,134 @@ export function TopicsListing() {
     () => (data?.items.length ? groupTopicsByCategory(data.items) : []),
     [data?.items],
   );
+  const { visibleGroups, hiddenCount, revealAll } = useVisibleGroups(groups);
 
-  return (
-    <Section ariaLabelledby="topics-listing-heading" className="pt-8 lg:pt-10">
-      <Container className="min-w-0">
-        <h2 id="topics-listing-heading" className="sr-only">
+  if (isLoading) {
+    return (
+      <FrameModule ariaLabelledby="topics-listing-heading">
+        <h2 className="sr-only" id="topics-listing-heading">
           {t("listingHeading")}
         </h2>
+        <TopicsSkeleton />
+      </FrameModule>
+    );
+  }
 
-        {isLoading ? <TopicsSkeleton /> : null}
-
-        {isError ? (
+  if (isError) {
+    return (
+      <FrameModule ariaLabelledby="topics-listing-heading">
+        <h2 className="sr-only" id="topics-listing-heading">
+          {t("listingHeading")}
+        </h2>
+        <div className="bg-white p-5">
           <ErrorState message={error?.message} onRetry={() => void refetch()} />
-        ) : null}
+        </div>
+      </FrameModule>
+    );
+  }
 
-        {!isLoading && !isError && !data?.items.length ? (
+  if (!data?.items.length) {
+    return (
+      <FrameModule ariaLabelledby="topics-listing-heading">
+        <h2 className="sr-only" id="topics-listing-heading">
+          {t("listingHeading")}
+        </h2>
+        <div className="bg-white p-5">
           <EmptyState message={t("empty")} />
-        ) : null}
+        </div>
+      </FrameModule>
+    );
+  }
 
-        {!isLoading && !isError && groups.length ? (
-          <div className="min-w-0 space-y-12">
-            <div className="flex items-end justify-between gap-4 border-b border-neutral-200 pb-2">
-              <h3 className="text-lg font-bold uppercase tracking-wide text-ink">
-                {t("allTopics")}
-              </h3>
-              <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
-                {t("topicCount", { count: data?.total ?? 0 })}
-              </p>
-            </div>
+  return (
+    <>
+      <FrameModule ariaLabelledby="topics-listing-heading">
+        <FrameHeading
+          id="topics-listing-heading"
+          subtitle={
+            data.total > TAXONOMY_PAGE_LIMIT
+              ? t("truncatedCount", { shown: data.items.length, total: data.total })
+              : t("topicCount", { count: data.total })
+          }
+          title={t("allTopics")}
+        />
+      </FrameModule>
 
-            {groups.map((group) => {
-              const title = group.category?.name ?? t("ungroupedCategory");
-              const headingId = `topics-category-${group.category?.id ?? "other"}`;
-
-              return (
-                <section
-                  aria-labelledby={headingId}
-                  className="min-w-0"
-                  key={group.category?.id ?? "ungrouped"}
+      {visibleGroups.map((group) => {
+        const title = group.category?.name ?? t("ungroupedCategory");
+        const headingId = `topics-category-${group.category?.id ?? "other"}`;
+        const heading = (
+          <div>
+            <p className="kicker">{t("kicker")}</p>
+            <h3
+              className="mt-1 font-serif text-xl font-bold text-ink sm:text-2xl"
+              id={headingId}
+            >
+              {group.category ? (
+                <Link
+                  className="transition-colors hover:text-accent"
+                  href={`/categories/${group.category.slug}`}
                 >
-                  <HorizontalScroller
-                    ariaLabel={title}
-                    heading={
-                      <div>
-                        <p className="kicker">{t("kicker")}</p>
-                        <h3
-                          className="mt-1 font-serif text-xl font-bold text-ink sm:text-2xl"
-                          id={headingId}
-                        >
-                          {group.category ? (
-                            <Link
-                              className="transition-colors hover:text-accent"
-                              href={`/categories/${group.category.slug}`}
-                            >
-                              {title}
-                            </Link>
-                          ) : (
-                            title
-                          )}
-                        </h3>
-                      </div>
-                    }
-                    trailing={
-                      <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
-                        {t("topicsInCategory", { count: group.items.length })}
-                      </p>
-                    }
-                  >
-                    {group.items.map((topic) => (
-                      <div
-                        className="w-60 shrink-0 snap-start border border-neutral-200 sm:w-72"
-                        key={topic.id}
-                        role="listitem"
-                      >
-                        <TopicCard topic={topic} />
-                      </div>
-                    ))}
-                  </HorizontalScroller>
-                </section>
-              );
-            })}
+                  {title}
+                </Link>
+              ) : (
+                title
+              )}
+            </h3>
           </div>
-        ) : null}
-      </Container>
-    </Section>
+        );
+
+        return (
+          <FrameModule ariaLabelledby={headingId} key={group.category?.id ?? "ungrouped"}>
+            {group.items.length < 4 ? (
+              <div className="min-w-0 space-y-5 bg-white p-5">
+                {heading}
+                <AdaptiveCardGrid
+                  items={group.items}
+                  keyForItem={(topic) => topic.id}
+                  renderItem={(topic) => (
+                    <div className="bg-white">
+                      <TopicCard topic={topic} />
+                    </div>
+                  )}
+                />
+              </div>
+            ) : (
+              <div className="min-w-0 bg-white p-5">
+                <HorizontalScroller
+                  ariaLabel={title}
+                  heading={heading}
+                  trailing={
+                    <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
+                      {t("topicsInCategory", { count: group.items.length })}
+                    </p>
+                  }
+                >
+                  {group.items.map((topic) => (
+                    <div
+                      className="w-60 shrink-0 snap-start border border-neutral-200 sm:w-72"
+                      key={topic.id}
+                      role="listitem"
+                    >
+                      <TopicCard topic={topic} />
+                    </div>
+                  ))}
+                </HorizontalScroller>
+              </div>
+            )}
+          </FrameModule>
+        );
+      })}
+
+      {hiddenCount > 0 && (
+        <FrameModule ariaLabelledby="topics-listing-heading">
+          <div className="flex justify-center bg-white p-5">
+            <Button onClick={revealAll} variant="secondary">
+              {t("revealMoreGroups", { count: hiddenCount })}
+            </Button>
+          </div>
+        </FrameModule>
+      )}
+    </>
   );
 }

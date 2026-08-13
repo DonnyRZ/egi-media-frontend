@@ -10,13 +10,13 @@ import { useTopicCatalog } from "@/features/topic-subscriptions/hooks/useTopicCa
 import { useTopicSubscriptionToggle } from "@/features/topic-subscriptions/hooks/useTopicSubscriptionToggle";
 import { EmptyState } from "@/shared/components/common/EmptyState";
 import { ErrorState } from "@/shared/components/common/ErrorState";
-import { Container } from "@/shared/components/layout/Container";
-import { Section } from "@/shared/components/layout/Section";
+import { FrameHeading } from "@/shared/components/layout/FrameHeading";
+import { FrameModule } from "@/shared/components/layout/FrameModule";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
 
 function ListSkeleton() {
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 bg-white p-5">
       {Array.from({ length: 3 }).map((_, index) => (
         <div className="space-y-3" key={index}>
           <Skeleton className="h-6 w-40" />
@@ -39,21 +39,19 @@ export function TopicSubscriptionsView() {
 
   if (!isHydrated) {
     return (
-      <Section className="pt-8 lg:pt-10">
-        <Container>
-          <ListSkeleton />
-        </Container>
-      </Section>
+      <FrameModule>
+        <ListSkeleton />
+      </FrameModule>
     );
   }
 
   if (!isAuthenticated) {
     return (
-      <Section className="pt-8 lg:pt-10">
-        <Container>
+      <FrameModule>
+        <div className="bg-white p-5">
           <TopicSubscriptionsSignInPrompt />
-        </Container>
-      </Section>
+        </div>
+      </FrameModule>
     );
   }
 
@@ -64,20 +62,17 @@ export function TopicSubscriptionsView() {
   const hasGroups = groups.length > 0;
 
   return (
-    <Section className="pt-8 lg:pt-10">
-      <Container>
-        <div className="mb-6 flex items-end justify-between gap-4 border-b border-neutral-200 pb-2">
-          <h2 className="text-lg font-bold uppercase tracking-wide text-ink">
-            {t("listingHeading")}
-          </h2>
-          <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
-            {t("subscribedCount", { count: subscribedCount })}
-          </p>
-        </div>
+    <FrameModule ariaLabelledby="topic-subscriptions-listing-heading">
+      <FrameHeading
+        id="topic-subscriptions-listing-heading"
+        subtitle={t("subscribedCount", { count: subscribedCount })}
+        title={t("listingHeading")}
+      />
 
-        {isLoading ? <ListSkeleton /> : null}
+      {isLoading ? <ListSkeleton /> : null}
 
-        {!isLoading && isCatalogError ? (
+      {!isLoading && isCatalogError ? (
+        <div className="bg-white p-5">
           <ErrorState
             message={
               catalog.error instanceof Error ? catalog.error.message : undefined
@@ -87,27 +82,29 @@ export function TopicSubscriptionsView() {
               void mine.refetch();
             }}
           />
-        ) : null}
+        </div>
+      ) : null}
 
-        {!isLoading && !isCatalogError && !hasGroups ? (
+      {!isLoading && !isCatalogError && !hasGroups ? (
+        <div className="bg-white p-5">
           <EmptyState message={t("empty")} />
-        ) : null}
+        </div>
+      ) : null}
 
-        {!isLoading && !isCatalogError && hasGroups ? (
-          <div className="space-y-10">
-            {groups.map((group) => (
-              <TopicSubscriptionGroupBlock
-                errorFor={errorFor}
-                group={group}
-                isPending={isPending}
-                isSubscribed={isSubscribed}
-                key={group.category?.id ?? "uncategorized"}
-                onToggle={(id) => void toggle(id)}
-              />
-            ))}
-          </div>
-        ) : null}
-      </Container>
-    </Section>
+      {!isLoading && !isCatalogError && hasGroups ? (
+        <div className="space-y-10 bg-white p-5">
+          {groups.map((group) => (
+            <TopicSubscriptionGroupBlock
+              errorFor={errorFor}
+              group={group}
+              isPending={isPending}
+              isSubscribed={isSubscribed}
+              key={group.category?.id ?? "uncategorized"}
+              onToggle={(id) => void toggle(id)}
+            />
+          ))}
+        </div>
+      ) : null}
+    </FrameModule>
   );
 }

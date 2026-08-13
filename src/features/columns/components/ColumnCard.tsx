@@ -20,7 +20,7 @@ export function ColumnCard({ column, variant = "default" }: ColumnCardProps) {
 
   if (variant === "featured") {
     return (
-      <article className="group grid gap-6 border border-neutral-200 p-6 lg:grid-cols-[1.2fr_1fr] lg:gap-10 lg:p-8">
+      <article className="group grid gap-6 p-5 lg:grid-cols-[1.2fr_1fr] lg:gap-10 lg:p-6">
         <Link className="block" href={href}>
           <div className="relative aspect-[16/10] overflow-hidden bg-neutral-100">
             <ArticleImage

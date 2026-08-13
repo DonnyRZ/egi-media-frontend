@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { CategoryDetailView } from "@/features/categories/components/CategoryDetailView";
-import { Container } from "@/shared/components/layout/Container";
-import { Section } from "@/shared/components/layout/Section";
+import { FrameModule } from "@/shared/components/layout/FrameModule";
+import { PageFrame } from "@/shared/components/layout/PageFrame";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
 import { HEADER_CATEGORY_I18N_KEYS } from "@/shared/constants/header-categories.constants";
 import { getCategoryBySlug } from "@/shared/repositories/category.repository";
@@ -47,15 +47,26 @@ export async function generateMetadata({
 
 function DetailFallback() {
   return (
-    <Section>
-      <Container>
-        <div className="space-y-4">
+    <PageFrame>
+      <FrameModule>
+        <div className="space-y-3 bg-white p-5">
           <Skeleton className="h-3 w-24" />
           <Skeleton className="h-10 w-1/2" />
           <Skeleton className="h-4 w-2/3" />
         </div>
-      </Container>
-    </Section>
+      </FrameModule>
+      <FrameModule>
+        <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
+          {Array.from({ length: 6 }).map((_, index) => (
+            <div key={index} className="space-y-3 bg-white p-5">
+              <Skeleton className="aspect-[16/10] w-full" />
+              <Skeleton className="h-3 w-20" />
+              <Skeleton className="h-6 w-3/4" />
+            </div>
+          ))}
+        </div>
+      </FrameModule>
+    </PageFrame>
   );
 }
 

@@ -18,8 +18,9 @@ import { Link } from "@/i18n/navigation";
 import { EmptyState } from "@/shared/components/common/EmptyState";
 import { ErrorState } from "@/shared/components/common/ErrorState";
 import { Pagination } from "@/shared/components/common/Pagination";
-import { Container } from "@/shared/components/layout/Container";
-import { Section } from "@/shared/components/layout/Section";
+import { FrameModule } from "@/shared/components/layout/FrameModule";
+import { FramePageHero } from "@/shared/components/layout/FramePageHero";
+import { PageFrame } from "@/shared/components/layout/PageFrame";
 import { Button } from "@/shared/components/ui/Button";
 import { ConfirmDialog } from "@/shared/components/ui/ConfirmDialog";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
@@ -46,61 +47,91 @@ export function MyColumnsView() {
   const { remove, submit } = useColumnMutations();
   const [deleteTarget, setDeleteTarget] = useState<ColumnListItem | null>(null);
 
+  const hero = (
+    <FrameModule ariaLabelledby="my-columns-hero-heading">
+      <FramePageHero
+        actions={
+          isHydrated && isAuthenticated ? (
+            <Link href="/kolom/tulis">
+              <Button className="rounded-none" type="button">
+                {t("writeCta")}
+              </Button>
+            </Link>
+          ) : undefined
+        }
+        leading={
+          <Link
+            className="text-xs font-semibold uppercase tracking-wide text-neutral-500 transition-colors hover:text-accent"
+            href="/kolom"
+          >
+            ← {t("backToColumns")}
+          </Link>
+        }
+        title={t("myColumnsHeading")}
+        titleId="my-columns-hero-heading"
+      />
+    </FrameModule>
+  );
+
   if (!isHydrated) {
     return (
-      <Section>
-        <Container>
-          <Skeleton className="h-40 w-full" />
-        </Container>
-      </Section>
+      <PageFrame>
+        {hero}
+        <FrameModule>
+          <div className="bg-white p-5">
+            <Skeleton className="h-40 w-full" />
+          </div>
+        </FrameModule>
+      </PageFrame>
     );
   }
 
   if (!isAuthenticated) {
     return (
-      <Section>
-        <Container>
-          <ColumnsSignInPrompt />
-        </Container>
-      </Section>
+      <PageFrame>
+        {hero}
+        <FrameModule>
+          <div className="bg-white p-5">
+            <ColumnsSignInPrompt />
+          </div>
+        </FrameModule>
+      </PageFrame>
     );
   }
 
   return (
-    <Section>
-      <Container>
-        <div className="mb-4 flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <Link
-              className="text-sm font-semibold text-primary-700 hover:text-accent"
-              href="/kolom"
-            >
-              ← {t("backToColumns")}
-            </Link>
-            <h2 className="mt-2 text-lg font-bold uppercase tracking-wide text-ink">
-              {t("myColumnsHeading")}
-            </h2>
-          </div>
-          <Link href="/kolom/tulis">
-            <Button className="rounded-none" type="button">
-              {t("writeCta")}
-            </Button>
-          </Link>
-        </div>
+    <PageFrame>
+      {hero}
 
-        {isLoading ? <Skeleton className="h-48 w-full" /> : null}
+      <FrameModule ariaLabelledby="my-columns-listing-heading">
+        <h2 className="sr-only" id="my-columns-listing-heading">
+          {t("myColumnsHeading")}
+        </h2>
+
+        {isLoading ? (
+          <div className="bg-white p-5">
+            <Skeleton className="h-48 w-full" />
+          </div>
+        ) : null}
 
         {isError ? (
-          <ErrorState message={error?.message} onRetry={() => void refetch()} />
+          <div className="bg-white p-5">
+            <ErrorState
+              message={error?.message}
+              onRetry={() => void refetch()}
+            />
+          </div>
         ) : null}
 
         {!isLoading && !isError && !data?.items.length ? (
-          <EmptyState message={t("myColumnsEmpty")} />
+          <div className="bg-white p-5">
+            <EmptyState message={t("myColumnsEmpty")} />
+          </div>
         ) : null}
 
         {!isLoading && !isError && data?.items.length ? (
-          <div className="space-y-8">
-            <ul className="divide-y divide-neutral-200 border border-neutral-200 bg-white">
+          <>
+            <ul className="divide-y divide-neutral-200 bg-white">
               {data.items.map((column) => (
                 <li
                   className="flex flex-col gap-4 p-5 sm:flex-row sm:items-start sm:justify-between"
@@ -178,12 +209,16 @@ export function MyColumnsView() {
                 </li>
               ))}
             </ul>
-            <Pagination
-              basePath="/kolom/saya"
-              currentPage={data.page}
-              totalPages={data.totalPages}
-            />
-          </div>
+            {data.totalPages > 1 ? (
+              <div className="bg-white p-5">
+                <Pagination
+                  basePath="/kolom/saya"
+                  currentPage={data.page}
+                  totalPages={data.totalPages}
+                />
+              </div>
+            ) : null}
+          </>
         ) : null}
 
         <ConfirmDialog
@@ -202,7 +237,7 @@ export function MyColumnsView() {
           title={t("deleteTitle")}
           tone="danger"
         />
-      </Container>
-    </Section>
+      </FrameModule>
+    </PageFrame>
   );
 }

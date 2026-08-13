@@ -4,7 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ProfesionalCtaBand } from "@/features/profesional/components/ProfesionalCtaBand";
 import { ProfesionalInsights } from "@/features/profesional/components/ProfesionalInsights";
 import { ProfesionalPageBanner, ProfesionalRichCopy } from "@/features/profesional/components/ProfesionalPageBanner";
-import { PAGE_BANNERS, PROFESIONAL_LOCALE } from "@/features/profesional/constants/profesional.constants";
+import { PAGE_BANNERS } from "@/features/profesional/constants/profesional.constants";
 import { profesionalPageMeta } from "@/features/profesional/lib/profesional-metadata";
 
 interface InsightsPageProps {
@@ -19,9 +19,9 @@ export async function generateMetadata({
 }
 
 export default async function InsightsPage({ params }: InsightsPageProps) {
-  await params;
-  setRequestLocale(PROFESIONAL_LOCALE);
-  const t = await getTranslations({ locale: PROFESIONAL_LOCALE, namespace: "profesional" });
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "profesional" });
 
   return (
     <>

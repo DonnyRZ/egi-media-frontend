@@ -4,7 +4,7 @@ import { setRequestLocale } from "next-intl/server";
 import { ProfesionalCtaBand } from "@/features/profesional/components/ProfesionalCtaBand";
 import { ProfesionalPageBanner } from "@/features/profesional/components/ProfesionalPageBanner";
 import { ProfesionalProductBlocks } from "@/features/profesional/components/ProfesionalProductBlocks";
-import { PAGE_BANNERS, PROFESIONAL_LOCALE } from "@/features/profesional/constants/profesional.constants";
+import { PAGE_BANNERS } from "@/features/profesional/constants/profesional.constants";
 import { profesionalPageMeta } from "@/features/profesional/lib/profesional-metadata";
 
 interface ProductsPageProps {
@@ -19,8 +19,8 @@ export async function generateMetadata({
 }
 
 export default async function ProductsPage({ params }: ProductsPageProps) {
-  await params;
-  setRequestLocale(PROFESIONAL_LOCALE);
+  const { locale } = await params;
+  setRequestLocale(locale);
 
   return (
     <>

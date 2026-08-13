@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 import {
   PROFESIONAL_LOCALE,
-  profesionalEnglishPath,
+  profesionalDefaultPath,
 } from "@/features/profesional/constants/profesional.constants";
 
 function isLoopbackHost(host: string) {
@@ -32,19 +32,19 @@ function publicOrigin(request: NextRequest) {
 }
 
 export function profesionalLocaleResponse(request: NextRequest) {
-  const englishPath = profesionalEnglishPath(request.nextUrl.pathname);
-  if (!englishPath) return null;
+  const defaultPath = profesionalDefaultPath(request.nextUrl.pathname);
+  if (!defaultPath) return null;
 
   const origin = publicOrigin(request);
   if (origin) {
-    const target = new URL(englishPath, origin);
+    const target = new URL(defaultPath, origin);
     target.search = request.nextUrl.search;
     return NextResponse.redirect(target);
   }
 
   const url = new URL(request.url);
   url.protocol = "http:";
-  url.pathname = englishPath;
+  url.pathname = defaultPath;
   const headers = new Headers(request.headers);
   headers.set("X-NEXT-INTL-LOCALE", PROFESIONAL_LOCALE);
   return NextResponse.rewrite(url, { request: { headers } });

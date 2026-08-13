@@ -76,14 +76,9 @@ export function isProfesionalPath(pathname: string) {
   return pathname === PROFESIONAL_PATH || pathname.startsWith(`${PROFESIONAL_PATH}/`);
 }
 
-export function profesionalEnglishPath(pathname: string) {
+export function profesionalDefaultPath(pathname: string) {
   if (pathname === PROFESIONAL_PATH || pathname.startsWith(`${PROFESIONAL_PATH}/`)) {
     return `/${PROFESIONAL_LOCALE}${pathname}`;
-  }
-
-  const prefixed = pathname.match(/^\/(id|uz)(\/profesional(?:\/.*)?)$/);
-  if (prefixed) {
-    return `/${PROFESIONAL_LOCALE}${prefixed[2]}`;
   }
 
   return null;

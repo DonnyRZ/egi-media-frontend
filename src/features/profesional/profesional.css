@@ -143,6 +143,24 @@ button.profesional-cta {
   margin-left: auto;
 }
 
+.profesional-lang {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.profesional-lang a {
+  color: #9a9a9a;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+}
+
+.profesional-lang a[aria-current="page"] {
+  color: #fff;
+}
+
 .profesional-menu-toggle {
   display: flex;
   flex-direction: column;

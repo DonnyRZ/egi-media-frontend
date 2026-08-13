@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 
-import { PROFESIONAL_PATH } from "@/features/profesional/constants/profesional.constants";
+import { isProfesionalPath } from "@/features/profesional/constants/profesional.constants";
 import { usePathname } from "@/i18n/navigation";
 
 interface PublicChromeProps {
@@ -20,7 +20,7 @@ export function PublicChrome({
 }: PublicChromeProps) {
   const pathname = usePathname();
 
-  if (pathname === PROFESIONAL_PATH) {
+  if (isProfesionalPath(pathname)) {
     return <>{children}</>;
   }
 

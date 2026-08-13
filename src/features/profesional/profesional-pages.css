@@ -1,0 +1,147 @@
+.profesional-interior {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 2rem;
+}
+
+.profesional-interior .profesional-lede {
+  margin-bottom: 2rem;
+}
+
+.profesional-points {
+  display: grid;
+  gap: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.profesional-points li {
+  border-top: 1px solid #2a2a2a;
+  padding: 1rem 0;
+}
+
+.profesional-points li:last-child {
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.profesional-product-block {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1.5rem 4.5rem;
+  scroll-margin-top: 6rem;
+}
+
+.profesional-product-block-media {
+  position: relative;
+  min-height: 16rem;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.profesional-form {
+  position: relative;
+  display: grid;
+  gap: 0.9rem;
+  max-width: 36rem;
+}
+
+.profesional-form label {
+  display: grid;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: #d1d5db;
+}
+
+.profesional-form input,
+.profesional-form textarea {
+  border: 1px solid #333;
+  border-radius: 4px;
+  background: #0a0a0a;
+  color: #fff;
+  padding: 0.75rem 0.85rem;
+}
+
+.profesional-honeypot {
+  position: absolute;
+  left: -10000px;
+  height: 0;
+  overflow: hidden;
+}
+
+.profesional-form-error {
+  color: #fca5a5;
+}
+
+.profesional-form-success {
+  color: #fff;
+  font-size: 1.1rem;
+}
+
+.profesional-footer {
+  background: #fff;
+  color: #111827;
+  padding: 3.5rem 1.5rem 1.5rem;
+}
+
+.profesional-footer-grid {
+  display: grid;
+  gap: 2rem;
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+.profesional-footer h2 {
+  margin-bottom: 0.85rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.profesional-footer a,
+.profesional-footer p {
+  color: #111827;
+  text-decoration: none;
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.profesional-footer a:hover {
+  color: var(--profesional-cta);
+}
+
+.profesional-footer-links {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.profesional-footer-copy {
+  max-width: 80rem;
+  margin: 2.5rem auto 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid #e5e7eb;
+  color: #6b7280;
+  font-size: 0.8rem;
+}
+
+@media (min-width: 900px) {
+  .profesional-product-block {
+    grid-template-columns: 1.1fr 1fr;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  .profesional-product-block:nth-child(even) {
+    grid-template-columns: 1fr 1.1fr;
+  }
+
+  .profesional-product-block:nth-child(even) .profesional-product-block-media {
+    order: 2;
+  }
+
+  .profesional-footer-grid {
+    grid-template-columns: 1fr 1fr 1fr 1.3fr;
+  }
+}

@@ -1,13 +1,14 @@
 import { useTranslations } from "next-intl";
 
-import { PROFESIONAL_ANCHORS } from "@/features/profesional/constants/profesional.constants";
+import { PROFESIONAL_ROUTES } from "@/features/profesional/constants/profesional.constants";
+import { Link } from "@/i18n/navigation";
 
 export function ProfesionalCtaButton() {
   const t = useTranslations("profesional");
 
   return (
-    <a className="profesional-cta" href={`#${PROFESIONAL_ANCHORS.demo}`}>
+    <Link className="profesional-cta" href={PROFESIONAL_ROUTES.support}>
       {t("requestDemo")}
-    </a>
+    </Link>
   );
 }

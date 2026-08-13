@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 
-import { ProfesionalAttention } from "@/features/profesional/components/ProfesionalAttention";
-import { ProfesionalAudience } from "@/features/profesional/components/ProfesionalAudience";
-import { ProfesionalDemoBand } from "@/features/profesional/components/ProfesionalDemoBand";
-import { ProfesionalDirections } from "@/features/profesional/components/ProfesionalDirections";
+import { ProfesionalCtaBand } from "@/features/profesional/components/ProfesionalCtaBand";
 import { ProfesionalHero } from "@/features/profesional/components/ProfesionalHero";
-import { ProfesionalIssues } from "@/features/profesional/components/ProfesionalIssues";
-import { ProfesionalKnowsCompany } from "@/features/profesional/components/ProfesionalKnowsCompany";
-import { ProfesionalShell } from "@/features/profesional/components/ProfesionalShell";
-import { ProfesionalTrust } from "@/features/profesional/components/ProfesionalTrust";
-import { ProfesionalUrgency } from "@/features/profesional/components/ProfesionalUrgency";
+import { ProfesionalInsights } from "@/features/profesional/components/ProfesionalInsights";
+import { ProfesionalProductsGrid } from "@/features/profesional/components/ProfesionalProductsGrid";
+import { ProfesionalSolutionsSplit } from "@/features/profesional/components/ProfesionalSolutionsSplit";
+import { profesionalPageMeta } from "@/features/profesional/lib/profesional-metadata";
 
 interface ProfesionalPageProps {
   params: Promise<{ locale: string }>;
@@ -20,12 +16,7 @@ export async function generateMetadata({
   params,
 }: ProfesionalPageProps): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "metadata" });
-
-  return {
-    title: t("profesionalTitle"),
-    description: t("profesionalDescription"),
-  };
+  return profesionalPageMeta(locale, "metaHomeTitle", "metaHomeDescription");
 }
 
 export default async function ProfesionalPage({ params }: ProfesionalPageProps) {
@@ -33,16 +24,12 @@ export default async function ProfesionalPage({ params }: ProfesionalPageProps) 
   setRequestLocale(locale);
 
   return (
-    <ProfesionalShell>
+    <>
       <ProfesionalHero />
-      <ProfesionalAttention />
-      <ProfesionalKnowsCompany />
-      <ProfesionalIssues />
-      <ProfesionalDirections />
-      <ProfesionalUrgency />
-      <ProfesionalTrust />
-      <ProfesionalAudience />
-      <ProfesionalDemoBand />
-    </ProfesionalShell>
+      <ProfesionalProductsGrid />
+      <ProfesionalSolutionsSplit />
+      <ProfesionalInsights />
+      <ProfesionalCtaBand />
+    </>
   );
 }

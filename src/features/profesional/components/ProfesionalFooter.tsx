@@ -1,7 +1,17 @@
 import { useTranslations } from "next-intl";
 
-import { PROFESIONAL_ANCHORS } from "@/features/profesional/constants/profesional.constants";
-import { CONTACT_EMAIL, CONTACT_EMAIL_HREF } from "@/features/contact/constants/contact.constants";
+import {
+  PRODUCT_CARDS,
+  PROFESIONAL_NAV,
+  PROFESIONAL_ROUTES,
+} from "@/features/profesional/constants/profesional.constants";
+import { copyKey } from "@/features/profesional/utils/copy-key";
+import {
+  CONTACT_EMAIL,
+  CONTACT_EMAIL_HREF,
+  CONTACT_PHONE_DISPLAY,
+  CONTACT_PHONE_HREF,
+} from "@/features/contact/constants/contact.constants";
 import { Link } from "@/i18n/navigation";
 import { env } from "@/shared/config/env";
 
@@ -11,20 +21,39 @@ export function ProfesionalFooter() {
 
   return (
     <footer className="profesional-footer">
-      <div className="profesional-footer-inner">
+      <div className="profesional-footer-grid">
         <div>
-          <p className="profesional-footer-brand">{t("brand")}</p>
-          <p className="profesional-footer-blurb">{t("footerBlurb")}</p>
+          <h2>{t("footerContact")}</h2>
+          <div className="profesional-footer-links">
+            <a href={CONTACT_PHONE_HREF}>{CONTACT_PHONE_DISPLAY}</a>
+            <a href={CONTACT_EMAIL_HREF}>{CONTACT_EMAIL}</a>
+          </div>
         </div>
         <div>
-          <p className="profesional-kicker">{t("footerContact")}</p>
-          <a href={CONTACT_EMAIL_HREF}>{CONTACT_EMAIL}</a>
+          <h2>{t("navProducts")}</h2>
+          <div className="profesional-footer-links">
+            {PRODUCT_CARDS.map((item) => (
+              <Link href={item.href} key={item.key}>
+                {t(copyKey("product", item.key))}
+              </Link>
+            ))}
+          </div>
         </div>
-        <div className="profesional-footer-links">
-          <a href={`#${PROFESIONAL_ANCHORS.demo}`}>{t("requestDemo")}</a>
-          <a href={env.aiAppUrl} rel="noreferrer">{t("signIn")}</a>
-          <Link href="/">{t("footerNews")}</Link>
-          <Link href="/privacy">{t("footerPrivacy")}</Link>
+        <div>
+          <h2>{t("footerAccess")}</h2>
+          <div className="profesional-footer-links">
+            <a href={env.aiAppUrl} rel="noreferrer">{t("signIn")}</a>
+            <Link href="/">{t("footerNews")}</Link>
+            {PROFESIONAL_NAV.map((item) => (
+              <Link href={item.href} key={item.key}>{t(item.key)}</Link>
+            ))}
+          </div>
+        </div>
+        <div>
+          <p>{t("footerBlurb")}</p>
+          <p>
+            <Link href={PROFESIONAL_ROUTES.support}>{t("requestDemo")} →</Link>
+          </p>
         </div>
       </div>
       <p className="profesional-footer-copy">© {year} {t("brand")}</p>

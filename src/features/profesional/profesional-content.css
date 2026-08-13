@@ -1,0 +1,245 @@
+.profesional-hero,
+.profesional-page-banner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.profesional-hero {
+  min-height: min(86vh, 48rem);
+}
+
+.profesional-page-banner {
+  min-height: 22rem;
+}
+
+.profesional-hero img,
+.profesional-page-banner img,
+.profesional-product-card img,
+.profesional-insight-card img,
+.profesional-product-block-media img {
+  object-fit: cover;
+}
+
+.profesional-hero-overlay,
+.profesional-page-banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgb(0 0 0 / 0.35), rgb(0 0 0 / 0.78));
+}
+
+.profesional-hero-copy,
+.profesional-page-banner-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 46rem;
+  padding: 5rem 1.5rem;
+}
+
+.profesional-hero h1,
+.profesional-page-banner h1 {
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.12;
+}
+
+.profesional-hero p,
+.profesional-page-banner p.profesional-lede {
+  margin: 1.15rem auto 0;
+  max-width: 38rem;
+  color: #eee;
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+.profesional-hero .profesional-cta,
+.profesional-page-banner .profesional-cta {
+  margin-top: 1.75rem;
+}
+
+.profesional-section {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 4.5rem 1.5rem;
+}
+
+.profesional-section-head {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.profesional-section h2,
+.profesional-product-block h2 {
+  font-size: clamp(1.8rem, 3.4vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.profesional-lede {
+  margin-top: 1rem;
+  max-width: 38rem;
+  color: var(--profesional-muted);
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+
+.profesional-product-grid {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.profesional-product-card,
+.profesional-insight-card {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 8px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.profesional-product-card {
+  min-height: 14.5rem;
+}
+
+.profesional-card-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgb(0 0 0 / 0.82), rgb(0 0 0 / 0.12));
+}
+
+.profesional-product-card-copy {
+  position: absolute;
+  left: 1.15rem;
+  right: 1.15rem;
+  bottom: 1.15rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.profesional-product-card h3,
+.profesional-insight-card h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.profesional-arrow {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 999px;
+  background: var(--profesional-cta);
+  color: #fff;
+  font-size: 1rem;
+}
+
+.profesional-solutions {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.profesional-link-list {
+  display: grid;
+  gap: 0;
+}
+
+.profesional-link-list a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.95rem 0;
+  border-top: 1px solid #2a2a2a;
+  font-size: 1.02rem;
+}
+
+.profesional-link-list a:last-child {
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.profesional-insight-grid {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.profesional-insight-card {
+  min-height: 24rem;
+}
+
+.profesional-insight-card-copy {
+  position: absolute;
+  top: 1.15rem;
+  left: 1.15rem;
+  right: 3.5rem;
+  max-width: 20rem;
+  padding: 1rem 1.1rem;
+  border-radius: 6px;
+  background: rgb(0 0 0 / 0.72);
+}
+
+.profesional-insight-kicker {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: var(--profesional-accent);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.profesional-insight-card .profesional-arrow {
+  position: absolute;
+  left: 1.15rem;
+  bottom: 1.15rem;
+}
+
+.profesional-cta-band {
+  max-width: 80rem;
+  margin: 0 auto 4.5rem;
+  padding: 4rem 1.5rem;
+  border-radius: 6px;
+  background: #1a1a1a;
+  text-align: center;
+}
+
+.profesional-cta-band .profesional-lede {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profesional-cta-band .profesional-cta {
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 900px) {
+  .profesional-product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .profesional-solutions {
+    grid-template-columns: 1fr 1.15fr;
+    align-items: start;
+  }
+
+  .profesional-link-list {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(4, auto);
+    grid-auto-flow: column;
+    column-gap: 2.5rem;
+  }
+
+  .profesional-insight-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

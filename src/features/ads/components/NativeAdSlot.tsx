@@ -52,21 +52,21 @@ export function NativeAdSlot({
           className,
         )}
       >
-        <Container className="flex flex-col items-center py-2">
-          <p className="mb-1.5 text-center text-[10px] font-medium uppercase tracking-[0.2em] text-neutral-400">
+        <Container className="flex flex-col items-center py-1.5">
+          <p className="mb-1 text-center text-[10px] font-medium uppercase tracking-[0.2em] text-neutral-400">
             {label}
           </p>
           <a
             href={ad.targetUrl}
             target="_blank"
             rel="noopener noreferrer sponsored"
-            className="group block w-full outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+            className="group flex h-[90px] w-full items-center justify-center outline-none focus-visible:ring-2 focus-visible:ring-accent/40 sm:h-[110px]"
             onClick={handleClick}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               alt={ad.title}
-              className="h-auto w-full object-contain object-center transition duration-500 group-hover:opacity-95"
+              className="max-h-full w-auto max-w-full object-contain object-center transition duration-500 group-hover:opacity-95"
               src={ad.imageUrl}
             />
           </a>

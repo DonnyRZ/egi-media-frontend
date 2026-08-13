@@ -115,7 +115,7 @@ export function AdFormModal({
           <p className="mt-1.5 text-xs text-neutral-500">
             Recommend {guideline.dimensions}.{" "}
             {placement === "LEADERBOARD"
-              ? "Width matches the header; height follows the artwork."
+              ? "Shown at leaderboard height so the header stays compact."
               : "Slot is fixed by layout."}
           </p>
         </Field>

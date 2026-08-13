@@ -12,8 +12,8 @@ export const AD_PLACEMENT_GUIDELINES: Record<
 > = {
   LEADERBOARD: {
     label: "Leaderboard (homepage header)",
-    dimensions: "full content width (e.g. 1280×548)",
-    tip: "Wide banner aligned to the header. Use the full artwork; the slot scales height to the image.",
+    dimensions: "728×90 (fits up to 110px tall)",
+    tip: "Compact header banner. Full artwork is shown; it is scaled down to leaderboard height.",
   },
   IN_FEED: {
     label: "In-feed (category grid card)",

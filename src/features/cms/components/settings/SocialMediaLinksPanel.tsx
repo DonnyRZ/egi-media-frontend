@@ -170,6 +170,7 @@ export function SocialMediaLinksPanel() {
             <Pagination
               page={data.page}
               totalPages={data.totalPages}
+              total={data.total}
               onPageChange={setPage}
             />
           </div>

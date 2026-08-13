@@ -36,8 +36,10 @@ export function NativeAdSlot({
 
   if (!ad) return null;
 
+  const currentAd = ad;
+
   function handleClick() {
-    void recordAdClick(ad.id).catch(() => undefined);
+    void recordAdClick(currentAd.id).catch(() => undefined);
   }
 
   if (placement === "LEADERBOARD") {

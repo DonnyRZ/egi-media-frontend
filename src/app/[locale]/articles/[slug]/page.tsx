@@ -91,7 +91,6 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 <ArticleEngagement
                   articleId={article.id}
                   initialShareCount={article.shareCount}
-                  initialViewCount={article.viewCount}
                   shareUrl={shareUrl}
                   title={article.title}
                 />

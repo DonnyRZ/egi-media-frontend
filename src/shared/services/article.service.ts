@@ -33,7 +33,7 @@ export async function fetchArticles(
     { params },
   );
 
-  return mapArticleListDto(response.data.data);
+  return mapArticleListDto(response.data?.data ?? null);
 }
 
 export async function fetchArticleById(

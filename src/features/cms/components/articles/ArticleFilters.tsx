@@ -5,7 +5,7 @@ import { Select } from "@/features/cms/components/ui/Select";
 import { BASE_FIELD } from "@/features/cms/components/ui/Input";
 import { cn } from "@/shared/lib/cn";
 
-export type ArticleSortKey = "newest" | "oldest" | "title";
+export type ArticleSortKey = "newest" | "oldest" | "title" | "views";
 
 interface ArticleFiltersProps {
   search: string;
@@ -18,6 +18,7 @@ const SORT_OPTIONS = [
   { value: "newest", label: "Newest first" },
   { value: "oldest", label: "Oldest first" },
   { value: "title", label: "Title A–Z" },
+  { value: "views", label: "Most viewed" },
 ];
 
 export function ArticleFilters({

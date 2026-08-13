@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 
+import { SocialLinks } from "@/features/footer/components/SocialLinks";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/shared/components/layout/Container";
 import { SITE_NAME } from "@/shared/constants/site.constants";
@@ -13,11 +14,8 @@ const COMPANY_LINKS = [
 const LEGAL_LINKS = [
   { key: "privacy", href: "/privacy" },
   { key: "terms", href: "/terms" },
+  { key: "pedomanMediaSiber", href: "/pedoman-media-siber" },
 ] as const;
-
-const SOCIAL_LINKS = [
-  { label: "YouTube", href: "https://www.youtube.com/@egimediaofficial" },
-];
 
 export function Footer() {
   const t = useTranslations("footer");
@@ -78,20 +76,7 @@ export function Footer() {
             <h2 className="text-xs font-bold uppercase tracking-[0.14em] text-neutral-500">
               {t("followUs")}
             </h2>
-            <ul className="mt-4 space-y-2">
-              {SOCIAL_LINKS.map((link) => (
-                <li key={link.href}>
-                  <a
-                    className="text-sm text-neutral-300 hover:text-white"
-                    href={link.href}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <SocialLinks />
           </div>
         </div>
 

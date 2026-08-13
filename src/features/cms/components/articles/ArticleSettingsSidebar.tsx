@@ -34,6 +34,7 @@ export function ArticleSettingsSidebar({
 }: ArticleSettingsSidebarProps) {
   const categoryId = useWatch({ control, name: "categoryId" });
   const topicId = useWatch({ control, name: "topicId" });
+  const headlinePosition = useWatch({ control, name: "headlinePosition" });
   const {
     filteredTopics,
     filteredSeries,
@@ -62,7 +63,11 @@ export function ArticleSettingsSidebar({
                 <PlacementCheckboxes
                   idPrefix="form-placement"
                   value={field.value ?? ["latest_news"]}
+                  headlinePosition={headlinePosition ?? null}
                   onChange={field.onChange}
+                  onHeadlinePositionChange={(position) =>
+                    setValue("headlinePosition", position)
+                  }
                 />
               )}
             />

@@ -9,6 +9,8 @@
     "termsDescription": "EGI Media foydalanish shartlari — veb-sayt, kontent va raqamli xizmatlarimizdan foydalanishni tartibga soladi.",
     "privacyTitle": "Maxfiylik siyosati",
     "privacyDescription": "EGI Media maxfiylik siyosati — shaxsiy maʼlumotlarni yigʻish, ishlatish va himoya qilish tartibi.",
+    "pedomanMediaSiberTitle": "Kiber-media axborot qoʻllanmasi",
+    "pedomanMediaSiberDescription": "Indoneziya Matbuot Kengashi kiber-media yangiliklari qoʻllanmasi (Peraturan Dewan Pers Nomor 1/Peraturan-DP/III/2012).",
     "articleFallbackTitle": "Maqola",
     "videosTitle": "Videolar",
     "videosDescription": "EGI Media video reportajlari, suhbatlari va vizual tahlillarini tomosha qiling — nashr sanasi va toʻliq tavsif bilan.",
@@ -585,6 +587,7 @@
     "contact": "Aloqa",
     "privacy": "Maxfiylik siyosati",
     "terms": "Foydalanish shartlari",
+    "pedomanMediaSiber": "Pedoman Media Siber",
     "tagline": "Tahririy aniqlik, professional dizayn va ishonchli xabarlarga ega premium raqamli yangiliklar.",
     "copyright": "© {year} {siteName}. Barcha huquqlar himoyalangan."
   },
@@ -871,5 +874,159 @@
     "notFoundTitle": "Maqola topilmadi",
     "notFoundMessage": "Qidirayotgan maqolangiz mavjud emas yoki oʻchirilgan.",
     "relatedHeading": "Shuningdek oʻqing"
+  },
+  "pedomanSiber": {
+    "kicker": "Matbuot Kengashi",
+    "headline": "Kiber-media axborot qoʻllanmasi",
+    "adoptedOn": "Matbuot Kengashi nizomi No. 1/Peraturan-DP/III/2012 · Jakarta, 2012-yil 3-fevral",
+    "lede": "Matbuot toʻgʻrisidagi 1999-yildagi 40-sonli Qonun va Jurnalistika odob-axloq kodeksiga muvofiq kiber-medianing professional boshqaruvi uchun Matbuot Kengashining rasmiy qoʻllanmasi.",
+    "bodyHeading": "Kiber-media axborot qoʻllanmasi matni",
+    "intro": [
+      "Fikr bildirish erkinligi, ifoda erkinligi va matbuot erkinligi — Panjasila, 1945-yil Konstitutsiyasi va BMT Inson huquqlari umumjahon deklaratsiyasi bilan himoyalangan inson huquqlaridir. Indoneziyada kiber-medianing mavjudligi ham fikr, ifoda va matbuot erkinligining bir qismidir.",
+      "Kiber-media oʻziga xos xususiyatlarga ega, shuning uchun uni professional boshqarish, Matbuot toʻgʻrisidagi 1999-yildagi 40-sonli Qonun va Jurnalistika odob-axloq kodeksiga muvofiq vazifa, huquq va majburiyatlarni bajarish uchun qoʻllanma zarur. Shu sababli Matbuot Kengashi matbuot tashkilotlari, kiber-media operatorlari va jamiyat bilan birgalikda quyidagi Kiber-media axborot qoʻllanmasini ishlab chiqdi:"
+    ],
+    "sections": [
+      {
+        "title": "Qoʻllanish doirasi",
+        "items": [
+          {
+            "text": "Kiber-media — internetdan foydalanadigan va jurnalistik faoliyat yuritadigan, Matbuot qonuni hamda Matbuot Kengashi belgilagan Matbuot kompaniyasi standartlariga javob beradigan har qanday media shaklidir."
+          },
+          {
+            "text": "Foydalanuvchi yaratgan kontent (User Generated Content) — kiber-media foydalanuvchilari tomonidan yaratilgan va/yoki eʼlon qilingan har qanday kontent, jumladan maqola, rasm, izoh, audio, video va blog, forum, oʻquvchi yoki tomoshabin izohlari kabi media bilan bogʻliq boshqa yuklamalardir."
+          }
+        ]
+      },
+      {
+        "title": "Tekshiruv va xabarlardagi muvozanat",
+        "items": [
+          {
+            "text": "Printsipial jihatdan har bir xabar tekshiruvdan oʻtishi shart."
+          },
+          {
+            "text": "Boshqa tomonga zarar yetkazishi mumkin boʻlgan xabar aniqlik va muvozanat tamoyillarini taʼminlash uchun oʻsha xabarning oʻzida tekshiruvni talab qiladi."
+          },
+          {
+            "text": "(a) bandidagi qoida quyidagi shartlar bilan istisno qilinishi mumkin:",
+            "children": [
+              "Xabar haqiqatan ham shoshilinch jamoat manfaatini oʻz ichiga oladi;",
+              "Birinchi manba aniq identifikatsiya qilingan, ishonchli va kompetentdir;",
+              "Tasdiqlanishi lozim boʻlgan xabar subyekti topilmaydi va/yoki suhbatlashib boʻlmaydi;",
+              "Media oʻquvchilarga xabar hali qoʻshimcha tekshiruvni talab qilishini va bu imkon qadar tez amalga oshirilishini tushuntiradi. Tushuntirish oʻsha xabar oxirida qavs ichida va kursiv bilan beriladi."
+            ]
+          },
+          {
+            "text": "(c) bandiga muvofiq xabar eʼlon qilingandan soʻng media tekshiruvni davom ettirishi shart; tekshiruv natijasi olingach, u yangilangan (update) xabarda, hali tekshirilmagan xabarga havola bilan keltiriladi."
+          }
+        ]
+      },
+      {
+        "title": "Foydalanuvchi yaratgan kontent",
+        "items": [
+          {
+            "text": "Kiber-media Matbuot toʻgʻrisidagi 1999-yildagi 40-sonli Qonun va Jurnalistika odob-axloq kodeksiga zid boʻlmagan Foydalanuvchi yaratgan kontent shartlarini aniq va ochiq joylashtirishi shart."
+          },
+          {
+            "text": "Kiber-media har qanday Foydalanuvchi yaratgan kontentni eʼlon qilishdan oldin foydalanuvchidan aʼzolik roʻyxatidan oʻtishni va tizimga kirishni talab qiladi. Kirish tartibi keyinroq tartibga solinadi."
+          },
+          {
+            "text": "Roʻyxatdan oʻtishda kiber-media foydalanuvchidan eʼlon qilinadigan Foydalanuvchi yaratgan kontent quyidagicha boʻlishiga yozma rozilik olishi shart:",
+            "children": [
+              "Yolgʻon, tuhmat, shafqatsiz va odobsiz mazmunni oʻz ichiga olmaydi;",
+              "Etnik, diniy, irqiy va guruhlararo (SARA) adovat yoki zoʻravonlikka undovni oʻz ichiga olmaydi;",
+              "Jins yoki til asosidagi kamsitishni oʻz ichiga olmaydi va zaif, kambagʻal, kasal yoki ruhiy yoki jismoniy nogiron odamlar qadr-qimmatini pastga urmaydi."
+            ]
+          },
+          {
+            "text": "Kiber-media (c) bandiga zid Foydalanuvchi yaratgan kontentni tahrirlash yoki oʻchirishda mutlaq vakolatga ega."
+          },
+          {
+            "text": "Kiber-media (c) bandini buzgan deb baholangan Foydalanuvchi yaratgan kontent boʻyicha shikoyat mexanizmini taqdim etishi shart. Mexanizm foydalanuvchi oson kirishi mumkin boʻlgan joyda boʻlishi kerak."
+          },
+          {
+            "text": "Kiber-media (c) bandini buzgan va shikoyat qilingan har bir Foydalanuvchi yaratgan kontentni mutanosib ravishda imkon qadar tez, shikoyat qabul qilinganidan keyin kechiqtida 2 × 24 soat ichida tahrirlashi, oʻchirishi va tuzatish choralarini koʻrishi shart."
+          },
+          {
+            "text": "(a), (b), (c) va (f) bandlariga rioya qilgan kiber-media (c) bandini buzgan kontent eʼlon qilinishi oqibatidagi muammolar uchun javobgarlik yuklamaydi."
+          },
+          {
+            "text": "Agar (f) bandidagi muddatdan keyin tuzatish choralari koʻrilmasa, kiber-media shikoyat qilingan Foydalanuvchi yaratgan kontent uchun javobgar boʻladi."
+          }
+        ]
+      },
+      {
+        "title": "Tuzatish, rad etish va javob berish huquqi",
+        "items": [
+          {
+            "text": "Tuzatish, rad etish va javob berish huquqi Matbuot qonuni, Jurnalistika odob-axloq kodeksi va Matbuot Kengashi belgilagan Javob berish huquqi qoʻllanmasiga asoslanadi."
+          },
+          {
+            "text": "Tuzatish, rad etish va/yoki javob berish huquqi tegishli xabarga bogʻlanishi shart."
+          },
+          {
+            "text": "Har bir tuzatish, rad etish va javob berish huquqi xabarida eʼlon qilingan vaqt koʻrsatilishi shart."
+          },
+          {
+            "text": "Agar bir kiber-media xabari boshqa kiber-media tomonidan tarqatilsa:",
+            "children": [
+              "Xabarni yaratgan kiber-medianing javobgarligi oʻsha mediada yoki uning texnik vakolati ostidagi mediada eʼlon qilingan xabar bilan cheklanadi;",
+              "Bir kiber-media tomonidan qilingan tuzatishni shu xabarni iqtibos qilgan boshqa kiber-media ham amalga oshirishi shart;",
+              "Kiber-media xabarini tarqatib, egasi va/yoki muallifi tomonidan qilingan tuzatishni bajarmagan media tuzatilmagan xabarning barcha huquqiy oqibatlari uchun toʻliq javobgar boʻladi."
+            ]
+          },
+          {
+            "text": "Matbuot qonuniga muvofiq, javob berish huquqini bermagan kiber-media 500.000.000 rupiyagacha (besh yuz million rupiya) jarima bilan jazolanishi mumkin."
+          }
+        ]
+      },
+      {
+        "title": "Xabarni qaytarib olish",
+        "items": [
+          {
+            "text": "Eʼlon qilingan xabar tahririyatdan tashqari senzura sababli qaytarib olinmaydi, bundan mustasno: SARA, axloq, bolalar kelajagi, jabrlanuvchining travmatik tajribasi yoki Matbuot Kengashi belgilagan boshqa maxsus asoslar."
+          },
+          {
+            "text": "Boshqa kiber-media qaytarib olingan asl mediadan olingan iqtiboslarni ham qaytarib olishga rioya qilishi shart."
+          },
+          {
+            "text": "Xabarni qaytarib olish sabablari bilan birga ommaga eʼlon qilinishi shart."
+          }
+        ]
+      },
+      {
+        "title": "Reklama",
+        "items": [
+          {
+            "text": "Kiber-media xabar mahsuloti va reklamani aniq ajratishi shart."
+          },
+          {
+            "text": "Reklama va/yoki pullik kontent boʻlgan har bir xabar/maqola/kontentda \"advertorial\", \"iklan\", \"ads\", \"sponsored\" yoki bu kontent reklama ekanligini bildiruvchi boshqa soʻz koʻrsatilishi shart."
+          }
+        ]
+      },
+      {
+        "title": "Mualliflik huquqi",
+        "paragraphs": [
+          "Kiber-media amaldagi qonun hujjatlarida belgilangan mualliflik huquqini hurmat qilishi shart."
+        ]
+      },
+      {
+        "title": "Qoʻllanmani joylashtirish",
+        "paragraphs": [
+          "Kiber-media ushbu Kiber-media axborot qoʻllanmasini oʻz mediasida aniq va ochiq joylashtirishi shart."
+        ]
+      },
+      {
+        "title": "Nizolar",
+        "paragraphs": [
+          "Ushbu Kiber-media axborot qoʻllanmasini qoʻllashga oid nizolarning yakuniy bahosi Matbuot Kengashi tomonidan hal qilinadi."
+        ]
+      }
+    ],
+    "closing": {
+      "date": "Jakarta, 2012-yil 3-fevral",
+      "agreedBy": "Jurnalistlar tashkilotlari va matbuot kompaniyalari tashkilotlari (AJI, PWI, IJTI, ATVLI, ATVSI, SPS, PRSSNI) tomonidan kelishilgan.",
+      "acknowledgedBy": "Tasdiqlovchi: Bagir Manan — Matbuot Kengashi raisi."
+    }
   }
 }

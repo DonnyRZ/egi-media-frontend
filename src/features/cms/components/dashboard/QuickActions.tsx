@@ -30,6 +30,12 @@ export function QuickActions() {
       icon: "users",
       show: permissions.canManageUsers,
     },
+    {
+      label: "Manage Ads",
+      href: "/cms/ads",
+      icon: "media",
+      show: permissions.canViewActivity,
+    },
   ];
 
   return (

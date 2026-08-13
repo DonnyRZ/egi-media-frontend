@@ -39,8 +39,8 @@ export async function fetchCategories(
   );
 
   return mapCategoryListDto({
-    items: response.data.data,
-    meta: { total: response.data.meta?.total ?? 0 },
+    items: response.data?.data ?? [],
+    meta: { total: response.data?.meta?.total ?? 0 },
   });
 }
 

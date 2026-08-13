@@ -15,6 +15,7 @@ import type {
   ArticleStatus,
   ArticleWritePayload,
 } from "@/features/cms/types/cms.types";
+import { QUERY_KEYS } from "@/shared/constants/query-keys.constants";
 
 export function useArticleMutations() {
   const queryClient = useQueryClient();
@@ -31,6 +32,12 @@ export function useArticleMutations() {
     });
     void queryClient.invalidateQueries({
       queryKey: CMS_QUERY_KEYS.translationJobs.all,
+    });
+    void queryClient.invalidateQueries({
+      queryKey: QUERY_KEYS.homepage.all,
+    });
+    void queryClient.invalidateQueries({
+      queryKey: QUERY_KEYS.articles.all,
     });
   };
 
@@ -67,10 +74,12 @@ export function useArticleMutations() {
     mutationFn: ({
       id,
       placements,
+      headlinePosition,
     }: {
       id: string;
       placements: ArticlePlacement[];
-    }) => updateArticlePlacements(id, placements),
+      headlinePosition?: number | null;
+    }) => updateArticlePlacements(id, placements, headlinePosition),
     onSuccess: invalidate,
   });
 

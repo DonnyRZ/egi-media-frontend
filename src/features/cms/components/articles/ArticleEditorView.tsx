@@ -23,6 +23,7 @@ const EMPTY_VALUES: ArticleFormValues = {
   topicId: "",
   tagIds: [],
   placements: [...DEFAULT_ARTICLE_PLACEMENTS],
+  headlinePosition: null,
 };
 
 export function ArticleEditorView({ articleId }: { articleId?: string }) {
@@ -54,6 +55,7 @@ export function ArticleEditorView({ articleId }: { articleId?: string }) {
           placements: data.placements.length
             ? data.placements
             : [...DEFAULT_ARTICLE_PLACEMENTS],
+          headlinePosition: data.headlinePosition,
         }
       : EMPTY_VALUES;
 

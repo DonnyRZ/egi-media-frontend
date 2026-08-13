@@ -2,10 +2,13 @@
 
 import { useFormatter, useTranslations } from "next-intl";
 
+import { NativeAdSlot } from "@/features/ads/components/NativeAdSlot";
 import { Link } from "@/i18n/navigation";
 import { DATE_FORMAT } from "@/shared/constants/format.constants";
 import type { Article } from "@/shared/types/article.types";
 import { getArticleHref } from "@/shared/utils/article-path";
+
+const SIDEBAR_HEADLINE_LIMIT = 5;
 
 interface HeroHeadlineListProps {
   articles: Article[];
@@ -14,23 +17,30 @@ interface HeroHeadlineListProps {
 export function HeroHeadlineList({ articles }: HeroHeadlineListProps) {
   const t = useTranslations("hero");
   const format = useFormatter();
+  const items = [...articles]
+    .sort((a, b) => {
+      const left = a.headlinePosition ?? Number.MAX_SAFE_INTEGER;
+      const right = b.headlinePosition ?? Number.MAX_SAFE_INTEGER;
+      return left - right;
+    })
+    .slice(0, SIDEBAR_HEADLINE_LIMIT);
 
   return (
     <div className="flex h-full flex-col bg-white p-6">
       <h3 className="border-b border-neutral-200 pb-2 text-sm font-bold uppercase tracking-wide text-ink">
         {t("moreTopStories")}
       </h3>
-      <ul className="mt-4 flex flex-1 flex-col">
-        {articles.map((article, index) => (
+      <ul className="mt-4 flex flex-col">
+        {items.map((article, index) => (
           <li
             key={article.id}
-            className="flex gap-3 border-b border-neutral-200 py-4 first:pt-0 last:border-b-0"
+            className="flex gap-3 border-b border-neutral-200 py-4 first:pt-0"
           >
             <span
               aria-hidden="true"
               className="font-serif text-lg font-bold leading-none text-accent"
             >
-              {String(index + 1).padStart(2, "0")}
+              {String(article.headlinePosition ?? index + 1).padStart(2, "0")}
             </span>
             <div>
               {article.category ? (
@@ -52,6 +62,10 @@ export function HeroHeadlineList({ articles }: HeroHeadlineListProps) {
           </li>
         ))}
       </ul>
+      <NativeAdSlot
+        className="mt-6"
+        placement="SIDEBAR_RECTANGLE"
+      />
     </div>
   );
 }

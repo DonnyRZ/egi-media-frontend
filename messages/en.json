@@ -9,6 +9,8 @@
     "termsDescription": "EGI Media Terms of Service governing the use of our website, content, and digital services.",
     "privacyTitle": "Privacy Policy",
     "privacyDescription": "EGI Media Privacy Policy on how we collect, use, and protect personal data.",
+    "pedomanMediaSiberTitle": "Cyber Media News Guidelines",
+    "pedomanMediaSiberDescription": "Indonesian Press Council Cyber Media News Guidelines (Peraturan Dewan Pers Nomor 1/Peraturan-DP/III/2012).",
     "articleFallbackTitle": "Article",
     "videosTitle": "Videos",
     "videosDescription": "Watch EGI Media video reporting, interviews, and visual analysis — with publish dates and full descriptions.",
@@ -585,6 +587,7 @@
     "contact": "Contact",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
+    "pedomanMediaSiber": "Pedoman Media Siber",
     "tagline": "Premium digital news with editorial clarity, professional design, and trusted reporting.",
     "copyright": "© {year} {siteName}. All rights reserved."
   },
@@ -871,5 +874,159 @@
     "notFoundTitle": "Article not found",
     "notFoundMessage": "The article you are looking for is unavailable or has been removed.",
     "relatedHeading": "Related Articles"
+  },
+  "pedomanSiber": {
+    "kicker": "Press Council",
+    "headline": "Cyber Media News Guidelines",
+    "adoptedOn": "Press Council Regulation No. 1/Peraturan-DP/III/2012 · Jakarta, 3 February 2012",
+    "lede": "Official Press Council guidelines for managing cyber media professionally in accordance with Law No. 40 of 1999 on the Press and the Journalistic Code of Ethics.",
+    "bodyHeading": "Cyber Media News Guidelines content",
+    "intro": [
+      "Freedom of opinion, freedom of expression, and freedom of the press are human rights protected by Pancasila, the 1945 Constitution, and the UN Universal Declaration of Human Rights. The presence of cyber media in Indonesia is also part of freedom of opinion, freedom of expression, and freedom of the press.",
+      "Cyber media has distinctive characteristics and therefore requires guidelines so that it can be managed professionally, fulfilling its functions, rights, and obligations under Law No. 40 of 1999 on the Press and the Journalistic Code of Ethics. For that reason, the Press Council, together with press organizations, cyber media operators, and the public, adopted the Cyber Media News Guidelines as follows:"
+    ],
+    "sections": [
+      {
+        "title": "Scope",
+        "items": [
+          {
+            "text": "Cyber Media means any form of media that uses the internet and carries out journalistic activities, and that meets the requirements of the Press Law and the Press Company Standards established by the Press Council."
+          },
+          {
+            "text": "User Generated Content means any content created and/or published by cyber media users, including articles, images, comments, audio, video, and other uploads attached to cyber media, such as blogs, forums, reader or viewer comments, and similar forms."
+          }
+        ]
+      },
+      {
+        "title": "Verification and Balance in Reporting",
+        "items": [
+          {
+            "text": "In principle, every news report must be verified."
+          },
+          {
+            "text": "News that may harm another party requires verification within the same report to meet the principles of accuracy and balance."
+          },
+          {
+            "text": "The provision in point (a) above may be excepted, provided that:",
+            "children": [
+              "The news truly involves urgent public interest;",
+              "The first source is clearly identified, credible, and competent;",
+              "The subject of the news who must be confirmed cannot be located and/or cannot be interviewed;",
+              "The media explains to readers that the report still requires further verification, which will be pursued as soon as possible. The explanation appears at the end of the same report, in parentheses and in italics."
+            ]
+          },
+          {
+            "text": "After publishing a report under point (c), the media must continue verification efforts, and once verification is obtained, the results must be included in an updated report with a link to the unverified report."
+          }
+        ]
+      },
+      {
+        "title": "User Generated Content",
+        "items": [
+          {
+            "text": "Cyber media must publish terms and conditions on User Generated Content that do not conflict with Law No. 40 of 1999 on the Press and the Journalistic Code of Ethics, placed clearly and conspicuously."
+          },
+          {
+            "text": "Cyber media must require every user to register as a member and log in before publishing any form of User Generated Content. Login provisions will be regulated further."
+          },
+          {
+            "text": "In that registration, cyber media must require users to give written consent that User Generated Content published:",
+            "children": [
+              "Does not contain false, defamatory, sadistic, or obscene content;",
+              "Does not contain prejudice or hatred related to ethnicity, religion, race, or inter-group relations (SARA), and does not encourage violence;",
+              "Does not contain discriminatory content based on gender or language, and does not demean the dignity of the weak, the poor, the sick, or persons with mental or physical disabilities."
+            ]
+          },
+          {
+            "text": "Cyber media has absolute authority to edit or delete User Generated Content that conflicts with point (c)."
+          },
+          {
+            "text": "Cyber media must provide a complaint mechanism for User Generated Content deemed to violate point (c). The mechanism must be placed where users can easily access it."
+          },
+          {
+            "text": "Cyber media must edit, delete, and take corrective action on any reported User Generated Content that violates point (c), as soon as reasonably possible and no later than 2 × 24 hours after the complaint is received."
+          },
+          {
+            "text": "Cyber media that has complied with points (a), (b), (c), and (f) is not burdened with liability for problems arising from published content that violates point (c)."
+          },
+          {
+            "text": "Cyber media is responsible for reported User Generated Content if it fails to take corrective action after the time limit in point (f)."
+          }
+        ]
+      },
+      {
+        "title": "Corrections, Retractions, and the Right of Reply",
+        "items": [
+          {
+            "text": "Corrections, retractions, and the right of reply refer to the Press Law, the Journalistic Code of Ethics, and the Right of Reply Guidelines established by the Press Council."
+          },
+          {
+            "text": "A correction, retraction, and/or right of reply must be linked to the report being corrected, retracted, or given a right of reply."
+          },
+          {
+            "text": "Every correction, retraction, and right-of-reply report must state the time it was published."
+          },
+          {
+            "text": "If a report by one cyber media outlet is disseminated by another, then:",
+            "children": [
+              "The responsibility of the originating cyber media is limited to the report published on that outlet or on media under its technical authority;",
+              "A correction made by one cyber media outlet must also be made by other cyber media that quoted the corrected report;",
+              "Media that disseminate a report from a cyber media outlet and fail to correct it in line with the correction by the owner and/or originator of the report bear full legal responsibility for all consequences of the uncorrected report."
+            ]
+          },
+          {
+            "text": "Under the Press Law, cyber media that fails to honor the right of reply may be subject to a criminal fine of up to Rp500,000,000 (five hundred million rupiah)."
+          }
+        ]
+      },
+      {
+        "title": "Withdrawal of News",
+        "items": [
+          {
+            "text": "Published news may not be withdrawn because of censorship from parties outside the newsroom, except in matters related to SARA, morality, the future of children, a victim’s traumatic experience, or other special considerations established by the Press Council."
+          },
+          {
+            "text": "Other cyber media must follow the withdrawal of quoted reports from the original outlet that has withdrawn them."
+          },
+          {
+            "text": "Withdrawal of a report must be accompanied by reasons and announced to the public."
+          }
+        ]
+      },
+      {
+        "title": "Advertising",
+        "items": [
+          {
+            "text": "Cyber media must clearly distinguish news products from advertising."
+          },
+          {
+            "text": "Every news item/article/content that is an advertisement and/or paid content must include the label \"advertorial\", \"iklan\", \"ads\", \"sponsored\", or another word explaining that the item is an advertisement."
+          }
+        ]
+      },
+      {
+        "title": "Copyright",
+        "paragraphs": [
+          "Cyber media must respect copyright as regulated under applicable laws and regulations."
+        ]
+      },
+      {
+        "title": "Publication of the Guidelines",
+        "paragraphs": [
+          "Cyber media must publish these Cyber Media News Guidelines on its platform clearly and conspicuously."
+        ]
+      },
+      {
+        "title": "Disputes",
+        "paragraphs": [
+          "Final assessment of disputes regarding the implementation of these Cyber Media News Guidelines is resolved by the Press Council."
+        ]
+      }
+    ],
+    "closing": {
+      "date": "Jakarta, 3 February 2012",
+      "agreedBy": "Agreed by journalists’ organizations and press company organizations (AJI, PWI, IJTI, ATVLI, ATVSI, SPS, PRSSNI).",
+      "acknowledgedBy": "Acknowledged by: Bagir Manan — Chair of the Press Council."
+    }
   }
 }

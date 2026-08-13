@@ -29,6 +29,18 @@ export const QUERY_KEYS = {
     all: ["youtube-videos"] as const,
     list: (params: Record<string, unknown>) => ["youtube-videos", "list", params] as const,
   },
+  socialMediaLinks: {
+    all: ["social-media-links"] as const,
+    active: () => ["social-media-links", "active"] as const,
+  },
+  teamMembers: {
+    all: ["team-members"] as const,
+    active: () => ["team-members", "active"] as const,
+  },
+  ads: {
+    all: ["ads"] as const,
+    byPlacement: (placement: string) => ["ads", "placement", placement] as const,
+  },
   savedArticles: {
     all: ["saved-articles"] as const,
     list: (params: Record<string, unknown>) =>

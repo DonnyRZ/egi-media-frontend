@@ -21,7 +21,7 @@ function HeroSkeleton() {
       </div>
       <div className="space-y-4 bg-white p-6">
         <Skeleton className="h-5 w-40" />
-        {Array.from({ length: 4 }).map((_, index) => (
+        {Array.from({ length: 5 }).map((_, index) => (
           <div key={index} className="space-y-2 border-b border-neutral-200 pb-4">
             <Skeleton className="h-3 w-20" />
             <Skeleton className="h-5 w-full" />

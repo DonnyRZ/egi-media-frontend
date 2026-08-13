@@ -40,7 +40,7 @@ export function RecentArticles({
         <EmptyState title={emptyLabel} />
       ) : (
         <ul className="divide-y divide-neutral-100 dark:divide-neutral-800">
-          {items.map((article) => (
+          {items.slice(0, 5).map((article) => (
             <li key={article.id}>
               <Link
                 href={`/cms/articles/${article.id}`}

@@ -6,6 +6,7 @@ import { QuickActions } from "@/features/cms/components/dashboard/QuickActions";
 import { RecentActivity } from "@/features/cms/components/dashboard/RecentActivity";
 import { RecentArticles } from "@/features/cms/components/dashboard/RecentArticles";
 import { StatCards } from "@/features/cms/components/dashboard/StatCards";
+import { TopArticles } from "@/features/cms/components/dashboard/TopArticles";
 import { TopTrendingIssues } from "@/features/cms/components/dashboard/TopTrendingIssues";
 import {
   useRecentDrafts,
@@ -43,12 +44,13 @@ export function DashboardView() {
               isLoading={published.isLoading}
               emptyLabel="Nothing published yet"
             />
+            {canViewActivity ? <RecentActivity /> : null}
           </div>
 
           <div className="space-y-6">
             <QuickActions />
+            <TopArticles />
             <TopTrendingIssues />
-            {canViewActivity ? <RecentActivity /> : null}
           </div>
         </div>
       </div>

@@ -53,7 +53,7 @@ export function ArticleForm({
   const router = useRouter();
   const toast = useToast();
   const { canPublish } = usePermissions();
-  const { create, update, changeStatus } = useArticleMutations();
+  const { create, update, changeStatus, updatePlacements } = useArticleMutations();
   const [scheduleOpen, setScheduleOpen] = useState(false);
 
   const categories = useCmsCategories();
@@ -121,22 +121,34 @@ export function ArticleForm({
     publishedAt?: string,
   ): Promise<string> {
     const payload = buildPayload(values);
+    let id: string;
     if (mode === "new") {
-      return create.mutateAsync({
+      id = await create.mutateAsync({
         ...payload,
         status: nextStatus ?? "draft",
         publishedAt,
       });
+    } else {
+      id = articleId as string;
+      await update.mutateAsync({ id, payload });
+      if (nextStatus && nextStatus !== status) {
+        await changeStatus.mutateAsync({
+          id,
+          status: nextStatus,
+          publishedAt,
+        });
+      }
     }
-    await update.mutateAsync({ id: articleId as string, payload });
-    if (nextStatus && nextStatus !== status) {
-      await changeStatus.mutateAsync({
-        id: articleId as string,
-        status: nextStatus,
-        publishedAt,
-      });
-    }
-    return articleId as string;
+
+    await updatePlacements.mutateAsync({
+      id,
+      placements: values.placements,
+      headlinePosition: values.placements.includes("headline")
+        ? values.headlinePosition
+        : null,
+    });
+
+    return id;
   }
 
   /** Review / publish / schedule only require Indonesian; EN/UZ stay optional in the editor. */

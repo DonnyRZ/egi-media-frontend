@@ -5,6 +5,7 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 
 import { AuthProvider } from "@/features/auth/components/AuthProvider";
+import { NativeAdSlot } from "@/features/ads/components/NativeAdSlot";
 import { Footer } from "@/features/footer/components/Footer";
 import { Header } from "@/features/header/components/Header";
 import { QueryProvider } from "@/shared/providers/QueryProvider";
@@ -89,6 +90,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <QueryProvider>
             <AuthProvider>
+              <NativeAdSlot placement="LEADERBOARD" />
               <Header />
               <main>{children}</main>
               <Footer />

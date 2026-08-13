@@ -8,7 +8,10 @@ import {
   fetchMyArticles,
 } from "@/features/cms/services/cms-article.service";
 import { fetchAuditLogs } from "@/features/cms/services/cms-audit-log.service";
-import { fetchDashboardStats } from "@/features/cms/services/cms-dashboard.service";
+import {
+  fetchDashboardStats,
+  fetchTopArticlesByViews,
+} from "@/features/cms/services/cms-dashboard.service";
 import { usePermissions } from "@/features/cms/hooks/usePermissions";
 
 export function useDashboardStats() {
@@ -39,12 +42,20 @@ export function useRecentPublished() {
   return useRecentByStatus("published");
 }
 
+export function useTopArticles(limit = 5) {
+  return useQuery({
+    queryKey: [...CMS_QUERY_KEYS.dashboard.all, "top-articles", { limit }],
+    queryFn: () => fetchTopArticlesByViews(limit),
+    staleTime: 30_000,
+  });
+}
+
 /** Superadmin-only recent activity feed. Pass `enabled` to gate by role. */
 export function useRecentActivity(enabled: boolean) {
   return useQuery({
-    queryKey: [...CMS_QUERY_KEYS.auditLogs.all, "recent", { limit: 6 }],
+    queryKey: [...CMS_QUERY_KEYS.auditLogs.all, "recent", { limit: 5 }],
     queryFn: async () => {
-      const result = await fetchAuditLogs({ page: 1, limit: 6 });
+      const result = await fetchAuditLogs({ page: 1, limit: 5 });
       return result.items;
     },
     enabled,

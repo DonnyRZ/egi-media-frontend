@@ -38,8 +38,8 @@ export async function fetchTopics(
   );
 
   return mapTopicListDto({
-    items: response.data.data,
-    meta: { total: response.data.meta?.total ?? 0 },
+    items: response.data?.data ?? [],
+    meta: { total: response.data?.meta?.total ?? 0 },
   });
 }
 

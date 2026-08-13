@@ -25,6 +25,7 @@ export function filterAndSortArticles(
 
   const sorted = [...filtered].sort((a, b) => {
     if (sort === "title") return a.title.localeCompare(b.title);
+    if (sort === "views") return b.viewCount - a.viewCount;
     const aTime = new Date(a.createdAt).getTime();
     const bTime = new Date(b.createdAt).getTime();
     return sort === "oldest" ? aTime - bTime : bTime - aTime;

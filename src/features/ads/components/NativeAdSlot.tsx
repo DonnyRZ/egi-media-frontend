@@ -57,7 +57,7 @@ export function NativeAdSlot({
             href={ad.targetUrl}
             target="_blank"
             rel="noopener noreferrer sponsored"
-            className="group relative mx-auto block h-24 w-full max-w-[970px] overflow-hidden bg-neutral-100 outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+            className="group relative mx-auto block h-[149px] w-full max-w-[873px] overflow-hidden bg-neutral-100 outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
             onClick={handleClick}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}

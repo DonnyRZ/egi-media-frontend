@@ -101,15 +101,54 @@
 }
 
 .profesional-footer a,
-.profesional-footer p {
+.profesional-footer p,
+.profesional-footer .profesional-sign-in {
   color: #111827;
   text-decoration: none;
   font-size: 0.92rem;
   line-height: 1.7;
 }
 
-.profesional-footer a:hover {
+.profesional-footer .profesional-sign-in {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.profesional-session {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.profesional-session-name {
+  max-width: 9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+.profesional-footer a:hover,
+.profesional-footer .profesional-sign-in:hover {
   color: var(--profesional-cta);
+}
+
+button.profesional-sign-in {
+  background: none;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+}
+
+.profesional-utility .profesional-sign-in {
+  color: #c5c5c5;
+  font-size: 0.72rem;
 }
 
 .profesional-footer-links {

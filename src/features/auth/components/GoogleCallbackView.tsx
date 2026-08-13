@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 import { AuthSuccessDialog } from "@/features/auth/components/AuthSuccessDialog";
+import { safeOAuthNext } from "@/features/auth/lib/oauth-next";
 import { useAuthStore } from "@/features/auth/stores/auth.store";
 import { useRouter } from "@/i18n/navigation";
 
@@ -17,9 +18,10 @@ export function GoogleCallbackView() {
   const [showSuccess, setShowSuccess] = useState(false);
 
   const goHome = useCallback(() => {
-    router.replace("/");
+    const next = safeOAuthNext(searchParams.get("next"));
+    router.replace(next || "/");
     router.refresh();
-  }, [router]);
+  }, [router, searchParams]);
 
   useEffect(() => {
     const accessToken = searchParams.get("access_token");

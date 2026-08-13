@@ -2,21 +2,19 @@
 
 import { useLocale, useTranslations } from "next-intl";
 
-import { AUTH_ENDPOINTS } from "@/features/auth/constants/auth.constants";
+import { googleOAuthStartUrl } from "@/features/auth/lib/oauth-next";
 import { Button } from "@/shared/components/ui/Button";
-import { env } from "@/shared/config/env";
 
-export function GoogleLoginButton() {
+interface GoogleLoginButtonProps {
+  next?: string;
+}
+
+export function GoogleLoginButton({ next }: GoogleLoginButtonProps) {
   const t = useTranslations("auth");
   const locale = useLocale();
 
   function handleGoogleLogin() {
-    const apiBase = env.apiUrl.replace(/\/$/, "");
-    const siteBase = env.siteUrl.replace(/\/$/, "");
-    const origin = `${siteBase}/${locale}`;
-    const url = new URL(`${apiBase}${AUTH_ENDPOINTS.google}`);
-    url.searchParams.set("origin", origin);
-    window.location.assign(url.toString());
+    window.location.assign(googleOAuthStartUrl(locale, next));
   }
 
   return (

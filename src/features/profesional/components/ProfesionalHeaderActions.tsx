@@ -3,9 +3,9 @@
 import { useTranslations } from "next-intl";
 
 import { ProfesionalLanguageSwitcher } from "@/features/profesional/components/ProfesionalLanguageSwitcher";
+import { ProfesionalSignIn } from "@/features/profesional/components/ProfesionalSignIn";
 import { PROFESIONAL_ROUTES } from "@/features/profesional/constants/profesional.constants";
 import { Link } from "@/i18n/navigation";
-import { env } from "@/shared/config/env";
 
 interface ProfesionalHeaderActionsProps {
   menuOpen: boolean;
@@ -18,9 +18,7 @@ export function ProfesionalHeaderActions({ menuOpen, onMenu }: ProfesionalHeader
   return (
     <div className="profesional-header-actions">
       <ProfesionalLanguageSwitcher />
-      <a className="profesional-sign-in" href={env.aiAppUrl} rel="noreferrer">
-        {t("signIn")}
-      </a>
+      <ProfesionalSignIn />
       <Link className="profesional-cta" href={PROFESIONAL_ROUTES.support}>
         {t("requestDemo")}
       </Link>

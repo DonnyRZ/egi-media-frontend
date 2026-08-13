@@ -6,6 +6,7 @@ import {
   PROFESIONAL_ROUTES,
 } from "@/features/profesional/constants/profesional.constants";
 import { copyKey } from "@/features/profesional/utils/copy-key";
+import { ProfesionalSignIn } from "@/features/profesional/components/ProfesionalSignIn";
 import {
   CONTACT_EMAIL,
   CONTACT_EMAIL_HREF,
@@ -13,7 +14,6 @@ import {
   CONTACT_PHONE_HREF,
 } from "@/features/contact/constants/contact.constants";
 import { Link } from "@/i18n/navigation";
-import { env } from "@/shared/config/env";
 
 export function ProfesionalFooter() {
   const t = useTranslations("profesional");
@@ -42,7 +42,7 @@ export function ProfesionalFooter() {
         <div>
           <h2>{t("footerAccess")}</h2>
           <div className="profesional-footer-links">
-            <a href={env.aiAppUrl} rel="noreferrer">{t("signIn")}</a>
+            <ProfesionalSignIn />
             <Link href="/" locale="id">{t("footerNews")}</Link>
             {PROFESIONAL_NAV.map((item) => (
               <Link href={item.href} key={item.key}>{t(item.key)}</Link>

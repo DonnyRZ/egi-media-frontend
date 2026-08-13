@@ -69,6 +69,7 @@ export const API_ENDPOINTS = {
   columnComments: (id: string) => `/api/v1/columns/${id}/comments`,
   columnCommentById: (columnId: string, commentId: string) =>
     `/api/v1/columns/${columnId}/comments/${commentId}`,
+  profesionalDemoRequests: "/api/v1/profesional/demo-requests",
 } as const;
 
 export const API_TIMEOUT_MS = 15_000;

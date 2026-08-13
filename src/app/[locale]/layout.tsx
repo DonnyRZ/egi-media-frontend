@@ -8,6 +8,7 @@ import { AuthProvider } from "@/features/auth/components/AuthProvider";
 import { NativeAdSlot } from "@/features/ads/components/NativeAdSlot";
 import { Footer } from "@/features/footer/components/Footer";
 import { Header } from "@/features/header/components/Header";
+import { PublicChrome } from "@/features/profesional/components/PublicChrome";
 import { QueryProvider } from "@/shared/providers/QueryProvider";
 import { SITE_NAME } from "@/shared/constants/site.constants";
 import { env } from "@/shared/config/env";
@@ -90,10 +91,13 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <QueryProvider>
             <AuthProvider>
-              <NativeAdSlot placement="LEADERBOARD" />
-              <Header />
-              <main>{children}</main>
-              <Footer />
+              <PublicChrome
+                ad={<NativeAdSlot placement="LEADERBOARD" />}
+                header={<Header />}
+                footer={<Footer />}
+              >
+                {children}
+              </PublicChrome>
             </AuthProvider>
           </QueryProvider>
         </NextIntlClientProvider>

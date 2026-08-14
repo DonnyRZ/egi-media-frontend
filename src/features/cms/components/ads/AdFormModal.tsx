@@ -115,7 +115,7 @@ export function AdFormModal({
           <p className="mt-1.5 text-xs text-neutral-500">
             Recommend {guideline.dimensions}.{" "}
             {placement === "LEADERBOARD"
-              ? "Centered at up to 840×360 so the artwork stays readable."
+              ? "Centered at up to 720×310 so the artwork stays readable."
               : "Slot is fixed by layout."}
           </p>
         </Field>

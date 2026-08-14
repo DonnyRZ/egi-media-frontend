@@ -60,13 +60,13 @@ export function NativeAdSlot({
             href={ad.targetUrl}
             target="_blank"
             rel="noopener noreferrer sponsored"
-            className="group mx-auto block w-full max-w-[840px] outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+            className="group mx-auto block w-full max-w-[720px] outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
             onClick={handleClick}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               alt={ad.title}
-              className="h-auto w-full max-h-[360px] object-contain object-center transition duration-500 group-hover:opacity-95"
+              className="h-auto w-full max-h-[310px] object-contain object-center transition duration-500 group-hover:opacity-95"
               src={ad.imageUrl}
             />
           </a>

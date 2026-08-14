@@ -12,7 +12,7 @@ export const AD_PLACEMENT_GUIDELINES: Record<
 > = {
   LEADERBOARD: {
     label: "Leaderboard (homepage header)",
-    dimensions: "840×360",
+    dimensions: "720×310",
     tip: "Centered header banner. Full artwork is visible at a readable size without dominating the page.",
   },
   IN_FEED: {

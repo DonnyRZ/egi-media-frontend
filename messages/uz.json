@@ -764,7 +764,22 @@
     "mapPlaceName": "Oscorp Building",
     "mapFullAddress": "Oscorp Building, Jl. Darmawangsa Raya No.16, RT.6/RW.1, Pulo, Kebayoran Baru, Janubiy Jakarta shahri, Jakarta 12160, Indoneziya",
     "openMaps": "Google Mapsda ochish",
-    "imageAlt": "EGI Media jamoasi"
+    "imageAlt": "EGI Media jamoasi",
+    "formKicker": "Bizga yozing",
+    "formHeadline": "Bogʻlanish",
+    "formLede": "Jamoamizga xabar yuboring. Odatda bir yoki ikki ish kuni ichida javob beramiz.",
+    "formFullName": "Toʻliq ism",
+    "formEmail": "Elektron pochta",
+    "formInquiryType": "Soʻrov turi",
+    "formMessage": "Xabar",
+    "formSubmit": "Xabar yuborish",
+    "formStubNotice": "Forma UI backend integratsiyasi uchun tayyor.",
+    "inquiryTypes": {
+      "general": "Umumiy soʻrov",
+      "advertising": "Reklama va hamkorlik",
+      "editorial": "Tahririyat/Matbuot",
+      "other": "Boshqa"
+    }
   },
   "terms": {
     "kicker": "Huquqiy",

@@ -1,7 +1,7 @@
 export const CONTACT_PHONE_DISPLAY = "+62 813 1877 806";
 export const CONTACT_PHONE_HREF = "tel:+628131877806";
-export const CONTACT_EMAIL = "official@egi-media.com";
-export const CONTACT_EMAIL_HREF = "mailto:official@egi-media.com";
+export const CONTACT_EMAIL = "egi.egimedia@gmail.com";
+export const CONTACT_EMAIL_HREF = "mailto:egi.egimedia@gmail.com";
 
 export const CONTACT_IMAGE = "/images/kontak/Ica-cathy.webp";
 

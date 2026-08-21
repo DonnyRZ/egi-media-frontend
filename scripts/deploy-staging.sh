@@ -21,10 +21,21 @@ if [ "${FORCE_DEPLOY:-0}" != "1" ] \
   exit 0
 fi
 
-if ! git diff --quiet -- . ':!node_modules' ':!.next'; then
-  echo "abort: tracked files are dirty in ${APP_DIR}"
-  git status --short -- . ':!node_modules' ':!.next'
-  exit 1
+# Preserve env files; discard other local tracked edits so CI can pull.
+# Manual VPS edits to source (e.g. contact email) must go through git.
+if ! git diff --quiet -- . ':!node_modules' ':!.next' ':!.env' ':!.env.*'; then
+  if [ "${FORCE_DEPLOY:-0}" = "1" ]; then
+    echo "FORCE_DEPLOY=1: discarding local tracked source changes (keeping .env*)"
+    git diff --name-only -- . ':!node_modules' ':!.next' ':!.env' ':!.env.*' \
+      | while IFS= read -r file; do
+          [ -n "$file" ] || continue
+          git checkout -- "$file"
+        done
+  else
+    echo "abort: tracked files are dirty in ${APP_DIR}"
+    git status --short -- . ':!node_modules' ':!.next'
+    exit 1
+  fi
 fi
 
 git checkout "${BRANCH}"

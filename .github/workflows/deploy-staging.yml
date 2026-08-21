@@ -23,12 +23,14 @@ jobs:
           host: ${{ secrets.STAGING_SSH_HOST }}
           username: ${{ secrets.STAGING_SSH_USER }}
           key: ${{ secrets.STAGING_SSH_KEY }}
-          script_stop: true
           command_timeout: 20m
           script: |
             set -euo pipefail
             cd /var/www/egi-media/cms/frontend
-            git fetch origin develop
-            git checkout develop
-            git pull --ff-only origin develop
+            # Discard stray VPS source edits so pull can proceed (.env* kept).
+            git diff --name-only -- . ':!node_modules' ':!.next' ':!.env' ':!.env.*' \
+              | while IFS= read -r file; do
+                  [ -n "$file" ] || continue
+                  git checkout -- "$file"
+                done
             FORCE_DEPLOY=1 bash scripts/deploy-staging.sh

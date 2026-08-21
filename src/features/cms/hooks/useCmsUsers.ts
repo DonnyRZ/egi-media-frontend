@@ -18,11 +18,12 @@ import {
   type UpdateUserPayload,
 } from "@/features/cms/services/cms-user.service";
 
-export function useCmsUsers(params: CmsUsersParams) {
+export function useCmsUsers(params: CmsUsersParams, enabled = true) {
   return useQuery({
     queryKey: CMS_QUERY_KEYS.users.list(params),
     queryFn: () => fetchUsers(params),
     placeholderData: keepPreviousData,
+    enabled,
   });
 }
 

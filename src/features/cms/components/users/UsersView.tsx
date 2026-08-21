@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 
 import { PageHeader } from "@/features/cms/components/layout/PageHeader";
 import { Badge } from "@/features/cms/components/ui/Badge";
@@ -41,7 +42,8 @@ const ROLE_TONE: Record<string, "info" | "success" | "neutral" | "muted"> = {
 
 export function UsersView() {
   const toast = useToast();
-  const { canManageUsers } = usePermissions();
+  const router = useRouter();
+  const { canManageUsers, canViewUsers } = usePermissions();
   const [searchInput, setSearchInput] = useState("");
   const [role, setRole] = useState<UserRoleFilter>("");
   const [sort, setSort] = useState<UserSortKey>("newest");
@@ -61,10 +63,20 @@ export function UsersView() {
     }),
     [page, search, role, sort],
   );
-  const { data, isLoading, isError } = useCmsUsers(params);
+  const { data, isLoading, isError } = useCmsUsers(params, canViewUsers);
   const { add, update, remove } = useUserMutations();
 
   const users = data?.items ?? [];
+
+  useEffect(() => {
+    if (!canViewUsers) {
+      router.replace("/cms");
+    }
+  }, [canViewUsers, router]);
+
+  if (!canViewUsers) {
+    return null;
+  }
 
   async function createUser(values: AddAuthorValues) {
     try {

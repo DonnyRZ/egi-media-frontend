@@ -11,12 +11,16 @@ export function usePermissions() {
   const role = user?.role ?? null;
 
   const isSuperadmin = role === "superadmin";
+  const isAdmin = role === "admin";
   const isAuthor = role === "author";
+  const isElevated = isSuperadmin || isAdmin;
 
   return {
     role,
     isSuperadmin,
+    isAdmin,
     isAuthor,
+    isElevated,
     // Authors and superadmins can author content.
     canManageArticles: isSuperadmin || isAuthor,
     // Publish / schedule / archive are superadmin-only. Authors may only submit
@@ -27,10 +31,11 @@ export function usePermissions() {
     canManageTaxonomy: isSuperadmin,
     canManageTags: isSuperadmin,
     canManageSeries: isSuperadmin,
-    // Everyone in the newsroom can view the team directory (read-only), but only
-    // superadmin can add / edit / delete users.
-    canViewUsers: isSuperadmin || isAuthor,
+    // User directory is admin-only. Authors must not see or open /cms/users.
+    canViewUsers: isElevated,
     canManageUsers: isSuperadmin,
+    // Only elevated roles can publish / activate videos.
+    canManageVideos: isElevated,
     canViewActivity: isSuperadmin,
     canModerateColumns: isSuperadmin,
   };

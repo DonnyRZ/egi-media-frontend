@@ -1,0 +1,12 @@
+[Unit]
+Description=Poll origin/develop for EGI Media CMS frontend staging
+
+[Timer]
+OnBootSec=45s
+OnUnitInactiveSec=60s
+AccuracySec=15s
+Persistent=true
+Unit=egi-media-cms-frontend-sync.service
+
+[Install]
+WantedBy=timers.target

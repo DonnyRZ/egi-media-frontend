@@ -20,22 +20,22 @@ Pada setiap push ke `develop`:
 2. `git fetch` + `git checkout develop` + `git pull --ff-only`.
 3. `npm ci` + `npm run build`.
 4. `systemctl restart egi-media-cms-frontend`.
-5. Health check `http://127.0.0.1:3012/id`.
+5. Health check `http://127.0.0.1:3012/`.
 
 Script di VPS: `scripts/deploy-staging.sh`.  
 Tidak mengubah `.env`, tidak `git reset --hard`, tidak menyentuh Docker production.
 
-## GitHub secrets (sekali)
+Cadangan: systemd timer `egi-media-cms-frontend-sync` mem-poll `origin/develop` tiap ~60 detik (skip jika sudah up to date).
 
-Di repo frontend: Settings → Environments → `staging` (buat jika belum) → Secrets:
+## GitHub secrets (repo, bukan environment)
 
 | Secret | Isi |
 |---|---|
 | `STAGING_SSH_HOST` | `212.85.24.238` |
 | `STAGING_SSH_USER` | `root` |
-| `STAGING_SSH_KEY` | Isi **private** key yang public key-nya sudah ada di VPS (`~/.ssh/authorized_keys`) |
+| `STAGING_SSH_KEY` | Private key yang public key-nya sudah ada di VPS |
 
-Tanpa ketiga secret ini, workflow akan gagal. Isi secret **sebelum** merge PR CI ke `develop`.
+Tanpa `STAGING_SSH_KEY`, job GitHub Actions di-skip. Timer VPS tetap men-deploy.
 
 ## Rollback
 

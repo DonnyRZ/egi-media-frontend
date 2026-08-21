@@ -2,12 +2,16 @@ import { API_ENDPOINTS } from "@/shared/constants/api.constants";
 import { axiosClient } from "@/shared/lib/axios-client";
 import type { ApiSuccessResponse, PaginatedMeta } from "@/shared/types/api.types";
 
+export type CmsVideoStatus = "review" | "published";
+
 export interface CmsVideo {
   id: string;
   title: string;
   description: string | null;
   url: string;
   isActive: boolean;
+  authorId: string | null;
+  status: CmsVideoStatus;
   createdAt: string | null;
 }
 
@@ -17,18 +21,42 @@ interface CmsVideoDto {
   description: string | null;
   url: string;
   is_active?: boolean;
+  author_id?: string | null;
+  status?: CmsVideoStatus | null;
   created_at?: string | null;
 }
 
 function mapVideo(dto: CmsVideoDto): CmsVideo {
+  const isActive = dto.is_active !== false;
   return {
     id: dto.id,
     title: dto.title,
     description: dto.description,
     url: dto.url,
-    isActive: dto.is_active !== false,
+    isActive,
+    authorId: dto.author_id ?? null,
+    status: dto.status === "review" || !isActive ? "review" : "published",
     createdAt: dto.created_at ?? null,
   };
+}
+
+export function getVideoStatusMeta(video: CmsVideo): {
+  tone: "info" | "success" | "muted";
+  label: string;
+} {
+  if (video.status === "review") return { tone: "info", label: "In Review" };
+  if (video.isActive) return { tone: "success", label: "Active" };
+  return { tone: "muted", label: "Inactive" };
+}
+
+export function canMutateVideo(
+  video: CmsVideo,
+  currentUserId: string | null,
+  isElevated: boolean,
+): boolean {
+  if (isElevated) return true;
+  if (!currentUserId || !video.authorId) return false;
+  return video.authorId === currentUserId;
 }
 
 export interface CmsVideosParams {

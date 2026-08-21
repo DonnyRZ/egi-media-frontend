@@ -764,7 +764,26 @@
     "mapPlaceName": "Oscorp Building",
     "mapFullAddress": "Oscorp Building, Jl. Darmawangsa Raya No.16, RT.6/RW.1, Pulo, Kebayoran Baru, Kota Jakarta Selatan, Jakarta 12160, Indonesia",
     "openMaps": "Buka di Google Maps",
-    "imageAlt": "Tim EGI Media"
+    "imageAlt": "Tim EGI Media",
+    "formKicker": "Tulis kepada kami",
+    "formHeadline": "Hubungi Tim Kami",
+    "formLede": "Kirim pesan kepada tim kami. Biasanya kami membalas dalam satu hingga dua hari kerja.",
+    "formFullName": "Nama Lengkap",
+    "formEmail": "Alamat Email",
+    "formPhone": "Nomor Telepon",
+    "formInquiryType": "Jenis Pertanyaan",
+    "formMessage": "Pesan",
+    "formSubmit": "Kirim Pesan",
+    "formSending": "Mengirim...",
+    "formSuccessKicker": "Pesan terkirim",
+    "formSuccess": "Terima kasih. Pesan Anda telah dikirim ke tim kami.",
+    "formError": "Gagal mengirim pesan. Silakan coba lagi nanti.",
+    "inquiryTypes": {
+      "general": "Pertanyaan Umum",
+      "advertising": "Iklan & Kemitraan",
+      "editorial": "Editorial/Pers",
+      "other": "Lainnya"
+    }
   },
   "terms": {
     "kicker": "Legal",

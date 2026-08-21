@@ -17,11 +17,17 @@ import {
 } from "@/features/cms/components/ui/StateViews";
 import { VideoFormModal } from "@/features/cms/components/videos/VideoFormModal";
 import { CMS_DEFAULT_PAGE_SIZE } from "@/features/cms/constants/cms.constants";
+import { useAuthStore } from "@/features/auth/stores/auth.store";
 import { useCmsVideos, useVideoMutations } from "@/features/cms/hooks/useCmsVideos";
 import { useDebouncedValue } from "@/features/cms/hooks/useDebouncedValue";
+import { usePermissions } from "@/features/cms/hooks/usePermissions";
 import { useToast } from "@/features/cms/stores/cms-toast.store";
 import type { VideoFormValues } from "@/features/cms/schemas/cms.schemas";
-import type { CmsVideo } from "@/features/cms/services/cms-video.service";
+import {
+  canMutateVideo,
+  getVideoStatusMeta,
+  type CmsVideo,
+} from "@/features/cms/services/cms-video.service";
 import {
   formatAbsoluteDateTime,
   getYoutubeThumbnail,
@@ -29,6 +35,8 @@ import {
 
 export function VideosView() {
   const toast = useToast();
+  const { canManageVideos, isElevated } = usePermissions();
+  const currentUserId = useAuthStore((state) => state.user?.id ?? null);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [formOpen, setFormOpen] = useState(false);
@@ -52,10 +60,16 @@ export function VideosView() {
           title: values.title,
           description: values.description,
           url: values.url,
-          isActive: values.isActive,
+          isActive: canManageVideos ? values.isActive : false,
         },
       });
-      toast.success(editing ? "Video updated" : "Video added");
+      toast.success(
+        editing
+          ? "Video updated"
+          : canManageVideos
+            ? "Video added"
+            : "Video submitted for review",
+      );
       setFormOpen(false);
       setEditing(null);
     } catch (error) {
@@ -128,6 +142,8 @@ export function VideosView() {
               <tbody className="divide-y divide-neutral-100 dark:divide-neutral-800">
                 {videos.map((video) => {
                   const thumb = getYoutubeThumbnail(video.url);
+                  const canMutate = canMutateVideo(video, currentUserId, isElevated);
+                  const statusMeta = getVideoStatusMeta(video);
                   return (
                     <tr key={video.id}>
                       <td className="px-5 py-3">
@@ -155,33 +171,33 @@ export function VideosView() {
                         </div>
                       </td>
                       <td className="px-5 py-3">
-                        <Badge tone={video.isActive ? "success" : "muted"}>
-                          {video.isActive ? "Active" : "Inactive"}
-                        </Badge>
+                        <Badge tone={statusMeta.tone}>{statusMeta.label}</Badge>
                       </td>
                       <td className="px-5 py-3 text-neutral-500">
                         {formatAbsoluteDateTime(video.createdAt) || "—"}
                       </td>
                       <td className="px-5 py-3">
-                        <div className="flex justify-end gap-1">
-                          <Button
-                            size="sm"
-                            variant="ghost"
-                            onClick={() => {
-                              setEditing(video);
-                              setFormOpen(true);
-                            }}
-                          >
-                            <Icons.edit className="h-4 w-4" />
-                          </Button>
-                          <Button
-                            size="sm"
-                            variant="ghost"
-                            onClick={() => setPendingDelete(video)}
-                          >
-                            <Icons.trash className="h-4 w-4 text-error" />
-                          </Button>
-                        </div>
+                        {canMutate ? (
+                          <div className="flex justify-end gap-1">
+                            <Button
+                              size="sm"
+                              variant="ghost"
+                              onClick={() => {
+                                setEditing(video);
+                                setFormOpen(true);
+                              }}
+                            >
+                              <Icons.edit className="h-4 w-4" />
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="ghost"
+                              onClick={() => setPendingDelete(video)}
+                            >
+                              <Icons.trash className="h-4 w-4 text-error" />
+                            </Button>
+                          </div>
+                        ) : null}
                       </td>
                     </tr>
                   );
@@ -202,6 +218,7 @@ export function VideosView() {
         open={formOpen}
         saving={save.isPending}
         video={editing}
+        canActivate={canManageVideos}
         onClose={() => {
           setFormOpen(false);
           setEditing(null);

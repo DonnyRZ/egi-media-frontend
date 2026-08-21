@@ -5,6 +5,22 @@ export const CONTACT_EMAIL_HREF = "mailto:official@egi-media.com";
 
 export const CONTACT_IMAGE = "/images/kontak/Ica-cathy.webp";
 
+export const CONTACT_INQUIRY_TYPES = [
+  "general",
+  "advertising",
+  "editorial",
+  "other",
+] as const;
+
+export type ContactInquiryType = (typeof CONTACT_INQUIRY_TYPES)[number];
+
+export const CONTACT_INQUIRY_LABELS: Record<ContactInquiryType, string> = {
+  general: "General Inquiry",
+  advertising: "Advertising & Partnerships",
+  editorial: "Editorial/Press",
+  other: "Other",
+};
+
 export const CONTACT_MAP_QUERY =
   "Oscorp Building, Jl. Darmawangsa Raya No.16, RT.6/RW.1, Pulo, Kebayoran Baru, South Jakarta City, Jakarta 12160, Indonesia";
 

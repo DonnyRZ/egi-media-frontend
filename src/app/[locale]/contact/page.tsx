@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
-import { ContactHero } from "@/features/contact/components/ContactHero";
-import { ContactDetails } from "@/features/contact/components/ContactDetails";
+import { ContactMain } from "@/features/contact/components/ContactMain";
 import { ContactMap } from "@/features/contact/components/ContactMap";
 
 interface ContactPageProps {
@@ -27,8 +26,7 @@ export default async function ContactPage({ params }: ContactPageProps) {
 
   return (
     <>
-      <ContactHero />
-      <ContactDetails />
+      <ContactMain />
       <ContactMap />
     </>
   );

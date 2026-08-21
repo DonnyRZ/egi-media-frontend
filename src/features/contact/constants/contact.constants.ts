@@ -14,6 +14,13 @@ export const CONTACT_INQUIRY_TYPES = [
 
 export type ContactInquiryType = (typeof CONTACT_INQUIRY_TYPES)[number];
 
+export const CONTACT_INQUIRY_LABELS: Record<ContactInquiryType, string> = {
+  general: "General Inquiry",
+  advertising: "Advertising & Partnerships",
+  editorial: "Editorial/Press",
+  other: "Other",
+};
+
 export const CONTACT_MAP_QUERY =
   "Oscorp Building, Jl. Darmawangsa Raya No.16, RT.6/RW.1, Pulo, Kebayoran Baru, South Jakarta City, Jakarta 12160, Indonesia";
 

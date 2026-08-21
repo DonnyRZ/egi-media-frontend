@@ -90,6 +90,8 @@ AI TIDAK BOLEH mengubah
 
 secara langsung.
 
+Staging (`https://staging.egi-media.com/`) ter-deploy otomatis saat PR di-merge ke `develop`. Lihat `.agents/DEPLOY.md`. Jangan push ke `develop`, jangan deploy production dari `develop`, dan jangan `git pull` feature branch di VPS.
+
 ---
 
 ## 6. Conventional Commit

@@ -25,6 +25,8 @@ Pada setiap push ke `develop`:
 Script di VPS: `scripts/deploy-staging.sh`.  
 Tidak mengubah `.env`, tidak `git reset --hard`, tidak menyentuh Docker production.
 
+Pada `FORCE_DEPLOY=1` (CI), perubahan lokal di file source di-discard supaya `git pull` tidak gagal; file `.env*` tetap aman. Edit source harus lewat git, bukan langsung di VPS.
+
 Cadangan: systemd timer `egi-media-cms-frontend-sync` mem-poll `origin/develop` tiap ~60 detik (skip jika sudah up to date).
 
 ## GitHub secrets (repo, bukan environment)

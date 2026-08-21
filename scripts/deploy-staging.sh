@@ -33,7 +33,11 @@ git pull --ff-only origin "${BRANCH}"
 NEW="$(git rev-parse --short HEAD)"
 echo "staging frontend current: ${NEW}"
 
-npm ci
+if ! npm ci; then
+  echo "npm ci failed; falling back to npm install"
+  npm install
+  git checkout -- package-lock.json
+fi
 npm run build
 systemctl restart "${SERVICE}"
 systemctl is-active --quiet "${SERVICE}"

@@ -3,5 +3,5 @@ export const env = {
   crawlApiUrl: process.env.NEXT_PUBLIC_CRAWL_API_URL ?? "http://localhost:5050",
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   aiAppUrl:
-    process.env.NEXT_PUBLIC_AI_APP_URL ?? "https://profesional.egi-media.com",
+    process.env.NEXT_PUBLIC_AI_APP_URL ?? "/id/login",
 } as const;

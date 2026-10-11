@@ -1,9 +1,10 @@
 "use client";
 
+import { HomepageSectionNotice } from "@/features/homepage/components/HomepageSectionNotice";
 import { useTranslations } from "next-intl";
 
 import { ArticleCard } from "@/shared/components/common/ArticleCard";
-import { GridFillers } from "@/shared/components/common/GridFillers";
+import { AdaptiveCardGrid } from "@/shared/components/common/AdaptiveCardGrid";
 import { FrameHeading } from "@/shared/components/layout/FrameHeading";
 import { FrameModule } from "@/shared/components/layout/FrameModule";
 import { ErrorState } from "@/shared/components/common/ErrorState";
@@ -11,10 +12,10 @@ import { Skeleton } from "@/shared/components/ui/Skeleton";
 import { useLatestNews } from "@/features/homepage/hooks/useLatestNews";
 
 export function LatestNewsSection() {
-  const { data, isLoading, isError, error, refetch } = useLatestNews();
+  const { data, isLoading, isError, error, refetch, sectionFailed } = useLatestNews();
   const t = useTranslations("latest");
 
-  if (!isLoading && !isError && !data?.items.length) {
+  if (!isLoading && !isError && !sectionFailed && !data?.items.length) {
     return null;
   }
 
@@ -22,6 +23,7 @@ export function LatestNewsSection() {
 
   return (
     <FrameModule ariaLabelledby="latest-heading">
+      <HomepageSectionNotice section="latest" />
       <FrameHeading
         actionHref="/latest"
         id="latest-heading"
@@ -49,16 +51,8 @@ export function LatestNewsSection() {
       ) : null}
 
       {!isLoading && !isError && items.length ? (
-        <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((article) => (
-            <ArticleCard
-              key={article.id}
-              article={article}
-              className="bg-white p-5"
-            />
-          ))}
-          <GridFillers count={items.length} />
-        </div>
+        <AdaptiveCardGrid items={items} keyForItem={(article) => article.id}
+          renderItem={(article) => <ArticleCard article={article} className="bg-white p-5" />} />
       ) : null}
     </FrameModule>
   );

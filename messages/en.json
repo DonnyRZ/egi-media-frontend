@@ -266,12 +266,13 @@
     "noFeatured": "No featured story"
   },
   "breaking": {
-    "title": "Breaking",
+    "title": "Trending",
     "empty": "No breaking stories at the moment."
   },
   "latest": {
     "title": "Latest News",
-    "subtitle": "Fresh reporting and analysis from our editorial team."
+    "subtitle": "Fresh reporting and analysis from our editorial team.",
+    "viewAll": "View all"
   },
   "forYou": {
     "title": "For You",
@@ -471,7 +472,9 @@
     "subtitle": "Watch our latest video reporting and interviews.",
     "empty": "Videos will appear here once available.",
     "kicker": "Watch",
-    "watchOnYoutube": "Watch on YouTube →"
+    "watchOnYoutube": "Watch on YouTube →",
+    "viewAll": "View all",
+    "playVideo": "Play video"
   },
   "videosPage": {
     "kicker": "Videos",

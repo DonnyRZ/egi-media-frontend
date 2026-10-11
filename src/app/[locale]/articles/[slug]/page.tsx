@@ -83,9 +83,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         <FrameModule>
           <div className="bg-white p-5 lg:p-8">
             <div className="mx-auto max-w-3xl">
-              <ArticleHero article={article} />
-              <div className="mt-8">
-                <ArticleHeader article={article} />
+              <ArticleHeader article={article} />
+              <div className="mt-6">
+                <ArticleHero article={article} />
               </div>
               <div className="mt-8">
                 <ArticleEngagement

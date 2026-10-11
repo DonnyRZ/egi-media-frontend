@@ -11,6 +11,7 @@ import type { CategoryNewsGroup } from "@/shared/types/category.types";
 import type { HomepageNewsData } from "@/shared/types/homepage.types";
 import type { TopicNewsGroup } from "@/shared/types/topic.types";
 import { takeUniqueArticles } from "@/shared/utils/unique-articles";
+import { selectHomepageNews } from "@/shared/utils/homepage-selection";
 
 const EMPTY_ARTICLE_LIST = {
   items: [] as Article[],
@@ -18,6 +19,7 @@ const EMPTY_ARTICLE_LIST = {
   page: 1,
   limit: 0,
   totalPages: 0,
+  failed: true,
 };
 
 async function safeFetchArticles(
@@ -31,6 +33,7 @@ async function safeFetchArticles(
       page: result?.page ?? 1,
       limit: result?.limit ?? 0,
       totalPages: result?.totalPages ?? 0,
+      failed: false,
     };
   } catch {
     return EMPTY_ARTICLE_LIST;
@@ -41,7 +44,7 @@ async function fetchByPlacement(
   placement: ArticlePlacement,
   limit: number,
   lang: ContentLocale,
-): Promise<Article[]> {
+): Promise<typeof EMPTY_ARTICLE_LIST> {
   const result = await safeFetchArticles({
     page: 1,
     limit,
@@ -49,20 +52,23 @@ async function fetchByPlacement(
     sort: "latest",
     lang,
   });
-  return result.items;
+  return result;
 }
 
 async function buildCategoryGroups(
   lang: ContentLocale,
   usedIds: Set<string>,
+  failedSections: string[],
 ): Promise<CategoryNewsGroup[]> {
   let categories;
   try {
     categories = await fetchCategories({
       page: 1,
       limit: HOMEPAGE_LIMITS.taxonomyCandidates,
+      lang,
     });
   } catch {
+    failedSections.push("categories");
     return [];
   }
 
@@ -84,6 +90,7 @@ async function buildCategoryGroups(
       HOMEPAGE_LIMITS.categoryArticles,
       usedIds,
     );
+    if (result.failed && !failedSections.includes("categories")) failedSections.push("categories");
 
     if (articles.length > 0) {
       groups.push({ category, articles });
@@ -96,14 +103,17 @@ async function buildCategoryGroups(
 async function buildTopicGroups(
   lang: ContentLocale,
   usedIds: Set<string>,
+  failedSections: string[],
 ): Promise<TopicNewsGroup[]> {
   let topics;
   try {
     topics = await fetchTopics({
       page: 1,
       limit: HOMEPAGE_LIMITS.taxonomyCandidates,
+      lang,
     });
   } catch {
+    failedSections.push("topics");
     return [];
   }
 
@@ -125,6 +135,7 @@ async function buildTopicGroups(
       HOMEPAGE_LIMITS.topicArticles,
       usedIds,
     );
+    if (result.failed && !failedSections.includes("topics")) failedSections.push("topics");
 
     if (articles.length > 0) {
       groups.push({ topic, articles });
@@ -135,21 +146,20 @@ async function buildTopicGroups(
 }
 
 /**
- * Homepage feed driven by CMS placement tags, with scoped taxonomy de-dup:
- * - Primary sections (hero, headlines, trending, latest) come from placements
- *   and may intentionally share an article when it has multiple tags.
+ * Homepage feed driven by CMS placement tags and a published fallback pool:
+ * - Lead, headlines, sidebar Latest and continuation share one selector
+ *   that preserves CMS priority and removes duplicate article IDs.
  * - Taxonomy sections (category + topic) share a separate used-id set so they
  *   stay filled even on a small catalog.
  * - Category is built before topic so By Category is not starved.
- * - Section fetch failures degrade to empty arrays so one bad API cannot
- *   crash the whole homepage Error Boundary.
+ * - Section failures retain available content and expose scoped retry notices.
  */
 export async function getHomepageNews(
   lang: ContentLocale = "id",
 ): Promise<HomepageNewsData> {
   const taxonomyUsedIds = new Set<string>();
 
-  const [heroItems, headlines, trending, latest, popularPool] =
+  const [heroItems, headlines, trending, latest, popularPool, fallbackPool] =
     await Promise.all([
       fetchByPlacement(
         HOMEPAGE_PLACEMENTS.hero,
@@ -168,7 +178,7 @@ export async function getHomepageNews(
       ),
       fetchByPlacement(
         HOMEPAGE_PLACEMENTS.latestNews,
-        HOMEPAGE_LIMITS.latestNews,
+        HOMEPAGE_LIMITS.fallbackPool,
         lang,
       ),
       safeFetchArticles({
@@ -177,20 +187,27 @@ export async function getHomepageNews(
         sort: "popular",
         lang,
       }),
+      safeFetchArticles({ page: 1, limit: HOMEPAGE_LIMITS.fallbackPool, sort: "latest", lang }),
     ]);
 
-  const categories = await buildCategoryGroups(lang, taxonomyUsedIds);
-  const topics = await buildTopicGroups(lang, taxonomyUsedIds);
+  const selected = selectHomepageNews({ heroes: heroItems.items, headlines: headlines.items,
+    latest: latest.items, pool: fallbackPool.items });
+  const failedSections = [
+    ...([heroItems, headlines, fallbackPool].some((result) => result.failed) ? ["hero"] : []),
+    ...(latest.failed ? ["latest"] : []),
+    ...(trending.failed ? ["breaking"] : []),
+    ...(popularPool.failed ? ["editors"] : []),
+  ];
+  const categories = await buildCategoryGroups(lang, taxonomyUsedIds, failedSections);
+  const topics = await buildTopicGroups(lang, taxonomyUsedIds, failedSections);
 
   return {
-    hero: {
-      featured: heroItems[0] ?? null,
-      headlines: headlines ?? [],
-    },
-    breaking: trending ?? [],
-    latest: latest ?? [],
+    hero: selected.hero,
+    breaking: trending.items,
+    latest: selected.latest,
     categories: categories ?? [],
     topics: topics ?? [],
     editors: (popularPool.items ?? []).slice(0, HOMEPAGE_LIMITS.editorsPicks),
+    failedSections,
   };
 }

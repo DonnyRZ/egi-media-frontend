@@ -44,7 +44,7 @@ export function SavedColumnCard({ column }: SavedColumnCardProps) {
         </Link>
         <div className="flex flex-1 flex-col pt-4">
           <span className="kicker">{t("columnKicker")}</span>
-          <h3 className="mt-2 font-serif text-xl font-bold leading-snug text-ink transition-colors group-hover:text-accent">
+          <h3 className="mt-2 font-sans text-xl font-bold leading-snug text-ink transition-colors group-hover:text-accent">
             <Link href={href}>{column.title}</Link>
           </h3>
           {column.summary ? (

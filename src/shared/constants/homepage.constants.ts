@@ -13,6 +13,7 @@ export const HOMEPAGE_LIMITS = {
   taxonomyCandidates: 16,
   taxonomyFetchLimit: 12,
   articlePool: 40,
+  fallbackPool: 20,
 } as const;
 
 /** Placement tags used by the public homepage sections. */

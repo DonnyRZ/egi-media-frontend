@@ -1,6 +1,8 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { useState } from "react";
+import { VideoPoster } from "@/features/videos/components/VideoPoster";
 
 import { getYoutubeEmbedUrl } from "@/shared/utils/format";
 import type { YoutubeVideo } from "@/shared/types/youtube.types";
@@ -20,6 +22,7 @@ export function VideoEmbed({
   className,
 }: VideoEmbedProps) {
   const t = useTranslations("videos");
+  const [playing, setPlaying] = useState(false);
   const baseUrl = getYoutubeEmbedUrl(video.url);
 
   if (!baseUrl) {
@@ -38,7 +41,12 @@ export function VideoEmbed({
     );
   }
 
-  const embedUrl = autoplay
+  if (!playing && !autoplay) {
+    return <VideoPoster video={video} label={`${t("playVideo")}: ${title ?? video.title}`}
+      className={className} onPlay={() => setPlaying(true)} />;
+  }
+
+  const embedUrl = autoplay || playing
     ? `${baseUrl}?autoplay=1&rel=0`
     : `${baseUrl}?rel=0`;
 

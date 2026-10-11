@@ -7,6 +7,7 @@ export function useLatestNews() {
 
   return {
     ...query,
+    sectionFailed: Boolean(query.data?.failedSections.includes("latest")),
     data: query.data
       ? { items: query.data.latest, total: query.data.latest.length }
       : undefined,

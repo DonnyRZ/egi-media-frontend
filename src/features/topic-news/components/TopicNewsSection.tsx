@@ -1,5 +1,6 @@
 "use client";
 
+import { HomepageSectionNotice } from "@/features/homepage/components/HomepageSectionNotice";
 import { useTranslations } from "next-intl";
 
 import { useTopicNews } from "@/features/homepage/hooks/useTopicNews";
@@ -20,7 +21,7 @@ function TopicBlock({ group }: { group: TopicNewsGroup }) {
   return (
     <div className="min-w-0 bg-white p-5">
       <div className="mb-4">
-        <h3 className="font-serif text-xl font-bold text-ink">
+        <h3 className="font-sans text-xl font-bold text-ink">
           <Link
             className="transition-colors hover:text-accent"
             href={`/topics/${group.topic.slug}`}
@@ -46,15 +47,16 @@ function TopicBlock({ group }: { group: TopicNewsGroup }) {
 }
 
 export function TopicNewsSection() {
-  const { data, isLoading, isError, error, refetch } = useTopicNews();
+  const { data, isLoading, isError, error, refetch, sectionFailed } = useTopicNews();
   const t = useTranslations("topics");
 
-  if (!isLoading && !isError && !data?.length) {
+  if (!isLoading && !isError && !sectionFailed && !data?.length) {
     return null;
   }
 
   return (
     <FrameModule ariaLabelledby="topics-heading">
+      <HomepageSectionNotice section="topics" />
       <FrameHeading
         actionHref="/topics"
         id="topics-heading"

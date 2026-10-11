@@ -104,7 +104,7 @@ export function ColumnDetailView({ slug }: ColumnDetailViewProps) {
             <div className="mb-4">{backLink}</div>
             <p className="kicker">{t("kicker")}</p>
             <h1
-              className="mt-2 font-serif text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl lg:text-5xl"
+              className="mt-2 font-sans text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl lg:text-5xl"
               id="column-detail-heading"
             >
               {data.title}

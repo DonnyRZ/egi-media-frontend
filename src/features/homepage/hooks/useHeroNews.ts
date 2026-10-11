@@ -7,6 +7,7 @@ export function useHeroNews() {
 
   return {
     ...query,
+    sectionFailed: Boolean(query.data?.failedSections.includes("hero")),
     data: query.data?.hero,
   };
 }

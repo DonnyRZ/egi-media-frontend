@@ -7,6 +7,7 @@ export function useCategoryNews() {
 
   return {
     ...query,
+    sectionFailed: Boolean(query.data?.failedSections.includes("categories")),
     data: query.data?.categories,
   };
 }

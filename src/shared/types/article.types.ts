@@ -60,4 +60,5 @@ export interface ArticleListResult {
 export interface HeroNewsData {
   featured: Article | null;
   headlines: Article[];
+  latest?: Article[];
 }

@@ -5,6 +5,7 @@ import { StatusBadge } from "@/features/cms/components/ui/Badge";
 import { Card, CardBody, CardHeader } from "@/features/cms/components/ui/Card";
 import { ALLOWED_STATUS_TRANSITIONS } from "@/features/cms/constants/cms.constants";
 import type { ArticleStatus } from "@/features/cms/types/cms.types";
+import { routing } from "@/i18n/routing";
 
 interface ArticleActionBarProps {
   mode: "new" | "edit";
@@ -60,6 +61,12 @@ export function ArticleActionBar({
           >
             {feedback.message}
           </p>
+        ) : null}
+        {status === "published" || feedback?.tone === "success" ? (
+          <a className="block py-2 text-center text-sm font-semibold text-accent underline underline-offset-4"
+            href={`/${routing.defaultLocale}`} target="_blank" rel="noopener noreferrer">
+            View homepage ↗
+          </a>
         ) : null}
 
         {show("review") ? (

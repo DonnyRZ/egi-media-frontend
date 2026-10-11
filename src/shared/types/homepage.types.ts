@@ -9,4 +9,5 @@ export interface HomepageNewsData {
   categories: CategoryNewsGroup[];
   topics: TopicNewsGroup[];
   editors: Article[];
+  failedSections: string[];
 }

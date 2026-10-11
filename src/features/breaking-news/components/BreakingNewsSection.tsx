@@ -1,5 +1,6 @@
 "use client";
 
+import { HomepageSectionNotice } from "@/features/homepage/components/HomepageSectionNotice";
 import { useTranslations } from "next-intl";
 
 import { Link } from "@/i18n/navigation";
@@ -25,7 +26,7 @@ function BreakingCard({ article }: { article: Article }) {
           {article.category.name}
         </span>
       ) : null}
-      <h3 className="mt-1 line-clamp-3 font-serif text-base font-semibold leading-snug text-ink group-hover:text-accent">
+      <h3 className="mt-1 line-clamp-3 font-sans text-lg font-bold leading-snug text-ink group-hover:text-accent">
         <Link href={getArticleHref(article)}>{article.title}</Link>
       </h3>
     </article>
@@ -33,15 +34,16 @@ function BreakingCard({ article }: { article: Article }) {
 }
 
 export function BreakingNewsSection() {
-  const { data, isLoading, isError, error, refetch } = useBreakingNews();
+  const { data, isLoading, isError, error, refetch, sectionFailed } = useBreakingNews();
   const t = useTranslations("breaking");
 
-  if (!isLoading && !isError && !data?.items.length) {
+  if (!isLoading && !isError && !sectionFailed && !data?.items.length) {
     return null;
   }
 
   return (
     <FrameModule ariaLabelledby="breaking-heading">
+      <HomepageSectionNotice section="breaking" />
       <div className="flex flex-col gap-4 bg-white p-4 lg:flex-row lg:items-start lg:gap-6 lg:p-5">
         <div className="flex shrink-0 items-center gap-2">
           <span

@@ -47,7 +47,7 @@ export function VideoPlaylist({
                 type="button"
                 onClick={() => onSelect(video)}
               >
-                <span className="relative h-[4.25rem] w-[7.5rem] shrink-0 overflow-hidden bg-neutral-100">
+                <span className="relative aspect-video w-[7.5rem] shrink-0 self-start overflow-hidden bg-neutral-100">
                   {video.thumbnailUrl ? (
                     <Image
                       alt=""
@@ -113,7 +113,7 @@ export function VideoStageMeta({ video }: { video: YoutubeVideo }) {
           {format.dateTime(new Date(video.publishedAt), DATE_FORMAT)}
         </time>
       ) : null}
-      <h2 className="mt-2 max-w-4xl font-serif text-2xl font-bold leading-tight tracking-tight text-ink sm:text-3xl">
+      <h2 className="mt-2 max-w-4xl font-sans text-2xl font-bold leading-tight tracking-tight text-ink sm:text-3xl">
         {video.title}
       </h2>
       {video.description ? (
@@ -178,7 +178,7 @@ export function VideoGridCard({ video }: { video: YoutubeVideo }) {
             {format.dateTime(new Date(video.publishedAt), DATE_FORMAT)}
           </time>
         ) : null}
-        <h3 className="mt-1.5 line-clamp-2 font-serif text-base font-bold leading-snug text-ink transition-colors group-hover:text-accent sm:text-lg">
+        <h3 className="mt-1.5 line-clamp-2 font-sans text-base font-bold leading-snug text-ink transition-colors group-hover:text-accent sm:text-lg">
           <a href={video.url} rel="noopener noreferrer" target="_blank">
             {video.title}
           </a>

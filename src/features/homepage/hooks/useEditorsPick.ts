@@ -7,6 +7,7 @@ export function useEditorsPick() {
 
   return {
     ...query,
+    sectionFailed: Boolean(query.data?.failedSections.includes("editors")),
     data: query.data
       ? { items: query.data.editors, total: query.data.editors.length }
       : undefined,

@@ -24,8 +24,8 @@ export function Footer() {
 
   return (
     <footer className="border-t border-neutral-800 bg-ink text-white">
-      <Container className="py-12 lg:py-16">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+      <Container className="py-8 lg:py-10">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <Link
               aria-label={SITE_NAME}

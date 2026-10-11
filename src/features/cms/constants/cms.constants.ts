@@ -35,12 +35,12 @@ export const DEFAULT_ARTICLE_PLACEMENTS: ArticlePlacement[] = ["latest_news"];
 
 export const ARTICLE_PLACEMENT_META: Record<
   ArticlePlacement,
-  { label: string; shortLabel: string; tone: "neutral" | "info" | "warning" | "success" }
+  { label: string; description: string; shortLabel: string; tone: "neutral" | "info" | "warning" | "success" }
 > = {
-  latest_news: { label: "Latest News", shortLabel: "Latest", tone: "neutral" },
-  homepage_hero: { label: "Homepage Hero", shortLabel: "Hero", tone: "info" },
-  headline: { label: "Headline", shortLabel: "Headline", tone: "warning" },
-  trending: { label: "Trending", shortLabel: "Trending", tone: "success" },
+  latest_news: { label: "Latest News", description: "Right column and the latest-news continuation. Hero and Headline duplicates are excluded.", shortLabel: "Latest", tone: "neutral" },
+  homepage_hero: { label: "Homepage Hero", description: "Center lead story. If several articles have Hero, the most recently published eligible article appears.", shortLabel: "Hero", tone: "info" },
+  headline: { label: "Headline", description: "Left supporting stories, ordered by slots 1–5. The first story includes a photo.", shortLabel: "Headline", tone: "warning" },
+  trending: { label: "Trending", description: "Trending section below the lead block.", shortLabel: "Trending", tone: "success" },
 };
 
 /**

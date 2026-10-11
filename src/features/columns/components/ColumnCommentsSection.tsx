@@ -325,7 +325,7 @@ export function ColumnCommentsSection({
       <div className="mx-auto max-w-3xl">
         <div className="mb-6 flex items-end justify-between gap-4">
           <h2
-            className="font-serif text-2xl font-bold text-ink"
+            className="font-sans text-2xl font-bold text-ink"
             id="column-comments-heading"
           >
             {t("heading")}

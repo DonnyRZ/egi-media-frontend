@@ -53,7 +53,7 @@ export function SeriesCard({ series, variant = "default" }: SeriesCardProps) {
               </time>
             ) : null}
           </div>
-          <h2 className="mt-3 font-serif text-3xl font-bold leading-tight text-ink transition-colors group-hover:text-accent sm:text-4xl">
+          <h2 className="mt-3 font-sans text-3xl font-bold leading-tight text-ink transition-colors group-hover:text-accent sm:text-4xl">
             <Link href={`/series/${series.slug}`}>{series.name}</Link>
           </h2>
           {series.description ? (
@@ -92,7 +92,7 @@ export function SeriesCard({ series, variant = "default" }: SeriesCardProps) {
             </time>
           ) : null}
         </div>
-        <h3 className="mt-2 font-serif text-xl font-bold leading-snug text-ink transition-colors group-hover:text-accent">
+        <h3 className="mt-2 font-sans text-xl font-bold leading-snug text-ink transition-colors group-hover:text-accent">
           <Link href={`/series/${series.slug}`}>{series.name}</Link>
         </h3>
         {series.description ? (

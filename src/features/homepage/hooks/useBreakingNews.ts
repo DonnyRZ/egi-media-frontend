@@ -7,6 +7,7 @@ export function useBreakingNews() {
 
   return {
     ...query,
+    sectionFailed: Boolean(query.data?.failedSections.includes("breaking")),
     data: query.data
       ? { items: query.data.breaking, total: query.data.breaking.length }
       : undefined,

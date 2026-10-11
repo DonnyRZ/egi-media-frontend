@@ -102,7 +102,7 @@ function HeaderClockStrip() {
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none invisible absolute flex items-center gap-2.5 whitespace-nowrap"
+        className="pointer-events-none invisible absolute flex max-w-full items-center gap-2.5 overflow-hidden whitespace-nowrap"
         ref={measureRef}
       >
         <span className="shrink-0 text-[10px] font-medium uppercase tracking-wide">
@@ -161,7 +161,7 @@ function Masthead() {
   const { isSearchOpen, toggleMobileMenu, setSearchOpen } = useUiStore();
 
   return (
-    <div className="flex h-16 items-center justify-between gap-3 lg:h-20 lg:gap-4">
+    <div className="flex h-16 items-center justify-between gap-2 lg:h-20 lg:gap-4">
       <div className="flex shrink-0 items-center gap-2">
         <button
           aria-label={t("toggleMenu")}
@@ -306,7 +306,7 @@ function DesktopNav() {
     <nav aria-label={t("navMain")} className="relative min-w-0 flex-1" ref={navRef}>
       <ul
         aria-hidden="true"
-        className="pointer-events-none invisible absolute flex items-center gap-8 whitespace-nowrap"
+        className="pointer-events-none invisible absolute flex max-w-full items-center gap-6 overflow-hidden whitespace-nowrap"
         ref={measureRef}
       >
         {NAV_ITEMS.map((item) => (

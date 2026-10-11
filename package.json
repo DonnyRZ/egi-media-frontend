@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test:upload": "node --test tests/image-upload.test.cjs"
+    "test:upload": "node --test tests/image-upload.test.cjs",
+    "test:editorial": "node --test tests/editorial.test.cjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",

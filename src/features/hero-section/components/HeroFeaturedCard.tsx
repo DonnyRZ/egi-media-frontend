@@ -17,13 +17,13 @@ export function HeroFeaturedCard({ article }: HeroFeaturedCardProps) {
   const format = useFormatter();
 
   return (
-    <article className="group bg-white p-6">
+    <article className="group mx-auto max-w-[560px] bg-white p-4 min-[1200px]:p-5">
       <Link href={getArticleHref(article)}>
         <div className="relative aspect-[16/9] overflow-hidden">
           <ArticleImage
             alt={article.title}
             priority
-            sizes="(max-width: 1024px) 100vw, 66vw"
+            sizes="(max-width: 767px) 100vw, (max-width: 1199px) 60vw, 480px"
             src={article.featuredImage}
           />
         </div>
@@ -33,17 +33,17 @@ export function HeroFeaturedCard({ article }: HeroFeaturedCardProps) {
         {article.category ? (
           <span className="kicker">{article.category.name}</span>
         ) : null}
-        <h2 className="mt-2 font-serif text-3xl font-bold leading-[1.1] tracking-tight text-ink sm:text-4xl lg:text-5xl">
+        <h2 className="mt-2 font-sans text-[28px] font-bold leading-[1.08] tracking-tight text-ink min-[1200px]:text-4xl min-[1440px]:text-[40px]">
           <Link className="headline-link" href={getArticleHref(article)}>
             {article.title}
           </Link>
         </h2>
         {article.summary ? (
-          <p className="mt-3 max-w-2xl text-base leading-7 text-neutral-700 lg:text-lg">
+          <p className="mt-3 line-clamp-3 text-base leading-6 text-neutral-700">
             {article.summary}
           </p>
         ) : null}
-        <div className="mt-4 flex flex-wrap items-center gap-2 text-sm text-neutral-500">
+        <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-neutral-500">
           <span className="font-semibold text-neutral-800">
             {article.author.fullName}
           </span>

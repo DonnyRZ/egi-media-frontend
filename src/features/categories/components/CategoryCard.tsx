@@ -20,7 +20,7 @@ export function CategoryCard({
     return (
       <article className="group p-5 lg:p-6">
         <p className="kicker">{t("featuredKicker")}</p>
-        <h2 className="mt-3 font-serif text-3xl font-bold leading-tight text-ink transition-colors group-hover:text-accent sm:text-4xl">
+        <h2 className="mt-3 font-sans text-3xl font-bold leading-tight text-ink transition-colors group-hover:text-accent sm:text-4xl">
           <Link href={`/categories/${category.slug}`}>{category.name}</Link>
         </h2>
         {category.description ? (
@@ -41,7 +41,7 @@ export function CategoryCard({
   return (
     <article className="group flex h-full flex-col bg-white p-5">
       <p className="kicker">{t("kicker")}</p>
-      <h3 className="mt-2 font-serif text-xl font-bold leading-snug text-ink transition-colors group-hover:text-accent">
+      <h3 className="mt-2 font-sans text-xl font-bold leading-snug text-ink transition-colors group-hover:text-accent">
         <Link href={`/categories/${category.slug}`}>{category.name}</Link>
       </h3>
       {category.description ? (

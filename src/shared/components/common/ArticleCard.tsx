@@ -47,7 +47,7 @@ function CategoryKicker({ article }: { article: Article }) {
 export function ArticleCard({ article, variant = "default", className }: ArticleCardProps) {
   if (variant === "featured") {
     return (
-      <article className={cn("group grid gap-6 lg:grid-cols-[1.2fr_1fr] lg:gap-10", className)}>
+      <article className={cn("group grid gap-5 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] md:gap-6", className)}>
         <Link href={getArticleHref(article)}>
           <div className="relative aspect-[16/9] overflow-hidden">
             <ArticleImage
@@ -58,9 +58,9 @@ export function ArticleCard({ article, variant = "default", className }: Article
             />
           </div>
         </Link>
-        <div className="flex flex-col justify-center">
+        <div className="flex min-w-0 flex-col justify-center">
           <CategoryKicker article={article} />
-          <h2 className="mt-2 font-serif text-2xl font-bold leading-tight text-ink transition-colors group-hover:text-accent sm:text-3xl">
+          <h2 className="mt-2 font-sans text-2xl font-bold leading-tight text-ink transition-colors group-hover:text-accent sm:text-3xl">
             <Link href={getArticleHref(article)}>{article.title}</Link>
           </h2>
           {article.summary ? (
@@ -77,12 +77,12 @@ export function ArticleCard({ article, variant = "default", className }: Article
   if (variant === "horizontal") {
     return (
       <article className={cn("group flex gap-4", className)}>
-        <div className="relative h-20 w-28 shrink-0 overflow-hidden">
+        <div className="relative aspect-video w-28 shrink-0 self-start overflow-hidden">
           <ArticleImage alt={article.title} src={article.featuredImage} />
         </div>
         <div className="min-w-0 flex-1">
           <CategoryKicker article={article} />
-          <h3 className="mt-1 line-clamp-2 font-serif text-base font-semibold leading-snug text-ink group-hover:text-accent">
+          <h3 className="mt-1 line-clamp-2 font-sans text-base font-semibold leading-snug text-ink group-hover:text-accent">
             <Link href={getArticleHref(article)}>{article.title}</Link>
           </h3>
           <ArticleMeta article={article} className="mt-2" />
@@ -95,7 +95,7 @@ export function ArticleCard({ article, variant = "default", className }: Article
     return (
       <article className={cn("group border-b border-neutral-200 pb-4 last:border-b-0 last:pb-0", className)}>
         <CategoryKicker article={article} />
-        <h3 className="mt-1 font-serif text-lg font-semibold leading-snug text-ink group-hover:text-accent">
+        <h3 className="mt-1 font-sans text-lg font-semibold leading-snug text-ink group-hover:text-accent">
           <Link href={getArticleHref(article)}>{article.title}</Link>
         </h3>
         <ArticleMeta article={article} className="mt-2" />
@@ -104,7 +104,7 @@ export function ArticleCard({ article, variant = "default", className }: Article
   }
 
   return (
-    <article className={cn("group flex h-full flex-col", className)}>
+      <article className={cn("group flex h-full min-w-0 flex-col break-words", className)}>
       <Link href={getArticleHref(article)}>
         <div className="relative aspect-[16/9] overflow-hidden">
           <ArticleImage
@@ -115,7 +115,7 @@ export function ArticleCard({ article, variant = "default", className }: Article
       </Link>
       <div className="flex flex-1 flex-col pt-3">
         <CategoryKicker article={article} />
-        <h3 className="mt-1.5 font-serif text-xl font-bold leading-tight text-ink group-hover:text-accent">
+        <h3 className="mt-1.5 font-sans text-2xl font-bold leading-[1.15] tracking-tight text-ink group-hover:text-accent">
           <Link href={getArticleHref(article)}>{article.title}</Link>
         </h3>
         {article.summary ? (

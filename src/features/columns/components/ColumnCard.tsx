@@ -40,7 +40,7 @@ export function ColumnCard({ column, variant = "default" }: ColumnCardProps) {
               {format.dateTime(new Date(dateValue), DATE_FORMAT)}
             </time>
           </div>
-          <h2 className="mt-3 font-serif text-3xl font-bold leading-tight text-ink transition-colors group-hover:text-accent sm:text-4xl">
+          <h2 className="mt-3 font-sans text-3xl font-bold leading-tight text-ink transition-colors group-hover:text-accent sm:text-4xl">
             <Link href={href}>{column.title}</Link>
           </h2>
           {column.summary ? (
@@ -83,7 +83,7 @@ export function ColumnCard({ column, variant = "default" }: ColumnCardProps) {
             {format.dateTime(new Date(dateValue), DATE_FORMAT)}
           </time>
         </div>
-        <h3 className="mt-2 font-serif text-xl font-bold leading-snug text-ink transition-colors group-hover:text-accent">
+        <h3 className="mt-2 font-sans text-xl font-bold leading-snug text-ink transition-colors group-hover:text-accent">
           <Link href={href}>{column.title}</Link>
         </h3>
         {column.summary ? (

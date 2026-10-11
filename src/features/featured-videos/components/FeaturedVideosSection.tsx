@@ -4,11 +4,13 @@ import { useTranslations } from "next-intl";
 
 import { VideoEmbed } from "@/features/videos/components/VideoEmbed";
 import { GridFillers } from "@/shared/components/common/GridFillers";
+import { AdaptiveCardGrid } from "@/shared/components/common/AdaptiveCardGrid";
 import { FrameHeading } from "@/shared/components/layout/FrameHeading";
 import { FrameModule } from "@/shared/components/layout/FrameModule";
 import { ErrorState } from "@/shared/components/common/ErrorState";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
 import { useFeaturedVideos } from "@/features/homepage/hooks/useFeaturedVideos";
+import { useHeroNews } from "@/features/homepage/hooks/useHeroNews";
 import type { YoutubeVideo } from "@/shared/types/youtube.types";
 
 function VideoCard({ video }: { video: YoutubeVideo }) {
@@ -28,7 +30,7 @@ function VideoCard({ video }: { video: YoutubeVideo }) {
             </span>
           ) : null}
         </div>
-        <h3 className="mt-1 font-serif text-lg font-bold leading-snug text-ink group-hover:text-accent">
+        <h3 className="mt-1 font-sans text-lg font-bold leading-snug text-ink group-hover:text-accent">
           <a href={video.url} rel="noopener noreferrer" target="_blank">
             {video.title}
           </a>
@@ -43,9 +45,11 @@ function VideoCard({ video }: { video: YoutubeVideo }) {
 
 export function FeaturedVideosSection() {
   const { data, isLoading, isError, error, refetch } = useFeaturedVideos();
+  const hero = useHeroNews();
+  const remaining = data ? { ...data, items: data.items.slice(hero.data?.featured ? 1 : 0) } : undefined;
   const t = useTranslations("videos");
 
-  if (!isLoading && !isError && !data?.items.length) {
+  if (!isLoading && !isError && !remaining?.items.length) {
     return null;
   }
 
@@ -75,13 +79,9 @@ export function FeaturedVideosSection() {
         </div>
       ) : null}
 
-      {!isLoading && !isError && data?.items.length ? (
-        <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
-          {data.items.map((video) => (
-            <VideoCard key={video.id} video={video} />
-          ))}
-          <GridFillers count={data.items.length} />
-        </div>
+      {!isLoading && !isError && remaining?.items.length ? (
+        <AdaptiveCardGrid items={remaining.items} keyForItem={(video) => video.id}
+          renderItem={(video) => <VideoCard video={video} />} />
       ) : null}
     </FrameModule>
   );

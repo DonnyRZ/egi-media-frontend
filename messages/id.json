@@ -266,12 +266,13 @@
     "noFeatured": "Belum ada berita utama"
   },
   "breaking": {
-    "title": "Terkini",
+    "title": "Trending",
     "empty": "Belum ada berita terkini saat ini."
   },
   "latest": {
     "title": "Berita Terbaru",
-    "subtitle": "Liputan dan analisis terbaru dari tim redaksi kami."
+    "subtitle": "Liputan dan analisis terbaru dari tim redaksi kami.",
+    "viewAll": "Lihat semua"
   },
   "forYou": {
     "title": "Untuk Anda",
@@ -471,7 +472,9 @@
     "subtitle": "Tonton liputan video dan wawancara terbaru kami.",
     "empty": "Video akan muncul di sini setelah tersedia.",
     "kicker": "Tonton",
-    "watchOnYoutube": "Tonton di YouTube →"
+    "watchOnYoutube": "Tonton di YouTube →",
+    "viewAll": "Lihat semua",
+    "playVideo": "Putar video"
   },
   "videosPage": {
     "kicker": "Video",

@@ -44,7 +44,7 @@ export function WriteColumnView() {
         >
           ← {t("backToMyColumns")}
         </Link>
-        <h1 className="mt-3 font-serif text-3xl font-bold text-ink">
+        <h1 className="mt-3 font-sans text-3xl font-bold text-ink">
           {t("writeHeadline")}
         </h1>
         <p className="mt-2 max-w-2xl text-sm leading-6 text-neutral-600">

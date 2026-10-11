@@ -266,12 +266,13 @@
     "noFeatured": "Asosiy yangilik yoʻq"
   },
   "breaking": {
-    "title": "Dolzarb",
+    "title": "Ommabop",
     "empty": "Hozircha dolzarb yangiliklar yoʻq."
   },
   "latest": {
     "title": "Soʻnggi yangiliklar",
-    "subtitle": "Tahririyatimizdan yangi xabarlar va tahlillar."
+    "subtitle": "Tahririyatimizdan yangi xabarlar va tahlillar.",
+    "viewAll": "Barchasi"
   },
   "forYou": {
     "title": "Siz uchun",
@@ -471,7 +472,9 @@
     "subtitle": "Soʻnggi video reportaj va suhbatlarimizni tomosha qiling.",
     "empty": "Videolar mavjud boʻlgach shu yerda koʻrinadi.",
     "kicker": "Tomosha",
-    "watchOnYoutube": "YouTubeʼda tomosha qiling →"
+    "watchOnYoutube": "YouTubeʼda tomosha qiling →",
+    "viewAll": "Barchasi",
+    "playVideo": "Videoni ijro etish"
   },
   "videosPage": {
     "kicker": "Videolar",

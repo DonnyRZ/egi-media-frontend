@@ -150,7 +150,7 @@ export function MyColumnsView() {
                         )}
                       </time>
                     </div>
-                    <h3 className="mt-2 font-serif text-xl font-bold text-ink">
+                    <h3 className="mt-2 font-sans text-xl font-bold text-ink">
                       {column.status === "published" ? (
                         <Link
                           className="hover:text-accent"

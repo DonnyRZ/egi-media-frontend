@@ -17,7 +17,7 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
   return (
     <header className="border-b border-neutral-200 pb-8">
       {article.category ? <p className="kicker">{article.category.name}</p> : null}
-      <h1 className="mt-3 font-serif text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl lg:text-5xl">
+      <h1 className="mt-3 font-sans text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl lg:text-5xl">
         {article.title}
       </h1>
       {article.summary ? (

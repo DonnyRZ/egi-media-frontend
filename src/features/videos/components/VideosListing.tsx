@@ -33,7 +33,7 @@ function StageSkeleton() {
               className="flex gap-3 border-b border-neutral-200 p-3"
               key={index}
             >
-              <Skeleton className="h-[4.25rem] w-[7.5rem] shrink-0 rounded-none" />
+              <Skeleton className="aspect-video w-[7.5rem] shrink-0 self-start rounded-none" />
               <div className="flex-1 space-y-2 py-1">
                 <Skeleton className="h-3 w-16" />
                 <Skeleton className="h-4 w-full" />

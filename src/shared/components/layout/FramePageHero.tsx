@@ -37,7 +37,7 @@ export function FramePageHero({
       >
         <div className="min-w-0">
           <h1
-            className="max-w-3xl font-serif text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl"
+            className="max-w-3xl font-sans text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl"
             id={titleId}
           >
             {title}

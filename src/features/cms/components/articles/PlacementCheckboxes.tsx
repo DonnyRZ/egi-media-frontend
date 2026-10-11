@@ -4,6 +4,7 @@ import {
   ARTICLE_PLACEMENT_META,
   ARTICLE_PLACEMENTS,
 } from "@/features/cms/constants/cms.constants";
+import { PlacementDiagram } from "@/features/cms/components/articles/PlacementDiagram";
 import type { ArticlePlacement } from "@/features/cms/types/cms.types";
 
 const HEADLINE_POSITIONS = [1, 2, 3, 4, 5] as const;
@@ -39,6 +40,7 @@ export function PlacementCheckboxes({
 
   return (
     <div className="space-y-2.5">
+      <PlacementDiagram value={value} />
       {ARTICLE_PLACEMENTS.map((placement) => {
         const meta = ARTICLE_PLACEMENT_META[placement];
         const inputId = `${idPrefix}-${placement}`;
@@ -57,6 +59,7 @@ export function PlacementCheckboxes({
               />
               <span>{meta.label}</span>
             </label>
+            <p className="ml-6 text-xs leading-5 text-neutral-500">{meta.description}</p>
             {placement === "headline" && value.includes("headline") ? (
               <div className="ml-6">
                 <label

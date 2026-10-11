@@ -1,5 +1,6 @@
 "use client";
 
+import { HomepageSectionNotice } from "@/features/homepage/components/HomepageSectionNotice";
 import { useTranslations } from "next-intl";
 
 import { NativeAdSlot } from "@/features/ads/components/NativeAdSlot";
@@ -41,15 +42,16 @@ function CategoryColumn({ group }: { group: CategoryNewsGroup }) {
 }
 
 export function CategoryNewsSection() {
-  const { data, isLoading, isError, error, refetch } = useCategoryNews();
+  const { data, isLoading, isError, error, refetch, sectionFailed } = useCategoryNews();
   const t = useTranslations("categories");
 
-  if (!isLoading && !isError && !data?.length) {
+  if (!isLoading && !isError && !sectionFailed && !data?.length) {
     return null;
   }
 
   return (
     <FrameModule ariaLabelledby="categories-heading">
+      <HomepageSectionNotice section="categories" />
       <FrameHeading
         actionHref="/categories"
         id="categories-heading"

@@ -1,5 +1,6 @@
 "use client";
 
+import { HomepageSectionNotice } from "@/features/homepage/components/HomepageSectionNotice";
 import { useTranslations } from "next-intl";
 
 import { Link } from "@/i18n/navigation";
@@ -17,7 +18,7 @@ function RankedItem({ article, rank }: { article: Article; rank: number }) {
     <div className="flex gap-4 bg-white p-5">
       <span
         aria-hidden="true"
-        className="font-serif text-3xl font-bold leading-none text-neutral-300"
+        className="font-sans text-3xl font-bold leading-none text-neutral-300"
       >
         {rank}
       </span>
@@ -27,7 +28,7 @@ function RankedItem({ article, rank }: { article: Article; rank: number }) {
             {article.category.name}
           </span>
         ) : null}
-        <h3 className="mt-0.5 font-serif text-lg font-semibold leading-snug text-ink hover:text-accent">
+        <h3 className="mt-0.5 font-sans text-lg font-semibold leading-snug text-ink hover:text-accent">
           <Link href={getArticleHref(article)}>{article.title}</Link>
         </h3>
         <p className="mt-1 text-xs text-neutral-500">{article.author.fullName}</p>
@@ -37,15 +38,16 @@ function RankedItem({ article, rank }: { article: Article; rank: number }) {
 }
 
 export function EditorsPickSection() {
-  const { data, isLoading, isError, error, refetch } = useEditorsPick();
+  const { data, isLoading, isError, error, refetch, sectionFailed } = useEditorsPick();
   const t = useTranslations("editors");
 
-  if (!isLoading && !isError && !data?.items.length) {
+  if (!isLoading && !isError && !sectionFailed && !data?.items.length) {
     return null;
   }
 
   return (
     <FrameModule ariaLabelledby="editors-heading">
+      <HomepageSectionNotice section="editors" />
       <FrameHeading
         id="editors-heading"
         subtitle={t("subtitle")}

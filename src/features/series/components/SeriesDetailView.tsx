@@ -110,7 +110,7 @@ export function SeriesDetailView({ slug }: SeriesDetailViewProps) {
             </div>
             <p className="kicker mt-4">{t("kicker")}</p>
             <h1
-              className="mt-2 max-w-4xl font-serif text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl"
+              className="mt-2 max-w-4xl font-sans text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl"
               id="series-detail-heading"
             >
               {data.name}

@@ -111,7 +111,7 @@ export function TopicsListing() {
           <div>
             <p className="kicker">{t("kicker")}</p>
             <h3
-              className="mt-1 font-serif text-xl font-bold text-ink sm:text-2xl"
+              className="mt-1 font-sans text-xl font-bold text-ink sm:text-2xl"
               id={headingId}
             >
               {group.category ? (

@@ -32,10 +32,10 @@ export function FrameHeading({
         className,
       )}
     >
-      <div className="flex items-end justify-between gap-4">
+      <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-2">
         <h2
           id={id}
-          className="text-lg font-bold uppercase tracking-wide text-ink sm:text-xl"
+          className="min-w-0 break-words text-lg font-bold uppercase tracking-wide text-ink sm:text-xl"
         >
           {title}
         </h2>

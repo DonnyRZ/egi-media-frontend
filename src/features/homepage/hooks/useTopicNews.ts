@@ -7,6 +7,7 @@ export function useTopicNews() {
 
   return {
     ...query,
+    sectionFailed: Boolean(query.data?.failedSections.includes("topics")),
     data: query.data?.topics,
   };
 }

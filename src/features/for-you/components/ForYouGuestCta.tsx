@@ -10,7 +10,7 @@ export function ForYouGuestCta() {
 
   return (
     <div className="bg-white px-6 py-10 text-center">
-      <h3 className="font-serif text-2xl font-bold text-ink">{t("guestTitle")}</h3>
+      <h3 className="font-sans text-2xl font-bold text-ink">{t("guestTitle")}</h3>
       <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-neutral-600">
         {t("guestMessage")}
       </p>

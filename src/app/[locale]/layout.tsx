@@ -10,7 +10,7 @@ import { Footer } from "@/features/footer/components/Footer";
 import { Header } from "@/features/header/components/Header";
 import { PublicChrome } from "@/features/profesional/components/PublicChrome";
 import { QueryProvider } from "@/shared/providers/QueryProvider";
-import { SITE_NAME } from "@/shared/constants/site.constants";
+import { SITE_ICONS, SITE_NAME } from "@/shared/constants/site.constants";
 import { env } from "@/shared/config/env";
 import { routing } from "@/i18n/routing";
 
@@ -56,6 +56,7 @@ export async function generateMetadata({
       template: `%s | ${SITE_NAME}`,
     },
     description,
+    icons: SITE_ICONS,
     metadataBase: new URL(env.siteUrl),
     openGraph: {
       title: SITE_NAME,

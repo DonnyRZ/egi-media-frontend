@@ -5,6 +5,7 @@ import { AuthProvider } from "@/features/auth/components/AuthProvider";
 import { CmsBootstrap } from "@/features/cms/components/CmsBootstrap";
 import { Toaster } from "@/features/cms/components/ui/Toaster";
 import { QueryProvider } from "@/shared/providers/QueryProvider";
+import { SITE_ICONS } from "@/shared/constants/site.constants";
 
 import "../globals.css";
 
@@ -24,6 +25,7 @@ const sourceSerif = Source_Serif_4({
 export const metadata: Metadata = {
   title: "Editorial CMS | EGI Media",
   description: "Internal editorial content management for EGI Media.",
+  icons: SITE_ICONS,
   robots: { index: false, follow: false },
 };
 

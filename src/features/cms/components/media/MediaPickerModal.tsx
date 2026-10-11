@@ -24,47 +24,73 @@ export function MediaPickerModal({
 }: MediaPickerModalProps) {
   const [url, setUrl] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [uploading, setUploading] = useState(false);
+
+  function handleClose() {
+    setUrl("");
+    setError(null);
+    setUploading(false);
+    onClose();
+  }
+
+  function handleBusyChange(busy: boolean) {
+    setUploading(busy);
+    if (busy) {
+      setUrl("");
+      setError(null);
+    }
+  }
 
   function handleInsert() {
+    if (uploading) return;
     const trimmed = url.trim();
     if (!trimmed) {
       setError("Enter an image URL");
       return;
     }
     try {
-      new URL(trimmed);
+      const parsed = new URL(trimmed);
+      if (!["http:", "https:"].includes(parsed.protocol)) throw new Error("Unsupported URL");
     } catch {
-      setError("Enter a valid URL");
+      setError("Enter a valid HTTP or HTTPS image URL");
       return;
     }
     onSelect(trimmed);
     setUrl("");
     setError(null);
+    setUploading(false);
   }
 
   return (
     <Modal
       open={open}
-      onClose={onClose}
+      onClose={handleClose}
       title={title}
       footer={
         <>
-          <Button variant="secondary" onClick={onClose}>
+          <Button type="button" variant="secondary" onClick={handleClose}>
             Cancel
           </Button>
-          <Button onClick={handleInsert}>Insert</Button>
+          <Button type="button" onClick={handleInsert} disabled={uploading || !url.trim()}>Insert</Button>
         </>
       }
     >
       <div className="space-y-4">
-        <ImageUpload onUploaded={(uploadedUrl) => setUrl(uploadedUrl)} />
+        <ImageUpload onBusyChange={handleBusyChange} onUploaded={(uploadedUrl) => {
+          setUrl(uploadedUrl);
+          setError(null);
+        }} />
 
         <Field label="Image URL" htmlFor="media-url" error={error ?? undefined}>
           <Input
             id="media-url"
             placeholder="https://…"
             value={url}
-            onChange={(event) => setUrl(event.target.value)}
+            disabled={uploading}
+            onChange={(event) => {
+              setUrl(event.target.value);
+              setError(null);
+            }}
           />
         </Field>
 

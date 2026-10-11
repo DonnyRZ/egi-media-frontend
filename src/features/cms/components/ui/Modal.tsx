@@ -41,6 +41,7 @@ export function Modal({
       role="dialog"
     >
       <button
+        type="button"
         aria-label="Close"
         className="absolute inset-0 bg-neutral-900/50 backdrop-blur-sm"
         onClick={onClose}
@@ -56,6 +57,7 @@ export function Modal({
             {title}
           </h2>
           <button
+            type="button"
             aria-label="Close dialog"
             className="rounded-md p-1 text-neutral-400 transition-colors hover:bg-neutral-100 hover:text-neutral-700 dark:hover:bg-neutral-800"
             onClick={onClose}

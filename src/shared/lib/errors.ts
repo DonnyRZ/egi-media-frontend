@@ -44,6 +44,13 @@ export class UnexpectedError extends ApiError {
   }
 }
 
+export class RequestTimeoutError extends ApiError {
+  constructor(message = "The request timed out. Please try again.") {
+    super(message, 408);
+    this.name = "RequestTimeoutError";
+  }
+}
+
 export function mapAxiosError(error: unknown): ApiError {
   if (!error || typeof error !== "object") {
     return new UnexpectedError();
@@ -57,6 +64,10 @@ export function mapAxiosError(error: unknown): ApiError {
 
   if (axiosError.code === "ERR_NETWORK") {
     return new NetworkError();
+  }
+
+  if (axiosError.code === "ECONNABORTED" || axiosError.code === "ETIMEDOUT") {
+    return new RequestTimeoutError();
   }
 
   const status = axiosError.response?.status ?? 500;

@@ -34,10 +34,9 @@ export function SavedColumnCard({ column }: SavedColumnCardProps) {
     <div className="flex h-full flex-col border border-neutral-200 bg-white p-4 transition-shadow hover:shadow-md">
       <article className="group flex flex-1 flex-col">
         <Link className="block" href={href}>
-          <div className="relative aspect-[16/10] overflow-hidden bg-neutral-100">
+          <div className="relative aspect-[16/9] overflow-hidden bg-neutral-100">
             <ArticleImage
               alt={column.title}
-              className="transition-transform duration-500 group-hover:scale-105"
               sizes="(max-width: 768px) 100vw, 33vw"
               src={column.featuredImage}
             />

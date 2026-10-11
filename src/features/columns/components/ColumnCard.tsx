@@ -22,10 +22,9 @@ export function ColumnCard({ column, variant = "default" }: ColumnCardProps) {
     return (
       <article className="group grid gap-6 p-5 lg:grid-cols-[1.2fr_1fr] lg:gap-10 lg:p-6">
         <Link className="block" href={href}>
-          <div className="relative aspect-[16/10] overflow-hidden bg-neutral-100">
+          <div className="relative aspect-[16/9] overflow-hidden bg-neutral-100">
             <ArticleImage
               alt={column.title}
-              className="transition-transform duration-500 group-hover:scale-105"
               sizes="(max-width: 768px) 100vw, 50vw"
               src={column.featuredImage}
             />
@@ -66,10 +65,9 @@ export function ColumnCard({ column, variant = "default" }: ColumnCardProps) {
   return (
     <article className="group flex h-full flex-col bg-white p-5">
       <Link className="block" href={href}>
-        <div className="relative aspect-[16/10] overflow-hidden bg-neutral-100">
+        <div className="relative aspect-[16/9] overflow-hidden bg-neutral-100">
           <ArticleImage
             alt={column.title}
-            className="transition-transform duration-500 group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, 33vw"
             src={column.featuredImage}
           />

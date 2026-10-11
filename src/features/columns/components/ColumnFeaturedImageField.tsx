@@ -68,7 +68,7 @@ export function ColumnFeaturedImageField({
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt=""
-            className="h-48 w-full object-cover"
+            className="aspect-[16/9] w-full object-cover"
             src={value}
           />
           <div className="flex gap-2 border-t border-neutral-200 bg-white p-3">
@@ -109,7 +109,7 @@ export function ColumnFeaturedImageField({
             void handleFile(event.dataTransfer.files?.[0]);
           }}
           className={cn(
-            "flex h-48 w-full flex-col items-center justify-center gap-2 border-2 border-dashed px-4 text-center transition-colors disabled:opacity-60",
+            "flex aspect-[16/9] w-full flex-col items-center justify-center gap-2 border-2 border-dashed px-4 text-center transition-colors disabled:opacity-60",
             dragOver
               ? "border-ink bg-neutral-50"
               : "border-neutral-300 hover:border-ink hover:bg-neutral-50",

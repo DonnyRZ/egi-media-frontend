@@ -23,7 +23,6 @@ function SeriesCover({
     <div className={`relative overflow-hidden bg-neutral-100 ${className ?? ""}`}>
       <ArticleImage
         alt={series.name}
-        className="transition-transform duration-500 group-hover:scale-105"
         sizes="(max-width: 768px) 100vw, 50vw"
         src={series.coverImage}
       />
@@ -40,7 +39,7 @@ export function SeriesCard({ series, variant = "default" }: SeriesCardProps) {
     return (
       <article className="group grid gap-6 border-b border-neutral-200 pb-8 lg:grid-cols-[1.2fr_1fr] lg:gap-10 lg:pb-10">
         <Link className="block" href={`/series/${series.slug}`}>
-          <SeriesCover className="aspect-[16/10]" series={series} />
+          <SeriesCover className="aspect-[16/9]" series={series} />
         </Link>
         <div className="flex flex-col justify-center">
           <div className="flex flex-wrap items-center gap-3">
@@ -79,7 +78,7 @@ export function SeriesCard({ series, variant = "default" }: SeriesCardProps) {
   return (
     <article className="group flex h-full flex-col bg-white p-5">
       <Link className="block" href={`/series/${series.slug}`}>
-        <SeriesCover className="aspect-[16/10]" series={series} />
+        <SeriesCover className="aspect-[16/9]" series={series} />
       </Link>
       <div className="flex flex-1 flex-col pt-4">
         <div className="flex flex-wrap items-center gap-3">

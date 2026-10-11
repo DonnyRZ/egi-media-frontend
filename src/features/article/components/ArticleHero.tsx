@@ -7,7 +7,7 @@ interface ArticleHeroProps {
 
 export function ArticleHero({ article }: ArticleHeroProps) {
   return (
-    <div className="relative mx-auto aspect-[16/10] w-full max-h-72 overflow-hidden bg-neutral-100 sm:max-h-80 lg:max-h-96">
+    <div className="relative mx-auto aspect-[16/9] w-full overflow-hidden bg-neutral-100">
       <ArticleImage
         alt={article.title}
         className="object-cover"

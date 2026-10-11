@@ -121,7 +121,7 @@ export function NativeAdSlot({
         className="group flex min-h-0 flex-1 flex-col outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
         onClick={handleClick}
       >
-        <div className="relative aspect-[16/10] w-full overflow-hidden bg-neutral-100">
+        <div className="relative aspect-[16/9] w-full shrink-0 overflow-hidden bg-neutral-100">
           <Image
             alt={ad.title}
             className={COVER_IMAGE_CLASS}

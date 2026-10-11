@@ -17,7 +17,6 @@ function BreakingCard({ article }: { article: Article }) {
       <div className="relative aspect-[16/9] overflow-hidden">
         <ArticleImage
           alt={article.title}
-          className="transition-transform duration-500 group-hover:scale-105"
           src={article.featuredImage}
         />
       </div>

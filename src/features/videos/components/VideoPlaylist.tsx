@@ -148,7 +148,7 @@ export function VideoGridCard({ video }: { video: YoutubeVideo }) {
         {video.thumbnailUrl ? (
           <Image
             alt={video.title}
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            className="object-cover"
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
             src={video.thumbnailUrl}

@@ -22,7 +22,6 @@ export function HeroFeaturedCard({ article }: HeroFeaturedCardProps) {
         <div className="relative aspect-[16/9] overflow-hidden">
           <ArticleImage
             alt={article.title}
-            className="transition-transform duration-500 group-hover:scale-105"
             priority
             sizes="(max-width: 1024px) 100vw, 66vw"
             src={article.featuredImage}

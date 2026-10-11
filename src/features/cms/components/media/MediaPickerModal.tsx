@@ -95,7 +95,7 @@ export function MediaPickerModal({
         </Field>
 
         {url.trim() ? (
-          <div className="relative h-40 w-full overflow-hidden rounded-lg border border-neutral-200 dark:border-neutral-800">
+          <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg border border-neutral-200 dark:border-neutral-800">
             <Image
               src={url}
               alt="Preview"

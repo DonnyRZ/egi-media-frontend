@@ -18,7 +18,7 @@ export function FeaturedImagePicker({ value, onChange }: FeaturedImagePickerProp
   return (
     <div>
       {value ? (
-        <div className="group relative h-44 w-full overflow-hidden rounded-lg border border-neutral-200 dark:border-neutral-800">
+        <div className="group relative aspect-[16/9] w-full overflow-hidden rounded-lg border border-neutral-200 dark:border-neutral-800">
           <Image
             src={value}
             alt="Featured"
@@ -39,7 +39,7 @@ export function FeaturedImagePicker({ value, onChange }: FeaturedImagePickerProp
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="flex h-44 w-full flex-col items-center justify-center gap-2 rounded-lg border-2 border-dashed border-neutral-300 text-neutral-400 transition-colors hover:border-accent hover:text-accent dark:border-neutral-700"
+          className="flex aspect-[16/9] w-full flex-col items-center justify-center gap-2 rounded-lg border-2 border-dashed border-neutral-300 text-neutral-400 transition-colors hover:border-accent hover:text-accent dark:border-neutral-700"
         >
           <Icons.media className="h-7 w-7" />
           <span className="text-sm font-medium">Set featured image</span>

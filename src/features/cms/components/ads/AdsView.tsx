@@ -91,7 +91,7 @@ export function AdsView() {
                         <img
                           src={ad.imageUrl}
                           alt=""
-                          className="h-10 w-16 rounded object-cover"
+                          className="aspect-[16/9] w-16 rounded object-cover"
                         />
                         <div className="min-w-0">
                           <p className="truncate font-medium text-neutral-900 dark:text-neutral-100">

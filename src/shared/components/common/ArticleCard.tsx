@@ -49,10 +49,9 @@ export function ArticleCard({ article, variant = "default", className }: Article
     return (
       <article className={cn("group grid gap-6 lg:grid-cols-[1.2fr_1fr] lg:gap-10", className)}>
         <Link href={getArticleHref(article)}>
-          <div className="relative aspect-[16/10] overflow-hidden">
+          <div className="relative aspect-[16/9] overflow-hidden">
             <ArticleImage
               alt={article.title}
-              className="transition-transform duration-500 group-hover:scale-105"
               priority
               sizes="(max-width: 1024px) 100vw, 58vw"
               src={article.featuredImage}
@@ -107,10 +106,9 @@ export function ArticleCard({ article, variant = "default", className }: Article
   return (
     <article className={cn("group flex h-full flex-col", className)}>
       <Link href={getArticleHref(article)}>
-        <div className="relative aspect-[16/10] overflow-hidden">
+        <div className="relative aspect-[16/9] overflow-hidden">
           <ArticleImage
             alt={article.title}
-            className="transition-transform duration-500 group-hover:scale-105"
             src={article.featuredImage}
           />
         </div>

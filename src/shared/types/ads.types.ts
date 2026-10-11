@@ -17,7 +17,7 @@ export const AD_PLACEMENT_GUIDELINES: Record<
   },
   IN_FEED: {
     label: "In-feed (category grid card)",
-    dimensions: "16:10 aspect (e.g. 800×500)",
+    dimensions: "16:9 aspect (e.g. 800×450)",
     tip: "Matches article card ratio. Keep text clear at card size.",
   },
   SIDEBAR_RECTANGLE: {

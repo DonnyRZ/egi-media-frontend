@@ -35,7 +35,7 @@ export function ContactMap() {
         />
 
         <div className="overflow-hidden border border-neutral-300 bg-white">
-          <div className="relative aspect-[16/10] w-full sm:aspect-[21/9]">
+          <div className="relative aspect-[16/9] w-full">
             <iframe
               allowFullScreen
               className="absolute inset-0 h-full w-full border-0"

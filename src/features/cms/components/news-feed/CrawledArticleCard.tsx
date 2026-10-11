@@ -20,14 +20,14 @@ function ArticleThumbnail({ src, title }: { src: string | null; title: string })
   const showImage = Boolean(src) && !imageError;
 
   return (
-    <div className="relative aspect-[16/10] overflow-hidden rounded-lg bg-neutral-100 dark:bg-neutral-800">
+    <div className="relative aspect-[16/9] overflow-hidden rounded-lg bg-neutral-100 dark:bg-neutral-800">
       {showImage ? (
         // External crawl thumbnails — plain img avoids next/image remote allowlist.
         // eslint-disable-next-line @next/next/no-img-element
         <img
           src={src!}
           alt={title}
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="h-full w-full object-cover"
           onError={() => setImageError(true)}
         />
       ) : (

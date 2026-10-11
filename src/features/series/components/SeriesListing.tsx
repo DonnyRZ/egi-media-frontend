@@ -30,7 +30,7 @@ function SeriesSkeleton() {
                 key={cardIndex}
                 className="w-60 shrink-0 space-y-3 border border-neutral-200 p-5"
               >
-                <Skeleton className="aspect-[16/10] w-full" />
+                <Skeleton className="aspect-[16/9] w-full" />
                 <Skeleton className="h-3 w-20" />
                 <Skeleton className="h-6 w-3/4" />
                 <Skeleton className="h-4 w-full" />

@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
+import { useForm, type FieldErrors } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Card, CardBody } from "@/features/cms/components/ui/Card";
@@ -44,6 +44,14 @@ interface ArticleFormProps {
   defaultValues: ArticleFormValues;
 }
 
+const FIELD_LABELS: Record<keyof ArticleFormValues, string> = {
+  title: "Indonesian title", summary: "Indonesian summary", content: "Indonesian content",
+  titleEn: "English title", summaryEn: "English summary", contentEn: "English content",
+  titleUz: "Uzbek title", summaryUz: "Uzbek summary", contentUz: "Uzbek content",
+  featuredImage: "Featured image", categoryId: "Category", seriesId: "Series",
+  topicId: "Topic", tagIds: "Tags", placements: "Placement", headlinePosition: "Headline position",
+};
+
 export function ArticleForm({
   mode,
   articleId,
@@ -55,6 +63,10 @@ export function ArticleForm({
   const { canPublish } = usePermissions();
   const { create, update, changeStatus, updatePlacements } = useArticleMutations();
   const [scheduleOpen, setScheduleOpen] = useState(false);
+  const submitLock = useRef(false);
+  const [saveFeedback, setSaveFeedback] = useState<{
+    tone: "success" | "error"; message: string;
+  } | null>(null);
 
   const categories = useCmsCategories();
   const topics = useCmsTopics();
@@ -69,13 +81,14 @@ export function ArticleForm({
     setError,
     setValue,
     getValues,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<ArticleFormValues>({
     resolver: zodResolver(articleFormSchema),
     defaultValues,
   });
 
-  const saving = create.isPending || update.isPending || changeStatus.isPending;
+  const saving = isSubmitting || create.isPending || update.isPending ||
+    changeStatus.isPending || updatePlacements.isPending;
   const title = watch("title");
 
   function buildTranslations(
@@ -167,21 +180,39 @@ export function ArticleForm({
       const message = missing[key];
       if (message) setError(key, { type: "manual", message });
     }
-    toast.error("Fill Indonesian title and content before continuing.");
+    const message = "Fill Indonesian title and content before continuing.";
+    setSaveFeedback({ tone: "error", message });
+    toast.error(message);
     return false;
   }
 
+  function reportValidationErrors(validationErrors: FieldErrors<ArticleFormValues>) {
+    const details = (Object.keys(validationErrors) as (keyof ArticleFormValues)[])
+      .map((key) => `${FIELD_LABELS[key] ?? key}: ${validationErrors[key]?.message ?? "Check this field"}`);
+    const message = `Not saved. ${details.join("; ")}`;
+    setSaveFeedback({ tone: "error", message });
+    toast.error(message);
+  }
+
   function run(nextStatus: ArticleStatus | undefined, message: string, toList: boolean, publishedAt?: string) {
+    if (saving || submitLock.current) return;
+    setSaveFeedback(null);
     if (!requireIndonesianContent(nextStatus)) return;
+    submitLock.current = true;
     return handleSubmit(async (values) => {
       try {
         const id = await persist(values, nextStatus, publishedAt);
+        setSaveFeedback({ tone: "success", message });
         toast.success(message);
         router.push(toList ? "/cms/articles" : `/cms/articles/${id}`);
       } catch (error) {
-        toast.error(error instanceof ApiError ? error.message : "Something went wrong");
+        const message = error instanceof ApiError ? error.message : "Could not complete save. Please try again.";
+        setSaveFeedback({ tone: "error", message });
+        toast.error(message);
       }
-    })();
+    }, reportValidationErrors)().finally(() => {
+      submitLock.current = false;
+    });
   }
 
   return (
@@ -205,7 +236,8 @@ export function ArticleForm({
           status={status}
           canPublish={canPublish}
           saving={saving}
-          onSave={() => run(undefined, "Draft saved", false)}
+          feedback={saveFeedback}
+          onSave={() => run(undefined, mode === "edit" ? "Article updated" : "Draft saved", false)}
           onSubmitReview={() => run("review", "Submitted for review", true)}
           onPublish={() =>
             run(
@@ -221,6 +253,7 @@ export function ArticleForm({
 
         <ArticleSettingsSidebar
           control={control}
+          errors={errors}
           setValue={setValue}
           categories={toCategoryOptions(categories.data ?? [])}
           series={toSeriesOptions(series.data ?? [])}

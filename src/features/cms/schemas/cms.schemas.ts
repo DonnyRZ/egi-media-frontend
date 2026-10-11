@@ -17,11 +17,13 @@ export const articleFormSchema = z.object({
     }),
   // Optional English translation. Title + content must be filled together.
   titleEn: z.string().trim().max(255).optional(),
-  summaryEn: z.string().trim().max(500).optional(),
+  // Translation length can expand beyond the Indonesian editorial limit.
+  // Match the backend's optional text field so existing AI output stays editable.
+  summaryEn: z.string().trim().optional(),
   contentEn: z.string().optional(),
   // Optional Uzbek translation.
   titleUz: z.string().trim().max(255).optional(),
-  summaryUz: z.string().trim().max(500).optional(),
+  summaryUz: z.string().trim().optional(),
   contentUz: z.string().optional(),
   featuredImage: optionalUrl,
   categoryId: z.string().optional(),

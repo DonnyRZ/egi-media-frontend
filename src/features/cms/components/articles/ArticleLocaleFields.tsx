@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Controller,
+  useWatch,
   type Control,
   type FieldErrors,
   type UseFormRegister,
@@ -52,6 +53,18 @@ export function ArticleLocaleFields({
   const overrideNames = OVERRIDE_FIELDS[overrideLocale];
   const titleError = errors.title?.message as string | undefined;
   const contentError = errors.content?.message as string | undefined;
+  const summaryError = errors.summary?.message;
+  const summary = useWatch({ control, name: "summary" }) ?? "";
+
+  useEffect(() => {
+    if (errors.titleEn || errors.summaryEn || errors.contentEn) {
+      setShowOverrides(true);
+      setOverrideLocale("en");
+    } else if (errors.titleUz || errors.summaryUz || errors.contentUz) {
+      setShowOverrides(true);
+      setOverrideLocale("uz");
+    }
+  }, [errors]);
 
   return (
     <div className="space-y-4">
@@ -74,10 +87,11 @@ export function ArticleLocaleFields({
         <span className="italic">(final slug generated on save)</span>
       </p>
 
-      <Field label="Summary" htmlFor="summary-id">
+      <Field label="Summary" htmlFor="summary-id" error={summaryError} hint={`${summary.length}/500 characters for the Indonesian summary.`}>
         <Textarea
           id="summary-id"
           placeholder="A short standfirst shown in listings"
+          invalid={Boolean(summaryError)}
           {...register("summary")}
         />
       </Field>
@@ -129,23 +143,25 @@ export function ArticleLocaleFields({
               ))}
             </div>
 
-            <Field label="Title" htmlFor={`title-${overrideLocale}`}>
+            <Field label="Title" htmlFor={`title-${overrideLocale}`} error={errors[overrideNames.title]?.message as string | undefined}>
               <Input
                 id={`title-${overrideLocale}`}
                 placeholder="Optional override headline"
+                invalid={Boolean(errors[overrideNames.title])}
                 {...register(overrideNames.title)}
               />
             </Field>
 
-            <Field label="Summary" htmlFor={`summary-${overrideLocale}`}>
+            <Field label="Summary" htmlFor={`summary-${overrideLocale}`} error={errors[overrideNames.summary]?.message as string | undefined}>
               <Textarea
                 id={`summary-${overrideLocale}`}
                 placeholder="Optional override summary"
+                invalid={Boolean(errors[overrideNames.summary])}
                 {...register(overrideNames.summary)}
               />
             </Field>
 
-            <Field label="Content">
+            <Field label="Content" error={errors[overrideNames.content]?.message as string | undefined}>
               <Controller
                 control={control}
                 name={overrideNames.content}
@@ -153,6 +169,7 @@ export function ArticleLocaleFields({
                   <RichTextEditor
                     value={(field.value as string) ?? ""}
                     onChange={field.onChange}
+                    invalid={Boolean(errors[overrideNames.content])}
                   />
                 )}
               />

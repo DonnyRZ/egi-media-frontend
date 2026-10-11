@@ -11,6 +11,7 @@ interface ArticleActionBarProps {
   status: ArticleStatus;
   canPublish: boolean;
   saving: boolean;
+  feedback?: { tone: "success" | "error"; message: string } | null;
   onSave: () => void;
   onSubmitReview: () => void;
   onPublish: () => void;
@@ -23,6 +24,7 @@ export function ArticleActionBar({
   status,
   canPublish,
   saving,
+  feedback,
   onSave,
   onSubmitReview,
   onPublish,
@@ -43,30 +45,43 @@ export function ArticleActionBar({
         action={mode === "edit" ? <StatusBadge status={status} /> : undefined}
       />
       <CardBody className="space-y-2">
-        <Button className="w-full" variant="secondary" onClick={onSave} loading={saving}>
-          Save draft
+        <Button type="button" className="w-full" variant="secondary" onClick={onSave} loading={saving}>
+          {mode === "edit" && status === "published"
+            ? "Update article"
+            : mode === "edit" && status !== "draft"
+              ? "Save changes"
+              : "Save draft"}
         </Button>
 
+        {feedback ? (
+          <p
+            role={feedback.tone === "error" ? "alert" : "status"}
+            className={feedback.tone === "error" ? "text-sm text-error" : "text-sm text-emerald-600 dark:text-emerald-400"}
+          >
+            {feedback.message}
+          </p>
+        ) : null}
+
         {show("review") ? (
-          <Button className="w-full" variant="secondary" onClick={onSubmitReview}>
+          <Button type="button" className="w-full" variant="secondary" onClick={onSubmitReview} disabled={saving}>
             Submit for review
           </Button>
         ) : null}
 
         {show("scheduled") ? (
-          <Button className="w-full" variant="secondary" onClick={onSchedule}>
+          <Button type="button" className="w-full" variant="secondary" onClick={onSchedule} disabled={saving}>
             Schedule
           </Button>
         ) : null}
 
         {canPublish && show("published") ? (
-          <Button className="w-full" onClick={onPublish}>
+          <Button type="button" className="w-full" onClick={onPublish} disabled={saving}>
             Publish now
           </Button>
         ) : null}
 
         {show("archived") ? (
-          <Button className="w-full" variant="ghost" onClick={onArchive}>
+          <Button type="button" className="w-full" variant="ghost" onClick={onArchive} disabled={saving}>
             Archive
           </Button>
         ) : null}

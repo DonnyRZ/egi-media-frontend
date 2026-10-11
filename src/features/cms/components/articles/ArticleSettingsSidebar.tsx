@@ -1,6 +1,6 @@
 "use client";
 
-import { Controller, useWatch, type Control, type UseFormSetValue } from "react-hook-form";
+import { Controller, useWatch, type Control, type FieldErrors, type UseFormSetValue } from "react-hook-form";
 
 import { PlacementCheckboxes } from "@/features/cms/components/articles/PlacementCheckboxes";
 import { Card, CardBody, CardHeader } from "@/features/cms/components/ui/Card";
@@ -17,6 +17,7 @@ import type { ArticleFormValues } from "@/features/cms/schemas/cms.schemas";
 
 interface ArticleSettingsSidebarProps {
   control: Control<ArticleFormValues>;
+  errors: FieldErrors<ArticleFormValues>;
   setValue: UseFormSetValue<ArticleFormValues>;
   categories: Option[];
   series: SeriesOption[];
@@ -26,6 +27,7 @@ interface ArticleSettingsSidebarProps {
 
 export function ArticleSettingsSidebar({
   control,
+  errors,
   setValue,
   categories,
   series,
@@ -54,6 +56,7 @@ export function ArticleSettingsSidebar({
         <CardBody>
           <Field
             label="Where this article appears"
+            error={errors.headlinePosition?.message ?? errors.placements?.message}
             hint="Independent of Draft / Published status. Latest News is selected by default."
           >
             <Controller
@@ -78,7 +81,7 @@ export function ArticleSettingsSidebar({
       <Card>
         <CardHeader title="Organize" />
         <CardBody className="space-y-5">
-          <Field label="Featured image">
+          <Field label="Featured image" error={errors.featuredImage?.message}>
             <Controller
               control={control}
               name="featuredImage"

@@ -4,7 +4,6 @@ import { HomepageSectionNotice } from "@/features/homepage/components/HomepageSe
 import { useTranslations } from "next-intl";
 
 import { Link } from "@/i18n/navigation";
-import { GridFillers } from "@/shared/components/common/GridFillers";
 import { FrameHeading } from "@/shared/components/layout/FrameHeading";
 import { FrameModule } from "@/shared/components/layout/FrameModule";
 import { ErrorState } from "@/shared/components/common/ErrorState";
@@ -55,7 +54,7 @@ export function EditorsPickSection() {
       />
 
       {isLoading ? (
-        <div className="grid gap-px bg-neutral-200 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-px bg-neutral-200">
           {Array.from({ length: 6 }).map((_, index) => (
             <div key={index} className="flex gap-4 bg-white p-5">
               <Skeleton className="h-8 w-6" />
@@ -76,11 +75,10 @@ export function EditorsPickSection() {
       ) : null}
 
       {!isLoading && !isError && data?.items.length ? (
-        <div className="grid gap-px bg-neutral-200 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-px bg-neutral-200">
           {data.items.map((article, index) => (
             <RankedItem key={article.id} article={article} rank={index + 1} />
           ))}
-          <GridFillers count={data.items.length} lgCols={2} />
         </div>
       ) : null}
     </FrameModule>

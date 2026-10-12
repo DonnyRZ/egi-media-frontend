@@ -21,9 +21,6 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
       <h1 className="mt-3 font-sans text-[30px] font-bold leading-tight tracking-tight text-ink sm:text-4xl lg:text-[44px]">
         {article.title}
       </h1>
-      {article.summary ? (
-        <p className="mt-4 max-w-3xl text-base leading-7 text-neutral-700 lg:text-lg lg:leading-8">{article.summary}</p>
-      ) : null}
       <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-neutral-500">
         <span className="font-semibold text-neutral-800">{article.author.fullName}</span>
         {article.publishedAt ? (

@@ -4,6 +4,7 @@ import { HomepageSectionNotice } from "@/features/homepage/components/HomepageSe
 import { useTranslations } from "next-intl";
 
 import { NativeAdSlot } from "@/features/ads/components/NativeAdSlot";
+import { useActiveAd } from "@/features/ads/hooks/useActiveAd";
 import { useCategoryNews } from "@/features/homepage/hooks/useCategoryNews";
 import { Link } from "@/i18n/navigation";
 import { ArticleCard } from "@/shared/components/common/ArticleCard";
@@ -12,6 +13,7 @@ import { GridFillers } from "@/shared/components/common/GridFillers";
 import { FrameHeading } from "@/shared/components/layout/FrameHeading";
 import { FrameModule } from "@/shared/components/layout/FrameModule";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
+import { cn } from "@/shared/lib/cn";
 import type { CategoryNewsGroup } from "@/shared/types/category.types";
 
 function CategoryColumn({ group }: { group: CategoryNewsGroup }) {
@@ -43,7 +45,15 @@ function CategoryColumn({ group }: { group: CategoryNewsGroup }) {
 
 export function CategoryNewsSection() {
   const { data, isLoading, isError, error, refetch, sectionFailed } = useCategoryNews();
+  const { data: inFeedAd } = useActiveAd("IN_FEED");
   const t = useTranslations("categories");
+  const itemCount = (data?.length ?? 0) + Number(Boolean(inFeedAd));
+  const gridColumns =
+    itemCount === 1
+      ? "grid-cols-1"
+      : itemCount === 2
+        ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-2"
+        : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3";
 
   if (!isLoading && !isError && !sectionFailed && !data?.length) {
     return null;
@@ -79,12 +89,14 @@ export function CategoryNewsSection() {
       ) : null}
 
       {!isLoading && !isError && data?.length ? (
-        <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
+        <div className={cn("grid gap-px bg-neutral-200", gridColumns)}>
           {data.map((group) => (
             <CategoryColumn key={group.category.id} group={group} />
           ))}
-          <NativeAdSlot className="border-0" placement="IN_FEED" />
-          <GridFillers count={data.length + 1} />
+          {inFeedAd ? (
+            <NativeAdSlot className="border-0" placement="IN_FEED" />
+          ) : null}
+          {itemCount >= 3 ? <GridFillers count={itemCount} /> : null}
         </div>
       ) : null}
     </FrameModule>

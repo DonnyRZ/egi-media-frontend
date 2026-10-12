@@ -9,6 +9,7 @@ import {
 } from "@/features/categories/components/DeskSections";
 import { ArticleCard, ArticleMeta } from "@/shared/components/common/ArticleCard";
 import { ArticleImage } from "@/shared/components/common/ArticleImage";
+import { AdaptiveCardGrid } from "@/shared/components/common/AdaptiveCardGrid";
 import { ArticleTimeline } from "@/shared/components/common/ArticleTimeline";
 import { EmptyState } from "@/shared/components/common/EmptyState";
 import { ErrorState } from "@/shared/components/common/ErrorState";
@@ -226,10 +227,12 @@ export function CategoryLatestGrid({ articles }: { articles: Article[] }) {
           <p className="mt-1 text-sm text-neutral-600">{t("subtitle")}</p>
         </div>
       </header>
-      <div className="grid gap-px border-t border-neutral-200 bg-neutral-200 sm:grid-cols-2 xl:grid-cols-3">
-        {articles.slice(0, 6).map((article) => (
-          <CategoryLatestCard key={article.id} article={article} />
-        ))}
+      <div className="border-t border-neutral-200">
+        <AdaptiveCardGrid
+          items={articles.slice(0, 6)}
+          keyForItem={(article) => article.id}
+          renderItem={(article) => <CategoryLatestCard article={article} />}
+        />
       </div>
     </section>
   );

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 
+import { ArticleActionIcon } from "@/features/article/components/ArticleActionIcon";
 import { trackArticleShare } from "@/shared/repositories/article.repository";
 import { cn } from "@/shared/lib/cn";
 import type { SharePlatform } from "@/shared/types/article.types";
@@ -64,24 +65,39 @@ export function ArticleShareBar({
 
   return (
     <div>
-      <div className="flex flex-wrap gap-2">
-        {SHARE_ACTIONS.map((action) => (
-          <button
-            key={action.platform}
-            className={cn(
-              "min-h-11 border border-neutral-300 bg-white px-3 py-2 text-xs font-semibold uppercase tracking-wide text-neutral-700 transition-colors hover:border-ink hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 disabled:opacity-60",
-              action.platform === "copy_link" && copied && "border-accent text-accent",
-            )}
-            disabled={pending === action.platform}
-            onClick={() => void handleShare(action.platform)}
-            type="button"
-          >
-            {action.platform === "copy_link" && copied
+      <div
+        aria-label={t("shareTitle")}
+        className="flex flex-wrap gap-2"
+        role="group"
+      >
+        {SHARE_ACTIONS.map((action) => {
+          const label =
+            action.platform === "copy_link" && copied
               ? t("linkCopied")
-              : t(action.labelKey)}
-          </button>
-        ))}
+              : t(action.labelKey);
+
+          return (
+            <button
+              key={action.platform}
+              aria-label={label}
+              className={cn(
+                "inline-flex h-11 w-11 items-center justify-center border border-neutral-300 bg-white p-0 text-neutral-700 transition-colors hover:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 disabled:opacity-60",
+                action.platform === "copy_link" &&
+                  copied &&
+                  "border-accent bg-accent/5",
+              )}
+              disabled={pending === action.platform}
+              onClick={() => void handleShare(action.platform)}
+              type="button"
+            >
+              <ArticleActionIcon name={action.platform} />
+            </button>
+          );
+        })}
       </div>
+      <span aria-live="polite" className="sr-only" role="status">
+        {copied ? t("linkCopied") : ""}
+      </span>
     </div>
   );
 }

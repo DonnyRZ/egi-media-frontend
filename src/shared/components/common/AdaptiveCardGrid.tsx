@@ -1,5 +1,6 @@
 import { Fragment, type ReactNode } from "react";
 
+import { GridFillers } from "@/shared/components/common/GridFillers";
 import { cn } from "@/shared/lib/cn";
 
 interface AdaptiveCardGridProps<T> {
@@ -60,6 +61,7 @@ export function AdaptiveCardGrid<T>({
       {items.map((item) => (
         <Fragment key={keyForItem(item)}>{renderItem(item)}</Fragment>
       ))}
+      <GridFillers count={items.length} lgCols={maxCols} />
     </div>
   );
 }

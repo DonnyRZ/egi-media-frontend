@@ -18,6 +18,7 @@ import { AuthUserMenu, AuthMobileActions } from "@/features/auth/components/Auth
 import { useAuthStore } from "@/features/auth/stores/auth.store";
 import { NotificationBell } from "@/features/notifications/components/NotificationBell";
 import { LanguageSwitcher } from "@/features/language/components/LanguageSwitcher";
+import { useEditorialNavigation } from "@/features/header/hooks/useEditorialNavigation";
 import { useScrollHeaderVisibility } from "@/features/header/hooks/useScrollHeaderVisibility";
 import { useClock } from "@/features/world-clock/hooks/useClock";
 import { WORLD_CLOCK_CITIES } from "@/features/world-clock/constants/world-clock.constants";
@@ -158,14 +159,16 @@ function HeaderClockStrip() {
 
 function Masthead() {
   const t = useTranslations("header");
-  const { isSearchOpen, toggleMobileMenu, setSearchOpen } = useUiStore();
+  const { isSearchOpen, isMobileMenuOpen, toggleMobileMenu, setSearchOpen } = useUiStore();
 
   return (
     <div className="flex h-16 items-center justify-between gap-2 lg:h-20 lg:gap-4">
       <div className="flex shrink-0 items-center gap-2">
         <button
           aria-label={t("toggleMenu")}
-          className="rounded p-1.5 text-white hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 lg:hidden"
+          aria-expanded={isMobileMenuOpen}
+          aria-controls="egi-mobile-navigation"
+          className="min-h-11 min-w-11 rounded p-1.5 text-white hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 lg:hidden"
           onClick={toggleMobileMenu}
           type="button"
         >
@@ -190,7 +193,7 @@ function Masthead() {
         <button
           aria-expanded={isSearchOpen}
           aria-label={t("toggleSearch")}
-          className="rounded p-1.5 text-white hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+          className="min-h-11 min-w-11 rounded p-1.5 text-white hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
           onClick={() => setSearchOpen(!isSearchOpen)}
           type="button"
         >
@@ -214,6 +217,7 @@ function Masthead() {
 }
 
 function DesktopNav() {
+  const isActive=useEditorialNavigation();
   const t = useTranslations("header");
   const navRef = useRef<HTMLElement>(null);
   const measureRef = useRef<HTMLUListElement>(null);
@@ -328,7 +332,8 @@ function DesktopNav() {
         {visibleItems.map((item) => (
           <li key={item.href} className="shrink-0">
             <Link
-              className="inline-block border-b-2 border-transparent py-3 text-xs font-semibold uppercase tracking-wide text-neutral-300 transition-colors hover:border-accent hover:text-white"
+              className="inline-block border-b-2 border-transparent py-3 text-xs font-semibold uppercase tracking-wide text-neutral-300 transition-colors hover:border-accent hover:text-white aria-[current=page]:border-accent aria-[current=page]:text-white"
+              aria-current={isActive(item.href)?"page":undefined}
               href={item.href}
             >
               {t(`nav.${item.key}`)}
@@ -364,7 +369,8 @@ function DesktopNav() {
                 {overflowItems.map((item) => (
                   <Link
                     className="block px-4 py-2 text-xs font-semibold uppercase tracking-wide text-neutral-300 transition-colors hover:bg-white/10 hover:text-white"
-                    href={item.href}
+                    aria-current={isActive(item.href)?"page":undefined}
+              href={item.href}
                     key={item.href}
                     onClick={() => setIsMoreOpen(false)}
                     role="menuitem"
@@ -398,14 +404,17 @@ function NavRow() {
 }
 
 function MobileNav() {
+  const isActive=useEditorialNavigation();
   const t = useTranslations("header");
   const { isMobileMenuOpen, setMobileMenuOpen } = useUiStore();
+  useEffect(()=>{if(!isMobileMenuOpen)return;const close=(e:KeyboardEvent)=>{if(e.key==='Escape'){setMobileMenuOpen(false);document.querySelector<HTMLButtonElement>('[aria-controls="egi-mobile-navigation"]')?.focus();}};document.addEventListener('keydown',close);return()=>document.removeEventListener('keydown',close);},[isMobileMenuOpen,setMobileMenuOpen]);
   const isHydrated = useAuthStore((state) => state.isHydrated);
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const showTopicPreferences = !isHydrated || !isAuthenticated;
 
   return (
     <nav
+      id="egi-mobile-navigation"
       aria-label={t("navMobile")}
       className={cn(
         "border-t border-neutral-800 py-4 lg:hidden",
@@ -417,6 +426,7 @@ function MobileNav() {
           <li key={item.href}>
             <Link
               className="block py-2 text-sm font-semibold uppercase tracking-wide text-neutral-200"
+              aria-current={isActive(item.href)?"page":undefined}
               href={item.href}
               onClick={() => setMobileMenuOpen(false)}
             >
@@ -516,7 +526,7 @@ function SearchBar() {
         </button>
         <button
           aria-label={t("searchClose")}
-          className="shrink-0 rounded p-2 text-neutral-400 transition-colors hover:bg-white/10 hover:text-white"
+          className="min-h-11 min-w-11 shrink-0 rounded p-2 text-neutral-400 transition-colors hover:bg-white/10 hover:text-white"
           onClick={() => setSearchOpen(false)}
           type="button"
         >

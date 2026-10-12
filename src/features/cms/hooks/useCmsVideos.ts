@@ -28,7 +28,7 @@ export function useCmsVideos(params: CmsVideosParams) {
 export function useVideoMutations() {
   const queryClient = useQueryClient();
   const invalidate = () =>
-    queryClient.invalidateQueries({ queryKey: CMS_QUERY_KEYS.videos.all });
+    queryClient.invalidateQueries();
 
   const save = useMutation({
     mutationFn: ({

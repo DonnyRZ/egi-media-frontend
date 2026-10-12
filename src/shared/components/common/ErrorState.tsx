@@ -8,23 +8,25 @@ interface ErrorStateProps {
   message?: string;
   onRetry?: () => void;
   className?: string;
+  tone?: "light" | "dark";
 }
 
-export function ErrorState({ title, message, onRetry, className }: ErrorStateProps) {
+export function ErrorState({ title, message, onRetry, className, tone = "light" }: ErrorStateProps) {
   const t = useTranslations();
 
   return (
     <div
       role="alert"
       className={cn(
-        "border border-error/20 bg-white p-6 text-center shadow-sm",
+        "border p-6 text-center",
+        tone === "dark" ? "border-white/25 bg-white/5" : "border-error/20 bg-white",
         className,
       )}
     >
-      <h3 className="text-lg font-semibold text-neutral-900">
+      <h3 className={cn("text-lg font-semibold",tone === "dark" ? "text-white" : "text-neutral-900")}>
         {title ?? t("states.errorTitle")}
       </h3>
-      <p className="mt-2 text-sm text-neutral-500">
+      <p className={cn("mt-2 text-sm",tone === "dark" ? "text-neutral-300" : "text-neutral-500")}>
         {message ?? t("states.errorMessage")}
       </p>
       {onRetry ? (

@@ -1,6 +1,5 @@
 import { Fragment, type ReactNode } from "react";
 
-import { GridFillers } from "@/shared/components/common/GridFillers";
 import { cn } from "@/shared/lib/cn";
 
 interface AdaptiveCardGridProps<T> {
@@ -33,19 +32,7 @@ export function AdaptiveCardGrid<T>({
 }: AdaptiveCardGridProps<T>) {
   if (items.length === 0) return null;
 
-  if (items.length === 1) {
-    return (
-      <div
-        className={cn(
-          "grid grid-cols-1 sm:grid-cols-2",
-          maxCols === 3 && "lg:grid-cols-3",
-          className,
-        )}
-      >
-        {renderItem(items[0])}
-      </div>
-    );
-  }
+  if (items.length === 1) return <div className={cn("mx-auto w-full max-w-[560px]",className)}>{renderItem(items[0])}</div>;
 
   if (items.length === 2) {
     return (
@@ -73,7 +60,6 @@ export function AdaptiveCardGrid<T>({
       {items.map((item) => (
         <Fragment key={keyForItem(item)}>{renderItem(item)}</Fragment>
       ))}
-      <GridFillers count={items.length} lgCols={maxCols} />
     </div>
   );
 }

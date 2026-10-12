@@ -1,9 +1,11 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { VideoMetadataFields } from "@/features/cms/components/videos/VideoMetadataFields";
+import Link from "next/link";
 import { Button } from "@/features/cms/components/ui/Button";
 import { Field } from "@/features/cms/components/ui/Field";
 import { Input } from "@/features/cms/components/ui/Input";
@@ -25,6 +27,8 @@ interface VideoFormModalProps {
 }
 
 const EMPTY: VideoFormValues = {
+  format: "horizontal",
+  posterLandscape:"",posterPortrait:"",categoryId:"",programId:"",durationSeconds:null,episodeNumber:null,
   title: "",
   description: "",
   url: "",
@@ -51,13 +55,17 @@ export function VideoFormModal({
     defaultValues: EMPTY,
   });
 
+  const [uploadBusy, setUploadBusy] = useState<Record<string, boolean>>({});
   const isActive = watch("isActive");
 
   useEffect(() => {
     if (!open) return;
+    setUploadBusy({});
     reset(
       video
         ? {
+            format:video.format || "horizontal", posterLandscape:video.posterLandscape||"",posterPortrait:video.posterPortrait||"",
+            categoryId:video.categoryId||"",programId:video.programId||"",durationSeconds:video.durationSeconds||null,episodeNumber:video.episodeNumber||null,
             title: video.title,
             description: video.description ?? "",
             url: video.url,
@@ -77,7 +85,7 @@ export function VideoFormModal({
           <Button variant="secondary" onClick={onClose} disabled={saving}>
             Cancel
           </Button>
-          <Button onClick={handleSubmit(onSubmit)} loading={saving}>
+          <Button onClick={handleSubmit(onSubmit)} loading={saving} disabled={Object.values(uploadBusy).some(Boolean)}>
             {video ? "Save changes" : "Add video"}
           </Button>
         </>
@@ -93,12 +101,14 @@ export function VideoFormModal({
             type="url"
             placeholder="https://www.youtube.com/watch?v=…"
             invalid={Boolean(errors.url)}
-            {...register("url")}
+            {...register("url", {onChange:(e)=>{if(!video&&String(e.target.value).includes("/shorts/"))setValue("format","short");}})}
           />
         </Field>
         <Field label="Description" htmlFor="video-desc" error={errors.description?.message}>
           <Textarea id="video-desc" {...register("description")} />
         </Field>
+        <VideoMetadataFields onUploadBusyChange={(key,busy)=>setUploadBusy(v=>({...v,[key]:busy}))} register={register} values={watch()} setValue={setValue} errors={errors}/>
+        {video?.status === "published" ? <Link className="text-sm underline" href={`/id/videos/watch/${video.id}`} target="_blank">View published video →</Link> : null}
         {canActivate ? (
           <label className="flex items-center gap-2 text-sm text-neutral-700 dark:text-neutral-300">
             <input

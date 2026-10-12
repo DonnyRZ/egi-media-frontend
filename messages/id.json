@@ -59,7 +59,7 @@
     "saved": "Tersimpan",
     "forYou": "Untuk Anda",
     "signIn": "Masuk",
-    "subscribe": "Berlangganan",
+    "subscribe": "Preferensi Topik",
     "toggleMenu": "Buka menu",
     "toggleSearch": "Buka pencarian",
     "searchLabel": "Cari artikel",
@@ -1142,5 +1142,28 @@
       "agreedBy": "Disepakati oleh organisasi wartawan dan organisasi perusahaan pers (AJI, PWI, IJTI, ATVLI, ATVSI, SPS, PRSSNI).",
       "acknowledgedBy": "Mengetahui: Bagir Manan — Ketua Dewan Pers."
     }
+  },
+  "editorial": {
+    "previous": "Sebelumnya",
+    "next": "Berikutnya",
+    "watch": "Tonton",
+    "latestVideos": "Video terbaru",
+    "nextVideos": "Tonton berikutnya",
+    "episodes": "Episode",
+    "noVideos": "Belum ada video yang diterbitkan.",
+    "latest": "Baca berita terbaru",
+    "editors": "Pilihan Editor",
+    "more": "Berita lainnya",
+    "topics": "Topik",
+    "search": "Cari berita",
+    "searchSubmit": "Cari",
+    "headline": "Berita Terbaru",
+    "categories": "Kategori",
+    "series": "Seri",
+    "columns": "Kolom",
+    "saved": "Tersimpan",
+    "forYou": "Untuk Anda",
+    "noTopics": "Topik belum tersedia. Anda tetap dapat membaca berita terbaru.",
+    "moreColumns": "Tulisan lain dari penulis"
   }
 }

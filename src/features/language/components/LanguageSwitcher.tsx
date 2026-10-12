@@ -80,12 +80,12 @@ export function LanguageSwitcher() {
         aria-expanded={isOpen}
         aria-haspopup="menu"
         aria-label={t("language")}
-        className="flex items-center gap-1.5 rounded p-2 text-neutral-300 hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+        className="flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded p-2 text-neutral-300 hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
         onClick={() => setIsOpen((previous) => !previous)}
         type="button"
       >
         <GlobeIcon />
-        <span className="text-xs font-bold uppercase tracking-wide">
+        <span className="hidden text-xs font-bold uppercase tracking-wide min-[360px]:inline">
           {active.code}
         </span>
       </button>
@@ -99,7 +99,7 @@ export function LanguageSwitcher() {
             <li key={option.locale} role="none">
               <Link
                 className={cn(
-                  "flex items-center justify-between px-4 py-2 text-sm hover:bg-neutral-100",
+                  "flex min-h-11 items-center justify-between px-4 py-2 text-sm hover:bg-neutral-100",
                   option.locale === locale
                     ? "font-semibold text-accent"
                     : "text-neutral-700",

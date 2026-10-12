@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 
 import { PageHeader } from "@/features/cms/components/layout/PageHeader";
@@ -37,6 +38,7 @@ export function VideosView() {
   const toast = useToast();
   const { canManageVideos, isElevated } = usePermissions();
   const currentUserId = useAuthStore((state) => state.user?.id ?? null);
+  const [publishedId, setPublishedId] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [formOpen, setFormOpen] = useState(false);
@@ -54,15 +56,14 @@ export function VideosView() {
 
   async function submit(values: VideoFormValues) {
     try {
-      await save.mutateAsync({
+      const result = await save.mutateAsync({
         id: editing?.id,
         payload: {
-          title: values.title,
-          description: values.description,
-          url: values.url,
+          ...values,
           isActive: canManageVideos ? values.isActive : false,
         },
       });
+      setPublishedId(result.status === "published" ? result.id : null);
       toast.success(
         editing
           ? "Video updated"
@@ -93,7 +94,7 @@ export function VideosView() {
     <>
       <PageHeader
         title="Videos"
-        description="Manage featured YouTube videos shown on the EGI Media homepage."
+        description="Manage horizontal videos, Shorts, program episodes and their publication status."
         actions={
           <Button
             onClick={() => {
@@ -121,6 +122,7 @@ export function VideosView() {
         </div>
       </div>
 
+      {publishedId ? <p role="status" className="my-4"><Link className="underline" href={`/id/videos/watch/${publishedId}`} target="_blank">View published video →</Link></p> : null}
       <Card>
         {isLoading ? (
           <LoadingState />
@@ -164,6 +166,7 @@ export function VideosView() {
                             <p className="truncate font-medium text-neutral-900 dark:text-neutral-100">
                               {video.title}
                             </p>
+                            <p className="text-xs text-neutral-500">{video.format === "short" ? "Shorts · 9:16" : "Horizontal · 16:9"}</p>
                             <p className="truncate text-xs text-neutral-400">
                               {video.url}
                             </p>
@@ -182,6 +185,7 @@ export function VideosView() {
                             <Button
                               size="sm"
                               variant="ghost"
+                              aria-label={`Edit ${video.title}`}
                               onClick={() => {
                                 setEditing(video);
                                 setFormOpen(true);
@@ -192,6 +196,7 @@ export function VideosView() {
                             <Button
                               size="sm"
                               variant="ghost"
+                              aria-label={`Delete ${video.title}`}
                               onClick={() => setPendingDelete(video)}
                             >
                               <Icons.trash className="h-4 w-4 text-error" />

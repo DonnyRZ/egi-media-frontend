@@ -20,7 +20,7 @@ export function VideoPoster({ video, label, onPlay, className }: VideoPosterProp
     style={{ backgroundImage: `url(${FALLBACK_VIDEO_THUMBNAIL})` }}
     onClick={onPlay}>
     <Image src={posterFailed ? FALLBACK_VIDEO_THUMBNAIL : video.thumbnailUrl ?? FALLBACK_VIDEO_THUMBNAIL}
-      alt="" fill sizes="(max-width: 767px) 100vw, 480px" className="object-cover"
+      alt="" fill sizes="(max-width: 767px) 100vw, 480px" className="object-contain"
       onError={() => setPosterFailed(true)} />
     <span className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border-2 border-white bg-black/50" aria-hidden="true">
       <svg className="ml-1 h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>

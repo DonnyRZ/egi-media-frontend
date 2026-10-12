@@ -1,10 +1,20 @@
+import { EDITORIAL_API } from "@/shared/constants/editorial-api.constants";
 import { API_ENDPOINTS } from "@/shared/constants/api.constants";
 import { axiosClient } from "@/shared/lib/axios-client";
 import type { ApiSuccessResponse, PaginatedMeta } from "@/shared/types/api.types";
 
 export type CmsVideoStatus = "review" | "published";
 
-export interface CmsVideo {
+export interface CmsVideoMetadata {
+  format?: "horizontal" | "short";
+  posterLandscape?: string | null;
+  posterPortrait?: string | null;
+  durationSeconds?: number | null;
+  categoryId?: string | null;
+  programId?: string | null;
+  episodeNumber?: number | null;
+}
+export interface CmsVideo extends CmsVideoMetadata {
   id: string;
   title: string;
   description: string | null;
@@ -16,6 +26,13 @@ export interface CmsVideo {
 }
 
 interface CmsVideoDto {
+  format?: "horizontal" | "short";
+  poster_landscape?: string | null;
+  poster_portrait?: string | null;
+  duration_seconds?: number | null;
+  category_id?: string | null;
+  program_id?: string | null;
+  episode_number?: number | null;
   id: string;
   title: string;
   description: string | null;
@@ -30,6 +47,13 @@ function mapVideo(dto: CmsVideoDto): CmsVideo {
   const isActive = dto.is_active !== false;
   return {
     id: dto.id,
+    format: dto.format || "horizontal",
+    posterLandscape: dto.poster_landscape || null,
+    posterPortrait: dto.poster_portrait || null,
+    durationSeconds: dto.duration_seconds || null,
+    categoryId: dto.category_id || null,
+    programId: dto.program_id || null,
+    episodeNumber: dto.episode_number || null,
     title: dto.title,
     description: dto.description,
     url: dto.url,
@@ -79,7 +103,7 @@ export async function fetchCmsVideos(
   const response = await axiosClient.get<{
     data: CmsVideoDto[];
     meta: PaginatedMeta;
-  }>(API_ENDPOINTS.youtubeVideos, {
+  }>(EDITORIAL_API.cmsVideos, {
     params: {
       page: params.page,
       limit: params.limit,
@@ -99,11 +123,16 @@ export async function fetchCmsVideos(
   };
 }
 
-export interface CmsVideoWritePayload {
+export interface CmsVideoWritePayload extends CmsVideoMetadata {
   title: string;
   description?: string;
   url: string;
   isActive: boolean;
+}
+
+function videoMetadata(p: CmsVideoWritePayload) {
+  const fields = {format:p.format,poster_landscape:p.posterLandscape,poster_portrait:p.posterPortrait,duration_seconds:p.durationSeconds,category_id:p.categoryId,program_id:p.programId,episode_number:p.episodeNumber};
+  return Object.fromEntries(Object.entries(fields).filter(([,v])=>v!==undefined).map(([k,v])=>[k,v===""?null:v]));
 }
 
 export async function createCmsVideo(
@@ -112,6 +141,7 @@ export async function createCmsVideo(
   const response = await axiosClient.post<ApiSuccessResponse<CmsVideoDto>>(
     API_ENDPOINTS.youtubeVideos,
     {
+      ...videoMetadata(payload),
       title: payload.title,
       description: payload.description || null,
       url: payload.url,
@@ -128,6 +158,7 @@ export async function updateCmsVideo(
   const response = await axiosClient.put<ApiSuccessResponse<CmsVideoDto>>(
     API_ENDPOINTS.youtubeVideoById(id),
     {
+      ...videoMetadata(payload),
       title: payload.title,
       description: payload.description || null,
       url: payload.url,
@@ -139,4 +170,9 @@ export async function updateCmsVideo(
 
 export async function deleteCmsVideo(id: string): Promise<void> {
   await axiosClient.delete(API_ENDPOINTS.youtubeVideoById(id));
+}
+
+export async function fetchCmsVideoById(id:string):Promise<CmsVideo> {
+  const response=await axiosClient.get<ApiSuccessResponse<CmsVideoDto>>(`${EDITORIAL_API.cmsVideos}/${id}`);
+  return mapVideo(response.data.data);
 }

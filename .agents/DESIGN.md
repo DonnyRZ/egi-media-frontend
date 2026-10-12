@@ -4,6 +4,24 @@
 
 Dokumen ini menjadi acuan utama untuk seluruh desain UI/UX pada project EGI Media.
 
+## Editorial public templates — October 2026
+
+These rules take precedence over generic card/spacing examples below for public news pages. The CMS keeps its existing dashboard styling; editorial previews use an explicitly isolated white/red surface.
+
+- Shared frame content max 1520px; outside gutters 16/24/32px. Header, frame and footer align.
+- Public news cards are square, without shadows, with thin separators. Video has a dark shell and rounded media collection cards.
+- Separate templates: homepage/desk lead package, chronological Latest, topic hub, Opinion/author, article reading, article series, horizontal video, Shorts, program posters, Search, Saved/For You.
+- Inter lead 36–40px desktop and 28px mobile; supporting 24–28px; list 18–20px; metadata 12–14px. Article heading 44/30px, content 18px at ~1.65 line height, reading width 768px and opening max 1040px.
+- News photo frames 16:9 with containment; original body images keep their ratio. Horizontal video 16:9; Shorts 9:16; program poster 2:3. Poster variants are separate assets.
+- Lead titles are complete. Card summaries clamp at three lines; detail summary remains complete.
+- Three-column lead package begins at 1200px only with two supporting stories and a useful right rail (video or three latest stories). Sparse data uses two or one column; the single article media stays capped at 560px.
+- Mobile order: lead, latest, supporting, video. Tablet: lead with rail, then supporting. Empty automatic modules do not reserve panels.
+- Curated category stories and fallback are published, category-scoped, deterministic and unique in the opening package. Existing homepage placements remain separate.
+- Every asynchronous source owns its loading/error/retry state. Shared skeletons follow the final template. Never populate production with fixtures to fill a design.
+- Visible focus, labelled controls, 44px touch targets, AA text contrast, keyboard carousels and reduced motion are required.
+- Local `/[locale]/editorial-preview` is development-only and uses ignored fixture media. Never expose the local QA server or its database through production configuration.
+
+
 ---
 
 # Brand Identity

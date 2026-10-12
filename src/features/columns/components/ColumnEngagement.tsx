@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import { ArticleStats } from "@/features/article/components/ArticleStats";
 import { ColumnShareBar } from "@/features/columns/components/ColumnShareBar";
 import { SaveColumnButton } from "@/features/columns/components/SaveColumnButton";
 import { trackColumnView } from "@/features/columns/repositories/column.repository";
@@ -41,9 +40,9 @@ export function ColumnEngagement({
   }, [columnId]);
 
   return (
-    <div className="flex flex-col gap-6 border-y border-neutral-200 py-6 sm:flex-row sm:items-start sm:justify-between">
-      <ArticleStats shareCount={shareCount} />
-      <div className="flex flex-col gap-5 sm:items-end">
+    <div className="flex flex-wrap items-center gap-3 border-y border-neutral-200 py-3">
+      {shareCount>0?<span className="sr-only">{shareCount}</span>:null}
+      <div className="flex flex-wrap items-center gap-3">
         <SaveColumnButton columnId={columnId} />
         <ColumnShareBar
           columnId={columnId}

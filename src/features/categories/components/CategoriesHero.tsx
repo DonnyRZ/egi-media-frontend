@@ -6,14 +6,12 @@ import { FrameModule } from "@/shared/components/layout/FrameModule";
 import { FramePageHero } from "@/shared/components/layout/FramePageHero";
 
 export function CategoriesHero() {
-  const t = useTranslations("categoriesPage");
+  const t = useTranslations("editorial");
 
   return (
     <FrameModule ariaLabelledby="categories-hero-heading">
       <FramePageHero
-        kicker={t("kicker")}
-        lede={t("lede")}
-        title={t("headline")}
+        title={t("categories")}
         titleId="categories-hero-heading"
       />
     </FrameModule>

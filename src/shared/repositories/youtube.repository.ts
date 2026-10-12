@@ -11,6 +11,7 @@ export async function getFeaturedVideos(
   return fetchYoutubeVideos({
     page: 1,
     limit: HOMEPAGE_LIMITS.featuredVideos,
+    format: "horizontal",
     lang,
   });
 }

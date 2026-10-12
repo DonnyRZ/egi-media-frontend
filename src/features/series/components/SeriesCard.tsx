@@ -57,7 +57,7 @@ export function SeriesCard({ series, variant = "default" }: SeriesCardProps) {
             <Link href={`/series/${series.slug}`}>{series.name}</Link>
           </h2>
           {series.description ? (
-            <p className="mt-4 line-clamp-4 text-base leading-7 text-neutral-700">
+            <p className="mt-4 line-clamp-3 text-base leading-7 text-neutral-700">
               {series.description}
             </p>
           ) : null}

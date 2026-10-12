@@ -15,7 +15,7 @@ export function useFeaturedVideos() {
   const lang = toContentLocale(useLocale());
 
   return useQuery({
-    queryKey: QUERY_KEYS.youtubeVideos.list({ section: "featured", lang }),
+    queryKey: QUERY_KEYS.youtubeVideos.list({ section: "featured", format: "horizontal", lang }),
     queryFn: () => getFeaturedVideos(lang),
     staleTime: QUERY_STALE_TIME.homepage,
     gcTime: QUERY_GC_TIME.homepage,

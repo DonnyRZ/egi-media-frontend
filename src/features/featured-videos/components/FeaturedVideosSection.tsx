@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 
+import { Link } from "@/i18n/navigation";
 import { VideoEmbed } from "@/features/videos/components/VideoEmbed";
 import { GridFillers } from "@/shared/components/common/GridFillers";
 import { AdaptiveCardGrid } from "@/shared/components/common/AdaptiveCardGrid";
@@ -31,9 +32,9 @@ function VideoCard({ video }: { video: YoutubeVideo }) {
           ) : null}
         </div>
         <h3 className="mt-1 font-sans text-lg font-bold leading-snug text-ink group-hover:text-accent">
-          <a href={video.url} rel="noopener noreferrer" target="_blank">
+          <Link href={`/videos/watch/${video.id}`}>
             {video.title}
-          </a>
+          </Link>
         </h3>
         {video.description ? (
           <p className="mt-2 line-clamp-2 text-sm text-neutral-600">{video.description}</p>

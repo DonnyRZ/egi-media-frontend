@@ -12,19 +12,46 @@ function load(file, imports = {}) {
     module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020, jsx: ts.JsxEmit.ReactJSX,
   } });
   const module = { exports: {} };
-  vm.runInNewContext(compiled.outputText, { module, exports: module.exports, Date, Set,
+  vm.runInNewContext(compiled.outputText, { module, exports: module.exports, Date, Set, Map, URL,
     require(name) { if (!(name in imports)) throw new Error("Unexpected import: " + name); return imports[name]; },
   });
   return module.exports;
 }
 const { selectHomepageNews } = load("src/shared/utils/homepage-selection.ts");
+const { selectCategoryPackage } = load("src/shared/utils/category-selection.ts");
+const { extractYoutubeId } = load("src/shared/utils/format.ts");
+const { optionalNumber } = load("src/features/cms/utils/optional-number.ts");
+const {safeImageSource}=load("src/shared/utils/safe-image.ts",{"@/shared/constants/site.constants":{FALLBACK_ARTICLE_IMAGE:"/fallback.svg"}});
+test("broken and unsupported image sources have a safe local fallback",()=>{
+  for(const src of [null,"ftp://example.invalid/photo.png","javascript:alert(1)","not a URL","https://user:pass@example.invalid/a.png"])assert.equal(safeImageSource(src),"/fallback.svg");
+  for(const src of ["/images/photo.png","https://example.invalid/a.png","http://example.invalid/a.png"])assert.equal(safeImageSource(src),src);
+});
+test("empty optional video fields stay null and entered numbers remain numeric", () => {
+  for(const value of ["",null,undefined]) assert.equal(optionalNumber(value),null);
+  assert.equal(optionalNumber("45"),45);assert.equal(optionalNumber(1),1);
+});
+test("category selection fills failed pins, keeps scope and never mutates the pool", () => {
+  const pool=Array.from({length:20},(_,i)=>make(i,{category:{id:"desk"}}));
+  const before=JSON.stringify(pool);
+  const config={lead_id:"missing",supporting_ids:["missing","2","2"],editor_ids:["3","3"]};
+  const selected=[make(24,{category:{id:"wrong"}}),make(25,{category:{id:"desk"},status:"draft"})];
+  const out=selectCategoryPackage("desk",pool,selected,config);
+  assert.equal(out.lead.id,"0");assert.equal(out.supporting.length,5);
+  assert.equal(out.supporting[0].id,"2");assert.equal(out.editors.length,1);
+  assert.equal(new Set([out.lead,...out.supporting,...out.latest].map(a=>a.id)).size,12);
+  assert.equal(JSON.stringify(pool),before);
+});
+test("frontend YouTube parser accepts supported URL forms and rejects spoofed hosts", () => {
+  for(const url of ["https://youtu.be/dQw4w9WgXcQ?t=1","https://youtube.com/watch?feature=share&v=dQw4w9WgXcQ","https://youtube.com/shorts/dQw4w9WgXcQ","https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ"])assert.equal(extractYoutubeId(url),"dQw4w9WgXcQ");
+  for(const url of ["https://youtube.com.evil.invalid/watch?v=dQw4w9WgXcQ","javascript:alert(1)","https://user:pass@youtube.com/watch?v=dQw4w9WgXcQ"])assert.equal(extractYoutubeId(url),null);
+});
 const { HOMEPAGE_LIMITS, HOMEPAGE_PLACEMENTS } = load("src/shared/constants/homepage.constants.ts");
 const make = (id, extra = {}) => ({ id: String(id), title: "Story " + id,
   publishedAt: new Date(Date.UTC(2026, 0, 1) - id * 1000).toISOString(), ...extra });
 const select = (extra = {}) => selectHomepageNews({ heroes: [], headlines: [], latest: [], pool: [], ...extra });
 const all = (result) => [result.hero.featured, ...result.hero.headlines, ...result.hero.latest, ...result.latest].filter(Boolean);
 
-for (const count of [0, 1, 2, 3, 20]) {
+for (const count of [0, 1, 2, 3, 5, 20]) {
   test("fallback with " + count + " published articles is bounded and unique", () => {
     const pool = Array.from({ length: count }, (_, i) => make(i));
     const before = JSON.stringify(pool);

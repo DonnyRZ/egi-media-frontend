@@ -13,6 +13,8 @@ export type ColumnTranslationStatus =
   | "failed";
 
 export interface ColumnAuthor {
+  avatarUrl?: string | null;
+  bio?: string | null;
   id: string;
   fullName: string;
   email?: string | null;
@@ -30,7 +32,12 @@ export interface ColumnListItem {
   title: string;
   slug: string;
   summary: string | null;
+  categoryId?: string | null;
   featuredImage: string | null;
+  featuredImageAlt?: string | null;
+  featuredImageCaption?: string | null;
+  featuredImageCredit?: string | null;
+
   status: ColumnStatus;
   translationStatus: ColumnTranslationStatus;
   rejectionReason: string | null;
@@ -59,12 +66,18 @@ export interface ColumnWritePayload {
   title: string;
   content: string;
   summary?: string | null;
+  category_id?: string | null;
   featured_image?: string | null;
+  featured_image_alt?: string | null;
+  featured_image_caption?: string | null;
+  featured_image_credit?: string | null;
+
   status?: "draft" | "pending_approval";
   translations?: Partial<Record<"en" | "uz", ColumnTranslation>>;
 }
 
 export interface ColumnListParams {
+  category_id?: string;
   page?: number;
   limit?: number;
   search?: string;

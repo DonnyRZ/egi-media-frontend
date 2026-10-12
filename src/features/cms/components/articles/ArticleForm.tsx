@@ -48,6 +48,7 @@ const FIELD_LABELS: Record<keyof ArticleFormValues, string> = {
   title: "Indonesian title", summary: "Indonesian summary", content: "Indonesian content",
   titleEn: "English title", summaryEn: "English summary", contentEn: "English content",
   titleUz: "Uzbek title", summaryUz: "Uzbek summary", contentUz: "Uzbek content",
+  featuredImageAlt:"Alternative text",featuredImageCaption:"Caption",featuredImageCredit:"Credit",
   featuredImage: "Featured image", categoryId: "Category", seriesId: "Series",
   topicId: "Topic", tagIds: "Tags", placements: "Placement", headlinePosition: "Headline position",
 };
@@ -119,6 +120,7 @@ export function ArticleForm({
       content: values.content,
       summary: values.summary || null,
       featuredImage: values.featuredImage || null,
+      featuredImageAlt:values.featuredImageAlt,featuredImageCaption:values.featuredImageCaption,featuredImageCredit:values.featuredImageCredit,
       categoryId: values.categoryId || null,
       seriesId: values.seriesId || null,
       topicId: values.topicId || null,

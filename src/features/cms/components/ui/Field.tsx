@@ -1,4 +1,11 @@
-import type { ReactNode } from "react";
+"use client";
+import {
+  cloneElement,
+  isValidElement,
+  useId,
+  type ReactNode,
+  type ReactElement,
+} from "react";
 
 interface FieldProps {
   label: string;
@@ -17,16 +24,22 @@ export function Field({
   required,
   children,
 }: FieldProps) {
+  const generatedId = useId();
+  const control = isValidElement<{ id?: string }>(children) ? children : null;
+  const controlId = htmlFor || control?.props.id || generatedId;
+  const labelledControl = control
+    ? cloneElement(control as ReactElement<{ id?: string }>, { id: controlId })
+    : children;
   return (
     <div className="space-y-1.5">
       <label
         className="block text-xs font-semibold uppercase tracking-wide text-neutral-600 dark:text-neutral-400"
-        htmlFor={htmlFor}
+        htmlFor={control ? controlId : htmlFor}
       >
         {label}
         {required ? <span className="ml-0.5 text-accent">*</span> : null}
       </label>
-      {children}
+      {labelledControl}
       {error ? (
         <p className="text-xs text-error">{error}</p>
       ) : hint ? (

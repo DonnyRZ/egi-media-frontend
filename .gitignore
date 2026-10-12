@@ -40,3 +40,6 @@ yarn-error.log*
 next-env.d.ts
 
 .env
+
+# Local editorial preview fixture media
+/public/images/editorial-preview*

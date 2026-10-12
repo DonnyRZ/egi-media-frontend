@@ -48,6 +48,7 @@ export function ArticleEditorView({ articleId }: { articleId?: string }) {
           summaryUz: data.translationUz?.summary ?? "",
           contentUz: data.translationUz?.content ?? "",
           featuredImage: data.featuredImage ?? "",
+          featuredImageAlt:data.featuredImageAlt||"",featuredImageCaption:data.featuredImageCaption||"",featuredImageCredit:data.featuredImageCredit||"",
           categoryId: data.categoryId ?? "",
           seriesId: data.seriesId ?? "",
           topicId: data.topicId ?? "",

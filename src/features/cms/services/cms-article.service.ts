@@ -103,6 +103,9 @@ function toArticleDto(payload: ArticleWritePayload) {
   if (payload.summary !== undefined) dto.summary = payload.summary;
   if (payload.featuredImage !== undefined)
     dto.featured_image = payload.featuredImage || null;
+  if(payload.featuredImageAlt !== undefined) dto.featured_image_alt=payload.featuredImageAlt||null;
+  if(payload.featuredImageCaption !== undefined) dto.featured_image_caption=payload.featuredImageCaption||null;
+  if(payload.featuredImageCredit !== undefined) dto.featured_image_credit=payload.featuredImageCredit||null;
   if (payload.categoryId !== undefined) dto.category_id = payload.categoryId;
   if (payload.seriesId !== undefined) dto.series_id = payload.seriesId;
   if (payload.status !== undefined) dto.status = payload.status;

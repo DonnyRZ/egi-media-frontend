@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { extractYoutubeId } from "@/shared/utils/format";
 
 const optionalUrl = z
   .string()
@@ -6,6 +7,8 @@ const optionalUrl = z
   .url("Enter a valid URL")
   .or(z.literal(""))
   .optional();
+
+const optionalPosterUrl = optionalUrl.refine(value => !value || /^https?:\/\//i.test(value), "Use an HTTP or HTTPS image URL");
 
 export const articleFormSchema = z.object({
   title: z.string().trim().min(1, "Title is required").max(255),
@@ -25,6 +28,9 @@ export const articleFormSchema = z.object({
   titleUz: z.string().trim().max(255).optional(),
   summaryUz: z.string().trim().optional(),
   contentUz: z.string().optional(),
+  featuredImageAlt: z.string().max(500).optional(),
+  featuredImageCaption: z.string().max(1000).optional(),
+  featuredImageCredit: z.string().max(500).optional(),
   featuredImage: optionalUrl,
   categoryId: z.string().optional(),
   seriesId: z.string().optional(),
@@ -136,6 +142,13 @@ export const changePasswordSchema = z
 export type ChangePasswordValues = z.infer<typeof changePasswordSchema>;
 
 export const videoFormSchema = z.object({
+  format: z.enum(["horizontal", "short"]).optional(),
+  posterLandscape: optionalPosterUrl,
+  posterPortrait: optionalPosterUrl,
+  durationSeconds: z.number().int().min(1).nullable().optional(),
+  categoryId: z.string().uuid().or(z.literal("")).optional(),
+  programId: z.string().uuid().or(z.literal("")).optional(),
+  episodeNumber: z.number().int().min(1).nullable().optional(),
   title: z.string().trim().min(1, "Title is required").max(255),
   description: z.string().trim().max(2000).optional(),
   url: z
@@ -145,7 +158,7 @@ export const videoFormSchema = z.object({
     .url("Enter a valid YouTube URL")
     .refine(
       (value) =>
-        /youtu\.be\//.test(value) || /youtube\.com\//.test(value),
+        Boolean(extractYoutubeId(value)),
       "Enter a YouTube URL",
     ),
   isActive: z.boolean(),

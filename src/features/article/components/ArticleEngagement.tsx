@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 
 import { ArticleShareBar } from "@/features/article/components/ArticleShareBar";
-import { ArticleStats } from "@/features/article/components/ArticleStats";
 import { SaveArticleButton } from "@/features/saved-articles/components/SaveArticleButton";
 import {
   articleViewSessionKey,
@@ -41,9 +40,9 @@ export function ArticleEngagement({
   }, [articleId]);
 
   return (
-    <div className="flex flex-col gap-6 border-y border-neutral-200 py-6 sm:flex-row sm:items-start sm:justify-between">
-      <ArticleStats shareCount={shareCount} />
-      <div className="flex flex-col gap-5 sm:items-end">
+    <div className="flex flex-wrap items-center gap-3 border-y border-neutral-200 py-3">
+      {shareCount > 0 ? <span className="sr-only">{shareCount}</span> : null}
+      <div className="flex flex-wrap items-center gap-3">
         <SaveArticleButton articleId={articleId} />
         <ArticleShareBar
           articleId={articleId}

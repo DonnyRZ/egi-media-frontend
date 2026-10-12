@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 import { FALLBACK_ARTICLE_IMAGE } from "@/shared/constants/site.constants";
+import { safeImageSource, imageNeedsDirectLoad } from "@/shared/utils/safe-image";
 import { cn } from "@/shared/lib/cn";
 
 interface ArticleImageProps {
@@ -21,7 +22,7 @@ export function ArticleImage({
   priority = false,
   sizes = "(max-width: 768px) 100vw, 50vw",
 }: ArticleImageProps) {
-  const resolvedSrc = src || FALLBACK_ARTICLE_IMAGE;
+  const resolvedSrc = safeImageSource(src);
   const [imageSrc, setImageSrc] = useState(resolvedSrc);
 
   useEffect(() => {
@@ -31,12 +32,13 @@ export function ArticleImage({
   return (
     <Image
       alt={alt}
-      className={cn("object-cover", className)}
+      className={cn("object-contain", className)}
       fill
       onError={() => setImageSrc(FALLBACK_ARTICLE_IMAGE)}
       priority={priority}
       sizes={sizes}
       src={imageSrc}
+      unoptimized={imageNeedsDirectLoad(imageSrc)}
     />
   );
 }

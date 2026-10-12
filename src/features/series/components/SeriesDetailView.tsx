@@ -108,6 +108,7 @@ export function SeriesDetailView({ slug }: SeriesDetailViewProps) {
                 </time>
               ) : null}
             </div>
+            {data.topic?<Link href={`/topics/${data.topic.slug}`} className="mt-4 block text-sm font-semibold text-primary-700">{data.topic.name} →</Link>:null}
             <p className="kicker mt-4">{t("kicker")}</p>
             <h1
               className="mt-2 max-w-4xl font-sans text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl"

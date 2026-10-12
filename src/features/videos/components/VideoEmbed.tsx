@@ -47,7 +47,7 @@ export function VideoEmbed({
   }
 
   const embedUrl = autoplay || playing
-    ? `${baseUrl}?autoplay=1&rel=0`
+    ? `${baseUrl}?autoplay=1&mute=1&rel=0`
     : `${baseUrl}?rel=0`;
 
   return (

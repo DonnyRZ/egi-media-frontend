@@ -7,6 +7,13 @@ interface YoutubeVideoDto {
   description: string | null;
   url: string;
   duration?: string | null;
+  format?: "horizontal" | "short";
+  poster_landscape?: string | null;
+  poster_portrait?: string | null;
+  duration_seconds?: number | null;
+  category_id?: string | null;
+  program_id?: string | null;
+  episode_number?: number | null;
   created_at?: string | null;
 }
 
@@ -26,8 +33,14 @@ export function mapYoutubeVideoDto(dto: YoutubeVideoDto): YoutubeVideo {
     title: dto.title,
     description: dto.description,
     url: dto.url,
-    thumbnailUrl: getYoutubeThumbnail(dto.url),
-    durationLabel: dto.duration ?? null,
+    thumbnailUrl: (dto.format === "short" ? dto.poster_portrait : dto.poster_landscape) || getYoutubeThumbnail(dto.url),
+    format: dto.format || "horizontal",
+    posterLandscape: dto.poster_landscape || null,
+    posterPortrait: dto.poster_portrait || null,
+    categoryId: dto.category_id || null,
+    programId: dto.program_id || null,
+    episodeNumber: dto.episode_number || null,
+    durationLabel: dto.duration_seconds ? `${Math.floor(dto.duration_seconds / 60)}:${String(dto.duration_seconds % 60).padStart(2, "0")}` : dto.duration ?? null,
     publishedAt: dto.created_at ?? null,
   };
 }

@@ -20,6 +20,7 @@ const LEGAL_LINKS = [
 
 export function Footer() {
   const t = useTranslations("footer");
+  const e=useTranslations("editorial");
   const currentYear = new Date().getFullYear();
 
   return (
@@ -44,7 +45,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h2 className="text-xs font-bold uppercase tracking-[0.14em] text-neutral-500">
+            <h2 className="text-xs font-bold uppercase tracking-[0.14em] text-neutral-400">
               {t("company")}
             </h2>
             <ul className="mt-4 space-y-2">
@@ -59,7 +60,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h2 className="text-xs font-bold uppercase tracking-[0.14em] text-neutral-500">
+            <h2 className="text-xs font-bold uppercase tracking-[0.14em] text-neutral-400">
               {t("legal")}
             </h2>
             <ul className="mt-4 space-y-2">
@@ -73,15 +74,10 @@ export function Footer() {
             </ul>
           </div>
 
-          <div>
-            <h2 className="text-xs font-bold uppercase tracking-[0.14em] text-neutral-500">
-              {t("followUs")}
-            </h2>
-            <SocialLinks />
-          </div>
+          <div><h2 className="text-xs font-bold uppercase tracking-[0.14em] text-neutral-400">EGI Media</h2><ul className="mt-4 space-y-2">{[['/latest','headline'],['/categories','categories'],['/topics','topics'],['/series','series'],['/kolom','columns']].map(([href,key])=><li key={href}><Link className="text-sm text-neutral-300 hover:text-white" href={href}>{e(key)}</Link></li>)}<li><Link href="/videos">Video</Link> · <Link href="/shorts">Shorts</Link></li></ul><SocialLinks/></div>
         </div>
 
-        <div className="mt-10 border-t border-neutral-800 pt-6 text-sm text-neutral-500">
+        <div className="mt-10 border-t border-neutral-800 pt-6 text-sm text-neutral-400">
           <p>{t("copyright", { year: currentYear, siteName: SITE_NAME })}</p>
         </div>
       </Container>

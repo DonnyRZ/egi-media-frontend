@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
-import { VideosHero } from "@/features/videos/components/VideosHero";
-import { VideosListing } from "@/features/videos/components/VideosListing";
+import { VideoHub } from "@/features/videos/components/VideoHub";
 import { FrameModule } from "@/shared/components/layout/FrameModule";
 import { PageFrame } from "@/shared/components/layout/PageFrame";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
@@ -54,9 +53,8 @@ export default async function VideosPage({ params }: VideosPageProps) {
 
   return (
     <PageFrame>
-      <VideosHero />
       <Suspense fallback={<ListingFallback />}>
-        <VideosListing />
+        <VideoHub />
       </Suspense>
     </PageFrame>
   );

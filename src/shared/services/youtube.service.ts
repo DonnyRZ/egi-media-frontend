@@ -13,6 +13,13 @@ interface YoutubeVideoDto {
   description: string | null;
   url: string;
   duration?: string | null;
+  format?: "horizontal" | "short";
+  poster_landscape?: string | null;
+  poster_portrait?: string | null;
+  duration_seconds?: number | null;
+  category_id?: string | null;
+  program_id?: string | null;
+  episode_number?: number | null;
   created_at?: string | null;
 }
 

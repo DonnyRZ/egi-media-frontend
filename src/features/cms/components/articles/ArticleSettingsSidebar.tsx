@@ -2,6 +2,7 @@
 
 import { Controller, useWatch, type Control, type FieldErrors, type UseFormSetValue } from "react-hook-form";
 
+import { ImageMetadataFields } from "@/features/cms/components/media/ImageMetadataFields";
 import { PlacementCheckboxes } from "@/features/cms/components/articles/PlacementCheckboxes";
 import { Card, CardBody, CardHeader } from "@/features/cms/components/ui/Card";
 import { Field } from "@/features/cms/components/ui/Field";
@@ -34,6 +35,7 @@ export function ArticleSettingsSidebar({
   topics,
   tags,
 }: ArticleSettingsSidebarProps) {
+  const mediaValues=useWatch({control});
   const categoryId = useWatch({ control, name: "categoryId" });
   const topicId = useWatch({ control, name: "topicId" });
   const headlinePosition = useWatch({ control, name: "headlinePosition" });
@@ -94,6 +96,7 @@ export function ArticleSettingsSidebar({
             />
           </Field>
 
+          <ImageMetadataFields values={mediaValues} onChange={(key,value)=>setValue(key,value,{shouldDirty:true,shouldValidate:true})} src={mediaValues.featuredImage||null} title={mediaValues.title||""} summary={mediaValues.summary}/>
           <Field label="Category" htmlFor="category">
             <Controller
               control={control}

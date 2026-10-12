@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 
+import { Link } from "@/i18n/navigation";
 import { cn } from "@/shared/lib/cn";
 
 interface EmptyStateProps {
@@ -10,6 +11,7 @@ interface EmptyStateProps {
 
 export function EmptyState({ title, message, className }: EmptyStateProps) {
   const t = useTranslations("states");
+  const e=useTranslations("editorial");
 
   return (
     <div
@@ -24,6 +26,7 @@ export function EmptyState({ title, message, className }: EmptyStateProps) {
       <p className="mt-2 text-sm text-neutral-500">
         {message ?? t("emptyMessage")}
       </p>
+      <Link className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold underline" href="/latest">{e("latest")} →</Link>
     </div>
   );
 }

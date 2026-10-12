@@ -1,9 +1,11 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { SocialIcon } from "@/features/footer/components/SocialIcons";
 import { useSocialMediaLinks } from "@/features/footer/hooks/useSocialMediaLinks";
 
 export function SocialLinks() {
+  const t=useTranslations("footer");
   const { data, isLoading, isError } = useSocialMediaLinks();
   const links = data ?? [];
 
@@ -12,7 +14,7 @@ export function SocialLinks() {
   }
 
   return (
-    <ul className="mt-4 flex flex-wrap items-center gap-2">
+    <div className="mt-5"><h2 className="text-xs font-bold uppercase tracking-wide text-neutral-400">{t("followUs")}</h2><ul className="mt-3 flex flex-wrap items-center gap-2">
       {links.map((link) => (
         <li key={link.id}>
           <a
@@ -26,6 +28,6 @@ export function SocialLinks() {
           </a>
         </li>
       ))}
-    </ul>
+    </ul></div>
   );
 }

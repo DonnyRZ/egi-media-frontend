@@ -59,7 +59,7 @@
     "saved": "Saqlangan",
     "forYou": "Siz uchun",
     "signIn": "Kirish",
-    "subscribe": "Obuna boʻlish",
+    "subscribe": "Mavzu sozlamalari",
     "toggleMenu": "Menyuni ochish",
     "toggleSearch": "Qidiruvni ochish",
     "searchLabel": "Maqolalarni qidirish",
@@ -1142,5 +1142,28 @@
       "agreedBy": "Jurnalistlar tashkilotlari va matbuot kompaniyalari tashkilotlari (AJI, PWI, IJTI, ATVLI, ATVSI, SPS, PRSSNI) tomonidan kelishilgan.",
       "acknowledgedBy": "Tasdiqlovchi: Bagir Manan — Matbuot Kengashi raisi."
     }
+  },
+  "editorial": {
+    "previous": "Oldingi",
+    "next": "Keyingi",
+    "watch": "Tomosha qilish",
+    "latestVideos": "So‘nggi videolar",
+    "nextVideos": "Keyingi videolar",
+    "episodes": "Epizodlar",
+    "noVideos": "Hali videolar chop etilmagan.",
+    "latest": "So‘nggi yangiliklarni o‘qing",
+    "editors": "Muharrir tanlovi",
+    "more": "Boshqa yangiliklar",
+    "topics": "Mavzular",
+    "search": "Yangiliklarni qidirish",
+    "searchSubmit": "Qidirish",
+    "headline": "So‘nggi yangiliklar",
+    "categories": "Bo‘limlar",
+    "series": "Turkumlar",
+    "columns": "Fikrlar",
+    "saved": "Saqlangan",
+    "forYou": "Siz uchun",
+    "noTopics": "Mavzular hali mavjud emas. So‘nggi yangiliklarni o‘qishingiz mumkin.",
+    "moreColumns": "Muallifning boshqa maqolalari"
   }
 }

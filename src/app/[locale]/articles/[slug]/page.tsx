@@ -82,12 +82,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       <PageFrame>
         <FrameModule>
           <div className="bg-white p-5 lg:p-8">
-            <div className="mx-auto max-w-3xl">
+            <div className="mx-auto max-w-[1040px]">
               <ArticleHeader article={article} />
-              <div className="mt-6">
-                <ArticleHero article={article} />
-              </div>
-              <div className="mt-8">
+              <div className="mt-4">
                 <ArticleEngagement
                   articleId={article.id}
                   initialShareCount={article.shareCount}
@@ -95,6 +92,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                   title={article.title}
                 />
               </div>
+              <div className="mx-auto mt-5 max-w-[768px]"><ArticleHero article={article} /></div>
             </div>
           </div>
         </FrameModule>

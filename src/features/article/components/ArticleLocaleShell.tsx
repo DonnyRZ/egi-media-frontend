@@ -33,7 +33,7 @@ export function ArticleLocaleShell({ article, children }: ArticleLocaleShellProp
   const alternates = useMemo(() => buildSlugAlternates(article), [article]);
 
   useEffect(() => {
-    setSlugAlternates(article.id, alternates);
+    setSlugAlternates(article.id, alternates,article.category?.id);
     // Do not clear on unmount — clearing races with the next article mount and
     // can leave LanguageSwitcher with stale alternates from another article.
     return () => {
@@ -42,7 +42,7 @@ export function ArticleLocaleShell({ article, children }: ArticleLocaleShellProp
         clearSlugAlternates();
       }
     };
-  }, [article.id, alternates, setSlugAlternates, clearSlugAlternates]);
+  }, [article.id, article.category?.id, alternates, setSlugAlternates, clearSlugAlternates]);
 
   return <>{children}</>;
 }

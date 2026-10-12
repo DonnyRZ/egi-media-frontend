@@ -32,6 +32,10 @@ export interface CmsArticleListItem {
   slug: string | null;
   summary: string | null;
   featuredImage: string | null;
+  featuredImageAlt?: string | null;
+  featuredImageCaption?: string | null;
+  featuredImageCredit?: string | null;
+
   status: ArticleStatus;
   translationStatus: TranslationStatus;
   placements: ArticlePlacement[];
@@ -86,6 +90,10 @@ export interface CmsArticleDetail {
   summary: string | null;
   content: string;
   featuredImage: string | null;
+  featuredImageAlt?: string | null;
+  featuredImageCaption?: string | null;
+  featuredImageCredit?: string | null;
+
   status: ArticleStatus;
   placements: ArticlePlacement[];
   headlinePosition: number | null;
@@ -104,6 +112,10 @@ export interface ArticleWritePayload {
   content: string;
   summary?: string | null;
   featuredImage?: string | null;
+  featuredImageAlt?: string | null;
+  featuredImageCaption?: string | null;
+  featuredImageCredit?: string | null;
+
   categoryId?: string | null;
   seriesId?: string | null;
   status?: ArticleStatus;

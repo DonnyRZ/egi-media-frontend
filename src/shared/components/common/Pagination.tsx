@@ -89,9 +89,9 @@ export function Pagination({
   }
 
   const navButtonClass =
-    "inline-flex min-h-10 items-center justify-center border border-neutral-200 px-3 text-sm font-semibold uppercase tracking-wide text-neutral-700 transition-colors hover:border-accent hover:text-accent";
+    "inline-flex min-h-11 items-center justify-center border border-neutral-200 px-3 text-sm font-semibold uppercase tracking-wide text-neutral-700 transition-colors hover:border-accent hover:text-accent";
   const navButtonDisabledClass =
-    "inline-flex min-h-10 cursor-not-allowed items-center justify-center border border-neutral-100 px-3 text-sm font-semibold uppercase tracking-wide text-neutral-300";
+    "inline-flex min-h-11 cursor-not-allowed items-center justify-center border border-neutral-100 px-3 text-sm font-semibold uppercase tracking-wide text-neutral-300";
 
   return (
     <nav
@@ -139,7 +139,7 @@ export function Pagination({
                 <Link
                   aria-current={page === currentPage ? "page" : undefined}
                   className={cn(
-                    "inline-flex min-h-10 min-w-10 items-center justify-center border text-sm font-semibold transition-colors",
+                    "inline-flex min-h-11 min-w-11 items-center justify-center border text-sm font-semibold transition-colors",
                     page === currentPage
                       ? "border-ink bg-ink text-white"
                       : "border-neutral-200 text-neutral-700 hover:border-accent hover:text-accent",

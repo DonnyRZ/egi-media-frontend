@@ -5,7 +5,9 @@ import { useTranslations } from "next-intl";
 
 import { useTopicDetail } from "@/features/topics/hooks/useTopicDetail";
 import { Link } from "@/i18n/navigation";
-import { AdaptiveCardGrid } from "@/shared/components/common/AdaptiveCardGrid";
+import { TopicFollow } from "@/features/topics/components/TopicFollow";
+import { TopicSeries } from "@/features/categories/components/DeskSections";
+import { ArticleTimeline } from "@/shared/components/common/ArticleTimeline";
 import { ArticleCard } from "@/shared/components/common/ArticleCard";
 import { EmptyState } from "@/shared/components/common/EmptyState";
 import { ErrorState } from "@/shared/components/common/ErrorState";
@@ -60,7 +62,7 @@ export function TopicDetailView({ slug }: TopicDetailViewProps) {
 
   const articleItems =
     !isLoading && !isError ? articlesQuery.data?.items ?? [] : [];
-  const showFeatured = page === 1 && articleItems.length >= 3;
+  const showFeatured = page === 1 && articleItems.length >= 1;
   const gridItems = showFeatured ? articleItems.slice(1) : articleItems;
 
   const content = (
@@ -77,6 +79,7 @@ export function TopicDetailView({ slug }: TopicDetailViewProps) {
             </Link>
           }
           lede={topicQuery.data?.description || undefined}
+          actions={topicQuery.data?<TopicFollow id={topicQuery.data.id}/>:undefined}
           title={heroTitle}
           titleId="topic-detail-heading"
         />
@@ -127,13 +130,7 @@ export function TopicDetailView({ slug }: TopicDetailViewProps) {
                   })}
                   title={t("articlesHeading")}
                 />
-                <AdaptiveCardGrid
-                  items={gridItems}
-                  keyForItem={(article) => article.id}
-                  renderItem={(article) => (
-                    <ArticleCard article={article} className="bg-white p-5" />
-                  )}
-                />
+                <div className="px-5"><ArticleTimeline articles={gridItems}/></div>
               </>
             ) : null}
 
@@ -154,6 +151,7 @@ export function TopicDetailView({ slug }: TopicDetailViewProps) {
           </>
         ) : null}
       </FrameModule>
+      {topicQuery.data?<TopicSeries topicId={topicQuery.data.id}/>:null}
     </PageFrame>
   );
 

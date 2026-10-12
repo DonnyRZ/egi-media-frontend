@@ -23,6 +23,10 @@ export interface Article {
   slug: string;
   summary: string | null;
   featuredImage: string | null;
+  featuredImageAlt?: string | null;
+  featuredImageCaption?: string | null;
+  featuredImageCredit?: string | null;
+
   publishedAt: string | null;
   author: ArticleAuthor;
   category: ArticleCategory | null;

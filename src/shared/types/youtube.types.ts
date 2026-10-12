@@ -1,4 +1,10 @@
 export interface YoutubeVideo {
+  format?: "horizontal" | "short";
+  posterLandscape?: string | null;
+  posterPortrait?: string | null;
+  categoryId?: string | null;
+  programId?: string | null;
+  episodeNumber?: number | null;
   id: string;
   title: string;
   description: string | null;

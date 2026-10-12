@@ -38,8 +38,7 @@ export function CategoriesListing() {
   const t = useTranslations("categoriesPage");
 
   const items = !isLoading && !isError ? data?.items ?? [] : [];
-  const showFeatured = items.length >= 3;
-  const gridItems = showFeatured ? items.slice(1) : items;
+  const gridItems = items;
 
   return (
     <FrameModule ariaLabelledby="categories-listing-heading">
@@ -63,12 +62,6 @@ export function CategoriesListing() {
 
       {!isLoading && !isError && data?.items.length ? (
         <>
-          {showFeatured ? (
-            <div className="border-b border-neutral-200 bg-white">
-              <CategoryCard category={items[0]} variant="featured" />
-            </div>
-          ) : null}
-
           <FrameHeading
             id="categories-grid-heading"
             subtitle={t("categoryCount", { count: data.total })}

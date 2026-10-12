@@ -9,8 +9,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { RouteGuard } from "@/features/cms/components/auth/RouteGuard";
 import { PageHeader } from "@/features/cms/components/layout/PageHeader";
 import { Card, CardBody } from "@/features/cms/components/ui/Card";
+import { useCategoryOptions } from "@/features/cms/hooks/useTaxonomyOptions";
+import { Select } from "@/features/cms/components/ui/Select";
 import { Field } from "@/features/cms/components/ui/Field";
 import { ConfirmDialog } from "@/features/cms/components/ui/ConfirmDialog";
+import { ImageMetadataFields } from "@/features/cms/components/media/ImageMetadataFields";
 import { FeaturedImagePicker } from "@/features/cms/components/media/FeaturedImagePicker";
 import { ColumnRejectDialog } from "@/features/cms/components/columns/ColumnRejectDialog";
 import { ColumnEditorSidebar } from "@/features/cms/components/columns/ColumnEditorSidebar";
@@ -73,6 +76,7 @@ export function ColumnEditorView({ columnId }: ColumnEditorViewProps) {
   const [approveOpen, setApproveOpen] = useState(false);
   const [rejectOpen, setRejectOpen] = useState(false);
 
+  const categories=useCategoryOptions();
   const defaultValues = useMemo<CmsColumnEditorValues | undefined>(() => {
     if (!detail.data) return undefined;
     const image = detail.data.featuredImage;
@@ -82,7 +86,9 @@ export function ColumnEditorView({ columnId }: ColumnEditorViewProps) {
       title: detail.data.title,
       summary: detail.data.summary ?? "",
       content: detail.data.content,
+      categoryId:detail.data.categoryId||"",
       featuredImage: usableImage,
+      featuredImageAlt:detail.data.featuredImageAlt||"",featuredImageCaption:detail.data.featuredImageCaption||"",featuredImageCredit:detail.data.featuredImageCredit||"",
       titleEn: detail.data.translations.en?.title ?? "",
       summaryEn: detail.data.translations.en?.summary ?? "",
       contentEn: detail.data.translations.en?.content ?? "",
@@ -97,6 +103,8 @@ export function ColumnEditorView({ columnId }: ColumnEditorViewProps) {
     control,
     handleSubmit,
     reset,
+    watch,
+    setValue,
     getValues,
     formState: { errors, isDirty },
   } = useForm<CmsColumnEditorValues>({
@@ -115,7 +123,9 @@ export function ColumnEditorView({ columnId }: ColumnEditorViewProps) {
       title: values.title.trim(),
       content: values.content.trim(),
       summary: values.summary?.trim() || null,
+      category_id:values.categoryId||null,
       featured_image: values.featuredImage?.trim() || null,
+      featured_image_alt:values.featuredImageAlt,featured_image_caption:values.featuredImageCaption,featured_image_credit:values.featuredImageCredit,
       translations: buildTranslations(values),
     };
     await update.mutateAsync({ id: columnId, payload });
@@ -206,6 +216,8 @@ export function ColumnEditorView({ columnId }: ColumnEditorViewProps) {
                     )}
                   />
                 </Field>
+                <Field label="Category" error={errors.categoryId?.message}><Select {...register("categoryId")} options={[{value:"",label:"No category"},...(categories.data?.items||[]).map(c=>({value:c.id,label:c.name}))]}/></Field>
+                <ImageMetadataFields values={watch()} onChange={(key,value)=>setValue(key,value,{shouldDirty:true,shouldValidate:true})} src={watch("featuredImage")||null} title={watch("title")} summary={watch("summary")}/>
               </CardBody>
             </Card>
 

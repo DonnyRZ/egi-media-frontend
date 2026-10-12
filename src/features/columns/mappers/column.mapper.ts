@@ -10,6 +10,8 @@ import type {
 import { resolveImageUrl } from "@/shared/utils/image";
 
 interface ColumnAuthorDto {
+  avatar_url?: string | null;
+  bio?: string | null;
   id: string;
   full_name: string;
   role?: string | null;
@@ -21,7 +23,12 @@ interface ColumnListItemDto {
   title: string;
   slug: string;
   summary: string | null;
+  category_id?: string | null;
   featured_image?: string | null;
+  featured_image_alt?: string | null;
+  featured_image_caption?: string | null;
+  featured_image_credit?: string | null;
+
   status: ColumnStatus;
   translation_status?: ColumnTranslationStatus | null;
   rejection_reason?: string | null;
@@ -60,6 +67,8 @@ function mapAuthor(dto: ColumnAuthorDto): ColumnAuthor {
   return {
     id: dto.id,
     fullName: dto.full_name,
+    avatarUrl: dto.avatar_url || null,
+    bio: dto.bio || null,
     email: dto.email ?? null,
     role: dto.role ?? null,
   };
@@ -81,9 +90,13 @@ export function mapColumnListItemDto(dto: ColumnListItemDto): ColumnListItem {
   return {
     id: dto.id,
     title: dto.title,
+    categoryId: dto.category_id || null,
     slug: dto.slug,
     summary: dto.summary,
     featuredImage: resolveImageUrl(dto.featured_image ?? null, dto.id),
+    featuredImageAlt: dto.featured_image_alt || null,
+    featuredImageCaption: dto.featured_image_caption || null,
+    featuredImageCredit: dto.featured_image_credit || null,
     status: dto.status,
     translationStatus: dto.translation_status ?? "none",
     rejectionReason: dto.rejection_reason ?? null,

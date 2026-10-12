@@ -40,13 +40,10 @@ export function SaveArticleButton({ articleId }: SaveArticleButtonProps) {
 
   return (
     <div>
-      <p className="text-xs font-bold uppercase tracking-[0.14em] text-neutral-500">
-        {t("saveTitle")}
-      </p>
       <button
         aria-pressed={isSaved}
         className={cn(
-          "mt-3 inline-flex items-center gap-2 border border-neutral-300 bg-white px-3 py-2 text-xs font-semibold uppercase tracking-wide text-neutral-700 transition-colors hover:border-ink hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 disabled:opacity-60",
+          "inline-flex min-h-11 items-center gap-2 border border-neutral-300 bg-white px-3 py-2 text-xs font-semibold uppercase tracking-wide text-neutral-700 transition-colors hover:border-ink hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 disabled:opacity-60",
           isSaved && "border-accent text-accent hover:border-accent hover:text-accent",
         )}
         disabled={isPending}

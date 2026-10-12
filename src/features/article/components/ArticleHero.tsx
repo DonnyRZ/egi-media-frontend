@@ -7,14 +7,14 @@ interface ArticleHeroProps {
 
 export function ArticleHero({ article }: ArticleHeroProps) {
   return (
-    <div className="relative mx-auto aspect-[16/9] w-full overflow-hidden bg-neutral-100">
+    <figure><div className="relative mx-auto aspect-[16/9] w-full overflow-hidden bg-neutral-100">
       <ArticleImage
-        alt={article.title}
+        alt={article.featuredImageAlt||article.title}
         className="object-cover"
         priority
         sizes="(max-width: 768px) 100vw, 768px"
         src={article.featuredImage}
       />
-    </div>
+    </div>{article.featuredImageCaption||article.featuredImageCredit?<figcaption className="mt-2 text-xs leading-5 text-neutral-600">{article.featuredImageCaption} {article.featuredImageCredit?<span>{article.featuredImageCredit}</span>:null}</figcaption>:null}</figure>
   );
 }

@@ -69,15 +69,12 @@ export function ColumnShareBar({
 
   return (
     <div>
-      <p className="text-xs font-bold uppercase tracking-[0.14em] text-neutral-500">
-        {t("shareTitle")}
-      </p>
-      <div className="mt-3 flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2">
         {SHARE_ACTIONS.map((action) => (
           <button
             key={action.platform}
             className={cn(
-              "border border-neutral-300 bg-white px-3 py-2 text-xs font-semibold uppercase tracking-wide text-neutral-700 transition-colors hover:border-ink hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 disabled:opacity-60",
+              "min-h-11 border border-neutral-300 bg-white px-3 py-2 text-xs font-semibold uppercase tracking-wide text-neutral-700 transition-colors hover:border-ink hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 disabled:opacity-60",
               action.platform === "copy_link" &&
                 copied &&
                 "border-accent text-accent",

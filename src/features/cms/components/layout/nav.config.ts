@@ -51,6 +51,8 @@ export const NAV_SECTIONS: NavSection[] = [
   {
     title: "Newsroom",
     items: [
+      {label:"Category Layout",href:"/cms/editorial",icon:"category",permission:"canViewActivity"},
+      {label:"Video Programs & Collections",href:"/cms/video-catalog",icon:"video",permission:"canViewActivity"},
       {
         label: "Taxonomy",
         href: "/cms/taxonomy",

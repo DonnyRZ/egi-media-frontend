@@ -5,13 +5,13 @@ import { Link } from "@/i18n/navigation";
 import type { Article } from "@/shared/types/article.types";
 import { getArticleHref } from "@/shared/utils/article-path";
 
-export function HeroLatestList({ articles }: { articles: Article[] }) {
+export function HeroLatestList({ articles,allHref="/latest" }: { articles: Article[];allHref?:string }) {
   const t = useTranslations("latest");
   const format = useFormatter();
   return <section className="p-4 min-[1200px]:p-5" aria-labelledby="hero-latest-heading">
     <div className="flex items-center justify-between gap-3">
       <h2 id="hero-latest-heading" className="text-xl font-bold text-accent">{t("title")}</h2>
-      <Link href="/latest" className="shrink-0 text-xs font-semibold underline underline-offset-4">{t("viewAll")}</Link>
+      <Link href={allHref} className="shrink-0 text-xs font-semibold underline underline-offset-4">{t("viewAll")}</Link>
     </div>
     <ul className="mt-3 divide-y divide-neutral-200">
       {articles.map((article) => <li key={article.id} className="py-3 first:pt-0 last:pb-0">

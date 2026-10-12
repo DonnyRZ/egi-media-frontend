@@ -35,7 +35,7 @@ export function ArticleMeta({ article, className }: ArticleMetaProps) {
 
 interface ArticleCardProps {
   article: Article;
-  variant?: "default" | "compact" | "horizontal" | "featured";
+  variant?: "default" | "compact" | "horizontal" | "featured" | "supporting";
   className?: string;
 }
 
@@ -45,6 +45,7 @@ function CategoryKicker({ article }: { article: Article }) {
 }
 
 export function ArticleCard({ article, variant = "default", className }: ArticleCardProps) {
+  if (variant === "supporting") return <article className={cn("group min-w-0",className)}><Link href={getArticleHref(article)}><div className="relative aspect-video"><ArticleImage src={article.featuredImage} alt={article.title}/></div><h3 className="mt-3 text-xl font-bold leading-tight">{article.title}</h3></Link></article>;
   if (variant === "featured") {
     return (
       <article className={cn("group grid gap-5 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] md:gap-6", className)}>
@@ -82,7 +83,7 @@ export function ArticleCard({ article, variant = "default", className }: Article
         </div>
         <div className="min-w-0 flex-1">
           <CategoryKicker article={article} />
-          <h3 className="mt-1 line-clamp-2 font-sans text-base font-semibold leading-snug text-ink group-hover:text-accent">
+          <h3 className="mt-1 font-sans text-base font-semibold leading-snug text-ink group-hover:text-accent">
             <Link href={getArticleHref(article)}>{article.title}</Link>
           </h3>
           <ArticleMeta article={article} className="mt-2" />

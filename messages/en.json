@@ -59,7 +59,7 @@
     "saved": "Saved",
     "forYou": "For You",
     "signIn": "Sign in",
-    "subscribe": "Subscribe",
+    "subscribe": "Topic Preferences",
     "toggleMenu": "Toggle menu",
     "toggleSearch": "Toggle search",
     "searchLabel": "Search articles",
@@ -1142,5 +1142,28 @@
       "agreedBy": "Agreed by journalists’ organizations and press company organizations (AJI, PWI, IJTI, ATVLI, ATVSI, SPS, PRSSNI).",
       "acknowledgedBy": "Acknowledged by: Bagir Manan — Chair of the Press Council."
     }
+  },
+  "editorial": {
+    "previous": "Previous",
+    "next": "Next",
+    "watch": "Watch",
+    "latestVideos": "Latest videos",
+    "nextVideos": "Watch next",
+    "episodes": "Episodes",
+    "noVideos": "No videos have been published yet.",
+    "latest": "Read the latest news",
+    "editors": "Editor’s Picks",
+    "more": "More stories",
+    "topics": "Topics",
+    "search": "Search news",
+    "searchSubmit": "Search",
+    "headline": "Latest News",
+    "categories": "Categories",
+    "series": "Series",
+    "columns": "Opinion",
+    "saved": "Saved",
+    "forYou": "For You",
+    "noTopics": "Topics are not available yet. You can still read the latest news.",
+    "moreColumns": "More from this columnist"
   }
 }

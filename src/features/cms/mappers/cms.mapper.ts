@@ -35,6 +35,10 @@ export interface CmsArticleListItemDto {
   slug: string | null;
   summary: string | null;
   featured_image: string | null;
+  featured_image_alt?: string | null;
+  featured_image_caption?: string | null;
+  featured_image_credit?: string | null;
+
   status: ArticleStatus;
   translation_status?: TranslationStatus | null;
   placements?: ArticlePlacement[] | null;
@@ -59,6 +63,10 @@ export interface CmsArticleDetailDto {
   summary: string | null;
   content: string;
   featured_image: string | null;
+  featured_image_alt?: string | null;
+  featured_image_caption?: string | null;
+  featured_image_credit?: string | null;
+
   status: ArticleStatus;
   placements?: ArticlePlacement[] | null;
   headline_position?: number | null;
@@ -121,6 +129,9 @@ export function mapCmsArticleListItem(
     slug: dto.slug,
     summary: dto.summary,
     featuredImage: dto.featured_image,
+    featuredImageAlt: dto.featured_image_alt || null,
+    featuredImageCaption: dto.featured_image_caption || null,
+    featuredImageCredit: dto.featured_image_credit || null,
     status: dto.status,
     translationStatus: dto.translation_status ?? "none",
     placements: mapPlacements(dto.placements),
@@ -157,6 +168,9 @@ export function mapCmsArticleDetail(dto: CmsArticleDetailDto): CmsArticleDetail 
     summary: dto.summary,
     content: dto.content ?? "",
     featuredImage: dto.featured_image,
+    featuredImageAlt: dto.featured_image_alt || null,
+    featuredImageCaption: dto.featured_image_caption || null,
+    featuredImageCredit: dto.featured_image_credit || null,
     status: dto.status,
     placements: mapPlacements(dto.placements),
     headlinePosition:

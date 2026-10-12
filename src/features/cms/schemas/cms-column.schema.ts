@@ -1,9 +1,13 @@
 import { z } from "zod";
 
 export const cmsColumnEditorSchema = z.object({
+  categoryId:z.string().uuid().or(z.literal("")).optional(),
   title: z.string().trim().min(1, "Title is required").max(255),
   summary: z.string().trim().max(1000).optional().or(z.literal("")),
   content: z.string().trim().min(1, "Content is required"),
+  featuredImageAlt: z.string().max(500).optional(),
+  featuredImageCaption: z.string().max(1000).optional(),
+  featuredImageCredit: z.string().max(500).optional(),
   featuredImage: z
     .string()
     .trim()

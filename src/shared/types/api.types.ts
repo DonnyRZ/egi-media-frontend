@@ -56,6 +56,7 @@ export interface TaxonomyListParams {
 }
 
 export interface SeriesListParams {
+  topic_id?: string;
   page?: number;
   limit?: number;
   search?: string;
@@ -68,6 +69,10 @@ export interface NewsletterListParams {
 }
 
 export interface YoutubeVideoListParams {
+  format?: "horizontal" | "short";
+  category_id?: string;
+  program_id?: string;
+  collection_id?: string;
   page?: number;
   limit?: number;
   search?: string;

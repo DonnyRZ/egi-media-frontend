@@ -65,18 +65,16 @@ export function calculateReadingTime(text: string | null | undefined): number {
 }
 
 export function extractYoutubeId(url: string): string | null {
-  const patterns = [
-    /youtu\.be\/([^?&]+)/,
-    /youtube\.com\/watch\?v=([^&]+)/,
-    /youtube\.com\/embed\/([^?&]+)/,
-  ];
-
-  for (const pattern of patterns) {
-    const match = url.match(pattern);
-    if (match?.[1]) return match[1];
-  }
-
-  return null;
+  try {
+    const value = new URL(url);
+    if (!["http:", "https:"].includes(value.protocol) || value.username || value.password) return null;
+    const parts = value.pathname.split("/").filter(Boolean);
+    const hosts = ["youtube.com", "www.youtube.com", "m.youtube.com", "youtube-nocookie.com", "www.youtube-nocookie.com"];
+    const id = value.hostname === "youtu.be" ? parts[0]
+      : hosts.includes(value.hostname) ? (parts[0] === "watch" ? value.searchParams.get("v")
+        : ["shorts", "embed"].includes(parts[0]) ? parts[1] : null) : null;
+    return id && /^[A-Za-z0-9_-]{11}$/.test(id) ? id : null;
+  } catch { return null; }
 }
 
 export function getYoutubeThumbnail(url: string): string | null {

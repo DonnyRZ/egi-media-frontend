@@ -4,6 +4,8 @@ import createNextIntlPlugin from "next-intl/plugin";
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const nextConfig: NextConfig = {
+  // Bound build workers so production builds can coexist with Crawl on the VPS.
+  experimental: { cpus: 1 },
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "**" },

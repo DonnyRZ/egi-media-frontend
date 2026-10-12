@@ -5,18 +5,16 @@ import { useTranslations } from "next-intl";
 
 import { useCategoryDetail } from "@/features/categories/hooks/useCategoryDetail";
 import { Link } from "@/i18n/navigation";
-import { AdaptiveCardGrid } from "@/shared/components/common/AdaptiveCardGrid";
-import { ArticleCard } from "@/shared/components/common/ArticleCard";
+import { CategoryDesk } from "@/features/categories/components/CategoryDesk";
+import { ArticleTimeline } from "@/shared/components/common/ArticleTimeline";
 import { EmptyState } from "@/shared/components/common/EmptyState";
 import { ErrorState } from "@/shared/components/common/ErrorState";
 import { Pagination } from "@/shared/components/common/Pagination";
 import { TaxonomyLocaleShell } from "@/shared/components/common/TaxonomyLocaleShell";
-import { FrameHeading } from "@/shared/components/layout/FrameHeading";
 import { FrameModule } from "@/shared/components/layout/FrameModule";
 import { FramePageHero } from "@/shared/components/layout/FramePageHero";
 import { PageFrame } from "@/shared/components/layout/PageFrame";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
-import { HEADER_CATEGORY_I18N_KEYS } from "@/shared/constants/header-categories.constants";
 import { TAXONOMY_ARTICLES_PAGE_LIMIT } from "@/shared/constants/taxonomy.constants";
 
 interface CategoryDetailViewProps {
@@ -42,9 +40,6 @@ export function CategoryDetailView({ slug }: CategoryDetailViewProps) {
   const page = Math.max(1, Number(searchParams.get("page")) || 1);
   const { categoryQuery, articlesQuery } = useCategoryDetail(slug, page);
   const t = useTranslations("categoriesPage");
-  const tHubs = useTranslations("categoryHubs");
-  const tCommon = useTranslations("common");
-  const hubKey = HEADER_CATEGORY_I18N_KEYS[slug];
 
   const isLoading = categoryQuery.isLoading || articlesQuery.isLoading;
   const isError = categoryQuery.isError || articlesQuery.isError;
@@ -55,35 +50,21 @@ export function CategoryDetailView({ slug }: CategoryDetailViewProps) {
     void articlesQuery.refetch();
   }
 
-  const categoryDescription =
-    categoryQuery.data?.description ||
-    (hubKey ? tHubs(`${hubKey}.lede`) : null);
-
   const heroTitle = categoryQuery.data
-    ? hubKey
-      ? tHubs(`${hubKey}.headline`)
-      : categoryQuery.data.name
+    ? categoryQuery.data.name
     : categoryQuery.isLoading
       ? "…"
       : t("notFound");
 
   const articleItems =
     !isLoading && !isError ? articlesQuery.data?.items ?? [] : [];
-  const showFeatured = page === 1 && articleItems.length >= 3;
-  const gridItems = showFeatured ? articleItems.slice(1) : articleItems;
 
   const content = (
     <PageFrame>
       <FrameModule ariaLabelledby="category-detail-heading">
         <FramePageHero
-          kicker={
-            categoryQuery.data
-              ? hubKey
-                ? tHubs(`${hubKey}.kicker`)
-                : t("kicker")
-              : undefined
-          }
-          leading={
+          className="py-4 lg:py-4 sm:[&_h1]:text-[44px]"
+          actions={
             <Link
               className="text-xs font-semibold uppercase tracking-wide text-neutral-500 transition-colors hover:text-accent"
               href="/categories"
@@ -91,7 +72,6 @@ export function CategoryDetailView({ slug }: CategoryDetailViewProps) {
               ← {t("backToCategories")}
             </Link>
           }
-          lede={categoryQuery.data ? categoryDescription || undefined : undefined}
           title={heroTitle}
           titleId="category-detail-heading"
         />
@@ -113,7 +93,7 @@ export function CategoryDetailView({ slug }: CategoryDetailViewProps) {
         {!isLoading &&
         !isError &&
         categoryQuery.data &&
-        !articlesQuery.data?.items.length ? (
+        !articlesQuery.data?.items.length && page !== 1 ? (
           <div className="bg-white p-5">
             <EmptyState message={t("noArticles")} />
           </div>
@@ -122,37 +102,11 @@ export function CategoryDetailView({ slug }: CategoryDetailViewProps) {
         {!isLoading &&
         !isError &&
         categoryQuery.data &&
-        articlesQuery.data?.items.length ? (
+        articlesQuery.data ? (
           <>
-            {showFeatured ? (
-              <div className="border-b border-neutral-200 bg-white p-5">
-                <p className="kicker">{t("featuredKicker")}</p>
-                <div className="mt-3">
-                  <ArticleCard article={articleItems[0]} variant="featured" />
-                </div>
-              </div>
-            ) : null}
+            {page === 1 ? <CategoryDesk categoryId={categoryQuery.data.id} articles={articleItems}/> : <div className="p-5"><ArticleTimeline articles={articleItems}/></div>}
 
-            {gridItems.length > 0 ? (
-              <>
-                <FrameHeading
-                  id="category-articles-grid-heading"
-                  subtitle={tCommon("articleCount", {
-                    count: articlesQuery.data.total,
-                  })}
-                  title={t("articlesHeading")}
-                />
-                <AdaptiveCardGrid
-                  items={gridItems}
-                  keyForItem={(article) => article.id}
-                  renderItem={(article) => (
-                    <ArticleCard article={article} className="bg-white p-5" />
-                  )}
-                />
-              </>
-            ) : null}
-
-            {articlesQuery.data.totalPages > 1 ? (
+          {articlesQuery.data.totalPages > 1 ? (
               <div className="bg-white p-5">
                 <Pagination
                   basePath={`/categories/${slug}`}

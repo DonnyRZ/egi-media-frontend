@@ -10,6 +10,7 @@ import { FramePageHero } from "@/shared/components/layout/FramePageHero";
 
 export function ColumnsHero() {
   const t = useTranslations("columnsPage");
+  const tEditorial = useTranslations("editorial");
   const isHydrated = useAuthStore((state) => state.isHydrated);
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
@@ -40,9 +41,7 @@ export function ColumnsHero() {
     <FrameModule ariaLabelledby="columns-hero-heading">
       <FramePageHero
         actions={actions}
-        kicker={t("kicker")}
-        lede={t("lede")}
-        title={t("headline")}
+        title={tEditorial("columns")}
         titleId="columns-hero-heading"
       />
     </FrameModule>

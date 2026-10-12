@@ -83,6 +83,8 @@ export function SavedArticlesView() {
     !hasArticles &&
     !hasColumns;
 
+  if(bothEmpty) return <FrameModule><div className="p-5"><EmptyState message={t("empty")}/></div></FrameModule>;
+
   return (
     <>
       <FrameModule ariaLabelledby="saved-articles-heading">

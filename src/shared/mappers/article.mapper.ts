@@ -31,6 +31,10 @@ export interface ArticleListItemDto {
   slug: string;
   summary: string | null;
   featured_image: string | null;
+  featured_image_alt?: string | null;
+  featured_image_caption?: string | null;
+  featured_image_credit?: string | null;
+
   published_at: string | null;
   author: ArticleAuthorDto;
   category: ArticleCategoryDto | null;
@@ -75,6 +79,9 @@ export function mapArticleDto(dto: ArticleListItemDto): Article {
     summary: dto.summary,
     // Seed by article id so placeholder image stays stable across locales.
     featuredImage: resolveImageUrl(dto.featured_image, dto.id),
+    featuredImageAlt: dto.featured_image_alt || null,
+    featuredImageCaption: dto.featured_image_caption || null,
+    featuredImageCredit: dto.featured_image_credit || null,
     publishedAt: dto.published_at,
     author: {
       id: dto.author.id,

@@ -54,7 +54,7 @@ export function SearchResultSection({ query, kind }: SearchSectionProps) {
   const t = useTranslations("searchPage");
   const result = model.result;
   return (
-    <section className="border-t border-neutral-200 px-5 py-5">
+    <section className="border-t border-neutral-200 px-4 md:px-5 py-5">
       <h2 className="text-xl font-bold">
         {t(kind === "articles" ? "articlesHeading" : "columnsHeading")}
       </h2>

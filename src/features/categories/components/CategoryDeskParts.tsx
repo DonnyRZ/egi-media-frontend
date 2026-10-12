@@ -240,7 +240,7 @@ export function CategoryLatestGrid({ articles }: { articles: Article[] }) {
 
 export function DeskNotices({ model }: DeskPartProps) {
   return model.selection.isError ? (
-    <div className="p-5">
+    <div className="px-4 py-5 md:p-5">
       <ErrorState onRetry={() => void model.selection.refetch()} />
     </div>
   ) : null;
@@ -329,7 +329,7 @@ export function DeskContinuation({ model }: DeskPartProps) {
 export function DeskEmptyNotice({ model }: DeskPartProps) {
   const t = useTranslations("categoriesPage");
   return !model.selection.isLoading && !model.lead ? (
-    <div className="p-5">
+    <div className="px-4 py-5 md:p-5">
       <EmptyState message={t("noArticles")} />
     </div>
   ) : null;

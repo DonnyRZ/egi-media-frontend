@@ -18,7 +18,7 @@ function ListSkeleton() {
   return (
     <div className="divide-y divide-neutral-100 bg-white">
       {Array.from({ length: 6 }).map((_, index) => (
-        <div className="flex items-start gap-4 px-4 py-4 sm:px-5" key={index}>
+        <div className="flex items-start gap-4 px-4 py-4 md:px-5" key={index}>
           <Skeleton className="h-10 w-10 flex-none rounded-full" />
           <div className="flex-1 space-y-2">
             <Skeleton className="h-4 w-1/3" />
@@ -51,7 +51,7 @@ export function NotificationsView() {
   if (!isAuthenticated) {
     return (
       <FrameModule>
-        <div className="bg-white p-5">
+        <div className="bg-white px-4 py-5 md:p-5">
           <NotificationsSignInPrompt />
         </div>
       </FrameModule>
@@ -62,7 +62,7 @@ export function NotificationsView() {
 
   return (
     <FrameModule ariaLabelledby="notifications-listing-heading">
-      <div className="flex items-end justify-between gap-4 border-b border-neutral-200 bg-white px-5 py-3">
+      <div className="flex items-end justify-between gap-4 border-b border-neutral-200 bg-white px-4 md:px-5 py-3">
         <h2
           className="text-lg font-bold uppercase tracking-wide text-ink sm:text-xl"
           id="notifications-listing-heading"
@@ -82,13 +82,13 @@ export function NotificationsView() {
       {isLoading ? <ListSkeleton /> : null}
 
       {isError ? (
-        <div className="bg-white p-5">
+        <div className="bg-white px-4 py-5 md:p-5">
           <ErrorState message={error?.message} onRetry={() => void refetch()} />
         </div>
       ) : null}
 
       {!isLoading && !isError && !hasItems ? (
-        <div className="bg-white p-5">
+        <div className="bg-white px-4 py-5 md:p-5">
           <EmptyState message={t("empty")} />
         </div>
       ) : null}
@@ -105,7 +105,7 @@ export function NotificationsView() {
             ))}
           </div>
           {data.totalPages > 1 ? (
-            <div className="bg-white p-5">
+            <div className="bg-white px-4 py-5 md:p-5">
               <Pagination
                 basePath="/notifications"
                 currentPage={data.page}

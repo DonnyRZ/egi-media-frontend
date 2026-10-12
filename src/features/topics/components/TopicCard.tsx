@@ -3,19 +3,21 @@
 import { useTranslations } from "next-intl";
 
 import { Link } from "@/i18n/navigation";
+import { cn } from "@/shared/lib/cn";
 import type { Topic } from "@/shared/types/topic.types";
 
 interface TopicCardProps {
   topic: Topic;
   variant?: "default" | "featured";
+  className?: string;
 }
 
-export function TopicCard({ topic, variant = "default" }: TopicCardProps) {
+export function TopicCard({ topic, variant = "default", className }: TopicCardProps) {
   const t = useTranslations("topicsPage");
 
   if (variant === "featured") {
     return (
-      <article className="group border-b border-neutral-200 pb-8 lg:pb-10">
+      <article className={cn("group border-b border-neutral-200 pb-8 lg:pb-10", className)}>
         <p className="kicker">{t("featuredKicker")}</p>
         <h2 className="mt-3 font-sans text-3xl font-bold leading-tight text-ink transition-colors group-hover:text-accent sm:text-4xl">
           <Link href={`/topics/${topic.slug}`}>{topic.name}</Link>
@@ -36,7 +38,7 @@ export function TopicCard({ topic, variant = "default" }: TopicCardProps) {
   }
 
   return (
-    <article className="group flex h-full flex-col p-5">
+    <article className={cn("group flex h-full flex-col px-4 py-5 md:p-5", className)}>
       <p className="kicker">{t("kicker")}</p>
       <h3 className="mt-2 font-sans text-xl font-bold leading-snug text-ink transition-colors group-hover:text-accent">
         <Link href={`/topics/${topic.slug}`}>{topic.name}</Link>

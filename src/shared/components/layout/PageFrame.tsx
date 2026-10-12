@@ -15,7 +15,7 @@ interface PageFrameProps {
  */
 export function PageFrame({ children, className }: PageFrameProps) {
   return (
-    <Container className={cn("py-0", className)}>
+    <Container className={cn("px-0 py-0 md:px-6 lg:px-8", className)}>
       <ContentFrame>{children}</ContentFrame>
     </Container>
   );

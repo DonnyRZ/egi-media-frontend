@@ -5,11 +5,13 @@ import { useFormatter, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { ArticleImage } from "@/shared/components/common/ArticleImage";
 import { DATE_FORMAT } from "@/shared/constants/format.constants";
+import { cn } from "@/shared/lib/cn";
 import type { Series } from "@/shared/types/series.types";
 
 interface SeriesCardProps {
   series: Series;
   variant?: "default" | "featured";
+  className?: string;
 }
 
 function SeriesCover({
@@ -30,14 +32,14 @@ function SeriesCover({
   );
 }
 
-export function SeriesCard({ series, variant = "default" }: SeriesCardProps) {
+export function SeriesCard({ series, variant = "default", className }: SeriesCardProps) {
   const t = useTranslations("seriesPage");
   const tCommon = useTranslations("common");
   const format = useFormatter();
 
   if (variant === "featured") {
     return (
-      <article className="group grid gap-6 border-b border-neutral-200 pb-8 lg:grid-cols-[1.2fr_1fr] lg:gap-10 lg:pb-10">
+      <article className={cn("group grid gap-6 border-b border-neutral-200 pb-8 lg:grid-cols-[1.2fr_1fr] lg:gap-10 lg:pb-10", className)}>
         <Link className="block" href={`/series/${series.slug}`}>
           <SeriesCover className="aspect-[16/9]" series={series} />
         </Link>
@@ -76,7 +78,7 @@ export function SeriesCard({ series, variant = "default" }: SeriesCardProps) {
   }
 
   return (
-    <article className="group flex h-full flex-col bg-white p-5">
+    <article className={cn("group flex h-full flex-col bg-white px-4 py-5 md:p-5", className)}>
       <Link className="block" href={`/series/${series.slug}`}>
         <SeriesCover className="aspect-[16/9]" series={series} />
       </Link>

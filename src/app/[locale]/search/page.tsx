@@ -27,7 +27,7 @@ function SearchFallback() {
   return (
     <PageFrame>
       <FrameModule>
-        <div className="bg-white px-5 py-6 lg:py-8">
+        <div className="bg-white px-4 md:px-5 py-6 lg:py-8">
           <Skeleton className="h-3 w-20" />
           <Skeleton className="mt-2 h-10 w-2/3" />
           <Skeleton className="mt-3 h-4 w-full max-w-2xl" />
@@ -36,7 +36,7 @@ function SearchFallback() {
       <FrameModule>
         <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 6 }).map((_, index) => (
-            <div key={index} className="space-y-3 bg-white p-5">
+            <div key={index} className="space-y-3 bg-white px-4 py-5 md:p-5">
               <Skeleton className="aspect-[16/9] w-full" />
               <Skeleton className="h-3 w-20" />
               <Skeleton className="h-6 w-3/4" />

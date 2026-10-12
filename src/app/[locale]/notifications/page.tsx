@@ -29,7 +29,7 @@ function ViewFallback() {
     <FrameModule>
       <div className="divide-y divide-neutral-100 bg-white">
         {Array.from({ length: 6 }).map((_, index) => (
-          <div className="flex items-start gap-4 px-4 py-4 sm:px-5" key={index}>
+          <div className="flex items-start gap-4 px-4 py-4 md:px-5" key={index}>
             <Skeleton className="h-10 w-10 flex-none rounded-full" />
             <div className="flex-1 space-y-2">
               <Skeleton className="h-4 w-1/3" />

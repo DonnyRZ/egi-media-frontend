@@ -14,7 +14,7 @@ import { getArticleHref } from "@/shared/utils/article-path";
 
 function RankedItem({ article, rank }: { article: Article; rank: number }) {
   return (
-    <div className="flex gap-4 bg-white p-5">
+    <div className="flex gap-4 bg-white px-4 py-5 md:p-5">
       <span
         aria-hidden="true"
         className="font-sans text-3xl font-bold leading-none text-neutral-300"
@@ -56,7 +56,7 @@ export function EditorsPickSection() {
       {isLoading ? (
         <div className="grid grid-cols-1 gap-px bg-neutral-200">
           {Array.from({ length: 6 }).map((_, index) => (
-            <div key={index} className="flex gap-4 bg-white p-5">
+            <div key={index} className="flex gap-4 bg-white px-4 py-5 md:p-5">
               <Skeleton className="h-8 w-6" />
               <div className="flex-1 space-y-2">
                 <Skeleton className="h-3 w-20" />
@@ -69,7 +69,7 @@ export function EditorsPickSection() {
       ) : null}
 
       {isError ? (
-        <div className="bg-white p-5">
+        <div className="bg-white px-4 py-5 md:p-5">
           <ErrorState message={error?.message} onRetry={() => void refetch()} />
         </div>
       ) : null}

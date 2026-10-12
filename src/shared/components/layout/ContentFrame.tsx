@@ -9,13 +9,15 @@ interface ContentFrameProps {
 
 /**
  * Single outer content frame for dense Bloomberg-style stacks.
+ * Mobile uses horizontal rules only; modules supply the content gutters.
  * Visible children are separated by hairline divide-y rules; null siblings are omitted.
  */
 export function ContentFrame({ children, className }: ContentFrameProps) {
   return (
     <div
+      data-editorial-frame
       className={cn(
-        "border border-neutral-200 divide-y divide-neutral-200 bg-white",
+        "border-y border-neutral-200 divide-y divide-neutral-200 bg-white md:border",
         className,
       )}
     >

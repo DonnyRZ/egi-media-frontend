@@ -21,7 +21,7 @@ export default async function Preview({
   const articles = previewArticles;
   return (
     <PageFrame>
-      <div className="p-5">
+      <div className="px-4 py-5 md:p-5">
         <p className="kicker">Preview lokal · data fixture</p>
         <h1 className="mt-2 text-4xl font-bold">Bisnis</h1>
         <nav className="mt-4 flex gap-6 border-t border-neutral-200 pt-4">
@@ -34,10 +34,10 @@ export default async function Preview({
         supporting={articles.slice(1, 4)}
         latest={articles.slice(4, 8)}
       />
-      <div className="p-5">
+      <div className="px-4 py-5 md:p-5">
         <ArticleTimeline articles={articles.slice(8)} />
       </div>
-      <div className="mx-auto max-w-[1040px] p-5">
+      <div className="mx-auto max-w-[1040px] px-4 py-5 md:p-5">
         <ArticleHeader article={articles[0]} />
       </div>
       <PreviewVideoAndShorts />
@@ -49,7 +49,7 @@ function PreviewVideoAndShorts() {
   const articles = previewArticles,
     video = previewVideo;
   return (
-    <div className="bg-[#060b18] p-5 text-white">
+    <div className="bg-[#060b18] px-4 py-5 md:p-5 text-white">
       <div className="grid items-center gap-6 md:grid-cols-[1fr_2fr]">
         <h2 className="text-3xl font-bold">{video.title}</h2>
         <div className="relative aspect-video">

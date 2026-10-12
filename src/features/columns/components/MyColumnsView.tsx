@@ -78,7 +78,7 @@ export function MyColumnsView() {
       <PageFrame>
         {hero}
         <FrameModule>
-          <div className="bg-white p-5">
+          <div className="bg-white px-4 py-5 md:p-5">
             <Skeleton className="h-40 w-full" />
           </div>
         </FrameModule>
@@ -91,7 +91,7 @@ export function MyColumnsView() {
       <PageFrame>
         {hero}
         <FrameModule>
-          <div className="bg-white p-5">
+          <div className="bg-white px-4 py-5 md:p-5">
             <ColumnsSignInPrompt />
           </div>
         </FrameModule>
@@ -109,13 +109,13 @@ export function MyColumnsView() {
         </h2>
 
         {isLoading ? (
-          <div className="bg-white p-5">
+          <div className="bg-white px-4 py-5 md:p-5">
             <Skeleton className="h-48 w-full" />
           </div>
         ) : null}
 
         {isError ? (
-          <div className="bg-white p-5">
+          <div className="bg-white px-4 py-5 md:p-5">
             <ErrorState
               message={error?.message}
               onRetry={() => void refetch()}
@@ -124,7 +124,7 @@ export function MyColumnsView() {
         ) : null}
 
         {!isLoading && !isError && !data?.items.length ? (
-          <div className="bg-white p-5">
+          <div className="bg-white px-4 py-5 md:p-5">
             <EmptyState message={t("myColumnsEmpty")} />
           </div>
         ) : null}
@@ -134,7 +134,7 @@ export function MyColumnsView() {
             <ul className="divide-y divide-neutral-200 bg-white">
               {data.items.map((column) => (
                 <li
-                  className="flex flex-col gap-4 p-5 sm:flex-row sm:items-start sm:justify-between"
+                  className="flex flex-col gap-4 px-4 py-5 md:p-5 sm:flex-row sm:items-start sm:justify-between"
                   key={column.id}
                 >
                   <div className="min-w-0 flex-1">
@@ -210,7 +210,7 @@ export function MyColumnsView() {
               ))}
             </ul>
             {data.totalPages > 1 ? (
-              <div className="bg-white p-5">
+              <div className="bg-white px-4 py-5 md:p-5">
                 <Pagination
                   basePath="/kolom/saya"
                   currentPage={data.page}

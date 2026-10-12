@@ -54,7 +54,7 @@ function ProgramEpisodes({ model }: ProgramModelProps) {
 export function VideoProgram({ slug }: { slug: string }) {
   const model = useVideoProgram(slug);
   return (
-    <div className="bg-[#050a16] p-5 text-white lg:p-8">
+    <div className="bg-[#050a16] px-4 py-5 md:p-5 text-white lg:p-8">
       <Link
         className="inline-flex min-h-11 items-center underline"
         href="/videos"

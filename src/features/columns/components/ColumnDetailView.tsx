@@ -59,7 +59,7 @@ export function ColumnDetailView({ slug }: ColumnDetailViewProps) {
     return (
       <PageFrame>
         <FrameModule>
-          <div className="bg-white p-5 lg:p-8">
+          <div className="bg-white px-4 py-5 md:p-5 lg:p-8">
             <div className="mb-4">{backLink}</div>
             <DetailSkeleton />
           </div>
@@ -72,7 +72,7 @@ export function ColumnDetailView({ slug }: ColumnDetailViewProps) {
     return (
       <PageFrame>
         <FrameModule>
-          <div className="bg-white p-5 lg:p-8">
+          <div className="bg-white px-4 py-5 md:p-5 lg:p-8">
             <div className="mb-4">{backLink}</div>
             <ErrorState
               message={error?.message}
@@ -101,7 +101,7 @@ export function ColumnDetailView({ slug }: ColumnDetailViewProps) {
   return (
     <PageFrame>
       <FrameModule ariaLabelledby="column-detail-heading">
-        <div className="bg-white p-5 lg:p-8">
+        <div className="bg-white px-4 py-5 md:p-5 lg:p-8">
           <div className="mx-auto max-w-[1040px]">
             <div className="mb-4">{backLink}</div>
             <p className="kicker">{t("kicker")}</p>
@@ -150,7 +150,7 @@ export function ColumnDetailView({ slug }: ColumnDetailViewProps) {
       </FrameModule>
 
       <FrameModule>
-        <div className="bg-white p-5 lg:p-8">
+        <div className="bg-white px-4 py-5 md:p-5 lg:p-8">
           <div className="mx-auto max-w-3xl">
             <ArticleBody content={data.content} />
             <ColumnAuthor author={data.author} showBio/>

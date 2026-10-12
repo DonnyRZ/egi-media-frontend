@@ -81,7 +81,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     <ArticleLocaleShell article={article}>
       <PageFrame>
         <FrameModule>
-          <div className="bg-white p-5 lg:p-8">
+          <div className="bg-white px-4 py-5 md:p-5 lg:p-8">
             <div className="mx-auto max-w-[1040px]">
               <ArticleHeader article={article} />
               <div className="mt-4">
@@ -98,7 +98,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         </FrameModule>
 
         <FrameModule>
-          <div className="bg-white p-5 lg:p-8">
+          <div className="bg-white px-4 py-5 md:p-5 lg:p-8">
             <div className="mx-auto max-w-3xl">
               <ArticleBody content={article.content} />
             </div>

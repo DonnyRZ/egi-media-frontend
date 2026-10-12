@@ -71,7 +71,7 @@ export function VideoDetail({ id }: { id: string }) {
   const model = useVideoDetail(id);
   const t = useTranslations("editorial");
   return (
-    <div className="bg-[#050a16] p-5 text-white lg:p-8">
+    <div className="bg-[#050a16] px-4 py-5 md:p-5 text-white lg:p-8">
       <Link
         className="inline-flex min-h-11 items-center text-sm underline"
         href={model.video.data?.format === "short" ? "/shorts" : "/videos"}

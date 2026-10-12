@@ -75,7 +75,7 @@ export function FeaturedVideosSection() {
       ) : null}
 
       {isError ? (
-        <div className="bg-white p-5">
+        <div className="bg-white px-4 py-5 md:p-5">
           <ErrorState message={error?.message} onRetry={() => void refetch()} />
         </div>
       ) : null}

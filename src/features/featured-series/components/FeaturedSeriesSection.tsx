@@ -30,7 +30,7 @@ export function FeaturedSeriesSection() {
       {isLoading ? (
         <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 3 }).map((_, index) => (
-            <div key={index} className="space-y-3 bg-white p-5">
+            <div key={index} className="space-y-3 bg-white px-4 py-5 md:p-5">
               <Skeleton className="aspect-[16/9] w-full" />
               <Skeleton className="h-4 w-20" />
               <Skeleton className="h-6 w-3/4" />
@@ -41,7 +41,7 @@ export function FeaturedSeriesSection() {
       ) : null}
 
       {isError ? (
-        <div className="bg-white p-5">
+        <div className="bg-white px-4 py-5 md:p-5">
           <ErrorState message={error?.message} onRetry={() => void refetch()} />
         </div>
       ) : null}

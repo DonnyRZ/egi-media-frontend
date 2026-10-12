@@ -17,7 +17,7 @@ export function HeroFeaturedCard({ article }: HeroFeaturedCardProps) {
   const format = useFormatter();
 
   return (
-    <article className="group mx-auto max-w-[560px] bg-white p-4 min-[1200px]:p-5">
+    <article className="group mx-auto bg-white p-4 md:max-w-[560px] min-[1200px]:p-5">
       <Link href={getArticleHref(article)}>
         <div className="relative aspect-[16/9] overflow-hidden">
           <ArticleImage

@@ -1,8 +1,7 @@
 import { setRequestLocale } from "next-intl/server";
 
 import { HeroSection } from "@/features/hero-section/components/HeroSection";
-import { Container } from "@/shared/components/layout/Container";
-import { ContentFrame } from "@/shared/components/layout/ContentFrame";
+import { PageFrame } from "@/shared/components/layout/PageFrame";
 
 import { BreakingNewsSection } from "@/features/breaking-news/components/BreakingNewsSection";
 
@@ -29,18 +28,16 @@ export default async function HomePage({ params }: HomePageProps) {
   setRequestLocale(locale);
 
   return (
-    <Container className="py-0">
-      <ContentFrame>
-        <HeroSection />
-        <BreakingNewsSection />
-        <LatestNewsSection />
-        <EditorsPickSection />
-        <CategoryNewsSection />
-        <TopicNewsSection />
-        <FeaturedSeriesSection />
-        <FeaturedVideosSection />
-        <ForYouSection />
-      </ContentFrame>
-    </Container>
+    <PageFrame>
+      <HeroSection />
+      <BreakingNewsSection />
+      <LatestNewsSection />
+      <EditorsPickSection />
+      <CategoryNewsSection />
+      <TopicNewsSection />
+      <FeaturedSeriesSection />
+      <FeaturedVideosSection />
+      <ForYouSection />
+    </PageFrame>
   );
 }

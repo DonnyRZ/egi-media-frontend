@@ -21,17 +21,17 @@ export function RelatedColumns({
   const items = query.data?.items.filter((c) => c.id !== id).slice(0, 4) || [];
   if (query.isError)
     return (
-      <div className="p-5">
+      <div className="px-4 py-5 md:p-5">
         <ErrorState onRetry={() => void query.refetch()} />
       </div>
     );
   if (!items.length) return null;
   return (
-    <section className="border-t border-neutral-200 p-5 lg:p-8">
+    <section className="border-t border-neutral-200 px-4 py-5 md:p-5 lg:p-8">
       <h2 className="mb-5 text-xl font-bold">{t("moreColumns")}</h2>
       <div className="grid gap-6 sm:grid-cols-2">
         {items.map((column) => (
-          <ColumnCard key={column.id} column={column} />
+          <ColumnCard key={column.id} column={column} className="max-md:px-0" />
         ))}
       </div>
     </section>

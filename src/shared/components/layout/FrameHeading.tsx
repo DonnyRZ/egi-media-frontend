@@ -28,7 +28,7 @@ export function FrameHeading({
   return (
     <div
       className={cn(
-        "border-b border-neutral-200 bg-white px-5 py-3",
+        "border-b border-neutral-200 bg-white px-4 py-3 md:px-5",
         className,
       )}
     >

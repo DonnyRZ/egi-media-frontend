@@ -30,10 +30,10 @@ export function SeriesDetailView({ slug }: SeriesDetailViewProps) {
       <PageFrame>
         <FrameModule>
           <div className="grid gap-px bg-neutral-200 lg:grid-cols-[1.2fr_1fr]">
-            <div className="bg-white p-5">
+            <div className="bg-white px-4 py-5 md:p-5">
               <Skeleton className="aspect-[16/9] w-full" />
             </div>
-            <div className="space-y-3 bg-white p-5">
+            <div className="space-y-3 bg-white px-4 py-5 md:p-5">
               <Skeleton className="h-3 w-24" />
               <Skeleton className="h-10 w-2/3" />
               <Skeleton className="h-4 w-full" />
@@ -43,7 +43,7 @@ export function SeriesDetailView({ slug }: SeriesDetailViewProps) {
         <FrameModule>
           <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
             {Array.from({ length: 6 }).map((_, index) => (
-              <div key={index} className="space-y-3 bg-white p-5">
+              <div key={index} className="space-y-3 bg-white px-4 py-5 md:p-5">
                 <Skeleton className="aspect-[16/9] w-full" />
                 <Skeleton className="h-4 w-24" />
                 <Skeleton className="h-6 w-full" />
@@ -59,7 +59,7 @@ export function SeriesDetailView({ slug }: SeriesDetailViewProps) {
     return (
       <PageFrame>
         <FrameModule>
-          <div className="bg-white p-5">
+          <div className="bg-white px-4 py-5 md:p-5">
             <ErrorState message={error?.message} onRetry={() => void refetch()} />
           </div>
         </FrameModule>
@@ -71,7 +71,7 @@ export function SeriesDetailView({ slug }: SeriesDetailViewProps) {
     return (
       <PageFrame>
         <FrameModule>
-          <div className="bg-white p-5">
+          <div className="bg-white px-4 py-5 md:p-5">
             <EmptyState message={t("notFound")} />
           </div>
         </FrameModule>
@@ -91,7 +91,7 @@ export function SeriesDetailView({ slug }: SeriesDetailViewProps) {
               src={data.coverImage}
             />
           </div>
-          <div className="bg-white p-5 lg:p-8">
+          <div className="bg-white px-4 py-5 md:p-5 lg:p-8">
             <div className="flex flex-wrap items-center gap-3">
               <Link
                 className="text-xs font-semibold uppercase tracking-wide text-neutral-500 transition-colors hover:text-accent"
@@ -132,7 +132,7 @@ export function SeriesDetailView({ slug }: SeriesDetailViewProps) {
         <FrameHeading id="series-articles-heading" title={t("articlesInSeries")} />
 
         {!data.articles.length ? (
-          <div className="bg-white p-5">
+          <div className="bg-white px-4 py-5 md:p-5">
             <EmptyState message={t("noArticles")} />
           </div>
         ) : (
@@ -140,7 +140,7 @@ export function SeriesDetailView({ slug }: SeriesDetailViewProps) {
             items={data.articles}
             keyForItem={(article) => article.id}
             renderItem={(article) => (
-              <ArticleCard article={article} className="bg-white p-5" />
+              <ArticleCard article={article} className="bg-white px-4 py-5 md:p-5" />
             )}
           />
         )}

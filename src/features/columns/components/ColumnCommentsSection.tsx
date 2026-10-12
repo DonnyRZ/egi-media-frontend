@@ -184,7 +184,7 @@ function CommentItem({
       )}
       style={depth > 0 ? { marginLeft: Math.min(depth, 4) * 16 } : undefined}
     >
-      <div className={cn("p-5", depth > 0 && "bg-neutral-50/60")}>
+      <div className={cn("px-4 py-5 md:p-5", depth > 0 ? "bg-neutral-50/60" : "max-md:px-0")}>
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
             <p className="text-sm font-semibold text-ink">
@@ -321,7 +321,7 @@ export function ColumnCommentsSection({
   }
 
   return (
-    <div className="bg-white p-5 lg:p-8">
+    <div className="bg-white px-4 py-5 md:p-5 lg:p-8">
       <div className="mx-auto max-w-3xl">
         <div className="mb-6 flex items-end justify-between gap-4">
           <h2

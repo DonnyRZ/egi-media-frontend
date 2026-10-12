@@ -16,7 +16,7 @@ import { Skeleton } from "@/shared/components/ui/Skeleton";
 
 function ListSkeleton() {
   return (
-    <div className="space-y-8 bg-white p-5">
+    <div className="space-y-8 bg-white px-4 py-5 md:p-5">
       {Array.from({ length: 3 }).map((_, index) => (
         <div className="space-y-3" key={index}>
           <Skeleton className="h-6 w-40" />
@@ -48,7 +48,7 @@ export function TopicSubscriptionsView() {
   if (!isAuthenticated) {
     return (
       <FrameModule>
-        <div className="bg-white p-5">
+        <div className="bg-white px-4 py-5 md:p-5">
           <TopicSubscriptionsSignInPrompt />
         </div>
       </FrameModule>
@@ -72,7 +72,7 @@ export function TopicSubscriptionsView() {
       {isLoading ? <ListSkeleton /> : null}
 
       {!isLoading && isCatalogError ? (
-        <div className="bg-white p-5">
+        <div className="bg-white px-4 py-5 md:p-5">
           <ErrorState
             message={
               catalog.error instanceof Error ? catalog.error.message : undefined
@@ -86,13 +86,13 @@ export function TopicSubscriptionsView() {
       ) : null}
 
       {!isLoading && !isCatalogError && !hasGroups ? (
-        <div className="bg-white p-5">
+        <div className="bg-white px-4 py-5 md:p-5">
           <EmptyState message={t("empty")} />
         </div>
       ) : null}
 
       {!isLoading && !isCatalogError && hasGroups ? (
-        <div className="space-y-10 bg-white p-5">
+        <div className="space-y-10 bg-white px-4 py-5 md:p-5">
           {groups.map((group) => (
             <TopicSubscriptionGroupBlock
               errorFor={errorFor}

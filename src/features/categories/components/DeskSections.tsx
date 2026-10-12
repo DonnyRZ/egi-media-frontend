@@ -23,13 +23,13 @@ export function TopicSection({
   });
   if (articles.isError)
     return (
-      <div className="p-5">
+      <div className="px-4 py-5 md:p-5">
         <ErrorState onRetry={() => void articles.refetch()} />
       </div>
     );
   if ((articles.data?.items.length || 0) < 2) return null;
   return (
-    <section className="border-t border-neutral-200 p-5">
+    <section className="border-t border-neutral-200 px-4 py-5 md:p-5">
       <h2 className="mb-4 text-xl font-bold">
         <Link href={`/topics/${topic.slug}`}>{topic.name} →</Link>
       </h2>
@@ -51,17 +51,17 @@ export function TopicSeries({ topicId }: { topicId: string }) {
   const items = series.data?.items.filter((s) => s.articleCount > 0) || [];
   if (series.isError)
     return (
-      <div className="p-5">
+      <div className="px-4 py-5 md:p-5">
         <ErrorState onRetry={() => void series.refetch()} />
       </div>
     );
   if (!items.length) return null;
   return (
-    <section className="border-t border-neutral-200 p-5">
+    <section className="border-t border-neutral-200 px-4 py-5 md:p-5">
       <h2 className="mb-4 text-xl font-bold">{t("series")}</h2>
       <div className="grid gap-5 sm:grid-cols-2">
         {items.map((s) => (
-          <SeriesCard key={s.id} series={s} />
+          <SeriesCard key={s.id} series={s} className="max-md:px-0" />
         ))}
       </div>
     </section>
@@ -76,18 +76,19 @@ export function DeskColumns({ categoryId }: { categoryId: string }) {
   });
   if (columns.isError)
     return (
-      <div className="p-5">
+      <div className="px-4 py-5 md:p-5">
         <ErrorState onRetry={() => void columns.refetch()} />
       </div>
     );
   if (!columns.data?.items.length) return null;
   return (
-    <section className="border-t border-neutral-200 bg-primary-100/40 p-5">
+    <section className="border-t border-neutral-200 bg-primary-100/40 px-4 py-5 md:p-5">
       <h2 className="mb-4 text-xl font-bold">{t("columns")}</h2>
       {columns.data.items.map((c, i) => (
         <ColumnCard
           key={c.id}
           column={c}
+          className="max-md:px-0"
           variant={i === 0 ? "featured" : "row"}
         />
       ))}

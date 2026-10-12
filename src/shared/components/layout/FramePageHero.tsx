@@ -26,7 +26,7 @@ export function FramePageHero({
   className,
 }: FramePageHeroProps) {
   return (
-    <div className={cn("bg-white px-5 py-5 lg:py-6", className)}>
+    <div className={cn("bg-white px-4 py-5 md:px-5 lg:py-6", className)}>
       {leading ? <div className="mb-3">{leading}</div> : null}
       {kicker ? <p className="kicker">{kicker}</p> : null}
       <div

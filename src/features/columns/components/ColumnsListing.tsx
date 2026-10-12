@@ -18,10 +18,10 @@ function ColumnsSkeleton() {
   return (
     <>
       <div className="grid gap-px bg-neutral-200 lg:grid-cols-[1.2fr_1fr]">
-        <div className="bg-white p-5">
+        <div className="bg-white px-4 py-5 md:p-5">
           <Skeleton className="aspect-[16/9] w-full" />
         </div>
-        <div className="space-y-3 bg-white p-5">
+        <div className="space-y-3 bg-white px-4 py-5 md:p-5">
           <Skeleton className="h-3 w-28" />
           <Skeleton className="h-8 w-3/4" />
           <Skeleton className="h-4 w-full" />
@@ -30,7 +30,7 @@ function ColumnsSkeleton() {
       </div>
       <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
         {Array.from({ length: 6 }).map((_, index) => (
-          <div className="space-y-3 bg-white p-5" key={index}>
+          <div className="space-y-3 bg-white px-4 py-5 md:p-5" key={index}>
             <Skeleton className="aspect-[16/9] w-full" />
             <Skeleton className="h-3 w-20" />
             <Skeleton className="h-6 w-3/4" />
@@ -61,13 +61,13 @@ export function ColumnsListing() {
       {isLoading ? <ColumnsSkeleton /> : null}
 
       {isError ? (
-        <div className="bg-white p-5">
+        <div className="bg-white px-4 py-5 md:p-5">
           <ErrorState message={error?.message} onRetry={() => void refetch()} />
         </div>
       ) : null}
 
       {!isLoading && !isError && !data?.items.length ? (
-        <div className="bg-white p-5">
+        <div className="bg-white px-4 py-5 md:p-5">
           <EmptyState message={t("empty")} />
         </div>
       ) : null}
@@ -96,7 +96,7 @@ export function ColumnsListing() {
           ) : null}
 
           {data.totalPages > 1 ? (
-            <div className="bg-white p-5">
+            <div className="bg-white px-4 py-5 md:p-5">
               <Pagination
                 basePath="/kolom"
                 currentPage={data.page}

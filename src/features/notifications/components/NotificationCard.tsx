@@ -26,7 +26,7 @@ export function NotificationCard({
   return (
     <article
       className={cn(
-        "flex items-start gap-4 border-l-2 bg-white px-4 py-4 transition-colors sm:px-5",
+        "flex items-start gap-4 border-l-2 bg-white px-4 py-4 transition-colors md:px-5",
         unread ? "border-accent bg-primary-100/30" : "border-transparent",
       )}
     >

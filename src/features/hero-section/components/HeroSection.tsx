@@ -13,7 +13,7 @@ import { Skeleton } from "@/shared/components/ui/Skeleton";
 function HeroSkeleton() {
   return <div className="news-lead-grid" data-layout="full" data-video="true" data-latest="true" aria-hidden="true">
     {(["lead", "latest", "headlines", "video"] as const).map((area) =>
-      <div key={area} className={`news-lead-${area} space-y-3 bg-white p-5`}>
+      <div key={area} className={`news-lead-${area} space-y-3 bg-white px-4 py-5 md:p-5`}>
         {area !== "latest" ? <Skeleton className="aspect-video w-full" /> : null}
         <Skeleton className="h-5 w-28" /><Skeleton className="h-8 w-full" />
         <Skeleton className="h-4 w-4/5" />
@@ -33,9 +33,9 @@ export function HeroSection() {
   return <FrameModule ariaLabelledby="hero-heading">
     <h1 id="hero-heading" className="sr-only">{t("srHeading")}</h1>
     {isLoading ? <HeroSkeleton /> : null}
-    {isError ? <div className="p-5"><ErrorState message={error?.message} onRetry={() => void refetch()} /></div> : null}
+    {isError ? <div className="px-4 py-5 md:p-5"><ErrorState message={error?.message} onRetry={() => void refetch()} /></div> : null}
     <HomepageSectionNotice section="hero" />
-    {!isLoading && !isError && !sectionFailed && !data?.featured ? <div className="p-5"><EmptyState title={t("noFeatured")} /></div> : null}
+    {!isLoading && !isError && !sectionFailed && !data?.featured ? <div className="px-4 py-5 md:p-5"><EmptyState title={t("noFeatured")} /></div> : null}
     {!isLoading && !isError && data?.featured ? <EditorialLead lead={data.featured} supporting={headlines} latest={latest} video={video?.format !== "short" ? video : undefined} /> : null}
   </FrameModule>;
 }

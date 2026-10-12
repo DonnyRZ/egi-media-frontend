@@ -20,7 +20,7 @@ import { groupSeriesByTopic } from "@/shared/utils/taxonomy-groups";
 
 function SeriesSkeleton() {
   return (
-    <div className="space-y-5 bg-white p-5">
+    <div className="space-y-5 bg-white px-4 py-5 md:p-5">
       {Array.from({ length: 2 }).map((_, sectionIndex) => (
         <div key={sectionIndex} className="space-y-5">
           <Skeleton className="h-7 w-48" />
@@ -28,7 +28,7 @@ function SeriesSkeleton() {
             {Array.from({ length: 3 }).map((_, cardIndex) => (
               <div
                 key={cardIndex}
-                className="w-60 shrink-0 space-y-3 border border-neutral-200 p-5"
+                className="w-60 shrink-0 space-y-3 border border-neutral-200 px-4 py-5 md:p-5"
               >
                 <Skeleton className="aspect-[16/9] w-full" />
                 <Skeleton className="h-3 w-20" />
@@ -70,7 +70,7 @@ export function SeriesListing() {
         <h2 className="sr-only" id="series-listing-heading">
           {t("listingHeading")}
         </h2>
-        <div className="bg-white p-5">
+        <div className="bg-white px-4 py-5 md:p-5">
           <ErrorState message={error?.message} onRetry={() => void refetch()} />
         </div>
       </FrameModule>
@@ -83,7 +83,7 @@ export function SeriesListing() {
         <h2 className="sr-only" id="series-listing-heading">
           {t("listingHeading")}
         </h2>
-        <div className="bg-white p-5">
+        <div className="bg-white px-4 py-5 md:p-5">
           <EmptyState message={t("empty")} />
         </div>
       </FrameModule>
@@ -131,16 +131,16 @@ export function SeriesListing() {
         return (
           <FrameModule ariaLabelledby={headingId} key={group.topic?.id ?? "ungrouped"}>
             {group.items.length < 4 ? (
-              <div className="min-w-0 space-y-5 bg-white p-5">
+              <div className="min-w-0 space-y-5 bg-white px-4 py-5 md:p-5">
                 {heading}
                 <AdaptiveCardGrid
                   items={group.items}
                   keyForItem={(series) => series.id}
-                  renderItem={(series) => <SeriesCard series={series} />}
+                  renderItem={(series) => <SeriesCard series={series} className="max-md:px-0" />}
                 />
               </div>
             ) : (
-              <div className="min-w-0 bg-white p-5">
+              <div className="min-w-0 bg-white px-4 py-5 md:p-5">
                 <HorizontalScroller
                   ariaLabel={title}
                   heading={heading}
@@ -168,7 +168,7 @@ export function SeriesListing() {
 
       {hiddenCount > 0 && (
         <FrameModule ariaLabelledby="series-listing-heading">
-          <div className="flex justify-center bg-white p-5">
+          <div className="flex justify-center bg-white px-4 py-5 md:p-5">
             <Button onClick={revealAll} variant="secondary">
               {t("revealMoreGroups", { count: hiddenCount })}
             </Button>

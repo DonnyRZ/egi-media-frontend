@@ -7,22 +7,24 @@ import { Link } from "@/i18n/navigation";
 import type { ColumnListItem } from "@/features/columns/types/column.types";
 import { ArticleImage } from "@/shared/components/common/ArticleImage";
 import { DATE_FORMAT } from "@/shared/constants/format.constants";
+import { cn } from "@/shared/lib/cn";
 
 interface ColumnCardProps {
   column: ColumnListItem;
   variant?: "default" | "featured" | "row";
+  className?: string;
 }
 
-export function ColumnCard({ column, variant = "default" }: ColumnCardProps) {
+export function ColumnCard({ column, variant = "default", className }: ColumnCardProps) {
   const t = useTranslations("columnsPage");
   const format = useFormatter();
   const href = `/kolom/${column.slug}`;
   const dateValue = column.publishedAt ?? column.createdAt;
 
-  if (variant === "row") return <article className="grid gap-4 py-5 md:grid-cols-[1fr_160px]"><div><p className="kicker">{t("kicker")}</p><h3 className="mt-2 text-xl font-bold leading-tight"><Link href={href}>{column.title}</Link></h3>{column.summary?<p className="mt-2 line-clamp-2 text-sm leading-6 text-neutral-600">{column.summary}</p>:null}<ColumnAuthor author={column.author}/></div><Link href={href} className="relative aspect-video w-32 md:w-full"><ArticleImage src={column.featuredImage} alt={column.title}/></Link></article>;
+  if (variant === "row") return <article className={cn("grid gap-4 py-5 md:grid-cols-[1fr_160px]", className)}><div><p className="kicker">{t("kicker")}</p><h3 className="mt-2 text-xl font-bold leading-tight"><Link href={href}>{column.title}</Link></h3>{column.summary?<p className="mt-2 line-clamp-2 text-sm leading-6 text-neutral-600">{column.summary}</p>:null}<ColumnAuthor author={column.author}/></div><Link href={href} className="relative aspect-video w-32 md:w-full"><ArticleImage src={column.featuredImage} alt={column.title}/></Link></article>;
   if (variant === "featured") {
     return (
-      <article className="group grid gap-6 p-5 lg:grid-cols-[1.2fr_1fr] lg:gap-10 lg:p-6">
+      <article className={cn("group grid gap-6 px-4 py-5 md:p-5 lg:grid-cols-[1.2fr_1fr] lg:gap-10 lg:p-6", className)}>
         <Link className="block" href={href}>
           <div className="relative aspect-[16/9] overflow-hidden bg-neutral-100">
             <ArticleImage
@@ -63,7 +65,7 @@ export function ColumnCard({ column, variant = "default" }: ColumnCardProps) {
   }
 
   return (
-    <article className="group flex h-full flex-col bg-white p-5">
+    <article className={cn("group flex h-full flex-col bg-white px-4 py-5 md:p-5", className)}>
       <Link className="block" href={href}>
         <div className="relative aspect-[16/9] overflow-hidden bg-neutral-100">
           <ArticleImage

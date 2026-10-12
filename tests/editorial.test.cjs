@@ -38,7 +38,8 @@ test("category selection fills failed pins, keeps scope and never mutates the po
   const out=selectCategoryPackage("desk",pool,selected,config);
   assert.equal(out.lead.id,"0");assert.equal(out.supporting.length,5);
   assert.equal(out.supporting[0].id,"2");assert.equal(out.editors.length,1);
-  assert.equal(new Set([out.lead,...out.supporting,...out.latest].map(a=>a.id)).size,12);
+  assert.deepEqual(out.latest.map(a=>a.id),["0","1","2","3","4","5"]);
+  assert.equal(out.rest.length,14);
   assert.equal(JSON.stringify(pool),before);
 });
 test("frontend YouTube parser accepts supported URL forms and rejects spoofed hosts", () => {

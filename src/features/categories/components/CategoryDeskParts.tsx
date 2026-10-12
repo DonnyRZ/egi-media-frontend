@@ -248,7 +248,6 @@ export function DeskEditorPicks({ model }: DeskPartProps) {
   const alreadyShown = new Set([
     model.lead?.id,
     ...model.supporting.map((article) => article.id),
-    ...model.latest.map((article) => article.id),
   ]);
   const articles = model.editors.filter(
     (article) => !alreadyShown.has(article.id),
@@ -275,7 +274,7 @@ export function DeskEditorPicks({ model }: DeskPartProps) {
 
 export function DeskCompactStories({ model }: DeskPartProps) {
   const t = useTranslations("editorial");
-  const articles = model.rest.slice(6, 12);
+  const articles = model.rest.slice(0, 6);
   if (!articles.length) return null;
 
   return (
@@ -311,7 +310,7 @@ export function DeskRelatedSections({
 
 export function DeskContinuation({ model }: DeskPartProps) {
   const t = useTranslations("editorial");
-  const articles = model.rest.slice(12);
+  const articles = model.rest.slice(6);
   if (!articles.length) return null;
 
   return (

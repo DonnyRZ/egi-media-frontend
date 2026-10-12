@@ -43,9 +43,13 @@ export function selectCategoryPackage(
     supporting.push(article);
     used.add(id);
   }
-  const rest = latestPool.filter((a) => !used.has(a.id));
+  const latest = latestPool.slice(0, 6);
+  const latestIds = new Set(latest.map((article) => article.id));
+  const rest = latestPool.filter(
+    (article) => !used.has(article.id) && !latestIds.has(article.id),
+  );
   const editors = [...new Set(config?.editor_ids ?? [])].flatMap((id) =>
     byId.has(id) ? [byId.get(id)!] : [],
   );
-  return { lead, supporting, rest, latest: rest.slice(0, 6), editors };
+  return { lead, supporting, rest, latest, editors };
 }

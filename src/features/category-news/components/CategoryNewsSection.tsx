@@ -53,7 +53,6 @@ export function CategoryNewsSection() {
     <FrameModule ariaLabelledby="categories-heading">
       <HomepageSectionNotice section="categories" />
       <FrameHeading
-        actionHref="/categories"
         id="categories-heading"
         subtitle={t("subtitle")}
         title={t("title")}

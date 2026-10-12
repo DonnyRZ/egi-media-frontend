@@ -512,20 +512,12 @@
     "emptyResults": "Tidak ada hasil untuk “{query}”."
   },
   "categoriesPage": {
-    "kicker": "Kategori",
     "headline": "Liputan menurut desk redaksi",
     "lede": "Kategori editorial yang mengorganisasi liputan kami — untuk pembaca yang menavigasi berita menurut bidang dan spesialisasi.",
-    "listingHeading": "Daftar kategori",
-    "featuredKicker": "Unggulan",
-    "allCategories": "Semua kategori",
-    "categoryCount": "{count} kategori",
-    "browseCategory": "Jelajahi kategori",
-    "backToCategories": "Semua kategori",
     "categoryAll": "Semua",
     "articlesHeading": "Artikel dalam kategori ini",
     "noArticles": "Belum ada artikel dalam kategori ini.",
-    "notFound": "Kategori tidak ditemukan.",
-    "empty": "Belum ada kategori yang dipublikasikan."
+    "notFound": "Kategori tidak ditemukan."
   },
   "topicsPage": {
     "kicker": "Topik",

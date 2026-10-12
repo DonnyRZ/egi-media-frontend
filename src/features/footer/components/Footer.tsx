@@ -18,6 +18,13 @@ const LEGAL_LINKS = [
   { key: "pedomanMediaSiber", href: "/pedoman-media-siber" },
 ] as const;
 
+const EDITORIAL_LINKS = [
+  { key: "headline", href: "/latest" },
+  { key: "topics", href: "/topics" },
+  { key: "series", href: "/series" },
+  { key: "columns", href: "/kolom" },
+] as const;
+
 export function Footer() {
   const t = useTranslations("footer");
   const e=useTranslations("editorial");
@@ -74,7 +81,22 @@ export function Footer() {
             </ul>
           </div>
 
-          <div><h2 className="text-xs font-bold uppercase tracking-[0.14em] text-neutral-400">EGI Media</h2><ul className="mt-4 space-y-2">{[['/latest','headline'],['/categories','categories'],['/topics','topics'],['/series','series'],['/kolom','columns']].map(([href,key])=><li key={href}><Link className="text-sm text-neutral-300 hover:text-white" href={href}>{e(key)}</Link></li>)}<li><Link href="/videos">Video</Link> · <Link href="/shorts">Shorts</Link></li></ul><SocialLinks/></div>
+          <div>
+            <h2 className="text-xs font-bold uppercase tracking-[0.14em] text-neutral-400">EGI Media</h2>
+            <ul className="mt-4 space-y-2">
+              {EDITORIAL_LINKS.map(({ href, key }) => (
+                <li key={href}>
+                  <Link className="text-sm text-neutral-300 hover:text-white" href={href}>
+                    {e(key)}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Link href="/videos">Video</Link> · <Link href="/shorts">Shorts</Link>
+              </li>
+            </ul>
+            <SocialLinks />
+          </div>
         </div>
 
         <div className="mt-10 border-t border-neutral-800 pt-6 text-sm text-neutral-400">

@@ -512,20 +512,12 @@
     "emptyResults": "No results found for “{query}”."
   },
   "categoriesPage": {
-    "kicker": "Categories",
     "headline": "Coverage by newsroom desk",
     "lede": "Editorial categories that organize our reporting — built for readers who navigate by beat and specialty.",
-    "listingHeading": "Category library",
-    "featuredKicker": "Featured",
-    "allCategories": "All categories",
-    "categoryCount": "{count} categories",
-    "browseCategory": "Browse category",
-    "backToCategories": "All categories",
     "categoryAll": "All",
     "articlesHeading": "Articles in this category",
     "noArticles": "No articles in this category yet.",
-    "notFound": "Category not found.",
-    "empty": "No categories have been published yet."
+    "notFound": "Category not found."
   },
   "topicsPage": {
     "kicker": "Topics",

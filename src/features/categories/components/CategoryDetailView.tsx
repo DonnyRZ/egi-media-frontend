@@ -4,7 +4,6 @@ import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 import { useCategoryDetail } from "@/features/categories/hooks/useCategoryDetail";
-import { Link } from "@/i18n/navigation";
 import { CategoryDesk } from "@/features/categories/components/CategoryDesk";
 import { ArticleTimeline } from "@/shared/components/common/ArticleTimeline";
 import { EmptyState } from "@/shared/components/common/EmptyState";
@@ -64,16 +63,7 @@ export function CategoryDetailView({ slug }: CategoryDetailViewProps) {
       <FrameModule ariaLabelledby="category-detail-heading">
         <FramePageHero
           className="py-5 lg:py-6 sm:[&_h1]:text-[44px]"
-          kicker={t("kicker")}
           lede={categoryQuery.data?.description ?? undefined}
-          actions={
-            <Link
-              className="text-xs font-semibold uppercase tracking-wide text-neutral-500 transition-colors hover:text-accent"
-              href="/categories"
-            >
-              ← {t("backToCategories")}
-            </Link>
-          }
           title={heroTitle}
           titleId="category-detail-heading"
         />

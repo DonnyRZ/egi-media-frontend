@@ -512,20 +512,12 @@
     "emptyResults": "“{query}” boʻyicha natija topilmadi."
   },
   "categoriesPage": {
-    "kicker": "Kategoriyalar",
     "headline": "Tahririyat boʻlimi boʻyicha reportaj",
     "lede": "Reportajlarimizni tartibga soluvchi tahririy kategoriyalar — yangiliklarni soha va ixtisoslik boʻyicha kuzatadigan oʻquvchilar uchun.",
-    "listingHeading": "Kategoriyalar roʻyxati",
-    "featuredKicker": "Tavsiya etilgan",
-    "allCategories": "Barcha kategoriyalar",
-    "categoryCount": "{count} ta kategoriya",
-    "browseCategory": "Kategoriyani koʻrish",
-    "backToCategories": "Barcha kategoriyalar",
     "categoryAll": "Barchasi",
     "articlesHeading": "Ushbu kategoriyadagi maqolalar",
     "noArticles": "Bu kategoriyada hali maqola yoʻq.",
-    "notFound": "Kategoriya topilmadi.",
-    "empty": "Hali hech qanday kategoriya nashr etilmagan."
+    "notFound": "Kategoriya topilmadi."
   },
   "topicsPage": {
     "kicker": "Mavzular",

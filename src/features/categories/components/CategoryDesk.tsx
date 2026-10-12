@@ -1,39 +1,46 @@
 "use client";
+
 import { useCategoryDesk } from "@/features/categories/hooks/useCategoryDesk";
 import {
-  DeskEmptyNotice,
-  DeskTopicNavigation,
-  DeskNotices,
-  DeskEditorPicks,
+  CategoryLatestGrid,
+  CategoryOpeningPackage,
   DeskCompactStories,
-  DeskRelatedSections,
   DeskContinuation,
+  DeskEditorPicks,
+  DeskEmptyNotice,
+  DeskNotices,
+  DeskRelatedSections,
+  DeskTopicNavigation,
 } from "@/features/categories/components/CategoryDeskParts";
-import { EditorialLead } from "@/shared/components/common/EditorialLead";
 import type { Article } from "@/shared/types/article.types";
+import type { CategoryDetail } from "@/shared/types/category.types";
+
 interface CategoryDeskProps {
-  categoryId: string;
+  category: CategoryDetail;
   articles: Article[];
 }
-export function CategoryDesk({ categoryId, articles }: CategoryDeskProps) {
-  const model = useCategoryDesk(categoryId, articles);
+
+/** A single editorial desk template shared by every public category page. */
+export function CategoryDesk({ category, articles }: CategoryDeskProps) {
+  const model = useCategoryDesk(category.id, articles);
+
   return (
     <>
-      <DeskTopicNavigation model={model} />
+      <DeskTopicNavigation model={model} categorySlug={category.slug} />
       <DeskEmptyNotice model={model} />
+      <DeskNotices model={model} />
+
       {model.lead ? (
-        <EditorialLead
+        <CategoryOpeningPackage
           lead={model.lead}
           supporting={model.supporting}
-          latest={model.latest}
-          latestHref={`/categories/${categoryId}?page=2`}
-          video={model.videos.data?.items[0]}
         />
       ) : null}
-      <DeskNotices model={model} />
+
+      <CategoryLatestGrid articles={model.latest} />
       <DeskEditorPicks model={model} />
       <DeskCompactStories model={model} />
-      <DeskRelatedSections model={model} categoryId={categoryId} />
+      <DeskRelatedSections model={model} categoryId={category.id} />
       <DeskContinuation model={model} />
     </>
   );

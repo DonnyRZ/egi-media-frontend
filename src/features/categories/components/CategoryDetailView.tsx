@@ -63,7 +63,9 @@ export function CategoryDetailView({ slug }: CategoryDetailViewProps) {
     <PageFrame>
       <FrameModule ariaLabelledby="category-detail-heading">
         <FramePageHero
-          className="py-4 lg:py-4 sm:[&_h1]:text-[44px]"
+          className="py-5 lg:py-6 sm:[&_h1]:text-[44px]"
+          kicker={t("kicker")}
+          lede={categoryQuery.data?.description ?? undefined}
           actions={
             <Link
               className="text-xs font-semibold uppercase tracking-wide text-neutral-500 transition-colors hover:text-accent"
@@ -104,7 +106,13 @@ export function CategoryDetailView({ slug }: CategoryDetailViewProps) {
         categoryQuery.data &&
         articlesQuery.data ? (
           <>
-            {page === 1 ? <CategoryDesk categoryId={categoryQuery.data.id} articles={articleItems}/> : <div className="p-5"><ArticleTimeline articles={articleItems}/></div>}
+            {page === 1 ? (
+              <CategoryDesk category={categoryQuery.data} articles={articleItems} />
+            ) : (
+              <div className="p-4 md:p-6">
+                <ArticleTimeline articles={articleItems} />
+              </div>
+            )}
 
           {articlesQuery.data.totalPages > 1 ? (
               <div className="bg-white p-5">

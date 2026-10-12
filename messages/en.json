@@ -521,6 +521,7 @@
     "categoryCount": "{count} categories",
     "browseCategory": "Browse category",
     "backToCategories": "All categories",
+    "categoryAll": "All",
     "articlesHeading": "Articles in this category",
     "noArticles": "No articles in this category yet.",
     "notFound": "Category not found.",

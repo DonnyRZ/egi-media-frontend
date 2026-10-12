@@ -147,8 +147,10 @@ async function buildTopicGroups(
 
 /**
  * Homepage feed driven by CMS placement tags and a published fallback pool:
- * - Lead, headlines, sidebar Latest and continuation share one selector
- *   that preserves CMS priority and removes duplicate article IDs.
+ * - Lead, headlines, and sidebar Latest share one selector that preserves CMS
+ *   priority and removes duplicate article IDs within the opening package.
+ * - The Latest News continuation is an independent chronological feed of the
+ *   six newest published stories and may overlap with the opening package.
  * - Taxonomy sections (category + topic) share a separate used-id set so they
  *   stay filled even on a small catalog.
  * - Category is built before topic so By Category is not starved.

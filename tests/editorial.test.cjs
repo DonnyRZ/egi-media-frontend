@@ -49,23 +49,26 @@ const { HOMEPAGE_LIMITS, HOMEPAGE_PLACEMENTS } = load("src/shared/constants/home
 const make = (id, extra = {}) => ({ id: String(id), title: "Story " + id,
   publishedAt: new Date(Date.UTC(2026, 0, 1) - id * 1000).toISOString(), ...extra });
 const select = (extra = {}) => selectHomepageNews({ heroes: [], headlines: [], latest: [], pool: [], ...extra });
-const all = (result) => [result.hero.featured, ...result.hero.headlines, ...result.hero.latest, ...result.latest].filter(Boolean);
+const openingPackage = (result) => [result.hero.featured, ...result.hero.headlines, ...result.hero.latest].filter(Boolean);
 
 for (const count of [0, 1, 2, 3, 5, 20]) {
-  test("fallback with " + count + " published articles is bounded and unique", () => {
+  test("fallback with " + count + " published articles keeps the opening package unique and fills Latest News", () => {
     const pool = Array.from({ length: count }, (_, i) => make(i));
     const before = JSON.stringify(pool);
     const result = select({ pool });
-    const items = all(result);
-    assert.equal(new Set(items.map(a => a.id)).size, items.length);
-    assert.equal(items.length, Math.min(count, 18));
+    const opening = openingPackage(result);
+    assert.equal(new Set(opening.map(a => a.id)).size, opening.length);
+    assert.equal(opening.length, Math.min(count, 12));
+    assert.equal(result.latest.length, Math.min(count, 6));
+    assert.equal(new Set(result.latest.map(a => a.id)).size, result.latest.length);
+    if (count) assert.equal(result.latest[0].id, result.hero.featured.id);
     assert.ok(result.hero.headlines.length <= 5);
     assert.ok(result.hero.latest.length <= 6);
     if (count >= 3) assert.ok(result.hero.headlines.length && result.hero.latest.length);
     assert.equal(JSON.stringify(pool), before);
   });
 }
-test("editorial Hero and Headline order win; overlapping tags never repeat", () => {
+test("editorial Hero and Headline order win while Latest News stays chronological", () => {
   const oldHero = make(100);
   const newHero = make(50);
   const first = make(80, { headlinePosition: 1 });
@@ -76,13 +79,16 @@ test("editorial Hero and Headline order win; overlapping tags never repeat", () 
   assert.equal(result.hero.headlines[0].id, first.id);
   assert.equal(result.hero.headlines[1].id, second.id);
   assert.equal(result.hero.latest[0].id, "90");
-  assert.equal(new Set(all(result).map(a => a.id)).size, all(result).length);
+  assert.equal(result.latest.map(a => a.id).join(","), "0,1,2,3,4,5");
+  assert.equal(new Set(openingPackage(result).map(a => a.id)).size, openingPackage(result).length);
 });
 test("non-published, missing dates and future dates never enter fallback", () => {
   const invalid = ["draft", "review", "scheduled", "archived"].map((status, i) => make(i, { status }));
   invalid.push(make(5, { publishedAt: null }), make(6, { publishedAt: "bad-date" }),
     make(7, { publishedAt: new Date(Date.now() + 100000).toISOString() }));
-  assert.equal(all(select({ pool: invalid })).length, 0);
+  const result = select({ pool: invalid });
+  assert.equal(openingPackage(result).length, 0);
+  assert.equal(result.latest.length, 0);
 });
 
 function repository(fetchArticles, fetchCategories = async () => ({ items: [] })) {

@@ -45,6 +45,9 @@ export function selectHomepageNews(input: HomepageSelectionInput): { hero: HeroN
   const available = candidates.filter((article) => !used.has(article.id));
   headlines.push(...take(available, Math.min(5 - headlines.length, Math.max(0, available.length - 1)), used));
   const sidebarLatest = take([...curatedLatest, ...pool], 6, used);
-  const latest = take([...curatedLatest, ...pool], 6, used);
+  // Latest News is a chronological feed, independent from the articles already
+  // shown in the hero package or sidebar. Only duplicates within this feed are removed.
+  const latestFeed = [...curatedLatest, ...pool].sort(newestFirst);
+  const latest = take(latestFeed, 6, new Set());
   return { hero: { featured, headlines, latest: sidebarLatest }, latest };
 }

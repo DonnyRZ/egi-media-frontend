@@ -60,7 +60,10 @@ export function formatAbsoluteDateTime(
 
 export function calculateReadingTime(text: string | null | undefined): number {
   if (!text) return 1;
-  const words = text.trim().split(/\s+/).length;
+  const visible = text.replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi, " ")
+    .replace(/<!--[\s\S]*?-->/g, " ").replace(/<[^>]*>/g, " ")
+    .replace(/&(?:#\d+|#x[\da-f]+|\w+);/gi, " ");
+  const words = visible.match(/[\p{L}\p{N}]+(?:['’‘ʼʻ\-][\p{L}\p{N}]+)*/gu)?.length ?? 0;
   return Math.max(1, Math.ceil(words / 200));
 }
 

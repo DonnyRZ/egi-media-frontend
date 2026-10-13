@@ -41,10 +41,10 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
             </time>
           </>
         ) : null}
-        <span className="inline-flex items-center gap-x-3">
+        {article.readingTimeMinutes ? <span className="inline-flex items-center gap-x-3">
           {article.publishedAt ? <span aria-hidden="true">•</span> : null}
           <span>{tCommon("readingTime", { minutes: article.readingTimeMinutes })}</span>
-        </span>
+        </span> : null}
         </div>
       </div>
     </header>

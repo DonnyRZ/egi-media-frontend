@@ -9,6 +9,7 @@ import { MobileReadingPreview } from "@/features/editorial-preview/MobileReading
 import { VideoHeroStage } from "@/features/videos/components/VideoHeroStage";
 import { VideoPageFrame } from "@/features/videos/components/VideoPageFrame";
 import { VideoThumbnailPreview } from "@/features/editorial-preview/VideoThumbnailPreview";
+import { HorizontalCardsPreview } from "@/features/editorial-preview/HorizontalCardsPreview";
 import {
   previewArticles,
   previewVideo,
@@ -19,7 +20,7 @@ export default async function Preview({
   searchParams,
 }: {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ template?: string; textScale?: string; spacing?: string; plain?: string; brokenImage?: string; longMeta?: string; short?: string; pasted?: string; defaultPoster?: string }>;
+  searchParams: Promise<{ template?: string; textScale?: string; spacing?: string; plain?: string; brokenImage?: string; longMeta?: string; short?: string; pasted?: string; defaultPoster?: string; baseline?: string }>;
 }) {
   if (process.env.NODE_ENV !== "development") notFound();
   const { locale } = await params;
@@ -28,6 +29,9 @@ export default async function Preview({
   const scale = [1, 1.25, 1.5, 2].includes(requestedScale) ? requestedScale : 1;
   const previewStyles = `html { font-size: ${16 * scale}px; }${query.spacing === "1" ? ".egi-public :is(h1,h2,h3,p,li,a,time,span,button,input,textarea,select) { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; } .egi-public main p { margin-bottom: 2em !important; }" : ""}`;
   setRequestLocale(locale);
+  if (query.template === "horizontal") {
+    return <><style>{previewStyles}</style><PageFrame><HorizontalCardsPreview baseline={query.baseline === "1"} /></PageFrame></>;
+  }
   const articles = previewArticles;
   if (query.template === "video-thumbnail") {
     return <VideoPageFrame><VideoThumbnailPreview /></VideoPageFrame>;

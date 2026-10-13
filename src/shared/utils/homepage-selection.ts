@@ -30,6 +30,11 @@ function take(items: Article[], limit: number, used: Set<string>) {
   return result;
 }
 
+/** Only the CMS Trending placement response is eligible; there is no fallback. */
+export function selectTrendingNews(items: Article[], limit = 6): Article[] {
+  return take(published(items).sort(newestFirst), limit, new Set());
+}
+
 /** Read-only selection: editorial slots win; fallback never changes CMS tags. */
 export function selectHomepageNews(input: HomepageSelectionInput): { hero: HeroNewsData; latest: Article[] } {
   const heroes = published(input.heroes).sort(newestFirst);

@@ -19,7 +19,7 @@ export function FeaturedSeriesSection() {
   }
 
   return (
-    <FrameModule ariaLabelledby="series-heading">
+    <FrameModule ariaLabelledby="series-heading" className="homepage-desktop-section">
       <FrameHeading
         actionHref="/series"
         id="series-heading"

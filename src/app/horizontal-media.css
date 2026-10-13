@@ -1,0 +1,30 @@
+/* Public horizontal media roles are deliberately separate from lead/article roles. */
+.egi-public .media-row-frame { container-type: inline-size; min-width: 0; width: 100%; }
+.egi-public .media-row { position: relative; display: grid; grid-template-columns: var(--media-row-width, min(40%, 9rem)) minmax(0, 1fr); gap: .625rem; align-items: start; }
+.egi-public .media-row[data-media-side="right"] { grid-template-columns: minmax(0, 1fr) var(--media-row-width, min(40%, 9rem)); }
+.egi-public .media-row[data-media-side="right"] .media-row-photo { grid-column: 2; grid-row: 1; }
+.egi-public .media-row[data-media-side="right"] .media-row-copy { grid-column: 1; grid-row: 1; }
+.egi-public .media-row-photo { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #f9fafb; }
+.egi-public .media-row-copy { min-width: 0; overflow-wrap: anywhere; }
+.egi-public .media-row .media-row-title { margin: 0; font-family: var(--font-sans); font-size: 1rem; font-weight: 600; line-height: 1.3; letter-spacing: 0; }
+.egi-public .media-row .media-row-heading { margin: 0; font: inherit; letter-spacing: inherit; overflow-wrap: anywhere; }
+.egi-public .media-row .media-row-kicker { margin: 0 0 .1875rem; color: var(--color-accent); font-size: .625rem; font-weight: 600; line-height: 1.2; letter-spacing: .08em; text-transform: uppercase; }
+.egi-public .media-row .media-row-metadata { margin-top: .25rem; }
+.egi-public .media-row .media-row-metadata .editorial-meta { margin-top: 0; }
+.egi-public .media-row .editorial-meta { font-size: .6875rem; line-height: 1.4; }
+.egi-public .media-row .media-row-description { margin-top: .375rem; font-size: .875rem; line-height: 1.45; }
+.egi-public .metadata-items { gap: .125rem 0; line-height: 1.4; }
+.egi-public .metadata-item { display: inline-flex; align-items: baseline; min-width: 0; max-width: 100%; }
+.egi-public .metadata-item > * { min-width: 0; overflow-wrap: anywhere; }
+.egi-public .metadata-item + .metadata-item::before { content: "·"; flex: 0 0 auto; margin-inline: .3rem; color: #6b7280; }
+.egi-public .media-row-action { min-height: 44px; }
+@container (width < 480px) {
+  .egi-public .media-row .media-row-title { font-size: .8125rem; }
+  .egi-public .media-row .editorial-meta { font-size: .625rem; }
+  .egi-public .media-row .media-row-description { display: none; }
+}
+@media (width < 1024px), (width < 1200px) and (height <= 500px) {
+  .egi-public .media-row .media-row-title { font-size: .8125rem; }
+  .egi-public .media-row .editorial-meta { font-size: .625rem; }
+  .egi-public .media-row .media-row-description { display: none; }
+}

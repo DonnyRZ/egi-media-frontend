@@ -1,10 +1,8 @@
 "use client";
 
-import { useFormatter, useTranslations } from "next-intl";
-
 import { Link } from "@/i18n/navigation";
 import { ArticleImage } from "@/shared/components/common/ArticleImage";
-import { DATE_FORMAT } from "@/shared/constants/format.constants";
+import { ArticleMeta } from "@/shared/components/common/ArticleCard";
 import type { Article } from "@/shared/types/article.types";
 import { getArticleHref } from "@/shared/utils/article-path";
 
@@ -13,9 +11,6 @@ interface HeroFeaturedCardProps {
 }
 
 export function HeroFeaturedCard({ article }: HeroFeaturedCardProps) {
-  const t = useTranslations("common");
-  const format = useFormatter();
-
   return (
     <article className="editorial-card editorial-gutter group mx-auto bg-white p-4 md:max-w-[560px] min-[1200px]:p-5">
       <Link href={getArticleHref(article)}>
@@ -43,19 +38,7 @@ export function HeroFeaturedCard({ article }: HeroFeaturedCardProps) {
             {article.summary}
           </p>
         ) : null}
-        <div className="editorial-meta mt-3 flex flex-wrap items-center gap-2 text-xs text-neutral-500">
-          <span className="font-semibold text-neutral-800">
-            {article.author.fullName}
-          </span>
-          <span aria-hidden="true">•</span>
-          {article.publishedAt ? (
-            <time dateTime={article.publishedAt}>
-              {format.dateTime(new Date(article.publishedAt), DATE_FORMAT)}
-            </time>
-          ) : null}
-          <span aria-hidden="true">•</span>
-          <span>{t("readingTime", { minutes: article.readingTimeMinutes })}</span>
-        </div>
+        <ArticleMeta article={article} className="mt-3" />
       </div>
     </article>
   );

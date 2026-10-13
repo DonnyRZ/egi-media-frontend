@@ -3,7 +3,7 @@ import { setRequestLocale } from "next-intl/server";
 import { HeroSection } from "@/features/hero-section/components/HeroSection";
 import { PageFrame } from "@/shared/components/layout/PageFrame";
 
-import { BreakingNewsSection } from "@/features/breaking-news/components/BreakingNewsSection";
+import { TrendingSection } from "@/features/trending/components/TrendingSection";
 
 import { LatestNewsSection } from "@/features/latest-news/components/LatestNewsSection";
 
@@ -17,7 +17,6 @@ import { FeaturedSeriesSection } from "@/features/featured-series/components/Fea
 
 import { FeaturedVideosSection } from "@/features/featured-videos/components/FeaturedVideosSection";
 
-import { EditorsPickSection } from "@/features/editors-pick/components/EditorsPickSection";
 
 interface HomePageProps {
   params: Promise<{ locale: string }>;
@@ -28,11 +27,10 @@ export default async function HomePage({ params }: HomePageProps) {
   setRequestLocale(locale);
 
   return (
-    <PageFrame>
+    <PageFrame className="homepage-frame">
       <HeroSection />
-      <BreakingNewsSection />
       <LatestNewsSection />
-      <EditorsPickSection />
+      <TrendingSection />
       <CategoryNewsSection />
       <TopicNewsSection />
       <FeaturedSeriesSection />

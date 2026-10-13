@@ -29,7 +29,7 @@ export function ForYouSection() {
     (isAuthenticated && (feed.isLoading || subscriptions.isLoading));
 
   return (
-    <FrameModule ariaLabelledby="for-you-heading">
+    <FrameModule ariaLabelledby="for-you-heading" className="homepage-for-you">
       <FrameHeading
         actionHref={isAuthenticated ? "/for-you" : "/register"}
         actionLabel={isAuthenticated ? t("viewAll") : t("guestSignUpCta")}

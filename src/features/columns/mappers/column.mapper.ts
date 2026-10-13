@@ -23,6 +23,7 @@ interface ColumnListItemDto {
   title: string;
   slug: string;
   summary: string | null;
+  reading_time_minutes?: number | null;
   category_id?: string | null;
   featured_image?: string | null;
   featured_image_alt?: string | null;
@@ -93,6 +94,8 @@ export function mapColumnListItemDto(dto: ColumnListItemDto): ColumnListItem {
     categoryId: dto.category_id || null,
     slug: dto.slug,
     summary: dto.summary,
+    readingTimeMinutes: typeof dto.reading_time_minutes === "number" && Number.isFinite(dto.reading_time_minutes) && dto.reading_time_minutes > 0
+      ? Math.ceil(dto.reading_time_minutes) : null,
     featuredImage: resolveImageUrl(dto.featured_image ?? null, dto.id),
     featuredImageAlt: dto.featured_image_alt || null,
     featuredImageCaption: dto.featured_image_caption || null,

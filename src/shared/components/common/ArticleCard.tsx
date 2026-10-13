@@ -1,10 +1,9 @@
 "use client";
 
-import { useFormatter, useTranslations } from "next-intl";
-
 import { Link } from "@/i18n/navigation";
 import { ArticleImage } from "@/shared/components/common/ArticleImage";
-import { DATE_FORMAT } from "@/shared/constants/format.constants";
+import { ContentMetadata } from "@/shared/components/common/ContentMetadata";
+import { HorizontalArticleCard } from "@/shared/components/common/HorizontalArticleCard";
 import type { Article } from "@/shared/types/article.types";
 import { getArticleHref } from "@/shared/utils/article-path";
 import { cn } from "@/shared/lib/cn";
@@ -15,22 +14,8 @@ interface ArticleMetaProps {
 }
 
 export function ArticleMeta({ article, className }: ArticleMetaProps) {
-  const t = useTranslations("common");
-  const format = useFormatter();
-
-  return (
-    <div className={cn("editorial-meta flex flex-wrap items-center gap-2 text-xs text-neutral-500", className)}>
-      <span className="font-semibold text-neutral-700">{article.author.fullName}</span>
-      <span aria-hidden="true">•</span>
-      {article.publishedAt ? (
-        <time dateTime={article.publishedAt}>
-          {format.dateTime(new Date(article.publishedAt), DATE_FORMAT)}
-        </time>
-      ) : null}
-      <span aria-hidden="true">•</span>
-      <span>{t("readingTime", { minutes: article.readingTimeMinutes })}</span>
-    </div>
-  );
+  return <ContentMetadata author={article.author.fullName} publishedAt={article.publishedAt}
+    readingTimeMinutes={article.readingTimeMinutes} className={className} />;
 }
 
 interface ArticleCardProps {
@@ -76,20 +61,7 @@ export function ArticleCard({ article, variant = "default", className }: Article
   }
 
   if (variant === "horizontal") {
-    return (
-      <article className={cn("editorial-card group flex gap-4", className)}>
-        <div className="relative aspect-video w-28 shrink-0 self-start overflow-hidden">
-          <ArticleImage alt={article.title} src={article.featuredImage} />
-        </div>
-        <div className="min-w-0 flex-1">
-          <CategoryKicker article={article} />
-          <h3 className="editorial-list-title mt-1 font-sans text-base font-semibold leading-snug text-ink group-hover:text-accent">
-            <Link href={getArticleHref(article)}>{article.title}</Link>
-          </h3>
-          <ArticleMeta article={article} className="mt-2" />
-        </div>
-      </article>
-    );
+    return <HorizontalArticleCard article={article} className={className} />;
   }
 
   if (variant === "compact") {

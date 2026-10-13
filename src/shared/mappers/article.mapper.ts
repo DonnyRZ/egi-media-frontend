@@ -30,6 +30,7 @@ export interface ArticleListItemDto {
   title: string;
   slug: string;
   summary: string | null;
+  reading_time_minutes?: number | null;
   featured_image: string | null;
   featured_image_alt?: string | null;
   featured_image_caption?: string | null;
@@ -90,7 +91,8 @@ export function mapArticleDto(dto: ArticleListItemDto): Article {
     category: dto.category
       ? { id: dto.category.id, name: dto.category.name }
       : null,
-    readingTimeMinutes: calculateReadingTime(dto.summary),
+    readingTimeMinutes: typeof dto.reading_time_minutes === "number" && Number.isFinite(dto.reading_time_minutes) && dto.reading_time_minutes > 0
+      ? Math.ceil(dto.reading_time_minutes) : null,
     locale: dto.locale ?? "id",
     availableLocales: dto.available_locales ?? ["id"],
     headlinePosition:
@@ -112,7 +114,7 @@ export function mapArticleDetailDto(dto: ArticleDetailDto): ArticleDetail {
     content: dto.content,
     viewCount: dto.view_count ?? 0,
     shareCount: dto.share_count ?? 0,
-    readingTimeMinutes: calculateReadingTime(dto.content || dto.summary),
+    readingTimeMinutes: base.readingTimeMinutes ?? calculateReadingTime(dto.content),
     defaultLocale: dto.default_locale ?? "id",
     requestedLocale: dto.requested_locale ?? base.locale,
     translations,

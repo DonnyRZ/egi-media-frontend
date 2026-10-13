@@ -267,6 +267,7 @@
   },
   "breaking": {
     "title": "Trending",
+    "subtitle": "Stories selected by our editors for Trending.",
     "empty": "No breaking stories at the moment."
   },
   "latest": {
@@ -469,6 +470,7 @@
   },
   "videos": {
     "title": "Featured Videos",
+    "latestTitle": "Latest Videos",
     "subtitle": "Watch our latest video reporting and interviews.",
     "empty": "Videos will appear here once available.",
     "kicker": "Watch",

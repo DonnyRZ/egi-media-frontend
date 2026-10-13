@@ -267,6 +267,7 @@
   },
   "breaking": {
     "title": "Ommabop",
+    "subtitle": "Muharrirlar Trending uchun tanlagan xabarlar.",
     "empty": "Hozircha dolzarb yangiliklar yoʻq."
   },
   "latest": {
@@ -469,6 +470,7 @@
   },
   "videos": {
     "title": "Tanlangan videolar",
+    "latestTitle": "Soʻnggi videolar",
     "subtitle": "Soʻnggi video reportaj va suhbatlarimizni tomosha qiling.",
     "empty": "Videolar mavjud boʻlgach shu yerda koʻrinadi.",
     "kicker": "Tomosha",

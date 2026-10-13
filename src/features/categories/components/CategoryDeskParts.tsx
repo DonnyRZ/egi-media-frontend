@@ -9,8 +9,8 @@ import {
 } from "@/features/categories/components/DeskSections";
 import { ArticleCard, ArticleMeta } from "@/shared/components/common/ArticleCard";
 import { ArticleImage } from "@/shared/components/common/ArticleImage";
-import { AdaptiveCardGrid } from "@/shared/components/common/AdaptiveCardGrid";
 import { ArticleTimeline } from "@/shared/components/common/ArticleTimeline";
+import { LatestArticleGrid } from "@/shared/components/common/LatestArticleGrid";
 import { EmptyState } from "@/shared/components/common/EmptyState";
 import { ErrorState } from "@/shared/components/common/ErrorState";
 import { Link } from "@/i18n/navigation";
@@ -99,32 +99,7 @@ function CategoryLeadStory({ article }: { article: Article }) {
 }
 
 function SupportingStory({ article }: { article: Article }) {
-  return (
-    <article className="editorial-card editorial-supporting-story group grid min-w-0 grid-cols-[112px_minmax(0,1fr)] gap-3 sm:grid-cols-[128px_minmax(0,1fr)] sm:gap-4 xl:grid-cols-[132px_minmax(0,1fr)]">
-      <Link
-        href={getArticleHref(article)}
-        aria-label={article.title}
-        className="relative aspect-video self-start overflow-hidden bg-neutral-100"
-      >
-        <ArticleImage
-          src={article.featuredImage}
-          alt={article.featuredImageAlt || article.title}
-          sizes="(max-width: 639px) 112px, 132px"
-        />
-      </Link>
-      <div className="min-w-0">
-        {article.category ? (
-          <p className="kicker text-[10px]">{article.category.name}</p>
-        ) : null}
-        <h3 className="editorial-list-title mt-1 font-sans text-base font-bold leading-snug tracking-tight text-ink sm:text-[17px]">
-          <Link className="headline-link" href={getArticleHref(article)}>
-            {article.title}
-          </Link>
-        </h3>
-        <ArticleMeta article={article} className="mt-2 text-[11px]" />
-      </div>
-    </article>
-  );
+  return <ArticleCard article={article} variant="horizontal" />;
 }
 
 export function CategoryOpeningPackage({
@@ -228,11 +203,7 @@ export function CategoryLatestGrid({ articles }: { articles: Article[] }) {
         </div>
       </header>
       <div className="border-t border-neutral-200">
-        <AdaptiveCardGrid
-          items={articles.slice(0, 6)}
-          keyForItem={(article) => article.id}
-          renderItem={(article) => <CategoryLatestCard article={article} />}
-        />
+        <LatestArticleGrid articles={articles.slice(0, 6)} renderDesktop={(article) => <CategoryLatestCard article={article} />} />
       </div>
     </section>
   );

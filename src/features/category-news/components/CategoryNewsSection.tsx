@@ -60,7 +60,7 @@ export function CategoryNewsSection() {
   }
 
   return (
-    <FrameModule ariaLabelledby="categories-heading">
+    <FrameModule ariaLabelledby="categories-heading" className="homepage-desktop-section">
       <HomepageSectionNotice section="categories" />
       <FrameHeading
         id="categories-heading"

@@ -30,7 +30,7 @@ export interface Article {
   publishedAt: string | null;
   author: ArticleAuthor;
   category: ArticleCategory | null;
-  readingTimeMinutes: number;
+  readingTimeMinutes: number | null;
   locale: ContentLocale;
   availableLocales: ContentLocale[];
   /** Curated Top Stories slot (1-5) when present. */

@@ -3,6 +3,7 @@
 import { useFormatter, useTranslations } from "next-intl";
 
 import { ColumnAuthor } from "@/features/columns/components/ColumnAuthor";
+import { HorizontalColumnCard } from "@/features/columns/components/HorizontalColumnCard";
 import { Link } from "@/i18n/navigation";
 import type { ColumnListItem } from "@/features/columns/types/column.types";
 import { ArticleImage } from "@/shared/components/common/ArticleImage";
@@ -21,7 +22,7 @@ export function ColumnCard({ column, variant = "default", className }: ColumnCar
   const href = `/kolom/${column.slug}`;
   const dateValue = column.publishedAt ?? column.createdAt;
 
-  if (variant === "row") return <article className={cn("editorial-card grid gap-4 py-5 md:grid-cols-[1fr_160px]", className)}><div><p className="kicker">{t("kicker")}</p><h3 className="editorial-list-title mt-2 text-xl font-bold leading-tight"><Link href={href}>{column.title}</Link></h3>{column.summary?<p className="editorial-summary mt-2 line-clamp-2 text-sm leading-6 text-neutral-600">{column.summary}</p>:null}<ColumnAuthor author={column.author}/></div><Link href={href} className="relative aspect-video w-32 md:w-full"><ArticleImage src={column.featuredImage} alt={column.title}/></Link></article>;
+  if (variant === "row") return <HorizontalColumnCard column={column} className={className} />;
   if (variant === "featured") {
     return (
       <article className={cn("editorial-card editorial-gutter group grid gap-6 px-4 py-5 md:p-5 lg:grid-cols-[1.2fr_1fr] lg:gap-10 lg:p-6", className)}>

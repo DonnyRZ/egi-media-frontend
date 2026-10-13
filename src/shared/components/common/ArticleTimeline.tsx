@@ -1,68 +1,36 @@
 "use client";
-import { useFormatter } from "next-intl";
+import { useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { ArticleImage } from "@/shared/components/common/ArticleImage";
+import { HorizontalMediaRow } from "@/shared/components/common/HorizontalMediaRow";
 import type { Article } from "@/shared/types/article.types";
 import { getArticleHref } from "@/shared/utils/article-path";
+import { editorialDate } from "@/shared/utils/editorial-date";
 interface TimelineRowProps {
   article: Article;
 }
 function TimelineDate({ article }: TimelineRowProps) {
-  const format = useFormatter();
-  return (
-    <div className="editorial-meta col-span-2 text-xs text-neutral-600 md:col-span-1 md:text-sm">
-      {article.publishedAt ? (
-        <time dateTime={article.publishedAt}>
-          {format.dateTime(new Date(article.publishedAt), {
-            day: "numeric",
-            month: "short",
-            hour: "2-digit",
-            minute: "2-digit",
-          })}
-        </time>
-      ) : null}
-    </div>
-  );
-}
-function TimelineHeadline({ article }: TimelineRowProps) {
-  return (
-    <div className="min-w-0">
-      {article.category ? (
-        <Link className="kicker" href={`/categories/${article.category.id}`}>
-          {article.category.name}
-        </Link>
-      ) : null}
-      <h2 className="editorial-list-title mt-1 text-lg font-bold leading-tight tracking-tight md:text-[22px]">
-        <Link className="headline-link" href={getArticleHref(article)}>
-          {article.title}
-        </Link>
-      </h2>
-      {article.summary ? (
-        <p className="editorial-summary mt-2 hidden text-sm leading-6 text-neutral-600 md:line-clamp-3">
-          {article.summary}
-        </p>
-      ) : null}
-    </div>
-  );
+  const locale = useLocale();
+  if (!article.publishedAt) return null;
+  return <time dateTime={article.publishedAt} className="editorial-meta text-xs text-neutral-600">
+    {editorialDate(new Date(article.publishedAt), locale, { time: true })}
+  </time>;
 }
 function TimelineRow({ article }: TimelineRowProps) {
-  return (
-    <article className="editorial-timeline-row grid min-w-0 grid-cols-[1fr_96px] gap-4 py-5 md:grid-cols-[112px_minmax(0,1fr)_200px] md:gap-6">
-      <TimelineDate article={article} />
-      <TimelineHeadline article={article} />
-      <Link
-        className="relative aspect-video self-start"
-        href={getArticleHref(article)}
-        aria-label={article.title}
-      >
-        <ArticleImage
-          src={article.featuredImage}
-          alt={article.title}
-          sizes="200px"
-        />
-      </Link>
-    </article>
-  );
+  const href = getArticleHref(article);
+  return <article className="editorial-timeline-row grid min-w-0 gap-2 py-3 min-[1024px]:grid-cols-[112px_minmax(0,1fr)]">
+    <div className="editorial-wide-only"><TimelineDate article={article} /></div>
+    <HorizontalMediaRow side="right"
+      media={<Link className="absolute inset-0" href={href} aria-label={article.title}>
+        <ArticleImage src={article.featuredImage} alt={article.featuredImageAlt || article.title}
+          sizes="(max-width: 1023px) 42vw, 152px" />
+      </Link>}
+      kicker={article.category ? <Link href={`/categories/${article.category.id}`}>{article.category.name}</Link> : undefined}
+      title={<h2 className="media-row-heading"><Link className="headline-link" href={href}>{article.title}</Link></h2>}
+      description={article.summary}
+      metadata={<div className="editorial-mobile-only"><TimelineDate article={article} /></div>}
+    />
+  </article>;
 }
 export function ArticleTimeline({ articles }: { articles: Article[] }) {
   return (

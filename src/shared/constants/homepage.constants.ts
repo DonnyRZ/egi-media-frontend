@@ -1,7 +1,7 @@
 export const HOMEPAGE_LIMITS = {
   heroFeatured: 1,
   heroHeadlines: 5,
-  breakingNews: 4,
+  breakingNews: 6,
   latestNews: 6,
   editorsPicks: 6,
   featuredSeries: 3,

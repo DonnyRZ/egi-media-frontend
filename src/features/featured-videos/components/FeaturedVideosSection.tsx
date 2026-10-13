@@ -55,12 +55,12 @@ export function FeaturedVideosSection() {
   }
 
   return (
-    <FrameModule ariaLabelledby="videos-heading">
+    <FrameModule ariaLabelledby="videos-heading" className="homepage-latest-videos">
       <FrameHeading
         actionHref="/videos"
         id="videos-heading"
         subtitle={t("subtitle")}
-        title={t("title")}
+        title={t("latestTitle")}
       />
 
       {isLoading ? (

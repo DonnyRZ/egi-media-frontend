@@ -55,7 +55,7 @@ export function TopicNewsSection() {
   }
 
   return (
-    <FrameModule ariaLabelledby="topics-heading">
+    <FrameModule ariaLabelledby="topics-heading" className="homepage-desktop-section">
       <HomepageSectionNotice section="topics" />
       <FrameHeading
         actionHref="/topics"

@@ -12,7 +12,9 @@ interface EditorialLeadProps {
   supporting: Article[];
   latest?: Article[];
   video?: YoutubeVideo;
-  latestHref?: string;
+  latestHref?: string | null;
+  latestTitle?: string;
+  latestHeadingId?: string;
 }
 export function EditorialLead({
   lead,
@@ -20,6 +22,8 @@ export function EditorialLead({
   latest = [],
   video,
   latestHref,
+  latestTitle,
+  latestHeadingId,
 }: EditorialLeadProps) {
   const full = supporting.length >= 2 && (Boolean(video) || latest.length >= 3);
   const layout = full ? "full" : supporting.length ? "support" : "single";
@@ -41,7 +45,7 @@ export function EditorialLead({
         ) : null}
         {latest.length ? (
           <div className="news-lead-latest min-w-0 bg-white">
-            <HeroLatestList articles={latest} allHref={latestHref} />
+            <HeroLatestList articles={latest} allHref={latestHref} title={latestTitle} headingId={latestHeadingId} />
           </div>
         ) : null}
         {video ? (

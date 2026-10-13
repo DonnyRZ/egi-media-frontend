@@ -267,6 +267,7 @@
   },
   "breaking": {
     "title": "Trending",
+    "subtitle": "Berita pilihan redaksi yang ditempatkan di Trending.",
     "empty": "Belum ada berita terkini saat ini."
   },
   "latest": {
@@ -469,6 +470,7 @@
   },
   "videos": {
     "title": "Video Pilihan",
+    "latestTitle": "Video Terbaru",
     "subtitle": "Tonton liputan video dan wawancara terbaru kami.",
     "empty": "Video akan muncul di sini setelah tersedia.",
     "kicker": "Tonton",

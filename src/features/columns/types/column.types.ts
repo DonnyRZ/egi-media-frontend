@@ -32,6 +32,7 @@ export interface ColumnListItem {
   title: string;
   slug: string;
   summary: string | null;
+  readingTimeMinutes?: number | null;
   categoryId?: string | null;
   featuredImage: string | null;
   featuredImageAlt?: string | null;

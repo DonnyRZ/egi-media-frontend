@@ -2,6 +2,7 @@
 
 import { useFormatter, useTranslations } from "next-intl";
 import { VideoThumbnail } from "@/features/videos/components/VideoThumbnail";
+import { VideoPlaylistItem } from "@/features/videos/components/VideoPlaylistItem";
 
 import { DATE_FORMAT } from "@/shared/constants/format.constants";
 import type { YoutubeVideo } from "@/shared/types/youtube.types";
@@ -33,59 +34,7 @@ export function VideoPlaylist({
         </p>
       </div>
       <ul className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
-        {videos.map((video) => {
-          const isActive = video.id === activeId;
-
-          return (
-            <li key={video.id} className="border-b border-neutral-200">
-              <button
-                aria-current={isActive ? "true" : undefined}
-                className={cn(
-                  "flex w-full gap-3 px-3 py-3 text-left transition-colors",
-                  isActive ? "bg-primary-100" : "hover:bg-neutral-50",
-                )}
-                type="button"
-                onClick={() => onSelect(video)}
-              >
-                <span className="relative aspect-video w-[7.5rem] shrink-0 self-start overflow-hidden bg-neutral-100">
-                  <VideoThumbnail video={{ ...video, format: "horizontal", posterLandscape: video.posterLandscape || video.posterPortrait }} sizes="120px" />
-                  <span
-                    aria-hidden="true"
-                    className="absolute inset-0 flex items-center justify-center bg-ink/20"
-                  >
-                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-ink shadow-sm">
-                      <svg className="ml-0.5 h-3 w-3" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
-                    </span>
-                  </span>
-                </span>
-                <span className="min-w-0 flex-1 py-0.5">
-                  {video.durationLabel ? (
-                    <span className="mb-1 flex items-center gap-1 text-[11px] font-medium text-neutral-500">
-                      <svg className="h-2.5 w-2.5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
-                      {video.durationLabel}
-                    </span>
-                  ) : (
-                    <span className="mb-1 block text-[11px] font-medium uppercase tracking-wide text-neutral-500">
-                      {t("watchKicker")}
-                    </span>
-                  )}
-                  <span
-                    className={cn(
-                      "line-clamp-3 text-sm font-semibold leading-snug",
-                      isActive ? "text-primary-900" : "text-ink",
-                    )}
-                  >
-                    {video.title}
-                  </span>
-                </span>
-              </button>
-            </li>
-          );
-        })}
+        {videos.map((video) => <VideoPlaylistItem key={video.id} video={video} isActive={video.id === activeId} onSelect={onSelect} />)}
       </ul>
     </aside>
   );

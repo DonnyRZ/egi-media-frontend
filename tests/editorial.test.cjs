@@ -17,7 +17,7 @@ function load(file, imports = {}) {
   });
   return module.exports;
 }
-const { selectHomepageNews } = load("src/shared/utils/homepage-selection.ts");
+const { selectHomepageNews, selectTrendingNews } = load("src/shared/utils/homepage-selection.ts");
 const { selectCategoryPackage } = load("src/shared/utils/category-selection.ts");
 const { extractYoutubeId } = load("src/shared/utils/format.ts");
 const { optionalNumber } = load("src/features/cms/utils/optional-number.ts");
@@ -99,7 +99,7 @@ function repository(fetchArticles, fetchCategories = async () => ({ items: [] })
     "@/shared/services/category.service": { fetchCategories },
     "@/shared/services/topic.service": { fetchTopics: async () => ({ items: [] }) },
     "@/shared/utils/unique-articles": { takeUniqueArticles: (items) => items },
-    "@/shared/utils/homepage-selection": { selectHomepageNews },
+    "@/shared/utils/homepage-selection": { selectHomepageNews, selectTrendingNews },
   });
 }
 test("partial API failures retain fallback and expose retry, without writes", async () => {
@@ -123,6 +123,26 @@ test("complete article API outage is distinguishable from an empty catalog", asy
   assert.equal(failed.hero.featured, null);
   assert.ok(failed.failedSections.length);
   assert.equal(empty.failedSections.length, 0);
+});
+test("Trending is manual, chronological, unique and excludes non-published stories", async () => {
+  const tagged = [make(8), make(2), make(2), make(1, { status: "draft" }), make(4)];
+  const before = JSON.stringify(tagged);
+  assert.equal(selectTrendingNews(tagged).map(a => a.id).join(","), "2,4,8");
+  assert.equal(JSON.stringify(tagged), before);
+  const calls = [];
+  const result = await repository(async params => {
+    calls.push(params);
+    return { items: params.placement === "trending" ? tagged : [make(0)], total: 1 };
+  }).getHomepageNews();
+  assert.equal(result.breaking.map(a => a.id).join(","), "2,4,8");
+  assert.ok(!calls.some(params => params.sort === "popular"));
+});
+test("empty Trending never borrows from latest published articles", async () => {
+  const result = await repository(async params => ({
+    items: params.placement === "trending" ? [] : [make(0)], total: 1,
+  })).getHomepageNews();
+  assert.equal(result.breaking.length, 0);
+  assert.equal(result.latest.length, 1);
 });
 test("video mounts as a poster; iframe is created only for requested playback", () => {
   const React = require("react");

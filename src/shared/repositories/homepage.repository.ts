@@ -11,7 +11,7 @@ import type { CategoryNewsGroup } from "@/shared/types/category.types";
 import type { HomepageNewsData } from "@/shared/types/homepage.types";
 import type { TopicNewsGroup } from "@/shared/types/topic.types";
 import { takeUniqueArticles } from "@/shared/utils/unique-articles";
-import { selectHomepageNews } from "@/shared/utils/homepage-selection";
+import { selectHomepageNews, selectTrendingNews } from "@/shared/utils/homepage-selection";
 
 const EMPTY_ARTICLE_LIST = {
   items: [] as Article[],
@@ -147,8 +147,9 @@ async function buildTopicGroups(
 
 /**
  * Homepage feed driven by CMS placement tags and a published fallback pool:
- * - Lead, headlines, and sidebar Latest share one selector that preserves CMS
- *   priority and removes duplicate article IDs within the opening package.
+ * - Lead and headlines use the published fallback pool and CMS slot priority.
+ * - Trending uses only its manual CMS placement, newest published first;
+ *   the dedicated cards and desktop sidebar share this curated list.
  * - The Latest News continuation is an independent chronological feed of the
  *   six newest published stories and may overlap with the opening package.
  * - Taxonomy sections (category + topic) share a separate used-id set so they
@@ -161,7 +162,7 @@ export async function getHomepageNews(
 ): Promise<HomepageNewsData> {
   const taxonomyUsedIds = new Set<string>();
 
-  const [heroItems, headlines, trending, latest, popularPool, fallbackPool] =
+  const [heroItems, headlines, trending, latest, fallbackPool] =
     await Promise.all([
       fetchByPlacement(
         HOMEPAGE_PLACEMENTS.hero,
@@ -183,12 +184,6 @@ export async function getHomepageNews(
         HOMEPAGE_LIMITS.fallbackPool,
         lang,
       ),
-      safeFetchArticles({
-        page: 1,
-        limit: HOMEPAGE_LIMITS.editorsPicks,
-        sort: "popular",
-        lang,
-      }),
       safeFetchArticles({ page: 1, limit: HOMEPAGE_LIMITS.fallbackPool, sort: "latest", lang }),
     ]);
 
@@ -198,18 +193,17 @@ export async function getHomepageNews(
     ...([heroItems, headlines, fallbackPool].some((result) => result.failed) ? ["hero"] : []),
     ...(latest.failed ? ["latest"] : []),
     ...(trending.failed ? ["breaking"] : []),
-    ...(popularPool.failed ? ["editors"] : []),
   ];
   const categories = await buildCategoryGroups(lang, taxonomyUsedIds, failedSections);
   const topics = await buildTopicGroups(lang, taxonomyUsedIds, failedSections);
 
   return {
     hero: selected.hero,
-    breaking: trending.items,
+    breaking: selectTrendingNews(trending.items, HOMEPAGE_LIMITS.breakingNews),
     latest: selected.latest,
     categories: categories ?? [],
     topics: topics ?? [],
-    editors: (popularPool.items ?? []).slice(0, HOMEPAGE_LIMITS.editorsPicks),
+    editors: [],
     failedSections,
   };
 }

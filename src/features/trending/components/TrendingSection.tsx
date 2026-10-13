@@ -4,8 +4,7 @@ import { useTranslations } from "next-intl";
 
 import { HomepageSectionNotice } from "@/features/homepage/components/HomepageSectionNotice";
 import { useBreakingNews } from "@/features/homepage/hooks/useBreakingNews";
-import { AdaptiveCardGrid } from "@/shared/components/common/AdaptiveCardGrid";
-import { ArticleCard } from "@/shared/components/common/ArticleCard";
+import { TrendingArticleGrid } from "@/features/trending/components/TrendingArticleGrid";
 import { ErrorState } from "@/shared/components/common/ErrorState";
 import { FrameHeading } from "@/shared/components/layout/FrameHeading";
 import { FrameModule } from "@/shared/components/layout/FrameModule";
@@ -29,8 +28,6 @@ export function TrendingSection() {
     {isError ? <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
       <ErrorState message={error?.message} onRetry={() => void refetch()} />
     </div> : null}
-    {!isLoading && !isError && items.length ? <AdaptiveCardGrid items={items}
-      className="homepage-trending-grid" keyForItem={(article) => article.id}
-      renderItem={(article) => <ArticleCard article={article} className="homepage-trending-card editorial-gutter bg-white px-4 py-5 md:p-5" />} /> : null}
+    {!isLoading && !isError && items.length ? <TrendingArticleGrid articles={items} /> : null}
   </FrameModule>;
 }

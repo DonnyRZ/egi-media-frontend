@@ -1160,5 +1160,13 @@
     "forYou": "Siz uchun",
     "noTopics": "Mavzular hali mavjud emas. So‘nggi yangiliklarni o‘qishingiz mumkin.",
     "moreColumns": "Muallifning boshqa maqolalari"
+  },
+  "homepageHighlights": {
+    "previous": "Oldingi",
+    "next": "Keyingi",
+    "position": "{total} ta xabardan {current}-xabar",
+    "refreshError": "Yangilash amalga oshmadi. Oxirgi xabarlar ko‘rsatilmoqda.",
+    "retry": "Qayta urinish",
+    "carouselLabel": "Tanlangan xabarlar"
   }
 }

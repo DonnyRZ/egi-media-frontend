@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "./horizontal-media.css";
 @import "./public-mobile.css";
+@import "./homepage-highlights.css";
 @plugin "@tailwindcss/typography";
 
 /* Class-based dark mode, scoped to elements under a `.dark` root (used by the
@@ -47,74 +48,72 @@
   }
 }
 
-/* Public editorial composition: keep breakpoint order outside generated utilities. */
-  .news-lead-grid {
+/* Keep the sidebar in normal flow so its video and headlines never inherit
+   the height of the lead or supporting column. */
+.news-lead-grid {
+  display: grid;
+  overflow-wrap: anywhere;
+  gap: 1px;
+  background: #e5e7eb;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "lead" "sidebar" "headlines";
+}
+.news-lead-lead { grid-area: lead; }
+.news-lead-headlines { grid-area: headlines; }
+.news-lead-sidebar {
+  grid-area: sidebar;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: white;
+}
+.news-lead-sidebar > * { flex: 0 0 auto; }
+.news-lead-sidebar > * + * { border-top: 1px solid #e5e7eb; }
+.news-lead-grid[data-sidebar="false"] { grid-template-areas: "lead" "headlines"; }
+
+/* A single curated story is a compact editorial row, with the same image
+   width and type as a regular three-column card rather than empty cells. */
+@media (width >= 1024px) {
+  .homepage-trending-single .homepage-trending-card {
     display: grid;
-    overflow-wrap: anywhere;
-    gap: 1px;
-    background: #e5e7eb;
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-areas: "lead" "latest" "headlines" "video";
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    align-items: center;
+    gap: 1.5rem;
   }
-  .news-lead-lead { grid-area: lead; }
-  .news-lead-latest { grid-area: latest; }
-  .news-lead-headlines { grid-area: headlines; }
-  .news-lead-video { grid-area: video; }
+  .homepage-trending-single .homepage-trending-card > div {
+    padding-top: 0;
+    max-width: 48rem;
+  }
+  .homepage-trending-single .homepage-trending-card .editorial-summary { flex: none; }
+}
 
-  @media (min-width: 768px) {
-    .news-lead-grid {
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-      grid-template-areas: "lead latest" "headlines video";
-    }
-    .news-lead-grid[data-layout="full"] {
-      grid-template-areas: "lead video" "lead latest" "headlines headlines";
-    }
-    .news-lead-grid[data-layout="full"][data-video="false"] {
-      grid-template-areas: "lead latest" "headlines headlines";
-    }
-    .news-lead-grid[data-layout="full"][data-latest="false"] {
-      grid-template-areas: "lead video" "headlines headlines";
-    }
-    .news-lead-grid[data-layout="single"] {
-      display: block;
-      background: white;
-    }
-    .news-lead-grid[data-layout="support"] {
-      grid-template-areas: "lead headlines" "latest latest" "video video";
-    }
-    .news-lead-grid[data-layout="sidebar"] {
-      grid-template-areas: "lead video" "lead latest";
-    }
-    .news-lead-grid[data-layout="sidebar"][data-video="false"] {
-      grid-template-areas: "lead latest";
-    }
-    .news-lead-grid[data-layout="sidebar"][data-latest="false"] {
-      grid-template-areas: "lead video";
-    }
+@media (min-width: 768px) {
+  .news-lead-grid {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    grid-template-areas: "lead sidebar" "headlines headlines";
   }
-  @media (min-width: 1200px) {
-    .news-lead-grid[data-layout="full"] {
-      grid-template-areas: "headlines lead video" "headlines lead latest";
-    }
-    .news-lead-grid {
-      grid-template-columns: minmax(0, 28fr) minmax(0, 40fr) minmax(0, 32fr);
-      grid-template-areas: "headlines lead video" "headlines lead latest";
-    }
-    .news-lead-grid[data-layout="support"] {
-      grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
-      grid-template-areas: "headlines lead" "latest latest" "video video";
-    }
-    .news-lead-grid[data-layout="sidebar"] {
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-    }
-    .news-lead-grid[data-layout="full"][data-video="false"] {
-      grid-template-areas: "headlines lead latest";
-    }
-    .news-lead-grid[data-layout="full"][data-latest="false"] {
-      grid-template-areas: "headlines lead video";
-    }
+  .news-lead-grid[data-layout="single"] { display: block; background: white; }
+  .news-lead-grid[data-layout="support"] {
+    grid-template-areas: "lead headlines" "sidebar sidebar";
   }
-
+  .news-lead-grid[data-layout="support"][data-sidebar="false"] {
+    grid-template-areas: "lead headlines";
+  }
+  .news-lead-grid[data-layout="sidebar"] { grid-template-areas: "lead sidebar"; }
+}
+@media (min-width: 1200px) {
+  .news-lead-grid[data-layout="full"] {
+    grid-template-columns: minmax(0, 28fr) minmax(0, 40fr) minmax(0, 32fr);
+    grid-template-areas: "headlines lead sidebar";
+  }
+  .news-lead-grid[data-layout="support"] {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    grid-template-areas: "headlines lead" "sidebar sidebar";
+  }
+  .news-lead-grid[data-layout="support"][data-sidebar="false"] {
+    grid-template-areas: "headlines lead";
+  }
+}
 
 @layer utilities {
   .scrollbar-hide {

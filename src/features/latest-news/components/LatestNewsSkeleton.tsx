@@ -1,9 +1,9 @@
 import { Skeleton } from "@/shared/components/ui/Skeleton";
 
-export function LatestNewsSkeleton() {
+export function LatestNewsSkeleton({ mobileCount = 6 }: { mobileCount?: number }) {
   return <>
     <div className="latest-news-mobile divide-y divide-neutral-200">
-      {Array.from({ length: 6 }).map((_, index) => (
+      {Array.from({ length: mobileCount }).map((_, index) => (
         <div key={index} className="editorial-gutter grid grid-cols-[min(40%,9rem)_minmax(0,1fr)] items-start gap-2.5 bg-white px-4 py-3">
           <Skeleton className="aspect-video w-full rounded-none" />
           <div className="min-w-0 space-y-2">

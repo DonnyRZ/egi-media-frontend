@@ -9,6 +9,7 @@ import { FrameHeading } from "@/shared/components/layout/FrameHeading";
 import { FrameModule } from "@/shared/components/layout/FrameModule";
 import { ErrorState } from "@/shared/components/common/ErrorState";
 import { useLatestNews } from "@/features/homepage/hooks/useLatestNews";
+import { HOMEPAGE_LIMITS } from "@/shared/constants/homepage.constants";
 
 export function LatestNewsSection() {
   const { data, isLoading, isError, error, refetch, sectionFailed } = useLatestNews();
@@ -30,7 +31,7 @@ export function LatestNewsSection() {
         title={t("title")}
       />
 
-      {isLoading ? <LatestNewsSkeleton /> : null}
+      {isLoading ? <LatestNewsSkeleton mobileCount={HOMEPAGE_LIMITS.mobileLatestNews} /> : null}
 
       {isError ? (
         <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
@@ -39,7 +40,7 @@ export function LatestNewsSection() {
       ) : null}
 
       {!isLoading && !isError && items.length ? (
-        <LatestArticleGrid articles={items} />
+        <LatestArticleGrid articles={items} mobileLimit={HOMEPAGE_LIMITS.mobileLatestNews} />
       ) : null}
     </FrameModule>
   );

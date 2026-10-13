@@ -7,6 +7,7 @@ import type { Article } from "@/shared/types/article.types";
 interface LatestArticleGridProps {
   articles: Article[];
   renderDesktop?: (article: Article) => ReactNode;
+  mobileLimit?: number;
 }
 
 function desktopCard(article: Article) {
@@ -14,11 +15,11 @@ function desktopCard(article: Article) {
 }
 
 /** CSS switches presentation without waiting for hydration or refetching news. */
-export function LatestArticleGrid({ articles, renderDesktop = desktopCard }: LatestArticleGridProps) {
+export function LatestArticleGrid({ articles, renderDesktop = desktopCard, mobileLimit }: LatestArticleGridProps) {
   if (!articles.length) return null;
   return <>
     <div className="latest-news-mobile divide-y divide-neutral-200">
-      {articles.map((article) => <ArticleCard key={article.id} article={article} variant="horizontal"
+      {articles.slice(0, mobileLimit).map((article) => <ArticleCard key={article.id} article={article} variant="horizontal"
         className="editorial-gutter bg-white px-4 py-3" />)}
     </div>
     <div className="latest-news-desktop">

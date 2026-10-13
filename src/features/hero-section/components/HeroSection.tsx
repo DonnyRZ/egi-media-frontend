@@ -13,12 +13,22 @@ import { Skeleton } from "@/shared/components/ui/Skeleton";
 
 function HeroSkeleton() {
   return <div className="news-lead-grid" data-layout="full" data-video="true" data-latest="true" aria-hidden="true">
-    {(["lead", "latest", "headlines", "video"] as const).map((area) =>
+    {(["lead", "headlines"] as const).map((area) =>
       <div key={area} className={`news-lead-${area} space-y-3 bg-white px-4 py-5 md:p-5`}>
-        {area !== "latest" ? <Skeleton className="aspect-video w-full" /> : null}
+        <Skeleton className="aspect-video w-full" />
         <Skeleton className="h-5 w-28" /><Skeleton className="h-8 w-full" />
         <Skeleton className="h-4 w-4/5" />
       </div>)}
+    <div className="news-lead-sidebar bg-white">
+      <div className="news-lead-video editorial-gutter space-y-3 px-4 py-5 md:p-5">
+        <Skeleton className="h-5 w-28" /><Skeleton className="aspect-video w-full" />
+        <Skeleton className="h-8 w-full" />
+      </div>
+      <div className="news-lead-latest editorial-gutter space-y-3 px-4 py-5 md:p-5">
+        <Skeleton className="h-5 w-28" /><Skeleton className="h-8 w-full" />
+        <Skeleton className="h-8 w-4/5" />
+      </div>
+    </div>
   </div>;
 }
 

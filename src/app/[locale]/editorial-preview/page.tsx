@@ -1,10 +1,16 @@
+import { HighlightsPreview } from "@/features/editorial-preview/HighlightsPreview";
 import { notFound } from "next/navigation";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { EditorialLead } from "@/shared/components/common/EditorialLead";
 import { ArticleTimeline } from "@/shared/components/common/ArticleTimeline";
 import { ArticleHeader } from "@/features/article/components/ArticleHeader";
 import { VideoEmbed } from "@/features/videos/components/VideoEmbed";
 import { PageFrame } from "@/shared/components/layout/PageFrame";
+import { FrameHeading } from "@/shared/components/layout/FrameHeading";
+import { FrameModule } from "@/shared/components/layout/FrameModule";
+import { LatestArticleGrid } from "@/shared/components/common/LatestArticleGrid";
+import { TrendingArticleGrid } from "@/features/trending/components/TrendingArticleGrid";
+import { HOMEPAGE_LIMITS } from "@/shared/constants/homepage.constants";
 import { MobileReadingPreview } from "@/features/editorial-preview/MobileReadingPreview";
 import { VideoHeroStage } from "@/features/videos/components/VideoHeroStage";
 import { VideoPageFrame } from "@/features/videos/components/VideoPageFrame";
@@ -20,7 +26,7 @@ export default async function Preview({
   searchParams,
 }: {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ template?: string; textScale?: string; spacing?: string; plain?: string; brokenImage?: string; longMeta?: string; short?: string; pasted?: string; defaultPoster?: string; baseline?: string }>;
+  searchParams: Promise<{ template?: string; primaryCount?: string; supportingCount?: string; textScale?: string; spacing?: string; plain?: string; brokenImage?: string; longMeta?: string; short?: string; pasted?: string; defaultPoster?: string; baseline?: string; count?: string; video?: string }>;
 }) {
   if (process.env.NODE_ENV !== "development") notFound();
   const { locale } = await params;
@@ -29,10 +35,40 @@ export default async function Preview({
   const scale = [1, 1.25, 1.5, 2].includes(requestedScale) ? requestedScale : 1;
   const previewStyles = `html { font-size: ${16 * scale}px; }${query.spacing === "1" ? ".egi-public :is(h1,h2,h3,p,li,a,time,span,button,input,textarea,select) { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; } .egi-public main p { margin-bottom: 2em !important; }" : ""}`;
   setRequestLocale(locale);
+  if (query.template === "highlights") {
+    const bounded = (value: string | undefined, max: number) => {
+      const count = Number(value ?? max); return Number.isFinite(count) ? Math.max(0, Math.min(max, Math.floor(count))) : max;
+    };
+    return <><style>{previewStyles}</style><PageFrame className="homepage-frame">
+      <HighlightsPreview primaryCount={bounded(query.primaryCount, 3)} supportingCount={bounded(query.supportingCount, 9)} brokenImage={query.brokenImage === "1"} longMeta={query.longMeta === "1"} />
+    </PageFrame></>;
+  }
   if (query.template === "horizontal") {
     return <><style>{previewStyles}</style><PageFrame><HorizontalCardsPreview baseline={query.baseline === "1"} /></PageFrame></>;
   }
   const articles = previewArticles;
+  if (query.template === "homepage-composition") {
+    const requestedCount = Number(query.count ?? 3);
+    const count = Number.isFinite(requestedCount) ? Math.max(0, Math.min(6, Math.floor(requestedCount))) : 1;
+    const trending = articles.slice(4, 4 + count);
+    const breakingText = await getTranslations("breaking");
+    const latestText = await getTranslations("latest");
+    return <><style>{previewStyles}</style><PageFrame className="homepage-frame">
+      <FrameModule className="homepage-lead">
+        <EditorialLead lead={articles[0]} supporting={articles.slice(1, 4)}
+          latest={trending} latestTitle={breakingText("title")} latestHeadingId="hero-trending-heading"
+          latestHref={null} video={query.video === "0" ? undefined : previewVideo} />
+      </FrameModule>
+      {trending.length ? <FrameModule className="homepage-trending" ariaLabelledby="trending-heading">
+        <FrameHeading id="trending-heading" title={breakingText("title")} subtitle={breakingText("subtitle")} />
+        <TrendingArticleGrid articles={trending} />
+      </FrameModule> : null}
+      <FrameModule className="homepage-latest" ariaLabelledby="latest-heading">
+        <FrameHeading id="latest-heading" title={latestText("title")} subtitle={latestText("subtitle")} actionHref="/latest" />
+        <LatestArticleGrid articles={articles.slice(0, 6)} mobileLimit={HOMEPAGE_LIMITS.mobileLatestNews} />
+      </FrameModule>
+    </PageFrame></>;
+  }
   if (query.template === "video-thumbnail") {
     return <VideoPageFrame><VideoThumbnailPreview /></VideoPageFrame>;
   }

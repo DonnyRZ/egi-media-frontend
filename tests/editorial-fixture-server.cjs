@@ -3,11 +3,20 @@
 const http = require("node:http");
 const fs = require("node:fs");
 const path = require("node:path");
-const state = { count: 20, fail: "", videos: true, curated: true, imageFailure: false, writes: [] };
+const state = { count: 20, trendingCount: 6, fail: "", videos: true, curated: true, imageFailure: false, writes: [] };
 const origin = "http://localhost:5099";
 const date = "2026-01-01T12:00:00Z";
 const user = { id: "qa-user", email: "qa@example.test", full_name: "Local QA", role: "superadmin", email_verified_at: date };
 const category = { id: "qa-category", name: "Bisnis", slug: "business", description: "Liputan bisnis dan ekonomi.", available_locales: ["id", "en", "uz"] };
+const fixtureCategories = [category,
+  { ...category, id: "qa-politics", slug: "politics", name: "Politik", name_en: "Politics", name_uz: "Siyosat" },
+  { ...category, id: "qa-technology", slug: "technology", name: "Teknologi", name_en: "Technology", name_uz: "Texnologiya" },
+  { ...category, id: "qa-entertainment", slug: "entertainment", name: "Hiburan", name_en: "Entertainment", name_uz: "Ko‘ngilochar" },
+];
+function fixtureCategory(index, lang) {
+  const item = fixtureCategories[index % 5 === 0 ? 1 : index % 3 === 0 ? 3 : index % 3 === 1 ? 0 : 2];
+  return { ...item, name: lang === "id" ? item.name : item["name_" + lang] || item.name };
+}
 const topic = { id: "qa-topic", name: "Teknologi", slug: "technology", category_id: category.id, category, description: "Analisis teknologi.", available_locales: ["id", "en", "uz"] };
 const series = { id: "qa-series", name: "Ekonomi Masa Depan", slug: "future-economy", description: "Liputan mendalam ekonomi.", image: origin + "/fixture.png", article_count: 20, created_at: date, topic_id: topic.id, topic };
 const headlines = {
@@ -21,11 +30,12 @@ function articles(lang = "id") {
     slug: "story-" + index, summary: { id: "Pameran mempertemukan kerajinan tradisional, teknologi, dan kreativitas generasi muda. Pelaku industri melihat peluang baru untuk memperluas pasar Indonesia.", en: "The exhibition brings together traditional crafts, technology, and a new generation of creative entrepreneurs, opening fresh opportunities in global markets.", uz: "Ko‘rgazma an’anaviy hunarmandchilik, texnologiya va yosh avlod ijodkorligini birlashtiradi. Tadbirkorlar yangi bozorlarga chiqish imkoniyatlarini ko‘rmoqda." }[lang],
     content: "<p>Konten lokal untuk pemeriksaan desain. Tidak disimpan ke production.</p><h2>Konteks dan analisis</h2><p>Paragraf kedua untuk memeriksa tata baca, tautan, dan layout artikel.</p>",
     featured_image: state.imageFailure ? origin + "/missing.png" : origin + "/fixture.png",
+    reading_time_minutes: 3,
     published_at: new Date(Date.parse(date) - index * 60000).toISOString(),
-    created_at: date, author: user, category, series, topics: [topic], tags: [],
+    created_at: date, author: user, category: fixtureCategory(index, lang), series, topics: [topic], tags: [],
     status: "published", translation_status: "ready", locale: lang,
     available_locales: ["id", "en", "uz"], headline_position: index > 0 && index < 6 ? index : null,
-    placements: state.curated ? index === 0 ? ["homepage_hero", "latest_news"] : index < 6 ? ["headline", "latest_news"] : ["latest_news", "trending"] : [],
+    placements: state.curated ? index === 0 ? ["homepage_hero", "latest_news"] : index < 6 ? ["headline", "latest_news"] : index < 6 + state.trendingCount ? ["latest_news", "trending"] : ["latest_news"] : [],
     view_count: 1, share_count: 0,
   }));
 }
@@ -44,8 +54,8 @@ function handleGet(url, res) {
   const lang = ["id", "en", "uz"].includes(params.get("lang")) ? params.get("lang") : "id";
   const list = articles(lang);
   if (route === "/__fixture") {
-    for (const key of ["count", "fail", "videos", "curated", "imageFailure"]) {
-      if (params.has(key)) state[key] = key === "count" ? Number(params.get(key)) : key === "fail" ? params.get(key) : params.get(key) === "true";
+    for (const key of ["count", "trendingCount", "fail", "videos", "curated", "imageFailure"]) {
+      if (params.has(key)) state[key] = ["count", "trendingCount"].includes(key) ? Number(params.get(key)) : key === "fail" ? params.get(key) : params.get(key) === "true";
     }
     return respond(res, state);
   }
@@ -57,19 +67,31 @@ function handleGet(url, res) {
   if (state.fail && (state.fail === "all" || params.get("placement") === state.fail)) {
     res.statusCode = 503; return res.end(JSON.stringify({ success: false, message: "Local fixture unavailable" }));
   }
+  if (route.endsWith("/articles/homepage-highlights")) {
+    res.setHeader("Cache-Control", "no-store");
+    if (state.fail === "highlights") { res.statusCode = 503; return res.end(JSON.stringify({success:false, message:"Highlights unavailable"})); }
+    const primary = item => item.category.slug === "politics" || item.placements.includes("trending");
+    return respond(res, { primary: list.filter(primary).slice(0, 3), supporting: list.filter(item => !primary(item)).slice(0, 9) });
+  }
   if (route.endsWith("/articles/saved")) return respond(res, paged(list.slice(0, 4), params));
   if (route.endsWith("/articles") || route.endsWith("/articles/manage") || route.endsWith("/articles/me") || route.endsWith("/articles/personalized")) {
     const placement = params.get("placement");
-    return respond(res, paged(placement ? list.filter(item => item.placements.includes(placement)) : list, params));
+    let filtered = placement ? list.filter(item => item.placements.includes(placement)) : list;
+    if (params.has("category_id")) filtered = filtered.filter(item => item.category.id === params.get("category_id"));
+    return respond(res, paged(filtered, params));
   }
   if (route.includes("/articles/") && !route.endsWith("/saved")) {
     return respond(res, list.find(item => route.endsWith(item.id) || route.endsWith(item.slug)) || list[0]);
   }
-  if (route.includes("/categories")) return route.endsWith("/categories") ? respond(res, [category], { total: 1 }) : respond(res, { ...category, locale: lang });
+  if (route.includes("/categories")) {
+    const catalog = fixtureCategories.map(item => ({ ...item, name: lang === "id" ? item.name : item["name_" + lang] || item.name }));
+    return route.endsWith("/categories") ? respond(res, catalog, { total: catalog.length })
+      : respond(res, { ...(catalog.find(item => route.endsWith(item.id) || route.endsWith(item.slug)) || catalog[0]), locale: lang });
+  }
   if (route.includes("/topics") && !route.includes("/users")) return route.endsWith("/topics") || route.endsWith("/catalog") ? respond(res, [topic], { total: 1 }) : respond(res, { ...topic, locale: lang });
   if (route.includes("/series")) return route.endsWith("/series") ? respond(res, [series], { total: 1 }) : respond(res, { ...series, articles: list });
   if (route.includes("/youtube-videos")) {
-    const videos = paged(state.videos ? [{ id: "qa-video", title: "Industri Kreatif Membuka Peluang Baru", description: "Video fixture", url: "https://www.youtube.com/watch?v=jfKfPfyJRdk", duration: "8:26", created_at: date }] : [], params);
+    const videos = paged(state.videos ? Array.from({ length: 4 }, (_, index) => ({ id: "qa-video-" + index, title: "Industri Kreatif Membuka Peluang Baru", description: "Video fixture", url: "https://www.youtube.com/watch?v=jfKfPfyJRdk", format: "horizontal", poster_landscape: origin + "/fixture.png", duration: "8:26", created_at: date })) : [], params);
     return respond(res, videos.items, videos.meta);
   }
   if (route.includes("/columns") && !route.endsWith("/comments")) return route.endsWith("/columns") || route.endsWith("/saved") || route.endsWith("/me") ? respond(res, paged(list.slice(0, 5), params)) : respond(res, list[0]);

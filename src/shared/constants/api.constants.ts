@@ -1,4 +1,5 @@
 export const API_ENDPOINTS = {
+  homepageHighlights: "/api/v1/articles/homepage-highlights",
   articles: "/api/v1/articles",
   articlesMe: "/api/v1/articles/me",
   articlesManage: "/api/v1/articles/manage",

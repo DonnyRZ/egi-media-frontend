@@ -1,5 +1,6 @@
 import { setRequestLocale } from "next-intl/server";
 
+import { HomepageHighlightsSection } from "@/features/homepage/components/HomepageHighlightsSection";
 import { HeroSection } from "@/features/hero-section/components/HeroSection";
 import { PageFrame } from "@/shared/components/layout/PageFrame";
 
@@ -29,12 +30,13 @@ export default async function HomePage({ params }: HomePageProps) {
   return (
     <PageFrame className="homepage-frame">
       <HeroSection />
-      <LatestNewsSection />
       <TrendingSection />
+      <LatestNewsSection />
+      <HomepageHighlightsSection />
+      <FeaturedVideosSection />
       <CategoryNewsSection />
       <TopicNewsSection />
       <FeaturedSeriesSection />
-      <FeaturedVideosSection />
       <ForYouSection />
     </PageFrame>
   );

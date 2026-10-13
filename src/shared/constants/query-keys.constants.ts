@@ -52,6 +52,7 @@ export const QUERY_KEYS = {
       ["saved-columns", "list", params] as const,
   },
   homepage: {
+    highlights: (lang: string) => ["homepage", "highlights", lang] as const,
     all: ["homepage"] as const,
     news: (lang: string) => ["homepage", "news", lang] as const,
   },

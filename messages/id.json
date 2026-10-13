@@ -1160,5 +1160,13 @@
     "forYou": "Untuk Anda",
     "noTopics": "Topik belum tersedia. Anda tetap dapat membaca berita terbaru.",
     "moreColumns": "Tulisan lain dari penulis"
+  },
+  "homepageHighlights": {
+    "previous": "Sebelumnya",
+    "next": "Berikutnya",
+    "position": "Artikel {current} dari {total}",
+    "refreshError": "Pembaruan belum berhasil. Artikel terakhir tetap ditampilkan.",
+    "retry": "Coba lagi",
+    "carouselLabel": "Pilihan berita"
   }
 }

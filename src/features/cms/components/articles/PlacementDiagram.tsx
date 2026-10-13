@@ -15,6 +15,6 @@ export function PlacementDiagram({ value }: { value: ArticlePlacement[] }) {
         {label}{value.includes(placement) ? " ✓" : ""}
       </div>)}
     </div>
-    <p className="mt-2 text-xs leading-5 text-neutral-500">Trending only uses manually selected, published articles; empty Trending stays empty. Desktop repeats the latest Trending selections below Featured Video. Mobile: Hero → Featured Video → 3 Trending → Latest News → Latest Videos → For You.</p>
+    <p className="mt-2 text-xs leading-5 text-neutral-500">Trending only uses manually selected, published articles; empty Trending stays empty. Desktop repeats the latest Trending selections below Featured Video. Mobile: Hero → Featured Video → 3 Trending image cards → 3 Latest News rows → Utama + Pendamping → Latest Videos → For You. Politics automatically qualifies for Utama together with manually selected Trending articles; publication time decides their order.</p>
   </figure>;
 }

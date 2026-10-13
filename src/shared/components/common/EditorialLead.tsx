@@ -26,7 +26,8 @@ export function EditorialLead({
   latestHeadingId,
 }: EditorialLeadProps) {
   const full = supporting.length >= 2 && (Boolean(video) || latest.length >= 3);
-  const layout = full ? "full" : supporting.length ? "support" : "single";
+  const hasSidebar = Boolean(video) || latest.length > 0;
+  const layout = full ? "full" : supporting.length ? "support" : hasSidebar ? "sidebar" : "single";
   return (
     <>
       <div
@@ -34,6 +35,7 @@ export function EditorialLead({
         data-layout={layout}
         data-video={Boolean(video)}
         data-latest={latest.length > 0}
+        data-sidebar={hasSidebar}
       >
         <div className="news-lead-lead min-w-0 bg-white">
           <HeroFeaturedCard article={lead} />
@@ -43,14 +45,14 @@ export function EditorialLead({
             <HeroHeadlineList articles={supporting} />
           </div>
         ) : null}
-        {latest.length ? (
-          <div className="news-lead-latest min-w-0 bg-white">
-            <HeroLatestList articles={latest} allHref={latestHref} title={latestTitle} headingId={latestHeadingId} />
-          </div>
-        ) : null}
-        {video ? (
-          <div className="news-lead-video min-w-0 bg-white">
-            <HeroVideo video={video} />
+        {hasSidebar ? (
+          <div className="news-lead-sidebar min-w-0 bg-white">
+            {video ? <div className="news-lead-video min-w-0">
+              <HeroVideo video={video} />
+            </div> : null}
+            {latest.length ? <div className="news-lead-latest min-w-0">
+              <HeroLatestList articles={latest} allHref={latestHref} title={latestTitle} headingId={latestHeadingId} />
+            </div> : null}
           </div>
         ) : null}
       </div>

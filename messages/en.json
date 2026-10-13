@@ -1160,5 +1160,13 @@
     "forYou": "For You",
     "noTopics": "Topics are not available yet. You can still read the latest news.",
     "moreColumns": "More from this columnist"
+  },
+  "homepageHighlights": {
+    "previous": "Previous",
+    "next": "Next",
+    "position": "Story {current} of {total}",
+    "refreshError": "Unable to refresh. Showing the last available stories.",
+    "retry": "Retry",
+    "carouselLabel": "Selected stories"
   }
 }

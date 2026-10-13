@@ -49,7 +49,7 @@ export function ContactMap() {
           <div className="flex flex-col gap-4 border-t border-neutral-200 p-6 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="font-serif text-lg font-bold text-ink">{t("mapPlaceName")}</p>
-              <p className="mt-1 max-w-2xl text-sm leading-6 text-neutral-500">
+              <p className="editorial-summary mt-1 max-w-2xl text-sm leading-6 text-neutral-500">
                 {t("mapFullAddress")}
               </p>
             </div>

@@ -27,13 +27,13 @@ function ViewFallback() {
   return (
     <PageFrame>
       <FrameModule>
-        <div className="bg-white px-4 py-5 md:p-5">
+        <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
           <Skeleton className="h-16 w-48" />
           <Skeleton className="mt-4 h-10 w-2/3" />
         </div>
       </FrameModule>
       <FrameModule>
-        <div className="bg-white px-4 py-5 md:p-5">
+        <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
           <Skeleton className="h-48 w-full" />
         </div>
       </FrameModule>

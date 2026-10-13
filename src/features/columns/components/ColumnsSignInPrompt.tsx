@@ -10,8 +10,8 @@ export function ColumnsSignInPrompt() {
 
   return (
     <div className="mx-auto max-w-md border border-neutral-300 bg-white p-8 text-center shadow-sm">
-      <h2 className="font-sans text-xl font-bold text-ink">{t("signInTitle")}</h2>
-      <p className="mt-2 text-sm leading-6 text-neutral-600">
+      <h2 className="editorial-section-title font-sans text-xl font-bold text-ink">{t("signInTitle")}</h2>
+      <p className="editorial-summary mt-2 text-sm leading-6 text-neutral-600">
         {t("signInMessage")}
       </p>
       <Link className="mt-5 inline-block" href="/login">

@@ -30,10 +30,10 @@ export function SeriesDetailView({ slug }: SeriesDetailViewProps) {
       <PageFrame>
         <FrameModule>
           <div className="grid gap-px bg-neutral-200 lg:grid-cols-[1.2fr_1fr]">
-            <div className="bg-white px-4 py-5 md:p-5">
+            <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
               <Skeleton className="aspect-[16/9] w-full" />
             </div>
-            <div className="space-y-3 bg-white px-4 py-5 md:p-5">
+            <div className="editorial-gutter space-y-3 bg-white px-4 py-5 md:p-5">
               <Skeleton className="h-3 w-24" />
               <Skeleton className="h-10 w-2/3" />
               <Skeleton className="h-4 w-full" />
@@ -43,7 +43,7 @@ export function SeriesDetailView({ slug }: SeriesDetailViewProps) {
         <FrameModule>
           <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
             {Array.from({ length: 6 }).map((_, index) => (
-              <div key={index} className="space-y-3 bg-white px-4 py-5 md:p-5">
+              <div key={index} className="editorial-gutter space-y-3 bg-white px-4 py-5 md:p-5">
                 <Skeleton className="aspect-[16/9] w-full" />
                 <Skeleton className="h-4 w-24" />
                 <Skeleton className="h-6 w-full" />
@@ -59,7 +59,7 @@ export function SeriesDetailView({ slug }: SeriesDetailViewProps) {
     return (
       <PageFrame>
         <FrameModule>
-          <div className="bg-white px-4 py-5 md:p-5">
+          <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
             <ErrorState message={error?.message} onRetry={() => void refetch()} />
           </div>
         </FrameModule>
@@ -71,7 +71,7 @@ export function SeriesDetailView({ slug }: SeriesDetailViewProps) {
     return (
       <PageFrame>
         <FrameModule>
-          <div className="bg-white px-4 py-5 md:p-5">
+          <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
             <EmptyState message={t("notFound")} />
           </div>
         </FrameModule>
@@ -91,7 +91,7 @@ export function SeriesDetailView({ slug }: SeriesDetailViewProps) {
               src={data.coverImage}
             />
           </div>
-          <div className="bg-white px-4 py-5 md:p-5 lg:p-8">
+          <div className="editorial-gutter bg-white px-4 py-5 md:p-5 lg:p-8">
             <div className="flex flex-wrap items-center gap-3">
               <Link
                 className="text-xs font-semibold uppercase tracking-wide text-neutral-500 transition-colors hover:text-accent"
@@ -111,13 +111,13 @@ export function SeriesDetailView({ slug }: SeriesDetailViewProps) {
             {data.topic?<Link href={`/topics/${data.topic.slug}`} className="mt-4 block text-sm font-semibold text-primary-700">{data.topic.name} →</Link>:null}
             <p className="kicker mt-4">{t("kicker")}</p>
             <h1
-              className="mt-2 max-w-4xl font-sans text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl"
+              className="editorial-page-title mt-2 max-w-4xl font-sans text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl"
               id="series-detail-heading"
             >
               {data.name}
             </h1>
             {data.description ? (
-              <p className="mt-5 max-w-3xl text-base leading-7 text-neutral-700">
+              <p className="editorial-summary mt-5 max-w-3xl text-base leading-7 text-neutral-700">
                 {data.description}
               </p>
             ) : null}
@@ -132,7 +132,7 @@ export function SeriesDetailView({ slug }: SeriesDetailViewProps) {
         <FrameHeading id="series-articles-heading" title={t("articlesInSeries")} />
 
         {!data.articles.length ? (
-          <div className="bg-white px-4 py-5 md:p-5">
+          <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
             <EmptyState message={t("noArticles")} />
           </div>
         ) : (
@@ -140,7 +140,7 @@ export function SeriesDetailView({ slug }: SeriesDetailViewProps) {
             items={data.articles}
             keyForItem={(article) => article.id}
             renderItem={(article) => (
-              <ArticleCard article={article} className="bg-white px-4 py-5 md:p-5" />
+              <ArticleCard article={article} className="editorial-gutter bg-white px-4 py-5 md:p-5" />
             )}
           />
         )}

@@ -21,7 +21,7 @@ function FeedSkeleton() {
   return (
     <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
       {Array.from({ length: 6 }).map((_, index) => (
-        <div className="space-y-3 bg-white px-4 py-5 md:p-5" key={index}>
+        <div className="editorial-gutter space-y-3 bg-white px-4 py-5 md:p-5" key={index}>
           <Skeleton className="aspect-[16/9] w-full" />
           <Skeleton className="h-3 w-20" />
           <Skeleton className="h-6 w-3/4" />
@@ -52,7 +52,7 @@ export function ForYouListing() {
   if (!isAuthenticated) {
     return (
       <FrameModule>
-        <div className="bg-white px-4 py-5 md:p-5">
+        <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
           <ForYouGuestCta />
         </div>
       </FrameModule>
@@ -74,7 +74,7 @@ export function ForYouListing() {
       {isLoading ? <FeedSkeleton /> : null}
 
       {feed.isError ? (
-        <div className="bg-white px-4 py-5 md:p-5">
+        <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
           <ErrorState
             message={feed.error?.message}
             onRetry={() => void feed.refetch()}
@@ -83,7 +83,7 @@ export function ForYouListing() {
       ) : null}
 
       {!isLoading && !feed.isError && (!hasSubscriptions || !hasItems) ? (
-        <div className="bg-white px-4 py-5 md:p-5">
+        <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
           <ForYouEmptyState />
         </div>
       ) : null}
@@ -94,11 +94,11 @@ export function ForYouListing() {
             items={feed.data.items}
             keyForItem={(article) => article.id}
             renderItem={(article) => (
-              <ArticleCard article={article} className="bg-white px-4 py-5 md:p-5" />
+              <ArticleCard article={article} className="editorial-gutter bg-white px-4 py-5 md:p-5" />
             )}
           />
           {feed.data.totalPages > 1 ? (
-            <div className="bg-white px-4 py-5 md:p-5">
+            <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
               <Pagination
                 basePath="/for-you"
                 currentPage={feed.data.page}

@@ -41,7 +41,7 @@ export function ColumnAuthor({ author, showBio = false }: ColumnAuthorProps) {
           {author.fullName}
         </Link>
         {showBio && author.bio ? (
-          <p className="mt-1 max-w-xl text-sm leading-6 text-neutral-600">
+          <p className="editorial-summary mt-1 max-w-xl text-sm leading-6 text-neutral-600">
             {author.bio}
           </p>
         ) : null}

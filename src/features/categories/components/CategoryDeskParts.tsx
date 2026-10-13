@@ -34,7 +34,7 @@ export function DeskTopicNavigation({
   return (
     <nav
       aria-label={t("topics")}
-      className="border-y border-neutral-200 bg-white px-4 md:px-6"
+      className="editorial-gutter border-y border-neutral-200 bg-white px-4 md:px-6"
     >
       <ul className="flex gap-6 overflow-x-auto scrollbar-hide">
         <li className="shrink-0">
@@ -63,7 +63,7 @@ export function DeskTopicNavigation({
 
 function CategoryLeadStory({ article }: { article: Article }) {
   return (
-    <article className="group min-w-0">
+    <article className="editorial-card group min-w-0">
       <Link
         href={getArticleHref(article)}
         aria-label={article.title}
@@ -78,17 +78,17 @@ function CategoryLeadStory({ article }: { article: Article }) {
           />
         </div>
       </Link>
-      <div className="pt-4">
+      <div className="editorial-card-copy pt-4">
         {article.category ? (
           <p className="kicker">{article.category.name}</p>
         ) : null}
-        <h2 className="mt-2 font-sans text-[28px] font-bold leading-[1.08] tracking-tight text-ink sm:text-3xl xl:text-4xl">
+        <h2 className="editorial-lead-title mt-2 font-sans text-[28px] font-bold leading-[1.08] tracking-tight text-ink sm:text-3xl xl:text-4xl">
           <Link className="headline-link" href={getArticleHref(article)}>
             {article.title}
           </Link>
         </h2>
         {article.summary ? (
-          <p className="mt-3 line-clamp-3 text-base leading-7 text-neutral-700">
+          <p className="editorial-summary mt-3 line-clamp-3 text-base leading-7 text-neutral-700">
             {article.summary}
           </p>
         ) : null}
@@ -100,7 +100,7 @@ function CategoryLeadStory({ article }: { article: Article }) {
 
 function SupportingStory({ article }: { article: Article }) {
   return (
-    <article className="group grid min-w-0 grid-cols-[112px_minmax(0,1fr)] gap-3 sm:grid-cols-[128px_minmax(0,1fr)] sm:gap-4 xl:grid-cols-[132px_minmax(0,1fr)]">
+    <article className="editorial-card editorial-supporting-story group grid min-w-0 grid-cols-[112px_minmax(0,1fr)] gap-3 sm:grid-cols-[128px_minmax(0,1fr)] sm:gap-4 xl:grid-cols-[132px_minmax(0,1fr)]">
       <Link
         href={getArticleHref(article)}
         aria-label={article.title}
@@ -116,7 +116,7 @@ function SupportingStory({ article }: { article: Article }) {
         {article.category ? (
           <p className="kicker text-[10px]">{article.category.name}</p>
         ) : null}
-        <h3 className="mt-1 font-sans text-base font-bold leading-snug tracking-tight text-ink sm:text-[17px]">
+        <h3 className="editorial-list-title mt-1 font-sans text-base font-bold leading-snug tracking-tight text-ink sm:text-[17px]">
           <Link className="headline-link" href={getArticleHref(article)}>
             {article.title}
           </Link>
@@ -141,12 +141,12 @@ export function CategoryOpeningPackage({
       aria-label={t("srHeading")}
       className="grid min-w-0 border-b border-neutral-200 xl:grid-cols-[minmax(0,1.55fr)_minmax(360px,1fr)]"
     >
-      <div className="min-w-0 p-4 md:p-6 xl:border-r xl:border-neutral-200">
+      <div className="editorial-gutter min-w-0 p-4 md:p-6 xl:border-r xl:border-neutral-200">
         <CategoryLeadStory article={lead} />
       </div>
       {supporting.length ? (
-        <div className="min-w-0 border-t border-neutral-200 p-4 md:p-6 xl:border-t-0">
-          <h2 className="mb-4 text-sm font-bold uppercase tracking-wide text-ink">
+        <div className="editorial-gutter min-w-0 border-t border-neutral-200 p-4 md:p-6 xl:border-t-0">
+          <h2 className="editorial-section-title mb-4 text-sm font-bold uppercase tracking-wide text-ink">
             {t("moreTopStories")}
           </h2>
           <div className="grid gap-x-6 gap-y-0 md:grid-cols-2 xl:grid-cols-1">
@@ -173,7 +173,7 @@ export function CategoryOpeningPackage({
 
 function CategoryLatestCard({ article }: { article: Article }) {
   return (
-    <article className="group flex min-w-0 flex-col bg-white p-4 md:p-5">
+    <article className="editorial-card editorial-gutter group flex min-w-0 flex-col bg-white p-4 md:p-5">
       <Link
         href={getArticleHref(article)}
         aria-label={article.title}
@@ -191,13 +191,13 @@ function CategoryLatestCard({ article }: { article: Article }) {
         {article.category ? (
           <p className="kicker">{article.category.name}</p>
         ) : null}
-        <h3 className="mt-1.5 font-sans text-xl font-bold leading-tight tracking-tight text-ink">
+        <h3 className="editorial-list-title mt-1.5 font-sans text-xl font-bold leading-tight tracking-tight text-ink">
           <Link className="headline-link" href={getArticleHref(article)}>
             {article.title}
           </Link>
         </h3>
         {article.summary ? (
-          <p className="mt-2 line-clamp-3 text-sm leading-6 text-neutral-600">
+          <p className="editorial-summary mt-2 line-clamp-3 text-sm leading-6 text-neutral-600">
             {article.summary}
           </p>
         ) : null}
@@ -216,11 +216,11 @@ export function CategoryLatestGrid({ articles }: { articles: Article[] }) {
       aria-labelledby="category-latest-heading"
       className="border-b border-neutral-200"
     >
-      <header className="flex flex-col gap-2 px-4 py-5 sm:flex-row sm:items-end sm:justify-between md:px-6">
+      <header className="editorial-gutter flex flex-col gap-2 px-4 py-5 sm:flex-row sm:items-end sm:justify-between md:px-6">
         <div>
           <h2
             id="category-latest-heading"
-            className="font-sans text-2xl font-bold tracking-tight text-ink"
+            className="editorial-section-title font-sans text-2xl font-bold tracking-tight text-ink"
           >
             {t("title")}
           </h2>
@@ -240,7 +240,7 @@ export function CategoryLatestGrid({ articles }: { articles: Article[] }) {
 
 export function DeskNotices({ model }: DeskPartProps) {
   return model.selection.isError ? (
-    <div className="px-4 py-5 md:p-5">
+    <div className="editorial-gutter px-4 py-5 md:p-5">
       <ErrorState onRetry={() => void model.selection.refetch()} />
     </div>
   ) : null;
@@ -258,8 +258,8 @@ export function DeskEditorPicks({ model }: DeskPartProps) {
   if (!articles.length) return null;
 
   return (
-    <section className="border-b border-neutral-200 p-4 md:p-6">
-      <h2 className="mb-4 font-sans text-xl font-bold tracking-tight text-ink">
+    <section className="editorial-gutter border-b border-neutral-200 p-4 md:p-6">
+      <h2 className="editorial-section-title mb-4 font-sans text-xl font-bold tracking-tight text-ink">
         {t("editors")}
       </h2>
       <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
@@ -281,8 +281,8 @@ export function DeskCompactStories({ model }: DeskPartProps) {
   if (!articles.length) return null;
 
   return (
-    <section className="border-b border-neutral-200 p-4 md:p-6">
-      <h2 className="mb-4 font-sans text-xl font-bold tracking-tight text-ink">
+    <section className="editorial-gutter border-b border-neutral-200 p-4 md:p-6">
+      <h2 className="editorial-section-title mb-4 font-sans text-xl font-bold tracking-tight text-ink">
         {t("more")}
       </h2>
       <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
@@ -317,8 +317,8 @@ export function DeskContinuation({ model }: DeskPartProps) {
   if (!articles.length) return null;
 
   return (
-    <section className="border-t border-neutral-200 p-4 md:p-6">
-      <h2 className="font-sans text-xl font-bold tracking-tight text-ink">
+    <section className="editorial-gutter border-t border-neutral-200 p-4 md:p-6">
+      <h2 className="editorial-section-title font-sans text-xl font-bold tracking-tight text-ink">
         {t("more")}
       </h2>
       <ArticleTimeline articles={articles} />
@@ -329,7 +329,7 @@ export function DeskContinuation({ model }: DeskPartProps) {
 export function DeskEmptyNotice({ model }: DeskPartProps) {
   const t = useTranslations("categoriesPage");
   return !model.selection.isLoading && !model.lead ? (
-    <div className="px-4 py-5 md:p-5">
+    <div className="editorial-gutter px-4 py-5 md:p-5">
       <EmptyState message={t("noArticles")} />
     </div>
   ) : null;

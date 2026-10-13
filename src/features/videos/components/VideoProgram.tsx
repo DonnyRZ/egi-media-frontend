@@ -21,7 +21,7 @@ function ProgramHeader({ model }: ProgramModelProps) {
         <p className="text-sm font-semibold text-neutral-300">
           Original Series
         </p>
-        <h1 className="mt-3 text-3xl font-bold lg:text-5xl">{program.name}</h1>
+        <h1 className="editorial-page-title mt-3 text-3xl font-bold lg:text-5xl">{program.name}</h1>
         {program.description ? (
           <p className="mt-4 max-w-2xl leading-7 text-neutral-300">
             {program.description}
@@ -54,7 +54,7 @@ function ProgramEpisodes({ model }: ProgramModelProps) {
 export function VideoProgram({ slug }: { slug: string }) {
   const model = useVideoProgram(slug);
   return (
-    <div className="bg-[#050a16] px-4 py-5 md:p-5 text-white lg:p-8">
+    <div className="editorial-gutter bg-[#050a16] px-4 py-5 text-white md:px-6 lg:px-8">
       <Link
         className="inline-flex min-h-11 items-center underline"
         href="/videos"

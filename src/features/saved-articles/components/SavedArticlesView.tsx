@@ -23,7 +23,7 @@ function GridSkeleton() {
   return (
     <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
       {Array.from({ length: 3 }).map((_, index) => (
-        <div className="space-y-3 bg-white px-4 py-5 md:p-5" key={index}>
+        <div className="editorial-gutter space-y-3 bg-white px-4 py-5 md:p-5" key={index}>
           <Skeleton className="aspect-[16/9] w-full" />
           <Skeleton className="h-4 w-16" />
           <Skeleton className="h-6 w-3/4" />
@@ -64,7 +64,7 @@ export function SavedArticlesView() {
   if (!isAuthenticated) {
     return (
       <FrameModule>
-        <div className="bg-white px-4 py-5 md:p-5">
+        <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
           <SavedArticlesSignInPrompt />
         </div>
       </FrameModule>
@@ -83,7 +83,7 @@ export function SavedArticlesView() {
     !hasArticles &&
     !hasColumns;
 
-  if(bothEmpty) return <FrameModule><div className="px-4 py-5 md:p-5"><EmptyState message={t("empty")}/></div></FrameModule>;
+  if(bothEmpty) return <FrameModule><div className="editorial-gutter px-4 py-5 md:p-5"><EmptyState message={t("empty")}/></div></FrameModule>;
 
   return (
     <>
@@ -101,7 +101,7 @@ export function SavedArticlesView() {
         {articlesLoading ? <GridSkeleton /> : null}
 
         {articles.isError ? (
-          <div className="bg-white px-4 py-5 md:p-5">
+          <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
             <ErrorState
               message={articles.error?.message}
               onRetry={() => void articles.refetch()}
@@ -110,7 +110,7 @@ export function SavedArticlesView() {
         ) : null}
 
         {!articlesLoading && !articles.isError && !hasArticles ? (
-          <div className="bg-white px-4 py-5 md:p-5">
+          <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
             <EmptyState message={t("emptyArticles")} />
           </div>
         ) : null}
@@ -126,7 +126,7 @@ export function SavedArticlesView() {
               renderItem={(article) => <SavedArticleCard article={article} />}
             />
             {articles.data.totalPages > 1 ? (
-              <div className="bg-white px-4 py-5 md:p-5">
+              <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
                 <Pagination
                   basePath="/saved"
                   currentPage={articles.data.page}
@@ -156,7 +156,7 @@ export function SavedArticlesView() {
         {columnsLoading ? <GridSkeleton /> : null}
 
         {columns.isError ? (
-          <div className="bg-white px-4 py-5 md:p-5">
+          <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
             <ErrorState
               message={columns.error?.message}
               onRetry={() => void columns.refetch()}
@@ -165,7 +165,7 @@ export function SavedArticlesView() {
         ) : null}
 
         {!columnsLoading && !columns.isError && !hasColumns ? (
-          <div className="bg-white px-4 py-5 md:p-5">
+          <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
             <EmptyState message={t("emptyColumns")} />
           </div>
         ) : null}
@@ -178,7 +178,7 @@ export function SavedArticlesView() {
               renderItem={(column) => <SavedColumnCard column={column} />}
             />
             {columns.data.totalPages > 1 ? (
-              <div className="bg-white px-4 py-5 md:p-5">
+              <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
                 <Pagination
                   basePath="/saved"
                   currentPage={columns.data.page}

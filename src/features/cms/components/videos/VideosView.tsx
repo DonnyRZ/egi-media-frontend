@@ -17,6 +17,7 @@ import {
   LoadingState,
 } from "@/features/cms/components/ui/StateViews";
 import { VideoFormModal } from "@/features/cms/components/videos/VideoFormModal";
+import { VideoThumbnail } from "@/features/videos/components/VideoThumbnail";
 import { CMS_DEFAULT_PAGE_SIZE } from "@/features/cms/constants/cms.constants";
 import { useAuthStore } from "@/features/auth/stores/auth.store";
 import { useCmsVideos, useVideoMutations } from "@/features/cms/hooks/useCmsVideos";
@@ -31,7 +32,6 @@ import {
 } from "@/features/cms/services/cms-video.service";
 import {
   formatAbsoluteDateTime,
-  getYoutubeThumbnail,
 } from "@/shared/utils/format";
 
 export function VideosView() {
@@ -143,25 +143,15 @@ export function VideosView() {
               </thead>
               <tbody className="divide-y divide-neutral-100 dark:divide-neutral-800">
                 {videos.map((video) => {
-                  const thumb = getYoutubeThumbnail(video.url);
                   const canMutate = canMutateVideo(video, currentUserId, isElevated);
                   const statusMeta = getVideoStatusMeta(video);
                   return (
                     <tr key={video.id}>
                       <td className="px-5 py-3">
                         <div className="flex items-center gap-3">
-                          {thumb ? (
-                            // eslint-disable-next-line @next/next/no-img-element
-                            <img
-                              src={thumb}
-                              alt=""
-                              className="h-12 w-20 shrink-0 rounded object-cover"
-                            />
-                          ) : (
-                            <div className="flex h-12 w-20 shrink-0 items-center justify-center rounded bg-neutral-100 dark:bg-neutral-800">
-                              <Icons.video className="h-5 w-5 text-neutral-400" />
-                            </div>
-                          )}
+                          <div className={`relative shrink-0 overflow-hidden rounded bg-neutral-100 dark:bg-neutral-800 ${video.format === "short" ? "aspect-[9/16] w-7" : "aspect-video w-20"}`}>
+                            <VideoThumbnail video={video} sizes="80px" />
+                          </div>
                           <div className="min-w-0">
                             <p className="truncate font-medium text-neutral-900 dark:text-neutral-100">
                               {video.title}

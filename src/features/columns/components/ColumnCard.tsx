@@ -21,10 +21,10 @@ export function ColumnCard({ column, variant = "default", className }: ColumnCar
   const href = `/kolom/${column.slug}`;
   const dateValue = column.publishedAt ?? column.createdAt;
 
-  if (variant === "row") return <article className={cn("grid gap-4 py-5 md:grid-cols-[1fr_160px]", className)}><div><p className="kicker">{t("kicker")}</p><h3 className="mt-2 text-xl font-bold leading-tight"><Link href={href}>{column.title}</Link></h3>{column.summary?<p className="mt-2 line-clamp-2 text-sm leading-6 text-neutral-600">{column.summary}</p>:null}<ColumnAuthor author={column.author}/></div><Link href={href} className="relative aspect-video w-32 md:w-full"><ArticleImage src={column.featuredImage} alt={column.title}/></Link></article>;
+  if (variant === "row") return <article className={cn("editorial-card grid gap-4 py-5 md:grid-cols-[1fr_160px]", className)}><div><p className="kicker">{t("kicker")}</p><h3 className="editorial-list-title mt-2 text-xl font-bold leading-tight"><Link href={href}>{column.title}</Link></h3>{column.summary?<p className="editorial-summary mt-2 line-clamp-2 text-sm leading-6 text-neutral-600">{column.summary}</p>:null}<ColumnAuthor author={column.author}/></div><Link href={href} className="relative aspect-video w-32 md:w-full"><ArticleImage src={column.featuredImage} alt={column.title}/></Link></article>;
   if (variant === "featured") {
     return (
-      <article className={cn("group grid gap-6 px-4 py-5 md:p-5 lg:grid-cols-[1.2fr_1fr] lg:gap-10 lg:p-6", className)}>
+      <article className={cn("editorial-card editorial-gutter group grid gap-6 px-4 py-5 md:p-5 lg:grid-cols-[1.2fr_1fr] lg:gap-10 lg:p-6", className)}>
         <Link className="block" href={href}>
           <div className="relative aspect-[16/9] overflow-hidden bg-neutral-100">
             <ArticleImage
@@ -44,11 +44,11 @@ export function ColumnCard({ column, variant = "default", className }: ColumnCar
               {format.dateTime(new Date(dateValue), DATE_FORMAT)}
             </time>
           </div>
-          <h2 className="mt-3 font-sans text-3xl font-bold leading-tight text-ink transition-colors group-hover:text-accent sm:text-4xl">
+          <h2 className="editorial-lead-title mt-3 font-sans text-3xl font-bold leading-tight text-ink transition-colors group-hover:text-accent sm:text-4xl">
             <Link href={href}>{column.title}</Link>
           </h2>
           {column.summary ? (
-            <p className="mt-4 line-clamp-3 text-base leading-7 text-neutral-700">
+            <p className="editorial-summary mt-4 line-clamp-3 text-base leading-7 text-neutral-700">
               {column.summary}
             </p>
           ) : null}
@@ -65,7 +65,7 @@ export function ColumnCard({ column, variant = "default", className }: ColumnCar
   }
 
   return (
-    <article className={cn("group flex h-full flex-col bg-white px-4 py-5 md:p-5", className)}>
+    <article className={cn("editorial-card editorial-gutter group flex h-full flex-col bg-white px-4 py-5 md:p-5", className)}>
       <Link className="block" href={href}>
         <div className="relative aspect-[16/9] overflow-hidden bg-neutral-100">
           <ArticleImage
@@ -85,11 +85,11 @@ export function ColumnCard({ column, variant = "default", className }: ColumnCar
             {format.dateTime(new Date(dateValue), DATE_FORMAT)}
           </time>
         </div>
-        <h3 className="mt-2 font-sans text-xl font-bold leading-snug text-ink transition-colors group-hover:text-accent">
+        <h3 className="editorial-card-title mt-2 font-sans text-xl font-bold leading-snug text-ink transition-colors group-hover:text-accent">
           <Link href={href}>{column.title}</Link>
         </h3>
         {column.summary ? (
-          <p className="mt-2 line-clamp-3 flex-1 text-sm leading-6 text-neutral-600">
+          <p className="editorial-summary mt-2 line-clamp-3 flex-1 text-sm leading-6 text-neutral-600">
             {column.summary}
           </p>
         ) : null}

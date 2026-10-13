@@ -17,6 +17,7 @@ import { PageFrame } from "@/shared/components/layout/PageFrame";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
 import { env } from "@/shared/config/env";
 import { DATE_FORMAT } from "@/shared/constants/format.constants";
+import { calculateReadingTime } from "@/shared/utils/format";
 
 interface ColumnDetailViewProps {
   slug: string;
@@ -38,6 +39,7 @@ function DetailSkeleton() {
 
 export function ColumnDetailView({ slug }: ColumnDetailViewProps) {
   const t = useTranslations("columnsPage");
+  const tCommon = useTranslations("common");
   const format = useFormatter();
   const locale = useLocale();
   const { data, isLoading, isError, error, refetch } = useColumnDetail(slug);
@@ -59,7 +61,7 @@ export function ColumnDetailView({ slug }: ColumnDetailViewProps) {
     return (
       <PageFrame>
         <FrameModule>
-          <div className="bg-white px-4 py-5 md:p-5 lg:p-8">
+          <div className="editorial-gutter bg-white px-4 py-5 md:p-5 lg:p-8">
             <div className="mb-4">{backLink}</div>
             <DetailSkeleton />
           </div>
@@ -72,7 +74,7 @@ export function ColumnDetailView({ slug }: ColumnDetailViewProps) {
     return (
       <PageFrame>
         <FrameModule>
-          <div className="bg-white px-4 py-5 md:p-5 lg:p-8">
+          <div className="editorial-gutter bg-white px-4 py-5 md:p-5 lg:p-8">
             <div className="mb-4">{backLink}</div>
             <ErrorState
               message={error?.message}
@@ -101,32 +103,35 @@ export function ColumnDetailView({ slug }: ColumnDetailViewProps) {
   return (
     <PageFrame>
       <FrameModule ariaLabelledby="column-detail-heading">
-        <div className="bg-white px-4 py-5 md:p-5 lg:p-8">
+        <div className="editorial-gutter editorial-opening bg-white px-4 py-5 md:p-5 lg:p-8">
           <div className="mx-auto max-w-[1040px]">
             <div className="mb-4">{backLink}</div>
             <p className="kicker">{t("kicker")}</p>
             <h1
-              className="mt-2 font-sans text-[30px] font-bold leading-tight tracking-tight text-ink sm:text-4xl lg:text-[44px]"
+              className="editorial-article-title mt-2 font-sans text-[30px] font-bold leading-tight tracking-tight text-ink sm:text-4xl lg:text-[44px]"
               id="column-detail-heading"
             >
               {data.title}
             </h1>
             {data.summary ? (
-              <p className="mt-5 border-l-2 border-ink pl-4 text-base leading-7 text-neutral-700 lg:text-lg">
+              <p className="editorial-summary mt-5 border-l-2 border-ink pl-4 text-base leading-7 text-neutral-700 lg:text-lg">
                 {data.summary}
               </p>
             ) : null}
-            <div className="mt-4 flex flex-wrap items-center gap-3 text-sm text-neutral-600">
+            <div className="editorial-reader-meta mt-4 flex flex-wrap items-center gap-3 text-sm text-neutral-600">
               <Link className="font-semibold text-ink hover:underline" href={`/kolom?author_id=${data.author.id}`}>
                 {t("byAuthor", { name: data.author.fullName })}
               </Link>
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
               {data.publishedAt ? (
                 <time dateTime={data.publishedAt}>
                   {format.dateTime(new Date(data.publishedAt), DATE_FORMAT)}
                 </time>
               ) : null}
+              <span className="editorial-mobile-only"> · {tCommon("readingTime", { minutes: calculateReadingTime(data.content) })}</span>
+              </div>
             </div>
-            <div className="mt-4">
+            <div className="editorial-actions-offset mt-4">
               <ColumnEngagement
                 columnId={data.id}
                 initialShareCount={data.shareCount}
@@ -135,7 +140,7 @@ export function ColumnDetailView({ slug }: ColumnDetailViewProps) {
               />
             </div>
             {data.featuredImage ? (
-              <div className="relative mx-auto mt-5 aspect-[16/9] max-w-[768px] overflow-hidden bg-neutral-100">
+              <div className="editorial-photo-offset relative mx-auto mt-5 aspect-[16/9] max-w-[768px] overflow-hidden bg-neutral-100">
                 <ArticleImage
                   alt={data.featuredImageAlt||data.title}
                   sizes="(max-width: 768px) 100vw, 768px"
@@ -143,15 +148,15 @@ export function ColumnDetailView({ slug }: ColumnDetailViewProps) {
                 />
               </div>
             ) : null}
-            {data.featuredImageCaption||data.featuredImageCredit?<p className="mx-auto mt-2 max-w-[768px] text-xs text-neutral-600">{data.featuredImageCaption} {data.featuredImageCredit}</p>:null}
+            {data.featuredImageCaption||data.featuredImageCredit?<p className="editorial-caption mx-auto mt-2 max-w-[768px] text-xs text-neutral-600">{data.featuredImageCaption} {data.featuredImageCredit}</p>:null}
 
           </div>
         </div>
       </FrameModule>
 
       <FrameModule>
-        <div className="bg-white px-4 py-5 md:p-5 lg:p-8">
-          <div className="mx-auto max-w-3xl">
+        <div className="editorial-gutter editorial-reading-module bg-white px-4 py-5 md:p-5 lg:p-8">
+          <div className="editorial-reading-width mx-auto max-w-3xl">
             <ArticleBody content={data.content} />
             <ColumnAuthor author={data.author} showBio/>
           </div>

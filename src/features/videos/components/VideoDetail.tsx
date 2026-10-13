@@ -39,7 +39,7 @@ function WatchMetadata({ model }: WatchProps) {
   return (
     <>
       {video.description ? (
-        <p className="mt-5 max-w-3xl leading-7 text-neutral-300">
+        <p className="editorial-summary mt-5 max-w-3xl leading-7 text-neutral-300">
           {video.description}
         </p>
       ) : null}
@@ -59,7 +59,7 @@ function WatchArticle({ id, model }: WatchProps) {
   if (!video) return null;
   return (
     <article className="mx-auto max-w-[1040px]">
-      <h1 className="my-5 text-[30px] font-bold leading-tight lg:text-[40px]">
+      <h1 className="editorial-article-title my-5 text-[30px] font-bold leading-tight lg:text-[40px]">
         {video.title}
       </h1>
       <WatchPlayer id={id} model={model} />
@@ -71,7 +71,7 @@ export function VideoDetail({ id }: { id: string }) {
   const model = useVideoDetail(id);
   const t = useTranslations("editorial");
   return (
-    <div className="bg-[#050a16] px-4 py-5 md:p-5 text-white lg:p-8">
+    <div className="editorial-gutter bg-[#050a16] px-4 py-5 text-white md:px-6 lg:px-8">
       <Link
         className="inline-flex min-h-11 items-center text-sm underline"
         href={model.video.data?.format === "short" ? "/shorts" : "/videos"}

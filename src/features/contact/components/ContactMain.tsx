@@ -21,12 +21,12 @@ export function ContactMain() {
         <div className="max-w-3xl">
           <p className="kicker">{t("formKicker")}</p>
           <h1
-            className="mt-3 font-serif text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl lg:text-5xl"
+            className="editorial-page-title mt-3 font-serif text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl lg:text-5xl"
             id="contact-form-heading"
           >
             {t("formHeadline")}
           </h1>
-          <p className="mt-4 max-w-2xl text-base leading-7 text-neutral-600 lg:text-lg">
+          <p className="editorial-summary mt-4 max-w-2xl text-base leading-7 text-neutral-600 lg:text-lg">
             {t("formLede")}
           </p>
         </div>
@@ -60,10 +60,10 @@ export function ContactMain() {
               <p className="mt-3 font-serif text-xl font-bold text-ink sm:text-2xl">
                 {t("building")}
               </p>
-              <p className="mt-2 text-sm leading-6 text-neutral-700 lg:text-base lg:leading-7">
+              <p className="editorial-summary mt-2 text-sm leading-6 text-neutral-700 lg:text-base lg:leading-7">
                 {t("addressLine")}
               </p>
-              <p className="text-sm leading-6 text-neutral-700 lg:text-base lg:leading-7">
+              <p className="editorial-summary text-sm leading-6 text-neutral-700 lg:text-base lg:leading-7">
                 {t("addressCity")}
               </p>
             </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 
 import { ArticleActionIcon } from "@/features/article/components/ArticleActionIcon";
@@ -14,6 +14,7 @@ interface ArticleShareBarProps {
   title: string;
   shareUrl: string;
   onShareRecorded: (shareCount: number | ((prev: number) => number)) => void;
+  leadingAction?: ReactNode;
 }
 
 const SHARE_ACTIONS: Array<{
@@ -32,6 +33,7 @@ export function ArticleShareBar({
   title,
   shareUrl,
   onShareRecorded,
+  leadingAction,
 }: ArticleShareBarProps) {
   const t = useTranslations("article");
   const [copied, setCopied] = useState(false);
@@ -64,12 +66,13 @@ export function ArticleShareBar({
   }
 
   return (
-    <div>
+    <div className="editorial-share-group">
       <div
         aria-label={t("shareTitle")}
-        className="flex flex-wrap gap-2"
+        className="editorial-share-items flex flex-wrap gap-2"
         role="group"
       >
+        {leadingAction}
         {SHARE_ACTIONS.map((action) => {
           const label =
             action.platform === "copy_link" && copied

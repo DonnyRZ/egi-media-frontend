@@ -56,21 +56,21 @@ export function ConfirmDialog({
     >
       <div
         ref={ref}
-        className="w-full max-w-sm border border-neutral-200 bg-white p-6 shadow-[0_24px_60px_rgba(15,23,42,0.18)]"
+        className="editorial-dialog-panel w-full max-w-sm border border-neutral-200 bg-white p-6 shadow-[0_24px_60px_rgba(15,23,42,0.18)]"
       >
         <h2
-          className="font-serif text-xl font-bold text-ink"
+          className="editorial-section-title font-serif text-xl font-bold text-ink"
           id="confirm-dialog-title"
         >
           {title}
         </h2>
         <p
-          className="mt-2 text-sm leading-6 text-neutral-600"
+          className="editorial-summary mt-2 text-sm leading-6 text-neutral-600"
           id="confirm-dialog-body"
         >
           {message}
         </p>
-        <div className="mt-6 flex justify-end gap-3">
+        <div className="editorial-dialog-actions mt-6 flex justify-end gap-3">
           <Button
             className="rounded-none"
             disabled={isPending}

@@ -23,8 +23,8 @@ export function AboutCoverage() {
               <span className="font-serif text-sm font-bold text-accent">
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <h3 className="mt-2 font-serif text-xl font-bold text-ink">{topic.label}</h3>
-              <p className="mt-2 text-sm leading-6 text-neutral-500">{topic.description}</p>
+              <h3 className="editorial-card-title mt-2 font-serif text-xl font-bold text-ink">{topic.label}</h3>
+              <p className="editorial-summary mt-2 text-sm leading-6 text-neutral-500">{topic.description}</p>
             </li>
           ))}
           {topics.length % 2 === 1 ? (

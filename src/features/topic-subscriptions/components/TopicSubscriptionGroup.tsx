@@ -27,7 +27,7 @@ export function TopicSubscriptionGroupBlock({
     <section aria-labelledby={`topic-group-${group.category?.id ?? "other"}`}>
       <div className="mb-4 flex items-end justify-between gap-4">
         <h3
-          className="font-serif text-xl font-bold text-ink"
+          className="editorial-card-title font-serif text-xl font-bold text-ink"
           id={`topic-group-${group.category?.id ?? "other"}`}
         >
           {heading}
@@ -46,7 +46,7 @@ export function TopicSubscriptionGroupBlock({
             <div className="min-w-0">
               <p className="font-semibold text-ink">{topic.name}</p>
               {topic.description ? (
-                <p className="mt-1 text-sm leading-6 text-neutral-500">
+                <p className="editorial-summary mt-1 text-sm leading-6 text-neutral-500">
                   {topic.description}
                 </p>
               ) : null}

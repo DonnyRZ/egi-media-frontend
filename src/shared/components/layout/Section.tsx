@@ -14,6 +14,7 @@ export function Section({ children, className, ariaLabelledby, dense }: SectionP
     <section
       aria-labelledby={ariaLabelledby}
       className={cn(
+        "editorial-section",
         dense ? "py-6 first:pt-0 lg:py-8" : "py-12 lg:py-16",
         className,
       )}

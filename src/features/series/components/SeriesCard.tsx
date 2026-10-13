@@ -39,7 +39,7 @@ export function SeriesCard({ series, variant = "default", className }: SeriesCar
 
   if (variant === "featured") {
     return (
-      <article className={cn("group grid gap-6 border-b border-neutral-200 pb-8 lg:grid-cols-[1.2fr_1fr] lg:gap-10 lg:pb-10", className)}>
+      <article className={cn("editorial-card group grid gap-6 border-b border-neutral-200 pb-8 lg:grid-cols-[1.2fr_1fr] lg:gap-10 lg:pb-10", className)}>
         <Link className="block" href={`/series/${series.slug}`}>
           <SeriesCover className="aspect-[16/9]" series={series} />
         </Link>
@@ -55,11 +55,11 @@ export function SeriesCard({ series, variant = "default", className }: SeriesCar
               </time>
             ) : null}
           </div>
-          <h2 className="mt-3 font-sans text-3xl font-bold leading-tight text-ink transition-colors group-hover:text-accent sm:text-4xl">
+          <h2 className="editorial-lead-title mt-3 font-sans text-3xl font-bold leading-tight text-ink transition-colors group-hover:text-accent sm:text-4xl">
             <Link href={`/series/${series.slug}`}>{series.name}</Link>
           </h2>
           {series.description ? (
-            <p className="mt-4 line-clamp-3 text-base leading-7 text-neutral-700">
+            <p className="editorial-summary mt-4 line-clamp-3 text-base leading-7 text-neutral-700">
               {series.description}
             </p>
           ) : null}
@@ -78,7 +78,7 @@ export function SeriesCard({ series, variant = "default", className }: SeriesCar
   }
 
   return (
-    <article className={cn("group flex h-full flex-col bg-white px-4 py-5 md:p-5", className)}>
+    <article className={cn("editorial-card editorial-gutter group flex h-full flex-col bg-white px-4 py-5 md:p-5", className)}>
       <Link className="block" href={`/series/${series.slug}`}>
         <SeriesCover className="aspect-[16/9]" series={series} />
       </Link>
@@ -94,11 +94,11 @@ export function SeriesCard({ series, variant = "default", className }: SeriesCar
             </time>
           ) : null}
         </div>
-        <h3 className="mt-2 font-sans text-xl font-bold leading-snug text-ink transition-colors group-hover:text-accent">
+        <h3 className="editorial-card-title mt-2 font-sans text-xl font-bold leading-snug text-ink transition-colors group-hover:text-accent">
           <Link href={`/series/${series.slug}`}>{series.name}</Link>
         </h3>
         {series.description ? (
-          <p className="mt-2 line-clamp-3 flex-1 text-sm leading-6 text-neutral-600">
+          <p className="editorial-summary mt-2 line-clamp-3 flex-1 text-sm leading-6 text-neutral-600">
             {series.description}
           </p>
         ) : null}

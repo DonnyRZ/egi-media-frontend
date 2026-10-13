@@ -23,7 +23,7 @@ export function ErrorState({ title, message, onRetry, className, tone = "light" 
         className,
       )}
     >
-      <h3 className={cn("text-lg font-semibold",tone === "dark" ? "text-white" : "text-neutral-900")}>
+      <h3 className={cn("editorial-card-title text-lg font-semibold",tone === "dark" ? "text-white" : "text-neutral-900")}>
         {title ?? t("states.errorTitle")}
       </h3>
       <p className={cn("mt-2 text-sm",tone === "dark" ? "text-neutral-300" : "text-neutral-500")}>

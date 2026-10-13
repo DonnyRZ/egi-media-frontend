@@ -71,7 +71,7 @@ export function VideoHubPrograms({ model, shorts }: HubModelProps) {
           <div className="relative aspect-[2/3] overflow-hidden rounded-lg bg-neutral-900">
             <ArticleImage alt={program.name} src={program.poster_url || null} />
           </div>
-          <h3 className="mt-3 text-lg font-bold">{program.name}</h3>
+          <h3 className="editorial-card-title mt-3 text-lg font-bold">{program.name}</h3>
         </Link>
       ))}
     </ScrollShelf>

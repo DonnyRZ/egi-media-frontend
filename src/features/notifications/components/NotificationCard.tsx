@@ -41,7 +41,7 @@ export function NotificationCard({
         <div className="flex items-start justify-between gap-3">
           <h3
             className={cn(
-              "text-sm text-ink sm:text-base",
+              "editorial-list-title text-sm text-ink sm:text-base",
               unread ? "font-bold" : "font-semibold",
             )}
           >
@@ -54,7 +54,7 @@ export function NotificationCard({
           ) : null}
         </div>
 
-        <p className="mt-1 text-sm leading-6 text-neutral-600">
+        <p className="editorial-summary mt-1 text-sm leading-6 text-neutral-600">
           {notification.message}
         </p>
 

@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { setRequestLocale } from "next-intl/server";
 import { VideoProgram } from "@/features/videos/components/VideoProgram";
-import { PageFrame } from "@/shared/components/layout/PageFrame";
+import { VideoPageFrame } from "@/features/videos/components/VideoPageFrame";
 export default async function Page({
   params,
 }: {
@@ -10,10 +10,10 @@ export default async function Page({
   const p = await params;
   setRequestLocale(p.locale);
   return (
-    <PageFrame>
+    <VideoPageFrame>
       <Suspense fallback={<div className="h-60 animate-pulse bg-[#050a16]" />}>
         <VideoProgram slug={p.slug} />
       </Suspense>
-    </PageFrame>
+    </VideoPageFrame>
   );
 }

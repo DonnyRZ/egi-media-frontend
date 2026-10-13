@@ -1,7 +1,7 @@
 "use client";
 import { Link } from "@/i18n/navigation";
 import { ScrollShelf } from "@/features/videos/components/ScrollShelf";
-import { ArticleImage } from "@/shared/components/common/ArticleImage";
+import { VideoThumbnail } from "@/features/videos/components/VideoThumbnail";
 import type { YoutubeVideo } from "@/shared/types/youtube.types";
 export function VideoShelf({
   title,
@@ -22,16 +22,16 @@ export function VideoShelf({
           <div
             className={`relative bg-neutral-900 ${video.format === "short" ? "aspect-[9/16]" : "aspect-video"}`}
           >
-            <ArticleImage
+            <VideoThumbnail
               alt=""
-              src={video.thumbnailUrl}
+              video={video}
               sizes="(max-width:767px) 80vw, 440px"
             />
             <span className="absolute bottom-3 left-3 flex items-center gap-2 rounded-full bg-black/75 px-3 py-2 text-sm">
               ▶ {video.durationLabel}
             </span>
           </div>
-          <h3 className="p-4 text-lg font-semibold leading-snug">
+          <h3 className="editorial-list-title p-4 text-lg font-semibold leading-snug">
             {video.title}
           </h3>
         </Link>

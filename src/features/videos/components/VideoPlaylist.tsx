@@ -1,7 +1,7 @@
 "use client";
 
 import { useFormatter, useTranslations } from "next-intl";
-import Image from "next/image";
+import { VideoThumbnail } from "@/features/videos/components/VideoThumbnail";
 
 import { DATE_FORMAT } from "@/shared/constants/format.constants";
 import type { YoutubeVideo } from "@/shared/types/youtube.types";
@@ -48,15 +48,7 @@ export function VideoPlaylist({
                 onClick={() => onSelect(video)}
               >
                 <span className="relative aspect-video w-[7.5rem] shrink-0 self-start overflow-hidden bg-neutral-100">
-                  {video.thumbnailUrl ? (
-                    <Image
-                      alt=""
-                      className="object-cover"
-                      fill
-                      sizes="120px"
-                      src={video.thumbnailUrl}
-                    />
-                  ) : null}
+                  <VideoThumbnail video={{ ...video, format: "horizontal", posterLandscape: video.posterLandscape || video.posterPortrait }} sizes="120px" />
                   <span
                     aria-hidden="true"
                     className="absolute inset-0 flex items-center justify-center bg-ink/20"
@@ -113,11 +105,11 @@ export function VideoStageMeta({ video }: { video: YoutubeVideo }) {
           {format.dateTime(new Date(video.publishedAt), DATE_FORMAT)}
         </time>
       ) : null}
-      <h2 className="mt-2 max-w-4xl font-sans text-2xl font-bold leading-tight tracking-tight text-ink sm:text-3xl">
+      <h2 className="editorial-lead-title mt-2 max-w-4xl font-sans text-2xl font-bold leading-tight tracking-tight text-ink sm:text-3xl">
         {video.title}
       </h2>
       {video.description ? (
-        <p className="mt-4 max-w-3xl text-sm leading-7 text-neutral-700 sm:text-base">
+        <p className="editorial-summary mt-4 max-w-3xl text-sm leading-7 text-neutral-700 sm:text-base">
           {video.description}
         </p>
       ) : null}
@@ -135,7 +127,6 @@ export function VideoStageMeta({ video }: { video: YoutubeVideo }) {
 
 export function VideoGridCard({ video }: { video: YoutubeVideo }) {
   const format = useFormatter();
-  const t = useTranslations("videosPage");
 
   return (
     <article className="group flex h-full flex-col bg-white">
@@ -145,19 +136,8 @@ export function VideoGridCard({ video }: { video: YoutubeVideo }) {
         rel="noopener noreferrer"
         target="_blank"
       >
-        {video.thumbnailUrl ? (
-          <Image
-            alt={video.title}
-            className="object-cover"
-            fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-            src={video.thumbnailUrl}
-          />
-        ) : (
-          <span className="flex h-full items-center justify-center bg-ink text-xs font-semibold uppercase tracking-wide text-white">
-            {t("watchKicker")}
-          </span>
-        )}
+        <VideoThumbnail video={{ ...video, format: "horizontal", posterLandscape: video.posterLandscape || video.posterPortrait }} alt={video.title}
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" />
         <span
           aria-hidden="true"
           className="absolute inset-0 flex items-center justify-center bg-ink/0 transition-colors group-hover:bg-ink/25"
@@ -178,13 +158,13 @@ export function VideoGridCard({ video }: { video: YoutubeVideo }) {
             {format.dateTime(new Date(video.publishedAt), DATE_FORMAT)}
           </time>
         ) : null}
-        <h3 className="mt-1.5 line-clamp-2 font-sans text-base font-bold leading-snug text-ink transition-colors group-hover:text-accent sm:text-lg">
+        <h3 className="editorial-list-title mt-1.5 line-clamp-2 font-sans text-base font-bold leading-snug text-ink transition-colors group-hover:text-accent sm:text-lg">
           <a href={video.url} rel="noopener noreferrer" target="_blank">
             {video.title}
           </a>
         </h3>
         {video.description ? (
-          <p className="mt-2 line-clamp-2 text-sm leading-5 text-neutral-600">
+          <p className="editorial-summary mt-2 line-clamp-2 text-sm leading-5 text-neutral-600">
             {video.description}
           </p>
         ) : null}

@@ -17,7 +17,7 @@ export function PrivacyBody() {
         <ol className="mx-auto max-w-3xl space-y-12">
           {sections.map((section, index) => (
             <li key={section.title}>
-              <h3 className="flex items-baseline gap-3 font-serif text-xl font-bold text-ink sm:text-2xl">
+              <h3 className="editorial-card-title flex items-baseline gap-3 font-serif text-xl font-bold text-ink sm:text-2xl">
                 <span aria-hidden="true" className="text-accent">
                   {String(index + 1).padStart(2, "0")}
                 </span>
@@ -27,7 +27,7 @@ export function PrivacyBody() {
                 {section.paragraphs.map((paragraph) => (
                   <p
                     key={paragraph.slice(0, 48)}
-                    className="text-base leading-8 text-neutral-700"
+                    className="editorial-body-copy text-base leading-8 text-neutral-700"
                   >
                     {paragraph}
                   </p>

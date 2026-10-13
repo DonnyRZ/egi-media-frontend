@@ -24,11 +24,13 @@ export function PublicChrome({
     return <>{children}</>;
   }
 
+  const isMediaPage = pathname === "/videos" || pathname.startsWith("/videos/") || pathname === "/shorts";
+
   return (
     <>
       {ad}
       {header}
-      <main>{children}</main>
+      <main className={isMediaPage ? "bg-[#050a16] text-white" : undefined}>{children}</main>
       {footer}
     </>
   );

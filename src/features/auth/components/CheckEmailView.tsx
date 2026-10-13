@@ -37,10 +37,10 @@ export function CheckEmailView() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="font-serif text-2xl font-bold text-ink">
+        <h2 className="editorial-section-title font-serif text-2xl font-bold text-ink">
           {t("checkEmailTitle")}
         </h2>
-        <p className="mt-2 text-sm leading-6 text-neutral-600">
+        <p className="editorial-summary mt-2 text-sm leading-6 text-neutral-600">
           {t("checkEmailBody", { email: email || t("yourEmail") })}
         </p>
       </div>

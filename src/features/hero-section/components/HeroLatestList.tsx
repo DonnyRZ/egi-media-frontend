@@ -8,14 +8,14 @@ import { getArticleHref } from "@/shared/utils/article-path";
 export function HeroLatestList({ articles,allHref="/latest" }: { articles: Article[];allHref?:string }) {
   const t = useTranslations("latest");
   const format = useFormatter();
-  return <section className="p-4 min-[1200px]:p-5" aria-labelledby="hero-latest-heading">
+  return <section className="editorial-gutter p-4 min-[1200px]:p-5" aria-labelledby="hero-latest-heading">
     <div className="flex items-center justify-between gap-3">
-      <h2 id="hero-latest-heading" className="text-xl font-bold text-accent">{t("title")}</h2>
+      <h2 id="hero-latest-heading" className="editorial-section-title text-xl font-bold text-accent">{t("title")}</h2>
       <Link href={allHref} className="shrink-0 text-xs font-semibold underline underline-offset-4">{t("viewAll")}</Link>
     </div>
     <ul className="mt-3 divide-y divide-neutral-200">
       {articles.map((article) => <li key={article.id} className="py-3 first:pt-0 last:pb-0">
-        <h3 className="font-sans text-lg font-bold leading-snug tracking-tight text-ink">
+        <h3 className="editorial-list-title font-sans text-lg font-bold leading-snug tracking-tight text-ink">
           <Link className="headline-link" href={getArticleHref(article)}>{article.title}</Link>
         </h3>
         {article.publishedAt ? <time dateTime={article.publishedAt} className="mt-1 block text-xs text-neutral-500">

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Source_Serif_4 } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
@@ -21,6 +21,12 @@ const inter = Inter({
   display: "swap",
   variable: "--font-inter",
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 const sourceSerif = Source_Serif_4({
   subsets: ["latin"],
@@ -88,7 +94,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale}>
-      <body className={`${inter.variable} ${sourceSerif.variable}`}>
+      <body className={`egi-public ${inter.variable} ${sourceSerif.variable}`}>
         <NextIntlClientProvider messages={messages}>
           <QueryProvider>
             <AuthProvider>

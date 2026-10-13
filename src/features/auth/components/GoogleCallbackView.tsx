@@ -52,7 +52,7 @@ export function GoogleCallbackView() {
   return (
     <>
       <div className="space-y-4 text-center">
-        <h2 className="font-serif text-2xl font-bold text-ink">
+        <h2 className="editorial-section-title font-serif text-2xl font-bold text-ink">
           {error ? t("googleFailedTitle") : t("googleLoadingTitle")}
         </h2>
         <p className="text-sm text-neutral-600">

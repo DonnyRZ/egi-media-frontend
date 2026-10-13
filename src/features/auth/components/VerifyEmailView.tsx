@@ -50,14 +50,14 @@ export function VerifyEmailView() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="font-serif text-2xl font-bold text-ink">
+        <h2 className="editorial-section-title font-serif text-2xl font-bold text-ink">
           {status === "loading"
             ? t("verifyingTitle")
             : status === "success"
               ? t("verifySuccessTitle")
               : t("verifyFailedTitle")}
         </h2>
-        <p className="mt-2 text-sm leading-6 text-neutral-600">
+        <p className="editorial-summary mt-2 text-sm leading-6 text-neutral-600">
           {status === "loading" ? t("verifyingBody") : message}
         </p>
       </div>

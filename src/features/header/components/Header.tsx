@@ -162,7 +162,7 @@ function Masthead() {
   const { isSearchOpen, isMobileMenuOpen, toggleMobileMenu, setSearchOpen } = useUiStore();
 
   return (
-    <div className="flex h-16 items-center justify-between gap-2 lg:h-20 lg:gap-4">
+    <div className="editorial-masthead flex h-16 items-center justify-between gap-2 lg:h-20 lg:gap-4">
       <div className="flex shrink-0 items-center gap-2">
         <button
           aria-label={t("toggleMenu")}
@@ -193,6 +193,7 @@ function Masthead() {
         <button
           aria-expanded={isSearchOpen}
           aria-label={t("toggleSearch")}
+          aria-controls="egi-site-search"
           className="min-h-11 min-w-11 rounded p-1.5 text-white hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
           onClick={() => setSearchOpen(!isSearchOpen)}
           type="button"
@@ -417,7 +418,7 @@ function MobileNav() {
       id="egi-mobile-navigation"
       aria-label={t("navMobile")}
       className={cn(
-        "border-t border-neutral-800 py-4 lg:hidden",
+        "editorial-mobile-nav border-t border-neutral-800 py-4 lg:hidden",
         isMobileMenuOpen ? "block" : "hidden",
       )}
     >
@@ -481,6 +482,7 @@ function SearchBar() {
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
         setSearchOpen(false);
+        document.querySelector<HTMLButtonElement>('[aria-controls="egi-site-search"]')?.focus();
       }
     }
 
@@ -502,8 +504,8 @@ function SearchBar() {
   }
 
   return (
-    <div className="border-t border-neutral-800 py-4">
-      <form className="flex items-end gap-3" onSubmit={submitSearch}>
+    <div id="egi-site-search" className="border-t border-neutral-800 py-4">
+      <form className="editorial-search-form flex items-end gap-3" onSubmit={submitSearch}>
         <div className="min-w-0 flex-1">
           <label className="sr-only" htmlFor="site-search">
             {t("searchLabel")}
@@ -527,7 +529,10 @@ function SearchBar() {
         <button
           aria-label={t("searchClose")}
           className="min-h-11 min-w-11 shrink-0 rounded p-2 text-neutral-400 transition-colors hover:bg-white/10 hover:text-white"
-          onClick={() => setSearchOpen(false)}
+          onClick={() => {
+            setSearchOpen(false);
+            document.querySelector<HTMLButtonElement>('[aria-controls="egi-site-search"]')?.focus();
+          }}
           type="button"
         >
           <CloseIcon />
@@ -546,11 +551,11 @@ export function Header() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 border-b border-neutral-800 bg-ink text-white transition-transform duration-300 ease-out will-change-transform",
+        "editorial-public-header sticky top-0 z-50 border-b border-neutral-800 bg-ink text-white transition-transform duration-300 ease-out will-change-transform",
         isVisible ? "translate-y-0" : "pointer-events-none -translate-y-full",
       )}
     >
-      <Container>
+      <Container className="editorial-header-container">
         <Masthead />
         <NavRow />
         <SearchBar />

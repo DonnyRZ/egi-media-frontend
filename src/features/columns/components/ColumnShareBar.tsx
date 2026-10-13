@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 
 import { buildShareUrl } from "@/features/article/utils/article.utils";
+import { ArticleActionIcon } from "@/features/article/components/ArticleActionIcon";
 import { trackColumnShare } from "@/features/columns/repositories/column.repository";
 import { cn } from "@/shared/lib/cn";
 import type { SharePlatform } from "@/shared/types/article.types";
@@ -13,6 +14,7 @@ interface ColumnShareBarProps {
   title: string;
   shareUrl: string;
   onShareRecorded: (shareCount: number | ((prev: number) => number)) => void;
+  leadingAction?: ReactNode;
 }
 
 const SHARE_ACTIONS: Array<{
@@ -36,6 +38,7 @@ export function ColumnShareBar({
   title,
   shareUrl,
   onShareRecorded,
+  leadingAction,
 }: ColumnShareBarProps) {
   const t = useTranslations("columnsPage");
   const [copied, setCopied] = useState(false);
@@ -68,11 +71,13 @@ export function ColumnShareBar({
   }
 
   return (
-    <div>
-      <div className="flex flex-wrap gap-2">
+    <div className="editorial-share-group">
+      <div className="editorial-share-items flex flex-wrap gap-2" role="group" aria-label={t("shareTitle")}>
+        {leadingAction}
         {SHARE_ACTIONS.map((action) => (
           <button
             key={action.platform}
+            aria-label={action.platform === "copy_link" && copied ? t("linkCopied") : t(action.labelKey)}
             className={cn(
               "min-h-11 border border-neutral-300 bg-white px-3 py-2 text-xs font-semibold uppercase tracking-wide text-neutral-700 transition-colors hover:border-ink hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 disabled:opacity-60",
               action.platform === "copy_link" &&
@@ -83,12 +88,14 @@ export function ColumnShareBar({
             onClick={() => void handleShare(action.platform)}
             type="button"
           >
-            {action.platform === "copy_link" && copied
+            <span className="editorial-mobile-only"><ArticleActionIcon name={action.platform} /></span>
+            <span className="editorial-wide-only">{action.platform === "copy_link" && copied
               ? t("linkCopied")
-              : t(action.labelKey)}
+              : t(action.labelKey)}</span>
           </button>
         ))}
       </div>
+      <span aria-live="polite" className="sr-only" role="status">{copied ? t("linkCopied") : ""}</span>
     </div>
   );
 }

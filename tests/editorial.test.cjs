@@ -131,6 +131,7 @@ test("video mounts as a poster; iframe is created only for requested playback", 
     react: React, "react/jsx-runtime": require("react/jsx-runtime"),
     "next/image": { default: (props) => React.createElement("img", { src: props.src, alt: props.alt }) },
     "@/shared/constants/site.constants": { FALLBACK_VIDEO_THUMBNAIL: "/images/fallback-video.svg" },
+    "@/features/videos/components/VideoThumbnail": { VideoThumbnail: ({ video, alt }) => React.createElement("img", { src: video.thumbnailUrl || "/images/fallback-video.svg", alt }) },
     "@/shared/lib/cn": { cn: (...values) => values.filter(Boolean).join(" ") },
   });
   const { VideoEmbed } = load("src/features/videos/components/VideoEmbed.tsx", {

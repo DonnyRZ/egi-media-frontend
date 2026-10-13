@@ -39,7 +39,7 @@ export function SaveArticleButton({ articleId }: SaveArticleButtonProps) {
   const label = isPending ? t("saving") : isSaved ? t("saved") : t("save");
 
   return (
-    <div>
+    <div className="editorial-save-action">
       <button
         aria-label={label}
         aria-pressed={isSaved}

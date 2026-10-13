@@ -78,9 +78,26 @@ export function extractYoutubeId(url: string): string | null {
 }
 
 export function getYoutubeThumbnail(url: string): string | null {
+  return getYoutubeThumbnailCandidates(url)[0] ?? null;
+}
+
+/** Highest quality first. Availability is checked against the original image in the renderer. */
+export function getYoutubeThumbnailCandidates(url: string): string[] {
   const videoId = extractYoutubeId(url);
-  if (!videoId) return null;
-  return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+  if (!videoId) return [];
+  return ["maxresdefault", "sddefault", "hqdefault", "mqdefault"].map(
+    (quality) => `https://img.youtube.com/vi/${videoId}/${quality}.jpg`,
+  );
+}
+
+export function isYoutubeThumbnail(src: string, videoUrl: string): boolean {
+  const id = extractYoutubeId(videoUrl);
+  if (!id) return false;
+  try {
+    const image = new URL(src);
+    return ["img.youtube.com", "i.ytimg.com"].includes(image.hostname)
+      && image.pathname.startsWith(`/vi/${id}/`);
+  } catch { return false; }
 }
 
 export function getYoutubeEmbedUrl(url: string): string | null {

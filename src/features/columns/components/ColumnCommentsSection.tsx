@@ -184,7 +184,7 @@ function CommentItem({
       )}
       style={depth > 0 ? { marginLeft: Math.min(depth, 4) * 16 } : undefined}
     >
-      <div className={cn("px-4 py-5 md:p-5", depth > 0 ? "bg-neutral-50/60" : "max-md:px-0")}>
+      <div className={cn("px-4 py-5 md:p-5", depth > 0 ? "bg-neutral-50/60" : "editorial-inset-free max-md:px-0")}>
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
             <p className="text-sm font-semibold text-ink">
@@ -207,7 +207,7 @@ function CommentItem({
             </button>
           ) : null}
         </div>
-        <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-neutral-700">
+        <p className="editorial-summary mt-3 whitespace-pre-wrap text-sm leading-6 text-neutral-700">
           {comment.content}
         </p>
         {canReply && !isReplying ? (
@@ -321,11 +321,11 @@ export function ColumnCommentsSection({
   }
 
   return (
-    <div className="bg-white px-4 py-5 md:p-5 lg:p-8">
+    <div className="editorial-gutter bg-white px-4 py-5 md:p-5 lg:p-8">
       <div className="mx-auto max-w-3xl">
         <div className="mb-6 flex items-end justify-between gap-4">
           <h2
-            className="font-sans text-2xl font-bold text-ink"
+            className="editorial-section-title font-sans text-2xl font-bold text-ink"
             id="column-comments-heading"
           >
             {t("heading")}

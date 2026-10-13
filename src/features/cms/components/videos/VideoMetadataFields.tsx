@@ -8,14 +8,9 @@ import {
   type VideoMetadataProps,
 } from "@/features/cms/components/videos/VideoMetadataInputs";
 import { MediaPreview } from "@/features/cms/components/media/MediaPreview";
-import { getYoutubeThumbnail } from "@/shared/utils/format";
 export function VideoMetadataFields(props: VideoMetadataProps) {
   const options = useVideoMetadataOptions();
   const values = props.values;
-  const src =
-    (values.format === "short"
-      ? values.posterPortrait
-      : values.posterLandscape) || getYoutubeThumbnail(values.url);
   return (
     <div className="space-y-4">
       <VideoFormatField {...props} />
@@ -32,7 +27,8 @@ export function VideoMetadataFields(props: VideoMetadataProps) {
       <MediaPreview
         title={values.title}
         summary={values.description}
-        src={src}
+        src={null}
+        video={values}
         ratio={values.format === "short" ? "9:16" : "16:9"}
       />
     </div>

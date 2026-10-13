@@ -27,7 +27,7 @@ export function SectionHeading({
       <div className="flex items-end justify-between gap-4">
         <h2
           id={id}
-          className="text-lg font-bold uppercase tracking-wide text-ink sm:text-xl"
+          className="editorial-section-title text-lg font-bold uppercase tracking-wide text-ink sm:text-xl"
         >
           {title}
         </h2>

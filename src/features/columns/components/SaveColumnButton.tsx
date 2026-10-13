@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { ArticleActionIcon } from "@/features/article/components/ArticleActionIcon";
 import { useTranslations } from "next-intl";
 
 import { useAuthStore } from "@/features/auth/stores/auth.store";
@@ -39,9 +40,10 @@ export function SaveColumnButton({ columnId }: SaveColumnButtonProps) {
   const label = isPending ? t("saving") : isSaved ? t("saved") : t("save");
 
   return (
-    <div>
+    <div className="editorial-save-action">
       <button
         aria-pressed={isSaved}
+        aria-label={label}
         className={cn(
           "inline-flex min-h-11 items-center gap-2 border border-neutral-300 bg-white px-3 py-2 text-xs font-semibold uppercase tracking-wide text-neutral-700 transition-colors hover:border-ink hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 disabled:opacity-60",
           isSaved &&
@@ -51,8 +53,9 @@ export function SaveColumnButton({ columnId }: SaveColumnButtonProps) {
         onClick={handleClick}
         type="button"
       >
-        <BookmarkIcon className="h-4 w-4" filled={isSaved} />
-        {label}
+        <span className="editorial-mobile-only"><ArticleActionIcon name="bookmark" /></span>
+        <BookmarkIcon className="editorial-wide-only h-4 w-4" filled={isSaved} />
+        <span className="editorial-wide-only">{label}</span>
       </button>
       {error ? (
         <p className="mt-2 text-xs text-error" role="alert">

@@ -51,7 +51,7 @@ export function ProfilePasswordForm() {
     return (
       <section className="border border-neutral-200 bg-white p-6 sm:p-8">
         <div className="border-b border-neutral-100 pb-4">
-          <h2 className="font-serif text-xl font-bold text-ink">
+          <h2 className="editorial-section-title font-serif text-xl font-bold text-ink">
             {t("passwordHeading")}
           </h2>
           <p className="mt-1 text-sm text-neutral-600">{t("passwordSocialNote")}</p>
@@ -82,7 +82,7 @@ export function ProfilePasswordForm() {
   return (
     <section className="border border-neutral-200 bg-white p-6 sm:p-8">
       <div className="border-b border-neutral-100 pb-4">
-        <h2 className="font-serif text-xl font-bold text-ink">
+        <h2 className="editorial-section-title font-serif text-xl font-bold text-ink">
           {t("passwordHeading")}
         </h2>
         <p className="mt-1 text-sm text-neutral-600">{t("passwordLede")}</p>

@@ -68,7 +68,7 @@ export function RegisterForm() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="font-serif text-2xl font-bold text-ink">
+        <h2 className="editorial-section-title font-serif text-2xl font-bold text-ink">
           {t("registerTitle")}
         </h2>
         <p className="mt-1 text-sm text-neutral-600">{t("registerSubtitle")}</p>

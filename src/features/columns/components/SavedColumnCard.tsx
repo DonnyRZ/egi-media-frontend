@@ -44,11 +44,11 @@ export function SavedColumnCard({ column }: SavedColumnCardProps) {
         </Link>
         <div className="flex flex-1 flex-col pt-4">
           <span className="kicker">{t("columnKicker")}</span>
-          <h3 className="mt-2 font-sans text-xl font-bold leading-snug text-ink transition-colors group-hover:text-accent">
+          <h3 className="editorial-card-title mt-2 font-sans text-xl font-bold leading-snug text-ink transition-colors group-hover:text-accent">
             <Link href={href}>{column.title}</Link>
           </h3>
           {column.summary ? (
-            <p className="mt-2 line-clamp-3 flex-1 text-sm leading-6 text-neutral-600">
+            <p className="editorial-summary mt-2 line-clamp-3 flex-1 text-sm leading-6 text-neutral-600">
               {column.summary}
             </p>
           ) : null}

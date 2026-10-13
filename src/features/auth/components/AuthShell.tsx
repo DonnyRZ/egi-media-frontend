@@ -21,10 +21,10 @@ export function AuthShell({ children, title, subtitle, kicker }: AuthShellProps)
       <Container className="grid gap-10 py-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16 lg:py-16">
         <section className="max-w-xl">
           <p className="kicker">{kicker ?? t("kicker")}</p>
-          <h1 className="mt-3 font-serif text-4xl font-bold leading-tight tracking-tight text-ink sm:text-5xl">
+          <h1 className="editorial-page-title mt-3 font-serif text-4xl font-bold leading-tight tracking-tight text-ink sm:text-5xl">
             {title}
           </h1>
-          <p className="mt-4 max-w-md text-sm leading-7 text-neutral-600 lg:text-base">
+          <p className="editorial-summary mt-4 max-w-md text-sm leading-7 text-neutral-600 lg:text-base">
             {subtitle}
           </p>
           <p className="mt-8 text-xs font-semibold uppercase tracking-wide text-neutral-500">

@@ -10,10 +10,10 @@ export default function ArticleNotFound() {
   return (
     <Container className="py-20 text-center">
       <p className="kicker">404</p>
-      <h1 className="mt-4 font-serif text-3xl font-bold text-ink sm:text-4xl">
+      <h1 className="editorial-page-title mt-4 font-serif text-3xl font-bold text-ink sm:text-4xl">
         {t("notFoundTitle")}
       </h1>
-      <p className="mx-auto mt-4 max-w-lg text-base leading-7 text-neutral-600">
+      <p className="editorial-summary mx-auto mt-4 max-w-lg text-base leading-7 text-neutral-600">
         {t("notFoundMessage")}
       </p>
       <Link

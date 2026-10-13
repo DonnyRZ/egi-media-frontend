@@ -67,10 +67,10 @@ export function ResetPasswordForm() {
     return (
       <div className="space-y-6">
         <div>
-          <h2 className="font-serif text-2xl font-bold text-ink">
+          <h2 className="editorial-section-title font-serif text-2xl font-bold text-ink">
             {t("resetSuccessTitle")}
           </h2>
-          <p className="mt-2 text-sm leading-6 text-neutral-600">
+          <p className="editorial-summary mt-2 text-sm leading-6 text-neutral-600">
             {t("resetSuccessBody")}
           </p>
         </div>
@@ -87,7 +87,7 @@ export function ResetPasswordForm() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="font-serif text-2xl font-bold text-ink">
+        <h2 className="editorial-section-title font-serif text-2xl font-bold text-ink">
           {t("resetTitle")}
         </h2>
         <p className="mt-1 text-sm text-neutral-600">{t("resetSubtitle")}</p>

@@ -19,9 +19,9 @@ function TopicBlock({ group }: { group: TopicNewsGroup }) {
   if (!featured) return null;
 
   return (
-    <div className="min-w-0 bg-white px-4 py-5 md:p-5">
+    <div className="editorial-gutter min-w-0 bg-white px-4 py-5 md:p-5">
       <div className="mb-4">
-        <h3 className="font-sans text-xl font-bold text-ink">
+        <h3 className="editorial-card-title font-sans text-xl font-bold text-ink">
           <Link
             className="transition-colors hover:text-accent"
             href={`/topics/${group.topic.slug}`}
@@ -30,7 +30,7 @@ function TopicBlock({ group }: { group: TopicNewsGroup }) {
           </Link>
         </h3>
         {group.topic.description ? (
-          <p className="mt-1 line-clamp-2 text-sm text-neutral-500">
+          <p className="editorial-summary mt-1 line-clamp-2 text-sm text-neutral-500">
             {group.topic.description}
           </p>
         ) : null}
@@ -67,7 +67,7 @@ export function TopicNewsSection() {
       {isLoading ? (
         <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 3 }).map((_, index) => (
-            <div key={index} className="space-y-4 bg-white px-4 py-5 md:p-5">
+            <div key={index} className="editorial-gutter space-y-4 bg-white px-4 py-5 md:p-5">
               <Skeleton className="h-6 w-32" />
               <Skeleton className="h-20 w-full" />
               <Skeleton className="h-14 w-full" />
@@ -79,7 +79,7 @@ export function TopicNewsSection() {
       ) : null}
 
       {isError ? (
-        <div className="bg-white px-4 py-5 md:p-5">
+        <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
           <ErrorState message={error?.message} onRetry={() => void refetch()} />
         </div>
       ) : null}

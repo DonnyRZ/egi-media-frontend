@@ -30,7 +30,7 @@ export function ArticleActionIcon({ name, className }: ArticleActionIconProps) {
   return (
     <span
       aria-hidden="true"
-      className={cn("block h-6 w-6 shrink-0", className)}
+      className={cn("editorial-action-icon block h-6 w-6 shrink-0", className)}
       style={style}
     />
   );

@@ -40,17 +40,15 @@ export function ColumnEngagement({
   }, [columnId]);
 
   return (
-    <div className="flex flex-wrap items-center gap-3 border-y border-neutral-200 py-3">
+    <div className="editorial-actions flex flex-wrap items-center gap-3 border-y border-neutral-200 py-3">
       {shareCount>0?<span className="sr-only">{shareCount}</span>:null}
-      <div className="flex flex-wrap items-center gap-3">
-        <SaveColumnButton columnId={columnId} />
         <ColumnShareBar
           columnId={columnId}
+          leadingAction={<SaveColumnButton columnId={columnId} />}
           onShareRecorded={setShareCount}
           shareUrl={shareUrl}
           title={title}
         />
-      </div>
     </div>
   );
 }

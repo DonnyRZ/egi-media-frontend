@@ -18,7 +18,7 @@ import type { CategoryNewsGroup } from "@/shared/types/category.types";
 
 function CategoryColumn({ group }: { group: CategoryNewsGroup }) {
   return (
-    <div className="min-w-0 bg-white px-4 py-5 md:p-5">
+    <div className="editorial-gutter min-w-0 bg-white px-4 py-5 md:p-5">
       <div className="mb-4 border-b border-neutral-200 pb-2">
         <p className="kicker">
           <Link
@@ -29,7 +29,7 @@ function CategoryColumn({ group }: { group: CategoryNewsGroup }) {
           </Link>
         </p>
         {group.category.description ? (
-          <p className="mt-1 line-clamp-2 text-sm text-neutral-500">
+          <p className="editorial-summary mt-1 line-clamp-2 text-sm text-neutral-500">
             {group.category.description}
           </p>
         ) : null}
@@ -71,7 +71,7 @@ export function CategoryNewsSection() {
       {isLoading ? (
         <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 3 }).map((_, index) => (
-            <div key={index} className="space-y-4 bg-white px-4 py-5 md:p-5">
+            <div key={index} className="editorial-gutter space-y-4 bg-white px-4 py-5 md:p-5">
               <Skeleton className="h-4 w-28" />
               <Skeleton className="h-16 w-full" />
               <Skeleton className="h-16 w-full" />
@@ -83,7 +83,7 @@ export function CategoryNewsSection() {
       ) : null}
 
       {isError ? (
-        <div className="bg-white px-4 py-5 md:p-5">
+        <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
           <ErrorState message={error?.message} onRetry={() => void refetch()} />
         </div>
       ) : null}

@@ -10,7 +10,7 @@ interface TimelineRowProps {
 function TimelineDate({ article }: TimelineRowProps) {
   const format = useFormatter();
   return (
-    <div className="col-span-2 text-xs text-neutral-600 md:col-span-1 md:text-sm">
+    <div className="editorial-meta col-span-2 text-xs text-neutral-600 md:col-span-1 md:text-sm">
       {article.publishedAt ? (
         <time dateTime={article.publishedAt}>
           {format.dateTime(new Date(article.publishedAt), {
@@ -32,13 +32,13 @@ function TimelineHeadline({ article }: TimelineRowProps) {
           {article.category.name}
         </Link>
       ) : null}
-      <h2 className="mt-1 text-lg font-bold leading-tight tracking-tight md:text-[22px]">
+      <h2 className="editorial-list-title mt-1 text-lg font-bold leading-tight tracking-tight md:text-[22px]">
         <Link className="headline-link" href={getArticleHref(article)}>
           {article.title}
         </Link>
       </h2>
       {article.summary ? (
-        <p className="mt-2 hidden text-sm leading-6 text-neutral-600 md:line-clamp-3">
+        <p className="editorial-summary mt-2 hidden text-sm leading-6 text-neutral-600 md:line-clamp-3">
           {article.summary}
         </p>
       ) : null}
@@ -47,7 +47,7 @@ function TimelineHeadline({ article }: TimelineRowProps) {
 }
 function TimelineRow({ article }: TimelineRowProps) {
   return (
-    <article className="grid min-w-0 grid-cols-[1fr_96px] gap-4 py-5 md:grid-cols-[112px_minmax(0,1fr)_200px] md:gap-6">
+    <article className="editorial-timeline-row grid min-w-0 grid-cols-[1fr_96px] gap-4 py-5 md:grid-cols-[112px_minmax(0,1fr)_200px] md:gap-6">
       <TimelineDate article={article} />
       <TimelineHeadline article={article} />
       <Link

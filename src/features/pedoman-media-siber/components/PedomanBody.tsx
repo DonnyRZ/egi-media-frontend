@@ -20,14 +20,14 @@ export function PedomanBody() {
           {t("bodyHeading")}
         </h2>
 
-        <article className="prose prose-lg mx-auto max-w-3xl prose-headings:font-serif prose-headings:text-ink prose-p:text-neutral-700 prose-li:text-neutral-700 prose-strong:text-ink">
+        <article className="editorial-reader prose prose-lg mx-auto max-w-3xl prose-headings:font-serif prose-headings:text-ink prose-p:text-neutral-700 prose-li:text-neutral-700 prose-strong:text-ink">
           {intro.map((paragraph) => (
             <p key={paragraph.slice(0, 64)}>{paragraph}</p>
           ))}
 
           {sections.map((section, index) => (
             <section key={section.title}>
-              <h3>
+              <h3 className="editorial-card-title">
                 {index + 1}. {section.title}
               </h3>
 

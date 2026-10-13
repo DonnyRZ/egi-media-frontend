@@ -51,7 +51,7 @@ export function NotificationsView() {
   if (!isAuthenticated) {
     return (
       <FrameModule>
-        <div className="bg-white px-4 py-5 md:p-5">
+        <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
           <NotificationsSignInPrompt />
         </div>
       </FrameModule>
@@ -64,7 +64,7 @@ export function NotificationsView() {
     <FrameModule ariaLabelledby="notifications-listing-heading">
       <div className="flex items-end justify-between gap-4 border-b border-neutral-200 bg-white px-4 md:px-5 py-3">
         <h2
-          className="text-lg font-bold uppercase tracking-wide text-ink sm:text-xl"
+          className="editorial-section-title text-lg font-bold uppercase tracking-wide text-ink sm:text-xl"
           id="notifications-listing-heading"
         >
           {t("title")}
@@ -82,13 +82,13 @@ export function NotificationsView() {
       {isLoading ? <ListSkeleton /> : null}
 
       {isError ? (
-        <div className="bg-white px-4 py-5 md:p-5">
+        <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
           <ErrorState message={error?.message} onRetry={() => void refetch()} />
         </div>
       ) : null}
 
       {!isLoading && !isError && !hasItems ? (
-        <div className="bg-white px-4 py-5 md:p-5">
+        <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
           <EmptyState message={t("empty")} />
         </div>
       ) : null}
@@ -105,7 +105,7 @@ export function NotificationsView() {
             ))}
           </div>
           {data.totalPages > 1 ? (
-            <div className="bg-white px-4 py-5 md:p-5">
+            <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
               <Pagination
                 basePath="/notifications"
                 currentPage={data.page}

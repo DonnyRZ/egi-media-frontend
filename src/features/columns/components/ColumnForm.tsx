@@ -150,7 +150,7 @@ export function ColumnForm({
     <form className="space-y-8" noValidate>
       <section className="space-y-4 border border-neutral-200 bg-white p-6 sm:p-8">
         <div>
-          <h2 className="font-serif text-xl font-bold text-ink">
+          <h2 className="editorial-section-title font-serif text-xl font-bold text-ink">
             {t("form.mainHeading")}
           </h2>
           <p className="mt-1 text-sm text-neutral-600">{t("form.mainLede")}</p>

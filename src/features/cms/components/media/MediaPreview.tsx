@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { ArticleImage } from "@/shared/components/common/ArticleImage";
 import { cn } from "@/shared/lib/cn";
+import { VideoThumbnail, type VideoThumbnailSource } from "@/features/videos/components/VideoThumbnail";
 type Ratio = "16:9" | "9:16" | "2:3";
 type Variant = "card" | "lead";
 interface MediaPreviewProps {
@@ -10,6 +11,7 @@ interface MediaPreviewProps {
   summary?: string;
   ratio?: Ratio;
   defaultVariant?: Variant;
+  video?: VideoThumbnailSource;
 }
 interface PreviewControlsProps {
   ratio: Ratio;
@@ -72,10 +74,12 @@ function PreviewMedia({
   src,
   title,
   ratio,
+  video,
 }: {
   src: string | null;
   title: string;
   ratio: Ratio;
+  video?: VideoThumbnailSource;
 }) {
   const shape =
     ratio === "9:16"
@@ -85,7 +89,7 @@ function PreviewMedia({
         : "aspect-video";
   return (
     <div className={cn("relative mx-auto bg-neutral-100", shape)}>
-      <ArticleImage src={src} alt={title} />
+      {video ? <VideoThumbnail video={video} alt={title} priority /> : <ArticleImage src={src} alt={title} />}
     </div>
   );
 }
@@ -128,6 +132,7 @@ export function MediaPreview({
   summary,
   ratio = "16:9",
   defaultVariant = "card",
+  video,
 }: MediaPreviewProps) {
   const [mobile, setMobile] = useState(true);
   const [variant, setVariant] = useState<Variant>(defaultVariant);
@@ -146,7 +151,7 @@ export function MediaPreview({
           mobile ? "max-w-[360px]" : "max-w-[640px]",
         )}
       >
-        <PreviewMedia src={src} title={title} ratio={ratio} />
+        <PreviewMedia src={src} title={title} ratio={ratio} video={video} />
         <PreviewCopy
           title={title}
           summary={summary}

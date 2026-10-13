@@ -21,13 +21,13 @@ export function TeamMemberCard({ member, role, featured = false }: TeamMemberCar
       </div>
       <h3
         className={cn(
-          "mt-4 font-serif font-bold text-ink",
+          "editorial-card-title mt-4 font-serif font-bold text-ink",
           featured ? "text-xl lg:text-2xl" : "text-lg",
         )}
       >
         {member.name}
       </h3>
-      <p className="mt-1 text-sm leading-6 text-neutral-500">{role}</p>
+      <p className="editorial-summary mt-1 text-sm leading-6 text-neutral-500">{role}</p>
     </article>
   );
 }

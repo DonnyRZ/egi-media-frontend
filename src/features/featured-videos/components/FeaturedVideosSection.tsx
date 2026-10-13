@@ -31,13 +31,13 @@ function VideoCard({ video }: { video: YoutubeVideo }) {
             </span>
           ) : null}
         </div>
-        <h3 className="mt-1 font-sans text-lg font-bold leading-snug text-ink group-hover:text-accent">
+        <h3 className="editorial-card-title mt-1 font-sans text-lg font-bold leading-snug text-ink group-hover:text-accent">
           <Link href={`/videos/watch/${video.id}`}>
             {video.title}
           </Link>
         </h3>
         {video.description ? (
-          <p className="mt-2 line-clamp-2 text-sm text-neutral-600">{video.description}</p>
+          <p className="editorial-summary mt-2 line-clamp-2 text-sm text-neutral-600">{video.description}</p>
         ) : null}
       </div>
     </article>
@@ -75,7 +75,7 @@ export function FeaturedVideosSection() {
       ) : null}
 
       {isError ? (
-        <div className="bg-white px-4 py-5 md:p-5">
+        <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
           <ErrorState message={error?.message} onRetry={() => void refetch()} />
         </div>
       ) : null}

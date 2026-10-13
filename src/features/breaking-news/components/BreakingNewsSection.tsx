@@ -26,7 +26,7 @@ function BreakingCard({ article }: { article: Article }) {
           {article.category.name}
         </span>
       ) : null}
-      <h3 className="mt-1 line-clamp-3 font-sans text-lg font-bold leading-snug text-ink group-hover:text-accent">
+      <h3 className="editorial-card-title mt-1 line-clamp-3 font-sans text-lg font-bold leading-snug text-ink group-hover:text-accent">
         <Link href={getArticleHref(article)}>{article.title}</Link>
       </h3>
     </article>
@@ -52,7 +52,7 @@ export function BreakingNewsSection() {
           />
           <h2
             id="breaking-heading"
-            className="text-sm font-bold uppercase tracking-[0.14em] text-accent"
+            className="editorial-section-title text-sm font-bold uppercase tracking-[0.14em] text-accent"
           >
             {t("title")}
           </h2>

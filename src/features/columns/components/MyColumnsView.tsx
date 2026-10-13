@@ -78,7 +78,7 @@ export function MyColumnsView() {
       <PageFrame>
         {hero}
         <FrameModule>
-          <div className="bg-white px-4 py-5 md:p-5">
+          <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
             <Skeleton className="h-40 w-full" />
           </div>
         </FrameModule>
@@ -91,7 +91,7 @@ export function MyColumnsView() {
       <PageFrame>
         {hero}
         <FrameModule>
-          <div className="bg-white px-4 py-5 md:p-5">
+          <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
             <ColumnsSignInPrompt />
           </div>
         </FrameModule>
@@ -109,13 +109,13 @@ export function MyColumnsView() {
         </h2>
 
         {isLoading ? (
-          <div className="bg-white px-4 py-5 md:p-5">
+          <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
             <Skeleton className="h-48 w-full" />
           </div>
         ) : null}
 
         {isError ? (
-          <div className="bg-white px-4 py-5 md:p-5">
+          <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
             <ErrorState
               message={error?.message}
               onRetry={() => void refetch()}
@@ -124,7 +124,7 @@ export function MyColumnsView() {
         ) : null}
 
         {!isLoading && !isError && !data?.items.length ? (
-          <div className="bg-white px-4 py-5 md:p-5">
+          <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
             <EmptyState message={t("myColumnsEmpty")} />
           </div>
         ) : null}
@@ -134,7 +134,7 @@ export function MyColumnsView() {
             <ul className="divide-y divide-neutral-200 bg-white">
               {data.items.map((column) => (
                 <li
-                  className="flex flex-col gap-4 px-4 py-5 md:p-5 sm:flex-row sm:items-start sm:justify-between"
+                  className="editorial-gutter flex flex-col gap-4 px-4 py-5 md:p-5 sm:flex-row sm:items-start sm:justify-between"
                   key={column.id}
                 >
                   <div className="min-w-0 flex-1">
@@ -150,7 +150,7 @@ export function MyColumnsView() {
                         )}
                       </time>
                     </div>
-                    <h3 className="mt-2 font-sans text-xl font-bold text-ink">
+                    <h3 className="editorial-card-title mt-2 font-sans text-xl font-bold text-ink">
                       {column.status === "published" ? (
                         <Link
                           className="hover:text-accent"
@@ -163,7 +163,7 @@ export function MyColumnsView() {
                       )}
                     </h3>
                     {column.summary ? (
-                      <p className="mt-1 line-clamp-2 text-sm text-neutral-600">
+                      <p className="editorial-summary mt-1 line-clamp-2 text-sm text-neutral-600">
                         {column.summary}
                       </p>
                     ) : null}
@@ -210,7 +210,7 @@ export function MyColumnsView() {
               ))}
             </ul>
             {data.totalPages > 1 ? (
-              <div className="bg-white px-4 py-5 md:p-5">
+              <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
                 <Pagination
                   basePath="/kolom/saya"
                   currentPage={data.page}

@@ -41,7 +41,7 @@ export async function RelatedArticles({ article, lang }: RelatedArticlesProps) {
         renderItem={(item) => (
           <ArticleCard
             article={item}
-            className="bg-white px-4 py-5 md:p-5"
+            className="editorial-gutter bg-white px-4 py-5 md:p-5"
             variant="horizontal"
           />
         )}

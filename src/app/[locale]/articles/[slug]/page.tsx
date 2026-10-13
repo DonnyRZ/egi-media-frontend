@@ -81,10 +81,10 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     <ArticleLocaleShell article={article}>
       <PageFrame>
         <FrameModule>
-          <div className="bg-white px-4 py-5 md:p-5 lg:p-8">
+          <div className="editorial-gutter editorial-opening bg-white px-4 py-5 md:p-5 lg:p-8">
             <div className="mx-auto max-w-[1040px]">
               <ArticleHeader article={article} />
-              <div className="mt-4">
+              <div className="editorial-actions-offset mt-4">
                 <ArticleEngagement
                   articleId={article.id}
                   initialShareCount={article.shareCount}
@@ -92,14 +92,14 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                   title={article.title}
                 />
               </div>
-              <div className="mx-auto mt-5 max-w-[768px]"><ArticleHero article={article} /></div>
+              <div className="editorial-photo-offset mx-auto mt-5 max-w-[768px]"><ArticleHero article={article} /></div>
             </div>
           </div>
         </FrameModule>
 
         <FrameModule>
-          <div className="bg-white px-4 py-5 md:p-5 lg:p-8">
-            <div className="mx-auto max-w-3xl">
+          <div className="editorial-gutter editorial-reading-module bg-white px-4 py-5 md:p-5 lg:p-8">
+            <div className="editorial-reading-width mx-auto max-w-3xl">
               <ArticleBody content={article.content} />
             </div>
           </div>

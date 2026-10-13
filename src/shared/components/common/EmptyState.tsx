@@ -20,7 +20,7 @@ export function EmptyState({ title, message, className }: EmptyStateProps) {
         className,
       )}
     >
-      <h3 className="text-lg font-semibold text-neutral-900">
+      <h3 className="editorial-card-title text-lg font-semibold text-neutral-900">
         {title ?? t("emptyTitle")}
       </h3>
       <p className="mt-2 text-sm text-neutral-500">

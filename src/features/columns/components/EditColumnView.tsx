@@ -124,10 +124,10 @@ export function EditColumnView({ columnId }: EditColumnViewProps) {
         >
           ← {t("backToMyColumns")}
         </Link>
-        <h1 className="mt-3 font-sans text-3xl font-bold text-ink">
+        <h1 className="editorial-page-title mt-3 font-sans text-3xl font-bold text-ink">
           {t("editHeadline")}
         </h1>
-        <p className="mt-2 max-w-2xl text-sm leading-6 text-neutral-600">
+        <p className="editorial-summary mt-2 max-w-2xl text-sm leading-6 text-neutral-600">
           {t("editLede")}
         </p>
 

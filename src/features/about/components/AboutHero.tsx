@@ -12,11 +12,11 @@ export function AboutHero() {
         <p className="kicker">{t("kicker")}</p>
         <h1
           id="about-hero-heading"
-          className="mt-4 max-w-4xl font-serif text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl lg:text-5xl"
+          className="editorial-page-title mt-4 max-w-4xl font-serif text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl lg:text-5xl"
         >
           {t("headline")}
         </h1>
-        <p className="mt-6 max-w-2xl text-base leading-7 text-neutral-700 lg:text-lg">
+        <p className="editorial-summary mt-6 max-w-2xl text-base leading-7 text-neutral-700 lg:text-lg">
           {t("lede")}
         </p>
         </div>

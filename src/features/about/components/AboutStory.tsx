@@ -15,7 +15,7 @@ export function AboutStory() {
           <div className="lg:col-span-4">
             <h2
               id="about-story-heading"
-              className="text-lg font-bold uppercase tracking-wide text-ink sm:text-xl"
+              className="editorial-section-title text-lg font-bold uppercase tracking-wide text-ink sm:text-xl"
             >
               {t("storyTitle")}
             </h2>
@@ -24,7 +24,7 @@ export function AboutStory() {
             </blockquote>
           </div>
 
-          <div className="space-y-6 lg:col-span-8">
+          <div className="article-legacy editorial-reader space-y-6 lg:col-span-8">
             <p className="font-serif text-lg leading-8 text-ink first-letter:float-left first-letter:mr-2 first-letter:font-serif first-letter:text-6xl first-letter:font-bold first-letter:leading-[0.8] first-letter:text-accent">
               {firstParagraph}
             </p>

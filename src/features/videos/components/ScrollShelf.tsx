@@ -37,9 +37,9 @@ export function ScrollShelf({ title, children }: ScrollShelfProps) {
   const id = useId();
   const model = useScrollShelf(children);
   return (
-    <section className="border-t border-white/20 py-6" aria-label={title}>
+    <section className="editorial-video-shelf border-t border-white/20 py-6" aria-label={title}>
       <div className="mb-4 flex items-center justify-between gap-4">
-        <h2 className="text-xl font-bold">{title}</h2>
+        <h2 className="editorial-section-title text-xl font-bold">{title}</h2>
         <ShelfControls id={id} model={model} />
       </div>
       <div

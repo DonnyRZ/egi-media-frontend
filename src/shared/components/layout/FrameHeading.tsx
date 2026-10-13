@@ -28,14 +28,14 @@ export function FrameHeading({
   return (
     <div
       className={cn(
-        "border-b border-neutral-200 bg-white px-4 py-3 md:px-5",
+        "editorial-heading-band border-b border-neutral-200 bg-white px-4 py-3 md:px-5",
         className,
       )}
     >
       <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-2">
         <h2
           id={id}
-          className="min-w-0 break-words text-lg font-bold uppercase tracking-wide text-ink sm:text-xl"
+          className="editorial-section-title min-w-0 break-words text-lg font-bold uppercase tracking-wide text-ink sm:text-xl"
         >
           {title}
         </h2>

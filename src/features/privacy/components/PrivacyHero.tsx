@@ -12,12 +12,12 @@ export function PrivacyHero() {
         <p className="kicker">{t("kicker")}</p>
         <h1
           id="privacy-hero-heading"
-          className="mt-4 max-w-3xl font-serif text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl lg:text-5xl"
+          className="editorial-page-title mt-4 max-w-3xl font-serif text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl lg:text-5xl"
         >
           {t("headline")}
         </h1>
         <p className="mt-4 text-sm text-neutral-500">{t("lastUpdated")}</p>
-        <p className="mt-6 max-w-2xl text-base leading-7 text-neutral-700 lg:text-lg">
+        <p className="editorial-summary mt-6 max-w-2xl text-base leading-7 text-neutral-700 lg:text-lg">
           {t("lede")}
         </p>
         </div>

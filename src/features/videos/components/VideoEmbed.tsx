@@ -13,6 +13,7 @@ interface VideoEmbedProps {
   title?: string;
   autoplay?: boolean;
   className?: string;
+  posterSizes?: string;
 }
 
 export function VideoEmbed({
@@ -20,6 +21,7 @@ export function VideoEmbed({
   title,
   autoplay = false,
   className,
+  posterSizes,
 }: VideoEmbedProps) {
   const t = useTranslations("videos");
   const [playing, setPlaying] = useState(false);
@@ -43,7 +45,7 @@ export function VideoEmbed({
 
   if (!playing && !autoplay) {
     return <VideoPoster video={video} label={`${t("playVideo")}: ${title ?? video.title}`}
-      className={className} onPlay={() => setPlaying(true)} />;
+      className={className} sizes={posterSizes} onPlay={() => setPlaying(true)} />;
   }
 
   const embedUrl = autoplay || playing

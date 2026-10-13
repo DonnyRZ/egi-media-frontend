@@ -13,7 +13,7 @@ export function ArticleBody({ content }: ArticleBodyProps) {
   if (isHtmlContent(content)) {
     return (
       <div
-        className="article-prose"
+        className="article-prose editorial-reader"
         dangerouslySetInnerHTML={{ __html: content }}
       />
     );
@@ -23,14 +23,14 @@ export function ArticleBody({ content }: ArticleBodyProps) {
 
   if (!paragraphs.length) {
     return (
-      <p className="whitespace-pre-wrap text-base leading-8 text-neutral-700">
+      <p className="editorial-reader whitespace-pre-wrap text-base leading-8 text-neutral-700">
         {content}
       </p>
     );
   }
 
   return (
-    <div className="space-y-6">
+    <div className="article-legacy editorial-reader space-y-6">
       {paragraphs.map((paragraph, index) => (
         <p
           key={`${index}-${paragraph.slice(0, 24)}`}

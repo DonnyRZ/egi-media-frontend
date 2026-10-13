@@ -24,7 +24,7 @@ function ArticlesSkeleton() {
   return (
     <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
       {Array.from({ length: 6 }).map((_, index) => (
-        <div key={index} className="space-y-3 bg-white px-4 py-5 md:p-5">
+        <div key={index} className="editorial-gutter space-y-3 bg-white px-4 py-5 md:p-5">
           <Skeleton className="aspect-[16/9] w-full" />
           <Skeleton className="h-3 w-20" />
           <Skeleton className="h-6 w-3/4" />
@@ -77,7 +77,7 @@ export function CategoryDetailView({ slug }: CategoryDetailViewProps) {
         {isLoading ? <ArticlesSkeleton /> : null}
 
         {isError ? (
-          <div className="bg-white px-4 py-5 md:p-5">
+          <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
             <ErrorState message={error?.message} onRetry={handleRetry} />
           </div>
         ) : null}
@@ -86,7 +86,7 @@ export function CategoryDetailView({ slug }: CategoryDetailViewProps) {
         !isError &&
         categoryQuery.data &&
         !articlesQuery.data?.items.length && page !== 1 ? (
-          <div className="bg-white px-4 py-5 md:p-5">
+          <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
             <EmptyState message={t("noArticles")} />
           </div>
         ) : null}
@@ -99,13 +99,13 @@ export function CategoryDetailView({ slug }: CategoryDetailViewProps) {
             {page === 1 ? (
               <CategoryDesk category={categoryQuery.data} articles={articleItems} />
             ) : (
-              <div className="p-4 md:p-6">
+              <div className="editorial-gutter p-4 md:p-6">
                 <ArticleTimeline articles={articleItems} />
               </div>
             )}
 
           {articlesQuery.data.totalPages > 1 ? (
-              <div className="bg-white px-4 py-5 md:p-5">
+              <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
                 <Pagination
                   basePath={`/categories/${slug}`}
                   currentPage={articlesQuery.data.page}

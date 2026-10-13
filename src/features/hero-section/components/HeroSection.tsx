@@ -33,9 +33,9 @@ export function HeroSection() {
   return <FrameModule ariaLabelledby="hero-heading">
     <h1 id="hero-heading" className="sr-only">{t("srHeading")}</h1>
     {isLoading ? <HeroSkeleton /> : null}
-    {isError ? <div className="px-4 py-5 md:p-5"><ErrorState message={error?.message} onRetry={() => void refetch()} /></div> : null}
+    {isError ? <div className="editorial-gutter px-4 py-5 md:p-5"><ErrorState message={error?.message} onRetry={() => void refetch()} /></div> : null}
     <HomepageSectionNotice section="hero" />
-    {!isLoading && !isError && !sectionFailed && !data?.featured ? <div className="px-4 py-5 md:p-5"><EmptyState title={t("noFeatured")} /></div> : null}
+    {!isLoading && !isError && !sectionFailed && !data?.featured ? <div className="editorial-gutter px-4 py-5 md:p-5"><EmptyState title={t("noFeatured")} /></div> : null}
     {!isLoading && !isError && data?.featured ? <EditorialLead lead={data.featured} supporting={headlines} latest={latest} video={video?.format !== "short" ? video : undefined} /> : null}
   </FrameModule>;
 }

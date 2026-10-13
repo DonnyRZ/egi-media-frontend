@@ -26,7 +26,7 @@ export function FramePageHero({
   className,
 }: FramePageHeroProps) {
   return (
-    <div className={cn("bg-white px-4 py-5 md:px-5 lg:py-6", className)}>
+    <div className={cn("editorial-page-hero bg-white px-4 py-5 md:px-5 lg:py-6", className)}>
       {leading ? <div className="mb-3">{leading}</div> : null}
       {kicker ? <p className="kicker">{kicker}</p> : null}
       <div
@@ -37,13 +37,13 @@ export function FramePageHero({
       >
         <div className="min-w-0">
           <h1
-            className="max-w-3xl font-sans text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl"
+            className="editorial-page-title max-w-3xl font-sans text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl"
             id={titleId}
           >
             {title}
           </h1>
           {lede ? (
-            <p className="mt-3 max-w-2xl text-sm leading-6 text-neutral-600 lg:text-base lg:leading-7">
+            <p className="editorial-summary mt-3 max-w-2xl text-sm leading-6 text-neutral-600 lg:text-base lg:leading-7">
               {lede}
             </p>
           ) : null}

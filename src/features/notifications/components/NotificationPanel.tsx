@@ -60,7 +60,7 @@ export function NotificationPanel({
     >
       <div className="flex items-center justify-between border-b border-neutral-200 px-4 py-3">
         <div className="flex items-center gap-2">
-          <h2 className="text-sm font-bold uppercase tracking-wide text-ink">
+          <h2 className="editorial-section-title text-sm font-bold uppercase tracking-wide text-ink">
             {t("title")}
           </h2>
           {unreadCount > 0 ? (

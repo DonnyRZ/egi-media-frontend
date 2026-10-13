@@ -10,7 +10,7 @@ export function TopicSubscriptionsSignInPrompt() {
 
   return (
     <div className="mx-auto max-w-md border border-neutral-300 bg-white p-8 text-center">
-      <h2 className="text-lg font-semibold text-neutral-900">{t("signInTitle")}</h2>
+      <h2 className="editorial-section-title text-lg font-semibold text-neutral-900">{t("signInTitle")}</h2>
       <p className="mt-2 text-sm text-neutral-500">{t("signInMessage")}</p>
       <div className="mt-5 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
         <Link href="/login">

@@ -91,7 +91,7 @@ function handleGet(url, res) {
   if (route.includes("/topics") && !route.includes("/users")) return route.endsWith("/topics") || route.endsWith("/catalog") ? respond(res, [topic], { total: 1 }) : respond(res, { ...topic, locale: lang });
   if (route.includes("/series")) return route.endsWith("/series") ? respond(res, [series], { total: 1 }) : respond(res, { ...series, articles: list });
   if (route.includes("/youtube-videos")) {
-    const videos = paged(state.videos ? Array.from({ length: 4 }, (_, index) => ({ id: "qa-video-" + index, title: "Industri Kreatif Membuka Peluang Baru", description: "Video fixture", url: "https://www.youtube.com/watch?v=jfKfPfyJRdk", format: "horizontal", poster_landscape: origin + "/fixture.png", duration: "8:26", created_at: date })) : [], params);
+    const videos = paged(state.videos ? Array.from({ length: 8 }, (_, index) => ({ id: "qa-video-" + index, title: "Industri Kreatif Membuka Peluang Baru", description: "Video fixture", url: "https://www.youtube.com/watch?v=jfKfPfyJRdk", format: "horizontal", poster_landscape: origin + "/fixture.png", duration: "8:26", created_at: date })) : [], params);
     return respond(res, videos.items, videos.meta);
   }
   if (route.includes("/columns") && !route.endsWith("/comments")) return route.endsWith("/columns") || route.endsWith("/saved") || route.endsWith("/me") ? respond(res, paged(list.slice(0, 5), params)) : respond(res, list[0]);

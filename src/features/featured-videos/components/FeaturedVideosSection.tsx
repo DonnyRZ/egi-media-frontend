@@ -4,12 +4,11 @@ import { useTranslations } from "next-intl";
 
 import { Link } from "@/i18n/navigation";
 import { VideoEmbed } from "@/features/videos/components/VideoEmbed";
-import { GridFillers } from "@/shared/components/common/GridFillers";
-import { AdaptiveCardGrid } from "@/shared/components/common/AdaptiveCardGrid";
+import { HomepageAdSkeleton } from "@/features/ads/components/HomepageAdSkeleton";
+import { HomepageAdGrid } from "@/features/ads/components/HomepageAdGrid";
 import { FrameHeading } from "@/shared/components/layout/FrameHeading";
 import { FrameModule } from "@/shared/components/layout/FrameModule";
 import { ErrorState } from "@/shared/components/common/ErrorState";
-import { Skeleton } from "@/shared/components/ui/Skeleton";
 import { useFeaturedVideos } from "@/features/homepage/hooks/useFeaturedVideos";
 import { useHeroNews } from "@/features/homepage/hooks/useHeroNews";
 import { HOMEPAGE_LIMITS } from "@/shared/constants/homepage.constants";
@@ -19,11 +18,11 @@ function VideoCard({ video }: { video: YoutubeVideo }) {
   const t = useTranslations("videos");
 
   return (
-    <article className="group flex h-full flex-col bg-white">
+    <article className="homepage-video-content group flex h-full flex-col bg-white">
       <div className="relative aspect-video overflow-hidden bg-ink">
         <VideoEmbed video={video} />
       </div>
-      <div className="p-4">
+      <div className="homepage-video-copy p-4">
         <div className="flex items-center gap-2">
           <span className="kicker">{t("kicker")}</span>
           {video.durationLabel ? (
@@ -59,9 +58,6 @@ export function FeaturedVideosSection() {
     : undefined;
   const t = useTranslations("videos");
 
-  if (!isLoading && !isError && !remaining?.items.length) {
-    return null;
-  }
 
   return (
     <FrameModule ariaLabelledby="videos-heading" className="homepage-latest-videos">
@@ -72,27 +68,14 @@ export function FeaturedVideosSection() {
         title={t("latestTitle")}
       />
 
-      {isLoading ? (
-        <div className="grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
-          {Array.from({ length: 3 }).map((_, index) => (
-            <div className="bg-white" key={index}>
-              <Skeleton className="aspect-video w-full" />
-            </div>
-          ))}
-          <GridFillers count={3} />
-        </div>
-      ) : null}
-
       {isError ? (
         <div className="editorial-gutter bg-white px-4 py-5 md:p-5">
           <ErrorState message={error?.message} onRetry={() => void refetch()} />
         </div>
       ) : null}
 
-      {!isLoading && !isError && remaining?.items.length ? (
-        <AdaptiveCardGrid items={remaining.items} keyForItem={(video) => video.id}
-          renderItem={(video) => <VideoCard video={video} />} />
-      ) : null}
+      {isLoading ? <HomepageAdSkeleton placement="LATEST_VIDEOS" /> : <HomepageAdGrid placement="LATEST_VIDEOS" items={remaining?.items ?? []} keyForItem={(video) => video.id}
+        renderItem={(video) => <VideoCard video={video} />} />}
     </FrameModule>
   );
 }

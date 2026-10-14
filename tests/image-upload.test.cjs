@@ -104,6 +104,7 @@ function serviceModule(post, prepareImage = async file => file) {
     "@/shared/lib/axios-client": { axiosClient: { post } },
     "@/shared/lib/errors": errors,
     "@/features/cms/utils/prepare-image": { prepareImage },
+    "@/features/cms/utils/prepare-ad-image": { prepareAdImage: async file => file },
   }, { FormData });
 }
 

@@ -14,5 +14,9 @@ export function useActiveAd(placement: AdPlacement) {
       return ads[0] ?? null;
     },
     staleTime: 60_000,
+    refetchInterval: 60_000,
+    refetchIntervalInBackground: false,
+    refetchOnWindowFocus: "always",
+    refetchOnReconnect: "always",
   });
 }

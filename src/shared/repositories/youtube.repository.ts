@@ -11,7 +11,7 @@ export async function getFeaturedVideos(
   return fetchYoutubeVideos({
     page: 1,
     // One result is also used as the single Video Pilihan in the homepage hero.
-    // Fetch one extra so Video Terbaru can still show its full six items after
+    // Fetch one extra so Video Terbaru can still show its full five items after
     // that exact hero video is removed from the lower list.
     limit: HOMEPAGE_LIMITS.latestVideos + 1,
     format: "horizontal",

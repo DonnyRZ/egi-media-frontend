@@ -3,20 +3,23 @@
 import { useEffect, useRef, useState } from "react";
 
 import { Icons } from "@/features/cms/components/ui/Icons";
-import { uploadImage, type ImageUploadState } from "@/features/cms/services/cms-media.service";
+import { uploadImage, type ImageUploadState, type AdImageMetadata } from "@/features/cms/services/cms-media.service";
+import type { AdPlacement } from "@/shared/types/ads.types";
 import { useToast } from "@/features/cms/stores/cms-toast.store";
 import { IMAGE_ACCEPT } from "@/features/cms/utils/prepare-image";
 
 interface ImageUploadProps {
   onUploaded: (url: string) => void;
   onBusyChange?: (busy: boolean) => void;
+  adPlacement?: AdPlacement;
+  onMetadata?: (metadata: AdImageMetadata) => void;
 }
 
 function formatSize(bytes: number) {
   return bytes >= 1024 * 1024 ? `${(bytes / (1024 * 1024)).toFixed(2)} MB` : `${Math.ceil(bytes / 1024)} KB`;
 }
 
-export function ImageUpload({ onUploaded, onBusyChange }: ImageUploadProps) {
+export function ImageUpload({ onUploaded, onBusyChange, adPlacement, onMetadata }: ImageUploadProps) {
   const toast = useToast();
   const inputRef = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false);
@@ -48,6 +51,8 @@ export function ImageUpload({ onUploaded, onBusyChange }: ImageUploadProps) {
       const url = await uploadImage(file, {
         signal: controller.signal,
         onStateChange: (next) => { if (mounted.current) setState(next); },
+        adPlacement,
+        onMetadata,
       });
       if (!mounted.current || controller.signal.aborted) return;
       setCompleted(true);
@@ -74,7 +79,7 @@ export function ImageUpload({ onUploaded, onBusyChange }: ImageUploadProps) {
   }
 
   const label = !busy ? "Click to upload an image"
-    : state?.stage === "preparing" ? "Optimizing image…"
+    : state?.stage === "preparing" ? adPlacement ? "Checking image dimensions…" : "Optimizing image…"
     : state?.stage === "retrying" ? "Connection interrupted. Retrying (2/2)…"
     : state?.stage === "saving" ? "Saving image…"
     : `Uploading… ${state?.progress ?? 0}%${state?.attempt === 2 ? " (2/2)" : ""}`;
@@ -92,13 +97,13 @@ export function ImageUpload({ onUploaded, onBusyChange }: ImageUploadProps) {
         {label}
       </span>
       <span className="text-xs text-neutral-400">
-        Photos are optimized automatically · JPG, PNG, WebP, GIF, AVIF, SVG
+        {adPlacement ? "Original file preserved · PNG, JPG, WebP, AVIF · Max 5 MB" : "Photos are optimized automatically · JPG, PNG, WebP, GIF, AVIF, SVG"}
       </span>
     </button>
       <input
         ref={inputRef}
         type="file"
-        accept={IMAGE_ACCEPT}
+        accept={adPlacement ? "image/png,image/jpeg,image/webp,image/avif" : IMAGE_ACCEPT}
         aria-label="Choose image file"
         disabled={busy}
         className="hidden"

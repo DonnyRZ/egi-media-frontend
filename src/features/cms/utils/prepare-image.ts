@@ -12,7 +12,7 @@ function checkAborted(signal?: AbortSignal) {
   if (signal?.aborted) throw new DOMException("Upload cancelled", "AbortError");
 }
 
-function decodeImage(file: File, signal?: AbortSignal): Promise<HTMLImageElement> {
+export function decodeImage(file: File, signal?: AbortSignal): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
     checkAborted(signal);
     const image = new Image();

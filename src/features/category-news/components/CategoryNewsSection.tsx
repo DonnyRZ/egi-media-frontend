@@ -3,8 +3,6 @@
 import { HomepageSectionNotice } from "@/features/homepage/components/HomepageSectionNotice";
 import { useTranslations } from "next-intl";
 
-import { NativeAdSlot } from "@/features/ads/components/NativeAdSlot";
-import { useActiveAd } from "@/features/ads/hooks/useActiveAd";
 import { useCategoryNews } from "@/features/homepage/hooks/useCategoryNews";
 import { Link } from "@/i18n/navigation";
 import { ArticleCard } from "@/shared/components/common/ArticleCard";
@@ -45,9 +43,8 @@ function CategoryColumn({ group }: { group: CategoryNewsGroup }) {
 
 export function CategoryNewsSection() {
   const { data, isLoading, isError, error, refetch, sectionFailed } = useCategoryNews();
-  const { data: inFeedAd } = useActiveAd("IN_FEED");
   const t = useTranslations("categories");
-  const itemCount = (data?.length ?? 0) + Number(Boolean(inFeedAd));
+  const itemCount = (data?.length ?? 0);
   const gridColumns =
     itemCount === 1
       ? "grid-cols-1"
@@ -93,9 +90,6 @@ export function CategoryNewsSection() {
           {data.map((group) => (
             <CategoryColumn key={group.category.id} group={group} />
           ))}
-          {inFeedAd ? (
-            <NativeAdSlot className="border-0" placement="IN_FEED" />
-          ) : null}
           {itemCount >= 3 ? <GridFillers count={itemCount} /> : null}
         </div>
       ) : null}

@@ -207,7 +207,7 @@ export type TeamMemberFormValues = z.infer<typeof teamMemberFormSchema>;
 export const AD_PLACEMENTS = [
   "LEADERBOARD",
   "IN_FEED",
-  "SIDEBAR_RECTANGLE",
+  "LATEST_VIDEOS",
 ] as const;
 
 export const adFormSchema = z.object({
@@ -215,14 +215,17 @@ export const adFormSchema = z.object({
   imageUrl: z
     .string()
     .trim()
-    .min(1, "Image is required")
     .refine(
-      (value) => /^https?:\/\//i.test(value) || value.startsWith("/"),
+      (value) => !value || /^https?:\/\//i.test(value) || value.startsWith("/"),
       "Use an http(s) URL or a site-relative path",
     ),
-  targetUrl: z.string().trim().url("Enter a valid target URL"),
+  targetUrl: z.string().trim().refine((value) => !value || /^https?:\/\//i.test(value) && URL.canParse(value), "Enter an http(s) target URL"),
   placement: z.enum(AD_PLACEMENTS),
   isActive: z.boolean(),
+  imageReceipt: z.string().nullable().optional(),
+}).superRefine((value, ctx) => {
+  if (value.isActive && !value.imageUrl) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["imageUrl"], message: "Upload an image to activate this slot" });
+  if (value.isActive && !value.targetUrl) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["targetUrl"], message: "A target URL is required for an active slot" });
 });
 
 export type AdFormValues = z.infer<typeof adFormSchema>;

@@ -1,32 +1,14 @@
-export type AdPlacement = "LEADERBOARD" | "IN_FEED" | "SIDEBAR_RECTANGLE";
-
-export const AD_PLACEMENT_VALUES: readonly AdPlacement[] = [
-  "LEADERBOARD",
-  "IN_FEED",
-  "SIDEBAR_RECTANGLE",
-] as const;
-
-export const AD_PLACEMENT_GUIDELINES: Record<
-  AdPlacement,
-  { label: string; dimensions: string; tip: string }
-> = {
-  LEADERBOARD: {
-    label: "Leaderboard (homepage header)",
-    dimensions: "873×149",
-    tip: "Wide banner. Prefer JPG/PNG/WebP, max ~200 KB.",
-  },
-  IN_FEED: {
-    label: "In-feed (category grid card)",
-    dimensions: "16:9 aspect (e.g. 800×450)",
-    tip: "Matches article card ratio. Keep text clear at card size.",
-  },
-  SIDEBAR_RECTANGLE: {
-    label: "Sidebar (Top Stories column)",
-    dimensions: "300×250",
-    tip: "Medium rectangle. Fits the homepage right column under Top Stories.",
-  },
+export type AdPlacement = "LEADERBOARD" | "IN_FEED" | "LATEST_VIDEOS";
+export const AD_PLACEMENT_VALUES: readonly AdPlacement[] = ["LEADERBOARD", "IN_FEED", "LATEST_VIDEOS"];
+export const AD_PLACEMENT_GUIDELINES: Record<AdPlacement, { label: string; dimensions: string; tip: string; ratio: number; aspectRatio: string }> = {
+  LEADERBOARD: { label: "Homepage — Above header", dimensions: "970×250", ratio: 97 / 25, aspectRatio: "97 / 25", tip: "97:25. Displayed in full, up to 970px wide." },
+  IN_FEED: { label: "Homepage — Latest News", dimensions: "1280×720", ratio: 16 / 9, aspectRatio: "16 / 9", tip: "16:9. After five articles on desktop or three on mobile." },
+  LATEST_VIDEOS: { label: "Homepage — Latest Videos", dimensions: "1280×720", ratio: 16 / 9, aspectRatio: "16 / 9", tip: "16:9. After five videos on desktop or three on mobile." },
 };
-
 export function isAdPlacement(value: string): value is AdPlacement {
-  return (AD_PLACEMENT_VALUES as readonly string[]).includes(value);
+  return AD_PLACEMENT_VALUES.includes(value as AdPlacement);
 }
+export function matchesAdRatio(placement: AdPlacement, width: number, height: number) {
+  return width > 0 && height > 0 && Math.abs(width / height / AD_PLACEMENT_GUIDELINES[placement].ratio - 1) <= 0.005;
+}
+export const AD_LABELS = { id: "Iklan", en: "Advertisement", uz: "Reklama" } as const;

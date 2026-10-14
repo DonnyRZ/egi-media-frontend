@@ -28,7 +28,7 @@ export function PublicChrome({
 
   return (
     <>
-      {ad}
+      {pathname === "/" ? <div className="homepage-banner"><div className="homepage-banner-inner">{ad}</div></div> : null}
       {header}
       <main className={isMediaPage ? "bg-[#050a16] text-white" : undefined}>{children}</main>
       {footer}

@@ -16,6 +16,9 @@ export interface CmsAd {
   impressions: number;
   createdAt: string | null;
   updatedAt: string | null;
+  imageReceipt: string | null;
+  imageHeight: number | null;
+  imageWidth: number | null;
 }
 
 interface CmsAdDto {
@@ -29,20 +32,27 @@ interface CmsAdDto {
   impressions?: number;
   created_at?: string | null;
   updated_at?: string | null;
+  image_width?: number | null;
+  image_height?: number | null;
+  image_receipt?: string | null;
 }
 
 function mapAd(dto: CmsAdDto): CmsAd {
+  if (!isAdPlacement(dto.placement)) throw new Error("Unsupported homepage advertisement placement");
   return {
     id: dto.id,
     title: dto.title,
     imageUrl: dto.image_url,
     targetUrl: dto.target_url,
-    placement: isAdPlacement(dto.placement) ? dto.placement : "IN_FEED",
+    placement: dto.placement,
     isActive: dto.is_active !== false,
     clicks: dto.clicks ?? 0,
     impressions: dto.impressions ?? 0,
     createdAt: dto.created_at ?? null,
     updatedAt: dto.updated_at ?? null,
+    imageWidth: dto.image_width ?? null,
+    imageHeight: dto.image_height ?? null,
+    imageReceipt: dto.image_receipt ?? null,
   };
 }
 
@@ -94,6 +104,7 @@ export interface CmsAdWritePayload {
   imageUrl: string;
   targetUrl: string;
   isActive: boolean;
+  imageReceipt?: string | null;
 }
 
 function toDtoBody(payload: CmsAdWritePayload) {
@@ -102,6 +113,7 @@ function toDtoBody(payload: CmsAdWritePayload) {
     image_url: payload.imageUrl,
     target_url: payload.targetUrl,
     is_active: payload.isActive,
+    image_receipt: payload.imageReceipt || undefined,
   };
 }
 

@@ -3,7 +3,7 @@ const test = require('node:test'), assert = require('node:assert/strict');
 const fs = require('node:fs'), path = require('node:path'), vm = require('node:vm'), ts = require('typescript');
 function load(file, imports = {}, globals = {}) {
   const source = fs.readFileSync(path.join(__dirname, '..', file), 'utf8');
-  const compiled = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 } });
+  const compiled = ts.transpileModule(source, { fileName:file, compilerOptions: { jsx:ts.JsxEmit.ReactJSX, module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 } });
   const module = { exports: {} };
   vm.runInNewContext(compiled.outputText, { module, exports: module.exports, URL, ...globals, require(name) { if (!(name in imports)) throw new Error('Unexpected import: '+name); return imports[name]; } });
   return module.exports;
@@ -12,17 +12,29 @@ const types = load('src/shared/types/ads.types.ts');
 test('three placements accept exact and rounded ratios and reject incompatible images', () => {
   assert.equal(types.AD_PLACEMENT_VALUES.length, 3);
   assert.equal(types.isAdPlacement('SIDEBAR_RECTANGLE'), false);
-  assert.equal(types.matchesAdRatio('LEADERBOARD',970,250), true);
+  assert.equal(types.matchesAdRatio('LEADERBOARD',1920,367), true);
+  assert.equal(types.matchesAdRatio('LEADERBOARD',970,250), false);
   assert.equal(types.matchesAdRatio('LEADERBOARD',1280,720), false);
   assert.equal(types.matchesAdRatio('IN_FEED',1280,720), true);
   assert.equal(types.matchesAdRatio('LATEST_VIDEOS',1920,1080), true);
   assert.equal(types.matchesAdRatio('IN_FEED',0,720), false);
 });
+
+test('banner media uses persisted and intrinsic legacy dimensions without changing content ad ratios', () => {
+  const media = load('src/features/ads/components/AdMedia.tsx', {
+    react: { useState: () => [null, () => {}] },
+    'react/jsx-runtime': { jsx: (type, props) => ({type,props}), jsxs: (type, props) => ({type,props}) },
+    '@/shared/types/ads.types': types,
+  }).AdMedia;
+  assert.equal(media({placement:'LEADERBOARD',imageUrl:'/legacy.png',imageWidth:970,imageHeight:250}).props.style.aspectRatio,'970 / 250');
+  assert.equal(media({placement:'LEADERBOARD'}).props.style.aspectRatio,'1920 / 367');
+  assert.equal(media({placement:'IN_FEED',imageWidth:970,imageHeight:250}).props.style.aspectRatio,'16 / 9');
+});
 test('ad preparation preserves exact original file; mismatch and oversized files fail', async () => {
   const file = { type:'image/png',size:1705687 }, banner = { type:'image/png',size:277327 };
   const { prepareAdImage } = load('src/features/cms/utils/prepare-ad-image.ts', {
     '@/shared/types/ads.types': types,
-    '@/features/cms/utils/prepare-image': { MAX_IMAGE_UPLOAD_BYTES:5*1024*1024, decodeImage:async value => ({ naturalWidth:value===banner?970:1280, naturalHeight:value===banner?250:720 }) },
+    '@/features/cms/utils/prepare-image': { MAX_IMAGE_UPLOAD_BYTES:5*1024*1024, decodeImage:async value => ({ naturalWidth:value===banner?1920:1280, naturalHeight:value===banner?367:720 }) },
   });
   assert.equal(await prepareAdImage(file,'LATEST_VIDEOS'),file);
   assert.equal(await prepareAdImage(banner,'LEADERBOARD'),banner);

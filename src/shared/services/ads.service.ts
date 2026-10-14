@@ -8,6 +8,8 @@ export interface PublicAd {
   imageUrl: string;
   targetUrl: string;
   placement: AdPlacement;
+  imageWidth?: number | null;
+  imageHeight?: number | null;
 }
 
 interface PublicAdDto {
@@ -16,6 +18,8 @@ interface PublicAdDto {
   image_url: string;
   target_url: string;
   placement: string;
+  image_width?: number | null;
+  image_height?: number | null;
 }
 
 function mapAd(dto: PublicAdDto): PublicAd {
@@ -25,6 +29,8 @@ function mapAd(dto: PublicAdDto): PublicAd {
     imageUrl: dto.image_url,
     targetUrl: dto.target_url,
     placement: dto.placement as AdPlacement,
+    imageWidth: dto.image_width ?? null,
+    imageHeight: dto.image_height ?? null,
   };
 }
 

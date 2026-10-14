@@ -18,6 +18,7 @@ export function NativeAdSlot({ placement, className }: NativeAdSlotProps) {
   const ref = useAdViewability(ad?.id, ad?.imageUrl, loaded);
   const validLink = Boolean(ad && failedUrl !== ad.imageUrl && /^https?:\/\//i.test(ad.targetUrl));
   const media = <AdMedia placement={placement} imageUrl={ad?.imageUrl} title={ad?.title}
+    imageWidth={ad?.imageWidth} imageHeight={ad?.imageHeight}
     mediaRef={ref} onReady={(ready) => { setReadyUrl(ready ? ad?.imageUrl ?? null : null); setFailedUrl(ready ? null : ad?.imageUrl ?? null); }} />;
   return <aside aria-label={label} data-ad-slot={placement} className={cn("homepage-ad-slot min-w-0 bg-white", className)}>
     {validLink ? <a href={ad?.targetUrl} target="_blank" rel="noopener noreferrer sponsored"

@@ -12,7 +12,7 @@ export function AdPreview({ placement, imageUrl, title }: AdPreviewProps) {
       {[false, true].map((value) => <button key={String(value)} type="button" aria-pressed={mobile === value}
         onClick={() => setMobile(value)} className="min-h-11 rounded border border-neutral-300 px-3 text-sm dark:border-neutral-700">{value ? "Mobile" : "Desktop"}</button>)}
     </div>
-    <div className="mx-auto w-full border border-neutral-200 bg-white p-3" style={{ maxWidth: mobile ? 360 : placement === "LEADERBOARD" ? 970 : 480 }}>
+    <div className="mx-auto w-full border border-neutral-200 bg-white" style={{ maxWidth: mobile ? 360 : placement === "LEADERBOARD" ? undefined : 480 }}>
       <AdMedia placement={placement} imageUrl={imageUrl} title={title}
         onDimensions={(width, height) => setDimensions({ url: imageUrl, width, height })} />
       <p className="mt-1 text-[11px] text-neutral-500">Advertisement</p>

@@ -1,7 +1,7 @@
 export type AdPlacement = "LEADERBOARD" | "IN_FEED" | "LATEST_VIDEOS";
 export const AD_PLACEMENT_VALUES: readonly AdPlacement[] = ["LEADERBOARD", "IN_FEED", "LATEST_VIDEOS"];
 export const AD_PLACEMENT_GUIDELINES: Record<AdPlacement, { label: string; dimensions: string; tip: string; ratio: number; aspectRatio: string }> = {
-  LEADERBOARD: { label: "Homepage — Above header", dimensions: "970×250", ratio: 97 / 25, aspectRatio: "97 / 25", tip: "97:25. Displayed in full, up to 970px wide." },
+  LEADERBOARD: { label: "Homepage — Above header", dimensions: "1920×367", ratio: 1920 / 367, aspectRatio: "1920 / 367", tip: "1920:367. Full-width banner, displayed without cropping. Existing images retain their original proportions." },
   IN_FEED: { label: "Homepage — Latest News", dimensions: "1280×720", ratio: 16 / 9, aspectRatio: "16 / 9", tip: "16:9. After five articles on desktop or three on mobile." },
   LATEST_VIDEOS: { label: "Homepage — Latest Videos", dimensions: "1280×720", ratio: 16 / 9, aspectRatio: "16 / 9", tip: "16:9. After five videos on desktop or three on mobile." },
 };

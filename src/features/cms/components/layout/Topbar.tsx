@@ -1,7 +1,5 @@
 "use client";
 
-import Link from "next/link";
-
 import { Breadcrumb } from "@/features/cms/components/layout/Breadcrumb";
 import { ThemeToggle } from "@/features/cms/components/layout/ThemeToggle";
 import { UserMenu } from "@/features/cms/components/layout/UserMenu";
@@ -27,12 +25,6 @@ export function Topbar() {
       </div>
 
       <div className="flex items-center gap-2">
-        <Link
-          href="/cms/articles/new"
-          className="hidden items-center gap-1.5 rounded-lg bg-accent px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-accent/90 sm:inline-flex"
-        >
-          <Icons.plus className="h-4 w-4" /> New article
-        </Link>
         <a
           href="/"
           target="_blank"

@@ -12,8 +12,8 @@ const types = load('src/shared/types/ads.types.ts');
 test('three placements accept exact and rounded ratios and reject incompatible images', () => {
   assert.equal(types.AD_PLACEMENT_VALUES.length, 3);
   assert.equal(types.isAdPlacement('SIDEBAR_RECTANGLE'), false);
-  assert.equal(types.matchesAdRatio('LEADERBOARD',1920,367), true);
-  assert.equal(types.matchesAdRatio('LEADERBOARD',970,250), false);
+  assert.equal(types.matchesAdRatio('LEADERBOARD',1920,367), false);
+  assert.equal(types.matchesAdRatio('LEADERBOARD',970,250), true);
   assert.equal(types.matchesAdRatio('LEADERBOARD',1280,720), false);
   assert.equal(types.matchesAdRatio('IN_FEED',1280,720), true);
   assert.equal(types.matchesAdRatio('LATEST_VIDEOS',1920,1080), true);
@@ -27,14 +27,14 @@ test('banner media uses persisted and intrinsic legacy dimensions without changi
     '@/shared/types/ads.types': types,
   }).AdMedia;
   assert.equal(media({placement:'LEADERBOARD',imageUrl:'/legacy.png',imageWidth:970,imageHeight:250}).props.style.aspectRatio,'970 / 250');
-  assert.equal(media({placement:'LEADERBOARD'}).props.style.aspectRatio,'1920 / 367');
+  assert.equal(media({placement:'LEADERBOARD'}).props.style.aspectRatio,'97 / 25');
   assert.equal(media({placement:'IN_FEED',imageWidth:970,imageHeight:250}).props.style.aspectRatio,'16 / 9');
 });
 test('ad preparation preserves exact original file; mismatch and oversized files fail', async () => {
   const file = { type:'image/png',size:1705687 }, banner = { type:'image/png',size:277327 };
   const { prepareAdImage } = load('src/features/cms/utils/prepare-ad-image.ts', {
     '@/shared/types/ads.types': types,
-    '@/features/cms/utils/prepare-image': { MAX_IMAGE_UPLOAD_BYTES:5*1024*1024, decodeImage:async value => ({ naturalWidth:value===banner?1920:1280, naturalHeight:value===banner?367:720 }) },
+    '@/features/cms/utils/prepare-image': { MAX_IMAGE_UPLOAD_BYTES:5*1024*1024, decodeImage:async value => ({ naturalWidth:value===banner?970:1280, naturalHeight:value===banner?250:720 }) },
   });
   assert.equal(await prepareAdImage(file,'LATEST_VIDEOS'),file);
   assert.equal(await prepareAdImage(banner,'LEADERBOARD'),banner);

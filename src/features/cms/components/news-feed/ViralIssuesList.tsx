@@ -8,12 +8,14 @@ interface ViralIssuesListProps {
   issues: ViralIssue[];
   selectedId: string | null;
   onSelect: (issue: ViralIssue) => void;
+  rankOffset?: number;
 }
 
 export function ViralIssuesList({
   issues,
   selectedId,
   onSelect,
+  rankOffset = 0,
 }: ViralIssuesListProps) {
   return (
     <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
@@ -25,7 +27,7 @@ export function ViralIssuesList({
             type="button"
             onClick={() => onSelect(issue)}
             className={cn(
-              "flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition-colors",
+              "grid w-full grid-cols-[2.5rem_minmax(0,1fr)] items-start gap-x-4 gap-y-2 px-5 py-4 text-left transition-colors sm:grid-cols-[2.5rem_minmax(0,1fr)_auto]",
               "hover:bg-neutral-50 dark:hover:bg-neutral-800/60",
               active && "bg-accent/5 dark:bg-accent/10",
             )}
@@ -35,16 +37,18 @@ export function ViralIssuesList({
                 Rank
               </span>
               <span className="mt-0.5 text-lg font-bold leading-none text-neutral-700 dark:text-neutral-200">
-                {index + 1}
+                {rankOffset + index + 1}
               </span>
             </div>
             <div className="min-w-0 flex-1">
-              <p className="truncate text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+              <p className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
                 {issue.title}
               </p>
+              {issue.score !== undefined ? <p className="mt-1 text-xs text-neutral-500">Skor {issue.score.toFixed(1)} · {issue.groupCount} kelompok terverifikasi · {issue.trend === "rising" ? "Cakupan bertambah" : issue.trend === "falling" ? "Cakupan menurun" : "Cakupan stabil"} · Bukti {issue.confidence === "high" ? "kuat" : "terbatas"} · {issue.recommendation === "primary" ? "Rekomendasi" : "Kandidat berkembang"}</p> : null}
+              {issue.reasons?.[0] ? <p className="mt-1 text-xs text-neutral-500">{issue.reasons[0]}</p> : null}
             </div>
-            <div className="flex shrink-0 items-center gap-2">
-              <Badge tone="warning">{issue.mediaCount} channels</Badge>
+            <div className="col-start-2 flex flex-wrap items-center gap-2 sm:col-start-3">
+              <Badge tone="warning">{issue.mediaCount} portal</Badge>
               <Badge tone="info">{issue.articleCount} articles</Badge>
             </div>
           </button>

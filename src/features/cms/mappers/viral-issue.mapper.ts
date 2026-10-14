@@ -12,6 +12,8 @@ interface ViralIssueArticleDto {
   source_id?: string;
   publishedAt?: string | null;
   url?: string | null;
+  evidenceQuality?: string;
+  angleId?: string;
 }
 
 interface ViralIssueTimelineEntryDto {
@@ -33,6 +35,15 @@ export interface ViralIssueDto {
   summary?: string;
   timeline?: ViralIssueTimelineEntryDto[];
   articles?: ViralIssueArticleDto[];
+  score?: number;
+  components?: ViralIssue["components"];
+  groupCount?: number;
+  trend?: string;
+  confidence?: string;
+  evidenceQuality?: string;
+  recommendation?: string;
+  reasons?: string[];
+  angles?: ViralIssue["angles"];
 }
 
 function mapArticle(
@@ -48,6 +59,8 @@ function mapArticle(
     sourceLabel,
     publishedAt: article.publishedAt ?? "",
     url: article.url ?? "#",
+    evidenceQuality: article.evidenceQuality,
+    angleId: article.angleId,
   };
 }
 
@@ -77,5 +90,14 @@ export function mapViralIssue(dto: ViralIssueDto, index: number): ViralIssue {
     summary: dto.summary ?? "",
     timeline: (dto.timeline ?? []).map(mapTimelineEntry),
     articles,
+    score: dto.score,
+    components: dto.components,
+    groupCount: dto.groupCount,
+    trend: dto.trend,
+    confidence: dto.confidence,
+    evidenceQuality: dto.evidenceQuality,
+    recommendation: dto.recommendation,
+    reasons: dto.reasons,
+    angles: dto.angles,
   };
 }

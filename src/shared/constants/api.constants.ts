@@ -6,6 +6,8 @@ export const API_ENDPOINTS = {
   articlesStats: "/api/v1/articles/stats",
   articlesTopViewed: "/api/v1/articles/top-viewed",
   newsFeedViral: "/api/v1/news-feed/viral",
+  newsFeedRecommendations: "/api/v1/news-feed/recommendations",
+  newsFeedStatus: "/api/v1/news-feed/status",
   newsFeedArticles: "/api/v1/news-feed/articles",
   articlesPersonalized: "/api/v1/articles/personalized",
   subscriptionStats: "/api/v1/subscriptions/stats",

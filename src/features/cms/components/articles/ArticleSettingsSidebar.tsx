@@ -59,7 +59,6 @@ export function ArticleSettingsSidebar({
           <Field
             label="Where this article appears"
             error={errors.headlinePosition?.message ?? errors.placements?.message}
-            hint="Independent of Draft / Published status. Latest News is selected by default."
           >
             <Controller
               control={control}

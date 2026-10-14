@@ -23,9 +23,14 @@ import {
   useTopicMutations,
 } from "@/features/cms/hooks/useTaxonomyMutations";
 import { usePermissions } from "@/features/cms/hooks/usePermissions";
+import { useCategoryTranslations } from "@/features/cms/hooks/useCategoryTranslations";
 import { useToast } from "@/features/cms/stores/cms-toast.store";
 import { cn } from "@/shared/lib/cn";
-import type { CmsTaxonomyItem } from "@/features/cms/services/cms-taxonomy.service";
+import {
+  type CategoryTranslationLocale,
+  type CmsCategoryTranslationState,
+  type CmsTaxonomyItem,
+} from "@/features/cms/services/cms-taxonomy.service";
 import { getMutationErrorMessage } from "@/features/cms/components/taxonomy/getMutationErrorMessage";
 import {
   TAXONOMY_SINGULAR,
@@ -35,6 +40,7 @@ import {
 interface FormState {
   kind: TaxonomyKind;
   editing: CmsTaxonomyItem | null;
+  translations?: CmsCategoryTranslationState["translations"];
 }
 
 export function TaxonomyView() {
@@ -53,6 +59,9 @@ export function TaxonomyView() {
   const tagMutations = useTagMutations();
 
   const [form, setForm] = useState<FormState | null>(null);
+  const categoryTranslations = useCategoryTranslations(
+    form?.kind === "category" ? form.editing?.id : undefined,
+  );
   const [pendingDelete, setPendingDelete] = useState<{
     kind: TaxonomyKind;
     item: CmsTaxonomyItem;
@@ -88,6 +97,40 @@ export function TaxonomyView() {
   const dataFor = (kind: TaxonomyKind) => dataByKind[kind];
   const mutationsFor = (kind: TaxonomyKind) => mutationsByKind[kind];
 
+  function openCreate(kind: TaxonomyKind) {
+    categoryTranslations.clear();
+    setForm({ kind, editing: null });
+  }
+
+  async function openEdit(kind: TaxonomyKind, item: CmsTaxonomyItem) {
+    if (kind !== "category") {
+      categoryTranslations.clear();
+      setForm({ kind, editing: item });
+      return;
+    }
+    try {
+      const state = await categoryTranslations.load(item.id);
+      setForm({ kind, editing: item, translations: state.translations });
+    } catch (error) {
+      toast.error(getMutationErrorMessage(error, "Could not load category translations"));
+    }
+  }
+
+  async function retryTranslation(locale: CategoryTranslationLocale) {
+    const id = form?.kind === "category" ? form.editing?.id : undefined;
+    if (!id) return;
+    try {
+      const { status, error, latest } = await categoryTranslations.retry(id, locale);
+      if (status === "failed") {
+        toast.error(error || latest.locales[locale].lastError || "Translation retry could not be queued");
+      } else {
+        toast.info(status === "pending" ? "Translation retry queued" : "Translation is already ready");
+      }
+    } catch (error) {
+      toast.error(getMutationErrorMessage(error, "Could not retry translation"));
+    }
+  }
+
   async function submit(values: TaxonomyFormValues) {
     if (!form) return;
     const { kind, editing } = form;
@@ -106,7 +149,46 @@ export function TaxonomyView() {
           payload: { ...base, image: values.image, topicId: values.topicId },
         });
       } else if (kind === "category") {
-        await categoryMutations.save.mutateAsync({ id, payload: base });
+        const result = await categoryMutations.save.mutateAsync({
+          id,
+          payload: {
+            ...base,
+            translations: {
+              en: { name: values.translations?.en?.name ?? "", description: values.translations?.en?.description ?? "" },
+              uz: { name: values.translations?.uz?.name ?? "", description: values.translations?.uz?.description ?? "" },
+            },
+          },
+        });
+        toast.success(`${TAXONOMY_SINGULAR[kind]} ${editing ? "updated" : "created"}`);
+        if (!editing) {
+          const categoryId = (result as { id?: string } | undefined)?.id;
+          if (categoryId) {
+            try {
+              const state = await categoryTranslations.load(categoryId);
+              setForm({
+                kind,
+                translations: state.translations,
+                editing: {
+                  id: categoryId,
+                  name: values.name,
+                  slug: null,
+                  description: values.description || null,
+                  image: null,
+                  articleCount: 0,
+                  categoryId: null,
+                  category: null,
+                  topicId: null,
+                  topic: null,
+                },
+              });
+              return;
+            } catch {
+              toast.info("Category saved. Translation status can be checked by editing it.");
+            }
+          }
+        }
+        setForm(null);
+        return;
       } else {
         if (!values.categoryId) {
           toast.error("Parent category is required");
@@ -150,6 +232,14 @@ export function TaxonomyView() {
   const active = TAXONOMY_TABS.find((tab) => tab.kind === activeTab) ?? TAXONOMY_TABS[0];
   const activeData = dataFor(active.kind);
   const activeMutation = form ? mutationsFor(form.kind) : null;
+  const initialValues = useMemo(() => form?.editing ? {
+    name: form.editing.name,
+    description: form.editing.description ?? "",
+    image: form.editing.image ?? "",
+    categoryId: form.editing.categoryId ?? "",
+    topicId: form.editing.topicId ?? "",
+    translations: form.translations,
+  } : undefined, [form]);
 
   return (
     <>
@@ -198,8 +288,8 @@ export function TaxonomyView() {
         isLoading={activeData.isLoading}
         isError={activeData.isError}
         canManage={canManageTaxonomy}
-        onCreate={() => setForm({ kind: active.kind, editing: null })}
-        onEdit={(item) => setForm({ kind: active.kind, editing: item })}
+      onCreate={() => openCreate(active.kind)}
+      onEdit={(item) => { void openEdit(active.kind, item); }}
         onDelete={(item) => setPendingDelete({ kind: active.kind, item })}
       />
 
@@ -210,20 +300,14 @@ export function TaxonomyView() {
         nameOnly={form?.kind === "tag"}
         requireCategory={form?.kind === "topic"}
         requireTopic={form?.kind === "series"}
+        categoryTranslations={form?.kind === "category"}
         categoryOptions={categoryOptions}
         topicOptions={topicOptions}
         saving={Boolean(activeMutation?.save.isPending)}
-        initial={
-          form?.editing
-            ? {
-                name: form.editing.name,
-                description: form.editing.description ?? "",
-                image: form.editing.image ?? "",
-                categoryId: form.editing.categoryId ?? "",
-                topicId: form.editing.topicId ?? "",
-              }
-            : undefined
-        }
+        translationState={categoryTranslations.state}
+        retryingLocale={categoryTranslations.retryingLocale}
+        onRetryTranslation={retryTranslation}
+        initial={initialValues}
         onClose={() => setForm(null)}
         onSubmit={submit}
       />

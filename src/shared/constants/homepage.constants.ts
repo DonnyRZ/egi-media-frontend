@@ -6,7 +6,7 @@ export const HOMEPAGE_LIMITS = {
   mobileLatestNews: 3,
   editorsPicks: 6,
   featuredSeries: 3,
-  featuredVideos: 6,
+  latestVideos: 6,
   categoryGroups: 2,
   categoryArticles: 2,
   topicGroups: 3,

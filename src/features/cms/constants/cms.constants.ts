@@ -35,12 +35,12 @@ export const DEFAULT_ARTICLE_PLACEMENTS: ArticlePlacement[] = ["latest_news"];
 
 export const ARTICLE_PLACEMENT_META: Record<
   ArticlePlacement,
-  { label: string; description: string; shortLabel: string; tone: "neutral" | "info" | "warning" | "success" }
+  { label: string; shortLabel: string; tone: "neutral" | "info" | "warning" | "success" }
 > = {
-  latest_news: { label: "Latest News", description: "Latest News section. It shows the six newest published stories on desktop and three on the mobile homepage, independently of Hero and Trending.", shortLabel: "Latest", tone: "neutral" },
-  homepage_hero: { label: "Homepage Hero", description: "Center lead story. If several articles have Hero, the most recently published eligible article appears.", shortLabel: "Hero", tone: "info" },
-  headline: { label: "Headline", description: "Left supporting stories, ordered by slots 1–5. The first story includes a photo.", shortLabel: "Headline", tone: "warning" },
-  trending: { label: "Trending", description: "Manual editorial selection. Appears in the Trending image-card section and the desktop list below Featured Video, newest published first. Mobile shows three cards with the image above the headline. No automatic fallback. Also qualifies for Utama, alongside articles in Politics; the three newest published eligible stories appear automatically. Politics needs no Trending placement.", shortLabel: "Trending", tone: "success" },
+  latest_news: { label: "Latest News", shortLabel: "Latest", tone: "neutral" },
+  homepage_hero: { label: "Homepage Hero", shortLabel: "Hero", tone: "info" },
+  headline: { label: "Headline", shortLabel: "Headline", tone: "warning" },
+  trending: { label: "Trending", shortLabel: "Trending", tone: "success" },
 };
 
 /**

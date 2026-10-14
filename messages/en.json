@@ -1162,6 +1162,7 @@
     "moreColumns": "More from this columnist"
   },
   "homepageHighlights": {
+    "sectionTitle": "More News",
     "previous": "Previous",
     "next": "Next",
     "position": "Story {current} of {total}",

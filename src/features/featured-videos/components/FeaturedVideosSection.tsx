@@ -12,6 +12,7 @@ import { ErrorState } from "@/shared/components/common/ErrorState";
 import { Skeleton } from "@/shared/components/ui/Skeleton";
 import { useFeaturedVideos } from "@/features/homepage/hooks/useFeaturedVideos";
 import { useHeroNews } from "@/features/homepage/hooks/useHeroNews";
+import { HOMEPAGE_LIMITS } from "@/shared/constants/homepage.constants";
 import type { YoutubeVideo } from "@/shared/types/youtube.types";
 
 function VideoCard({ video }: { video: YoutubeVideo }) {
@@ -47,7 +48,15 @@ function VideoCard({ video }: { video: YoutubeVideo }) {
 export function FeaturedVideosSection() {
   const { data, isLoading, isError, error, refetch } = useFeaturedVideos();
   const hero = useHeroNews();
-  const remaining = data ? { ...data, items: data.items.slice(hero.data?.featured ? 1 : 0) } : undefined;
+  const heroVideoId = hero.data?.featured ? data?.items[0]?.id : undefined;
+  const remaining = data
+    ? {
+        ...data,
+        items: data.items
+          .filter((video) => video.id !== heroVideoId)
+          .slice(0, HOMEPAGE_LIMITS.latestVideos),
+      }
+    : undefined;
   const t = useTranslations("videos");
 
   if (!isLoading && !isError && !remaining?.items.length) {

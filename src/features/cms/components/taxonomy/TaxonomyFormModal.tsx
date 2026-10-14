@@ -10,6 +10,11 @@ import { Input } from "@/features/cms/components/ui/Input";
 import { Modal } from "@/features/cms/components/ui/Modal";
 import { Select } from "@/features/cms/components/ui/Select";
 import { Textarea } from "@/features/cms/components/ui/Textarea";
+import { CategoryTranslationFields } from "@/features/cms/components/taxonomy/CategoryTranslationFields";
+import type {
+  CategoryTranslationLocale,
+  CmsCategoryTranslationState,
+} from "@/features/cms/services/cms-taxonomy.service";
 import {
   seriesFormSchema,
   taxonomyFormSchema,
@@ -25,6 +30,10 @@ export interface TaxonomyFormValues {
   image?: string;
   categoryId?: string;
   topicId?: string;
+  translations?: {
+    en?: { name?: string; description?: string };
+    uz?: { name?: string; description?: string };
+  };
 }
 
 interface ParentOption {
@@ -39,10 +48,14 @@ interface TaxonomyFormModalProps {
   nameOnly?: boolean;
   requireCategory?: boolean;
   requireTopic?: boolean;
+  categoryTranslations?: boolean;
   categoryOptions?: ParentOption[];
   topicOptions?: ParentOption[];
   saving: boolean;
   initial?: TaxonomyFormValues;
+  translationState?: CmsCategoryTranslationState | null;
+  retryingLocale?: CategoryTranslationLocale | null;
+  onRetryTranslation?: (locale: CategoryTranslationLocale) => void;
   onClose: () => void;
   onSubmit: (values: TaxonomyFormValues) => void;
 }
@@ -57,6 +70,10 @@ const EMPTY: FormValues = {
   image: "",
   categoryId: "",
   topicId: "",
+  translations: {
+    en: { name: "", description: "" },
+    uz: { name: "", description: "" },
+  },
 };
 
 export function TaxonomyFormModal({
@@ -66,10 +83,14 @@ export function TaxonomyFormModal({
   nameOnly,
   requireCategory,
   requireTopic,
+  categoryTranslations,
   categoryOptions = [],
   topicOptions = [],
   saving,
   initial,
+  translationState,
+  retryingLocale,
+  onRetryTranslation,
   onClose,
   onSubmit,
 }: TaxonomyFormModalProps) {
@@ -83,7 +104,9 @@ export function TaxonomyFormModal({
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    getValues,
+    setValue,
+    formState: { errors, dirtyFields },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: EMPTY,
@@ -96,9 +119,29 @@ export function TaxonomyFormModal({
         ...initial,
         categoryId: initial?.categoryId ?? "",
         topicId: initial?.topicId ?? "",
+        translations: {
+          en: { name: initial?.translations?.en?.name ?? "", description: initial?.translations?.en?.description ?? "" },
+          uz: { name: initial?.translations?.uz?.name ?? "", description: initial?.translations?.uz?.description ?? "" },
+        },
       });
     }
   }, [open, initial, reset]);
+
+  useEffect(() => {
+    if (!open || !categoryTranslations || !translationState) return;
+    for (const locale of ["en", "uz"] as const) {
+      if (translationState.locales[locale].status !== "ready") continue;
+      for (const field of ["name", "description"] as const) {
+        const path = `translations.${locale}.${field}` as const;
+        const dirty = dirtyFields.translations?.[locale]?.[field];
+        const currentValue = getValues(path) || "";
+        const translatedValue = translationState.translations[locale][field];
+        if (!dirty && !currentValue && translatedValue) {
+          setValue(path, translatedValue, { shouldDirty: false });
+        }
+      }
+    }
+  }, [categoryTranslations, dirtyFields.translations, getValues, open, setValue, translationState]);
 
   return (
     <Modal
@@ -125,6 +168,23 @@ export function TaxonomyFormModal({
             <Textarea id="tax-desc" {...register("description")} />
           </Field>
         )}
+        {categoryTranslations ? (
+          <CategoryTranslationFields
+            state={translationState}
+            retryingLocale={retryingLocale}
+            onRetry={onRetryTranslation}
+            fields={{
+              en: {
+                name: register("translations.en.name"),
+                description: register("translations.en.description"),
+              },
+              uz: {
+                name: register("translations.uz.name"),
+                description: register("translations.uz.description"),
+              },
+            }}
+          />
+        ) : null}
         {requireCategory ? (
           <Field
             label="Parent category"

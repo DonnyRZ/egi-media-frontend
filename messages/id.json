@@ -1162,6 +1162,7 @@
     "moreColumns": "Tulisan lain dari penulis"
   },
   "homepageHighlights": {
+    "sectionTitle": "Berita Lainnya",
     "previous": "Sebelumnya",
     "next": "Berikutnya",
     "position": "Artikel {current} dari {total}",

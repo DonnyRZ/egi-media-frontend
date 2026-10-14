@@ -10,6 +10,37 @@ import type { Tag } from "@/features/cms/types/cms.types";
 export interface TaxonomyWritePayload {
   name: string;
   description?: string | null;
+  translations?: {
+    en?: { name?: string; description?: string };
+    uz?: { name?: string; description?: string };
+  };
+}
+
+export type CategoryTranslationLocale = "en" | "uz";
+export type CategoryTranslationStatus = "none" | "pending" | "processing" | "ready" | "failed";
+
+export interface CmsCategoryTranslationState {
+  categoryId: string;
+  translations: Record<CategoryTranslationLocale, { name: string; description: string }>;
+  locales: Record<CategoryTranslationLocale, {
+    status: CategoryTranslationStatus;
+    lastError: string | null;
+    nameOrigin: "manual" | "ai" | null;
+    descriptionOrigin: "manual" | "ai" | null;
+    updatedAt: string | null;
+  }>;
+}
+
+interface CategoryTranslationStateDto {
+  category_id: string;
+  translations: CmsCategoryTranslationState["translations"];
+  locales: Record<CategoryTranslationLocale, {
+    status: CategoryTranslationStatus;
+    last_error?: string | null;
+    name_origin?: "manual" | "ai" | null;
+    description_origin?: "manual" | "ai" | null;
+    updated_at?: string | null;
+  }>;
 }
 
 export interface TopicWritePayload extends TaxonomyWritePayload {
@@ -95,21 +126,66 @@ export const fetchCmsTags = () => fetchTaxonomyList(API_ENDPOINTS.tags);
 
 export async function createCategory(
   payload: TaxonomyWritePayload,
-): Promise<void> {
-  await axiosClient.post(API_ENDPOINTS.categories, {
+): Promise<{ id: string; slug: string | null }> {
+  const response = await axiosClient.post<ApiSuccessResponse<{ id: string; slug?: string | null }>>(
+    API_ENDPOINTS.categories,
+    {
     name: payload.name,
     description: payload.description ?? "",
-  });
+    translations: payload.translations,
+    },
+  );
+  return { id: response.data.data.id, slug: response.data.data.slug ?? null };
 }
 
 export async function updateCategory(
   id: string,
   payload: TaxonomyWritePayload,
-): Promise<void> {
-  await axiosClient.put(API_ENDPOINTS.categoryById(id), {
+): Promise<{ id: string }> {
+  const response = await axiosClient.put<ApiSuccessResponse<{ id: string }>>(
+    API_ENDPOINTS.categoryById(id),
+    {
     name: payload.name,
     description: payload.description ?? "",
+    translations: payload.translations,
+    },
+  );
+  return { id: response.data.data.id };
+}
+
+export async function fetchCategoryTranslationState(
+  id: string,
+): Promise<CmsCategoryTranslationState> {
+  const response = await axiosClient.get<ApiSuccessResponse<CategoryTranslationStateDto>>(
+    API_ENDPOINTS.categoryTranslations(id),
+  );
+  const dto = response.data.data;
+  const mapLocale = (locale: CategoryTranslationLocale) => ({
+    status: dto.locales[locale].status,
+    lastError: dto.locales[locale].last_error ?? null,
+    nameOrigin: dto.locales[locale].name_origin ?? null,
+    descriptionOrigin: dto.locales[locale].description_origin ?? null,
+    updatedAt: dto.locales[locale].updated_at ?? null,
   });
+  return {
+    categoryId: dto.category_id,
+    translations: dto.translations,
+    locales: { en: mapLocale("en"), uz: mapLocale("uz") },
+  };
+}
+
+export async function retryCategoryTranslation(
+  id: string,
+  locale: CategoryTranslationLocale,
+): Promise<{ status: CategoryTranslationStatus; error: string | null }> {
+  const response = await axiosClient.post<ApiSuccessResponse<{
+    status: CategoryTranslationStatus;
+    error?: string | null;
+  }>>(API_ENDPOINTS.categoryTranslationRetry(id), { locale });
+  return {
+    status: response.data.data.status,
+    error: response.data.data.error ?? null,
+  };
 }
 
 export async function deleteCategory(id: string): Promise<void> {

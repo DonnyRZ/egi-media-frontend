@@ -45,7 +45,7 @@ export function PlacementCheckboxes({
         const meta = ARTICLE_PLACEMENT_META[placement];
         const inputId = `${idPrefix}-${placement}`;
         return (
-          <div key={placement} className="space-y-2">
+          <div key={placement}>
             <label
               htmlFor={inputId}
               className="flex cursor-pointer items-center gap-2.5 text-sm text-neutral-700 dark:text-neutral-300"
@@ -59,7 +59,6 @@ export function PlacementCheckboxes({
               />
               <span>{meta.label}</span>
             </label>
-            <p className="ml-6 text-xs leading-5 text-neutral-500">{meta.description}</p>
             {placement === "headline" && value.includes("headline") ? (
               <div className="ml-6">
                 <label
@@ -82,10 +81,6 @@ export function PlacementCheckboxes({
                     </option>
                   ))}
                 </select>
-                <p className="mt-1 text-xs text-neutral-400">
-                  Existing articles at this slot and below shift down; #05 drops
-                  off.
-                </p>
               </div>
             ) : null}
           </div>

@@ -1162,6 +1162,7 @@
     "moreColumns": "Muallifning boshqa maqolalari"
   },
   "homepageHighlights": {
+    "sectionTitle": "Boshqa yangiliklar",
     "previous": "Oldingi",
     "next": "Keyingi",
     "position": "{total} ta xabardan {current}-xabar",

@@ -75,8 +75,18 @@ export function getMissingTranslationErrors(
 }
 
 export const taxonomyFormSchema = z.object({
-  name: z.string().trim().min(1, "Name is required").max(150),
+  name: z.string().trim().min(1, "Name is required").max(100),
   description: z.string().trim().max(1000).optional(),
+  translations: z.object({
+    en: z.object({
+      name: z.string().trim().max(100).optional(),
+      description: z.string().trim().max(1000).optional(),
+    }),
+    uz: z.object({
+      name: z.string().trim().max(100).optional(),
+      description: z.string().trim().max(1000).optional(),
+    }),
+  }).optional(),
 });
 
 export type TaxonomyFormValues = z.infer<typeof taxonomyFormSchema>;

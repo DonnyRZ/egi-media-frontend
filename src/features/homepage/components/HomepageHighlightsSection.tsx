@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { ErrorState } from "@/shared/components/common/ErrorState";
+import { FrameHeading } from "@/shared/components/layout/FrameHeading";
 import { FrameModule } from "@/shared/components/layout/FrameModule";
 import { useHomepageHighlights } from "../hooks/useHomepageHighlights";
 import { useHighlightSnapshot } from "../hooks/useHighlightSnapshot";
@@ -13,7 +14,8 @@ export function HomepageHighlightsSection() {
   const t = useTranslations("homepageHighlights");
   const { snapshot, frameRef, setFocused, gesture, endGesture } = useHighlightSnapshot(query.data, query.dataUpdatedAt);
   if (snapshot && !snapshot.primary.length && !snapshot.supporting.length && !query.isError) return null;
-  return <FrameModule className="homepage-highlights">
+  return <FrameModule ariaLabelledby="homepage-highlights-heading" className="homepage-highlights">
+    <FrameHeading id="homepage-highlights-heading" title={t("sectionTitle")} />
     <div ref={frameRef} onFocusCapture={() => setFocused(true)} onBlurCapture={event => {
       if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false);
     }} onPointerDownCapture={gesture} onPointerMoveCapture={event => { if (event.buttons) gesture(); }}

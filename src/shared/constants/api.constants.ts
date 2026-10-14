@@ -27,6 +27,9 @@ export const API_ENDPOINTS = {
   categories: "/api/v1/categories",
   categoryById: (idOrSlug: string) =>
     `/api/v1/categories/${encodeURIComponent(idOrSlug)}`,
+  categoryTranslations: (id: string) => `/api/v1/categories/${id}/translations`,
+  categoryTranslationRetry: (id: string) =>
+    `/api/v1/categories/${id}/translations/retry`,
   topics: "/api/v1/topics",
   topicsCatalog: "/api/v1/topics/catalog",
   topicById: (idOrSlug: string) =>

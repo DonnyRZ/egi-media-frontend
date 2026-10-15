@@ -15,12 +15,12 @@ test('three placements accept exact and rounded ratios and reject incompatible i
   assert.equal(types.matchesAdRatio('LEADERBOARD',1920,367), false);
   assert.equal(types.matchesAdRatio('LEADERBOARD',970,250), true);
   assert.equal(types.matchesAdRatio('LEADERBOARD',1280,720), false);
-  assert.equal(types.matchesAdRatio('IN_FEED',1280,720), true);
-  assert.equal(types.matchesAdRatio('LATEST_VIDEOS',1920,1080), true);
+  assert.equal(types.matchesAdRatio('IN_FEED',1080,1080), true);
+  assert.equal(types.matchesAdRatio('LATEST_VIDEOS',1920,1920), true);
   assert.equal(types.matchesAdRatio('IN_FEED',0,720), false);
 });
 
-test('banner media uses persisted and intrinsic legacy dimensions without changing content ad ratios', () => {
+test('ad media preserves existing creative proportions and uses the current empty-slot ratio', () => {
   const media = load('src/features/ads/components/AdMedia.tsx', {
     react: { useState: () => [null, () => {}] },
     'react/jsx-runtime': { jsx: (type, props) => ({type,props}), jsxs: (type, props) => ({type,props}) },
@@ -28,17 +28,17 @@ test('banner media uses persisted and intrinsic legacy dimensions without changi
   }).AdMedia;
   assert.equal(media({placement:'LEADERBOARD',imageUrl:'/legacy.png',imageWidth:970,imageHeight:250}).props.style.aspectRatio,'970 / 250');
   assert.equal(media({placement:'LEADERBOARD'}).props.style.aspectRatio,'97 / 25');
-  assert.equal(media({placement:'IN_FEED',imageWidth:970,imageHeight:250}).props.style.aspectRatio,'16 / 9');
+  assert.equal(media({placement:'IN_FEED',imageWidth:1280,imageHeight:720}).props.style.aspectRatio,'1280 / 720');
 });
 test('ad preparation preserves exact original file; mismatch and oversized files fail', async () => {
   const file = { type:'image/png',size:1705687 }, banner = { type:'image/png',size:277327 };
   const { prepareAdImage } = load('src/features/cms/utils/prepare-ad-image.ts', {
     '@/shared/types/ads.types': types,
-    '@/features/cms/utils/prepare-image': { MAX_IMAGE_UPLOAD_BYTES:5*1024*1024, decodeImage:async value => ({ naturalWidth:value===banner?970:1280, naturalHeight:value===banner?250:720 }) },
+    '@/features/cms/utils/prepare-image': { MAX_IMAGE_UPLOAD_BYTES:5*1024*1024, decodeImage:async value => ({ naturalWidth:value===banner?970:1080, naturalHeight:value===banner?250:1080 }) },
   });
   assert.equal(await prepareAdImage(file,'LATEST_VIDEOS'),file);
   assert.equal(await prepareAdImage(banner,'LEADERBOARD'),banner);
-  await assert.rejects(prepareAdImage(file,'LEADERBOARD'),/1280×720/);
+  await assert.rejects(prepareAdImage(file,'LEADERBOARD'),/1080×1080/);
   await assert.rejects(prepareAdImage({type:'image/png',size:5*1024*1024+1},'IN_FEED'),/5 MB/);
 });
 test('viewability requires loaded media, half visible, active tab and a continuous second', () => {

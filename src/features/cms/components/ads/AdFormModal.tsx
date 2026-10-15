@@ -9,7 +9,7 @@ import { Modal } from "@/features/cms/components/ui/Modal";
 import { useAdForm } from "@/features/cms/hooks/useAdForm";
 import type { AdFormValues } from "@/features/cms/schemas/cms.schemas";
 import type { CmsAd } from "@/features/cms/services/cms-ads.service";
-import { AD_PLACEMENT_GUIDELINES } from "@/shared/types/ads.types";
+import { AD_PLACEMENT_GUIDELINES, matchesAdRatio } from "@/shared/types/ads.types";
 interface AdFormModalProps { open: boolean; saving: boolean; ad: CmsAd | null; availableAds: CmsAd[]; onClose: () => void; onSubmit: (values: AdFormValues) => void; }
 export function AdFormModal({ open, saving, ad, availableAds, onClose, onSubmit }: AdFormModalProps) {
   const [busy, setBusy] = useState(false);
@@ -18,7 +18,7 @@ export function AdFormModal({ open, saving, ad, availableAds, onClose, onSubmit 
   if (!open || !ad) return null;
   const guideline = AD_PLACEMENT_GUIDELINES[ad.placement];
   const reusable = availableAds.filter((item) => item.id !== ad.id && item.imageReceipt && item.imageUrl &&
-    AD_PLACEMENT_GUIDELINES[item.placement].ratio === guideline.ratio);
+    item.imageWidth && item.imageHeight && matchesAdRatio(ad.placement, item.imageWidth, item.imageHeight));
   return <Modal open={open} onClose={() => { if (!busy && !saving) onClose(); }} title={guideline.label}
     footer={<><Button variant="secondary" onClick={onClose} disabled={busy || saving}>Cancel</Button>
       <Button disabled={busy} onClick={handleSubmit(onSubmit)} loading={saving}>Save changes</Button></>}>

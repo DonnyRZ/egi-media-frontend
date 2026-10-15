@@ -35,7 +35,7 @@ export function AdsView() {
       {ads.map((ad) => <section key={ad.id} className="min-w-0 rounded-lg border border-neutral-200 bg-white p-4 dark:border-neutral-800 dark:bg-neutral-900">
         <h2 className="mb-2 text-base font-semibold">{AD_PLACEMENT_GUIDELINES[ad.placement].label}</h2>
         <p className="mb-3 text-xs text-neutral-500">{AD_PLACEMENT_GUIDELINES[ad.placement].dimensions}px</p>
-        <AdMedia placement={ad.placement} imageUrl={ad.imageUrl} title={ad.title} />
+        <AdMedia placement={ad.placement} imageUrl={ad.imageUrl} title={ad.title} imageWidth={ad.imageWidth} imageHeight={ad.imageHeight} />
         <div className="mt-3 flex items-center justify-between gap-2"><Badge tone={ad.isActive ? "success" : "neutral"}>{ad.isActive ? "Active" : "Inactive"}</Badge>
           <Button variant="secondary" size="sm" onClick={() => setEditing(ad)}>Edit</Button></div>
         <p className="mt-3 break-words text-sm">{ad.title}</p>

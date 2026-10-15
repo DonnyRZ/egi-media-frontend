@@ -7,7 +7,7 @@ export function AdMedia({ placement, imageUrl, title = "", imageWidth, imageHeig
   const [intrinsic, setIntrinsic] = useState<{ url: string; width: number; height: number } | null>(null);
   const width = intrinsic && intrinsic.url === imageUrl ? intrinsic.width : imageWidth;
   const height = intrinsic && intrinsic.url === imageUrl ? intrinsic.height : imageHeight;
-  const aspectRatio = placement === "LEADERBOARD" && width && height && width > 0 && height > 0
+  const aspectRatio = width && height && width > 0 && height > 0
     ? `${width} / ${height}` : AD_PLACEMENT_GUIDELINES[placement].aspectRatio;
   return <div ref={mediaRef} className="relative w-full overflow-hidden bg-white"
     style={{ aspectRatio }} data-ad-media>

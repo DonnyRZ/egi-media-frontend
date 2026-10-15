@@ -12,7 +12,6 @@ export function TopicSubscriptionsHero() {
     <FrameModule ariaLabelledby="topic-subscriptions-hero-heading">
       <FramePageHero
         kicker={t("kicker")}
-        lede={t("lede")}
         title={t("headline")}
         titleId="topic-subscriptions-hero-heading"
       />

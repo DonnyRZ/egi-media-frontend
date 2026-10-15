@@ -16,9 +16,6 @@ export function AboutHero() {
         >
           {t("headline")}
         </h1>
-        <p className="editorial-summary mt-6 max-w-2xl text-base leading-7 text-neutral-700 lg:text-lg">
-          {t("lede")}
-        </p>
         </div>
       </Container>
     </section>

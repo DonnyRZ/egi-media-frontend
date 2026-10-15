@@ -30,7 +30,6 @@ export function ContactMap() {
       <Container>
         <SectionHeading
           id="contact-map-heading"
-          subtitle={t("mapSubtitle")}
           title={t("mapTitle")}
         />
 

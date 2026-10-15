@@ -79,7 +79,6 @@ export function ForgotPasswordForm() {
         <h2 className="editorial-section-title font-serif text-2xl font-bold text-ink">
           {t("forgotTitle")}
         </h2>
-        <p className="mt-1 text-sm text-neutral-600">{t("forgotSubtitle")}</p>
       </div>
 
       <form className="space-y-4" noValidate onSubmit={handleSubmit(onSubmit)}>

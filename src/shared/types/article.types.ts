@@ -1,5 +1,6 @@
 export interface ArticleAuthor {
   id: string;
+  /** Public article byline; account profile names are mapped separately in CMS. */
   fullName: string;
 }
 

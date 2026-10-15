@@ -116,11 +116,6 @@ export function SeriesDetailView({ slug }: SeriesDetailViewProps) {
             >
               {data.name}
             </h1>
-            {data.description ? (
-              <p className="editorial-summary mt-5 max-w-3xl text-base leading-7 text-neutral-700">
-                {data.description}
-              </p>
-            ) : null}
             <p className="mt-5 text-xs font-semibold uppercase tracking-wide text-neutral-500">
               {tCommon("articleCount", { count: data.articleCount })}
             </p>

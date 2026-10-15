@@ -123,7 +123,7 @@ function VideoStage({
         <>
           <FrameHeading
             id="videos-more-heading"
-            subtitle={t("videoCount", { count: total })}
+            countLabel={t("videoCount", { count: total })}
             title={t("moreVideos")}
           />
           <AdaptiveCardGrid

@@ -153,7 +153,6 @@ export function ColumnForm({
           <h2 className="editorial-section-title font-serif text-xl font-bold text-ink">
             {t("form.mainHeading")}
           </h2>
-          <p className="mt-1 text-sm text-neutral-600">{t("form.mainLede")}</p>
         </div>
         <p className="border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-600">
           {t("form.aiBanner")}

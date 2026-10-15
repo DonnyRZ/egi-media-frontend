@@ -67,7 +67,7 @@ export function ForYouListing() {
     <FrameModule ariaLabelledby="for-you-listing-heading">
       <FrameHeading
         id="for-you-listing-heading"
-        subtitle={feed.data ? t("count", { count: feed.data.total }) : undefined}
+        countLabel={feed.data ? t("count", { count: feed.data.total }) : undefined}
         title={t("listingHeading")}
       />
 

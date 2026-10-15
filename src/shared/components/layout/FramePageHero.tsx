@@ -6,7 +6,6 @@ interface FramePageHeroProps {
   title: string;
   titleId: string;
   kicker?: string;
-  lede?: string;
   leading?: ReactNode;
   actions?: ReactNode;
   className?: string;
@@ -20,7 +19,6 @@ export function FramePageHero({
   title,
   titleId,
   kicker,
-  lede,
   leading,
   actions,
   className,
@@ -42,11 +40,6 @@ export function FramePageHero({
           >
             {title}
           </h1>
-          {lede ? (
-            <p className="editorial-summary mt-3 max-w-2xl text-sm leading-6 text-neutral-600 lg:text-base lg:leading-7">
-              {lede}
-            </p>
-          ) : null}
         </div>
         {actions ? <div className="flex shrink-0 flex-wrap gap-2">{actions}</div> : null}
       </div>

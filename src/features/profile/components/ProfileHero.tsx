@@ -18,9 +18,6 @@ export function ProfileHero() {
         >
           {t("headline")}
         </h1>
-        <p className="editorial-summary mt-3 max-w-2xl text-sm leading-6 text-neutral-600 lg:text-base lg:leading-7">
-          {t("lede")}
-        </p>
         </div>
       </Container>
     </section>

@@ -7,6 +7,7 @@ import { HorizontalMediaRow } from "@/shared/components/common/HorizontalMediaRo
 import type { Article } from "@/shared/types/article.types";
 import { getArticleHref } from "@/shared/utils/article-path";
 import { cn } from "@/shared/lib/cn";
+import { PUBLIC_ARTICLE_AUTHOR_NAME } from "@/shared/constants/article.constants";
 
 export function HorizontalArticleCard({ article, className }: { article: Article; className?: string }) {
   const href = getArticleHref(article);
@@ -18,7 +19,7 @@ export function HorizontalArticleCard({ article, className }: { article: Article
       </Link>}
       kicker={article.category?.name}
       title={<h3 className="media-row-heading"><Link className="headline-link" href={href}>{article.title}</Link></h3>}
-      metadata={<ContentMetadata author={article.author.fullName} publishedAt={article.publishedAt}
+      metadata={<ContentMetadata author={PUBLIC_ARTICLE_AUTHOR_NAME} publishedAt={article.publishedAt}
         readingTimeMinutes={article.readingTimeMinutes} compact />}
     />
   </article>;

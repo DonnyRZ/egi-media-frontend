@@ -206,6 +206,7 @@ export type TeamMemberFormValues = z.infer<typeof teamMemberFormSchema>;
 
 export const AD_PLACEMENTS = [
   "LEADERBOARD",
+  "HERO_BELOW",
   "IN_FEED",
   "LATEST_VIDEOS",
 ] as const;

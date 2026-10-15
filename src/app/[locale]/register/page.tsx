@@ -26,7 +26,7 @@ export default async function RegisterPage({ params }: RegisterPageProps) {
   const t = await getTranslations({ locale, namespace: "auth" });
 
   return (
-    <AuthShell subtitle={t("registerLede")} title={t("registerHeadline")}>
+    <AuthShell title={t("registerHeadline")}>
       <RegisterForm />
     </AuthShell>
   );

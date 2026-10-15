@@ -12,6 +12,7 @@ import { Skeleton } from "@/shared/components/ui/Skeleton";
 import { useEditorsPick } from "@/features/homepage/hooks/useEditorsPick";
 import type { Article } from "@/shared/types/article.types";
 import { getArticleHref } from "@/shared/utils/article-path";
+import { PUBLIC_ARTICLE_AUTHOR_NAME } from "@/shared/constants/article.constants";
 
 function RankedGrid({ count, children }: { count: number; children: ReactNode }) {
   return (
@@ -43,7 +44,7 @@ function RankedItem({ article, rank, secondColumn }: { article: Article; rank: n
         <h3 className="editorial-list-title mt-0.5 font-sans text-lg font-semibold leading-snug text-ink hover:text-accent">
           <Link href={getArticleHref(article)}>{article.title}</Link>
         </h3>
-        <p className="mt-1 text-xs text-neutral-500">{article.author.fullName}</p>
+        <p className="mt-1 text-xs text-neutral-500">{PUBLIC_ARTICLE_AUTHOR_NAME}</p>
       </div>
     </div>
   );
@@ -62,7 +63,6 @@ export function EditorsPickSection() {
       <HomepageSectionNotice section="editors" />
       <FrameHeading
         id="editors-heading"
-        subtitle={t("subtitle")}
         title={t("title")}
       />
 

@@ -22,11 +22,6 @@ function ProgramHeader({ model }: ProgramModelProps) {
           Original Series
         </p>
         <h1 className="editorial-page-title mt-3 text-3xl font-bold lg:text-5xl">{program.name}</h1>
-        {program.description ? (
-          <p className="mt-4 max-w-2xl leading-7 text-neutral-300">
-            {program.description}
-          </p>
-        ) : null}
       </div>
     </header>
   );

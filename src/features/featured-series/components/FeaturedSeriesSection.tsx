@@ -23,7 +23,6 @@ export function FeaturedSeriesSection() {
       <FrameHeading
         actionHref="/series"
         id="series-heading"
-        subtitle={t("subtitle")}
         title={t("title")}
       />
 

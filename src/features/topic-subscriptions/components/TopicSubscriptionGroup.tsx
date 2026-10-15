@@ -45,11 +45,6 @@ export function TopicSubscriptionGroupBlock({
           >
             <div className="min-w-0">
               <p className="font-semibold text-ink">{topic.name}</p>
-              {topic.description ? (
-                <p className="editorial-summary mt-1 text-sm leading-6 text-neutral-500">
-                  {topic.description}
-                </p>
-              ) : null}
               {errorFor(topic.id) ? (
                 <p className="mt-1 text-sm text-red-600">{errorFor(topic.id)}</p>
               ) : null}

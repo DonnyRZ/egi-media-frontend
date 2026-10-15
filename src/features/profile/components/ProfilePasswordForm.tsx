@@ -85,7 +85,6 @@ export function ProfilePasswordForm() {
         <h2 className="editorial-section-title font-serif text-xl font-bold text-ink">
           {t("passwordHeading")}
         </h2>
-        <p className="mt-1 text-sm text-neutral-600">{t("passwordLede")}</p>
       </div>
 
       <form

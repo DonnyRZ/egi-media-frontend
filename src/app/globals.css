@@ -3,6 +3,8 @@
 @import "./horizontal-media.css";
 @import "./public-mobile.css";
 @import "./homepage-highlights.css";
+@import "./editorial-rules.css";
+@import "./trending-heading.css";
 @plugin "@tailwindcss/typography";
 
 /* Class-based dark mode, scoped to elements under a `.dark` root (used by the
@@ -54,8 +56,8 @@
 .news-lead-grid {
   display: grid;
   overflow-wrap: anywhere;
-  gap: 1px;
-  background: #e5e7eb;
+  gap: var(--editorial-rule-width, 1px);
+  background: var(--editorial-rule-color, #e5e7eb);
   grid-template-columns: minmax(0, 1fr);
   grid-template-areas: "lead" "sidebar" "headlines";
 }
@@ -69,7 +71,7 @@
   background: white;
 }
 .news-lead-sidebar > * { flex: 0 0 auto; }
-.news-lead-sidebar > * + * { border-top: 1px solid #e5e7eb; }
+.news-lead-sidebar > * + * { border-top: var(--editorial-rule-width, 1px) solid var(--editorial-rule-color, #e5e7eb); }
 .news-lead-grid[data-sidebar="false"] { grid-template-areas: "lead" "headlines"; }
 
 /* A single curated story is a compact editorial row, with the same image

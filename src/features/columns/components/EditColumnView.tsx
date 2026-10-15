@@ -127,9 +127,6 @@ export function EditColumnView({ columnId }: EditColumnViewProps) {
         <h1 className="editorial-page-title mt-3 font-sans text-3xl font-bold text-ink">
           {t("editHeadline")}
         </h1>
-        <p className="editorial-summary mt-2 max-w-2xl text-sm leading-6 text-neutral-600">
-          {t("editLede")}
-        </p>
 
         {defaultValues ? (
           <div className="mt-8">

@@ -10,7 +10,6 @@ export function ProfesionalHero() {
     <section className="profesional-hero">
       <div className="profesional-hero-copy">
         <h1>{t("heroHeadline")}</h1>
-        <p>{t("heroLede")}</p>
         <ProfesionalCtaButton />
       </div>
       <ProfesionalIssueMock />

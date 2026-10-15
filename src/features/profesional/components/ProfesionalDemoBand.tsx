@@ -11,7 +11,6 @@ export function ProfesionalDemoBand() {
       <div id={PROFESIONAL_ANCHORS.support}>
         <p className="profesional-kicker">{t("demoKicker")}</p>
         <h2>{t("demoTitle")}</h2>
-        <p className="profesional-lede">{t("demoBody")}</p>
       </div>
       <ProfesionalDemoForm />
     </section>

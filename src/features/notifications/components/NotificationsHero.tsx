@@ -12,7 +12,6 @@ export function NotificationsHero() {
     <FrameModule ariaLabelledby="notifications-hero-heading">
       <FramePageHero
         kicker={t("kicker")}
-        lede={t("lede")}
         title={t("headline")}
         titleId="notifications-hero-heading"
       />

@@ -65,7 +65,7 @@ export function TopicSubscriptionsView() {
     <FrameModule ariaLabelledby="topic-subscriptions-listing-heading">
       <FrameHeading
         id="topic-subscriptions-listing-heading"
-        subtitle={t("subscribedCount", { count: subscribedCount })}
+        countLabel={t("subscribedCount", { count: subscribedCount })}
         title={t("listingHeading")}
       />
 

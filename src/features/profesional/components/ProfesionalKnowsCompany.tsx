@@ -9,7 +9,6 @@ export function ProfesionalKnowsCompany() {
     <section className="profesional-section" id={PROFESIONAL_ANCHORS.products}>
       <p className="profesional-kicker">{t("companyKicker")}</p>
       <h2>{t("companyTitle")}</h2>
-      <p className="profesional-lede">{t("companyBody")}</p>
     </section>
   );
 }

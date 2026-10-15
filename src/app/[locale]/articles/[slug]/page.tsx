@@ -22,6 +22,7 @@ import {
   normalizeArticleSlug,
 } from "@/shared/utils/article-path";
 import { toContentLocale } from "@/shared/utils/locale";
+import { PUBLIC_ARTICLE_AUTHOR_NAME } from "@/shared/constants/article.constants";
 
 interface ArticlePageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -49,6 +50,7 @@ export async function generateMetadata({
     const article = await loadArticle(slug, lang);
     return {
       title: article.title,
+      authors: [{ name: PUBLIC_ARTICLE_AUTHOR_NAME }],
       description: article.summary ?? t("siteDescription"),
     };
   } catch {

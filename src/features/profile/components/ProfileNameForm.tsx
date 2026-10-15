@@ -66,7 +66,6 @@ export function ProfileNameForm() {
         <h2 className="editorial-section-title font-serif text-xl font-bold text-ink">
           {t("nameHeading")}
         </h2>
-        <p className="mt-1 text-sm text-neutral-600">{t("nameLede")}</p>
       </div>
 
       <form

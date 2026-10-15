@@ -47,9 +47,6 @@ export function WriteColumnView() {
         <h1 className="editorial-page-title mt-3 font-sans text-3xl font-bold text-ink">
           {t("writeHeadline")}
         </h1>
-        <p className="editorial-summary mt-2 max-w-2xl text-sm leading-6 text-neutral-600">
-          {t("writeLede")}
-        </p>
         <div className="mt-8">
           <ColumnForm mode="create" />
         </div>

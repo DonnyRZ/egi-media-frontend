@@ -9,6 +9,7 @@ import { ArticleCard } from "@/shared/components/common/ArticleCard";
 import { ArticleImage } from "@/shared/components/common/ArticleImage";
 import { ArticleTimeline } from "@/shared/components/common/ArticleTimeline";
 import { ContentMetadata } from "@/shared/components/common/ContentMetadata";
+import { PUBLIC_ARTICLE_AUTHOR_NAME } from "@/shared/constants/article.constants";
 import type { Article } from "@/shared/types/article.types";
 import type { YoutubeVideo } from "@/shared/types/youtube.types";
 import { previewArticles, previewVideo } from "./fixtures";
@@ -40,7 +41,7 @@ function BaselineCard({ article }: { article: Article }) {
     <div className="min-w-0 break-words">
       <p className="text-[11px] font-semibold uppercase tracking-wide text-accent">{article.category?.name}</p>
       <h3 className="mt-1 text-[16px] font-semibold leading-[1.35]">{article.title}</h3>
-      <ContentMetadata className="mt-2" author={article.author.fullName} publishedAt={article.publishedAt} readingTimeMinutes={article.readingTimeMinutes} />
+      <ContentMetadata className="mt-2" author={PUBLIC_ARTICLE_AUTHOR_NAME} publishedAt={article.publishedAt} readingTimeMinutes={article.readingTimeMinutes} />
     </div>
   </article>;
 }

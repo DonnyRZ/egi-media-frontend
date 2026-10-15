@@ -17,9 +17,6 @@ export function PrivacyHero() {
           {t("headline")}
         </h1>
         <p className="mt-4 text-sm text-neutral-500">{t("lastUpdated")}</p>
-        <p className="editorial-summary mt-6 max-w-2xl text-base leading-7 text-neutral-700 lg:text-lg">
-          {t("lede")}
-        </p>
         </div>
       </Container>
     </section>

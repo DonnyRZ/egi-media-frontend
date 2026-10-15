@@ -27,7 +27,7 @@ export default async function LoginPage({ params }: LoginPageProps) {
   const t = await getTranslations({ locale, namespace: "auth" });
 
   return (
-    <AuthShell subtitle={t("loginLede")} title={t("loginHeadline")}>
+    <AuthShell title={t("loginHeadline")}>
       <Suspense fallback={<p>{t("loading")}</p>}>
         <LoginForm />
       </Suspense>

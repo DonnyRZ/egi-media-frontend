@@ -25,7 +25,6 @@ export function LatestNewsSection() {
       <FrameHeading
         actionHref="/latest"
         id="latest-heading"
-        subtitle={t("subtitle")}
         title={t("title")}
       />
 

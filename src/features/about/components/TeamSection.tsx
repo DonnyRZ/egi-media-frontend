@@ -26,7 +26,6 @@ export async function TeamSection() {
       <Container>
         <SectionHeading
           id="about-team-heading"
-          subtitle={t("teamSubtitle")}
           title={t("teamTitle")}
         />
 

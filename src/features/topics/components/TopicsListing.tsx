@@ -95,7 +95,7 @@ export function TopicsListing() {
       <FrameModule ariaLabelledby="topics-listing-heading">
         <FrameHeading
           id="topics-listing-heading"
-          subtitle={
+          countLabel={
             data.total > TAXONOMY_PAGE_LIMIT
               ? t("truncatedCount", { shown: data.items.length, total: data.total })
               : t("topicCount", { count: data.total })

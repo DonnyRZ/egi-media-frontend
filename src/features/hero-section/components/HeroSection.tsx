@@ -5,6 +5,7 @@ import { useHeroNews } from "@/features/homepage/hooks/useHeroNews";
 import { useFeaturedVideos } from "@/features/homepage/hooks/useFeaturedVideos";
 import { useBreakingNews } from "@/features/homepage/hooks/useBreakingNews";
 import { EditorialLead } from "@/shared/components/common/EditorialLead";
+import { NativeAdSlot } from "@/features/ads/components/NativeAdSlot";
 import { HomepageSectionNotice } from "@/features/homepage/components/HomepageSectionNotice";
 import { FrameModule } from "@/shared/components/layout/FrameModule";
 import { ErrorState } from "@/shared/components/common/ErrorState";
@@ -49,6 +50,7 @@ export function HeroSection() {
     {isError ? <div className="editorial-gutter px-4 py-5 md:p-5"><ErrorState message={error?.message} onRetry={() => void refetch()} /></div> : null}
     <HomepageSectionNotice section="hero" />
     {!isLoading && !isError && !sectionFailed && !data?.featured ? <div className="editorial-gutter px-4 py-5 md:p-5"><EmptyState title={t("noFeatured")} /></div> : null}
-    {!isLoading && !isError && data?.featured ? <EditorialLead lead={data.featured} supporting={headlines} latest={latest} latestTitle={trendingText("title")} latestHeadingId="hero-trending-heading" latestHref={null} video={video?.format !== "short" ? video : undefined} /> : null}
+    {!isLoading && !isError && data?.featured ? <EditorialLead lead={data.featured} supporting={headlines} latest={latest} latestTitle={trendingText("title")} latestHeadingId="hero-trending-heading" latestHref={null} video={video?.format !== "short" ? video : undefined}
+      leadFooter={<NativeAdSlot placement="HERO_BELOW" className="homepage-hero-ad" />} /> : null}
   </FrameModule>;
 }

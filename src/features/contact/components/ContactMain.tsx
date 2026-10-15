@@ -26,9 +26,6 @@ export function ContactMain() {
           >
             {t("formHeadline")}
           </h1>
-          <p className="editorial-summary mt-4 max-w-2xl text-base leading-7 text-neutral-600 lg:text-lg">
-            {t("formLede")}
-          </p>
         </div>
 
         <div className="mt-8 grid grid-cols-1 items-start gap-12 md:grid-cols-2 lg:mt-12 lg:gap-16">

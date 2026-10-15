@@ -17,7 +17,7 @@ export function TrendingSection() {
   if (!isLoading && !isError && !sectionFailed && !items.length) return null;
 
   return <FrameModule ariaLabelledby="trending-heading" className="homepage-trending">
-    <FrameHeading id="trending-heading" title={t("title")} subtitle={t("subtitle")} />
+    <FrameHeading id="trending-heading" title={t("title")} variant="trending" />
     <HomepageSectionNotice section="breaking" />
     {isLoading ? <div className="homepage-trending-grid grid gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-3">
       {Array.from({ length: 6 }, (_, index) => <div key={index} className="homepage-trending-card editorial-gutter space-y-3 bg-white px-4 py-5 md:p-5">

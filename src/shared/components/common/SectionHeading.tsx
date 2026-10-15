@@ -5,7 +5,6 @@ import { cn } from "@/shared/lib/cn";
 
 interface SectionHeadingProps {
   title: string;
-  subtitle?: string;
   id: string;
   className?: string;
   actionHref?: string;
@@ -14,7 +13,6 @@ interface SectionHeadingProps {
 
 export function SectionHeading({
   title,
-  subtitle,
   id,
   className,
   actionHref,
@@ -40,9 +38,6 @@ export function SectionHeading({
           </Link>
         ) : null}
       </div>
-      {subtitle ? (
-        <p className="mt-2 max-w-2xl text-sm text-neutral-500">{subtitle}</p>
-      ) : null}
     </div>
   );
 }

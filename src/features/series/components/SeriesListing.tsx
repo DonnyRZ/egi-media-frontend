@@ -95,7 +95,7 @@ export function SeriesListing() {
       <FrameModule ariaLabelledby="series-listing-heading">
         <FrameHeading
           id="series-listing-heading"
-          subtitle={
+          countLabel={
             data.total > SERIES_PAGE_LIMIT
               ? t("truncatedCount", { shown: data.items.length, total: data.total })
               : t("seriesCount", { count: data.total })

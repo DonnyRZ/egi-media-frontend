@@ -1,0 +1,31 @@
+/* Keep the original editorial heading; only its red glow changes over time. */
+.egi-public .editorial-trending-title {
+  animation: editorial-trending-glow 1.5s ease-in-out infinite;
+}
+
+@keyframes editorial-trending-glow {
+  0%, 100% {
+    color: #0a0a0a;
+    text-shadow: 0 0 0 rgb(200 16 46 / 0%);
+  }
+  45%, 60% {
+    color: #c8102e;
+    text-shadow: 0 0 8px rgb(200 16 46 / 50%), 0 0 20px rgb(200 16 46 / 24%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .egi-public .editorial-trending-title {
+    animation: none;
+    color: #c8102e;
+    text-shadow: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .egi-public .editorial-trending-title {
+    animation: none;
+    color: CanvasText;
+    text-shadow: none;
+  }
+}

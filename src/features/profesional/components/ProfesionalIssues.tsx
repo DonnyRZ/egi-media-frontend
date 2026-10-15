@@ -9,7 +9,6 @@ export function ProfesionalIssues() {
     <section className="profesional-section">
       <p className="profesional-kicker">{t("issuesKicker")}</p>
       <h2>{t("issuesTitle")}</h2>
-      <p className="profesional-lede">{t("issuesBody")}</p>
       <ol className="profesional-issue-list">
         {ISSUE_KEYS.map((key, index) => (
           <li key={key}>

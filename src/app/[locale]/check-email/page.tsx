@@ -27,7 +27,7 @@ export default async function CheckEmailPage({ params }: CheckEmailPageProps) {
   const t = await getTranslations({ locale, namespace: "auth" });
 
   return (
-    <AuthShell subtitle={t("checkEmailLede")} title={t("checkEmailHeadline")}>
+    <AuthShell title={t("checkEmailHeadline")}>
       <Suspense fallback={<p>{t("loading")}</p>}>
         <CheckEmailView />
       </Suspense>

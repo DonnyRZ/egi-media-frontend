@@ -22,7 +22,7 @@ function VideoCard({ video }: { video: YoutubeVideo }) {
       <div className="relative aspect-video overflow-hidden bg-ink">
         <VideoEmbed video={video} />
       </div>
-      <div className="homepage-video-copy p-4">
+      <div className="homepage-video-copy">
         <div className="flex items-center gap-2">
           <span className="kicker">{t("kicker")}</span>
           {video.durationLabel ? (
@@ -64,7 +64,6 @@ export function FeaturedVideosSection() {
       <FrameHeading
         actionHref="/videos"
         id="videos-heading"
-        subtitle={t("subtitle")}
         title={t("latestTitle")}
       />
 

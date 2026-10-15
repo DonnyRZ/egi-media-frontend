@@ -29,11 +29,6 @@ function TopicBlock({ group }: { group: TopicNewsGroup }) {
             {group.topic.name}
           </Link>
         </h3>
-        {group.topic.description ? (
-          <p className="editorial-summary mt-1 line-clamp-2 text-sm text-neutral-500">
-            {group.topic.description}
-          </p>
-        ) : null}
       </div>
 
       <div className="space-y-5">
@@ -60,7 +55,6 @@ export function TopicNewsSection() {
       <FrameHeading
         actionHref="/topics"
         id="topics-heading"
-        subtitle={t("subtitle")}
         title={t("title")}
       />
 

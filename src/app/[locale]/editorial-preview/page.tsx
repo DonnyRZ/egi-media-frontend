@@ -60,11 +60,11 @@ export default async function Preview({
           latestHref={null} video={query.video === "0" ? undefined : previewVideo} />
       </FrameModule>
       {trending.length ? <FrameModule className="homepage-trending" ariaLabelledby="trending-heading">
-        <FrameHeading id="trending-heading" title={breakingText("title")} subtitle={breakingText("subtitle")} />
+        <FrameHeading id="trending-heading" title={breakingText("title")} variant="trending" />
         <TrendingArticleGrid articles={trending} />
       </FrameModule> : null}
       <FrameModule className="homepage-latest" ariaLabelledby="latest-heading">
-        <FrameHeading id="latest-heading" title={latestText("title")} subtitle={latestText("subtitle")} actionHref="/latest" />
+        <FrameHeading id="latest-heading" title={latestText("title")}  actionHref="/latest" />
         <LatestArticleGrid articles={articles.slice(0, 6)} mobileLimit={HOMEPAGE_LIMITS.mobileLatestNews} />
       </FrameModule>
     </PageFrame></>;

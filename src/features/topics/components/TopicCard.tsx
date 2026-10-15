@@ -22,11 +22,6 @@ export function TopicCard({ topic, variant = "default", className }: TopicCardPr
         <h2 className="editorial-lead-title mt-3 font-sans text-3xl font-bold leading-tight text-ink transition-colors group-hover:text-accent sm:text-4xl">
           <Link href={`/topics/${topic.slug}`}>{topic.name}</Link>
         </h2>
-        {topic.description ? (
-          <p className="editorial-summary mt-4 max-w-3xl text-base leading-7 text-neutral-700">
-            {topic.description}
-          </p>
-        ) : null}
         <Link
           className="mt-5 inline-flex text-sm font-semibold text-primary-700 transition-colors hover:text-accent"
           href={`/topics/${topic.slug}`}
@@ -43,11 +38,6 @@ export function TopicCard({ topic, variant = "default", className }: TopicCardPr
       <h3 className="editorial-card-title mt-2 font-sans text-xl font-bold leading-snug text-ink transition-colors group-hover:text-accent">
         <Link href={`/topics/${topic.slug}`}>{topic.name}</Link>
       </h3>
-      {topic.description ? (
-        <p className="editorial-summary mt-2 line-clamp-3 flex-1 text-sm leading-6 text-neutral-600">
-          {topic.description}
-        </p>
-      ) : null}
       <Link
         className="mt-4 inline-flex text-sm font-semibold text-primary-700 transition-colors hover:text-accent"
         href={`/topics/${topic.slug}`}

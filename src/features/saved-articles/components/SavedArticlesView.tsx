@@ -90,7 +90,7 @@ export function SavedArticlesView() {
       <FrameModule ariaLabelledby="saved-articles-heading">
         <FrameHeading
           id="saved-articles-heading"
-          subtitle={
+          countLabel={
             articles.data
               ? t("count", { count: articles.data.total })
               : undefined
@@ -145,7 +145,7 @@ export function SavedArticlesView() {
       <FrameModule ariaLabelledby="saved-columns-heading">
         <FrameHeading
           id="saved-columns-heading"
-          subtitle={
+          countLabel={
             columns.data
               ? t("columnsCount", { count: columns.data.total })
               : undefined

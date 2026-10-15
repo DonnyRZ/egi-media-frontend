@@ -29,7 +29,7 @@ export default async function GoogleCallbackPage({
   const t = await getTranslations({ locale, namespace: "auth" });
 
   return (
-    <AuthShell subtitle={t("googleLoadingBody")} title={t("googleLoadingTitle")}>
+    <AuthShell title={t("googleLoadingTitle")}>
       <Suspense fallback={<p>{t("loading")}</p>}>
         <GoogleCallbackView />
       </Suspense>

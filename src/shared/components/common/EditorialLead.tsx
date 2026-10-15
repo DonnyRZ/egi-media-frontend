@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { HeroFeaturedCard } from "@/features/hero-section/components/HeroFeaturedCard";
 import { HeroHeadlineList } from "@/features/hero-section/components/HeroHeadlineList";
 import { HeroLatestList } from "@/features/hero-section/components/HeroLatestList";
@@ -15,6 +16,7 @@ interface EditorialLeadProps {
   latestHref?: string | null;
   latestTitle?: string;
   latestHeadingId?: string;
+  leadFooter?: ReactNode;
 }
 export function EditorialLead({
   lead,
@@ -24,6 +26,7 @@ export function EditorialLead({
   latestHref,
   latestTitle,
   latestHeadingId,
+  leadFooter,
 }: EditorialLeadProps) {
   const full = supporting.length >= 2 && (Boolean(video) || latest.length >= 3);
   const hasSidebar = Boolean(video) || latest.length > 0;
@@ -36,6 +39,7 @@ export function EditorialLead({
         data-video={Boolean(video)}
         data-latest={latest.length > 0}
         data-sidebar={hasSidebar}
+        data-lead-footer={Boolean(leadFooter)}
       >
         <div className="news-lead-lead min-w-0 bg-white">
           <HeroFeaturedCard article={lead} />
@@ -55,6 +59,7 @@ export function EditorialLead({
             </div> : null}
           </div>
         ) : null}
+        {leadFooter ? <div className="news-lead-footer bg-white">{leadFooter}</div> : null}
       </div>
     </>
   );

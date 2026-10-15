@@ -4,6 +4,7 @@ import { useFormatter, useTranslations } from "next-intl";
 
 import { Link } from "@/i18n/navigation";
 import { DATE_FORMAT } from "@/shared/constants/format.constants";
+import { PUBLIC_ARTICLE_AUTHOR_NAME } from "@/shared/constants/article.constants";
 import type { ArticleDetail } from "@/shared/types/article.types";
 
 interface ArticleHeaderProps {
@@ -22,7 +23,7 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
         {article.title}
       </h1>
       <div className="editorial-reader-meta mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-neutral-500">
-        <span className="font-semibold text-neutral-800">{article.author.fullName}</span>
+        <span className="font-semibold text-neutral-800">{PUBLIC_ARTICLE_AUTHOR_NAME}</span>
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
         {article.publishedAt ? (
           <>

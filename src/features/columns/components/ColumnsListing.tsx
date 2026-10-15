@@ -84,7 +84,7 @@ export function ColumnsListing() {
             <>
               <FrameHeading
                 id="columns-grid-heading"
-                subtitle={t("columnCount", { count: data.total })}
+                countLabel={t("columnCount", { count: data.total })}
                 title={showFeatured ? t("allColumns") : t("listingHeading")}
               />
               <AdaptiveCardGrid

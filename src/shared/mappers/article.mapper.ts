@@ -7,6 +7,7 @@ import type {
 } from "@/shared/types/article.types";
 import { calculateReadingTime } from "@/shared/utils/format";
 import { resolveImageUrl } from "@/shared/utils/image";
+import { PUBLIC_ARTICLE_AUTHOR_NAME } from "@/shared/constants/article.constants";
 
 interface ArticleAuthorDto {
   id: string;
@@ -86,7 +87,7 @@ export function mapArticleDto(dto: ArticleListItemDto): Article {
     publishedAt: dto.published_at,
     author: {
       id: dto.author.id,
-      fullName: dto.author.full_name,
+      fullName: PUBLIC_ARTICLE_AUTHOR_NAME,
     },
     category: dto.category
       ? { id: dto.category.id, name: dto.category.name }

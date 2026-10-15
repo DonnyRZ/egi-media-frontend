@@ -7,6 +7,7 @@ import { HorizontalArticleCard } from "@/shared/components/common/HorizontalArti
 import type { Article } from "@/shared/types/article.types";
 import { getArticleHref } from "@/shared/utils/article-path";
 import { cn } from "@/shared/lib/cn";
+import { PUBLIC_ARTICLE_AUTHOR_NAME } from "@/shared/constants/article.constants";
 
 interface ArticleMetaProps {
   article: Article;
@@ -14,7 +15,7 @@ interface ArticleMetaProps {
 }
 
 export function ArticleMeta({ article, className }: ArticleMetaProps) {
-  return <ContentMetadata author={article.author.fullName} publishedAt={article.publishedAt}
+  return <ContentMetadata author={PUBLIC_ARTICLE_AUTHOR_NAME} publishedAt={article.publishedAt}
     readingTimeMinutes={article.readingTimeMinutes} className={className} />;
 }
 

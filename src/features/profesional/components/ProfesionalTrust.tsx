@@ -9,7 +9,6 @@ export function ProfesionalTrust() {
     <section className="profesional-section" id={PROFESIONAL_ANCHORS.trust}>
       <p className="profesional-kicker">{t("trustKicker")}</p>
       <h2>{t("trustTitle")}</h2>
-      <p className="profesional-lede">{t("trustBody")}</p>
     </section>
   );
 }

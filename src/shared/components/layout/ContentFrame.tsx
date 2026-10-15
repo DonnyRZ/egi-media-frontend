@@ -10,7 +10,7 @@ interface ContentFrameProps {
 /**
  * Single outer content frame for dense Bloomberg-style stacks.
  * Mobile uses horizontal rules only; modules supply the content gutters.
- * Visible children are separated by hairline divide-y rules; null siblings are omitted.
+ * Visible children use the public section-rule tokens; null siblings are omitted.
  */
 export function ContentFrame({ children, className }: ContentFrameProps) {
   return (

@@ -12,7 +12,6 @@ export function VideosHero() {
     <FrameModule ariaLabelledby="videos-hero-heading">
       <FramePageHero
         kicker={t("kicker")}
-        lede={t("lede")}
         title={t("headline")}
         titleId="videos-hero-heading"
       />

@@ -78,7 +78,6 @@ export function TopicDetailView({ slug }: TopicDetailViewProps) {
               ← {t("backToTopics")}
             </Link>
           }
-          lede={topicQuery.data?.description || undefined}
           actions={topicQuery.data?<TopicFollow id={topicQuery.data.id}/>:undefined}
           title={heroTitle}
           titleId="topic-detail-heading"
@@ -125,7 +124,7 @@ export function TopicDetailView({ slug }: TopicDetailViewProps) {
               <>
                 <FrameHeading
                   id="topic-articles-grid-heading"
-                  subtitle={tCommon("articleCount", {
+                  countLabel={tCommon("articleCount", {
                     count: articlesQuery.data.total,
                   })}
                   title={t("articlesHeading")}

@@ -26,11 +26,6 @@ function CategoryColumn({ group }: { group: CategoryNewsGroup }) {
             {group.category.name}
           </Link>
         </p>
-        {group.category.description ? (
-          <p className="editorial-summary mt-1 line-clamp-2 text-sm text-neutral-500">
-            {group.category.description}
-          </p>
-        ) : null}
       </div>
       <div className="space-y-5">
         {group.articles.map((article) => (
@@ -61,7 +56,6 @@ export function CategoryNewsSection() {
       <HomepageSectionNotice section="categories" />
       <FrameHeading
         id="categories-heading"
-        subtitle={t("subtitle")}
         title={t("title")}
       />
 

@@ -1,0 +1,50 @@
+/* Editorial rules have two weights: section boundaries and internal dividers.
+   These tokens stay inside the public shell; CMS controls keep their own style. */
+.egi-public {
+  --editorial-rule-width: 1.5px;
+  --editorial-rule-color: #b4b4b4;
+  --editorial-section-rule-width: 2px;
+  --editorial-section-rule-color: #969696;
+}
+
+/* Change existing editorial lines, never add a border to an unbordered node. */
+.egi-public main .border-neutral-200 {
+  border-color: var(--editorial-rule-color);
+}
+
+.egi-public main .divide-y.divide-neutral-200 > :not(:last-child) {
+  border-color: var(--editorial-rule-color);
+  border-bottom-width: var(--editorial-rule-width);
+}
+
+.egi-public main .gap-px.bg-neutral-200 {
+  gap: var(--editorial-rule-width);
+  background-color: var(--editorial-rule-color);
+}
+
+.egi-public main [data-editorial-frame] {
+  border-color: var(--editorial-section-rule-color);
+  border-block-width: var(--editorial-section-rule-width);
+}
+
+.egi-public main [data-editorial-frame] > :not(:last-child) {
+  border-bottom-color: var(--editorial-section-rule-color);
+  border-bottom-width: var(--editorial-section-rule-width);
+}
+
+.egi-public main .editorial-heading-band {
+  border-bottom-width: var(--editorial-rule-width);
+}
+
+/* Preserve the existing compact layout's edge-to-edge content. */
+@media (width >= 1024px) {
+  .egi-public main [data-editorial-frame] {
+    border-inline-width: var(--editorial-rule-width);
+  }
+}
+
+@media (width < 1024px), (width < 1200px) and (height <= 500px) {
+  .egi-public main [data-editorial-frame] {
+    border-inline-width: 0;
+  }
+}

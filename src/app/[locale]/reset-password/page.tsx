@@ -29,7 +29,7 @@ export default async function ResetPasswordPage({
   const t = await getTranslations({ locale, namespace: "auth" });
 
   return (
-    <AuthShell subtitle={t("resetLede")} title={t("resetHeadline")}>
+    <AuthShell title={t("resetHeadline")}>
       <Suspense fallback={<p>{t("loading")}</p>}>
         <ResetPasswordForm />
       </Suspense>

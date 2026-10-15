@@ -58,11 +58,6 @@ export function SeriesCard({ series, variant = "default", className }: SeriesCar
           <h2 className="editorial-lead-title mt-3 font-sans text-3xl font-bold leading-tight text-ink transition-colors group-hover:text-accent sm:text-4xl">
             <Link href={`/series/${series.slug}`}>{series.name}</Link>
           </h2>
-          {series.description ? (
-            <p className="editorial-summary mt-4 line-clamp-3 text-base leading-7 text-neutral-700">
-              {series.description}
-            </p>
-          ) : null}
           <p className="mt-5 text-xs font-semibold uppercase tracking-wide text-neutral-500">
             {tCommon("articleCount", { count: series.articleCount })}
           </p>
@@ -97,11 +92,6 @@ export function SeriesCard({ series, variant = "default", className }: SeriesCar
         <h3 className="editorial-card-title mt-2 font-sans text-xl font-bold leading-snug text-ink transition-colors group-hover:text-accent">
           <Link href={`/series/${series.slug}`}>{series.name}</Link>
         </h3>
-        {series.description ? (
-          <p className="editorial-summary mt-2 line-clamp-3 flex-1 text-sm leading-6 text-neutral-600">
-            {series.description}
-          </p>
-        ) : null}
         <p className="mt-3 text-xs font-semibold uppercase tracking-wide text-neutral-500">
           {tCommon("articleCount", { count: series.articleCount })}
         </p>

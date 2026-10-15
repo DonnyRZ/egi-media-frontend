@@ -63,7 +63,6 @@ export function CategoryDetailView({ slug }: CategoryDetailViewProps) {
       <FrameModule ariaLabelledby="category-detail-heading">
         <FramePageHero
           className="py-5 lg:py-6 sm:[&_h1]:text-[44px]"
-          lede={categoryQuery.data?.description ?? undefined}
           title={heroTitle}
           titleId="category-detail-heading"
         />

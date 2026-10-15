@@ -27,7 +27,7 @@ export default async function VerifyEmailPage({ params }: VerifyEmailPageProps) 
   const t = await getTranslations({ locale, namespace: "auth" });
 
   return (
-    <AuthShell subtitle={t("verifyLede")} title={t("verifyHeadline")}>
+    <AuthShell title={t("verifyHeadline")}>
       <Suspense fallback={<p>{t("loading")}</p>}>
         <VerifyEmailView />
       </Suspense>

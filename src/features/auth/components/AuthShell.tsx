@@ -9,11 +9,10 @@ import { SITE_NAME } from "@/shared/constants/site.constants";
 interface AuthShellProps {
   children: React.ReactNode;
   title: string;
-  subtitle: string;
   kicker?: string;
 }
 
-export function AuthShell({ children, title, subtitle, kicker }: AuthShellProps) {
+export function AuthShell({ children, title, kicker }: AuthShellProps) {
   const t = useTranslations("auth");
 
   return (
@@ -24,9 +23,6 @@ export function AuthShell({ children, title, subtitle, kicker }: AuthShellProps)
           <h1 className="editorial-page-title mt-3 font-serif text-4xl font-bold leading-tight tracking-tight text-ink sm:text-5xl">
             {title}
           </h1>
-          <p className="editorial-summary mt-4 max-w-md text-sm leading-7 text-neutral-600 lg:text-base">
-            {subtitle}
-          </p>
           <p className="mt-8 text-xs font-semibold uppercase tracking-wide text-neutral-500">
             {SITE_NAME}
           </p>

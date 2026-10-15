@@ -199,7 +199,6 @@ export function CategoryLatestGrid({ articles }: { articles: Article[] }) {
           >
             {t("title")}
           </h2>
-          <p className="mt-1 text-sm text-neutral-600">{t("subtitle")}</p>
         </div>
       </header>
       <div className="border-t border-neutral-200">

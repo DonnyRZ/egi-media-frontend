@@ -14,7 +14,6 @@ export function AboutCoverage() {
       <Container>
         <SectionHeading
           id="about-coverage-heading"
-          subtitle={t("coverageSubtitle")}
           title={t("coverageTitle")}
         />
         <ul className="grid gap-px overflow-hidden border border-neutral-300 bg-neutral-300 sm:grid-cols-2 lg:grid-cols-5">
@@ -24,7 +23,6 @@ export function AboutCoverage() {
                 {String(index + 1).padStart(2, "0")}
               </span>
               <h3 className="editorial-card-title mt-2 font-serif text-xl font-bold text-ink">{topic.label}</h3>
-              <p className="editorial-summary mt-2 text-sm leading-6 text-neutral-500">{topic.description}</p>
             </li>
           ))}
           {topics.length % 2 === 1 ? (

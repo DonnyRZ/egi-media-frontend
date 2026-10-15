@@ -31,7 +31,7 @@ export function AdsView() {
     {isLoading ? <LoadingState label="Loading advertisements…" /> : null}
     {isError ? <><ErrorState title="Could not load advertisements" /><Button variant="secondary" onClick={() => void refetch()}>Retry</Button></> : null}
     {!isLoading && !isError && !ads.length ? <EmptyState title="No advertisement slots found" /> : null}
-    <div className="grid items-start gap-5 xl:grid-cols-3">
+    <div className="grid items-start gap-5 xl:grid-cols-2 2xl:grid-cols-4">
       {ads.map((ad) => <section key={ad.id} className="min-w-0 rounded-lg border border-neutral-200 bg-white p-4 dark:border-neutral-800 dark:bg-neutral-900">
         <h2 className="mb-2 text-base font-semibold">{AD_PLACEMENT_GUIDELINES[ad.placement].label}</h2>
         <p className="mb-3 text-xs text-neutral-500">{AD_PLACEMENT_GUIDELINES[ad.placement].dimensions}px</p>

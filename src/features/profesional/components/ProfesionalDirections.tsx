@@ -11,7 +11,6 @@ export function ProfesionalDirections() {
     <section className="profesional-section" id={PROFESIONAL_ANCHORS.solutions}>
       <p className="profesional-kicker">{t("directionsKicker")}</p>
       <h2>{t("directionsTitle")}</h2>
-      <p className="profesional-lede">{t("directionsBody")}</p>
       <div className="profesional-tiles">
         {DIRECTION_KEYS.map((key) => (
           <article key={key}>{t(key)}</article>
